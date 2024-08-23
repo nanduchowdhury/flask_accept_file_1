@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kupamanduk - StudentO</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> <!-- Link to external CSS file -->
+</head>
+<body>
+    <h1>Kupamanduk - StudentO</h1>
+
+    <div class="top-right">
+        <img src="{{ url_for('static', filename='frog.jpg') }}" width=50 height=50 alt="Description of image">
+    </div>
+
+    <!-- Hidden file input and custom label to trigger it -->
+    <input type="file" id="fileInput" />
+    <label for="fileInput" class="custom-file-input">select PDF jpg png</label>
+    <!-- File Select and Take Picture -->
+    <button id="takePicture">take picture using camera</button>
+
+    <!-- Preview Area -->
+    <div id="previewArea">
+        <canvas id="pdfCanvas"></canvas>
+        <video id="videoOverlay" controls></video>
+        <img src="" id="selectionImage" style="display: none;" alt="">
+        <canvas id="selectionCanvas" style="display: none;"></canvas>
+    </div>
+
+    <div id="loadingSpinner"></div>   
+
+    <!-- Send Button -->
+    <button id="sendButton">explain me</button>
+    <button id="regionButton">explain region</button>
+
+    <div id="resultsContainer">
+        <div class="resultArea" id="result1"></div>
+        <div class="resultArea" id="result2"></div>
+    </div>
+
+    <!-- Camera Popup -->
+    <div id="cameraPopup">
+        <video id="cameraFeed" style="width: 100%; height: auto;" autoplay></video>
+        <button id="captureButton">Capture</button>
+        <button id="startRecording">Start Recording</button>
+        <button id="stopRecording">Stop Recording</button>
+        <canvas id="cameraCanvas" style="display: none;"></canvas>
+        <button id="closePopup">Close</button>
+    </div>
+
+    <script>
+        // This code will execute as soon as the page has loaded.
+        console.log("KUPAMANDUK-1001 page loaded successfully!"); 
+    </script>
+
+    <!-- PDF.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    
+    <script src="{{ url_for('static', filename='postItNote.js') }}""></script>
+    <script src="{{ url_for('static', filename='main.js') }}""></script>
+
+</body>
+</html>

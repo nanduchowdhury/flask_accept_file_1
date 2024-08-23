@@ -1,0 +1,279 @@
+        #previewArea {            
+            width: 98%;
+            height: 200px;
+            overflow-y: auto;
+            border: 5px solid #d4e8f3;
+            padding: 10px;
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        /*
+        #pdfCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1; /* Lower z-index to place it below the image */
+        }
+*/
+
+        #selectionImage {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2; /* Higher z-index to place it on top of the canvas */
+        }
+
+        #resultsContainer {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .resultArea {
+            width: 98%;
+            height: 300px;
+            overflow: auto; /* Enables both horizontal and vertical scrolling */
+            border: 5px solid #ccc;
+            padding: 10px;
+            box-sizing: border-box;
+            white-space: pre-wrap;
+            font-family: 'Poppins', sans-serif; /* Use the Poppins font */
+            font-weight: 600; /* Bold text */
+            font-size: 14px; /* Smaller text size */
+        }
+
+        #cameraPopup {
+            display: none;
+            position: fixed; /* Changed to fixed to make it stay on screen */
+            top: 20%;
+            left: 20%;
+            width: 30%;
+            height: 30%;
+            border: 1px solid #ccc;
+            background: #fff;
+            z-index: 1000; /* Ensure it's on top of other content */
+        }
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Style for the file input button */
+        #fileInput {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3498db; /* Button color */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0px 5px 0px 0px #2980b9; /* 3D effect */
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        #fileInput:hover {
+            background-color: #2980b9;
+            box-shadow: 0px 4px 0px 0px #1c639e;
+        }
+
+        #fileInput:active {
+            box-shadow: none;
+            transform: translateY(4px); /* Pressed effect */
+        }
+
+        /* Hide the default file input */
+        #fileInput[type="file"] {
+            display: none;
+        }
+
+        /* Optional: style the label to act like a button */
+        label.custom-file-input {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0px 5px 0px 0px #2980b9;
+            font-size: 16px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        label.custom-file-input:hover {
+            background-color: #2980b9;
+            box-shadow: 0px 4px 0px 0px #1c639e;
+        }
+
+        label.custom-file-input:active {
+            box-shadow: none;
+            transform: translateY(4px); /* Pressed effect */
+        }
+
+        /* Apply the same style to all buttons */
+        button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0px 5px 0px 0px #2980b9;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+            box-shadow: 0px 4px 0px 0px #1c639e;
+        }
+
+        button:active {
+            box-shadow: none;
+            transform: translateY(4px); /* Pressed effect */
+        }
+
+        /* Loading Spinner Styles */
+        #loadingSpinner {
+            display: none; /* Hidden by default */
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .selectionBox {
+            position: absolute;
+            border: 2px dashed #3498db;
+            background-color: rgba(52, 152, 219, 0.3);
+            pointer-events: none;
+        }
+
+        /* Importing the hand-written font */
+        @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
+        .postItNote {
+            width: auto;
+            height: auto;
+            background-color: #ffeb3b; /* Yellow color similar to a post-it note */
+            padding: 10px;
+            margin: 10px;
+            font-family: 'Indie Flower', cursive; /* Apply the hand-written font */
+            font-weight: normal; /* Set the font weight to normal */
+            font-size: 14px; /* Text size */
+            color: #333; /* Dark text color */
+            box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            position: relative;
+            cursor: pointer;
+            transition: height 0.3s ease;
+            overflow: hidden; /* Hide overflow when collapsed */
+        }
+
+        .postItNote.collapsed {
+            height: 30px; /* Adjust as needed for the collapsed height */
+            padding: 5px
+        }
+        
+        .postItNote .arrow {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #333;
+            transform: rotate(0deg);
+            transition: transform 0.3s ease;
+        }
+        
+        .postItNote.collapsed .arrow {
+            transform: rotate(-180deg);
+        }
+        
+        .postItContent {
+            display: block; /* This will be toggled */
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 5px;
+        }
+    
+        .tab.active {
+            background-color: #ffd54f;
+            font-weight: bold;
+        }
+    
+        .tabContent {
+            display: none;
+        }
+    
+        .tabContent.active {
+            display: block;
+            margin-top: 10px;
+        }
+
+        .tabContainer {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .tabButton {
+            flex: 1;
+            background-color: #ffc107;
+            border: 1px solid #ffeb3b;
+            padding: 5px;
+            cursor: pointer;
+            text-align: center;
+            font-family: 'Patrick Hand', cursive;
+            font-weight: normal;
+            display: flex; /* Change to flexbox to handle icon positioning */
+            justify-content: center; /* Center content */
+            align-items: center; /* Center content vertically */
+            position: relative; /* Ensure icons are positioned relative to the button */
+        }
+        
+        .tabButton i {
+            margin-left: 8px; /* Add spacing between text and icon */
+            font-size: 16px; /* Ensure icons are large enough to be visible */
+        }
+        
+        .tabButton.active {
+            background-color: #ffeb3b;
+        }
+        
+        .speaker-icon, .stop-icon {
+            cursor: pointer;
+            color: #333; /* Darker color for better contrast */
+        }     
+
+        #videoOverlay {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: none;
+            object-fit: contain;
+        }
+        
+        #previewVideo {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10; /* Ensure it appears above the canvas content */
+        }
+

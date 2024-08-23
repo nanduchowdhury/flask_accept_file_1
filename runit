@@ -1,0 +1,7 @@
+#!/bin/bash
+
+export GOOGLE_API_KEY=AIzaSyAQCZ2bJHOI6yapnei35Eyrd2IL19ts9GM
+
+python flask_file_accept.py
+
+
