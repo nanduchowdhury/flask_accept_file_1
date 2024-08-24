@@ -111,10 +111,6 @@ function onMouseUp() {
 document.getElementById('regionButton').addEventListener('click', function() {
     console.trace(`KPMNDK - trace : `);
 
-    const selectionImage = document.getElementById('selectionImage');
-    const selectionCanvas = document.getElementById('selectionCanvas');
-    // const selectionImage = document.getElementById('selectionImage');
-
     const pdfCanvas = document.getElementById('pdfCanvas');
     const context = pdfCanvas.getContext('2d');
     

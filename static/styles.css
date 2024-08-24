@@ -1,28 +1,51 @@
-        #previewArea {            
-            width: 98%;
-            height: 200px;
-            overflow-y: auto;
-            border: 5px solid #d4e8f3;
+
+        .header-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-container img {
+            margin-right: 10px; /* Space between the image and text */
+        }
+
+        .header-container h1 {
+            font-size: 24px;
+            color: rgb(106, 188, 55);
+            margin: 0; /* Remove any default margin */
+        }
+
+        #PreviewAndRoughAreaContainer {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            width: 100%;
+            height: 150px;
+        }
+
+        #previewArea {
+            flex: 3; /* Takes up 60% of the container width */
+            background-color: #f0f0f0; /* Optional background color for visualization */
             padding: 10px;
+            height: 100%; /* Adjust height to account for padding */
+            overflow: auto;
+            border: 5px solid #d4e8f3;
             text-align: center;
-            margin-top: 10px;
-            margin-bottom: 10px;
+            box-sizing: border-box;
         }
-
-        /*
-        #pdfCanvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1; /* Lower z-index to place it below the image */
-        }
-*/
-
-        #selectionImage {
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 2; /* Higher z-index to place it on top of the canvas */
+        
+        /* Rough Area */
+        #roughArea {
+            flex: 2; /* Takes up 40% of the container width */
+            background-color: #e0e0e0; /* Optional background color for visualization */
+            padding: 10px;
+            height: 100%; /* Adjust height to account for padding */
+            overflow: auto;
+            border: 5px solid #ccc;
+            box-sizing: border-box;
+            white-space: pre-wrap;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
         }
 
         #resultsContainer {
