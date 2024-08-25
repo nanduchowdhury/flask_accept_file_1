@@ -145,11 +145,20 @@ document.getElementById('regionButton').addEventListener('click', function() {
     // Put the image data onto the new canvas
     rectContext.putImageData(imageData, 0, 0);
     
-    console.log('region rect canvas : ', rectCanvas);
-
     // Convert the canvas to an image (Data URL)
     const dataURL = rectCanvas.toDataURL('image/png');
 
+    const imageElement = new Image();
+    imageElement.src = dataURL;
+    imageElement.alt = 'Extracted Image';
+    // Set display to block to ensure new line placement
+    imageElement.style.display = 'block';
+
+    // Append the image to the roughArea
+    const roughArea = document.getElementById('roughArea');
+    roughArea.appendChild(imageElement);
+
+    console.log('region rect canvas : ', rectCanvas);
 
     // previewArea.innerHTML = `<img src="${dataURL}" alt="Picture Preview" style="max-width: 100%; height: auto;">`;
 

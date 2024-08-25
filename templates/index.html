@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kupamanduk - StudentO</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='buttonCombination.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
 
@@ -15,11 +17,7 @@
             <h1 style="font-size: 24px; color: rgb(106, 188, 55);">StudentO</h1>
         </div>
 
-    <!-- Hidden file input and custom label to trigger it -->
-    <input type="file" id="fileInput" />
-    <label for="fileInput" class="custom-file-input">select PDF jpg png</label>
-    <!-- File Select and Take Picture -->
-    <button id="takePicture">take picture using camera</button>
+
 
     <!-- Container for both areas -->
     <div id="PreviewAndRoughAreaContainer">
@@ -39,12 +37,33 @@
 
     <div id="loadingSpinner"></div>   
 
-    <!-- Send Button -->
-    <button id="sendButton">explain me</button>
-    <button id="regionButton">explain region</button>
+    <div class="separator"></div> <!-- Custom Separator -->
+
+    <div class="button-dropdown-container">
+        <div class="button-dropdown">
+            <input type="file" id="fileInput" />
+            <label for="fileInput" class="custom-file-input">select PDF jpg png</label>
+            <button class="dropdown-toggle">▼</button>
+            <div class="dropdown-content">
+                <button class="dropdown-item" id="takePicture">take picture using camera</button>
+            </div>
+        </div>
+        
+        <div class="horizontal_space_separator"></div>
+
+        <div class="button-dropdown">
+            <button class="main-button" id="sendButton">explain me</button>
+            <button class="dropdown-toggle">▼</button>
+            <div class="dropdown-content">
+                <button class="dropdown-item" id="regionButton">explain region</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="separator"></div> <!-- Custom Separator -->
 
     <div id="resultsContainer">
-        <div class="resultArea" id="result1"></div>
+        <div class="resultArea" id="result1" title="shows explanation as we progress"></div>
         <div class="resultArea" id="result2"></div>
     </div>
 
