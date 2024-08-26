@@ -6,6 +6,7 @@ let videoBlob;
 let DataSource;
 let selectionBox;
 let regionStartX=0, regionStartY=0, regionEndX=0, regionEndY=0;
+let regionImageStartX=0, regionImageStartY=0, regionImageEndX=0, regionImageEndY=0;
 let selectionRegionRect = {left : 0, top : 0, width : 0, height : 0};
 let mediaRecorder;
 let recordedChunks = [];
@@ -47,12 +48,11 @@ function onMouseDown(event) {
     regionStartX = event.pageX;
     regionStartY = event.pageY;
 
+    regionImageStartX = event.offsetX;
+    regionImageStartY = event.offsetY;
+
     if ( selectionBox ) selectionBox.remove();
 
-    const preview_rect = previewArea.getBoundingClientRect();
-
-    // selectionRegionRect.left = Math.round(regionStartX + preview_rect.left);
-    // selectionRegionRect.top = Math.round(regionStartY + preview_rect.top);
     selectionRegionRect.left = Math.round(regionStartX);
     selectionRegionRect.top = Math.round(regionStartY);
     
@@ -65,11 +65,8 @@ function onMouseDown(event) {
     selectionBox.style.top = `${selectionRegionRect.top}px`;
     selectionBox.style.width = `1px`;
     selectionBox.style.height = `1px`;
-    
-    // hideVideoShowCanvas();
-    // unShowVideoElement();
+
     previewArea.appendChild(selectionBox);
-    // appendPreviewAreaChild(selectionBox);
 
     previewArea.addEventListener('mousemove', onMouseMove);
     previewArea.addEventListener('mouseup', onMouseUp);
@@ -79,14 +76,13 @@ function onMouseMove(event) {
     regionEndX = event.pageX;
     regionEndY = event.pageY;
 
-    const preview_rect = previewArea.getBoundingClientRect();
+    regionImageEndX = event.offsetX;
+    regionImageEndY = event.offsetY;
 
     if ( regionEndX < regionStartX ) {
-        // selectionRegionRect.left = Math.round(regionEndX + preview_rect.left);
         selectionRegionRect.left = Math.round(regionEndX);
     }
     if ( regionEndY < regionStartY ) {
-        // selectionRegionRect.top = Math.round(regionEndY + preview_rect.top);
         selectionRegionRect.top = Math.round(regionEndY);
     }
     selectionRegionRect.width = Math.abs(Math.round(regionEndX - regionStartX));
@@ -103,9 +99,6 @@ function onMouseUp() {
 
     previewArea.removeEventListener('mousemove', onMouseMove);
     previewArea.removeEventListener('mouseup', onMouseUp);
-
-    console.log('onMouseUp selectionRegionRect : ', selectionRegionRect);
-    console.log('onMouseUp selectionBox.style : ', selectionBox.style);
 }
 
 document.getElementById('regionButton').addEventListener('click', function() {
@@ -113,28 +106,19 @@ document.getElementById('regionButton').addEventListener('click', function() {
 
     const pdfCanvas = document.getElementById('pdfCanvas');
     const context = pdfCanvas.getContext('2d');
-    
-    const pdfCanvasRect = pdfCanvas.getBoundingClientRect();
 
-    // Calculate the coordinates relative to the pdfCanvas
-    const x = selectionRegionRect.left - pdfCanvasRect.left + pdfCanvas.scrollLeft;
-    const y = selectionRegionRect.top - pdfCanvasRect.top + pdfCanvas.scrollTop;
-
-    // Make sure the coordinates are within the canvas boundaries
-    // const relativeX = Math.max(0, Math.min(x, pdfCanvas.width));
-    // const relativeY = Math.max(0, Math.min(y, pdfCanvas.height));
+    const x = (regionImageStartX < regionImageEndX) ? regionImageStartX : regionImageEndX;
+    const y = (regionImageStartY < regionImageEndY) ? regionImageStartY : regionImageEndY;
     
     const left = Math.round(x);
     const top = Math.round(y);
-    const width = selectionRegionRect.width;
-    const height = selectionRegionRect.height;
+
+    const width = Math.abs(regionImageEndX - regionImageStartX);
+    const height = Math.abs(regionImageEndY - regionImageStartY);
 
     console.log('region cut is : ', left, top, width, height);
 
-    // Extract the image data for the specified rectangle
     const imageData = context.getImageData(left, top, width, height);
-    
-    console.log(imageData);
 
     // Create a new canvas to hold the cropped image
     const rectCanvas = document.createElement('canvas');
@@ -142,10 +126,8 @@ document.getElementById('regionButton').addEventListener('click', function() {
     rectCanvas.height = selectionRegionRect.height;
     const rectContext = rectCanvas.getContext('2d');
     
-    // Put the image data onto the new canvas
     rectContext.putImageData(imageData, 0, 0);
-    
-    // Convert the canvas to an image (Data URL)
+
     const dataURL = rectCanvas.toDataURL('image/png');
 
     const imageElement = new Image();
@@ -154,13 +136,8 @@ document.getElementById('regionButton').addEventListener('click', function() {
     // Set display to block to ensure new line placement
     imageElement.style.display = 'block';
 
-    // Append the image to the roughArea
     const roughArea = document.getElementById('roughArea');
     roughArea.appendChild(imageElement);
-
-    console.log('region rect canvas : ', rectCanvas);
-
-    // previewArea.innerHTML = `<img src="${dataURL}" alt="Picture Preview" style="max-width: 100%; height: auto;">`;
 
     console.log("KUPAMANDUK-1009 selected-image datURL is shown below : ");
     console.log('%c ', `font-size:300px; background:url(${dataURL}) no-repeat;`);
@@ -184,7 +161,7 @@ function onFileInput(event) {
                 loadingTask.promise.then(function(pdf) {
                     // Fetch the first page
                     pdf.getPage(1).then(function(page) {
-                        const scale = 1.5;
+                        const scale = 1.0;
                         const viewport = page.getViewport({scale});
                         const pdfCanvas = document.getElementById('pdfCanvas');
 
@@ -192,12 +169,8 @@ function onFileInput(event) {
                         pdfCanvas.height = viewport.height;
                         pdfCanvas.width = viewport.width;
                         pdfCanvas.style.display = 'block';
-                        // previewArea.innerHTML = ''; // Clear previous content
                         
                         hideVideoShowCanvas();
-                        // unShowVideoElement();
-                        // previewArea.appendChild(pdfCanvas);
-                        // appendPreviewAreaChild(pdfCanvas);
 
                         const renderContext = {
                             canvasContext: context,
@@ -211,7 +184,6 @@ function onFileInput(event) {
         } else {
             const reader = new FileReader();
             reader.onload = function(e) {
-                // previewArea.innerHTML = '';
 
                 const pdfCanvas = document.getElementById('pdfCanvas');
                 const ctx = pdfCanvas.getContext('2d');
@@ -219,14 +191,11 @@ function onFileInput(event) {
                 const img = new Image();
                 img.onload = function() {
 
-                    pdfCanvas.width = img.width;
-                    pdfCanvas.height = img.height;
-                    ctx.drawImage(img, 0, 0);
-                    
+                    pdfCanvas.width = img.naturalWidth;
+                    pdfCanvas.height = img.naturalHeight;
+                    ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
+
                     hideVideoShowCanvas();
-                    // unShowVideoElement();
-                    // previewArea.appendChild(pdfCanvas);
-                    // appendPreviewAreaChild(pdfCanvas);
                 };
 
                 // Set the source of the image element to the FileReader result
@@ -335,7 +304,28 @@ function onStopRecording() {
     };
 }
 
+/******************************************************************
+* There is an issue that on some browsers (especially chrome) the 
+* available voices do not load at the very first time.
+* Load them here to init all voices.
+********************************************************************/
+function initializeVoices() {
+    let voices = window.speechSynthesis.getVoices();
 
+    if (voices.length === 0) {
+        // If the voices are not yet loaded, set up the event listener
+        window.speechSynthesis.onvoiceschanged = () => {
+            voices = window.speechSynthesis.getVoices();
+            // Now you can use the voices array
+            console.log(voices);
+        };
+    } else {
+        // If voices are already loaded, use them immediately
+        console.log(voices);
+    }
+}
+// Call the function to initialize voices
+initializeVoices();
 
 document.getElementById('stopRecording').addEventListener('click', onStopRecording);
 document.getElementById('startRecording').addEventListener('click', onStartRecording);

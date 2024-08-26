@@ -21,7 +21,9 @@
         /* Rough Area */
         #roughArea {
             flex: 2; /* Takes up 40% of the container width */
-            background-color: #e0e0e0; /* Optional background color for visualization */
+            background-color: #fff;
+            background-image: linear-gradient(to bottom, #706c6c 1px, transparent 1px);
+            background-size: 100% 24px; /* Adjust the height between lines here */
             padding: 10px;
             height: 100%; /* Adjust height to account for padding */
             overflow: auto;
@@ -66,8 +68,11 @@
             z-index: 1000; /* Ensure it's on top of other content */
         }
         canvas {
-            max-width: 100%;
+            max-width: none;
+            max-height: none;
+            width: auto;
             height: auto;
+            display: block;
         }
 
         /* Style for the file input button */
