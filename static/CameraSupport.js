@@ -4,6 +4,10 @@ class CameraSupport {
         
         this.previewAreaControl = _previewAreaControl;
 
+        this.videoStream = null;
+        this.mediaRecorder = null;
+        this.recordedChunks = [];
+
         document.getElementById('stopRecording').addEventListener('click', this.onStopRecording);
         document.getElementById('startRecording').addEventListener('click', this.onStartRecording);
         document.getElementById('closePopup').addEventListener('click', this.onCloseCamera);
@@ -21,8 +25,8 @@ class CameraSupport {
         const canvas = document.getElementById('cameraCanvas');
 
         try {
-            videoStream = await navigator.mediaDevices.getUserMedia({ video: true });
-            video.srcObject = videoStream;
+            this.videoStream = await navigator.mediaDevices.getUserMedia({ video: true });
+            video.srcObject = this.videoStream;
             video.onloadedmetadata = () => {
                 video.play();
             };
@@ -51,8 +55,8 @@ class CameraSupport {
         DataSource = 'Picture';
 
         // Stop the camera feed and close popup
-        if (videoStream) {
-            videoStream.getTracks().forEach(track => track.stop());
+        if (this.videoStream) {
+            this.videoStream.getTracks().forEach(track => track.stop());
         }
         document.getElementById('cameraPopup').style.display = 'none';
     }
@@ -60,8 +64,8 @@ class CameraSupport {
     onCloseCamera = () => {
         console.trace(`KPMNDK - trace : `);
 
-        if (videoStream) {
-            videoStream.getTracks().forEach(track => track.stop());
+        if (this.videoStream) {
+            this.videoStream.getTracks().forEach(track => track.stop());
         }
         document.getElementById('cameraPopup').style.display = 'none';
     }
@@ -69,24 +73,24 @@ class CameraSupport {
     onStartRecording = () => {
         console.trace(`KPMNDK - trace : `);
 
-        recordedChunks = [];
-        mediaRecorder = new MediaRecorder(videoStream, { mimeType: 'video/webm' });
+        this.recordedChunks = [];
+        this.mediaRecorder = new MediaRecorder(this.videoStream, { mimeType: 'video/webm' });
 
-        mediaRecorder.ondataavailable = function(event) {
+        this.mediaRecorder.ondataavailable = (event) => {
             if (event.data.size > 0) {
-                recordedChunks.push(event.data);
+                this.recordedChunks.push(event.data);
             }
         };
 
-        mediaRecorder.start();
+        this.mediaRecorder.start();
     }
 
     onStopRecording = () => {
         console.trace(`KPMNDK - trace : `);
-        mediaRecorder.stop();
+        this.mediaRecorder.stop();
 
-        mediaRecorder.onstop = () => {
-            videoBlob = new Blob(recordedChunks, { type: 'video/webm' });
+        this.mediaRecorder.onstop = () => {
+            videoBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
             const videoUrl = URL.createObjectURL(videoBlob);
 
             DataSource = 'video';
