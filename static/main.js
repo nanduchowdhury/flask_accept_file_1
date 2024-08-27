@@ -11,36 +11,10 @@ let selectionRegionRect = {left : 0, top : 0, width : 0, height : 0};
 let mediaRecorder;
 let recordedChunks = [];
 
-function showVideoInCanvas(videoUrl) {
-    console.trace(`KPMNDK - trace : `);
 
-    const videoElement = document.getElementById('videoOverlay');
-    const pdfCanvas = document.getElementById('pdfCanvas');
+const previewAreaControl = new PreviewAreaControl();
+const cameraSupport = new CameraSupport(previewAreaControl);
 
-    const ctx = pdfCanvas.getContext('2d');
-    ctx.clearRect(0, 0, pdfCanvas.width, pdfCanvas.height);
-
-    pdfCanvas.style.display = 'none';
-
-    videoElement.src = videoUrl;
-    videoElement.style.display = 'block';
-
-    previewArea.removeEventListener('mousedown', onMouseDown);
-}
-
-function hideVideoShowCanvas() {
-    console.trace(`KPMNDK - trace : `);
-
-    const videoElement = document.getElementById('videoOverlay');
-    const pdfCanvas = document.getElementById('pdfCanvas');
-
-    videoElement.pause();
-    videoElement.style.display = 'none';
-
-    pdfCanvas.style.display = 'block';
-
-    previewArea.addEventListener('mousedown', onMouseDown);
-}
 
 function onMouseDown(event) {
     console.trace(`KPMNDK - trace : `);
@@ -170,7 +144,7 @@ function onFileInput(event) {
                         pdfCanvas.width = viewport.width;
                         pdfCanvas.style.display = 'block';
                         
-                        hideVideoShowCanvas();
+                        previewAreaControl.hideVideoShowCanvas();
 
                         const renderContext = {
                             canvasContext: context,
@@ -195,7 +169,7 @@ function onFileInput(event) {
                     pdfCanvas.height = img.naturalHeight;
                     ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
 
-                    hideVideoShowCanvas();
+                    previewAreaControl.hideVideoShowCanvas();
                 };
 
                 // Set the source of the image element to the FileReader result
@@ -208,101 +182,6 @@ function onFileInput(event) {
     }
 }
 
-// Open camera in popup
-async function onTakePicture() {
-    console.trace(`KPMNDK - trace : `);
-
-    const popup = document.getElementById('cameraPopup');
-    popup.style.display = 'block';
-
-    const video = document.getElementById('cameraFeed');
-    const canvas = document.getElementById('cameraCanvas');
-    const context = canvas.getContext('2d');
-
-    try {
-        videoStream = await navigator.mediaDevices.getUserMedia({ video: true });
-        video.srcObject = videoStream;
-        video.onloadedmetadata = () => {
-            video.play();
-        };
-    } catch (err) {
-        console.error('Error accessing camera:', err);
-    }
-}
-
-function onCaptureButton() {
-    console.trace(`KPMNDK - trace : `);
-
-    const video = document.getElementById('cameraFeed');
-
-    const pdfCanvas = document.getElementById('pdfCanvas');
-    const ctx = pdfCanvas.getContext('2d');
-    pdfCanvas.width = video.videoWidth;
-    pdfCanvas.height = video.videoHeight;
-    ctx.drawImage(video, 0, 0, pdfCanvas.width, pdfCanvas.height);
-    const dataURL = pdfCanvas.toDataURL('image/png');
-    
-    hideVideoShowCanvas();
-    // unShowVideoElement();
-    // previewArea.appendChild(pdfCanvas);
-    // appendPreviewAreaChild(pdfCanvas);
-
-    console.log("KUPAMANDUK-1002 captured-image datURL is shown below : ");
-    console.log('%c ', `font-size:300px; background:url(${dataURL}) no-repeat;`);
-
-    DataSource = 'Picture';
-
-    // Stop the camera feed and close popup
-    if (videoStream) {
-        videoStream.getTracks().forEach(track => track.stop());
-    }
-    document.getElementById('cameraPopup').style.display = 'none';
-}
-
-function onCloseCamera() {
-    console.trace(`KPMNDK - trace : `);
-
-    if (videoStream) {
-        videoStream.getTracks().forEach(track => track.stop());
-    }
-    document.getElementById('cameraPopup').style.display = 'none';
-}
-
-function onStartRecording() {
-    console.trace(`KPMNDK - trace : `);
-
-    recordedChunks = [];
-    mediaRecorder = new MediaRecorder(videoStream, { mimeType: 'video/webm' });
-
-    mediaRecorder.ondataavailable = function(event) {
-        if (event.data.size > 0) {
-            recordedChunks.push(event.data);
-        }
-    };
-
-    mediaRecorder.start();
-}
-
-function onStopRecording() {
-    console.trace(`KPMNDK - trace : `);
-    mediaRecorder.stop();
-
-    mediaRecorder.onstop = function() {
-        videoBlob = new Blob(recordedChunks, { type: 'video/webm' });
-        const videoUrl = URL.createObjectURL(videoBlob);
-
-        DataSource = 'video';
-
-        showVideoInCanvas(videoUrl);
-        // showVideoElement(videoUrl);
-
-        const downloadLink = document.createElement('a');
-        downloadLink.href = videoUrl;
-        downloadLink.download = 'captured_video.webm';
-        downloadLink.textContent = 'Download Video';
-        document.body.appendChild(downloadLink);
-    };
-}
 
 /******************************************************************
 * There is an issue that on some browsers (especially chrome) the 
@@ -327,11 +206,7 @@ function initializeVoices() {
 // Call the function to initialize voices
 initializeVoices();
 
-document.getElementById('stopRecording').addEventListener('click', onStopRecording);
-document.getElementById('startRecording').addEventListener('click', onStartRecording);
-document.getElementById('closePopup').addEventListener('click', onCloseCamera);
-document.getElementById('captureButton').addEventListener('click', onCaptureButton);
-document.getElementById('takePicture').addEventListener('click', onTakePicture);
+
 document.getElementById('fileInput').addEventListener('change', onFileInput);
 
 const sendRecvManager = new SendReceiveManager(
