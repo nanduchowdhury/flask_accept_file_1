@@ -164,27 +164,68 @@ class PreviewAreaControl {
                 // Display PDF using PDF.js
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    const loadingTask = pdfjsLib.getDocument({data: e.target.result});
+                    const loadingTask = pdfjsLib.getDocument({ data: e.target.result });
                     loadingTask.promise.then(function(pdf) {
-                        // Fetch the first page
-                        pdf.getPage(1).then(function(page) {
-                            const scale = 1.0;
-                            const viewport = page.getViewport({scale});
-                            const pdfCanvas = document.getElementById('pdfCanvas');
-    
-                            const context = pdfCanvas.getContext('2d');
-                            pdfCanvas.height = viewport.height;
-                            pdfCanvas.width = viewport.width;
+                        const numPages = pdf.numPages;  // Get the total number of pages
+                        const scale = 1.0;
+                        const pdfCanvas = document.getElementById('pdfCanvas');
+                        const context = pdfCanvas.getContext('2d');
+                        let totalHeight = 0;
+                        let maxWidth = 0;
+            
+                        function renderPage(pageNumber) {
+                            return pdf.getPage(pageNumber).then(function(page) {
+                                const viewport = page.getViewport({ scale });
+                                const pageHeight = viewport.height;
+                                const pageWidth = viewport.width;
+            
+                                // Create an off-screen canvas for each page
+                                const offScreenCanvas = document.createElement('canvas');
+                                offScreenCanvas.width = pageWidth;
+                                offScreenCanvas.height = pageHeight;
+                                const offScreenContext = offScreenCanvas.getContext('2d');
+            
+                                const renderContext = {
+                                    canvasContext: offScreenContext,
+                                    viewport: viewport
+                                };
+            
+                                return page.render(renderContext).promise.then(() => {
+                                    // Update total height and max width
+                                    totalHeight += pageHeight;
+                                    maxWidth = Math.max(maxWidth, pageWidth);
+            
+                                    // Return the off-screen canvas
+                                    return offScreenCanvas;
+                                });
+                            });
+                        }
+            
+                        // Render all pages
+                        const renderAllPages = async () => {
+                            const canvases = [];
+            
+                            for (let pageNumber = 1; pageNumber <= numPages; pageNumber++) {
+                                const offScreenCanvas = await renderPage(pageNumber);
+                                canvases.push(offScreenCanvas);
+                            }
+            
+                            // Set final pdfCanvas size
+                            pdfCanvas.width = maxWidth;
+                            pdfCanvas.height = totalHeight;
+            
+                            // Composite all off-screen canvases onto the final canvas
+                            let currentHeight = 0;
+                            canvases.forEach(canvas => {
+                                context.drawImage(canvas, 0, currentHeight);
+                                currentHeight += canvas.height;
+                            });
+            
                             pdfCanvas.style.display = 'block';
-                            
                             previewAreaControl.hideVideoShowCanvas();
-    
-                            const renderContext = {
-                                canvasContext: context,
-                                viewport: viewport
-                            };
-                            page.render(renderContext);
-                        });
+                        };
+            
+                        renderAllPages();
                     });
                 };
                 reader.readAsArrayBuffer(file);
