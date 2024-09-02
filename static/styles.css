@@ -17,7 +17,7 @@
             text-align: center;
             box-sizing: border-box;
         }
-        
+
         /* Rough Area */
         #roughArea {
             flex: 2; /* Takes up 40% of the container width */

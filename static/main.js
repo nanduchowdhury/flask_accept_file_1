@@ -5,13 +5,6 @@
 let videoBlob;
 let DataSource;
 
-
-
-
-
-
-
-
 const previewAreaControl = new PreviewAreaControl();
 const cameraSupport = new CameraSupport(previewAreaControl);
 
