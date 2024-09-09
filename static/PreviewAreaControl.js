@@ -1,21 +1,10 @@
 class PreviewAreaControl {
     constructor() {
 
-        this.selectionRegionRect = {left : 0, top : 0, width : 0, height : 0};
-        this.regionImageStartX = 0;
-        this.regionImageStartY = 0;
-        this.regionImageEndX = 0;
-        this.regionImageEndY = 0;
-        this.regionStartX = 0;
-        this.regionStartY = 0;
-        this.regionEndX = 0;
-        this.regionEndY = 0;
-        this.selectionBox = null;
-
-
+        this.mouseControl = new MouseControl('previewArea');
 
         document.getElementById('fileInput').addEventListener('change', this.onFileInput);
-        document.getElementById('regionButton').addEventListener('click', this.onRegionButton);
+        document.getElementById('explainAgainButton').addEventListener('click', this.explainAgainButton);
     }
 
     showVideoInCanvas(videoUrl) {
@@ -32,7 +21,7 @@ class PreviewAreaControl {
         videoElement.src = videoUrl;
         videoElement.style.display = 'block';
     
-        previewArea.removeEventListener('mousedown', this.onMouseDown);
+        this.mouseControl.deActivateRegionSelection();
     }
     
     hideVideoShowCanvas() {
@@ -46,109 +35,7 @@ class PreviewAreaControl {
     
         pdfCanvas.style.display = 'block';
     
-        previewArea.addEventListener('mousedown', this.onMouseDown);
-    }
-    
-    onMouseDown = (event) => {
-        console.trace(`KPMNDK - trace : `);
-    
-        this.regionStartX = event.pageX;
-        this.regionStartY = event.pageY;
-    
-        this.regionImageStartX = event.offsetX;
-        this.regionImageStartY = event.offsetY;
-    
-        if ( this.selectionBox ) this.selectionBox.remove();
-    
-        this.selectionRegionRect.left = Math.round(this.regionStartX);
-        this.selectionRegionRect.top = Math.round(this.regionStartY);
-        
-        this.selectionRegionRect.width = 1;
-        this.selectionRegionRect.height = 1;
-    
-        this.selectionBox = document.createElement('div');
-        this.selectionBox.className = 'selectionBox';
-        this.selectionBox.style.left = `${this.selectionRegionRect.left}px`;
-        this.selectionBox.style.top = `${this.selectionRegionRect.top}px`;
-        this.selectionBox.style.width = `1px`;
-        this.selectionBox.style.height = `1px`;
-    
-        previewArea.appendChild(this.selectionBox);
-    
-        previewArea.addEventListener('mousemove', this.onMouseMove);
-        previewArea.addEventListener('mouseup', this.onMouseUp);
-    }
-    
-    onMouseMove = (event) => {
-        this.regionEndX = event.pageX;
-        this.regionEndY = event.pageY;
-    
-        this.regionImageEndX = event.offsetX;
-        this.regionImageEndY = event.offsetY;
-    
-        if ( this.regionEndX < this.regionStartX ) {
-            this.selectionRegionRect.left = Math.round(this.regionEndX);
-        }
-        if ( this.regionEndY < this.regionStartY ) {
-            this.selectionRegionRect.top = Math.round(this.regionEndY);
-        }
-        this.selectionRegionRect.width = Math.abs(Math.round(this.regionEndX - this.regionStartX));
-        this.selectionRegionRect.height = Math.abs(Math.round(this.regionEndY - this.regionStartY));
-    
-        this.selectionBox.style.width = `${this.selectionRegionRect.width}px`;
-        this.selectionBox.style.height = `${this.selectionRegionRect.height}px`;
-        this.selectionBox.style.left = `${this.selectionRegionRect.left}px`;
-        this.selectionBox.style.top = `${this.selectionRegionRect.top}px`;
-    }
-    
-    onMouseUp = () => {
-        console.trace(`KPMNDK - trace : `);
-    
-        previewArea.removeEventListener('mousemove', this.onMouseMove);
-        previewArea.removeEventListener('mouseup', this.onMouseUp);
-    }
-    
-    onRegionButton = () => {
-        console.trace(`KPMNDK - trace : `);
-    
-        const pdfCanvas = document.getElementById('pdfCanvas');
-        const context = pdfCanvas.getContext('2d');
-    
-        const x = (this.regionImageStartX < this.regionImageEndX) ? this.regionImageStartX : this.regionImageEndX;
-        const y = (this.regionImageStartY < this.regionImageEndY) ? this.regionImageStartY : this.regionImageEndY;
-        
-        const left = Math.round(x);
-        const top = Math.round(y);
-    
-        const width = Math.abs(this.regionImageEndX - this.regionImageStartX);
-        const height = Math.abs(this.regionImageEndY - this.regionImageStartY);
-    
-        console.log('region cut is : ', left, top, width, height);
-    
-        const imageData = context.getImageData(left, top, width, height);
-    
-        // Create a new canvas to hold the cropped image
-        const rectCanvas = document.createElement('canvas');
-        rectCanvas.width = this.selectionRegionRect.width;
-        rectCanvas.height = this.selectionRegionRect.height;
-        const rectContext = rectCanvas.getContext('2d');
-        
-        rectContext.putImageData(imageData, 0, 0);
-    
-        const dataURL = rectCanvas.toDataURL('image/png');
-    
-        const imageElement = new Image();
-        imageElement.src = dataURL;
-        imageElement.alt = 'Extracted Image';
-        // Set display to block to ensure new line placement
-        imageElement.style.display = 'block';
-    
-        const roughArea = document.getElementById('roughArea');
-        roughArea.appendChild(imageElement);
-    
-        console.log("KUPAMANDUK-1009 selected-image datURL is shown below : ");
-        console.log('%c ', `font-size:300px; background:url(${dataURL}) no-repeat;`);
-        
+        this.mouseControl.activateRegionSelection();
     }
     
     onFileInput = (event) => {
