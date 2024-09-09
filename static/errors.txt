@@ -1,3 +1,5 @@
+
+// Messages for PostItNote. 
 1001 : The language %s (%s) not available in this system.
 1002 : %s
 1003 : %s
@@ -7,3 +9,5 @@
 1007 : %s
 1008 : %s
 1009 : %s
+
+// Messages for sendRecv.
