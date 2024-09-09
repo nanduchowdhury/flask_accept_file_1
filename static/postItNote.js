@@ -17,10 +17,10 @@ class PostItNote {
         let tabContainer = document.createElement('div');
         tabContainer.className = 'tabContainer';
 
-        this.tab1Button = this.createTabButtonWithSpeakers('Tab 1', this.tab1Content);
+        this.tab1Button = this.createTabButtonWithSpeakers('eng', this.tab1Content);
         tabContainer.appendChild(this.tab1Button);
 
-        this.tab2Button = this.createTabButtonWithSpeakers('Tab 2', this.tab2Content);
+        this.tab2Button = this.createTabButtonWithSpeakers('hindi', this.tab2Content);
         tabContainer.appendChild(this.tab2Button);
         
         this.postItNote.appendChild(tabContainer);
@@ -103,9 +103,7 @@ class PostItNote {
         if (voice) {
             utterance.voice = voice;
         } else {
-            let msg = 'The language ' + this.langMap.get(utterance.lang) + 
-                        ' (' + utterance.lang + ') ' + 'not available in this system.';
-            alert(msg);
+            errorManager.showError(1001, this.langMap.get(utterance.lang), utterance.lang);
             return;
         }
 

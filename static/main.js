@@ -34,6 +34,7 @@ function initializeVoices() {
 // Call the function to initialize voices
 initializeVoices();
 
+const errorManager = new ErrorManager();
 
 const sendRecvManager = new SendReceiveManager(
     'fileInput',

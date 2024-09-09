@@ -1,0 +1,2 @@
+1001 : The language %s (%s) not available in this system.
+
