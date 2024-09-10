@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='header.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='buttonCombination.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='top_right_menu.css') }}">
 </head>
 <body>
 
@@ -15,6 +16,35 @@
         <div class="header-container">
             <img src="{{ url_for('static', filename='frog.jpg') }}" width="50" height="50" alt="Kupamanduk" title="Kupamanduk">
             <h1 style="font-size: 24px; color: rgb(106, 188, 55);">StudentO</h1>
+
+            <!-- top-right drop-down -->
+            <div class="tr_menu_dropdown-container">
+                <div class="tr_menu_dropdown">
+                    <div class="tr_menu_menu-icon"></div>
+                    <div class="tr_menu_dropdown-content">
+                        <a id="report-item" href="#">Report</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- top-right report-issue popup -->
+            <div id="reportPopup" class="report_issue_popup report_issue_hidden">
+                <div class="report_issue_popup-content">
+                    <h2>Report Issue</h2>
+                    <div class="report_issue_screenshot-area">
+                        <h3>Screenshot</h3>
+                        <img id="screenshotImage" alt="Screenshot" />
+                    </div>
+                    <div class="report_issue_message-area">
+                        <h3>Message</h3>
+                        <textarea id="reportMessage" placeholder="Enter your message"></textarea>
+                    </div>
+                    <div class="report_issue_popup-buttons">
+                        <button id="reportIssueSendButton">Send</button>
+                        <button id="reportIssueCancelButton">Cancel</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
 
@@ -81,7 +111,7 @@
 
     <!-- PDF.js Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="{{ url_for('static', filename='PreviewAreaControl.js') }}""></script>
     <script src="{{ url_for('static', filename='CameraSupport.js') }}""></script>
     <script src="{{ url_for('static', filename='ConceptTracker.js') }}""></script>
@@ -91,6 +121,7 @@
     <script src="{{ url_for('static', filename='rmb.js') }}""></script>
     <script src="{{ url_for('static', filename='mouseControl.js') }}""></script>
     <script src="{{ url_for('static', filename='errorManager.js') }}""></script>
+    <script src="{{ url_for('static', filename='report_to_developer.js') }}""></script>
     <script src="{{ url_for('static', filename='main.js') }}""></script>
 
 </body>
