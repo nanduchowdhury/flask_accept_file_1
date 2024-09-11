@@ -24,9 +24,13 @@ from PIL import Image
 
 app = Flask(__name__)
 
-UPLOAD_FOLDER = 'uploads'
+UPLOAD_FOLDER = '/home/nandu_chowdhury/kupamanduk/scholar/uploads/'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+LOG_FOLDER = '/home/nandu_chowdhury/kupamanduk/scholar/client_logs/'
+if not os.path.exists(LOG_FOLDER):
+    os.makedirs(LOG_FOLDER)
 
 def extract_text_from_pdf(pdf_path):
     text = ""
@@ -79,6 +83,8 @@ firstResponse = []
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
+    
+    client_ip = request.remote_addr  # Get the client's IP address
 
     file_path = ''
 
@@ -161,6 +167,36 @@ def upload_file():
     # genai.delete_file(genai_upload_file.name)
 
     # return jsonify({'result1': english_response.text, 'result2': hindi_response.text})
+
+
+# Function to get the log file path for a client (using IP as the identifier)
+def get_log_file_path(client_ip, client_id):
+    return os.path.join(LOG_FOLDER, f'{client_ip}_{client_id}.txt')
+
+@app.route('/save_logs', methods=['POST'])
+def save_logs():
+    try:
+        data = request.get_json()
+        logs = data.get('logs', [])
+        client_id = data.get('clientId', 'unknown')
+
+        if not logs:
+            return jsonify({"status": "no logs to save"}), 200
+
+        # Get the client's IP address
+        client_ip = request.remote_addr
+        log_file_path = get_log_file_path(client_ip, client_id)
+
+        # Append the logs to the client's log file
+        with open(log_file_path, 'a') as log_file:
+            for log in logs:
+                log_file.write(f"{log}\n")
+
+        return jsonify({"status": "logs saved"}), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 
 if __name__ == '__main__':
     app.run(debug=True)
