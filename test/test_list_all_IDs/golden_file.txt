@@ -1,0 +1,30 @@
+Chrome driver title is : Kupamanduk - Scholar-M
+*****************************
+ID is : report-item
+ID is : reportPopup
+ID is : screenshotImage
+ID is : reportMessage
+ID is : reportIssueSendButton
+ID is : reportIssueCancelButton
+ID is : PreviewAndRoughAreaContainer
+ID is : previewArea
+ID is : pdfCanvas
+ID is : videoOverlay
+ID is : roughArea
+ID is : loadingSpinner
+ID is : fileInput
+ID is : takePicture
+ID is : sendButton
+ID is : explainAgainButton
+ID is : resultsContainer
+ID is : result2
+ID is : result1
+ID is : cameraPopup
+ID is : cameraFeed
+ID is : captureButton
+ID is : startRecording
+ID is : stopRecording
+ID is : cameraCanvas
+ID is : closePopup
+ID is : action-1
+*****************************
