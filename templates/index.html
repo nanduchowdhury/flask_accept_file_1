@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='header.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='buttonCombination.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='MessageBox.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='top_right_menu.css') }}">
 </head>
 <body>
@@ -104,6 +105,11 @@
         <button id="closePopup">Close</button>
     </div>
 
+    <div id="messageBox" class="message-box hidden">
+        <span id="messageBoxText"></span>
+        <button id="messageBoxOkButton">OK</button>
+    </div>
+      
     <script>
         // This code will execute as soon as the page has loaded.
         console.log("KUPAMANDUK-1001 page loaded successfully!"); 
@@ -112,6 +118,7 @@
     <!-- PDF.js Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/log4javascript/1.4.9/log4javascript.min.js"></script>
     <script src="{{ url_for('static', filename='PreviewAreaControl.js') }}""></script>
     <script src="{{ url_for('static', filename='CameraSupport.js') }}""></script>
     <script src="{{ url_for('static', filename='ConceptTracker.js') }}""></script>

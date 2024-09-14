@@ -40,8 +40,6 @@ const geoInfo = new GeolocationInfo();
 geoInfo.getFormattedInfo().then(info => console.log(info));
 
 
-const logger = new ClientLogger(10000);
-
 const sendRecvManager = new SendReceiveManager(
     'fileInput',
     'sendButton',

@@ -96,15 +96,7 @@ class GeolocationInfo {
         const timezone = await this.getTimezone();
         const organization = await this.getOrganization();
 
-        return `
-        Country: ${country}
-        Region: ${region}
-        City: ${city}
-        Location: ${location}
-        Postal Code: ${postalCode}
-        Timezone: ${timezone}
-        Organization: ${organization}
-        `;
+        return `Country - ${country}    Region - ${region}      City - ${city}      Location - ${location}      Postal-Code - ${postalCode}     Timezone - ${timezone}      Organization - ${organization}`;
     }
 }
 

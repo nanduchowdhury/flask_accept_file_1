@@ -190,7 +190,7 @@ class ScholarKM(Flask):
 
             # Get the client's IP address
             client_ip = request.remote_addr
-            log_file_path = get_log_file_path(client_ip, client_id)
+            log_file_path = self.get_log_file_path(client_ip, client_id)
 
             # Append the logs to the client's log file
             with open(log_file_path, 'a') as log_file:
