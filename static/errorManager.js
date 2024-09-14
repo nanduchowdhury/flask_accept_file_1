@@ -170,6 +170,11 @@ class ErrorManager {
         this.messageBox.classList.remove('info', 'warn', 'error');
     }
 
+    isBase64(str) {
+        const base64Pattern = /^[A-Za-z0-9+/=]+$/;
+        return base64Pattern.test(str);
+    }
+
     getRealMessage(code, args) {
         let message;
     
@@ -179,8 +184,19 @@ class ErrorManager {
             // Replace placeholders %s with actual arguments
             args.forEach(arg => {
                 if (typeof arg === 'object') {
-                    // Convert objects or arrays to JSON string
-                    message = message.replace('%s', JSON.stringify(arg));
+                    // Convert objects to JSON, replacing binary data with 'binary'
+                    const jsonString = JSON.stringify(arg, (key, value) => {
+                        if (typeof value === 'string' && value.length > 1000 && this.isBase64(value)) {
+                            return 'binary (base64)';
+                        } else if (typeof value === 'string' && value.length > 100 && value.match(/^data:.+;base64,/)) {
+                            return 'binary (base64)';
+                        } else if (value instanceof ArrayBuffer || value instanceof Blob || 
+                            value instanceof Uint8Array) {
+                            return 'binary';  // Replace binary data with 'binary'
+                        }
+                        return value;  // Keep all other fields
+                    });
+                    message = message.replace('%s', jsonString);
                 } else {
                     // Directly replace for primitive types
                     message = message.replace('%s', arg);
@@ -194,8 +210,6 @@ class ErrorManager {
     
         return message;
     }
-
-    
 
     showError(code, ...args) {
         let message = this.getRealMessage(code, args);
