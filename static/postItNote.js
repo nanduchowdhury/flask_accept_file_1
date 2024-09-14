@@ -121,7 +121,7 @@ class PostItNote {
             if (voice) {
                 utterance.voice = voice;
             } else {
-                errorManager.showError(1001, this.langMap.get(utterance.lang), utterance.lang);
+                errorManager.showInfo(1001, this.langMap.get(utterance.lang), utterance.lang);
                 return;
             }
 
@@ -135,7 +135,6 @@ class PostItNote {
             };
 
             speechSynthesis.speak(utterance);
-            // console.log(speechSynthesis.getVoices());
         } catch (error) {
             errorManager.showError(1007, error.message);
         }

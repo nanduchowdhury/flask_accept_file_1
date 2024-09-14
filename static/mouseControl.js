@@ -37,7 +37,6 @@ class MouseControl {
     }
 
     onMouseDown = (event) => {
-        console.trace(`KPMNDK - trace : `);
 
         this.regionStartX = event.pageX;
         this.regionStartY = event.pageY;
@@ -89,7 +88,6 @@ class MouseControl {
     }
 
     onMouseUp = () => {
-        console.trace(`KPMNDK - trace : `);
 
         if ( this.selectionBox.offsetWidth <= MouseControl.ACCEPTABLE_REGION_SIZE ||
             this.selectionBox.offsetHeight <= MouseControl.ACCEPTABLE_REGION_SIZE ) {

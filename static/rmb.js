@@ -80,7 +80,6 @@ class PreviewAreaRmb extends RmbBase {
     }
 
     onExplainRegion() {
-        console.trace(`KPMNDK - trace : `);
     
         const pdfCanvas = document.getElementById('pdfCanvas');
         const context = pdfCanvas.getContext('2d');
@@ -93,8 +92,6 @@ class PreviewAreaRmb extends RmbBase {
     
         const width = Math.abs(this.regionImageEndX - this.regionImageStartX);
         const height = Math.abs(this.regionImageEndY - this.regionImageStartY);
-
-        console.log('region cut is : ', left, top, width, height);
 
         if ( width <= MouseControl.ACCEPTABLE_REGION_SIZE || 
                 height <= MouseControl.ACCEPTABLE_REGION_SIZE ) {
@@ -122,8 +119,8 @@ class PreviewAreaRmb extends RmbBase {
         const roughArea = document.getElementById('roughArea');
         roughArea.appendChild(imageElement);
     
-        console.log("KUPAMANDUK-1009 selected-image datURL is shown below : ");
-        console.log('%c ', `font-size:300px; background:url(${dataURL}) no-repeat;`);
+        errorManager.log(1014);
+        // console.log('%c ', `font-size:300px; background:url(${dataURL}) no-repeat;`);
         
     }
 

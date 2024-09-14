@@ -16,7 +16,6 @@ class CameraSupport {
     }
 
     onTakePicture = async () => {
-        console.trace(`KPMNDK - trace : `);
 
         const popup = document.getElementById('cameraPopup');
         popup.style.display = 'block';
@@ -31,12 +30,11 @@ class CameraSupport {
                 video.play();
             };
         } catch (err) {
-            console.error('Error accessing camera:', err);
+            errorManager.showError(1011, err);
         }
     }
 
     onCaptureButton = () => {
-        console.trace(`KPMNDK - trace : `);
 
         const video = document.getElementById('cameraFeed');
 
@@ -49,8 +47,8 @@ class CameraSupport {
         
         this.previewAreaControl.hideVideoShowCanvas();
 
-        console.log("KUPAMANDUK-1002 captured-image datURL is shown below : ");
-        console.log('%c ', `font-size:300px; background:url(${dataURL}) no-repeat;`);
+        errorManager.log(1010);
+        // console.log('%c ', `font-size:300px; background:url(${dataURL}) no-repeat;`);
 
         DataSource = 'Picture';
 
@@ -62,7 +60,6 @@ class CameraSupport {
     }
 
     onCloseCamera = () => {
-        console.trace(`KPMNDK - trace : `);
 
         if (this.videoStream) {
             this.videoStream.getTracks().forEach(track => track.stop());
@@ -71,7 +68,6 @@ class CameraSupport {
     }
 
     onStartRecording = () => {
-        console.trace(`KPMNDK - trace : `);
 
         this.recordedChunks = [];
         this.mediaRecorder = new MediaRecorder(this.videoStream, { mimeType: 'video/webm' });
@@ -86,7 +82,6 @@ class CameraSupport {
     }
 
     onStopRecording = () => {
-        console.trace(`KPMNDK - trace : `);
         this.mediaRecorder.stop();
 
         this.mediaRecorder.onstop = () => {

@@ -5,7 +5,6 @@ class ConceptTracker {
 
     constructor() {
         this.currentLevel = this.ALL_TITLES_LEVEL;
-        console.log(this.currentLevel);
         this.maxLevel = this.ALL_TITLES_LEVEL;
         this.levelTitles = new Map();
     }

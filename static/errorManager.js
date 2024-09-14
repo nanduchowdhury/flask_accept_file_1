@@ -170,23 +170,50 @@ class ErrorManager {
         this.messageBox.classList.remove('info', 'warn', 'error');
     }
 
-    showError(code, ...args) {
-        
+    getRealMessage(code, args) {
         let message;
-
+    
         if (this.errors.has(code)) {
             message = this.errors.get(code);
-
+    
             // Replace placeholders %s with actual arguments
             args.forEach(arg => {
-                message = message.replace('%s', arg);
+                if (typeof arg === 'object') {
+                    // Convert objects or arrays to JSON string
+                    message = message.replace('%s', JSON.stringify(arg));
+                } else {
+                    // Directly replace for primitive types
+                    message = message.replace('%s', arg);
+                }
             });
-
-            message = `Error ${code}: ${message}`;
+    
+            message = ` ${code}: ${message}`;
         } else {
             message = `Unknown error with code: ${code}`;
         }
+    
+        return message;
+    }
 
+    
+
+    showError(code, ...args) {
+        let message = this.getRealMessage(code, args);
+        this.showMessage('error', message);
+    }
+
+    showWarn(code, ...args) {
+        let message = this.getRealMessage(code, args);
+        this.showMessage('warn', message);
+    }
+
+    showInfo(code, ...args) {
+        let message = this.getRealMessage(code, args);
         this.showMessage('info', message);
+    }
+
+    log(code, ...args) {
+        let message = this.getRealMessage(code, args);
+        this.logger.info(message);
     }
 }

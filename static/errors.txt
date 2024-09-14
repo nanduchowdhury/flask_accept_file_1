@@ -1,4 +1,9 @@
 
+// Format of this file is as follows:
+//      code : message
+// Do not use ':' in the message portion.
+// You can use %s in the message portion to be replaced with args from caller side.
+
 // Messages for PostItNote. 
 1001 : The language %s (%s) not available in this system.
 1002 : %s
@@ -10,4 +15,16 @@
 1008 : %s
 1009 : %s
 
-// Messages for sendRecv.
+1010 : Captured camera image.
+1011 : Error accessing camera - %s.
+1012 : Initialized all voices on client machine.
+1013 : Geolocation Info are as following - %s.
+1014 : Explain region.
+1015 : Error encountered while sending data to server - %s.
+1016 : Sending image data to server.
+1017 : Sending data to server - %s.
+1018 : Error sending data to server - %s.
+1019 : Received server data for INIT level - %s.
+1020 : Received server data for NON-INIT level - %s.
+
+

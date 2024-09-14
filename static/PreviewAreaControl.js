@@ -8,7 +8,6 @@ class PreviewAreaControl {
     }
 
     showVideoInCanvas(videoUrl) {
-        console.trace(`KPMNDK - trace : `);
     
         const videoElement = document.getElementById('videoOverlay');
         const pdfCanvas = document.getElementById('pdfCanvas');
@@ -25,7 +24,6 @@ class PreviewAreaControl {
     }
     
     hideVideoShowCanvas() {
-        console.trace(`KPMNDK - trace : `);
     
         const videoElement = document.getElementById('videoOverlay');
         const pdfCanvas = document.getElementById('pdfCanvas');
@@ -39,7 +37,6 @@ class PreviewAreaControl {
     }
     
     onFileInput = (event) => {
-        console.trace(`KPMNDK - trace : `);
     
         const file = event.target.files[0];
         const previewArea = document.getElementById('previewArea');

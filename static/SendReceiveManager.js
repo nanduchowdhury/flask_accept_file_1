@@ -27,14 +27,13 @@ class SendReceiveManager {
                 this.sendVideo();
             } 
         } catch (error) {
-            console.error('Error:', error);
+            errorManager.showError(1015, error);
         } finally {
             // this.spinner.hide();
         }
     }
 
     sendFile() {
-        console.trace(`KPMNDK - trace : `);
 
         if (this.fileInput.files.length === 0) {
             alert('Choose a PDF, JPG, PNG - or take a picture using the camera');
@@ -62,7 +61,6 @@ class SendReceiveManager {
     }
 
     sendVideo() {
-        console.trace(`KPMNDK - trace : `);
         if ( videoBlob ) {
 
             const reader = new FileReader();
@@ -82,11 +80,10 @@ class SendReceiveManager {
     }
 
     sendImage() {
-        console.trace(`KPMNDK - trace : `);
 
         const dataUrl = this.pdfCanvas.toDataURL('image/png');
-        console.log("KUPAMANDUK-1004 sent-image dataURL shown below :");
-        console.log('%c ', `font-size:300px; background:url(${dataUrl}) no-repeat;`);
+        errorManager.log(1016);
+        // console.log('%c ', `font-size:300px; background:url(${dataUrl}) no-repeat;`);
 
         const data = {
             image: dataUrl,
@@ -98,13 +95,12 @@ class SendReceiveManager {
     }
 
     sendDataToServer(data) {
-        console.trace(`KPMNDK - trace : `);
 
         this.spinner.show();
 
         data.additionalData.learnLevel = this.cTracker.getCurrentLevel();
 
-        console.log('sending data to server : ', data);
+        errorManager.log(1017, data);
 
         fetch('/upload', {
             method: 'POST',
@@ -119,13 +115,12 @@ class SendReceiveManager {
             this.spinner.hide();
         })
         .catch(error => {
-            console.error('Error:', error);
+            errorManager.showError(1018, error);
             this.spinner.hide();
         });
     }
 
     handleServerResponse(data) {
-        console.trace(`KPMNDK - trace : `);
         
         if (data.error) {
             this.resultDiv.textContent = 'Error: ' + data.error;
@@ -133,7 +128,7 @@ class SendReceiveManager {
 
             if ( this.cTracker.isInitLevel() ) {
 
-                console.log('recvd server data for init level : ', data);
+                errorManager.log(1019, data);
 
                 if ( data.numPoints ) {
                     this.cTracker.setMaxLevel(data.numPoints);
@@ -147,7 +142,7 @@ class SendReceiveManager {
                 }
             } else {
 
-                console.log('recvd server data for non-init level : ', data);
+                errorManager.log(1020, data);
 
                 this.resultDiv1.append(this.cTracker.getCurrentLevelTitle());
                 this.resultDiv1.append('\n');

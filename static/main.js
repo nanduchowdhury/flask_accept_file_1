@@ -24,20 +24,20 @@ function initializeVoices() {
         window.speechSynthesis.onvoiceschanged = () => {
             voices = window.speechSynthesis.getVoices();
             // Now you can use the voices array
-            console.log(voices);
+            errorManager.log(1012);
         };
     } else {
         // If voices are already loaded, use them immediately
-        console.log(voices);
+        errorManager.log(1012);
     }
 }
-// Call the function to initialize voices
-initializeVoices();
+
 
 const errorManager = new ErrorManager();
 
+initializeVoices();
 const geoInfo = new GeolocationInfo();
-geoInfo.getFormattedInfo().then(info => console.log(info));
+geoInfo.getFormattedInfo().then(info => errorManager.log(1013, info));
 
 
 const sendRecvManager = new SendReceiveManager(
