@@ -184,18 +184,38 @@ class ErrorManager {
             // Replace placeholders %s with actual arguments
             args.forEach(arg => {
                 if (typeof arg === 'object') {
-                    // Convert objects to JSON, replacing binary data with 'binary'
+                    
                     const jsonString = JSON.stringify(arg, (key, value) => {
-                        if (typeof value === 'string' && value.length > 1000 && this.isBase64(value)) {
-                            return 'binary (base64)';
-                        } else if (typeof value === 'string' && value.length > 100 && value.match(/^data:.+;base64,/)) {
-                            return 'binary (base64)';
-                        } else if (value instanceof ArrayBuffer || value instanceof Blob || 
-                            value instanceof Uint8Array) {
-                            return 'binary';  // Replace binary data with 'binary'
+                    
+                        // Check if value is an object or an error instance
+                        if (value !== null && typeof value === 'object') {
+                    
+                            // Check if the value is a specific error instance
+                            if (value instanceof ReferenceError) {
+                                return `ReferenceError: ${value.message}`;
+                            } else if (value instanceof Error) {  // For general errors
+                                return `${value.name}: ${value.message}`;
+                            }
+                    
+                            if (value instanceof ArrayBuffer || value instanceof Blob || value instanceof Uint8Array) {
+                                return 'binary';  // Replace binary data with 'binary'
+                            }
+                            return value;  // Return other objects as is
                         }
-                        return value;  // Keep all other fields
+                    
+                        // Handle string values
+                        if (typeof value === 'string') {
+                            if (value.length > 1000 && this.isBase64(value)) {
+                                return 'binary (base64)';
+                            } else if (value.length > 100 && value.match(/^data:.+;base64,/)) {
+                                return 'binary (base64)';
+                            }
+                        }
+                    
+                        // Return other types as is
+                        return value;
                     });
+
                     message = message.replace('%s', jsonString);
                 } else {
                     // Directly replace for primitive types

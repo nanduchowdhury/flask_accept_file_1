@@ -2,10 +2,12 @@
 "use strict";
 
 
-let videoBlob;
-let DataSource;
+class SharedData {
+    static videoBlob;
+    static DataSource;
+}
 
-const previewAreaControl = new PreviewAreaControl();
+const previewAreaControl = new PreviewAreaControl('loadingSpinner');
 const cameraSupport = new CameraSupport(previewAreaControl);
 
 

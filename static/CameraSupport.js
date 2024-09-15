@@ -50,7 +50,7 @@ class CameraSupport {
         errorManager.log(1010);
         // console.log('%c ', `font-size:300px; background:url(${dataURL}) no-repeat;`);
 
-        DataSource = 'Picture';
+        SharedData.DataSource = 'Picture';
 
         // Stop the camera feed and close popup
         if (this.videoStream) {
@@ -85,10 +85,10 @@ class CameraSupport {
         this.mediaRecorder.stop();
 
         this.mediaRecorder.onstop = () => {
-            videoBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
-            const videoUrl = URL.createObjectURL(videoBlob);
+            SharedData.videoBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
+            const videoUrl = URL.createObjectURL(SharedData.videoBlob);
 
-            DataSource = 'video';
+            SharedData.DataSource = 'video';
 
             this.previewAreaControl.showVideoInCanvas(videoUrl);
             // showVideoElement(videoUrl);

@@ -19,11 +19,11 @@ class SendReceiveManager {
 
     handleSendButtonClick() {
         try {
-            if ( DataSource == 'File' ) {
+            if ( SharedData.DataSource == 'File' ) {
                 this.sendFile();
-            } else if ( DataSource == 'Picture' ) {
+            } else if ( SharedData.DataSource == 'Picture' ) {
                 this.sendImage();
-            } else if ( DataSource == 'video' ) {
+            } else if ( SharedData.DataSource == 'video' ) {
                 this.sendVideo();
             } 
         } catch (error) {
@@ -61,7 +61,7 @@ class SendReceiveManager {
     }
 
     sendVideo() {
-        if ( videoBlob ) {
+        if ( SharedData.videoBlob ) {
 
             const reader = new FileReader();
             reader.onloadend = () => {
@@ -75,7 +75,7 @@ class SendReceiveManager {
                 };
                 this.sendDataToServer(data);
             };
-            reader.readAsDataURL(videoBlob);
+            reader.readAsDataURL(SharedData.videoBlob);
         }
     }
 

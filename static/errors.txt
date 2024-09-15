@@ -27,4 +27,17 @@
 1019 : Received server data for INIT level - %s.
 1020 : Received server data for NON-INIT level - %s.
 
+// PDF reading
+1021 : Error rendering page number %s - %s.
+1022 : Error rendering all pages - %s.
+1023 : Error in rendering process - %s.
+1024 : Error loading PDF - %s.
+1025 : Error reading PDF file - %s.
+1026 : Error in supportPdfReading - %s.
+
+1027 : Error rendering image - %s.
+1028 : Error loading image - %s.
+1029 : Error reading file %s - %s.
+1030 : Error reading image file %s - %s.
+
 
