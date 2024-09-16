@@ -95,14 +95,31 @@
         <div class="resultArea" id="result1" title="shows detail explanation as we progress"></div>
     </div>
 
+
     <!-- Camera Popup -->
     <div id="cameraPopup">
         <video id="cameraFeed" style="width: 100%; height: auto;" autoplay></video>
-        <button id="captureButton">Capture</button>
-        <button id="startRecording">Start Recording</button>
-        <button id="stopRecording">Stop Recording</button>
         <canvas id="cameraCanvas" style="display: none;"></canvas>
-        <button id="closePopup">Close</button>
+
+        <!-- Icon for Capture Picture (Unicode Camera) with Tooltip -->
+        <div id="captureButton" title="Capture Picture" style="position: absolute; top: 10px; left: 10px; cursor: pointer; font-size: 20px;">
+            📷 <!-- Unicode camera icon -->
+        </div>
+
+        <!-- Icon for Start Recording (Unicode Circle) with Tooltip -->
+        <div id="startRecording" title="Start Recording" style="position: absolute; top: 10px; left: 60px; cursor: pointer; font-size: 20px;">
+            ⏺️ <!-- Unicode record icon -->
+        </div>
+
+        <!-- Icon for Stop Recording (Unicode Stop) with Tooltip -->
+        <div id="stopRecording" title="Stop Recording" style="position: absolute; top: 10px; left: 110px; display: none; cursor: pointer; font-size: 20px;">
+            ⏹️ <!-- Unicode stop icon -->
+        </div>
+
+        <!-- Icon for Closing Popup (Unicode Close) with Tooltip -->
+        <div id="closePopup" title="Close" style="position: absolute; top: 10px; right: 10px; cursor: pointer; font-size: 20px;">
+            ❌ <!-- Unicode close icon -->
+        </div>
     </div>
 
     <div id="messageBox" class="message-box hidden">

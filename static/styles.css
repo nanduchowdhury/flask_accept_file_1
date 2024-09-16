@@ -67,6 +67,34 @@
             background: #fff;
             z-index: 1000; /* Ensure it's on top of other content */
         }
+
+        #captureButton, #startRecording, #stopRecording, #closePopup {
+            position: absolute;
+            cursor: pointer;
+            font-size: 30px; /* Adjust size of icons */
+        }
+        
+        #captureButton {
+            top: 10px;
+            left: 10px;
+        }
+        
+        #startRecording {
+            top: 10px;
+            left: 60px;
+        }
+        
+        #stopRecording {
+            top: 10px;
+            left: 110px;
+            display: none; /* Hidden by default */
+        }
+        
+        #closePopup {
+            top: 10px;
+            right: 10px;
+        }
+        
         canvas {
             max-width: none;
             max-height: none;

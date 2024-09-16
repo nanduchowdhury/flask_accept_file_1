@@ -40,4 +40,17 @@
 1029 : Error reading file %s - %s.
 1030 : Error reading image file %s - %s.
 
+// Camera support
+1031 : Camera support error in %s - %s.
+1032 : Error in video stream - %s.
+1033 : Error in image capture - %s.
+1034 : Error closing camera - %s.
+1035 : Error while recording - %s.
+1036 : Error while stopping recording - %s.
+1037 : Error displaying video - %s.
+
+
+
+
+
 
