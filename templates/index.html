@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='buttonCombination.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='MessageBox.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='postItNote.css') }}">    
     <link rel="stylesheet" href="{{ url_for('static', filename='top_right_menu.css') }}">
 </head>
 <body>
@@ -95,6 +96,8 @@
         <div class="resultArea" id="result1" title="shows detail explanation as we progress"></div>
     </div>
 
+    <div id="genericPopoutId" class="genericPopout">This is a generic popout</div>
+
 
     <!-- Camera Popup -->
     <div id="cameraPopup">
@@ -147,6 +150,7 @@
     <script src="{{ url_for('static', filename='errorManager.js') }}""></script>
     <script src="{{ url_for('static', filename='report_to_developer.js') }}""></script>
     <script src="{{ url_for('static', filename='geologicalInfo.js') }}""></script>
+    <script src="{{ url_for('static', filename='popoutManager.js') }}""></script>
     <script src="{{ url_for('static', filename='clientLogging.js') }}""></script>
     <script src="{{ url_for('static', filename='main.js') }}""></script>
 

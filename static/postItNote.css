@@ -1,0 +1,116 @@
+        /* Importing the hand-written font */
+        @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
+        .postItNote {
+            width: auto;
+            height: auto;
+            background-color: #ffeb3b; /* Yellow color similar to a post-it note */
+            padding: 10px;
+            margin: 10px;
+            font-family: 'Indie Flower', cursive; /* Apply the hand-written font */
+            font-weight: normal; /* Set the font weight to normal */
+            font-size: 14px; /* Text size */
+            color: #333; /* Dark text color */
+            box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            position: relative;
+            cursor: pointer;
+            transition: height 0.3s ease;
+            overflow: hidden; /* Hide overflow when collapsed */
+        }
+
+        .postItNote.collapsed {
+            height: 30px; /* Adjust as needed for the collapsed height */
+            padding: 5px
+        }
+        
+        .postItNote .enlarge {
+            position: absolute;
+            top: 10px;
+            right: 50px; /* Adjust this to position it next to the arrow */
+            width: 16px;
+            height: 10px; /* Adjust height for rectangle shape */
+            border: 2px solid #2c1b1b;
+            background-color: transparent;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        .postItNote .enlarge:hover {
+            background-color: #dcdcdc; /* Add hover effect if desired */
+            transform: scale(1.1); /* Slight zoom on hover */
+        }
+
+        .postItNote .arrow {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #2c1b1b;
+            transform: rotate(0deg);
+            transition: transform 0.3s ease;
+        }
+        
+        .postItNote.collapsed .arrow {
+            transform: rotate(-180deg);
+        }
+        
+        .postItContent {
+            display: block; /* This will be toggled */
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 5px;
+        }
+    
+        .tab.active {
+            background-color: #ffd54f;
+            font-weight: bold;
+        }
+    
+        .tabContent {
+            display: none;
+        }
+    
+        .tabContent.active {
+            display: block;
+            margin-top: 10px;
+        }
+
+        .tabContainer {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .tabButton {
+            flex: 1;
+            background-color: #ffc107;
+            border: 1px solid #ffeb3b;
+            padding: 5px;
+            cursor: pointer;
+            text-align: center;
+            font-family: 'Patrick Hand', cursive;
+            font-weight: normal;
+            display: flex; /* Change to flexbox to handle icon positioning */
+            justify-content: center; /* Center content */
+            align-items: center; /* Center content vertically */
+            position: relative; /* Ensure icons are positioned relative to the button */
+        }
+        
+        .tabButton i {
+            margin-left: 8px; /* Add spacing between text and icon */
+            font-size: 16px; /* Ensure icons are large enough to be visible */
+        }
+        
+        .tabButton.active {
+            background-color: #ffeb3b;
+        }
+        
+        .speaker-icon, .stop-icon {
+            cursor: pointer;
+            color: #333; /* Darker color for better contrast */
+        }     

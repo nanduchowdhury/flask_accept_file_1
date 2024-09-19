@@ -54,6 +54,7 @@
             font-family: 'Poppins', sans-serif; /* Use the Poppins font */
             font-weight: 600; /* Bold text */
             font-size: 14px; /* Smaller text size */
+
         }
 
         #cameraPopup {
@@ -200,107 +201,6 @@
             pointer-events: none;
         }
 
-        /* Importing the hand-written font */
-        @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
-
-        .postItNote {
-            width: auto;
-            height: auto;
-            background-color: #ffeb3b; /* Yellow color similar to a post-it note */
-            padding: 10px;
-            margin: 10px;
-            font-family: 'Indie Flower', cursive; /* Apply the hand-written font */
-            font-weight: normal; /* Set the font weight to normal */
-            font-size: 14px; /* Text size */
-            color: #333; /* Dark text color */
-            box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
-            position: relative;
-            cursor: pointer;
-            transition: height 0.3s ease;
-            overflow: hidden; /* Hide overflow when collapsed */
-        }
-
-        .postItNote.collapsed {
-            height: 30px; /* Adjust as needed for the collapsed height */
-            padding: 5px
-        }
-        
-        .postItNote .arrow {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 0;
-            height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-top: 10px solid #333;
-            transform: rotate(0deg);
-            transition: transform 0.3s ease;
-        }
-        
-        .postItNote.collapsed .arrow {
-            transform: rotate(-180deg);
-        }
-        
-        .postItContent {
-            display: block; /* This will be toggled */
-        }
-
-        .tab {
-            flex: 1;
-            text-align: center;
-            padding: 5px;
-        }
-    
-        .tab.active {
-            background-color: #ffd54f;
-            font-weight: bold;
-        }
-    
-        .tabContent {
-            display: none;
-        }
-    
-        .tabContent.active {
-            display: block;
-            margin-top: 10px;
-        }
-
-        .tabContainer {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-        
-        .tabButton {
-            flex: 1;
-            background-color: #ffc107;
-            border: 1px solid #ffeb3b;
-            padding: 5px;
-            cursor: pointer;
-            text-align: center;
-            font-family: 'Patrick Hand', cursive;
-            font-weight: normal;
-            display: flex; /* Change to flexbox to handle icon positioning */
-            justify-content: center; /* Center content */
-            align-items: center; /* Center content vertically */
-            position: relative; /* Ensure icons are positioned relative to the button */
-        }
-        
-        .tabButton i {
-            margin-left: 8px; /* Add spacing between text and icon */
-            font-size: 16px; /* Ensure icons are large enough to be visible */
-        }
-        
-        .tabButton.active {
-            background-color: #ffeb3b;
-        }
-        
-        .speaker-icon, .stop-icon {
-            cursor: pointer;
-            color: #333; /* Darker color for better contrast */
-        }     
-
         #videoOverlay {
             position: relative;
             width: 100%;
@@ -336,4 +236,21 @@
             background-color: #f0f0f0;
         }
 
+        .genericPopout {
+            position: absolute;
+            background-color: rgb(243, 243, 165);
+            border: 5px solid #ccc;
+            padding: 10px;
+            display: none;
+            z-index: 1000;
+            top: 80%;
+            left: 50%;
+            width: 800px;
+            height: 400px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            transform: translate(-50%, -50%);
+            overflow: auto; /* Adds scrollbars when content overflows */
+        }
         
+
+

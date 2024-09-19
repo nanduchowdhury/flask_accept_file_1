@@ -9,6 +9,8 @@ class PostItNote {
             this.tab1Content = tab1Content;
             this.tab2Content = tab2Content;
 
+            this.contentBeingShown = 'tab1';
+
             this.createLanguageMap();
 
             this.postItNote = document.createElement('div');
@@ -34,6 +36,10 @@ class PostItNote {
             this.arrow = document.createElement('div');
             this.arrow.className = 'arrow';
             this.postItNote.appendChild(this.arrow);
+
+            this.enlarge = document.createElement('div');
+            this.enlarge.className = 'enlarge';
+            this.postItNote.appendChild(this.enlarge);
 
             this._addEventListeners();
             this._appendToResultArea();
@@ -159,6 +165,8 @@ class PostItNote {
                 this.tab2ContentDiv.classList.remove('active');
                 this.tab1Button.classList.add('active');
                 this.tab2Button.classList.remove('active');
+
+                this.contentBeingShown = 'tab1';
             });
 
             this.tab2Button.addEventListener('click', () => {
@@ -166,15 +174,34 @@ class PostItNote {
                 this.tab2ContentDiv.classList.add('active');
                 this.tab1Button.classList.remove('active');
                 this.tab2Button.classList.add('active');
+
+                this.contentBeingShown = 'tab2';
             });
 
             this.arrow.addEventListener('click', (event) => {
                 this.postItNote.classList.toggle('collapsed');
                 event.stopPropagation(); // Prevents the event from bubbling up to the postItNote
             });
+
+            this.enlarge.addEventListener('click', (event) => {
+
+                this.popoutMgr = new PopoutManager('genericPopoutId');
+                this.popoutMgr.clear();
+                if ( this.contentBeingShown === 'tab1' ) {
+                    this.popoutMgr.appendItem(this.tab1Content);
+                } else if ( this.contentBeingShown === 'tab2' ) {
+                    this.popoutMgr.appendItem(this.tab2Content);
+                }
+                this.popoutMgr.showPopout();
+            });
+
         } catch (error) {
             errorManager.showError(1009, error.message);
         }
+    }
+
+    getActualPostItNote() {
+        return this.postItNote;
     }
 
     _appendToResultArea() {
