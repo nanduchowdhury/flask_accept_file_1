@@ -12,7 +12,6 @@ const cameraSupport = new CameraSupport(previewAreaControl);
 
 
 
-
 /******************************************************************
 * There is an issue that on some browsers (especially chrome) the 
 * available voices do not load at the very first time.
