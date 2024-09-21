@@ -19,13 +19,25 @@ class SendReceiveManager {
 
     handleSendButtonClick() {
         try {
-            if ( SharedData.DataSource == 'File' ) {
-                this.sendFile();
-            } else if ( SharedData.DataSource == 'Picture' ) {
-                this.sendImage();
-            } else if ( SharedData.DataSource == 'video' ) {
-                this.sendVideo();
-            } 
+
+            if ( this.cTracker.isInitLevel() ) {
+                if ( SharedData.DataSource == 'File' ) {
+                    this.sendFile();
+                } else if ( SharedData.DataSource == 'Picture' ) {
+                    this.sendImage();
+                } else if ( SharedData.DataSource == 'video' ) {
+                    this.sendVideo();
+                }
+            } else {
+                const data = {
+                    clientId: basicInitializer.getClientId(),
+                    additionalData: {
+                        // Add any additional data you want to include in the JSON object
+                        someKey: "someValue"
+                    }
+                };
+                this.sendDataToServer(data);
+            }
         } catch (error) {
             errorManager.showError(1015, error);
         } finally {
@@ -47,6 +59,7 @@ class SendReceiveManager {
             const base64File = reader.result.split(',')[1];
 
             const data = {
+                clientId: basicInitializer.getClientId(),
                 fileName: file.name,
                 fileType: file.type,
                 fileContent: base64File,
@@ -68,6 +81,7 @@ class SendReceiveManager {
                 const base64Video = reader.result.split(',')[1]; // Get the base64 data without the prefix
 
                 const data = {
+                    clientId: basicInitializer.getClientId(),
                     video: base64Video,
                     additionalData: {
                         someKey: "someValue"
@@ -86,6 +100,7 @@ class SendReceiveManager {
         // console.log('%c ', `font-size:300px; background:url(${dataUrl}) no-repeat;`);
 
         const data = {
+            clientId: basicInitializer.getClientId(),
             image: dataUrl,
             additionalData: {
                 someKey: "someValue"

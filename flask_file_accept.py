@@ -13,15 +13,14 @@ import PyPDF2
 
 import pathlib
 import textwrap
-import google.generativeai as genai
-
-import time
 
 import base64
 from io import BytesIO
 import io
 from PIL import Image
 
+from error_message_manager import ErrorManager
+from gemini_access import GeminiAccess
 
 class ScholarKM(Flask):
     def __init__(self):
@@ -31,21 +30,25 @@ class ScholarKM(Flask):
         self.route('/upload', methods=['POST'])(self.upload_file)
         self.route('/save_logs', methods=['POST'])(self.save_logs)
 
+        self.upload_folder = ''
+        self.log_folder = ''
+
         # Constants
-        self.UPLOAD_FOLDER = '/home/nandu_chowdhury/kupamanduk/scholar/uploads/'
-        self.LOG_FOLDER = '/home/nandu_chowdhury/kupamanduk/scholar/client_logs/'
+        self.BASE_FOLDER = '/home/nandu_chowdhury/kupamanduk/scholar/'
+        
+        self.BASE_UPLOAD_FOLDER = 'uploads/'
+        self.BASE_LOG_FOLDER = 'client_logs/'
         self.FIRST_TITLE_LEVEL = 0
         self.ALL_TITLES_LEVEL = -1
 
-        if not os.path.exists(self.UPLOAD_FOLDER):
-            os.makedirs(self.UPLOAD_FOLDER, exist_ok=True)
-        self.config['UPLOAD_FOLDER'] = self.UPLOAD_FOLDER
-
-        if not os.path.exists(self.LOG_FOLDER):
-            os.makedirs(self.LOG_FOLDER)
+        self.error_manager = ErrorManager('static/errors.txt', 
+            log_dir='/home/nandu_chowdhury/kupamanduk/scholar/server_logs/')
 
         self.numPoints = 0
         self.firstResponse = []
+
+        self.gemini_access = GeminiAccess(self.error_manager)
+        self.gemini_access.initialize()
 
     def extract_text_from_pdf(self, pdf_path):
         text = ""
@@ -56,16 +59,28 @@ class ScholarKM(Flask):
                 text += page.extract_text()
         return text
 
-    def get_upload_file_path(self, file):
-        filename = secure_filename(file.filename)
-        file_path = os.path.join(self.config['UPLOAD_FOLDER'], filename)
-        file.save(file_path)
+    def establish_folders(self, client_ip, client_id):
 
-        return file_path
+        client_folder = os.path.join(self.BASE_FOLDER, f'{client_ip}_{client_id}/')
+
+        if not os.path.exists(client_folder):
+            os.makedirs(client_folder, exist_ok=True)
+
+        self.upload_folder = os.path.join(client_folder, self.BASE_UPLOAD_FOLDER)
+
+        if not os.path.exists(self.upload_folder):
+            os.makedirs(self.upload_folder, exist_ok=True)
+
+        self.log_folder = os.path.join(client_folder, self.BASE_LOG_FOLDER)
+
+        if not os.path.exists(self.log_folder):
+            os.makedirs(self.log_folder, exist_ok=True)
 
     def extract_file(self, data):
+
         file_name = data['fileName']
-        file_name = os.path.join(self.config['UPLOAD_FOLDER'], file_name)
+
+        file_name = os.path.join(self.upload_folder, file_name)
         file_content = base64.b64decode(data['fileContent'])
 
         with open(file_name, 'wb') as f:
@@ -77,14 +92,14 @@ class ScholarKM(Flask):
         header, base64_image = image_data_url.split(',', 1)
         file_content = base64.b64decode(base64_image)
         image = Image.open(io.BytesIO(file_content))
-        filename = os.path.join(self.UPLOAD_FOLDER, 'captured_image.png')
+        filename = os.path.join(self.upload_folder, 'captured_image.png')
         image.save(filename)
         return filename
 
     def extract_video(self, data):
         video_data = data['video']
         video_binary = base64.b64decode(video_data)
-        video_path = os.path.join(self.UPLOAD_FOLDER, 'uploaded_video.webm')
+        video_path = os.path.join(self.upload_folder, 'uploaded_video.webm')
         with open(video_path, 'wb') as video_file:
             video_file.write(video_binary)
         return video_path
@@ -92,104 +107,90 @@ class ScholarKM(Flask):
     def index(self):
         return render_template('index.html')
 
-    def upload_file(self):
-        
-        client_ip = request.remote_addr  # Get the client's IP address
-
+    def receive_and_save_file(self, client_ip, data):
         file_path = ''
 
-        data = request.json
-
         if 'fileContent' in data:
-            print("KUPAMANDUK-1001 Receiving file")
             file_path = self.extract_file(data)
 
+            self.error_manager.show_message(2002, client_ip, file_path)
+
         elif 'image' in data:
-            print("KUPAMANDUK-1002 Receiving image data")
             file_path = self.extract_image(data)
+            self.error_manager.show_message(2003, client_ip, file_path)
+
         elif 'video' in data:
-            print("KUPAMANDUK-1003 Receiving video data")
             file_path = self.extract_video(data)
+            self.error_manager.show_message(2004, client_ip, file_path)
+
         else:
-            return jsonify({'error': 'Invalid data format'}), 400
+            raise ValueError(self.error_manager.show_message(2001, client_ip))
 
+        return file_path
 
-        GOOGLE_API_KEY=os.getenv('GOOGLE_API_KEY')
-        genai.configure(api_key=GOOGLE_API_KEY)
-
-        print("KUPAMANDUK-1002 Saved file or image/video data as " + file_path)
+    def upload_file(self):
         
-        print("KUPAMANDUK-1003 Uploading file to gemini...")
-        genai_upload_file = genai.upload_file(path=file_path)
+        try:
+            data = request.json
+            client_ip = request.remote_addr
+            client_id = data.get('clientId', 'unknown')
 
-        while genai_upload_file.state.name == "PROCESSING":
-            print('KUPAMANDUK-1004 Waiting for file to be uploaded to gemini...')
-            time.sleep(10)
-            genai_upload_file = genai.get_file(genai_upload_file.name)
+            self.establish_folders(client_ip, client_id);
 
-        if genai_upload_file.state.name == "FAILED":
-            raise ValueError(genai_upload_file.state.name)
-        print(f'KUPAMANDUK-1005 File upload to gemini complete : ' + genai_upload_file.uri)
+            learnLevel = data['additionalData']
+            learnLevel = learnLevel['learnLevel']
 
-        # model = genai.GenerativeModel("gemini-pro")
-        model = genai.GenerativeModel(model_name="models/gemini-1.5-flash")
-
-        learnLevel = data['additionalData']
-        learnLevel = learnLevel['learnLevel']
-        print(learnLevel)
+            if learnLevel == self.ALL_TITLES_LEVEL:
+            
+                file_path = self.receive_and_save_file(client_ip, data)
+                self.gemini_access.upload_file(client_ip, file_path)
 
 
-        if learnLevel == self.ALL_TITLES_LEVEL:
-            english_prompt = "summarize the content in points separated by newlines"
-            english_response = model.generate_content([english_prompt, genai_upload_file],
-                                    request_options={"timeout": 600})
-            self.numPoints = len(english_response.text.splitlines())
-            print(f'learnLevel : ' + str(learnLevel))
-            print(f'numPoints : ' + str(self.numPoints))
-            # print(f'response : ' + english_response.text)
-            self.firstResponse = english_response.text.splitlines()
-            print(self.firstResponse[1])
-            hindi_prompt = "convert following text in such a way that most of the content is in hindi and all hard words are in english : \n\n" + english_response.text
-            hindi_response = model.generate_content(hindi_prompt,
-                                    request_options={"timeout": 600})
-            return jsonify({'numPoints': self.numPoints,
-                            'firstResponse' : self.firstResponse,
-                            'result1': english_response.text, 
-                            'result2': hindi_response.text})
-        else:
-            english_prompt = "summarize about following point : \"" + self.firstResponse[learnLevel] + "\""
-            print(f'english_promp : ' + english_prompt)
-            english_response = model.generate_content([english_prompt, genai_upload_file],
-                                    request_options={"timeout": 600})
-            print(f'learnLevel : ' + str(learnLevel))
-            print(f'response : ' + english_response.text)
-            hindi_prompt = "convert following text in such a way that most of the content is in hindi and all hard words are in english : \n\n" + english_response.text
-            hindi_response = model.generate_content(hindi_prompt,
-                                    request_options={"timeout": 600})
-            return jsonify({'result1': english_response.text, 
-                            'result2': hindi_response.text})        
+                english_response = self.gemini_access.get_overall_summary()
+                self.numPoints = len(english_response.splitlines())
 
-        # genai.delete_file(genai_upload_file.name)
+                self.error_manager.show_message(2009, client_ip, learnLevel, self.numPoints)
 
-        # return jsonify({'result1': english_response.text, 'result2': hindi_response.text})
+                self.firstResponse = english_response.splitlines()
 
+                hindi_response = self.gemini_access.convert_to_hindi(english_response)
+
+                return jsonify({'numPoints': self.numPoints,
+                                'firstResponse' : self.firstResponse,
+                                'result1': english_response, 
+                                'result2': hindi_response})
+            else:
+
+                english_response = self.gemini_access.get_summary(self.firstResponse[learnLevel])
+                hindi_response = self.gemini_access.convert_to_hindi(english_response)
+                self.error_manager.show_message(2010, client_ip, learnLevel)
+
+                return jsonify({'result1': english_response, 
+                                'result2': hindi_response})        
+
+        except ValueError as e:
+            return jsonify({e}), 500
 
     # Function to get the log file path for a client (using IP as the identifier)
     def get_log_file_path(self, client_ip, client_id):
-        return os.path.join(self.LOG_FOLDER, f'{client_ip}_{client_id}.txt')
+        return os.path.join(self.log_folder, f'{client_ip}_{client_id}.txt')
 
 
     def save_logs(self):
         try:
             data = request.get_json()
-            logs = data.get('logs', [])
+            
             client_id = data.get('clientId', 'unknown')
+            client_ip = request.remote_addr
+            self.establish_folders(client_ip, client_id)
+            
+            logs = data.get('logs', [])
 
             if not logs:
                 return jsonify({"status": "no logs to save"}), 200
 
             # Get the client's IP address
-            client_ip = request.remote_addr
+            
             log_file_path = self.get_log_file_path(client_ip, client_id)
 
             # Append the logs to the client's log file

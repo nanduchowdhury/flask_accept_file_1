@@ -49,6 +49,18 @@
 1036 : Error while stopping recording - %s.
 1037 : Error displaying video - %s.
 
+// Server side
+2001 : Client %s - Invalid data/file format received from client. Valid format are PDF, image, video.
+2002 : Client %s - received file %s.
+2003 : Client %s - received image %s.
+2004 : Client %s - received video %s.
+2005 : Client %s - uploading file to gemini - %s.
+2006 : Client %s - waiting for file to be uploaded to gemini.
+2007 : Client %s - error file upload into gemini - %s.
+2008 : Client %s - file upload to gemini success - uri %s.
+2009 : Client %s - learn-level %s - gemini responded %s points.
+2010 : Client %s - generated level-%s.
+
 
 
 

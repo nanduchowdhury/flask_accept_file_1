@@ -7,6 +7,8 @@ class SharedData {
     static DataSource;
 }
 
+const basicInitializer = new BasicInitializer();
+
 const previewAreaControl = new PreviewAreaControl('loadingSpinner');
 const cameraSupport = new CameraSupport(previewAreaControl);
 
