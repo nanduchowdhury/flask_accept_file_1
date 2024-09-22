@@ -204,12 +204,12 @@ class ErrorManager {
                 }
             });
     
-            message = ` ${code}: ${message}`;
+            message = `${code}: ${message}`;
         } else {
             message = `Unknown error with code: ${code}`;
         }
     
-        return message;
+        return 'MSG-' + message;
     }
 
     showError(code, ...args) {

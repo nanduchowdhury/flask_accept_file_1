@@ -124,13 +124,21 @@ class SendReceiveManager {
             },
             body: JSON.stringify(data)
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                // Handle HTTP errors (like 500)
+                return response.json().then(data => {
+                    throw new Error(data.error); // Access the error message
+                });
+            }
+            return response.json(); // Process successful response
+        })
         .then(data => {
             this.handleServerResponse(data)
             this.spinner.hide();
         })
         .catch(error => {
-            errorManager.showError(1018, error);
+            errorManager.showError(1018, error.message);
             this.spinner.hide();
         });
     }
@@ -138,7 +146,7 @@ class SendReceiveManager {
     handleServerResponse(data) {
         
         if (data.error) {
-            this.resultDiv.textContent = 'Error: ' + data.error;
+            this.resultDiv.textContent = data.error;
         } else {
 
             if ( this.cTracker.isInitLevel() ) {

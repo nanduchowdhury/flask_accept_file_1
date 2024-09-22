@@ -26,6 +26,9 @@ class ScholarKM(Flask):
     def __init__(self):
         super().__init__(__name__)
 
+        self.client_ip = 'client_ip'
+        self.client_id = 'client_id'
+
         self.route('/')(self.index)
         self.route('/upload', methods=['POST'])(self.upload_file)
         self.route('/save_logs', methods=['POST'])(self.save_logs)
@@ -36,16 +39,17 @@ class ScholarKM(Flask):
         # Constants
         self.BASE_FOLDER = '/home/nandu_chowdhury/kupamanduk/scholar/'
         
+        self.SERVER_LOGS_FOLDER = '/home/nandu_chowdhury/kupamanduk/scholar/server_logs/'
         self.BASE_UPLOAD_FOLDER = 'uploads/'
         self.BASE_LOG_FOLDER = 'client_logs/'
         self.FIRST_TITLE_LEVEL = 0
         self.ALL_TITLES_LEVEL = -1
 
-        self.error_manager = ErrorManager('static/errors.txt', 
-            log_dir='/home/nandu_chowdhury/kupamanduk/scholar/server_logs/')
-
         self.numPoints = 0
         self.firstResponse = []
+
+        self.error_manager = ErrorManager(self.client_ip, 'static/errors.txt', 
+                    log_dir=self.SERVER_LOGS_FOLDER)
 
         self.gemini_access = GeminiAccess(self.error_manager)
         self.gemini_access.initialize()
@@ -59,9 +63,9 @@ class ScholarKM(Flask):
                 text += page.extract_text()
         return text
 
-    def establish_folders(self, client_ip, client_id):
+    def establish_folders(self):
 
-        client_folder = os.path.join(self.BASE_FOLDER, f'{client_ip}_{client_id}/')
+        client_folder = os.path.join(self.BASE_FOLDER, f'{self.client_ip}_{self.client_id}/')
 
         if not os.path.exists(client_folder):
             os.makedirs(client_folder, exist_ok=True)
@@ -107,24 +111,24 @@ class ScholarKM(Flask):
     def index(self):
         return render_template('index.html')
 
-    def receive_and_save_file(self, client_ip, data):
+    def receive_and_save_file(self, data):
         file_path = ''
 
         if 'fileContent' in data:
             file_path = self.extract_file(data)
 
-            self.error_manager.show_message(2002, client_ip, file_path)
+            self.error_manager.show_message(2002, file_path)
 
         elif 'image' in data:
             file_path = self.extract_image(data)
-            self.error_manager.show_message(2003, client_ip, file_path)
+            self.error_manager.show_message(2003, file_path)
 
         elif 'video' in data:
             file_path = self.extract_video(data)
-            self.error_manager.show_message(2004, client_ip, file_path)
+            self.error_manager.show_message(2004, file_path)
 
         else:
-            raise ValueError(self.error_manager.show_message(2001, client_ip))
+            raise ValueError(self.error_manager.show_message(2001))
 
         return file_path
 
@@ -132,24 +136,27 @@ class ScholarKM(Flask):
         
         try:
             data = request.json
-            client_ip = request.remote_addr
-            client_id = data.get('clientId', 'unknown')
+            self.client_ip = request.remote_addr
+            self.client_id = data.get('clientId', 'unknown')
 
-            self.establish_folders(client_ip, client_id);
+            self.error_manager.update_client_ip(self.client_ip)
+
+            self.establish_folders();
 
             learnLevel = data['additionalData']
             learnLevel = learnLevel['learnLevel']
 
             if learnLevel == self.ALL_TITLES_LEVEL:
             
-                file_path = self.receive_and_save_file(client_ip, data)
-                self.gemini_access.upload_file(client_ip, file_path)
+                file_path = self.receive_and_save_file(data)
+                self.gemini_access.upload_file(file_path)
 
+                self.gemini_access.check_content_student_related()
 
                 english_response = self.gemini_access.get_overall_summary()
                 self.numPoints = len(english_response.splitlines())
 
-                self.error_manager.show_message(2009, client_ip, learnLevel, self.numPoints)
+                self.error_manager.show_message(2009, learnLevel, self.numPoints)
 
                 self.firstResponse = english_response.splitlines()
 
@@ -163,35 +170,33 @@ class ScholarKM(Flask):
 
                 english_response = self.gemini_access.get_summary(self.firstResponse[learnLevel])
                 hindi_response = self.gemini_access.convert_to_hindi(english_response)
-                self.error_manager.show_message(2010, client_ip, learnLevel)
+                self.error_manager.show_message(2010, learnLevel)
 
                 return jsonify({'result1': english_response, 
-                                'result2': hindi_response})        
+                                'result2': hindi_response})
 
         except ValueError as e:
-            return jsonify({e}), 500
+            return jsonify({"error": str(e)}), 500
 
     # Function to get the log file path for a client (using IP as the identifier)
-    def get_log_file_path(self, client_ip, client_id):
-        return os.path.join(self.log_folder, f'{client_ip}_{client_id}.txt')
+    def get_log_file_path(self):
+        return os.path.join(self.log_folder, f'{self.client_ip}_{self.client_id}.txt')
 
 
     def save_logs(self):
         try:
             data = request.get_json()
             
-            client_id = data.get('clientId', 'unknown')
-            client_ip = request.remote_addr
-            self.establish_folders(client_ip, client_id)
+            self.client_id = data.get('clientId', 'unknown')
+            self.client_ip = request.remote_addr
+            self.establish_folders(self.client_ip, self.client_id)
             
             logs = data.get('logs', [])
 
             if not logs:
                 return jsonify({"status": "no logs to save"}), 200
-
-            # Get the client's IP address
             
-            log_file_path = self.get_log_file_path(client_ip, client_id)
+            log_file_path = self.get_log_file_path()
 
             # Append the logs to the client's log file
             with open(log_file_path, 'a') as log_file:

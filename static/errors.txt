@@ -23,7 +23,7 @@
 1015 : Error encountered while sending data to server - %s.
 1016 : Sending image data to server.
 1017 : Sending data to server - %s.
-1018 : Error sending data to server - %s.
+1018 : Error from server - %s.
 1019 : Received server data for INIT level - %s.
 1020 : Received server data for NON-INIT level - %s.
 
@@ -50,16 +50,17 @@
 1037 : Error displaying video - %s.
 
 // Server side
-2001 : Client %s - Invalid data/file format received from client. Valid format are PDF, image, video.
-2002 : Client %s - received file %s.
-2003 : Client %s - received image %s.
-2004 : Client %s - received video %s.
-2005 : Client %s - uploading file to gemini - %s.
-2006 : Client %s - waiting for file to be uploaded to gemini.
-2007 : Client %s - error file upload into gemini - %s.
-2008 : Client %s - file upload to gemini success - uri %s.
-2009 : Client %s - learn-level %s - gemini responded %s points.
-2010 : Client %s - generated level-%s.
+2001 : invalid data/file format received from client. Valid format are PDF, image, video
+2002 : received file %s
+2003 : received image %s
+2004 : received video %s
+2005 : uploading file to gemini - %s
+2006 : waiting for file to be uploaded to gemini
+2007 : error file upload into gemini - %s
+2008 : file upload to gemini success - uri %s
+2009 : learn-level %s - gemini responded %s points
+2010 : generated level-%s
+2011 : content not related to academics - please specify valid content for learning
 
 
 

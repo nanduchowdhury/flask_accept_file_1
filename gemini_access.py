@@ -21,24 +21,45 @@ class GeminiAccess:
         genai.delete_file(self.genai_upload_file.name)
 
 
-    def upload_file(self, client_ip, file_path):
+    def upload_file(self, file_path):
 
-        self.error_manager.show_message(2005, client_ip, file_path)
+        self.error_manager.show_message(2005, file_path)
         self.genai_upload_file = genai.upload_file(path=file_path)
 
         while self.genai_upload_file.state.name == "PROCESSING":
-            self.error_manager.show_message(2006, client_ip)
+            self.error_manager.show_message(2006)
             time.sleep(10)
             self.genai_upload_file = genai.get_file(self.genai_upload_file.name)
 
         if self.genai_upload_file.state.name == "FAILED":
-            raise ValueError(self.error_manager.show_message(2007, client_ip, self.genai_upload_file.state.name))
-        self.error_manager.show_message(2008, client_ip, self.genai_upload_file.uri)
+            raise ValueError(self.error_manager.show_message(2007, self.genai_upload_file.state.name))
+        self.error_manager.show_message(2008, self.genai_upload_file.uri)
 
-    def get_summary(self, point):
-        prompt = "summarize about following point : \"" + point + "\""
+    def contains_any_substring(self, main_string, substrings):
+        main_string_lower = main_string.lower()  # Convert the main string to lowercase
+        return any(substring.lower() in main_string_lower for substring in substrings)  # Convert substrings to lowercase
+
+    def check_content_student_related(self):
+
+        substr_in_result = ["no"]
+
+        prompt = "is the content related to academics which is taught in school or college? please answer yes or no."
         response = self.model.generate_content([prompt, self.genai_upload_file],
                                     request_options={"timeout": 600})
+
+        if ( self.contains_any_substring(response.text, substr_in_result) ):
+            raise ValueError(self.error_manager.show_message(2011))
+
+    def get_summary(self, point):
+
+        prompt = "are there main sections? If so, what are main sections headers?"
+        response = self.model.generate_content([prompt, self.genai_upload_file],
+                                    request_options={"timeout": 600})
+        print(response.text)
+
+        # prompt = "summarize about following point : \"" + point + "\""
+        # response = self.model.generate_content([prompt, self.genai_upload_file],
+        #                             request_options={"timeout": 600})
         return response.text
 
     def get_overall_summary(self):

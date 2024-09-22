@@ -3,12 +3,16 @@ import logging
 from datetime import datetime
 
 class ErrorManager:
-    def __init__(self, file_path, log_dir='./logs'):
+    def __init__(self, client_ip, file_path, log_dir='./logs'):
         self.error_map = {}
+        self.client_ip = client_ip
         self.log_dir = log_dir
         self.log_file = self.generate_log_file_name()
         self.setup_logger()
         self.load_errors(file_path)
+
+    def update_client_ip(self, client_ip):
+        self.client_ip = client_ip
 
     def generate_log_file_name(self):
         """
@@ -69,11 +73,14 @@ class ErrorManager:
                 return f"Error message for code {code} expects different number of arguments."
 
         # Complete message with error code
-        full_message = f"MSG-{code}: {message}"
+        msg_for_client = f"{message}"
+
+        full_msg = f"MSG-{code}: client {self.client_ip} - {message}"
 
         # Print the message to the console
-        print(full_message)
+        print(full_msg)
 
         # Log the message to the server.log file
-        self.logger.info(full_message)
+        self.logger.info(full_msg)
 
+        return msg_for_client
