@@ -153,7 +153,11 @@ class ScholarKM(Flask):
 
                 self.gemini_access.check_content_student_related()
 
-                english_response = self.gemini_access.get_overall_summary()
+                if ( self.gemini_access.is_there_text_in_content() ):
+                    english_response = self.gemini_access.get_all_headers_of_text()
+                else:
+                    english_response = self.gemini_access.get_all_headers_of_picture()
+
                 self.numPoints = len(english_response.splitlines())
 
                 self.error_manager.show_message(2009, learnLevel, self.numPoints)
@@ -168,7 +172,7 @@ class ScholarKM(Flask):
                                 'result2': hindi_response})
             else:
 
-                english_response = self.gemini_access.get_summary(self.firstResponse[learnLevel])
+                english_response = self.gemini_access.get_header_summary(self.firstResponse[learnLevel])
                 hindi_response = self.gemini_access.convert_to_hindi(english_response)
                 self.error_manager.show_message(2010, learnLevel)
 

@@ -111,95 +111,86 @@ class PreviewAreaControl {
     }
     
 
-    supportPdfReading(file) {
+    async supportPdfReading(file) {
         try {
-            // Display PDF using PDF.js
             const reader = new FileReader();
     
-            reader.onload = (e) => {
-                const loadingTask = pdfjsLib.getDocument({ data: e.target.result });
+            reader.onload = async (e) => {
+                try {
+                    const loadingTask = pdfjsLib.getDocument({ data: e.target.result });
+                    const pdf = await loadingTask.promise;
     
-                loadingTask.promise
-                    .then((pdf) => {
-                        const numPages = pdf.numPages;  // Get the total number of pages
-                        const scale = 1.0;
-                        const pdfCanvas = document.getElementById('pdfCanvas');
-                        const context = pdfCanvas.getContext('2d');
-                        let totalHeight = 0;
-                        let maxWidth = 0;
+                    const numPages = pdf.numPages;
+                    const scale = 1.0;
+                    const pdfCanvas = document.getElementById('pdfCanvas');
+                    const context = pdfCanvas.getContext('2d');
+                    let totalHeight = 0;
+                    let maxWidth = 0;
     
-                        const renderPage = async (pageNumber) => {
-                            try {
-                                const page = await pdf.getPage(pageNumber);
-                                const viewport = page.getViewport({ scale });
-                                const pageHeight = viewport.height;
-                                const pageWidth = viewport.width;
+                    // Function to render a single page
+                    const renderPage = async (pageNumber) => {
+                        const page = await pdf.getPage(pageNumber);
+                        const viewport = page.getViewport({ scale });
     
-                                // Create an off-screen canvas for each page
-                                const offScreenCanvas = document.createElement('canvas');
-                                offScreenCanvas.width = pageWidth;
-                                offScreenCanvas.height = pageHeight;
-                                const offScreenContext = offScreenCanvas.getContext('2d');
+                        // Create an off-screen canvas for each page
+                        const offScreenCanvas = document.createElement('canvas');
+                        offScreenCanvas.width = viewport.width;
+                        offScreenCanvas.height = viewport.height;
+                        const offScreenContext = offScreenCanvas.getContext('2d');
     
-                                const renderContext = {
-                                    canvasContext: offScreenContext,
-                                    viewport: viewport
-                                };
-    
-                                await page.render(renderContext).promise;
-    
-                                // Update total height and max width
-                                totalHeight += pageHeight;
-                                maxWidth = Math.max(maxWidth, pageWidth);
-    
-                                // Return the off-screen canvas
-                                return offScreenCanvas;
-                            } catch (err) {
-                                errorManager.showError(1021, pageNumber, err);
-                                throw err;
-                            }
+                        const renderContext = {
+                            canvasContext: offScreenContext,
+                            viewport: viewport,
                         };
     
-                        // Render all pages using an arrow function to preserve 'this'
-                        const renderAllPages = async () => {
-                            const canvases = [];
+                        await page.render(renderContext).promise;
     
-                            try {
-                                this.spinner.show();
+                        // Update total height and max width
+                        totalHeight += viewport.height;
+                        maxWidth = Math.max(maxWidth, viewport.width);
     
-                                for (let pageNumber = 1; pageNumber <= numPages; pageNumber++) {
-                                    const offScreenCanvas = await renderPage(pageNumber);
-                                    canvases.push(offScreenCanvas);
-                                }
+                        // Return the off-screen canvas
+                        return offScreenCanvas;
+                    };
     
-                                // Set final pdfCanvas size
-                                pdfCanvas.width = maxWidth;
-                                pdfCanvas.height = totalHeight;
+                    // Function to render all pages
+                    const renderAllPages = async () => {
+                        const canvases = [];
     
-                                // Composite all off-screen canvases onto the final canvas
-                                let currentHeight = 0;
-                                canvases.forEach((canvas) => {
-                                    context.drawImage(canvas, 0, currentHeight);
-                                    currentHeight += canvas.height;
-                                });
-    
-                                pdfCanvas.style.display = 'block';
-                                previewAreaControl.hideVideoShowCanvas();
-                            } catch (err) {
-                                errorManager.showError(1022, err);
-                                throw err;
-                            } finally {
-                                this.spinner.hide();
+                        try {
+                            errorManager.showInfo(1021);
+
+                            // Render all pages asynchronously, collecting all canvas elements
+                            for (let pageNumber = 1; pageNumber <= numPages; pageNumber++) {
+                                const offScreenCanvas = await renderPage(pageNumber);
+                                canvases.push(offScreenCanvas);
                             }
-                        };
     
-                        renderAllPages().catch((err) => {
-                            errorManager.showError(1023, err);
-                        });
-                    })
-                    .catch((err) => {
-                        errorManager.showError(1024, err);
-                    });
+                            // Set final pdfCanvas size
+                            pdfCanvas.width = maxWidth;
+                            pdfCanvas.height = totalHeight;
+    
+                            // Composite all off-screen canvases onto the final canvas
+                            let currentHeight = 0;
+                            canvases.forEach((canvas) => {
+                                context.drawImage(canvas, 0, currentHeight);
+                                currentHeight += canvas.height;
+                            });
+    
+                            pdfCanvas.style.display = 'block';
+                            previewAreaControl.hideVideoShowCanvas();
+                        } catch (err) {
+                            errorManager.showError(1022, err);
+                            throw err;
+                        } finally {
+                            errorManager.hideMessage();
+                        }
+                    };
+    
+                    await renderAllPages();
+                } catch (err) {
+                    errorManager.showError(1024, err);
+                }
             };
     
             reader.onerror = (err) => {
@@ -210,6 +201,7 @@ class PreviewAreaControl {
         } catch (err) {
             errorManager.showError(1026, err);
         }
-    }    
+    }
+        
 
 }

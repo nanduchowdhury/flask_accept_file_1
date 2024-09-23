@@ -50,20 +50,33 @@ class GeminiAccess:
         if ( self.contains_any_substring(response.text, substr_in_result) ):
             raise ValueError(self.error_manager.show_message(2011))
 
-    def get_summary(self, point):
+    def is_there_text_in_content(self):
+        substr_in_result = ["no"]
 
-        prompt = "are there main sections? If so, what are main sections headers?"
+        prompt = "is there text in content? please answer yes or no."
         response = self.model.generate_content([prompt, self.genai_upload_file],
                                     request_options={"timeout": 600})
-        print(response.text)
 
-        # prompt = "summarize about following point : \"" + point + "\""
-        # response = self.model.generate_content([prompt, self.genai_upload_file],
-        #                             request_options={"timeout": 600})
+        if ( self.contains_any_substring(response.text, substr_in_result) ):
+            return False
+        
+        return True
+
+    def get_all_headers_of_picture(self):
+        prompt = "summarize about content of the picture. use number-bullets to summarize."
+        response = self.model.generate_content([prompt, self.genai_upload_file],
+                                    request_options={"timeout": 600})
         return response.text
 
-    def get_overall_summary(self):
-        prompt = "summarize the content in points separated by newlines"
+    def get_header_summary(self, point):
+
+        prompt = "summarize about following header in the content : \"" + point + "\""
+        response = self.model.generate_content([prompt, self.genai_upload_file],
+                                 request_options={"timeout": 600})
+        return response.text
+
+    def get_all_headers_of_text(self):
+        prompt = "are there main sections? If so, what are main sections headers?"
         response = self.model.generate_content([prompt, self.genai_upload_file],
                                     request_options={"timeout": 600})
         return response.text
