@@ -4,8 +4,10 @@ class PostItNote {
 
     currentUtterance = null;
 
-    constructor(tab1Content = '', tab2Content = '') {
+    constructor(containerId, tab1Content = '', tab2Content = '') {
         try {
+            this.containerId = containerId;
+
             this.tab1Content = tab1Content;
             this.tab2Content = tab2Content;
 
@@ -42,7 +44,7 @@ class PostItNote {
             this.postItNote.appendChild(this.enlarge);
 
             this._addEventListeners();
-            this._appendToResultArea();
+            this._appendToContainer();
         } catch (error) {
             errorManager.showError(1002, error.message);
         }
@@ -204,10 +206,10 @@ class PostItNote {
         return this.postItNote;
     }
 
-    _appendToResultArea() {
+    _appendToContainer() {
         try {
-            const resultArea = document.getElementById('result1');
-            resultArea.appendChild(this.postItNote);
+            const container = document.getElementById(this.containerId);
+            container.appendChild(this.postItNote);
         } catch (error) {
             errorManager.showError(1010, error.message);
         }

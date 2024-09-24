@@ -2,12 +2,15 @@ import re
 import os
 
 import time
+from PIL import Image
 
 import google.generativeai as genai
 
 class GeminiAccess:
     def __init__(self, eManager):
         self.error_manager = eManager
+
+        self.example_bullet_points = "for example: 1. point-1   2. point-2"
 
     def initialize(self):
 
@@ -19,7 +22,6 @@ class GeminiAccess:
 
     def clear(self):
         genai.delete_file(self.genai_upload_file.name)
-
 
     def upload_file(self, file_path):
 
@@ -63,9 +65,12 @@ class GeminiAccess:
         return True
 
     def get_all_headers_of_picture(self):
-        prompt = "summarize about content of the picture. use number-bullets to summarize."
+        prompt = "generate summary of the picture \
+             as following example : " + self.example_bullet_points
+                            
         response = self.model.generate_content([prompt, self.genai_upload_file],
                                     request_options={"timeout": 600})
+
         return response.text
 
     def get_header_summary(self, point):
@@ -75,8 +80,28 @@ class GeminiAccess:
                                  request_options={"timeout": 600})
         return response.text
 
+    def is_there_headers_in_content(self):
+        substr_in_result = ["no"]
+
+        prompt = "is there headers in content? please answer only yes or no."
+        response = self.model.generate_content([prompt, self.genai_upload_file],
+                                    request_options={"timeout": 600})
+
+        if ( self.contains_any_substring(response.text, substr_in_result) ):
+            return False
+        
+        return True
+
     def get_all_headers_of_text(self):
-        prompt = "are there main sections? If so, what are main sections headers?"
+
+        prompt = ''
+        if ( self.is_there_headers_in_content() ):
+            self.error_manager.show_message(2014, "YES")
+            prompt = "list all header or sections of entire content with title as following example : " + self.example_bullet_points
+        else:
+            self.error_manager.show_message(2014, "NO")
+            prompt = "list summary points of entire content as following example : " + self.example_bullet_points
+        
         response = self.model.generate_content([prompt, self.genai_upload_file],
                                     request_options={"timeout": 600})
         return response.text
@@ -87,4 +112,18 @@ class GeminiAccess:
                         request_options={"timeout": 600})
         return response.text
 
-    
+
+    def explain_region(self, main_content_file, explain_region_file):
+
+        prompt = "generate detail explanation"
+        base_response = self.model.generate_content([prompt, self.genai_upload_file],
+                                    request_options={"timeout": 600})
+
+        image = Image.open(explain_region_file)
+        prompt = "explain and answer the question in the image specified in context to the detailed \
+                        explanation of a document as follows : " + base_response.text
+        response = self.model.generate_content([prompt, image])
+
+        return response.text
+
+

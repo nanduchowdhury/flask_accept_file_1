@@ -59,12 +59,16 @@ class PreviewAreaRmb extends RmbBase {
     constructor() {
         super('previewArea', ["explain region"]);
 
+        this.spinnerId = 'loadingSpinner';
+
         this.regionImageStartX = 0;
         this.regionImageStartY = 0; 
         this.regionImageEndX = 0;
         this.regionImageEndY = 0;
 
         this.selectionRegionRect = {left : 0, top : 0, width : 0, height : 0};
+
+        this.spinner = new Spinner(this.spinnerId);
     }
 
     updateRegionBbox(startX, startY, endX, endY) {
@@ -81,6 +85,55 @@ class PreviewAreaRmb extends RmbBase {
 
     onExplainRegion() {
     
+        const imageElement = this.grabRegionAndShowInScratchArea();
+        this.sendToServer(imageElement.src);
+    }
+    
+    sendToServer(dataUrl) {
+        
+        this.spinner.show();
+
+        const data = {
+            clientId: basicInitializer.getClientId(),
+            image: dataUrl,
+            additionalData: {
+                someKey: "someValue"
+            }
+        };
+
+        fetch('/explain_region', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) {
+                // Handle HTTP errors (like 500)
+                return response.json().then(data => {
+                    throw new Error(data.error); // Access the error message
+                });
+            }
+            return response.json(); // Process successful response
+        })
+        .then(data => {
+            this.processResultsRecvdFromServer(data);
+            this.spinner.hide();
+        })
+        .catch(error => {
+            errorManager.showError(1038, error.message);
+            this.spinner.hide();
+        });
+    }
+
+    processResultsRecvdFromServer(data) {
+        const myPostIt = new PostItNote('roughArea', data.result1, data.result2);
+        myPostIt.setTabTitle(1, 'eng');
+        myPostIt.setTabTitle(2, 'hindi');
+    }
+
+    grabRegionAndShowInScratchArea() {
         const pdfCanvas = document.getElementById('pdfCanvas');
         const context = pdfCanvas.getContext('2d');
 
@@ -122,6 +175,7 @@ class PreviewAreaRmb extends RmbBase {
         errorManager.log(1014);
         // console.log('%c ', `font-size:300px; background:url(${dataURL}) no-repeat;`);
         
+        return imageElement;
     }
 
     onAction(actionIndex) {

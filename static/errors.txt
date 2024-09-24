@@ -23,7 +23,7 @@
 1015 : Error encountered while sending data to server - %s.
 1016 : Sending image data to server.
 1017 : Sending data to server - %s.
-1018 : Error from server - %s.
+1018 : Error from server procssing main-content - %s.
 1019 : Received server data for INIT level - %s.
 1020 : Received server data for NON-INIT level - %s.
 
@@ -49,18 +49,27 @@
 1036 : Error while stopping recording - %s.
 1037 : Error displaying video - %s.
 
+// Region processing
+1038 : Error from server procssing region-content - %s.
+
+
 // Server side
-2001 : invalid data/file format received from client. Valid format are PDF, image, video
-2002 : received file %s
-2003 : received image %s
-2004 : received video %s
-2005 : uploading file to gemini - %s
-2006 : waiting for file to be uploaded to gemini
-2007 : error file upload into gemini - %s
-2008 : file upload to gemini success - uri %s
+2001 : invalid main-content data/file format received from client. Valid format are PDF, image, video
+2002 : received main-content file %s
+2003 : received main-content image %s
+2004 : received main-content video %s
+2005 : uploading main-content file to gemini - %s
+2006 : waiting for main-content file to be uploaded to gemini
+2007 : error main-content file upload into gemini - %s
+2008 : main-content file upload to gemini success - uri %s
 2009 : learn-level %s - gemini responded %s points
 2010 : generated level-%s
-2011 : content not related to academics - please specify valid content for learning
+2011 : main-content not related to academics - please specify valid content for learning
+2012 : classified main-content as %s
+2013 : region-content explanation done
+2014 : Status of header-presence in main-content - %s
+
+
 
 
 

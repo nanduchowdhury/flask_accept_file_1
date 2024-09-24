@@ -169,7 +169,7 @@ class SendReceiveManager {
 
                 this.resultDiv1.append(this.cTracker.getCurrentLevelTitle());
                 this.resultDiv1.append('\n');
-                const myPostIt = new PostItNote(data.result1, data.result2);
+                const myPostIt = new PostItNote('result1', data.result1, data.result2);
                 myPostIt.setTabTitle(1, 'eng');
                 myPostIt.setTabTitle(2, 'hindi');
                 

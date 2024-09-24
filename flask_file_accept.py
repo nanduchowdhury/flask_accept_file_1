@@ -19,6 +19,8 @@ from io import BytesIO
 import io
 from PIL import Image
 
+import google.generativeai as genai
+
 from error_message_manager import ErrorManager
 from gemini_access import GeminiAccess
 
@@ -32,6 +34,7 @@ class ScholarKM(Flask):
         self.route('/')(self.index)
         self.route('/upload', methods=['POST'])(self.upload_file)
         self.route('/save_logs', methods=['POST'])(self.save_logs)
+        self.route('/explain_region', methods=['POST'])(self.explain_region)
 
         self.upload_folder = ''
         self.log_folder = ''
@@ -148,14 +151,16 @@ class ScholarKM(Flask):
 
             if learnLevel == self.ALL_TITLES_LEVEL:
             
-                file_path = self.receive_and_save_file(data)
-                self.gemini_access.upload_file(file_path)
+                self.main_content_file = self.receive_and_save_file(data)
+                self.gemini_access.upload_file(self.main_content_file)
 
                 self.gemini_access.check_content_student_related()
 
                 if ( self.gemini_access.is_there_text_in_content() ):
+                    self.error_manager.show_message(2012, "TEXT")
                     english_response = self.gemini_access.get_all_headers_of_text()
                 else:
+                    self.error_manager.show_message(2012, "PICTURE")
                     english_response = self.gemini_access.get_all_headers_of_picture()
 
                 self.numPoints = len(english_response.splitlines())
@@ -186,6 +191,26 @@ class ScholarKM(Flask):
     def get_log_file_path(self):
         return os.path.join(self.log_folder, f'{self.client_ip}_{self.client_id}.txt')
 
+
+    def explain_region(self):
+        try:
+            data = request.get_json()
+            
+            self.client_id = data.get('clientId', 'unknown')
+            self.client_ip = request.remote_addr
+
+            self.explain_region_file = self.extract_image(data)
+
+            english_response = self.gemini_access.explain_region(self.main_content_file, self.explain_region_file)
+            self.error_manager.show_message(2013)
+
+            hindi_response = self.gemini_access.convert_to_hindi(english_response)
+
+            return jsonify({'result1': english_response, 
+                            'result2': hindi_response})
+
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
 
     def save_logs(self):
         try:

@@ -59,6 +59,8 @@ class PreviewAreaControl {
             // Show spinner before starting the file read
             this.spinner.show();
     
+            this.clearPdfCanvasContext();
+
             const reader = new FileReader();
     
             // Use an arrow function to retain 'this' context
@@ -110,11 +112,21 @@ class PreviewAreaControl {
         }
     }
     
+    clearPdfCanvasContext() {
+        const pdfCanvas = document.getElementById('pdfCanvas');
+        const context = pdfCanvas.getContext('2d');
+
+        pdfCanvas.width = 0;
+        pdfCanvas.height = 0;
+        context.clearRect(0, 0, pdfCanvas.width, pdfCanvas.height);
+    }
 
     async supportPdfReading(file) {
         try {
             const reader = new FileReader();
     
+            this.clearPdfCanvasContext();
+
             reader.onload = async (e) => {
                 try {
                     const loadingTask = pdfjsLib.getDocument({ data: e.target.result });
@@ -202,6 +214,6 @@ class PreviewAreaControl {
             errorManager.showError(1026, err);
         }
     }
-        
+    
 
 }
