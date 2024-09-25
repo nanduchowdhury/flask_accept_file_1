@@ -57,125 +57,37 @@ class RmbBase {
 
 class PreviewAreaRmb extends RmbBase {
     constructor() {
-        super('previewArea', ["explain region"]);
+        super('previewArea', ["explain region", "pop out"]);
 
-        this.spinnerId = 'loadingSpinner';
-
-        this.regionImageStartX = 0;
-        this.regionImageStartY = 0; 
-        this.regionImageEndX = 0;
-        this.regionImageEndY = 0;
-
-        this.selectionRegionRect = {left : 0, top : 0, width : 0, height : 0};
-
-        this.spinner = new Spinner(this.spinnerId);
+        this.selectRegionMgr = new SelectRegionManager();
     }
 
     updateRegionBbox(startX, startY, endX, endY) {
         
-        this.regionImageStartX = startX;
-        this.regionImageStartY = startY; 
-        this.regionImageEndX = endX;
-        this.regionImageEndY = endY;
+        this.selectRegionMgr.updateRegionBbox(startX, startY, endX, endY);
     }
 
     updateSelectionRegionRect(rect) {
-        this.selectionRegionRect = rect;
+        this.selectRegionMgr.updateSelectionRegionRect(rect);
     }
 
     onExplainRegion() {
     
-        const imageElement = this.grabRegionAndShowInScratchArea();
-        this.sendToServer(imageElement.src);
-    }
-    
-    sendToServer(dataUrl) {
-        
-        this.spinner.show();
-
-        const data = {
-            clientId: basicInitializer.getClientId(),
-            image: dataUrl,
-            additionalData: {
-                someKey: "someValue"
-            }
-        };
-
-        fetch('/explain_region', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => {
-            if (!response.ok) {
-                // Handle HTTP errors (like 500)
-                return response.json().then(data => {
-                    throw new Error(data.error); // Access the error message
-                });
-            }
-            return response.json(); // Process successful response
-        })
-        .then(data => {
-            this.processResultsRecvdFromServer(data);
-            this.spinner.hide();
-        })
-        .catch(error => {
-            errorManager.showError(1038, error.message);
-            this.spinner.hide();
-        });
+        this.selectRegionMgr.grabRegionAndShowInRoughAreaAndTalkToServer('pdfCanvas');
     }
 
-    processResultsRecvdFromServer(data) {
-        const myPostIt = new PostItNote('roughArea', data.result1, data.result2);
-        myPostIt.setTabTitle(1, 'eng');
-        myPostIt.setTabTitle(2, 'hindi');
-    }
+    onPopOut() {
 
-    grabRegionAndShowInScratchArea() {
+        this.pdfPopoutManager = new PdfPopoutManager('genericPopoutId');
+        this.pdfPopoutManager.clear(); // Clear the popout
+
         const pdfCanvas = document.getElementById('pdfCanvas');
-        const context = pdfCanvas.getContext('2d');
+        this.pdfPopoutManager.movePdfCanvasToPopout(pdfCanvas); // Move pdfCanvas to the popout
+        
+        this.pdfPopoutManager.showPopout();
 
-        const x = (this.regionImageStartX < this.regionImageEndX) ? this.regionImageStartX : this.regionImageEndX;
-        const y = (this.regionImageStartY < this.regionImageEndY) ? this.regionImageStartY : this.regionImageEndY;
-        
-        const left = Math.round(x);
-        const top = Math.round(y);
-    
-        const width = Math.abs(this.regionImageEndX - this.regionImageStartX);
-        const height = Math.abs(this.regionImageEndY - this.regionImageStartY);
-
-        if ( width <= MouseControl.ACCEPTABLE_REGION_SIZE || 
-                height <= MouseControl.ACCEPTABLE_REGION_SIZE ) {
-            return;
-        }
-    
-        const imageData = context.getImageData(left, top, width, height);
-    
-        // Create a new canvas to hold the cropped image
-        const rectCanvas = document.createElement('canvas');
-        rectCanvas.width = this.selectionRegionRect.width;
-        rectCanvas.height = this.selectionRegionRect.height;
-        const rectContext = rectCanvas.getContext('2d');
-        
-        rectContext.putImageData(imageData, 0, 0);
-    
-        const dataURL = rectCanvas.toDataURL('image/png');
-    
-        const imageElement = new Image();
-        imageElement.src = dataURL;
-        imageElement.alt = 'Extracted Image';
-        // Set display to block to ensure new line placement
-        imageElement.style.display = 'block';
-    
-        const roughArea = document.getElementById('roughArea');
-        roughArea.appendChild(imageElement);
-    
-        errorManager.log(1014);
-        // console.log('%c ', `font-size:300px; background:url(${dataURL}) no-repeat;`);
-        
-        return imageElement;
+        // this.mouseControl = new MouseControl('genericPopoutId');
+        // this.mouseControl.activateRegionSelection();
     }
 
     onAction(actionIndex) {
@@ -184,7 +96,7 @@ class PreviewAreaRmb extends RmbBase {
                 this.onExplainRegion();
                 break;
             case 2:
-                alert('Preview Area Action-2 clicked!');
+                this.onPopOut();
                 break;
             default:
                 alert(`Preview Area Action-${actionIndex} clicked!`);
@@ -192,5 +104,34 @@ class PreviewAreaRmb extends RmbBase {
         this.contextMenu.style.display = 'none'; // Hide menu after action
     }
 }
+
+class PopOutRmb extends RmbBase {
+    constructor() {
+        super('genericPopoutId', ["explain region"]);
+
+        this.selectRegionMgr = new SelectRegionManager();
+    }
+
+    setSelectedImage(image) {
+        this.selectRegionMgr.setSelectedImage(image);
+    }
+
+    onExplainRegion() {
+
+        this.selectRegionMgr.showSelectedImageInRoughAreaAndTalkToServer();
+    }
+
+    onAction(actionIndex) {
+        switch (actionIndex) {
+            case 1:
+                this.onExplainRegion();
+                break;
+            default:
+                alert(`Preview Area Action-${actionIndex} clicked!`);
+        }
+        this.contextMenu.style.display = 'none'; // Hide menu after action
+    }
+}
+
 
 

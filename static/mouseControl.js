@@ -1,8 +1,5 @@
 class MouseControl {
 
-    static LEFT_MOUSE_BUTTON = 0;
-    static ACCEPTABLE_REGION_SIZE = 10;
-
     constructor(containerId) {
         this.container = document.getElementById(containerId);
 
@@ -17,12 +14,13 @@ class MouseControl {
         this.regionStartY = 0;
         this.regionEndX = 0;
         this.regionEndY = 0;
-        this.selectionBox = null;
+
+        this.selectionBoxMgr = new SelectionBoxManager();
     }
 
     deActivateRegionSelection() {
         this.container.removeEventListener('mousedown', (event) => {
-            if (event.button === MouseControl.LEFT_MOUSE_BUTTON) {
+            if (event.button === BasicInitializer.LEFT_MOUSE_BUTTON) {
                 this.onMouseDown(event);
             }
         });
@@ -30,7 +28,7 @@ class MouseControl {
 
     activateRegionSelection() {
         this.container.addEventListener('mousedown', (event) => {
-            if (event.button === MouseControl.LEFT_MOUSE_BUTTON) {
+            if (event.button === BasicInitializer.LEFT_MOUSE_BUTTON) {
                 this.onMouseDown(event);
             }
         });
@@ -44,7 +42,7 @@ class MouseControl {
         this.regionImageStartX = event.offsetX;
         this.regionImageStartY = event.offsetY;
 
-        if ( this.selectionBox ) this.selectionBox.remove();
+        this.selectionBoxMgr.clear();
 
         this.selectionRegionRect.left = Math.round(this.regionStartX);
         this.selectionRegionRect.top = Math.round(this.regionStartY);
@@ -52,14 +50,10 @@ class MouseControl {
         this.selectionRegionRect.width = 1;
         this.selectionRegionRect.height = 1;
 
-        this.selectionBox = document.createElement('div');
-        this.selectionBox.className = 'selectionBox';
-        this.selectionBox.style.left = `${this.selectionRegionRect.left}px`;
-        this.selectionBox.style.top = `${this.selectionRegionRect.top}px`;
-        this.selectionBox.style.width = `1px`;
-        this.selectionBox.style.height = `1px`;
+        this.selectionBoxMgr.create(`${this.selectionRegionRect.left}px`,
+                                    `${this.selectionRegionRect.top}px`);
 
-        this.container.appendChild(this.selectionBox);
+        this.container.appendChild(this.selectionBoxMgr.getSelectionBox());
 
         this.container.addEventListener('mousemove', this.onMouseMove);
         this.container.addEventListener('mouseup', this.onMouseUp);
@@ -81,17 +75,19 @@ class MouseControl {
         this.selectionRegionRect.width = Math.abs(Math.round(this.regionEndX - this.regionStartX));
         this.selectionRegionRect.height = Math.abs(Math.round(this.regionEndY - this.regionStartY));
 
-        this.selectionBox.style.width = `${this.selectionRegionRect.width}px`;
-        this.selectionBox.style.height = `${this.selectionRegionRect.height}px`;
-        this.selectionBox.style.left = `${this.selectionRegionRect.left}px`;
-        this.selectionBox.style.top = `${this.selectionRegionRect.top}px`;
+        this.selectionBoxMgr.updateDimension(`${this.selectionRegionRect.top}px`,
+                                            `${this.selectionRegionRect.left}px`,
+                                            `${this.selectionRegionRect.width}px`,
+                                            `${this.selectionRegionRect.height}px`);
+
+
     }
 
     onMouseUp = () => {
 
-        if ( this.selectionBox.offsetWidth <= MouseControl.ACCEPTABLE_REGION_SIZE ||
-            this.selectionBox.offsetHeight <= MouseControl.ACCEPTABLE_REGION_SIZE ) {
-                this.selectionBox.remove();
+        if ( this.selectionBoxMgr.getOffsetWidth() <= BasicInitializer.ACCEPTABLE_REGION_SIZE ||
+            this.selectionBoxMgr.getOffsetHeight() <= BasicInitializer.ACCEPTABLE_REGION_SIZE ) {
+                this.selectionBoxMgr.clear();
             }
 
         this.previewAreaRmb.updateRegionBbox(this.regionImageStartX, this.regionImageStartY, 

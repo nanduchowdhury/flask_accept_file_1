@@ -1,4 +1,8 @@
 class BasicInitializer {
+
+    static LEFT_MOUSE_BUTTON = 0;
+    static ACCEPTABLE_REGION_SIZE = 10;
+
     constructor() {
         this.clientId = 'client-' + this.getFormattedTimestamp();
     }
