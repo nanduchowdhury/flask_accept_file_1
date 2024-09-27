@@ -55,7 +55,7 @@
 1040 : Error convert ppt to PDF.
 1041 : Error during ppt to PDF conversion.
 1042 : Error rendering PDF to canvas - %s.
-
+1043 : Error loading video file %s - %s.
 
 
 // Server side

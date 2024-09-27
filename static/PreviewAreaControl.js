@@ -58,16 +58,47 @@ class PreviewAreaControl extends ContainerScrollBarControl {
                 this.supportImageFileReading(file);
             } else if (file.type === 'application/vnd.openxmlformats-officedocument.presentationml.presentation') {
                 this.supportPptFileReading(file);
+            } else if (file.type.startsWith('video/')) {
+                this.supportVideoFileReading(file);
             } else {
                 errorManager.showError(1039, file.type);
             }
         }
     }
 
+    supportVideoFileReading(file) {
+        try {
+
+            this.spinner.show();
+
+            const videoURL = URL.createObjectURL(file);
+            const videoElement = document.createElement("video");
+            videoElement.src = videoURL;
+            videoElement.controls = true; // Optional: add controls for video playback
+            videoElement.style.width = "100%"; // Set to fit the canvas
+            videoElement.style.height = "auto"; // Maintain aspect ratio
+        
+            // Assuming 'pdfCanvas' is your canvas element
+            const pdfCanvas = document.getElementById("pdfCanvas");
+            pdfCanvas.innerHTML = ""; // Clear existing content
+            pdfCanvas.appendChild(videoElement);
+        
+            this.showVideoInCanvas(videoURL);
+
+            // Optionally, you can autoplay the video
+            // videoElement.play();
+
+        } catch (err) {
+            errorManager.showError(1043, file, err);
+        } finally {
+            // Always hide the spinner, regardless of success or error
+            this.spinner.hide();
+        }
+    }
+
     supportPptFileReading(file) {
         this.convertPPTtoPDF(file);
     }
-
 
     supportImageFileReading(file) {
         try {
