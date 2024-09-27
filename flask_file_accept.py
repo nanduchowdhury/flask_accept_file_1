@@ -17,7 +17,18 @@ import textwrap
 import base64
 from io import BytesIO
 import io
-from PIL import Image
+from PIL import Image, ImageDraw
+
+from flask import Flask, request, send_file
+from pptx import Presentation
+from pptx.util import Inches  # Import Inches from pptx.util
+from io import BytesIO
+import pdfkit  # You'll need to install the `pdfkit` and `wkhtmltopdf
+
+import tempfile  # For creating temporary files
+
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
 
 import google.generativeai as genai
 
@@ -35,6 +46,7 @@ class ScholarKM(Flask):
         self.route('/upload', methods=['POST'])(self.upload_file)
         self.route('/save_logs', methods=['POST'])(self.save_logs)
         self.route('/explain_region', methods=['POST'])(self.explain_region)
+        self.route('/convert_ppt_to_pdf', methods=['POST'])(self.convert_ppt_to_pdf)
 
         self.upload_folder = ''
         self.log_folder = ''
@@ -184,7 +196,7 @@ class ScholarKM(Flask):
                 return jsonify({'result1': english_response, 
                                 'result2': hindi_response})
 
-        except ValueError as e:
+        except Exception as e:
             return jsonify({"error": str(e)}), 500
 
     # Function to get the log file path for a client (using IP as the identifier)
@@ -236,6 +248,83 @@ class ScholarKM(Flask):
 
         except Exception as e:
             return jsonify({"error": str(e)}), 500
+
+
+
+    def convert_slide_to_image(self, slide):
+        # For simplicity, we'll create a blank image to represent the slide
+        width, height = 1280, 720  # Default slide dimensions in pixels
+
+        # Create a blank white image for the slide
+        slide_image = Image.new('RGB', (width, height), color='white')
+        draw = ImageDraw.Draw(slide_image)
+        
+        # Iterate over the shapes in the slide and draw rectangles and text
+        for shape in slide.shapes:
+            if not shape.has_text_frame:
+                continue
+            
+            # Extract text from the shape
+            text = shape.text
+            
+            # Convert EMUs to pixels (assuming 96 DPI)
+            left = shape.left / Inches(1) * 96  # Convert Inches to pixels
+            top = shape.top / Inches(1) * 96
+            width = shape.width / Inches(1) * 96
+            height = shape.height / Inches(1) * 96
+            
+            # Draw a rectangle around the shape
+            draw.rectangle([left, top, left + width, top + height], outline='black', width=2)
+            
+            # Draw the text inside the rectangle
+            draw.text((left + 10, top + 10), text, fill='black')
+        
+        return slide_image
+
+    def convert_ppt_to_pdf(self):
+        try:
+
+            if 'file' not in request.files:
+                raise ValueError(self.error_manager.show_message(2016))
+
+            file = request.files['file']
+            
+            if file.filename.endswith('.pptx'):
+                ppt = Presentation(file)
+                pdf_output = BytesIO()
+
+                # Create a ReportLab canvas for the PDF
+                c = canvas.Canvas(pdf_output)
+                
+                # Convert each slide to an image and add it to the PDF
+                for slide in ppt.slides:
+                    slide_image = self.convert_slide_to_image(slide)
+                    
+                    # Save the slide image to a temporary file
+                    with tempfile.NamedTemporaryFile(suffix='.png', delete=False) as tmpfile:
+                        slide_image.save(tmpfile, format='PNG')
+                        tmpfile_path = tmpfile.name
+
+                    # Add the image from the temporary file to the PDF
+                    c.drawImage(tmpfile_path, 0, 0, width=600, height=400)  # Adjust size as needed
+
+                    # Finish the page and move to the next slide
+                    c.showPage()
+
+                    # Delete the temporary file
+                    os.remove(tmpfile_path)
+                
+                # Save the final PDF
+                c.save()
+                pdf_output.seek(0)
+                
+                self.error_manager.show_message(2015)
+
+                return send_file(pdf_output, as_attachment=True, download_name='converted.pdf', mimetype='application/pdf')
+
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
+        
 
 if __name__ == '__main__':
   app = ScholarKM()

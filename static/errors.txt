@@ -33,7 +33,7 @@
 1023 : ERROR - in rendering process - %s.
 1024 : ERROR - loading PDF - %s.
 1025 : ERROR - reading PDF file - %s.
-1026 : ERROR - in supportPdfReading - %s.
+1026 : ERROR - in PDF reading - %s.
 
 1027 : Error rendering image - %s.
 1028 : Error loading image - %s.
@@ -51,6 +51,11 @@
 
 // Region processing
 1038 : Error from server procssing region-content - %s.
+1039 : Error unsupported file-type selected - %s.
+1040 : Error convert ppt to PDF.
+1041 : Error during ppt to PDF conversion.
+1042 : Error rendering PDF to canvas - %s.
+
 
 
 // Server side
@@ -68,6 +73,9 @@
 2012 : classified main-content as %s
 2013 : region-content explanation done
 2014 : Status of header-presence in main-content - %s
+2015 : Converted client's pptx file to PDF and sent back to client
+2016 : Could not get any ppt file to convert to PDF
+
 
 
 
