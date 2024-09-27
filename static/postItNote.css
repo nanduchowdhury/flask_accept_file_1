@@ -8,7 +8,7 @@
             padding: 10px;
             margin: 10px;
             font-family: 'Indie Flower', cursive; /* Apply the hand-written font */
-            font-weight: normal; /* Set the font weight to normal */
+            font-weight: bold; /* Set the font weight to normal */
             font-size: 14px; /* Text size */
             color: #333; /* Dark text color */
             box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);

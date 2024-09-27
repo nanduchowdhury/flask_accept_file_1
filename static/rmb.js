@@ -57,7 +57,7 @@ class RmbBase {
 
 class PreviewAreaRmb extends RmbBase {
     constructor() {
-        super('previewArea', ["explain region", "pop out"]);
+        super('previewArea', [BasicInitializer.EXPLAIN_REGION_RMB, BasicInitializer.POP_OUT_RMB]);
 
         this.selectRegionMgr = new SelectRegionManager();
     }
@@ -107,7 +107,7 @@ class PreviewAreaRmb extends RmbBase {
 
 class PopOutRmb extends RmbBase {
     constructor() {
-        super('genericPopoutId', ["explain region"]);
+        super('genericPopoutId', [BasicInitializer.EXPLAIN_REGION_RMB]);
 
         this.selectRegionMgr = new SelectRegionManager();
     }

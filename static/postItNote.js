@@ -29,10 +29,10 @@ class PostItNote {
             
             this.postItNote.appendChild(tabContainer);
 
-            this.tab1ContentDiv = this.attachTabContent(tab1Content, 'tabContent active');
+            this.tab1ContentDiv = this.createTabContent(tab1Content, 'tabContent active');
             this.postItNote.appendChild(this.tab1ContentDiv);
 
-            this.tab2ContentDiv = this.attachTabContent(tab2Content, 'tabContent');
+            this.tab2ContentDiv = this.createTabContent(tab2Content, 'tabContent');
             this.postItNote.appendChild(this.tab2ContentDiv);
 
             this.arrow = document.createElement('div');
@@ -62,7 +62,7 @@ class PostItNote {
         }
     }
 
-    attachTabContent(tabContent, className) {
+    createTabContent(tabContent, className) {
         try {
             let tabContentDiv = document.createElement('div');
             tabContentDiv.className = className;
@@ -190,9 +190,12 @@ class PostItNote {
                 this.popoutMgr = new PopoutManager('genericPopoutId');
                 this.popoutMgr.clear();
                 if ( this.contentBeingShown === 'tab1' ) {
-                    this.popoutMgr.appendItem(this.tab1Content);
+                    let tabContentDiv = this.createTabContent(this.tab1Content, 'tabContent active');
+                    this.popoutMgr.appendItem(tabContentDiv);
+
                 } else if ( this.contentBeingShown === 'tab2' ) {
-                    this.popoutMgr.appendItem(this.tab2Content);
+                    let tabContentDiv = this.createTabContent(this.tab2Content, 'tabContent active');
+                    this.popoutMgr.appendItem(tabContentDiv);
                 }
                 this.popoutMgr.showPopout();
             });

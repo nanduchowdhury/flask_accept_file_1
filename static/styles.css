@@ -104,80 +104,6 @@
             display: block;
         }
 
-        /* Style for the file input button */
-        #fileInput {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #3498db; /* Button color */
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            box-shadow: 0px 5px 0px 0px #2980b9; /* 3D effect */
-            cursor: pointer;
-            font-size: 16px;
-            transition: all 0.2s ease-in-out;
-        }
-
-        #fileInput:hover {
-            background-color: #2980b9;
-            box-shadow: 0px 4px 0px 0px #1c639e;
-        }
-
-        #fileInput:active {
-            box-shadow: none;
-            transform: translateY(4px); /* Pressed effect */
-        }
-
-        /* Hide the default file input */
-        #fileInput[type="file"] {
-            display: none;
-        }
-
-        /* Optional: style the label to act like a button */
-        label.custom-file-input {
-            padding: 10px 20px;
-            background-color: #3498db;
-            color: #fff;
-            border-radius: 5px;
-            cursor: pointer;
-            box-shadow: 0px 5px 0px 0px #2980b9;
-            font-size: 16px;
-            transition: all 0.2s ease-in-out;
-        }
-
-        label.custom-file-input:hover {
-            background-color: #2980b9;
-            box-shadow: 0px 4px 0px 0px #1c639e;
-        }
-
-        label.custom-file-input:active {
-            box-shadow: none;
-            transform: translateY(4px); /* Pressed effect */
-        }
-
-        /* Apply the same style to all buttons */
-        button {
-            padding: 10px 20px;
-            background-color: #3498db;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            box-shadow: 0px 5px 0px 0px #2980b9;
-            cursor: pointer;
-            font-size: 16px;
-            transition: all 0.2s ease-in-out;
-        }
-
-        button:hover {
-            background-color: #2980b9;
-            box-shadow: 0px 4px 0px 0px #1c639e;
-        }
-
-        button:active {
-            box-shadow: none;
-            transform: translateY(4px); /* Pressed effect */
-        }
-
         /* Loading Spinner Styles */
         #loadingSpinner {
             display: none; /* Hidden by default */
@@ -243,6 +169,9 @@
             padding: 10px;
             display: none;
             z-index: 1000;
+            font-family: 'Indie Flower', cursive; /* Apply the hand-written font */
+            font-weight: bold; /* Set the font weight to normal */
+            font-size: 14px; /* Text size */
             top: 80%;
             left: 50%;
             width: 800px;
@@ -250,7 +179,12 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
             transform: translate(-50%, -50%);
             overflow: auto; /* Adds scrollbars when content overflows */
+            white-space: normal; /* Allows text to wrap and break into multiple lines */
+            word-wrap: break-word; /* Breaks long words if needed */
+            line-height: 1.5; /* Adjusts line spacing for readability */
         }
+        
+
         
 
 
