@@ -1,5 +1,8 @@
-class PopoutManager {
+class PopoutManager extends ContainerScrollBarControl {
     constructor(containerId) {
+
+        super(containerId);
+
         this.popout = document.getElementById(containerId);
     }
 
@@ -56,6 +59,11 @@ class PdfPopoutManager extends PopoutManager {
         this.popOutRmb = new PopOutRmb();
 
         this.pdfCanvas.addEventListener('mousedown', this.onMouseDown);
+    }
+
+
+    onScroll() {
+        this.selectionBoxMgr.clear();
     }
 
     // Store the original parent and move pdfCanvas to the popout

@@ -18,6 +18,10 @@ class MouseControl {
         this.selectionBoxMgr = new SelectionBoxManager();
     }
 
+    clearSelectionRegion() {
+        this.selectionBoxMgr.clear();
+    }
+
     deActivateRegionSelection() {
         this.container.removeEventListener('mousedown', (event) => {
             if (event.button === BasicInitializer.LEFT_MOUSE_BUTTON) {

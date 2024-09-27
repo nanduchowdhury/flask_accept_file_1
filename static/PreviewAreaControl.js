@@ -1,5 +1,7 @@
-class PreviewAreaControl {
+class PreviewAreaControl extends ContainerScrollBarControl {
     constructor(spinnerId) {
+
+        super('previewArea');
 
         this.mouseControl = new MouseControl('previewArea');
 
@@ -7,6 +9,10 @@ class PreviewAreaControl {
 
         document.getElementById('fileInput').addEventListener('change', this.onFileInput);
         document.getElementById('explainAgainButton').addEventListener('click', this.explainAgainButton);
+    }
+
+    onScroll() {
+        this.mouseControl.clearSelectionRegion();
     }
 
     showVideoInCanvas(videoUrl) {
