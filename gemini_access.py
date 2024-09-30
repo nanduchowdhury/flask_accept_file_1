@@ -10,6 +10,8 @@ class GeminiAccess:
     def __init__(self, eManager):
         self.error_manager = eManager
 
+        self.base_response = ''
+
         self.example_bullet_points = "for example: 1. point-1   2. point-2"
 
     def initialize(self):
@@ -35,6 +37,8 @@ class GeminiAccess:
 
         if self.genai_upload_file.state.name == "FAILED":
             raise ValueError(self.error_manager.show_message(2007, self.genai_upload_file.state.name))
+
+        self.generate_base_response()            
         self.error_manager.show_message(2008, self.genai_upload_file.uri)
 
     def contains_any_substring(self, main_string, substrings):
@@ -97,7 +101,7 @@ class GeminiAccess:
         prompt = ''
         if ( self.is_there_headers_in_content() ):
             self.error_manager.show_message(2014, "YES")
-            prompt = "list all header or sections of entire content with title as following example : " + self.example_bullet_points
+            prompt = "identify all headers or sections in the entire content marked in bold or larger-font - for example 1.1 header1   1.2 header2   1.2.1 sub-header  etc. List them as following example : " + self.example_bullet_points
         else:
             self.error_manager.show_message(2014, "NO")
             prompt = "list summary points of entire content as following example : " + self.example_bullet_points
@@ -112,16 +116,18 @@ class GeminiAccess:
                         request_options={"timeout": 600})
         return response.text
 
+    def generate_base_response(self):
+
+        prompt = "generate detail explanation"
+        self.base_response = self.model.generate_content([prompt, self.genai_upload_file],
+                                    request_options={"timeout": 600})
 
     def explain_region(self, main_content_file, explain_region_file):
 
-        prompt = "generate detail explanation"
-        base_response = self.model.generate_content([prompt, self.genai_upload_file],
-                                    request_options={"timeout": 600})
-
         image = Image.open(explain_region_file)
-        prompt = "explain and answer the question in the image specified in context to the detailed \
-                        explanation of a document as follows : " + base_response.text
+        prompt = "explain the image specified in context to the detailed \
+                        explanation of the document as follows : " + self.base_response.text + "."
+        prompt = prompt + " also answer if any question present. also help if there is any activity to be done."
         response = self.model.generate_content([prompt, image])
 
         return response.text

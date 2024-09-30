@@ -8,7 +8,6 @@ class PreviewAreaControl extends ContainerScrollBarControl {
         this.spinner = new Spinner(spinnerId);
 
         document.getElementById('fileInput').addEventListener('change', this.onFileInput);
-        document.getElementById('explainAgainButton').addEventListener('click', this.explainAgainButton);
     }
 
     onScroll() {
@@ -281,7 +280,4 @@ class PreviewAreaControl extends ContainerScrollBarControl {
             errorManager.showError(1026, err); // General error handling
         }
     }
-    
-    
-
 }

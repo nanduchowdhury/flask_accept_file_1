@@ -4,10 +4,10 @@
         .postItNote {
             width: auto;
             height: auto;
-            background-color: #ffeb3b; /* Yellow color similar to a post-it note */
+            background-color: #f2e88af9; /* Yellow color similar to a post-it note */
             padding: 10px;
             margin: 10px;
-            font-family: 'Indie Flower', cursive; /* Apply the hand-written font */
+            font-family: 'Patrick Hand', cursive; /* Apply the hand-written font */
             font-weight: bold; /* Set the font weight to normal */
             font-size: 14px; /* Text size */
             color: #333; /* Dark text color */
@@ -89,7 +89,7 @@
         .tabButton {
             flex: 1;
             background-color: #ffc107;
-            border: 1px solid #ffeb3b;
+            border: 1px solid #f2e88af9;
             padding: 5px;
             cursor: pointer;
             text-align: center;
@@ -107,7 +107,7 @@
         }
         
         .tabButton.active {
-            background-color: #ffeb3b;
+            background-color: #f2e88af9;
         }
         
         .speaker-icon, .stop-icon {

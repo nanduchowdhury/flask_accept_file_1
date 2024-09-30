@@ -230,8 +230,8 @@ class ScholarKM(Flask):
             
             self.client_id = data.get('clientId', 'unknown')
             self.client_ip = request.remote_addr
-            self.establish_folders(self.client_ip, self.client_id)
-            
+            self.establish_folders()
+
             logs = data.get('logs', [])
 
             if not logs:

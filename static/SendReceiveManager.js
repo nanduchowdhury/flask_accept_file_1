@@ -3,18 +3,41 @@ class SendReceiveManager {
         this.fileInput = document.getElementById(fileInputId);
         this.sendButton = document.getElementById(sendButtonId);
         this.resultDiv1 = document.getElementById(resultDivId1);
-        this.resultDiv2 = document.getElementById(resultDivId2);
         this.spinner = new Spinner(spinnerId);
         this.previewArea = document.getElementById(previewAreaId);
         this.pdfCanvas = document.getElementById(pdfCanvasId);
 
-        this.cTracker = new ConceptTracker();
+        // this.restartButton = document.getElementById('restartButton');
+
+        this.cTracker = new ConceptTracker('result2', 
+                            "Following topics/sections will be explained:", 
+                            { color: 'red', font: 'Courier', bold: true });
 
         this.addEventListeners();
     }
 
     addEventListeners() {
         this.sendButton.addEventListener('click', this.handleSendButtonClick.bind(this));
+        // this.restartButton.addEventListener('click', this.handleRestartButtonClick.bind(this));
+    }
+
+    startExplanation() {
+        this.sendButton.innerText = "Explain Next";
+    }
+
+    restartExplanation() {
+        this.sendButton.innerText = "Start Explanation";
+        this.cTracker.reset();
+    }
+
+    handleRestartButtonClick() {
+        try {
+            this.restartExplanation();
+        } catch (error) {
+            errorManager.showError(1045, error);
+        } finally {
+            // this.spinner.hide();
+        }
     }
 
     handleSendButtonClick() {
@@ -28,7 +51,7 @@ class SendReceiveManager {
                 } else if ( SharedData.DataSource == 'video' ) {
                     this.sendVideo();
                 }
-            } else {
+            } else if ( !this.cTracker.isMaxLevelReached() ) {
                 const data = {
                     clientId: basicInitializer.getClientId(),
                     additionalData: {
@@ -37,6 +60,8 @@ class SendReceiveManager {
                     }
                 };
                 this.sendDataToServer(data);
+            } else {
+                errorManager.showError(1044);
             }
         } catch (error) {
             errorManager.showError(1015, error);
@@ -154,18 +179,17 @@ class SendReceiveManager {
                 errorManager.log(1019, data);
 
                 if ( data.numPoints ) {
-                    this.cTracker.setMaxLevel(data.numPoints);
-                }
-                if ( data.firstResponse ) {
-                    for (let i = 0; i < this.cTracker.getMaxLevel(); i++) {
-                        this.cTracker.setLevelTitle(i, data.firstResponse[i]);
-                        this.resultDiv2.append(data.firstResponse[i]);
-                        this.resultDiv2.append('\n');
-                    }
+                    
+                    this.startExplanation();
+
+                    this.cTracker.setLevelStrings(data.firstResponse);
+                    this.cTracker.render();
                 }
             } else {
 
                 errorManager.log(1020, data);
+
+                this.cTracker.changeColor(this.cTracker.getCurrentLevel(), 'green');
 
                 this.resultDiv1.append(this.cTracker.getCurrentLevelTitle());
                 this.resultDiv1.append('\n');
