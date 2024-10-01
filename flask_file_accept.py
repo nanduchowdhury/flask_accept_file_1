@@ -34,13 +34,15 @@ import google.generativeai as genai
 
 from error_message_manager import ErrorManager
 from gemini_access import GeminiAccess
+from base_client_manager import BaseClientManager
 
-class ScholarKM(Flask):
+
+class ScholarKM(Flask, BaseClientManager):
     def __init__(self):
-        super().__init__(__name__)
+        Flask.__init__(self, __name__)
+        BaseClientManager.__init__(self)  # Initialize client management base class
 
         self.client_ip = 'client_ip'
-        self.client_id = 'client_id'
 
         self.route('/')(self.index)
         self.route('/upload', methods=['POST'])(self.upload_file)
@@ -48,20 +50,23 @@ class ScholarKM(Flask):
         self.route('/explain_region', methods=['POST'])(self.explain_region)
         self.route('/convert_ppt_to_pdf', methods=['POST'])(self.convert_ppt_to_pdf)
 
-        self.upload_folder = ''
-        self.log_folder = ''
-
         # Constants
         self.BASE_FOLDER = '/home/nandu_chowdhury/kupamanduk/scholar/'
-        
         self.SERVER_LOGS_FOLDER = '/home/nandu_chowdhury/kupamanduk/scholar/server_logs/'
         self.BASE_UPLOAD_FOLDER = 'uploads/'
         self.BASE_LOG_FOLDER = 'client_logs/'
         self.FIRST_TITLE_LEVEL = 0
         self.ALL_TITLES_LEVEL = -1
 
-        self.numPoints = 0
-        self.firstResponse = []
+        # Key names in the shared-data dictionary
+        self.CDATA_client_id = 'client_id'
+        self.CDATA_client_ip = 'client_ip'
+        self.CDATA_upload_folder = 'upload_folder'
+        self.CDATA_log_folder = 'log_folder'
+        self.CDATA_log_file = 'log_file'
+        self.CDATA_main_content_file = 'main_content_file'
+        self.CDATA_num_learn_points = 'num_learn_points'
+        self.CDATA_first_response = 'first_response'
 
         self.error_manager = ErrorManager(self.client_ip, 'static/errors.txt', 
                     log_dir=self.SERVER_LOGS_FOLDER)
@@ -78,47 +83,63 @@ class ScholarKM(Flask):
                 text += page.extract_text()
         return text
 
-    def establish_folders(self):
+    def establish_folders(self, uuid):
 
-        client_folder = os.path.join(self.BASE_FOLDER, f'{self.client_ip}_{self.client_id}/')
+        client_ip = self.get_client_data(uuid, self.CDATA_client_ip)
+        client_id = self.get_client_data(uuid, self.CDATA_client_id)
+        
+        client_folder = os.path.join(self.BASE_FOLDER, f'{client_ip}_{client_id}/')
 
         if not os.path.exists(client_folder):
             os.makedirs(client_folder, exist_ok=True)
 
-        self.upload_folder = os.path.join(client_folder, self.BASE_UPLOAD_FOLDER)
+        upload_folder = os.path.join(client_folder, self.BASE_UPLOAD_FOLDER)
+        self.save_client_data(uuid, self.CDATA_upload_folder, upload_folder)
 
-        if not os.path.exists(self.upload_folder):
-            os.makedirs(self.upload_folder, exist_ok=True)
+        if not os.path.exists(upload_folder):
+            os.makedirs(upload_folder, exist_ok=True)
+        
+        log_folder = os.path.join(client_folder, self.BASE_LOG_FOLDER)
+        self.save_client_data(uuid, self.CDATA_log_folder, log_folder)
 
-        self.log_folder = os.path.join(client_folder, self.BASE_LOG_FOLDER)
+        if not os.path.exists(log_folder):
+            os.makedirs(log_folder, exist_ok=True)
+        
+        log_file_path = os.path.join(log_folder, f'client_log.txt')
+        self.save_client_data(uuid, self.CDATA_log_file, log_file_path)
 
-        if not os.path.exists(self.log_folder):
-            os.makedirs(self.log_folder, exist_ok=True)
-
-    def extract_file(self, data):
+    def extract_file(self, uuid, data):
 
         file_name = data['fileName']
 
-        file_name = os.path.join(self.upload_folder, file_name)
+        upload_folder = self.get_client_data(uuid, self.CDATA_upload_folder)
+
+        file_name = os.path.join(upload_folder, file_name)
         file_content = base64.b64decode(data['fileContent'])
 
         with open(file_name, 'wb') as f:
             f.write(file_content)
         return file_name
 
-    def extract_image(self, data):
+    def extract_image(self, uuid, data):
+
+        upload_folder = self.get_client_data(uuid, self.CDATA_upload_folder)
+
         image_data_url = data['image']
         header, base64_image = image_data_url.split(',', 1)
         file_content = base64.b64decode(base64_image)
         image = Image.open(io.BytesIO(file_content))
-        filename = os.path.join(self.upload_folder, 'captured_image.png')
+        filename = os.path.join(upload_folder, 'captured_image.png')
         image.save(filename)
         return filename
 
-    def extract_video(self, data):
+    def extract_video(self, uuid, data):
+
+        upload_folder = self.get_client_data(uuid, self.CDATA_upload_folder)
+
         video_data = data['video']
         video_binary = base64.b64decode(video_data)
-        video_path = os.path.join(self.upload_folder, 'uploaded_video.webm')
+        video_path = os.path.join(upload_folder, 'uploaded_video.webm')
         with open(video_path, 'wb') as video_file:
             video_file.write(video_binary)
         return video_path
@@ -126,20 +147,20 @@ class ScholarKM(Flask):
     def index(self):
         return render_template('index.html')
 
-    def receive_and_save_file(self, data):
+    def receive_and_save_file(self, uuid, data):
         file_path = ''
 
         if 'fileContent' in data:
-            file_path = self.extract_file(data)
+            file_path = self.extract_file(uuid, data)
 
             self.error_manager.show_message(2002, file_path)
 
         elif 'image' in data:
-            file_path = self.extract_image(data)
+            file_path = self.extract_image(uuid, data)
             self.error_manager.show_message(2003, file_path)
 
         elif 'video' in data:
-            file_path = self.extract_video(data)
+            file_path = self.extract_video(uuid, data)
             self.error_manager.show_message(2004, file_path)
 
         else:
@@ -151,45 +172,49 @@ class ScholarKM(Flask):
         
         try:
             data = request.json
-            self.client_ip = request.remote_addr
-            self.client_id = data.get('clientId', 'unknown')
 
-            self.error_manager.update_client_ip(self.client_ip)
-
-            self.establish_folders();
+            uuid = self.get_or_generate_uuid(data)
 
             learnLevel = data['additionalData']
             learnLevel = learnLevel['learnLevel']
 
             if learnLevel == self.ALL_TITLES_LEVEL:
             
-                self.main_content_file = self.receive_and_save_file(data)
-                self.gemini_access.upload_file(self.main_content_file)
+                main_content_file = self.receive_and_save_file(uuid, data)
+                self.save_client_data(uuid, self.CDATA_main_content_file, main_content_file)
+                self.gemini_access.upload_file(uuid, main_content_file)
 
-                self.gemini_access.check_content_student_related()
+                self.gemini_access.check_content_student_related(uuid)
 
-                if ( self.gemini_access.is_there_text_in_content() ):
+                if ( self.gemini_access.is_there_text_in_content(uuid) ):
                     self.error_manager.show_message(2012, "TEXT")
-                    english_response = self.gemini_access.get_all_headers_of_text()
+                    english_response = self.gemini_access.get_all_headers_of_text(uuid)
                 else:
                     self.error_manager.show_message(2012, "PICTURE")
-                    english_response = self.gemini_access.get_all_headers_of_picture()
+                    english_response = self.gemini_access.get_all_headers_of_picture(uuid)
 
-                self.numPoints = len(english_response.splitlines())
+                num_learn_points = len(english_response.splitlines())
+                self.save_client_data(uuid, self.CDATA_num_learn_points, main_content_file)
 
-                self.error_manager.show_message(2009, learnLevel, self.numPoints)
+                self.error_manager.show_message(2009, learnLevel, num_learn_points)
 
-                self.firstResponse = english_response.splitlines()
+                self.save_client_data(uuid, self.CDATA_first_response, english_response)
+
+                first_response = english_response.splitlines()
 
                 hindi_response = self.gemini_access.convert_to_hindi(english_response)
 
-                return jsonify({'numPoints': self.numPoints,
-                                'firstResponse' : self.firstResponse,
+                return jsonify({'numPoints': num_learn_points,
+                                'firstResponse' : first_response,
                                 'result1': english_response, 
                                 'result2': hindi_response})
             else:
 
-                english_response = self.gemini_access.get_header_summary(self.firstResponse[learnLevel])
+                first_response = self.get_client_data(uuid, self.CDATA_first_response)
+
+                first_response = first_response.splitlines()
+
+                english_response = self.gemini_access.get_header_summary(uuid, first_response[learnLevel])
                 hindi_response = self.gemini_access.convert_to_hindi(english_response)
                 self.error_manager.show_message(2010, learnLevel)
 
@@ -199,21 +224,17 @@ class ScholarKM(Flask):
         except Exception as e:
             return jsonify({"error": str(e)}), 500
 
-    # Function to get the log file path for a client (using IP as the identifier)
-    def get_log_file_path(self):
-        return os.path.join(self.log_folder, f'{self.client_ip}_{self.client_id}.txt')
-
 
     def explain_region(self):
         try:
             data = request.get_json()
             
-            self.client_id = data.get('clientId', 'unknown')
-            self.client_ip = request.remote_addr
+            uuid = self.get_or_generate_uuid(data)
 
-            self.explain_region_file = self.extract_image(data)
+            main_content_file = self.get_client_data(uuid, self.CDATA_main_content_file)
+            explain_region_file = self.extract_image(data)
 
-            english_response = self.gemini_access.explain_region(self.main_content_file, self.explain_region_file)
+            english_response = self.gemini_access.explain_region(uuid, main_content_file, explain_region_file)
             self.error_manager.show_message(2013)
 
             hindi_response = self.gemini_access.convert_to_hindi(english_response)
@@ -224,27 +245,45 @@ class ScholarKM(Flask):
         except Exception as e:
             return jsonify({"error": str(e)}), 500
 
+    def get_or_generate_uuid(self, data, is_generate=False):
+        client_uuid = data.get('client_uuid', '')
+        print("UUID : ", client_uuid)
+        if not client_uuid:
+            if is_generate:
+                client_uuid = self.set_client_id()  # Generate a new client ID
+            else:
+                raise ValueError(self.error_manager.show_message(2017))
+        return client_uuid
+
     def save_logs(self):
         try:
             data = request.get_json()
             
-            self.client_id = data.get('clientId', 'unknown')
-            self.client_ip = request.remote_addr
-            self.establish_folders()
+            client_uuid = self.get_or_generate_uuid(data, True)
+            client_id = data.get('clientId', 'unknown')
+            self.save_client_data(client_uuid, self.CDATA_client_id, client_id)
+            
+            client_ip = request.remote_addr
+            self.save_client_data(client_uuid, self.CDATA_client_ip, client_ip)
+
+            self.error_manager.update_client_ip(client_ip)
+
+            self.establish_folders(client_uuid)
 
             logs = data.get('logs', [])
 
             if not logs:
                 return jsonify({"status": "no logs to save"}), 200
             
-            log_file_path = self.get_log_file_path()
+            log_file_path = self.get_client_data(client_uuid, self.CDATA_log_file)
 
             # Append the logs to the client's log file
             with open(log_file_path, 'a') as log_file:
                 for log in logs:
                     log_file.write(f"{log}\n")
 
-            return jsonify({"status": "logs saved"}), 200
+
+            return jsonify({"client_uuid": client_uuid}), 200
 
         except Exception as e:
             return jsonify({"error": str(e)}), 500
@@ -325,8 +364,8 @@ class ScholarKM(Flask):
         except Exception as e:
             return jsonify({"error": str(e)}), 500
         
+app = ScholarKM()
 
 if __name__ == '__main__':
-  app = ScholarKM()
-  app.run(debug=True)
+  app.run(debug=True, threaded=True)
 

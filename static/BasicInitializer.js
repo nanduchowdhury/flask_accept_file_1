@@ -7,6 +7,7 @@ class BasicInitializer {
 
     constructor() {
         this.clientId = 'client-' + this.getFormattedTimestamp();
+        this.client_uuid = '';
     }
 
     getFormattedTimestamp() {
@@ -25,5 +26,13 @@ class BasicInitializer {
 
     getClientId() {    
         return this.clientId;
+    }
+
+    setClient_UUID(uuid) {
+        this.client_uuid = uuid;
+    }
+
+    getClient_UUID() {    
+        return this.client_uuid;
     }
 }

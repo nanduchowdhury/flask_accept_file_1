@@ -53,7 +53,7 @@ class SendReceiveManager {
                 }
             } else if ( !this.cTracker.isMaxLevelReached() ) {
                 const data = {
-                    clientId: basicInitializer.getClientId(),
+                    client_uuid: basicInitializer.getClient_UUID(),
                     additionalData: {
                         // Add any additional data you want to include in the JSON object
                         someKey: "someValue"
@@ -84,7 +84,7 @@ class SendReceiveManager {
             const base64File = reader.result.split(',')[1];
 
             const data = {
-                clientId: basicInitializer.getClientId(),
+                client_uuid: basicInitializer.getClient_UUID(),
                 fileName: file.name,
                 fileType: file.type,
                 fileContent: base64File,
@@ -106,7 +106,7 @@ class SendReceiveManager {
                 const base64Video = reader.result.split(',')[1]; // Get the base64 data without the prefix
 
                 const data = {
-                    clientId: basicInitializer.getClientId(),
+                    client_uuid: basicInitializer.getClient_UUID(),
                     video: base64Video,
                     additionalData: {
                         someKey: "someValue"
@@ -125,7 +125,7 @@ class SendReceiveManager {
         // console.log('%c ', `font-size:300px; background:url(${dataUrl}) no-repeat;`);
 
         const data = {
-            clientId: basicInitializer.getClientId(),
+            client_uuid: basicInitializer.getClient_UUID(),
             image: dataUrl,
             additionalData: {
                 someKey: "someValue"

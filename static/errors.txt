@@ -77,6 +77,7 @@
 2014 : Status of header-presence in main-content - %s
 2015 : Converted client's pptx file to PDF and sent back to client
 2016 : Could not get any ppt file to convert to PDF
+2017 : Client UUID not found
 
 
 

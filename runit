@@ -2,6 +2,9 @@
 
 export GOOGLE_API_KEY=AIzaSyAQCZ2bJHOI6yapnei35Eyrd2IL19ts9GM
 
-python flask_file_accept.py
+gunicorn -w 4 --timeout 300 -k gevent flask_file_accept:app
+
+# python flask_file_accept.py
+
 
 
