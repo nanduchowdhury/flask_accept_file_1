@@ -30,7 +30,7 @@
             border: 5px solid #ccc;
             box-sizing: border-box;
             white-space: pre-wrap;
-            font-family: 'Poppins', sans-serif;
+            font-family: "Courier New", Courier, monospace;
             font-weight: 600;
             font-size: 14px;
         }
@@ -51,7 +51,7 @@
             padding: 10px;
             box-sizing: border-box;
             white-space: pre-wrap;
-            font-family: 'Poppins', sans-serif; /* Use the Poppins font */
+            font-family: "Courier New", Courier, monospace;
             font-weight: 600; /* Bold text */
             font-size: 14px; /* Smaller text size */
 

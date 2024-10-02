@@ -5,7 +5,7 @@ class ErrorManager {
 
         this.logs = [];
         this.lastSentIndex = 0;
-        this.interval = 1000;
+        this.interval = 10000;
         this.clientId = basicInitializer.getClientId();
         this.serverEndpoint = '/save_logs';
         this.timeoutID = null; // Holds the timeout ID
@@ -88,11 +88,7 @@ class ErrorManager {
         })
         .then(response => response.json())
         .then(data => {
-            basicInitializer.setClient_UUID(data.client_uuid);
 
-            if ( !basicInitializer.getClient_UUID() ) {
-                console.error("No client-UUID recvd from server.");
-            }
         })
         .catch(error => console.error('Error sending logs:', error));
     }

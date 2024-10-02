@@ -30,6 +30,8 @@ import tempfile  # For creating temporary files
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 
+from datetime import datetime
+
 import google.generativeai as genai
 
 from error_message_manager import ErrorManager
@@ -45,6 +47,7 @@ class ScholarKM(Flask, BaseClientManager):
         self.client_ip = 'client_ip'
 
         self.route('/')(self.index)
+        self.route('/basic_init', methods=['POST'])(self.basic_init)
         self.route('/upload', methods=['POST'])(self.upload_file)
         self.route('/save_logs', methods=['POST'])(self.save_logs)
         self.route('/explain_region', methods=['POST'])(self.explain_region)
@@ -121,7 +124,18 @@ class ScholarKM(Flask, BaseClientManager):
             f.write(file_content)
         return file_name
 
+    def append_timestamp_to_filename(self, filename):
+        current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+        base_name, ext = os.path.splitext(filename)
+        
+        new_filename = f'{base_name}_{current_time}{ext}'
+        
+        return new_filename
+
     def extract_image(self, uuid, data):
+
+        file_name = 'captured_image.png'
+        file_name = self.append_timestamp_to_filename(file_name)
 
         upload_folder = self.get_client_data(uuid, self.CDATA_upload_folder)
 
@@ -129,17 +143,20 @@ class ScholarKM(Flask, BaseClientManager):
         header, base64_image = image_data_url.split(',', 1)
         file_content = base64.b64decode(base64_image)
         image = Image.open(io.BytesIO(file_content))
-        filename = os.path.join(upload_folder, 'captured_image.png')
+        filename = os.path.join(upload_folder, file_name)
         image.save(filename)
         return filename
 
     def extract_video(self, uuid, data):
 
+        file_name = 'uploaded_video.webm'
+        file_name = self.append_timestamp_to_filename(file_name)
+
         upload_folder = self.get_client_data(uuid, self.CDATA_upload_folder)
 
         video_data = data['video']
         video_binary = base64.b64decode(video_data)
-        video_path = os.path.join(upload_folder, 'uploaded_video.webm')
+        video_path = os.path.join(upload_folder, file_name)
         with open(video_path, 'wb') as video_file:
             video_file.write(video_binary)
         return video_path
@@ -193,14 +210,14 @@ class ScholarKM(Flask, BaseClientManager):
                     self.error_manager.show_message(2012, "PICTURE")
                     english_response = self.gemini_access.get_all_headers_of_picture(uuid)
 
-                num_learn_points = len(english_response.splitlines())
-                self.save_client_data(uuid, self.CDATA_num_learn_points, main_content_file)
+                first_response = english_response.splitlines()
+
+                num_learn_points = len(first_response)
+                self.save_client_data(uuid, self.CDATA_num_learn_points, num_learn_points)
 
                 self.error_manager.show_message(2009, learnLevel, num_learn_points)
 
-                self.save_client_data(uuid, self.CDATA_first_response, english_response)
-
-                first_response = english_response.splitlines()
+                self.save_client_data(uuid, self.CDATA_first_response, first_response)
 
                 hindi_response = self.gemini_access.convert_to_hindi(english_response)
 
@@ -211,8 +228,6 @@ class ScholarKM(Flask, BaseClientManager):
             else:
 
                 first_response = self.get_client_data(uuid, self.CDATA_first_response)
-
-                first_response = first_response.splitlines()
 
                 english_response = self.gemini_access.get_header_summary(uuid, first_response[learnLevel])
                 hindi_response = self.gemini_access.convert_to_hindi(english_response)
@@ -232,7 +247,7 @@ class ScholarKM(Flask, BaseClientManager):
             uuid = self.get_or_generate_uuid(data)
 
             main_content_file = self.get_client_data(uuid, self.CDATA_main_content_file)
-            explain_region_file = self.extract_image(data)
+            explain_region_file = self.extract_image(uuid, data)
 
             english_response = self.gemini_access.explain_region(uuid, main_content_file, explain_region_file)
             self.error_manager.show_message(2013)
@@ -247,7 +262,6 @@ class ScholarKM(Flask, BaseClientManager):
 
     def get_or_generate_uuid(self, data, is_generate=False):
         client_uuid = data.get('client_uuid', '')
-        print("UUID : ", client_uuid)
         if not client_uuid:
             if is_generate:
                 client_uuid = self.set_client_id()  # Generate a new client ID
@@ -255,10 +269,10 @@ class ScholarKM(Flask, BaseClientManager):
                 raise ValueError(self.error_manager.show_message(2017))
         return client_uuid
 
-    def save_logs(self):
+    def basic_init(self):
         try:
             data = request.get_json()
-            
+
             client_uuid = self.get_or_generate_uuid(data, True)
             client_id = data.get('clientId', 'unknown')
             self.save_client_data(client_uuid, self.CDATA_client_id, client_id)
@@ -269,6 +283,17 @@ class ScholarKM(Flask, BaseClientManager):
             self.error_manager.update_client_ip(client_ip)
 
             self.establish_folders(client_uuid)
+
+            return jsonify({"client_uuid": client_uuid}), 200
+
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
+
+    def save_logs(self):
+        try:
+            data = request.get_json()
+            
+            client_uuid = self.get_or_generate_uuid(data)
 
             logs = data.get('logs', [])
 
@@ -283,7 +308,7 @@ class ScholarKM(Flask, BaseClientManager):
                     log_file.write(f"{log}\n")
 
 
-            return jsonify({"client_uuid": client_uuid}), 200
+            return jsonify({"status": "logs saved"}), 200
 
         except Exception as e:
             return jsonify({"error": str(e)}), 500

@@ -1,13 +1,15 @@
 class ConceptTracker {
     constructor(containerId, headerExplanation = '', options = { color: 'black', font: 'Arial', bold: false }) {
         this.container = document.getElementById(containerId);
+        this.sendButton = document.getElementById('sendButton');
+        this.detailExplanationContainer = document.getElementById('result1');
         this.renderOptions = options;
         this.levelStrings = [];
         this.originalLevelStrings = []; // Store the original strings
         this.comments = {};
         this.originalColors = {}; // Store original colors for each level
-        this.currentLevel = -1; // ALL_TITLES_LEVEL
         this.ALL_TITLES_LEVEL = -1;
+        this.currentLevel = this.ALL_TITLES_LEVEL;
         this.INIT_LEVEL = 0;
         this.headerExplanation = headerExplanation;
         this.commentStyle = {
@@ -139,6 +141,7 @@ class ConceptTracker {
     setNextLevel() {
         if (this.currentLevel < this.getMaxLevel()) {
             this.currentLevel += 1;
+            this.sendButton.innerText = "Explain Next";
         }
     }
 
@@ -194,12 +197,23 @@ class ConceptTracker {
         this.render();
     }
 
+    setInitLevel() {
+        this.currentLevel = this.ALL_TITLES_LEVEL;
+        this.levelStrings = [...this.originalLevelStrings];
+        this.originalColors = {};
+        this.comments = {};
+        this.render();
+
+        this.sendButton.innerText = "Start Explanation";
+        this.detailExplanationContainer.innerHTML = '';
+    }
+
     // API to reset the class to original state
     reset() {
-        this.levelStrings = [...this.originalLevelStrings];
+        this.setInitLevel();
+        this.levelStrings = [];
         this.comments = {};
         this.originalColors = {};
-        this.currentLevel = this.ALL_TITLES_LEVEL;
         this.render();
     }
 }

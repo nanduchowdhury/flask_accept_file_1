@@ -43,12 +43,19 @@ class PreviewAreaControl extends ContainerScrollBarControl {
         this.mouseControl.activateRegionSelection();
     }
     
+
     onFileInput = (event) => {
-    
-        const file = event.target.files[0];
-        const previewArea = document.getElementById('previewArea');
-    
+        const files = event.target.files;
+        
+        // Case 1: No file was selected (user clicked cancel)
+        if (!files || files.length === 0) {
+            return;
+        }
+
+        // Case 2: File was selected
+        const file = files[0];
         SharedData.DataSource = 'File';
+        cTracker.reset();
 
         if (file) {
             if (file.type === 'application/pdf') {
@@ -60,7 +67,7 @@ class PreviewAreaControl extends ContainerScrollBarControl {
             } else if (file.type.startsWith('video/')) {
                 this.supportVideoFileReading(file);
             } else {
-                errorManager.showError(1039, file.type);
+                errorManager.showError(1039, file.type);  // Unsupported file type error
             }
         }
     }

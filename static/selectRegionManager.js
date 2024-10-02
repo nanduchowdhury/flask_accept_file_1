@@ -93,7 +93,7 @@ class SelectRegionManager {
         this.spinner.show();
 
         const data = {
-            clientId: basicInitializer.getClientId(),
+            client_uuid: basicInitializer.getClient_UUID(),
             image: dataUrl,
             additionalData: {
                 someKey: "someValue"

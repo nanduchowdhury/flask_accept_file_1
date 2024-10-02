@@ -8,6 +8,9 @@ class BasicInitializer {
     constructor() {
         this.clientId = 'client-' + this.getFormattedTimestamp();
         this.client_uuid = '';
+
+        this.initializeVoices();
+        this.sendInitToServer();
     }
 
     getFormattedTimestamp() {
@@ -22,6 +25,65 @@ class BasicInitializer {
         const seconds = String(now.getSeconds()).padStart(2, '0');
     
         return `${day}${month}${year}-${hours}:${minutes}:${seconds}`;
+    }
+
+    /******************************************************************
+    * There is an issue that on some browsers (especially chrome) the 
+    * available voices do not load at the very first time.
+    * Load them here to init all voices.
+    ********************************************************************/
+    initializeVoices() {
+        let voices = window.speechSynthesis.getVoices();
+
+        if (voices.length === 0) {
+            // If the voices are not yet loaded, set up the event listener
+            window.speechSynthesis.onvoiceschanged = () => {
+                voices = window.speechSynthesis.getVoices();
+                // Now you can use the voices array
+                errorManager.log(1012);
+            };
+        } else {
+            // If voices are already loaded, use them immediately
+            errorManager.log(1012);
+        }
+    }
+
+    sendInitToServer() {
+        
+        const data = {
+            client_uuid: this.getClient_UUID(),
+            additionalData: {
+                someKey: "someValue"
+            }
+        };
+
+        fetch('/basic_init', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) {
+                // Handle HTTP errors (like 500)
+                return response.json().then(data => {
+                    throw new Error(data.error); // Access the error message
+                });
+            }
+            return response.json(); // Process successful response
+        })
+        .then(data => {
+            this.setClient_UUID(data.client_uuid);
+            console.log(data.client_uuid);
+            if ( !this.getClient_UUID() ) {
+                console.error("No client-UUID recvd from server.");
+            }
+        })
+        .catch(error => {
+            errorManager.showError(1038, error.message);
+            this.spinner.hide();
+        });
     }
 
     getClientId() {    

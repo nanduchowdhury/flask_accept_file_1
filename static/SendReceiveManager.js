@@ -9,10 +9,6 @@ class SendReceiveManager {
 
         // this.restartButton = document.getElementById('restartButton');
 
-        this.cTracker = new ConceptTracker('result2', 
-                            "Following topics/sections will be explained:", 
-                            { color: 'red', font: 'Courier', bold: true });
-
         this.addEventListeners();
     }
 
@@ -21,13 +17,8 @@ class SendReceiveManager {
         // this.restartButton.addEventListener('click', this.handleRestartButtonClick.bind(this));
     }
 
-    startExplanation() {
-        this.sendButton.innerText = "Explain Next";
-    }
-
     restartExplanation() {
-        this.sendButton.innerText = "Start Explanation";
-        this.cTracker.reset();
+        cTracker.reset();
     }
 
     handleRestartButtonClick() {
@@ -43,7 +34,7 @@ class SendReceiveManager {
     handleSendButtonClick() {
         try {
 
-            if ( this.cTracker.isInitLevel() ) {
+            if ( cTracker.isInitLevel() ) {
                 if ( SharedData.DataSource == 'File' ) {
                     this.sendFile();
                 } else if ( SharedData.DataSource == 'Picture' ) {
@@ -51,7 +42,7 @@ class SendReceiveManager {
                 } else if ( SharedData.DataSource == 'video' ) {
                     this.sendVideo();
                 }
-            } else if ( !this.cTracker.isMaxLevelReached() ) {
+            } else if ( !cTracker.isMaxLevelReached() ) {
                 const data = {
                     client_uuid: basicInitializer.getClient_UUID(),
                     additionalData: {
@@ -138,7 +129,7 @@ class SendReceiveManager {
 
         this.spinner.show();
 
-        data.additionalData.learnLevel = this.cTracker.getCurrentLevel();
+        data.additionalData.learnLevel = cTracker.getCurrentLevel();
 
         errorManager.log(1017, data);
 
@@ -174,31 +165,28 @@ class SendReceiveManager {
             this.resultDiv.textContent = data.error;
         } else {
 
-            if ( this.cTracker.isInitLevel() ) {
+            if ( cTracker.isInitLevel() ) {
 
                 errorManager.log(1019, data);
 
                 if ( data.numPoints ) {
-                    
-                    this.startExplanation();
-
-                    this.cTracker.setLevelStrings(data.firstResponse);
-                    this.cTracker.render();
+                    cTracker.setLevelStrings(data.firstResponse);
+                    cTracker.render();
                 }
             } else {
 
                 errorManager.log(1020, data);
 
-                this.cTracker.changeColor(this.cTracker.getCurrentLevel(), 'green');
+                cTracker.changeColor(cTracker.getCurrentLevel(), 'green');
 
-                this.resultDiv1.append(this.cTracker.getCurrentLevelTitle());
+                this.resultDiv1.append(cTracker.getCurrentLevelTitle());
                 this.resultDiv1.append('\n');
                 const myPostIt = new PostItNote('result1', data.result1, data.result2);
                 myPostIt.setTabTitle(1, 'eng');
                 myPostIt.setTabTitle(2, 'hindi');
                 
             }
-            this.cTracker.setNextLevel();
+            cTracker.setNextLevel();
         }
     }
 }
