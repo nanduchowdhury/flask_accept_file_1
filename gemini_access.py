@@ -107,7 +107,7 @@ class GeminiAccess(BaseClientManager):
         substr_in_result = ["no"]
         genai_upload_file = self.get_client_data(uuid, self.CDATA_genai_upload_file)
 
-        prompt = "is there headers in content? please answer only yes or no."
+        prompt = "are there headers or sections marked in bold in content? please answer only yes or no."
         response = self.model.generate_content([prompt, genai_upload_file],
                                     request_options={"timeout": 600})
 

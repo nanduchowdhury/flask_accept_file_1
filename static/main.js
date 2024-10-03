@@ -21,6 +21,7 @@ const errorManager = new ErrorManager();
 const geoInfo = new GeolocationInfo();
 geoInfo.getFormattedInfo().then(info => errorManager.log(1013, info));
 
+const reportToDeveloper = new ReportToDeveloper();
 
 const sendRecvManager = new SendReceiveManager(
     'fileInput',

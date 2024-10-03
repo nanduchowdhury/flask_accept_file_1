@@ -59,6 +59,9 @@
 1044 : Finished explanation of all sections/topics.
 1045 : Error - %s.
 
+1046 : Error from server processing report-by-user - %s.
+1047 : Reported message successfuly.
+1048 : Error during basic-initialization - %s.
 
 // Server side
 2001 : invalid main-content data/file format received from client. Valid format are PDF, image, video
@@ -73,11 +76,15 @@
 2010 : generated level-%s
 2011 : main-content not related to academics - please specify valid content for learning
 2012 : classified main-content as %s
-2013 : region-content explanation done
+2013 : region-content explanation done for region-file - %s
 2014 : Status of header-presence in main-content - %s
 2015 : Converted client's pptx file to PDF and sent back to client
 2016 : Could not get any ppt file to convert to PDF
 2017 : Client UUID not found
+2018 : Report received and saved as follows - %s
+2019 : Basic-init done for client UUID - %s
+
+
 
 
 

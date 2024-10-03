@@ -176,8 +176,9 @@ class PreviewAreaControl extends ContainerScrollBarControl {
     async renderPDFtoCanvas(pdf, scale = 1) {
         const pdfCanvas = document.getElementById('pdfCanvas');
         const context = pdfCanvas.getContext('2d');
-        let totalHeight = 0;
-        let maxWidth = 0;
+        const canvases = [];  // Store the rendered canvases (images) of each page
+        let totalHeight = 0;   // Track the current total height of the canvas
+        let maxWidth = 0;      // Track the maximum width across all pages
     
         const renderPage = async (pageNumber) => {
             try {
@@ -189,39 +190,50 @@ class PreviewAreaControl extends ContainerScrollBarControl {
                 offScreenCanvas.height = viewport.height;
                 const offScreenContext = offScreenCanvas.getContext('2d');
     
+                // Render the page to the off-screen canvas
                 await page.render({
                     canvasContext: offScreenContext,
                     viewport: viewport
                 }).promise;
     
-                totalHeight += viewport.height;
-                maxWidth = Math.max(maxWidth, viewport.width);
+                // Store the off-screen canvas in the list
+                canvases.push(offScreenCanvas);
     
-                return offScreenCanvas;
+                // Update the max width and total height
+                maxWidth = Math.max(maxWidth, viewport.width);
+                totalHeight += viewport.height;
+    
             } catch (err) {
                 errorManager.showError(1042, err);
             }
         };
     
+        const redrawAllPages = () => {
+            // Set the final size of the pdfCanvas based on all pages' dimensions
+            pdfCanvas.width = maxWidth;
+            pdfCanvas.height = totalHeight;
+    
+            let currentHeight = 0;
+    
+            // Redraw all the stored canvases (pages) on the pdfCanvas
+            canvases.forEach((canvas) => {
+                context.drawImage(canvas, 0, currentHeight);
+                currentHeight += canvas.height;  // Move down for the next page
+            });
+        };
+    
         const renderAllPages = async () => {
             try {
-                const canvases = [];
                 const numPages = pdf.numPages;
-    
                 errorManager.showInfo(1021);
+    
+                // Render each page and redraw all previous pages after each render
                 for (let pageNumber = 1; pageNumber <= numPages; pageNumber++) {
-                    const offScreenCanvas = await renderPage(pageNumber);
-                    canvases.push(offScreenCanvas);
+                    await renderPage(pageNumber);
+    
+                    // After rendering the current page, redraw all the pages
+                    redrawAllPages();
                 }
-    
-                pdfCanvas.width = maxWidth;
-                pdfCanvas.height = totalHeight;
-    
-                let currentHeight = 0;
-                canvases.forEach((canvas) => {
-                    context.drawImage(canvas, 0, currentHeight);
-                    currentHeight += canvas.height;
-                });
             } catch (err) {
                 errorManager.showError(1022, err);
             }
@@ -234,7 +246,7 @@ class PreviewAreaControl extends ContainerScrollBarControl {
         } catch (err) {
             errorManager.showError(1023, err);
         }
-    }
+    }    
     
     async convertPPTtoPDF(pptFileName) {
         const formData = new FormData();
@@ -272,7 +284,7 @@ class PreviewAreaControl extends ContainerScrollBarControl {
             reader.onload = async (e) => {
                 try {
                     const pdf = await pdfjsLib.getDocument({ data: e.target.result }).promise;
-                    await this.renderPDFtoCanvas(pdf);
+                    await this.renderPDFtoCanvas(pdf);  // Each page will be rendered and displayed as it is read
                 } catch (err) {
                     errorManager.showError(1024, err); // Error while loading PDF
                 }
@@ -287,4 +299,5 @@ class PreviewAreaControl extends ContainerScrollBarControl {
             errorManager.showError(1026, err); // General error handling
         }
     }
+    
 }

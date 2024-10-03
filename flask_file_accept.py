@@ -51,6 +51,7 @@ class ScholarKM(Flask, BaseClientManager):
         self.route('/upload', methods=['POST'])(self.upload_file)
         self.route('/save_logs', methods=['POST'])(self.save_logs)
         self.route('/explain_region', methods=['POST'])(self.explain_region)
+        self.route('/report_to_user', methods=['POST'])(self.report_to_user)
         self.route('/convert_ppt_to_pdf', methods=['POST'])(self.convert_ppt_to_pdf)
 
         # Constants
@@ -58,6 +59,7 @@ class ScholarKM(Flask, BaseClientManager):
         self.SERVER_LOGS_FOLDER = '/home/nandu_chowdhury/kupamanduk/scholar/server_logs/'
         self.BASE_UPLOAD_FOLDER = 'uploads/'
         self.BASE_LOG_FOLDER = 'client_logs/'
+        self.BASE_REPORT_TO_USER_FOLDER = 'report_by_user/'
         self.FIRST_TITLE_LEVEL = 0
         self.ALL_TITLES_LEVEL = -1
 
@@ -66,6 +68,7 @@ class ScholarKM(Flask, BaseClientManager):
         self.CDATA_client_ip = 'client_ip'
         self.CDATA_upload_folder = 'upload_folder'
         self.CDATA_log_folder = 'log_folder'
+        self.CDATA_report_to_user_folder = 'report_to_user_folder'
         self.CDATA_log_file = 'log_file'
         self.CDATA_main_content_file = 'main_content_file'
         self.CDATA_num_learn_points = 'num_learn_points'
@@ -107,6 +110,12 @@ class ScholarKM(Flask, BaseClientManager):
 
         if not os.path.exists(log_folder):
             os.makedirs(log_folder, exist_ok=True)
+
+        report_to_user_folder = os.path.join(client_folder, self.BASE_REPORT_TO_USER_FOLDER)
+        self.save_client_data(uuid, self.CDATA_report_to_user_folder, report_to_user_folder)
+
+        if not os.path.exists(report_to_user_folder):
+            os.makedirs(report_to_user_folder, exist_ok=True)
         
         log_file_path = os.path.join(log_folder, f'client_log.txt')
         self.save_client_data(uuid, self.CDATA_log_file, log_file_path)
@@ -122,6 +131,22 @@ class ScholarKM(Flask, BaseClientManager):
 
         with open(file_name, 'wb') as f:
             f.write(file_content)
+        return file_name
+
+    def save_report_to_user_file(self, uuid, data):
+
+        file_name = data['fileName']
+
+        file_name = self.append_timestamp_to_filename(file_name)
+
+        report_to_user_folder = self.get_client_data(uuid, self.CDATA_report_to_user_folder)
+
+        file_name = os.path.join(report_to_user_folder, file_name)
+        file_content = base64.b64decode(data['fileContent'])
+
+        with open(file_name, 'wb') as f:
+            f.write(file_content)
+
         return file_name
 
     def append_timestamp_to_filename(self, filename):
@@ -239,6 +264,19 @@ class ScholarKM(Flask, BaseClientManager):
         except Exception as e:
             return jsonify({"error": str(e)}), 500
 
+    def report_to_user(self):
+        try:
+            data = request.get_json()
+            uuid = self.get_or_generate_uuid(data)
+            
+            saved_report_by_user = self.save_report_to_user_file(uuid, data)
+
+            self.error_manager.show_message(2018, saved_report_by_user)
+
+            return jsonify({"status": "success"}), 200
+
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
 
     def explain_region(self):
         try:
@@ -250,7 +288,7 @@ class ScholarKM(Flask, BaseClientManager):
             explain_region_file = self.extract_image(uuid, data)
 
             english_response = self.gemini_access.explain_region(uuid, main_content_file, explain_region_file)
-            self.error_manager.show_message(2013)
+            self.error_manager.show_message(2013, explain_region_file)
 
             hindi_response = self.gemini_access.convert_to_hindi(english_response)
 
@@ -283,6 +321,8 @@ class ScholarKM(Flask, BaseClientManager):
             self.error_manager.update_client_ip(client_ip)
 
             self.establish_folders(client_uuid)
+
+            self.error_manager.show_message(2019, client_uuid)
 
             return jsonify({"client_uuid": client_uuid}), 200
 

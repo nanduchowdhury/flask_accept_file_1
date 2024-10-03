@@ -52,6 +52,7 @@ class BasicInitializer {
         
         const data = {
             client_uuid: this.getClient_UUID(),
+            clientId: this.getClientId(),
             additionalData: {
                 someKey: "someValue"
             }
@@ -81,8 +82,7 @@ class BasicInitializer {
             }
         })
         .catch(error => {
-            errorManager.showError(1038, error.message);
-            this.spinner.hide();
+            errorManager.showError(1048, error.message);
         });
     }
 
