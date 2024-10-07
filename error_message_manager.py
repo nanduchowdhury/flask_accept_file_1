@@ -3,9 +3,10 @@ import logging
 from datetime import datetime
 
 class ErrorManager:
-    def __init__(self, client_ip, file_path, log_dir='./logs'):
+    def __init__(self, client_ip, client_uuid, file_path, log_dir='./logs'):
         self.error_map = {}
         self.client_ip = client_ip
+        self.client_uuid = client_uuid
         self.log_dir = log_dir
         self.log_file = self.generate_log_file_name()
         self.setup_logger()
@@ -13,6 +14,9 @@ class ErrorManager:
 
     def update_client_ip(self, client_ip):
         self.client_ip = client_ip
+
+    def update_client_uuid(self, client_uuid):
+        self.client_uuid = client_uuid
 
     def generate_log_file_name(self):
         """
@@ -75,7 +79,7 @@ class ErrorManager:
         # Complete message with error code
         msg_for_client = f"{message}"
 
-        full_msg = f"MSG-{code}: client {self.client_ip} - {message}"
+        full_msg = f"MSG-{code}: IP {self.client_ip} UUID {self.client_uuid} - {message}"
 
         # Print the message to the console
         print(full_msg)

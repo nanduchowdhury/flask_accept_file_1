@@ -7,6 +7,7 @@ class SharedData {
     static DataSource;
 }
 
+const errorManager = new ErrorManager();
 const basicInitializer = new BasicInitializer();
 
 const cTracker = new ConceptTracker('result2', 
@@ -16,7 +17,7 @@ const cTracker = new ConceptTracker('result2',
 const previewAreaControl = new PreviewAreaControl('loadingSpinner');
 const cameraSupport = new CameraSupport(previewAreaControl);
 
-const errorManager = new ErrorManager();
+
 
 const geoInfo = new GeolocationInfo();
 geoInfo.getFormattedInfo().then(info => errorManager.log(1013, info));

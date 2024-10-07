@@ -17,13 +17,16 @@ import textwrap
 import base64
 from io import BytesIO
 import io
-from PIL import Image, ImageDraw
 
-from flask import Flask, request, send_file
-from pptx import Presentation
-from pptx.util import Inches  # Import Inches from pptx.util
+from flask import Flask, request, send_file, session, redirect, url_for
+
+import redis
+
 from io import BytesIO
 import pdfkit  # You'll need to install the `pdfkit` and `wkhtmltopdf
+
+from redis import Redis
+from flask_session import Session
 
 import tempfile  # For creating temporary files
 
@@ -45,6 +48,7 @@ class ScholarKM(Flask, BaseClientManager):
         BaseClientManager.__init__(self)  # Initialize client management base class
 
         self.client_ip = 'client_ip'
+        self.client_uuid = 'client_uuid'
 
         self.route('/')(self.index)
         self.route('/basic_init', methods=['POST'])(self.basic_init)
@@ -52,7 +56,6 @@ class ScholarKM(Flask, BaseClientManager):
         self.route('/save_logs', methods=['POST'])(self.save_logs)
         self.route('/explain_region', methods=['POST'])(self.explain_region)
         self.route('/report_to_user', methods=['POST'])(self.report_to_user)
-        self.route('/convert_ppt_to_pdf', methods=['POST'])(self.convert_ppt_to_pdf)
 
         # Constants
         self.BASE_FOLDER = '/home/nandu_chowdhury/kupamanduk/scholar/'
@@ -74,7 +77,7 @@ class ScholarKM(Flask, BaseClientManager):
         self.CDATA_num_learn_points = 'num_learn_points'
         self.CDATA_first_response = 'first_response'
 
-        self.error_manager = ErrorManager(self.client_ip, 'static/errors.txt', 
+        self.error_manager = ErrorManager(self.client_ip, self.client_uuid, 'static/errors.txt', 
                     log_dir=self.SERVER_LOGS_FOLDER)
 
         self.gemini_access = GeminiAccess(self.error_manager)
@@ -221,7 +224,6 @@ class ScholarKM(Flask, BaseClientManager):
             learnLevel = learnLevel['learnLevel']
 
             if learnLevel == self.ALL_TITLES_LEVEL:
-            
                 main_content_file = self.receive_and_save_file(uuid, data)
                 self.save_client_data(uuid, self.CDATA_main_content_file, main_content_file)
                 self.gemini_access.upload_file(uuid, main_content_file)
@@ -312,9 +314,12 @@ class ScholarKM(Flask, BaseClientManager):
             data = request.get_json()
 
             client_uuid = self.get_or_generate_uuid(data, True)
+
             client_id = data.get('clientId', 'unknown')
             self.save_client_data(client_uuid, self.CDATA_client_id, client_id)
             
+            self.error_manager.update_client_uuid(client_uuid)
+
             client_ip = request.remote_addr
             self.save_client_data(client_uuid, self.CDATA_client_ip, client_ip)
 
@@ -353,83 +358,20 @@ class ScholarKM(Flask, BaseClientManager):
         except Exception as e:
             return jsonify({"error": str(e)}), 500
 
-
-
-    def convert_slide_to_image(self, slide):
-        # For simplicity, we'll create a blank image to represent the slide
-        width, height = 1280, 720  # Default slide dimensions in pixels
-
-        # Create a blank white image for the slide
-        slide_image = Image.new('RGB', (width, height), color='white')
-        draw = ImageDraw.Draw(slide_image)
-        
-        # Iterate over the shapes in the slide and draw rectangles and text
-        for shape in slide.shapes:
-            if not shape.has_text_frame:
-                continue
-            
-            # Extract text from the shape
-            text = shape.text
-            
-            # Convert EMUs to pixels (assuming 96 DPI)
-            left = shape.left / Inches(1) * 96  # Convert Inches to pixels
-            top = shape.top / Inches(1) * 96
-            width = shape.width / Inches(1) * 96
-            height = shape.height / Inches(1) * 96
-            
-            # Draw a rectangle around the shape
-            draw.rectangle([left, top, left + width, top + height], outline='black', width=2)
-            
-            # Draw the text inside the rectangle
-            draw.text((left + 10, top + 10), text, fill='black')
-        
-        return slide_image
-
-    def convert_ppt_to_pdf(self):
-        try:
-
-            if 'file' not in request.files:
-                raise ValueError(self.error_manager.show_message(2016))
-
-            file = request.files['file']
-            
-            if file.filename.endswith('.pptx'):
-                ppt = Presentation(file)
-                pdf_output = BytesIO()
-
-                # Create a ReportLab canvas for the PDF
-                c = canvas.Canvas(pdf_output)
-                
-                # Convert each slide to an image and add it to the PDF
-                for slide in ppt.slides:
-                    slide_image = self.convert_slide_to_image(slide)
-                    
-                    # Save the slide image to a temporary file
-                    with tempfile.NamedTemporaryFile(suffix='.png', delete=False) as tmpfile:
-                        slide_image.save(tmpfile, format='PNG')
-                        tmpfile_path = tmpfile.name
-
-                    # Add the image from the temporary file to the PDF
-                    c.drawImage(tmpfile_path, 0, 0, width=600, height=400)  # Adjust size as needed
-
-                    # Finish the page and move to the next slide
-                    c.showPage()
-
-                    # Delete the temporary file
-                    os.remove(tmpfile_path)
-                
-                # Save the final PDF
-                c.save()
-                pdf_output.seek(0)
-                
-                self.error_manager.show_message(2015)
-
-                return send_file(pdf_output, as_attachment=True, download_name='converted.pdf', mimetype='application/pdf')
-
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
         
 app = ScholarKM()
+# app.secret_key = os.urandom(32)
+
+app.config['SESSION_TYPE'] = 'redis'
+app.config['SESSION_PERMANENT'] = False
+app.config['SESSION_USE_SIGNER'] = True  # Prevents tampering of session cookies
+app.config['SESSION_KEY_PREFIX'] = 'kupamanduk-session:'
+app.config['SESSION_REDIS'] = redis.StrictRedis(host='localhost', port=6379)
+
+# app.config['SECRET_KEY'] = os.urandom(32)
+app.config['SECRET_KEY'] = "kupamanduk-10987"
+
+Session(app)
 
 if __name__ == '__main__':
   app.run(debug=True, threaded=True)

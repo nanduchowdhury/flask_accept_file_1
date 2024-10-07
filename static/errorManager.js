@@ -5,8 +5,7 @@ class ErrorManager {
 
         this.logs = [];
         this.lastSentIndex = 0;
-        this.interval = 10000;
-        this.clientId = basicInitializer.getClientId();
+        this.interval = 30000;
         this.serverEndpoint = '/save_logs';
         this.timeoutID = null; // Holds the timeout ID
 
@@ -82,7 +81,7 @@ class ErrorManager {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 client_uuid: basicInitializer.getClient_UUID(),
-                clientId: this.clientId,
+                clientId: basicInitializer.getClientId(),
                 logs: logs
             })
         })

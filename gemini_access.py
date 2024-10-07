@@ -18,8 +18,8 @@ class GeminiAccess(BaseClientManager):
         # Constants
         self.example_bullet_points = "for example: 1. point-1   2. point-2"
 
-        self.CDATA_base_response = 'base_response'
-        self.CDATA_genai_upload_file = 'genai_upload_file'
+        self.CDATA_base_response_text = 'base_response_text'
+        self.CDATA_genai_upload_file_name = 'genai_upload_file_name'
 
     def initialize(self):
 
@@ -30,40 +30,46 @@ class GeminiAccess(BaseClientManager):
         self.model = genai.GenerativeModel(model_name="models/gemini-1.5-flash")
 
     def clear(self, uuid):
-        genai_upload_file = self.get_client_data(uuid, self.CDATA_genai_upload_file)
-        genai.delete_file(genai_upload_file.name)
+        google_file = self.get_google_genai_file(uuid)
+        genai.delete_file(google_file.name)
 
     def upload_file(self, uuid, file_path):
 
         self.error_manager.show_message(2005, file_path)
-        genai_upload_file = genai.upload_file(path=file_path)
+        google_file = genai.upload_file(path=file_path)
 
-        while genai_upload_file.state.name == "PROCESSING":
+        while google_file.state.name == "PROCESSING":
             self.error_manager.show_message(2006)
             time.sleep(10)
-            genai_upload_file = genai.get_file(genai_upload_file.name)
+            google_file = genai.get_file(google_file.name)
 
-        if genai_upload_file.state.name == "FAILED":
-            raise ValueError(self.error_manager.show_message(2007, genai_upload_file.state.name))
+        if google_file.state.name == "FAILED":
+            raise ValueError(self.error_manager.show_message(2007, google_file.state.name))
 
-        self.save_client_data(uuid, self.CDATA_genai_upload_file, genai_upload_file)
+        self.save_client_data(uuid, self.CDATA_genai_upload_file_name, google_file.name)
 
         self.generate_base_response(uuid)            
-        self.error_manager.show_message(2008, genai_upload_file.uri)
+        self.error_manager.show_message(2008, google_file.uri)
 
 
     def contains_any_substring(self, main_string, substrings):
         main_string_lower = main_string.lower()  # Convert the main string to lowercase
         return any(substring.lower() in main_string_lower for substring in substrings)  # Convert substrings to lowercase
 
+    def get_google_genai_file(self, uuid):
+        genai_upload_file_name = self.get_client_data(uuid, self.CDATA_genai_upload_file_name)
+        google_file = genai.get_file(genai_upload_file_name)
+
+        return google_file
+
     def check_content_student_related(self, uuid):
 
         substr_in_result = ["no"]
 
-        genai_upload_file = self.get_client_data(uuid, self.CDATA_genai_upload_file)
+        google_file = self.get_google_genai_file(uuid)
 
         prompt = "is the content related to academics which is taught in school or college? please answer yes or no."
-        response = self.model.generate_content([prompt, genai_upload_file],
+        response = self.model.generate_content([prompt, google_file],
                                     request_options={"timeout": 600})
 
         if ( self.contains_any_substring(response.text, substr_in_result) ):
@@ -71,10 +77,11 @@ class GeminiAccess(BaseClientManager):
 
     def is_there_text_in_content(self, uuid):
         substr_in_result = ["no"]
-        genai_upload_file = self.get_client_data(uuid, self.CDATA_genai_upload_file)
+
+        google_file = self.get_google_genai_file(uuid)
 
         prompt = "is there text in content? please answer yes or no."
-        response = self.model.generate_content([prompt, genai_upload_file],
+        response = self.model.generate_content([prompt, google_file],
                                     request_options={"timeout": 600})
 
         if ( self.contains_any_substring(response.text, substr_in_result) ):
@@ -86,9 +93,9 @@ class GeminiAccess(BaseClientManager):
         prompt = "generate summary of the picture \
              as following example : " + self.example_bullet_points
                             
-        genai_upload_file = self.get_client_data(uuid, self.CDATA_genai_upload_file)
+        google_file = self.get_google_genai_file(uuid)
 
-        response = self.model.generate_content([prompt, genai_upload_file],
+        response = self.model.generate_content([prompt, google_file],
                                     request_options={"timeout": 600})
 
         return response.text
@@ -97,18 +104,19 @@ class GeminiAccess(BaseClientManager):
 
         prompt = "summarize about following header in the content : \"" + point + "\""
 
-        genai_upload_file = self.get_client_data(uuid, self.CDATA_genai_upload_file)
+        google_file = self.get_google_genai_file(uuid)
 
-        response = self.model.generate_content([prompt, genai_upload_file],
+        response = self.model.generate_content([prompt, google_file],
                                  request_options={"timeout": 600})
         return response.text
 
     def is_there_headers_in_content(self, uuid):
         substr_in_result = ["no"]
-        genai_upload_file = self.get_client_data(uuid, self.CDATA_genai_upload_file)
+
+        google_file = self.get_google_genai_file(uuid)
 
         prompt = "are there headers or sections marked in bold in content? please answer only yes or no."
-        response = self.model.generate_content([prompt, genai_upload_file],
+        response = self.model.generate_content([prompt, google_file],
                                     request_options={"timeout": 600})
 
         if ( self.contains_any_substring(response.text, substr_in_result) ):
@@ -126,9 +134,9 @@ class GeminiAccess(BaseClientManager):
             self.error_manager.show_message(2014, "NO")
             prompt = "list summary points of entire content as following example : " + self.example_bullet_points
         
-        genai_upload_file = self.get_client_data(uuid, self.CDATA_genai_upload_file)
+        google_file = self.get_google_genai_file(uuid)
 
-        response = self.model.generate_content([prompt, genai_upload_file],
+        response = self.model.generate_content([prompt, google_file],
                                     request_options={"timeout": 600})
         return response.text
 
@@ -140,21 +148,21 @@ class GeminiAccess(BaseClientManager):
 
     def generate_base_response(self, uuid):
 
-        genai_upload_file = self.get_client_data(uuid, self.CDATA_genai_upload_file)
+        google_file = self.get_google_genai_file(uuid)
 
         prompt = "generate detail explanation"
-        base_response = self.model.generate_content([prompt, genai_upload_file],
+        base_response = self.model.generate_content([prompt, google_file],
                                     request_options={"timeout": 600})
 
-        self.save_client_data(uuid, self.CDATA_base_response, base_response)
+        self.save_client_data(uuid, self.CDATA_base_response_text, base_response.text)
 
     def explain_region(self, uuid, main_content_file, explain_region_file):
 
-        base_response = self.get_client_data(uuid, self.CDATA_base_response)
+        base_response = self.get_client_data(uuid, self.CDATA_base_response_text)
 
         image = Image.open(explain_region_file)
         prompt = "explain the image specified in context to the detailed \
-                        explanation of the document as follows : " + base_response.text + "."
+                        explanation of the document as follows : " + base_response + "."
         prompt = prompt + " also answer if any question present. also help if there is any activity to be done."
         response = self.model.generate_content([prompt, image])
 
