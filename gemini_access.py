@@ -8,18 +8,15 @@ import google.generativeai as genai
 
 from base_client_manager import BaseClientManager
 
-class GeminiAccess(BaseClientManager):
-    def __init__(self, eManager):
+class GeminiAccess():
+    def __init__(self, sess, eManager):
 
-        BaseClientManager.__init__(self)  # Initialize client management base class
-
+        self.sess = sess
         self.error_manager = eManager
 
         # Constants
         self.example_bullet_points = "for example: 1. point-1   2. point-2"
 
-        self.CDATA_base_response_text = 'base_response_text'
-        self.CDATA_genai_upload_file_name = 'genai_upload_file_name'
 
     def initialize(self):
 
@@ -46,7 +43,7 @@ class GeminiAccess(BaseClientManager):
         if google_file.state.name == "FAILED":
             raise ValueError(self.error_manager.show_message(2007, google_file.state.name))
 
-        self.save_client_data(uuid, self.CDATA_genai_upload_file_name, google_file.name)
+        self.sess.save_client_data(uuid, 'upload_file.genai_upload_file_name', google_file.name)
 
         self.generate_base_response(uuid)            
         self.error_manager.show_message(2008, google_file.uri)
@@ -57,7 +54,7 @@ class GeminiAccess(BaseClientManager):
         return any(substring.lower() in main_string_lower for substring in substrings)  # Convert substrings to lowercase
 
     def get_google_genai_file(self, uuid):
-        genai_upload_file_name = self.get_client_data(uuid, self.CDATA_genai_upload_file_name)
+        genai_upload_file_name = self.sess.get_client_data(uuid, 'upload_file.genai_upload_file_name')
         google_file = genai.get_file(genai_upload_file_name)
 
         return google_file
@@ -154,11 +151,11 @@ class GeminiAccess(BaseClientManager):
         base_response = self.model.generate_content([prompt, google_file],
                                     request_options={"timeout": 600})
 
-        self.save_client_data(uuid, self.CDATA_base_response_text, base_response.text)
+        self.sess.save_client_data(uuid, 'upload_file.base_response_text', base_response.text)
 
-    def explain_region(self, uuid, main_content_file, explain_region_file):
+    def explain_region(self, uuid, explain_region_file):
 
-        base_response = self.get_client_data(uuid, self.CDATA_base_response_text)
+        base_response = self.sess.get_client_data(uuid, 'upload_file.base_response_text')
 
         image = Image.open(explain_region_file)
         prompt = "explain the image specified in context to the detailed \

@@ -1,140 +1,159 @@
+import json
 import threading
 import uuid
-
 from flask import session, jsonify, current_app, request
-
 import redis
 from redis.exceptions import LockError
 
 redis_client = redis.StrictRedis(host='localhost', port=6379)
-
-lock = redis_client.lock('session_lock', timeout=10) 
+lock = redis_client.lock('session_lock', timeout=10)
 
 class BaseClientManager:
     def __init__(self):
-        # self.data_lock = threading.Lock()  # Lock for thread-safe operations
-        self.dummy = 0
-        
 
-    def dump_session(self):
-        print("+++++++++++", session)
+        self.data = {}
 
-    def force_read_session(self):
-        """Forces a re-read of the session from Redis."""
-        # Get the session interface
+    def dump_session(self, uuid):
+        if not self._acquire_lock():
+            return None
+
+        try:
+            self._force_read_session()
+            print(json.dumps(self.data[uuid], indent=4))
+
+        finally:
+            self._release_lock()
+
+    def _force_read_session(self):
         session_interface = current_app.session_interface
-        
-        # Use the existing request context
+
         if not request:
             raise RuntimeError("Request context is required to read the session.")
-        
-        # Open the session (this will re-load from Redis)
+
         session_obj = session_interface.open_session(current_app, request)
-        
-        # Update the session with the newly read session object
         session.update(session_obj or {})
 
-    def save_session(self):
-        
-        session.modified = True  # Mark the session as modified
+        self.data = session.get('data', {})
 
-        # Force saving the session manually using Flask's session_interface
+    def _force_save_session(self):
+
+        session['data'] = self.data
+        session.modified = True
         response = current_app.response_class()  # Dummy response object
         current_app.session_interface.save_session(current_app, session, response)
-        print("Session saved forcefully.")
+
+    def _acquire_lock(self):
+        try:
+            if lock.acquire(blocking=True):
+                return True
+        except Exception as e:
+            raise ValueError(f"Could not acquire lock - '{str(e)}'")
+        return False
+
+    def _release_lock(self):
+        try:
+            lock.release()
+        except Exception as e:
+            raise ValueError(f"Could not release lock - '{str(e)}'")
+
+    def _set_uuid(self, cuuid):
+        if cuuid not in self.data:
+            self.data[cuuid] = {}
+
+    def _clear_uuid(self, uuid):
+        if uuid in self.data:
+            del self.data[uuid]
+
+    def clear_client_id(self, cuuid):
+        if not self._acquire_lock():
+            return None
+
+        try:
+            self._force_read_session()
+            self._clear_uuid(cuuid)
+            self._force_save_session()
+
+        finally:
+            self._release_lock()
+
+    def set_client_id(self, cuuid=None):
+        if not self._acquire_lock():
+            return None
+
+        try:
+            if cuuid is None:
+                cuuid = str(uuid.uuid4())  # Generate a new UUID if none is provided
+
+            print("UUID is : ", cuuid)
+
+            self._set_uuid(cuuid)
+            return cuuid
+
+        finally:
+            self._release_lock()
+
+    def _clear_key(self, uuid, key):
+        if uuid in self.data:
+            if key in self.data[uuid]:
+                # Remove the 'key' and all its data
+                del self.data[uuid][key]
+
+    def _set_key(self, cuuid, key, value):
+        if cuuid not in self.data:
+            self.data[cuuid] = {}
+
+        keys = key.split('.')
+        current_data = self.data[cuuid]
+        for k in keys[:-1]:
+            current_data = current_data.setdefault(k, {})  # Traverse or create nested dicts
+        current_data[keys[-1]] = value
+
+    def _get_key(self, cuuid, key):
+        if cuuid not in self.data:
+            raise ValueError(f"UUID '{cuuid}' not found.")
         
-
-    def set_client_id(self, client_uuid=None):
+        keys = key.split('.')
+        current_data = self.data[cuuid]
+        
         try:
-            if lock.acquire(blocking=True):
-                """Sets or generates a UUID for the client. Returns the UUID."""
-                if client_uuid is None:
-                    client_uuid = str(uuid.uuid4())  # Generate a new UUID if none is provided
+            for k in keys:
+                current_data = current_data[k]
+            return current_data
+        except Exception as e:
+            raise ValueError(f"key '{key}' not found - '{str(e)}'")
 
-                # Store the client UUID in the session
-                # session['client_uuid'] = client_uuid
-                # session['client_data'] = {}
+    def clear_client_data(self, cuuid, key):
+        if not self._acquire_lock():
+            return
 
-                session.setdefault('client_data', {})
-
-                c_data = session['client_data']
-                c_data.setdefault(client_uuid, {})
-
-                # c_data[client_uuid] = {}
-
-                return client_uuid
-
-        except LockError:
-            print("Could not acquire lock.")
-        finally:
-            lock.release()
-
-    def save_client_data(self, client_uuid, key, value):
         try:
-            if lock.acquire(blocking=True):
+            self._force_read_session()
+            self._clear_key(cuuid, key)
+            self._force_save_session()
 
-                self.force_read_session();
-
-                print(f"*****save_client_data start... {client_uuid}, {key}")
-                
-                # Check if client_uuid is provided
-                if not client_uuid:
-                    raise ValueError("Client UUID is not set. Provide a valid client ID.")
-
-                # Initialize 'client_data' if not present
-                if 'client_data' not in session:
-                    session['client_data'] = {}
-
-                # Get or initialize the client's data
-                c_data = session['client_data']
-                client_data = c_data.setdefault(client_uuid, {})
-
-                # Set the value for the specified key
-                client_data[key] = value
-
-                # Save the updated client data back to the session
-                session['client_data'][client_uuid] = client_data
-                
-                self.save_session()
-
-                print(f"*****save_client_data done... {client_uuid}, {id(c_data)}")
-
-        except LockError:
-            print("Could not acquire lock.")
         finally:
-            lock.release()
+            self._release_lock()
 
-    def get_client_data(self, client_uuid, key):
+    def save_client_data(self, cuuid, key, value):
+        if not self._acquire_lock():
+            return
+
         try:
-            if lock.acquire(blocking=True):
+            self._force_read_session()
+            self._set_key(cuuid, key, value)
+            self._force_save_session()
 
-                self.force_read_session();
-
-                print(f"*****get_client_data start... {client_uuid}, {key}")
-                
-                # Check if client_uuid is provided
-                if not client_uuid:
-                    raise ValueError("Client UUID is not set. Provide a valid client ID.")
-
-                # Ensure the session has client_data
-                if 'client_data' not in session:
-                    raise ValueError(f"Session data not found for UUID {client_uuid}")
-
-                # Get the client's data
-                c_data = session['client_data']
-                if client_uuid not in c_data:
-                    raise ValueError(f"No client_data found for UUID {client_uuid}")
-
-                # Get the key data
-                client_data = c_data[client_uuid]
-                if key not in client_data:
-                    raise ValueError(f"Key '{key}' not found for UUID {client_uuid}")
-
-                print(f"*****get_client_data done... {client_uuid}, {id(c_data)}")
-                return client_data[key]
-
-        except LockError:
-            print("Could not acquire lock.")
         finally:
-            lock.release()
-            
+            self._release_lock()
+
+    def get_client_data(self, cuuid, key):
+
+        if not self._acquire_lock():
+            return None
+
+        try:
+            self._force_read_session()
+            return self._get_key(cuuid, key)
+
+        finally:
+            self._release_lock()
