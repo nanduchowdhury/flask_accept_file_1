@@ -54,7 +54,14 @@ class CommonBaseClass:
         
         # Initialize the Chrome driver
         driver = webdriver.Chrome(service=service, options=options)
-        driver.get("http://127.0.0.1:5000")
+
+        # This is for the case where server is running as - python ...
+        # driver.get("http://127.0.0.1:5000")
+
+        # This is for the case where server is running as - gunicorn ...
+        driver.get("http://127.0.0.1:8000")
+
+
         print(f'Chrome driver title is : ' + driver.title)
         return driver, service, options
 

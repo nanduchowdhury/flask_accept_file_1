@@ -64,7 +64,7 @@ class BaseClientManager:
         if uuid in self.data:
             del self.data[uuid]
 
-    def clear_client_id(self, cuuid):
+    def clear_client_uuid(self, cuuid):
         if not self._acquire_lock():
             return None
 
@@ -76,7 +76,7 @@ class BaseClientManager:
         finally:
             self._release_lock()
 
-    def set_client_id(self, cuuid=None):
+    def set_client_uuid(self, cuuid=None):
         if not self._acquire_lock():
             return None
 

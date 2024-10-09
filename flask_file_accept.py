@@ -86,9 +86,8 @@ class ScholarKM(Flask):
     def establish_folders(self, uuid):
 
         client_ip = self.sess.get_client_data(uuid, 'basic_init.client_ip')
-        client_id = self.sess.get_client_data(uuid, 'basic_init.client_id')
         
-        client_folder = os.path.join(self.BASE_FOLDER, f'{client_ip}_{client_id}/')
+        client_folder = os.path.join(self.BASE_FOLDER, f'{client_ip}_{uuid}/')
 
         if not os.path.exists(client_folder):
             os.makedirs(client_folder, exist_ok=True)
@@ -302,7 +301,7 @@ class ScholarKM(Flask):
         client_uuid = data.get('client_uuid', '')
         if not client_uuid:
             if is_generate:
-                client_uuid = self.sess.set_client_id()  # Generate a new client ID
+                client_uuid = self.sess.set_client_uuid()  # Generate a new client ID
             else:
                 raise ValueError(self.error_manager.show_message(2017))
         return client_uuid
@@ -318,6 +317,8 @@ class ScholarKM(Flask):
         try:
             data = request.get_json()
             client_uuid = self.get_or_generate_uuid(data, True)
+
+            self.sess.save_client_data(client_uuid, 'basic_init.client_uuid', client_uuid)
 
             client_id = data.get('clientId', 'unknown')
             self.sess.save_client_data(client_uuid, 'basic_init.client_id', client_id)

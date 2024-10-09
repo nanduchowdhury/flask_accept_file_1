@@ -4,7 +4,7 @@ import os
 sys.path.append(os.path.abspath("../common/"))
 from common import *
 
-class Test2Class(CommonBaseClass):
+class TestStartExplanation(CommonBaseClass):
     def run_test(self):
         # Start capturing output
         captured_output = io.StringIO()
@@ -45,5 +45,5 @@ class Test2Class(CommonBaseClass):
 
 # To execute
 if __name__ == '__main__':
-    test = Test2Class()
+    test = TestStartExplanation()
     test.run_test()
