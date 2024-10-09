@@ -27,7 +27,7 @@ try:
 
     # Reset stdout to its original value
     sys.stdout = sys.__stdout__
-    show_final_decision(captured_output, GOLDEN_FILE_PATH)
+    show_final_decision_wrt_diff(captured_output, GOLDEN_FILE_PATH)
 
 finally:
     # Close the browser

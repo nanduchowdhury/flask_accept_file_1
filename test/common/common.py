@@ -33,6 +33,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 import logging
 
+import time
 
 def initialize_chrome_driver():
 
@@ -80,7 +81,18 @@ def show_diff(current_output, golden_file_content):
     )
     return '\n'.join(diff)
 
-def show_final_decision(captured_output, golden_file):
+def check_and_ok_message_box(driver):
+    
+    try:
+        time.sleep(2)
+        message_box_ok_button = driver.find_element(By.ID, "messageBoxOkButton")
+        message_box_ok_button.click()
+        time.sleep(2)  # Wait for the modal to close
+    except:
+        print("No message-box found.")
+
+
+def show_final_decision_wrt_diff(captured_output, golden_file):
 
     current_output = captured_output.getvalue()
 
@@ -97,3 +109,15 @@ def show_final_decision(captured_output, golden_file):
         diff_output = show_diff(current_output, golden_file_content)
         print("Difference between current output and golden file:")
         print(diff_output)
+
+def show_final_decision_wrt_num_lines(output, num_lines):
+
+    lines = output.splitlines()
+
+    n = len(lines)
+    if n > num_lines:
+        print(f"PASS: The test output has atleast {num_lines} lines.")
+    else:
+        print(f"FAIL: The test output does NOT have {num_lines} lines : {n}")
+        print(output)
+

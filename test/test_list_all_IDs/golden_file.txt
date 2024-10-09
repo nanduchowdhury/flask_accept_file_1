@@ -15,16 +15,20 @@ ID is : loadingSpinner
 ID is : fileInput
 ID is : takePicture
 ID is : sendButton
-ID is : explainAgainButton
 ID is : resultsContainer
 ID is : result2
 ID is : result1
+ID is : genericPopoutId
 ID is : cameraPopup
 ID is : cameraFeed
+ID is : cameraCanvas
 ID is : captureButton
 ID is : startRecording
 ID is : stopRecording
-ID is : cameraCanvas
 ID is : closePopup
+ID is : messageBox
+ID is : messageBoxText
+ID is : messageBoxOkButton
 ID is : action-1
+ID is : action-2
 *****************************
