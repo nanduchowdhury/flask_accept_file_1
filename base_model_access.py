@@ -16,6 +16,93 @@ class BaseModelAccess():
                 main_string_lower = main_string.lower()  # Convert the main string to lowercase
                 return any(substring.lower() in main_string_lower for substring in substrings)  # Convert substrings to lowercase
 
+    def check_content_student_related(self, uuid):
+
+        substr_in_result = ["no"]
+
+        prompt = self.base_prompt.get_prompt_to_check_academics();
+        response = self.query_google_file(uuid, prompt)
+
+        if ( self.contains_any_substring(response, substr_in_result) ):
+            raise ValueError(self.error_manager.show_message(2011))
+
+    def is_there_text_in_content(self, uuid):
+        substr_in_result = ["no"]
+
+        prompt = self.base_prompt.get_prompt_to_check_text_content();
+        response = self.query_google_file(uuid, prompt)
+
+        if ( self.contains_any_substring(response, substr_in_result) ):
+            return False
+        
+        return True
+
+    def get_all_headers_of_picture(self, uuid):
+        
+        prompt = self.base_prompt.get_prompt_get_all_headers_of_picture()
+        response = self.query_google_file(uuid, prompt)
+
+        return response
+
+    def get_header_summary(self, uuid, point):
+
+        prompt = self.base_prompt.get_prompt_header_summary(point)
+        response = self.query_google_file(uuid, prompt)
+
+        return response
+
+    def is_there_headers_in_content(self, uuid):
+        substr_in_result = ["no"]
+        
+        prompt = self.base_prompt.get_prompt_is_there_header_in_content()
+        response = self.query_google_file(uuid, prompt)
+        
+        if ( self.contains_any_substring(response, substr_in_result) ):
+            return False
+        
+        return True
+
+    def get_all_headers_of_text(self, uuid):
+
+        prompt = ''
+        if ( self.is_there_headers_in_content(uuid) ):
+            self.error_manager.show_message(2014, "YES")
+            prompt = self.base_prompt.get_prompt_get_all_headers_of_text()
+        else:
+            self.error_manager.show_message(2014, "NO")
+            prompt = self.base_prompt.get_prompt_get_all_headers_of_text(False)
+        
+        response = self.query_google_file(uuid, prompt)
+
+        return response
+
+    def convert_to_hindi(self, text):
+        
+        prompt = self.base_prompt.get_prompt_convert_to_hindi(text)
+        response = self.query_only_prompt(prompt)
+
+        return response
+
+    def generate_base_response(self, uuid):
+
+        google_file = self.get_google_genai_file(uuid)
+
+        prompt = self.base_prompt.get_prompt_detail_response()
+        response = self.query_google_file(uuid, prompt)
+
+        self.sess.save_client_data(uuid, 'upload_file.base_response_text', response)
+
+    def explain_region(self, uuid, explain_region_file):
+
+        base_response = self.sess.get_client_data(uuid, 'upload_file.base_response_text')
+
+        image = Image.open(explain_region_file)
+        prompt = self.base_prompt.get_prompt_explain_image_wrt_content(base_response)
+        response = self.query_image(prompt, image)
+
+        return response
+
+
 class BasePrompt():
     def __init__(self):
 

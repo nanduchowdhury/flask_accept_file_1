@@ -13,6 +13,7 @@
 # For example to install chrome:
 #           wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 #           sudo apt install ./google-chrome-stable_current_amd64.deb
+#           [ After every few days, we may need to do following : sudo apt update ]
 #
 # See below the path of chromedriver and google-chrome used.
 #

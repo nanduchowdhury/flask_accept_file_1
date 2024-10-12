@@ -83,6 +83,14 @@
 2017 : Client UUID not found
 2018 : Report received and saved as follows - %s
 2019 : Basic-init done for client UUID - %s
+2020 : Error initializing AI model key - %s
+2021 : Error clearing AI model files - %s
+2022 : Error uploading file to AI model -%s
+2023 : Error accessing file from AI model - %s
+2024 : Error accessing AI model - %s
+2025 : Error querying AI model - %s
+2026 : Error querying image from AI model - %s
+
 
 
 
