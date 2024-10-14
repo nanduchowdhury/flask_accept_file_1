@@ -46,6 +46,9 @@ class CameraSupport {
     // Capture image from video and handle any errors
     onCaptureButton = () => {
         try {
+
+            basicInitializer.clearBeforeStartNewExplanation();
+
             const video = document.getElementById('cameraFeed');
             const pdfCanvas = document.getElementById('pdfCanvas');
             const ctx = pdfCanvas.getContext('2d');
@@ -82,6 +85,9 @@ class CameraSupport {
     // Start recording video with error handling
     onStartRecording = () => {
         try {
+
+            basicInitializer.clearBeforeStartNewExplanation();
+
             this.recordedChunks = [];
             if (!this.videoStream) {
                 throw new Error('Video stream is not available');

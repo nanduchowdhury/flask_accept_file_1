@@ -2,10 +2,9 @@ class PreviewAreaControl extends ContainerScrollBarControl {
     constructor(spinnerId) {
 
         super('previewArea');
-
         this.mouseControl = new MouseControl('previewArea');
-
         this.spinner = new Spinner(spinnerId);
+        this.currentSelectedFile = '';
 
         document.getElementById('fileInput').addEventListener('change', this.onFileInput);
     }
@@ -42,7 +41,6 @@ class PreviewAreaControl extends ContainerScrollBarControl {
     
         this.mouseControl.activateRegionSelection();
     }
-    
 
     onFileInput = (event) => {
         const files = event.target.files;
@@ -55,7 +53,8 @@ class PreviewAreaControl extends ContainerScrollBarControl {
         // Case 2: File was selected
         const file = files[0];
         SharedData.DataSource = 'File';
-        cTracker.reset();
+
+        basicInitializer.clearBeforeStartNewExplanation();
 
         if (file) {
             if (file.type === 'application/pdf') {
@@ -63,12 +62,13 @@ class PreviewAreaControl extends ContainerScrollBarControl {
             } else if (file.type.startsWith('image/')) {
                 this.supportImageFileReading(file);
             } else if (file.type === 'application/vnd.openxmlformats-officedocument.presentationml.presentation') {
-                this.supportPptFileReading(file);
+                errorManager.showInfo(1049);
             } else if (file.type.startsWith('video/')) {
                 this.supportVideoFileReading(file);
             } else {
                 errorManager.showError(1039, file.type);  // Unsupported file type error
             }
+            this.currentSelectedFile = file;
         }
     }
 
@@ -102,16 +102,10 @@ class PreviewAreaControl extends ContainerScrollBarControl {
         }
     }
 
-    supportPptFileReading(file) {
-        this.convertPPTtoPDF(file);
-    }
-
     supportImageFileReading(file) {
         try {
             // Show spinner before starting the file read
             this.spinner.show();
-    
-            this.clearPdfCanvasContext();
 
             const reader = new FileReader();
     
@@ -162,15 +156,6 @@ class PreviewAreaControl extends ContainerScrollBarControl {
             errorManager.showError(1030, file, err);
             this.spinner.hide(); // Ensure spinner is hidden if an error occurs in the main block
         }
-    }
-    
-    clearPdfCanvasContext() {
-        const pdfCanvas = document.getElementById('pdfCanvas');
-        const context = pdfCanvas.getContext('2d');
-
-        pdfCanvas.width = 0;
-        pdfCanvas.height = 0;
-        context.clearRect(0, 0, pdfCanvas.width, pdfCanvas.height);
     }
 
     async renderPDFtoCanvas(pdf, scale = 1) {
@@ -246,40 +231,11 @@ class PreviewAreaControl extends ContainerScrollBarControl {
         } catch (err) {
             errorManager.showError(1023, err);
         }
-    }    
-    
-    async convertPPTtoPDF(pptFileName) {
-        const formData = new FormData();
-        formData.append('file', pptFileName);
-    
-        let pdfBlob = null;
-    
-        try {
-            const response = await fetch('/convert_ppt_to_pdf', {
-                method: 'POST',
-                body: formData
-            });
-    
-            if (!response.ok) {
-                errorManager.showError(1040);
-            }
-    
-            pdfBlob = await response.blob();
-    
-            const pdfUrl = URL.createObjectURL(pdfBlob);
-            const pdf = await pdfjsLib.getDocument(pdfUrl).promise;
-    
-            await this.renderPDFtoCanvas(pdf);
-        } catch (error) {
-            errorManager.showError(1041, error);
-        }
-        return pdfBlob;
     }
     
     async supportPdfReading(file) {
         try {
             const reader = new FileReader();
-            this.clearPdfCanvasContext();
     
             reader.onload = async (e) => {
                 try {

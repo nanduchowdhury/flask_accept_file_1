@@ -51,7 +51,7 @@
 
 // Region processing
 1038 : Error from server procssing region-content - %s.
-1039 : Error unsupported file-type selected - %s.
+1039 : Error unsupported file-type selected - %s. Convert externally into PDF.
 1040 : Error convert ppt to PDF.
 1041 : Error during ppt to PDF conversion.
 1042 : Error rendering PDF to canvas - %s.
@@ -62,6 +62,10 @@
 1046 : Error from server processing report-by-user - %s.
 1047 : Reported message successfuly.
 1048 : Error during basic-initialization - %s.
+1049 : Convert Microsoft ppts docx files externally into PDF and upload here.
+1050 : Select PDF JPG PNG file to start.
+
+
 
 // Server side
 2001 : invalid main-content data/file format received from client. Valid format are PDF, image, video
@@ -81,7 +85,7 @@
 2015 : Converted client's pptx file to PDF and sent back to client
 2016 : Could not get any ppt file to convert to PDF
 2017 : Client UUID not found
-2018 : Report received and saved as follows - %s
+2018 : User provided report received and saved as follows - %s
 2019 : Basic-init done for client UUID - %s
 2020 : Error initializing AI model key - %s
 2021 : Error clearing AI model files - %s

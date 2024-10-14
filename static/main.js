@@ -7,12 +7,12 @@ class SharedData {
     static DataSource;
 }
 
+const cTracker = new ConceptTracker('result2', 
+            "Following are the main topics/sections:", 
+            { color: 'red', font: 'Courier', bold: true });
+
 const errorManager = new ErrorManager();
 const basicInitializer = new BasicInitializer();
-
-const cTracker = new ConceptTracker('result2', 
-            "Following topics/sections will be explained:", 
-            { color: 'red', font: 'Courier', bold: true });
 
 const previewAreaControl = new PreviewAreaControl('loadingSpinner');
 const cameraSupport = new CameraSupport(previewAreaControl);

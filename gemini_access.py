@@ -24,7 +24,7 @@ class GeminiAccess(BaseModelAccess):
             self.model = genai.GenerativeModel(model_name="models/gemini-1.5-flash")
 
         except Exception as e:
-            raise ValueError(eManager.show_message(2020, e))
+            raise ValueError(self.eManager.show_message(2020, e))
 
     def clear(self, uuid):
         try:
@@ -32,7 +32,7 @@ class GeminiAccess(BaseModelAccess):
             genai.delete_file(google_file.name)
 
         except Exception as e:
-            raise ValueError(eManager.show_message(2021, e))
+            raise ValueError(self.eManager.show_message(2021, e))
 
     def upload_file(self, uuid, file_path):
         try:
@@ -53,7 +53,7 @@ class GeminiAccess(BaseModelAccess):
             self.eManager.show_message(2008, google_file.uri)
 
         except Exception as e:
-            raise ValueError(eManager.show_message(2022, e))
+            raise ValueError(self.eManager.show_message(2022, e))
 
     def get_google_genai_file(self, uuid):
         try:
@@ -63,7 +63,7 @@ class GeminiAccess(BaseModelAccess):
             return google_file
 
         except Exception as e:
-            raise ValueError(eManager.show_message(2023, e))
+            raise ValueError(self.eManager.show_message(2023, e))
 
     def query_google_file(self, uuid, prompt):
         try:
@@ -73,7 +73,7 @@ class GeminiAccess(BaseModelAccess):
             return response.text
 
         except Exception as e:
-            raise ValueError(eManager.show_message(2024, e))
+            raise ValueError(self.eManager.show_message(2024, e))
 
     def query_only_prompt(self, prompt):
         try:
@@ -82,7 +82,7 @@ class GeminiAccess(BaseModelAccess):
             return response.text
 
         except Exception as e:
-            raise ValueError(eManager.show_message(2025, e))
+            raise ValueError(self.eManager.show_message(2025, e))
 
     def query_image(self, prompt, image):
         try:
@@ -90,7 +90,7 @@ class GeminiAccess(BaseModelAccess):
             return response.text
 
         except Exception as e:
-            raise ValueError(eManager.show_message(2026, e))
+            raise ValueError(self.eManager.show_message(2026, e))
 
     
 

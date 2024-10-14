@@ -8,7 +8,7 @@ class BaseModelAccess():
     def __init__(self, sess, eManager):
 
         self.sess = sess
-        self.error_manager = eManager
+        self.eManager = eManager
 
         self.base_prompt = BasePrompt()
 
@@ -24,7 +24,7 @@ class BaseModelAccess():
         response = self.query_google_file(uuid, prompt)
 
         if ( self.contains_any_substring(response, substr_in_result) ):
-            raise ValueError(self.error_manager.show_message(2011))
+            raise ValueError(self.eManager.show_message(2011))
 
     def is_there_text_in_content(self, uuid):
         substr_in_result = ["no"]
@@ -66,10 +66,10 @@ class BaseModelAccess():
 
         prompt = ''
         if ( self.is_there_headers_in_content(uuid) ):
-            self.error_manager.show_message(2014, "YES")
+            self.eManager.show_message(2014, "YES")
             prompt = self.base_prompt.get_prompt_get_all_headers_of_text()
         else:
-            self.error_manager.show_message(2014, "NO")
+            self.eManager.show_message(2014, "NO")
             prompt = self.base_prompt.get_prompt_get_all_headers_of_text(False)
         
         response = self.query_google_file(uuid, prompt)

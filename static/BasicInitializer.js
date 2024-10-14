@@ -97,4 +97,21 @@ class BasicInitializer {
     getClient_UUID() {    
         return this.client_uuid;
     }
+
+    clearPdfCanvasContext() {
+        const pdfCanvas = document.getElementById('pdfCanvas');
+        const context = pdfCanvas.getContext('2d');
+
+        pdfCanvas.width = 0;
+        pdfCanvas.height = 0;
+        context.clearRect(0, 0, pdfCanvas.width, pdfCanvas.height);
+    }
+
+    clearBeforeStartNewExplanation() {
+
+        this.clearPdfCanvasContext();
+        cTracker.reset();
+        document.getElementById('result1').innerHTML = '';
+        document.getElementById('roughArea').innerHTML = '';
+    }
 }

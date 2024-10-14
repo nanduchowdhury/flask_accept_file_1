@@ -91,8 +91,13 @@ class ReportToDeveloper {
       const { jsPDF } = window.jspdf;
       const pdf = new jsPDF();
 
-      // Add message text to the PDF
-      pdf.text(message, 10, 10);
+      const yPosition = 10;
+    const lineHeight = 15;
+
+    pdf.text(basicInitializer.getClient_UUID(), 10, yPosition);
+    pdf.text(basicInitializer.getClientId(), 10, yPosition + lineHeight);
+    pdf.text(message, 10, yPosition + 2 * lineHeight);
+
 
       // Convert image to data URL format (Base64)
       const img = new Image();
@@ -108,7 +113,7 @@ class ReportToDeveloper {
           const imgData = canvas.toDataURL('image/png');
 
           // Insert the image into the PDF
-          pdf.addImage(imgData, 'PNG', 10, 30, 180, 100);
+          pdf.addImage(imgData, 'PNG', 10, 80, 180, 150);
 
           // Return the PDF as a Blob object via callback
           callback(pdf.output('blob'));

@@ -6,6 +6,7 @@ class SendReceiveManager {
         this.spinner = new Spinner(spinnerId);
         this.previewArea = document.getElementById(previewAreaId);
         this.pdfCanvas = document.getElementById(pdfCanvasId);
+        this.sendButtonInProcess = false;
 
         // this.restartButton = document.getElementById('restartButton');
 
@@ -34,6 +35,12 @@ class SendReceiveManager {
     handleSendButtonClick() {
         try {
 
+            if ( this.sendButtonInProcess ) {
+                return;
+            }
+
+            this.sendButtonInProcess = true;
+
             if ( cTracker.isInitLevel() ) {
                 if ( SharedData.DataSource == 'File' ) {
                     this.sendFile();
@@ -41,6 +48,8 @@ class SendReceiveManager {
                     this.sendImage();
                 } else if ( SharedData.DataSource == 'video' ) {
                     this.sendVideo();
+                } else {
+                    errorManager.showError(1050);
                 }
             } else if ( !cTracker.isMaxLevelReached() ) {
                 const data = {
@@ -63,8 +72,8 @@ class SendReceiveManager {
 
     sendFile() {
 
-        if (this.fileInput.files.length === 0) {
-            alert('Choose a PDF, JPG, PNG - or take a picture using the camera');
+        if ( !previewAreaControl.currentSelectedFile ) {
+            errorManager.showError(1050);
             return;
         }
 
@@ -152,10 +161,12 @@ class SendReceiveManager {
         .then(data => {
             this.handleServerResponse(data)
             this.spinner.hide();
+            this.sendButtonInProcess = false;
         })
         .catch(error => {
             errorManager.showError(1018, error.message);
             this.spinner.hide();
+            this.sendButtonInProcess = false;
         });
     }
 
