@@ -64,7 +64,9 @@
 1048 : Error during basic-initialization - %s.
 1049 : Convert Microsoft ppts docx files externally into PDF and upload here.
 1050 : Select PDF JPG PNG file to start.
-
+1051 : Error reading JSON distributed shared-file %s - %s
+1052 : Error writing JSON distributed shared-file %s - %s
+1053 : Error getting key %s - %s
 
 
 // Server side

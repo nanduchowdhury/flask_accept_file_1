@@ -47,8 +47,6 @@ class ScholarKM(Flask):
     def __init__(self):
         Flask.__init__(self, __name__)
 
-        self.sess = BaseClientManager()
-
         self.client_ip = 'client_ip'
         self.client_uuid = 'client_uuid'
 
@@ -71,6 +69,7 @@ class ScholarKM(Flask):
         self.error_manager = ErrorManager(self.client_ip, self.client_uuid, 'static/errors.txt', 
                     log_dir=self.SERVER_LOGS_FOLDER)
 
+        self.sess = BaseClientManager(self.error_manager)
         self.gemini_access = GeminiAccess(self.sess, self.error_manager)
         self.gemini_access.initialize()
 
