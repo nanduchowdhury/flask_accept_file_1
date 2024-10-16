@@ -59,28 +59,47 @@ class ConceptTracker {
         this.levelStrings.forEach((str, index) => {
             const div = document.createElement('div');
             const [number, text] = this._splitNumberFromText(str);
-
+        
             // Create separate spans for number and text
             const numberSpan = document.createElement('span');
             numberSpan.innerText = number;
-
+        
             const textSpan = document.createElement('span');
             textSpan.innerText = text;
             textSpan.style.color = this.originalColors[index + 1] || this.renderOptions.color; // Use original or default color
             textSpan.style.fontFamily = this.renderOptions.font;
             textSpan.style.fontWeight = this.renderOptions.bold ? 'bold' : 'normal';
-
+        
             div.dataset.level = index + 1;
             div.appendChild(numberSpan);
             div.appendChild(textSpan);
             this.container.appendChild(div);
-
+        
             // Add comment if exists
             if (this.comments[index + 1]) {
                 const commentDiv = this._createCommentDiv(this.comments[index + 1]);
                 this.container.appendChild(commentDiv);
             }
-        });
+        });  
+    }
+
+    enableMouseHover(level) {
+        const textSpan = this._getElementAtLevel(level); // This is already the correct span
+        
+        if (textSpan) {
+            // Add hover effect and click event
+            textSpan.addEventListener('mouseover', () => {
+                textSpan.style.backgroundColor = 'yellow'; // Highlight background on hover
+            });
+        
+            textSpan.addEventListener('mouseout', () => {
+                textSpan.style.backgroundColor = ''; // Remove highlight when not hovered
+            });
+        
+            textSpan.addEventListener('click', () => {
+                detailAreaManager.jumpToHeader(this.getLevelTitle(level)); // Call jumpToHeader on click
+            });
+        }
     }
 
     // Helper to split number and text from a level string
@@ -103,9 +122,14 @@ class ConceptTracker {
         return commentDiv;
     }
 
+    _getElementAtLevel(level) {
+        const div = this.container.querySelector(`[data-level='${level + 1}'] span:last-child`);
+        return div;
+    }
+
     // API to change color of any level-string (only the string part, not the number)
     changeColor(level, color) {
-        const div = this.container.querySelector(`[data-level='${level + 1}'] span:last-child`);
+        const div = this._getElementAtLevel(level);
         if (div) {
             this.originalColors[level] = color;
             div.style.color = color;

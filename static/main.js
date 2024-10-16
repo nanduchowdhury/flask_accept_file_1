@@ -13,7 +13,7 @@ const cTracker = new ConceptTracker('result2',
 
 const errorManager = new ErrorManager();
 const basicInitializer = new BasicInitializer();
-
+const detailAreaManager = new DetailAreaManager('result1');
 const previewAreaControl = new PreviewAreaControl('loadingSpinner');
 const cameraSupport = new CameraSupport(previewAreaControl);
 

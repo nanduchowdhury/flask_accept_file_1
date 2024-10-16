@@ -129,8 +129,9 @@ class SelectRegionManager {
     }
 
     processResultsRecvdFromServer(data) {
-        const myPostIt = new PostItNote('roughArea', data.result1, data.result2);
-        myPostIt.setTabTitle(1, 'eng');
-        myPostIt.setTabTitle(2, 'hindi');
+        const postIt = new PostItNote(data.result1, data.result2);
+
+        const container = document.getElementById('roughArea');
+        container.appendChild(postIt.getElement());
     }
 }

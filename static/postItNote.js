@@ -4,10 +4,8 @@ class PostItNote {
 
     currentUtterance = null;
 
-    constructor(containerId, tab1Content = '', tab2Content = '') {
+    constructor(tab1Content = '', tab2Content = '') {
         try {
-            this.containerId = containerId;
-
             this.tab1Content = tab1Content;
             this.tab2Content = tab2Content;
 
@@ -44,7 +42,6 @@ class PostItNote {
             this.postItNote.appendChild(this.enlarge);
 
             this._addEventListeners();
-            this._appendToContainer();
         } catch (error) {
             errorManager.showError(1002, error.message);
         }
@@ -205,17 +202,8 @@ class PostItNote {
         }
     }
 
-    getActualPostItNote() {
+    getElement() {
         return this.postItNote;
-    }
-
-    _appendToContainer() {
-        try {
-            const container = document.getElementById(this.containerId);
-            container.appendChild(this.postItNote);
-        } catch (error) {
-            errorManager.showError(1010, error.message);
-        }
     }
 
     setTabTitle(tabIndex, title) {

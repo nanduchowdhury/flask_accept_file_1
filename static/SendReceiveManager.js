@@ -4,7 +4,6 @@ class SendReceiveManager {
     constructor(fileInputId, sendButtonId, resultDivId1, resultDivId2, spinnerId, previewAreaId, pdfCanvasId) {
         this.fileInput = document.getElementById(fileInputId);
         this.sendButton = document.getElementById(sendButtonId);
-        this.resultDiv1 = document.getElementById(resultDivId1);
         this.spinner = new Spinner(spinnerId);
         this.previewArea = document.getElementById(previewAreaId);
         this.pdfCanvas = document.getElementById(pdfCanvasId);
@@ -191,13 +190,13 @@ class SendReceiveManager {
                 errorManager.log(1020, data);
 
                 cTracker.changeColor(cTracker.getCurrentLevel(), 'green');
+                cTracker.enableMouseHover(cTracker.getCurrentLevel());
 
-                this.resultDiv1.append(cTracker.getCurrentLevelTitle());
-                this.resultDiv1.append('\n');
-                const myPostIt = new PostItNote('result1', data.result1, data.result2);
-                myPostIt.setTabTitle(1, 'eng');
-                myPostIt.setTabTitle(2, 'hindi');
-                
+                detailAreaManager.addHeader(cTracker.getCurrentLevelTitle(), 'green');
+
+                const postIt = new PostItNote(data.result1, data.result2);
+
+                detailAreaManager.addExplanation(cTracker.getCurrentLevelTitle(), postIt);
             }
             cTracker.setNextLevel();
         }
