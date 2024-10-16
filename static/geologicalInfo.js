@@ -1,3 +1,5 @@
+"use strict";
+
 class GeolocationInfo {
     constructor() {
         // Get API key from https://ipinfo.io/account/token

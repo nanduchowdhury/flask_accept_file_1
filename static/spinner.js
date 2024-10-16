@@ -1,3 +1,5 @@
+"use strict";
+
 class Spinner {
     constructor(elementId) {
         this.spinnerElement = document.getElementById(elementId);

@@ -1,3 +1,5 @@
+"use strict";
+
 class RmbBase {
     constructor(containerId, actions) {
         this.container = document.getElementById(containerId);

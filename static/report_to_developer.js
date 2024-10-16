@@ -1,3 +1,5 @@
+"use strict";
+
 class ReportToDeveloper {
   constructor() {
       this.reportItem = document.getElementById('report-item');

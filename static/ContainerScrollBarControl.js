@@ -1,3 +1,5 @@
+"use strict";
+
 class ContainerScrollBarControl {
     constructor(containerId) {
         this.container = document.getElementById(containerId);

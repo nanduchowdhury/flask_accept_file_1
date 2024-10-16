@@ -1,3 +1,5 @@
+"use strict";
+
 class SendReceiveManager {
     constructor(fileInputId, sendButtonId, resultDivId1, resultDivId2, spinnerId, previewAreaId, pdfCanvasId) {
         this.fileInput = document.getElementById(fileInputId);

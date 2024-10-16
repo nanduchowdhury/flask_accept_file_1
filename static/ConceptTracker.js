@@ -1,3 +1,5 @@
+"use strict";
+
 class ConceptTracker {
     constructor(containerId, headerExplanation = '', options = { color: 'black', font: 'Arial', bold: false }) {
         this.container = document.getElementById(containerId);

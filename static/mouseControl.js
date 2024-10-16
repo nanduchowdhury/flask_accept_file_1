@@ -1,3 +1,5 @@
+"use strict";
+
 class MouseControl {
 
     constructor(containerId) {

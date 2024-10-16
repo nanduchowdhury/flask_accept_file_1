@@ -1,3 +1,5 @@
+"use strict";
+
 class BasicInitializer {
 
     static LEFT_MOUSE_BUTTON = 0;

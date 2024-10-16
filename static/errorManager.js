@@ -1,3 +1,5 @@
+"use strict";
+
 class ErrorManager {
     constructor(errorFilePath = 'static/errors.txt') {
         this.errorFilePath = errorFilePath;

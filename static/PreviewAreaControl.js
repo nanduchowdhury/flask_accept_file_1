@@ -1,3 +1,5 @@
+"use strict";
+
 class PreviewAreaControl extends ContainerScrollBarControl {
     constructor(spinnerId) {
 

@@ -1,3 +1,5 @@
+"use strict";
+
 class SelectionBoxManager {
     constructor(isClearAfterTimeout = false) {
 

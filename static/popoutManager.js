@@ -1,3 +1,5 @@
+"use strict";
+
 class PopoutManager extends ContainerScrollBarControl {
     constructor(containerId) {
 
