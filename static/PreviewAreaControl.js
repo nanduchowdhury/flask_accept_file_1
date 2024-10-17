@@ -4,7 +4,7 @@ class PreviewAreaControl extends ContainerScrollBarControl {
     constructor(spinnerId) {
 
         super('previewArea');
-        this.mouseControl = new MouseControl('previewArea');
+        
         this.spinner = new Spinner(spinnerId);
         this.currentSelectedFile = '';
 
@@ -12,7 +12,7 @@ class PreviewAreaControl extends ContainerScrollBarControl {
     }
 
     onScroll() {
-        this.mouseControl.clearSelectionRegion();
+        mouseControl.clearSelectionRegion();
     }
 
     showVideoInCanvas(videoUrl) {
@@ -28,7 +28,7 @@ class PreviewAreaControl extends ContainerScrollBarControl {
         videoElement.src = videoUrl;
         videoElement.style.display = 'block';
     
-        this.mouseControl.deActivateRegionSelection();
+        mouseControl.deActivateRegionSelection();
     }
     
     hideVideoShowCanvas() {
@@ -41,7 +41,7 @@ class PreviewAreaControl extends ContainerScrollBarControl {
     
         pdfCanvas.style.display = 'block';
     
-        this.mouseControl.activateRegionSelection();
+        mouseControl.activateRegionSelection();
     }
 
     onFileInput = (event) => {

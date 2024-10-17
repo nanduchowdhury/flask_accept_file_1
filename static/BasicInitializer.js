@@ -5,7 +5,7 @@ class BasicInitializer {
     static LEFT_MOUSE_BUTTON = 0;
     static ACCEPTABLE_REGION_SIZE = 10;
     static EXPLAIN_REGION_RMB = "Explain Selection";
-    static POP_OUT_RMB = "Pop Out";
+    static POP_OUT_RMB = "Pop Out/In";
 
     constructor() {
         this.clientId = 'client-' + this.getFormattedTimestamp();

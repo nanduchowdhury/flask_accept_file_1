@@ -40,10 +40,26 @@ class MouseControl {
         });
     }
 
+    computeXYAdjustmentAsPerScrollBars() {
+        let xAdj = 0;
+        let yAdj = 0;
+        if ( containerMaximizeManager.isAnyContainerMaximized() ) {
+            yAdj = this.container.scrollTop;
+            let browserScroll = window.scrollY || document.documentElement.scrollTop;
+            yAdj -= browserScroll;
+
+            // TBD : xAdj
+        }
+
+        return [xAdj, yAdj];
+    }
+
     onMouseDown = (event) => {
 
+        const [xAdj, yAdj] = this.computeXYAdjustmentAsPerScrollBars();
+
         this.regionStartX = event.pageX;
-        this.regionStartY = event.pageY;
+        this.regionStartY = event.pageY + yAdj;
 
         this.regionImageStartX = event.offsetX;
         this.regionImageStartY = event.offsetY;
@@ -66,8 +82,11 @@ class MouseControl {
     }
 
     onMouseMove = (event) => {
+
+        const [xAdj, yAdj] = this.computeXYAdjustmentAsPerScrollBars();
+
         this.regionEndX = event.pageX;
-        this.regionEndY = event.pageY;
+        this.regionEndY = event.pageY + yAdj;
 
         this.regionImageEndX = event.offsetX;
         this.regionImageEndY = event.offsetY;

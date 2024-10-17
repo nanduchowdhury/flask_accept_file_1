@@ -78,18 +78,13 @@ class PreviewAreaRmb extends RmbBase {
         this.selectRegionMgr.grabRegionAndShowInRoughAreaAndTalkToServer('pdfCanvas');
     }
 
-    onPopOut() {
+    onPopInOut() {
 
-        this.pdfPopoutManager = new PdfPopoutManager('genericPopoutId');
-        this.pdfPopoutManager.clear(); // Clear the popout
-
-        const pdfCanvas = document.getElementById('pdfCanvas');
-        this.pdfPopoutManager.movePdfCanvasToPopout(pdfCanvas); // Move pdfCanvas to the popout
-        
-        this.pdfPopoutManager.showPopout();
-
-        // this.mouseControl = new MouseControl('genericPopoutId');
-        // this.mouseControl.activateRegionSelection();
+        if ( containerMaximizeManager.isAnyContainerMaximized() ) {
+            containerMaximizeManager.revertLayout();
+        } else {
+            containerMaximizeManager.popOutPreviewArea();
+        }
     }
 
     onAction(actionIndex) {
@@ -98,7 +93,7 @@ class PreviewAreaRmb extends RmbBase {
                 this.onExplainRegion();
                 break;
             case 2:
-                this.onPopOut();
+                this.onPopInOut();
                 break;
             default:
                 alert(`Preview Area Action-${actionIndex} clicked!`);

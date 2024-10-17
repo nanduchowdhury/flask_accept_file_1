@@ -70,14 +70,14 @@ class BaseClientManager:
         except FileNotFoundError:
             self.data = {}
         except Exception as e:
-            raise ValueError(eManager.show_message(1051, self.SERVER_SHARED_FILE, str(e)))
+            raise ValueError(self.eManager.show_message(1051, self.SERVER_SHARED_FILE, str(e)))
 
     def _force_save_session_fsystem(self):
         try:
             with open(self.SERVER_SHARED_FILE, 'w') as f:
                 json.dump(self.data, f, indent=4)
         except Exception as e:
-            raise ValueError(eManager.show_message(1052, self.SERVER_SHARED_FILE, str(e)))
+            raise ValueError(self.eManager.show_message(1052, self.SERVER_SHARED_FILE, str(e)))
     
     def _force_read_session(self):
         
@@ -155,7 +155,7 @@ class BaseClientManager:
                 current_data = current_data[k]
             return current_data
         except Exception as e:
-            raise ValueError(eManager.show_message(1053, key, str(e)))
+            raise ValueError(self.eManager.show_message(1053, key, str(e)))
 
     def clear_client_data(self, cuuid, key):
         if not self.lock.acquire(blocking=True):

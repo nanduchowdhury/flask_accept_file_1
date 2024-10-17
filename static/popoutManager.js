@@ -162,32 +162,6 @@ class PdfPopoutManager extends PopoutManager {
         }
     }
 
-    cutOutImageFromCanvas_1(canvas, x, y, width, height) {
-
-        const context = canvas.getContext('2d');
-
-        const imageData = context.getImageData(x, y, width, height);
-    
-        // Create a new canvas to hold the cropped image
-        const rectCanvas = document.createElement('canvas');
-        rectCanvas.width = width;
-        rectCanvas.height = height;
-        const rectContext = rectCanvas.getContext('2d');
-        
-        rectContext.putImageData(imageData, 0, 0);
-    
-        const dataURL = rectCanvas.toDataURL('image/png');
-    
-        const imageElement = new Image();
-        imageElement.src = dataURL;
-        imageElement.alt = 'Extracted Image';
-        // Set display to block to ensure new line placement
-        imageElement.style.display = 'block';
-
-        return imageElement;
-    }
-
-
     // Method to cut out the selected image from the canvas
     cutOutImageFromCanvas(canvas, x, y, width, height) {
         // Create an off-screen canvas to draw the selected region
