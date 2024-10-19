@@ -42,6 +42,7 @@ from error_message_manager import ErrorManager
 from gemini_access import GeminiAccess
 from base_client_manager import BaseClientManager
 
+import constants
 
 class ScholarKM(Flask):
     def __init__(self):
@@ -69,7 +70,7 @@ class ScholarKM(Flask):
         self.error_manager = ErrorManager(self.client_ip, self.client_uuid, 'static/errors.txt', 
                     log_dir=self.SERVER_LOGS_FOLDER)
 
-        self.sess = BaseClientManager(self.error_manager)
+        self.sess = BaseClientManager(self.error_manager, constants.server_database)
         self.gemini_access = GeminiAccess(self.sess, self.error_manager)
         self.gemini_access.initialize()
 
@@ -359,18 +360,21 @@ class ScholarKM(Flask):
         except Exception as e:
             return jsonify({"error": str(e)}), 500
 
-        
+
 app = ScholarKM()
-# app.secret_key = os.urandom(32)
 
-app.config['SESSION_TYPE'] = 'redis'
-app.config['SESSION_PERMANENT'] = False
-app.config['SESSION_USE_SIGNER'] = True  # Prevents tampering of session cookies
-app.config['SESSION_KEY_PREFIX'] = 'kupamanduk-session:'
-app.config['SESSION_REDIS'] = redis.StrictRedis(host='localhost', port=6379)
+if constants.server_database == constants.USE_REDIS:
+    app.config['SESSION_TYPE'] = 'redis'
+    app.config['SESSION_PERMANENT'] = False
+    app.config['SESSION_USE_SIGNER'] = True  # Prevents tampering of session cookies
+    app.config['SESSION_KEY_PREFIX'] = 'kupamanduk-session:'
+    app.config['SESSION_REDIS'] = redis.StrictRedis(host='localhost', port=6379)
 
-# app.config['SECRET_KEY'] = os.urandom(32)
-app.config['SECRET_KEY'] = "kupamanduk-10987"
+    # app.config['SECRET_KEY'] = os.urandom(32)
+    app.config['SECRET_KEY'] = "kupamanduk-10987"
+    # app.secret_key = os.urandom(32)
+else:
+    app.config['SESSION_TYPE'] = 'filesystem'
 
 Session(app)
 

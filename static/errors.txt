@@ -96,6 +96,12 @@
 2024 : Error accessing AI model - %s
 2025 : Error querying AI model - %s
 2026 : Error querying image from AI model - %s
+2027 : Failed to connect to Redis - %s
+2028 : Failed to initialize Redis lock
+2029 : Failed to acquire file-system lock - %s
+2030 : Failed to release file-system lock - %s
+2031 : Failed to acquire distributed lock - %s
+2032 : Failed to release distributed lock - %s
 
 
 

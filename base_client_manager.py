@@ -6,24 +6,46 @@ import redis
 from redis.exceptions import LockError
 from redis.lock import Lock
 
-redis_client = redis.StrictRedis(host='localhost', port=6379)
+import os
+import fcntl
+
+import constants
 
 class BaseClientManager:
-    def __init__(self, eManager):
+    def __init__(self, eManager, server_database):
 
         self.eManager = eManager
+        self.server_database = server_database
 
         self.data = {}
-        self.lock = Lock(redis_client, 'session_lock', timeout=60)
+        
+        self.fsystem_lock_file = "/home/nandu_chowdhury/kupamanduk/scholar/server_logs/shared_lock.lock"
+        # self.fsystem_lock_fd
 
         # Constants
         self.SERVER_SHARED_FILE = "/home/nandu_chowdhury/kupamanduk/scholar/server_logs/shared_file.json"
-        self.REDIS = 'redis'
-        self.FSYSTEM = 'fsystem'
-        self.USE_DATABASE = self.FSYSTEM
+
+        if self.server_database == constants.USE_REDIS:
+            if self.check_redis_connection():
+                self.redis_lock = Lock(self.redis_client, 'session_lock', timeout=60)
+            else:
+                self.eManager.show_message(2028, str(e))
+                exit
+
+    def check_redis_connection(self):
+        try:
+            self.redis_client = redis.Redis(host='localhost', port=6379)
+            if self.redis_client:
+                self.redis_client.ping()
+                return True
+            else:
+                return False
+        except Exception as e:
+            self.eManager.show_message(2027, str(e))
+
 
     def dump_session(self, uuid):
-        if not self.lock.acquire(blocking=True):
+        if not self.lock():
             return None
 
         try:
@@ -31,7 +53,7 @@ class BaseClientManager:
             print(json.dumps(self.data[uuid], indent=4))
 
         finally:
-            self.lock.release()
+            self.lock_release()
 
     ########################################################
     # Following 2 APIs can be used if Redis database is used 
@@ -44,6 +66,9 @@ class BaseClientManager:
     #                KEYS *
     #                FLUSHALL
     #                GET <key>
+    # Caveat :
+    # It has been seen that writing/reading across 
+    # multiple-workers is not synchronized - data integrity issues.
     ########################################################
     def _force_read_session_redis(self):
         session_interface = current_app.session_interface
@@ -81,16 +106,16 @@ class BaseClientManager:
     
     def _force_read_session(self):
         
-        if self.USE_DATABASE == self.REDIS:
+        if self.server_database == constants.USE_REDIS:
             self._force_read_session_redis()
-        elif self.USE_DATABASE == self.FSYSTEM:
+        elif self.server_database == constants.USE_FSYSTEM:
             self._force_read_session_fsystem()
 
     def _force_save_session(self):
         
-        if self.USE_DATABASE == self.REDIS:
+        if self.server_database == constants.USE_REDIS:
             self._force_save_session_redis()
-        elif self.USE_DATABASE == self.FSYSTEM:
+        elif self.server_database == constants.USE_FSYSTEM:
             self._force_save_session_fsystem()
 
     def _set_uuid(self, cuuid):
@@ -101,8 +126,48 @@ class BaseClientManager:
         if uuid in self.data:
             del self.data[uuid]
 
+    def acquire_redis_lock(self):
+        if not self.redis_lock.acquire(blocking=True):
+            return None
+
+    def acquire_fsystem_lock(self):
+        try:
+            self.fsystem_lock_fd = os.open(self.fsystem_lock_file, os.O_CREAT | os.O_RDWR)
+            fcntl.flock(self.fsystem_lock_fd, fcntl.LOCK_EX)
+            return self.fsystem_lock_fd
+        except Exception as e:
+            self.eManager.show_message(2029, str(e))
+
+    def release_redis_lock(self):
+        self.redis_lock.release()
+
+    def release_fsystem_lock(self):
+        try:
+            fcntl.flock(self.fsystem_lock_fd, fcntl.LOCK_UN)
+            os.close(self.fsystem_lock_fd)
+        except Exception as e:
+            self.eManager.show_message(2030, str(e))
+
+    def lock(self):
+        try:
+            if self.server_database == constants.USE_REDIS:
+                return self.acquire_redis_lock()
+            else:
+                return self.acquire_fsystem_lock()
+        except Exception as e:
+            self.eManager.show_message(2031, str(e))
+
+    def lock_release(self):
+        try:
+            if self.server_database == constants.USE_REDIS:
+                return self.release_redis_lock()
+            else:
+                return self.release_fsystem_lock()
+        except Exception as e:
+            self.eManager.show_message(2032, str(e))
+
     def clear_client_uuid(self, cuuid):
-        if not self.lock.acquire(blocking=True):
+        if not self.lock():
             return None
 
         try:
@@ -111,10 +176,10 @@ class BaseClientManager:
             self._force_save_session()
 
         finally:
-            self.lock.release()
+            self.lock_release()
 
     def set_client_uuid(self, cuuid=None):
-        if not self.lock.acquire(blocking=True):
+        if not self.lock():
             return None
 
         try:
@@ -125,7 +190,7 @@ class BaseClientManager:
             return cuuid
 
         finally:
-            self.lock.release()
+            self.lock_release()
 
     def _clear_key(self, uuid, key):
         if uuid in self.data:
@@ -158,8 +223,8 @@ class BaseClientManager:
             raise ValueError(self.eManager.show_message(1053, key, str(e)))
 
     def clear_client_data(self, cuuid, key):
-        if not self.lock.acquire(blocking=True):
-            return
+        if not self.lock():
+            return None
 
         try:
             self._force_read_session()
@@ -167,11 +232,11 @@ class BaseClientManager:
             self._force_save_session()
 
         finally:
-            self.lock.release()
+            self.lock_release()
 
     def save_client_data(self, cuuid, key, value):
-        if not self.lock.acquire(blocking=True):
-            return
+        if not self.lock():
+            return None
 
         try:
             self._force_read_session()  # Load existing data from session
@@ -192,11 +257,11 @@ class BaseClientManager:
             raise
 
         finally:
-            self.lock.release()
+            self.lock_release()
 
     def get_client_data(self, cuuid, key):
 
-        if not self.lock.acquire(blocking=True):
+        if not self.lock():
             return None
 
         try:
@@ -210,5 +275,5 @@ class BaseClientManager:
                 raise ValueError(f"Key '{key}' not found in the session data.")
 
         finally:
-            self.lock.release()
+            self.lock_release()
 
