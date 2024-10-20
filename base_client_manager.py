@@ -20,11 +20,14 @@ class BaseClientManager:
 
         self.data = {}
         
-        self.fsystem_lock_file = "/home/nandu_chowdhury/kupamanduk/scholar/server_logs/shared_lock.lock"
+        self.BASE_FOLDER = os.path.join(constants.ROOT_FOLDER)
+        self.SERVER_LOGS_FOLDER = os.path.join(self.BASE_FOLDER, 'server_logs/')
+
+        self.fsystem_lock_file = os.path.join(self.SERVER_LOGS_FOLDER, 'shared_lock.lock')
         # self.fsystem_lock_fd
 
         # Constants
-        self.SERVER_SHARED_FILE = "/home/nandu_chowdhury/kupamanduk/scholar/server_logs/shared_file.json"
+        self.SERVER_SHARED_FILE = os.path.join(self.SERVER_LOGS_FOLDER, 'shared_file.json')
 
         if self.server_database == constants.USE_REDIS:
             if self.check_redis_connection():

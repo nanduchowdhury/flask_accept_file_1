@@ -20,7 +20,7 @@ import io
 
 from flask import Flask, request, send_file, session, redirect, url_for
 
-# from PIL import Image, ImageDraw # not required at present
+#### from PIL import Image, ImageDraw # not required at present
 
 # import redis
 
@@ -60,8 +60,12 @@ class ScholarKM(Flask):
         self.route('/report_to_user', methods=['POST'])(self.report_to_user)
 
         # Constants
-        self.BASE_FOLDER = '/home/nandu_chowdhury/kupamanduk/scholar/'
-        self.SERVER_LOGS_FOLDER = '/home/nandu_chowdhury/kupamanduk/scholar/server_logs/'
+        self.BASE_FOLDER = os.path.join(constants.ROOT_FOLDER)
+        os.makedirs(self.BASE_FOLDER, exist_ok=True)
+        
+        self.SERVER_LOGS_FOLDER = os.path.join(self.BASE_FOLDER, 'server_logs/')
+        os.makedirs(self.SERVER_LOGS_FOLDER, exist_ok=True)
+
         self.BASE_UPLOAD_FOLDER = 'uploads/'
         self.BASE_LOG_FOLDER = 'client_logs/'
         self.BASE_REPORT_TO_USER_FOLDER = 'report_by_user/'
