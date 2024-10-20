@@ -2,7 +2,7 @@ import re
 import os
 
 import time
-from PIL import Image
+# from PIL import Image
 
 class BaseModelAccess():
     def __init__(self, sess, eManager):

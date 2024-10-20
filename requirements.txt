@@ -1,0 +1,7 @@
+gunicorn
+flask
+Pillow
+PyPDF2
+flask_session
+google-generativeai
+

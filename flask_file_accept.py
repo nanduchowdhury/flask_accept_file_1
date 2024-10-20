@@ -19,20 +19,21 @@ from io import BytesIO
 import io
 
 from flask import Flask, request, send_file, session, redirect, url_for
-from PIL import Image, ImageDraw
 
-import redis
+# from PIL import Image, ImageDraw # not required at present
+
+# import redis
 
 from io import BytesIO
-import pdfkit  # You'll need to install the `pdfkit` and `wkhtmltopdf
+# import pdfkit  # You'll need to install the `pdfkit` and `wkhtmltopdf
 
-from redis import Redis
+# from redis import Redis
 from flask_session import Session
 
-import tempfile  # For creating temporary files
+# import tempfile  # For creating temporary files
 
-from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import letter
+# from reportlab.pdfgen import canvas
+# from reportlab.lib.pagesizes import letter
 
 from datetime import datetime
 

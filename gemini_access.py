@@ -2,7 +2,7 @@ import re
 import os
 
 import time
-from PIL import Image
+# from PIL import Image
 
 import google.generativeai as genai
 

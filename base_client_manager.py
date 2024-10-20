@@ -2,9 +2,10 @@ import json
 import threading
 import uuid
 from flask import session, jsonify, current_app, request
-import redis
-from redis.exceptions import LockError
-from redis.lock import Lock
+
+#import redis
+#from redis.exceptions import LockError
+#from redis.lock import Lock
 
 import os
 import fcntl
