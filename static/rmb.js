@@ -56,6 +56,80 @@ class RmbBase {
     }
 }
 
+class MainTopicsAreaRmb extends RmbBase {
+    constructor() {
+        super('result2', [BasicInitializer.POP_OUT_RMB]);
+    }
+    onPopInOut() {
+
+        if ( containerMaximizeManager.isAnyContainerMaximized() ) {
+            containerMaximizeManager.revertLayout();
+        } else {
+            containerMaximizeManager.popOutResult2Area();
+        }
+    }
+
+    onAction(actionIndex) {
+        switch (actionIndex) {
+            case 1:
+                this.onPopInOut();
+                break;
+            default:
+                alert(`Preview Area Action-${actionIndex} clicked!`);
+        }
+        this.contextMenu.style.display = 'none'; // Hide menu after action
+    }
+}
+
+class DetailExplanationAreaRmb extends RmbBase {
+    constructor() {
+        super('result1', [BasicInitializer.POP_OUT_RMB]);
+    }
+    onPopInOut() {
+
+        if ( containerMaximizeManager.isAnyContainerMaximized() ) {
+            containerMaximizeManager.revertLayout();
+        } else {
+            containerMaximizeManager.popOutResult1Area();
+        }
+    }
+
+    onAction(actionIndex) {
+        switch (actionIndex) {
+            case 1:
+                this.onPopInOut();
+                break;
+            default:
+                alert(`Preview Area Action-${actionIndex} clicked!`);
+        }
+        this.contextMenu.style.display = 'none'; // Hide menu after action
+    }
+}
+
+class RoughAreaRmb extends RmbBase {
+    constructor() {
+        super('roughArea', [BasicInitializer.POP_OUT_RMB]);
+    }
+    onPopInOut() {
+
+        if ( containerMaximizeManager.isAnyContainerMaximized() ) {
+            containerMaximizeManager.revertLayout();
+        } else {
+            containerMaximizeManager.popOutRoughArea();
+        }
+    }
+
+    onAction(actionIndex) {
+        switch (actionIndex) {
+            case 1:
+                this.onPopInOut();
+                break;
+            default:
+                alert(`Preview Area Action-${actionIndex} clicked!`);
+        }
+        this.contextMenu.style.display = 'none'; // Hide menu after action
+    }
+}
 
 class PreviewAreaRmb extends RmbBase {
     constructor() {
@@ -75,7 +149,11 @@ class PreviewAreaRmb extends RmbBase {
 
     onExplainRegion() {
     
-        this.selectRegionMgr.grabRegionAndShowInRoughAreaAndTalkToServer('pdfCanvas');
+        if ( cTracker.isInitLevel() ) {
+            errorManager.showError(1054);
+        } else {
+            this.selectRegionMgr.grabRegionAndShowInRoughAreaAndTalkToServer('pdfCanvas');
+        }
     }
 
     onPopInOut() {

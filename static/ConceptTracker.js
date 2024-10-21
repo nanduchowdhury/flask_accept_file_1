@@ -167,7 +167,7 @@ class ConceptTracker {
     setNextLevel() {
         if (this.currentLevel < this.getMaxLevel()) {
             this.currentLevel += 1;
-            this.sendButton.innerText = "Explain Next";
+            this.sendButton.innerText = BasicInitializer.LEARN_NEXT;
         }
     }
 
@@ -230,7 +230,7 @@ class ConceptTracker {
         this.comments = {};
         this.render();
 
-        this.sendButton.innerText = "Start Explanation";
+        this.sendButton.innerText = BasicInitializer.START_LEARN;
         this.detailExplanationContainer.innerHTML = '';
     }
 

@@ -20,7 +20,7 @@ import io
 
 from flask import Flask, request, send_file, session, redirect, url_for
 
-#### from PIL import Image, ImageDraw # not required at present
+from PIL import Image, ImageDraw
 
 # import redis
 

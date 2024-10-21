@@ -5,6 +5,8 @@ class ErrorManager {
         this.errorFilePath = errorFilePath;
         this.errors = new Map();
 
+        this.MESSAGE_BOX_DISAPPEAR_TIMEOUT = 6000;
+
         this.logs = [];
         this.lastSentIndex = 0;
         this.interval = 30000;
@@ -147,7 +149,7 @@ class ErrorManager {
 
         // Automatically hide the message after 30 seconds
         if (this.timeoutID) clearTimeout(this.timeoutID);  // Clear any existing timeout
-        this.timeoutID = setTimeout(() => this.hideMessage(), 30000);  // 30 seconds
+        this.timeoutID = setTimeout(() => this.hideMessage(), this.MESSAGE_BOX_DISAPPEAR_TIMEOUT);
     }
 
     hideMessage() {

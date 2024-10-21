@@ -2,7 +2,7 @@ import re
 import os
 
 import time
-# from PIL import Image
+from PIL import Image
 
 class BaseModelAccess():
     def __init__(self, sess, eManager):
@@ -123,7 +123,9 @@ class BasePrompt():
         return prompt
 
     def get_prompt_header_summary(self, header_point):
-        prompt = "summarize about following header in the content : \"" + header_point + "\""
+        prompt = "summarize about following header in the content in context to the uploaded file - \
+                           also answer if any question present. also help if there is any activity to be done : \"" + header_point + "\""
+
         return prompt
 
     def get_prompt_is_there_header_in_content(self):
@@ -132,7 +134,7 @@ class BasePrompt():
 
     def get_prompt_get_all_headers_of_text(self, is_headers_present=True):
         if ( is_headers_present ):
-            prompt = "identify all headers or sections in the entire content marked in bold or larger-font - for example 1.1 header1   1.2 header2   1.2.1 sub-header  etc. List them as following example : " + self.example_bullet_points
+            prompt = "identify all headers or sections in the entire content which are marked in bold or larger-font - for example 1.1 header1   1.2 header2   1.2.1 sub-header  etc. List them as following example : " + self.example_bullet_points
         else:
             prompt = "list summary points of entire content as following example : " + self.example_bullet_points
 

@@ -6,6 +6,9 @@ class MouseControl {
         this.container = document.getElementById(containerId);
 
         this.previewAreaRmb = new PreviewAreaRmb();
+        this.mainTopicsAreaRmb = new MainTopicsAreaRmb();
+        this.detailExplanationAreaRmb = new DetailExplanationAreaRmb();
+        this.roughAreaRmb = new RoughAreaRmb();
 
         this.selectionRegionRect = {left : 0, top : 0, width : 0, height : 0};
         this.regionImageStartX = 0;

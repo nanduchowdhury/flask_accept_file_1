@@ -36,12 +36,6 @@ class SendReceiveManager {
     handleSendButtonClick() {
         try {
 
-            if ( this.sendButtonInProcess ) {
-                return;
-            }
-
-            this.sendButtonInProcess = true;
-
             if ( cTracker.isInitLevel() ) {
                 if ( SharedData.DataSource == 'File' ) {
                     this.sendFile();
@@ -137,6 +131,10 @@ class SendReceiveManager {
 
     sendDataToServer(data) {
 
+        if ( this.sendButtonInProcess ) {
+            return;
+        }
+        this.sendButtonInProcess = true;
         this.spinner.show();
 
         data.additionalData.learnLevel = cTracker.getCurrentLevel();

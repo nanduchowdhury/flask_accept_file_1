@@ -6,6 +6,8 @@ class BasicInitializer {
     static ACCEPTABLE_REGION_SIZE = 10;
     static EXPLAIN_REGION_RMB = "Explain Selection";
     static POP_OUT_RMB = "Pop Out/In";
+    static START_LEARN = "Start Learning";
+    static LEARN_NEXT = "Learn Next Topic/Section";
 
     constructor() {
         this.clientId = 'client-' + this.getFormattedTimestamp();

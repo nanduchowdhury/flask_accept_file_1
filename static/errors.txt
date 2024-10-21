@@ -5,7 +5,7 @@
 // You can use %s in the message portion to be replaced with args from caller side.
 
 // Messages for PostItNote. 
-1001 : The language %s (%s) not available in this system.
+1001 : The voice for language %s (%s) not available in this system.
 1002 : %s
 1003 : %s
 1004 : %s
@@ -67,6 +67,7 @@
 1051 : Error reading JSON distributed shared-file %s - %s
 1052 : Error writing JSON distributed shared-file %s - %s
 1053 : Error getting key %s - %s
+1054 : Start learning before selection-explanation
 
 
 // Server side
