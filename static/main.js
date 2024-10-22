@@ -8,8 +8,8 @@ class SharedData {
 }
 
 const cTracker = new ConceptTracker('result2', 
-            "Following are the main topics/sections:", 
-            { color: 'red', font: 'Courier', bold: true });
+            "Let's learn following topics/sections:", 
+            { color: 'black', font: 'Courier', bold: true });
 
 const errorManager = new ErrorManager();
 const basicInitializer = new BasicInitializer();

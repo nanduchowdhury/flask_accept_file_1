@@ -23,7 +23,7 @@
 1015 : Error encountered while sending data to server - %s.
 1016 : Sending image data to server.
 1017 : Sending data to server - %s.
-1018 : Error from server procssing main-content - %s.
+1018 : Error from server processing main-content - %s.
 1019 : Received server data for INIT level - %s.
 1020 : Received server data for NON-INIT level - %s.
 
@@ -81,7 +81,7 @@
 2008 : main-content file upload to gemini success - uri %s
 2009 : learn-level %s - gemini responded %s points
 2010 : generated level-%s
-2011 : main-content not related to academics - please specify valid content for learning
+2011 : content not related to academics - please specify valid content for learning
 2012 : classified main-content as %s
 2013 : region-content explanation done for region-file - %s
 2014 : Status of header-presence in main-content - %s

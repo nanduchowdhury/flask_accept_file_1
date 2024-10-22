@@ -15,6 +15,16 @@ class BasicInitializer {
 
         this.initializeVoices();
         this.sendInitToServer();
+
+        this.onBrowserRefresh = this.onBrowserRefresh.bind(this);
+        // Add the event listener for beforeunload
+        window.addEventListener('beforeunload', this.onBrowserRefresh);
+    }
+
+    onBrowserRefresh(event) {
+        const confirmationMessage = 'Are you sure you want to leave this page? Current learning session will be lost.';
+        event.returnValue = confirmationMessage; // Standard
+        return confirmationMessage; // For older browsers
     }
 
     getFormattedTimestamp() {
