@@ -60,9 +60,9 @@
         #cameraPopup {
             display: none;
             position: fixed; /* Changed to fixed to make it stay on screen */
-            top: 20%;
+            top: 10%;
             left: 20%;
-            width: 30%;
+            width: 50%;
             height: 30%;
             border: 1px solid #ccc;
             background: #fff;

@@ -42,45 +42,53 @@ class ConceptTracker {
 
     // Render level strings inside container with default styles
     render(options = this.renderOptions) {
-
         this.renderOptions = options;
-
+    
         this.container.innerHTML = ''; // Clear container
-
+    
         // Add the header explanation first
         if (this.headerExplanation) {
             const headerDiv = document.createElement('div');
             headerDiv.innerText = this.headerExplanation;
             headerDiv.style.fontWeight = 'bold';
             this.container.appendChild(headerDiv);
+            
+            // Add a newline or gap after the header explanation
+            const gapDiv = document.createElement('div');
+            gapDiv.style.height = '10px'; // Adjust height as needed
+            this.container.appendChild(gapDiv);
         }
-
+    
         // Render each level string with a tab before it and comment if any
         this.levelStrings.forEach((str, index) => {
             const div = document.createElement('div');
             const [number, text] = this._splitNumberFromText(str);
-        
+    
             // Create separate spans for number and text
             const numberSpan = document.createElement('span');
             numberSpan.innerText = number;
-        
+    
             const textSpan = document.createElement('span');
             textSpan.innerText = text;
+    
+            // Add a tab before the textSpan
+            numberSpan.style.paddingLeft = '20px'; // Adjust padding as needed for the tab effect
+    
             textSpan.style.color = this.originalColors[index + 1] || this.renderOptions.color; // Use original or default color
             textSpan.style.fontFamily = this.renderOptions.font;
             textSpan.style.fontWeight = this.renderOptions.bold ? 'bold' : 'normal';
-        
+    
             div.dataset.level = index + 1;
             div.appendChild(numberSpan);
             div.appendChild(textSpan);
             this.container.appendChild(div);
-        
+    
             // Add comment if exists
             if (this.comments[index + 1]) {
                 const commentDiv = this._createCommentDiv(this.comments[index + 1]);
                 this.container.appendChild(commentDiv);
             }
-        });  
+        });
     }
 
     enableMouseHover(level) {

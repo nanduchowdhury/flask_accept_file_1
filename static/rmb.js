@@ -6,6 +6,11 @@ class RmbBase {
         this.actions = actions;
         this.contextMenu = this.createContextMenu();
         this.initializeContextMenu();
+
+        this.pageX = 0;
+        this.pageY = 0;
+        this.offsetX = 0;
+        this.offsetY = 0;
     }
 
     // Dynamically create the context menu based on the actions array
@@ -35,6 +40,12 @@ class RmbBase {
     initializeContextMenu() {
         // Show custom context menu on right-click
         this.container.addEventListener('contextmenu', (e) => {
+
+            this.pageX = e.pageX;
+            this.pageY = e.pageY;
+            this.offsetX = e.offsetX;
+            this.offsetY = e.offsetY;
+
             e.preventDefault(); // Prevent the default browser context menu
             this.contextMenu.style.display = 'block';
             this.contextMenu.style.left = `${e.pageX}px`;
@@ -133,9 +144,12 @@ class RoughAreaRmb extends RmbBase {
 
 class PreviewAreaRmb extends RmbBase {
     constructor() {
-        super('previewArea', [BasicInitializer.EXPLAIN_REGION_RMB, BasicInitializer.POP_OUT_RMB]);
+        super('previewArea', [BasicInitializer.EXPLAIN_REGION_RMB, 
+            BasicInitializer.POP_OUT_RMB, BasicInitializer.REGION_START_END_RMB]);
 
         this.selectRegionMgr = new SelectRegionManager();
+
+        this.regionStartOrEndIndicator = '';
     }
 
     updateRegionBbox(startX, startY, endX, endY) {
@@ -165,6 +179,16 @@ class PreviewAreaRmb extends RmbBase {
         }
     }
 
+    onRegionStartEnd() {
+        if ( this.regionStartOrEndIndicator != 'START' ) {
+            mouseControl.setRegionStartOnMouseClick(this.pageX, this.pageY, this.offsetX, this.offsetY);
+            this.regionStartOrEndIndicator = 'START';
+        } else {
+            mouseControl.setRegionEndOnMouseClick(this.pageX, this.pageY, this.offsetX, this.offsetY);
+            this.regionStartOrEndIndicator = 'END';
+        }
+    }
+
     onAction(actionIndex) {
         switch (actionIndex) {
             case 1:
@@ -172,6 +196,9 @@ class PreviewAreaRmb extends RmbBase {
                 break;
             case 2:
                 this.onPopInOut();
+                break;
+            case 3:
+                this.onRegionStartEnd();
                 break;
             default:
                 alert(`Preview Area Action-${actionIndex} clicked!`);

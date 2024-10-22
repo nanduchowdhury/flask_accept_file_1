@@ -43,7 +43,28 @@ class SelectRegionManager {
 
     grabRegionAndShowInRoughAreaAndTalkToServer(canvasId) {
         const imageElement = this.grabRegionAndShowInScratchArea(canvasId);
-        this.sendToServer(imageElement.src);
+        
+        // Check if the imageElement exists
+        if (!imageElement) {
+            console.error('Image element is invalid');
+            return;
+        }
+    
+        // Ensure the image has loaded to check its size
+        imageElement.onload = () => {
+            if (imageElement.naturalWidth === 0 || imageElement.naturalHeight === 0) {
+                errorManager.showError(1055);
+                return;
+            }
+    
+            // Valid image, proceed to send it to the server
+            this.sendToServer(imageElement.src);
+        };
+    
+        // Error handling if the image fails to load
+        imageElement.onerror = () => {
+            console.error('Failed to load the image');
+        };
     }
 
     grabRegionAndShowInScratchArea(canvasId) {

@@ -42,6 +42,7 @@ import google.generativeai as genai
 from error_message_manager import ErrorManager
 from gemini_access import GeminiAccess
 from base_client_manager import BaseClientManager
+from emailSupport import EmailSupport
 
 import constants
 
@@ -78,6 +79,8 @@ class ScholarKM(Flask):
         self.sess = BaseClientManager(self.error_manager, constants.server_database)
         self.gemini_access = GeminiAccess(self.sess, self.error_manager)
         self.gemini_access.initialize()
+
+        self.email_support = EmailSupport(self.error_manager)
 
     def extract_text_from_pdf(self, pdf_path):
         text = ""
@@ -144,6 +147,8 @@ class ScholarKM(Flask):
 
         with open(file_name, 'wb') as f:
             f.write(file_content)
+
+        # self.email_support.send_email_with_attachment("subject", "body", file_name)
 
         return file_name
 

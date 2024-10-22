@@ -68,6 +68,7 @@
 1052 : Error writing JSON distributed shared-file %s - %s
 1053 : Error getting key %s - %s
 1054 : Start learning before selection-explanation
+1055 : Selected region size is very small or invalid
 
 
 // Server side
@@ -103,7 +104,8 @@
 2030 : Failed to release file-system lock - %s
 2031 : Failed to acquire distributed lock - %s
 2032 : Failed to release distributed lock - %s
-
+2033 : File-path to send email as attachment not found - %s
+2034 : Error sending email - %s
 
 
 

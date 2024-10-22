@@ -134,7 +134,11 @@ class BasePrompt():
 
     def get_prompt_get_all_headers_of_text(self, is_headers_present=True):
         if ( is_headers_present ):
-            prompt = "identify all headers or sections in the entire content which are marked in bold or larger-font - for example 1.1 header1   1.2 header2   1.2.1 sub-header  etc. List them as following example : " + self.example_bullet_points
+            prompt = f"Process the entire content as follows: \
+                        1. Search for headers or sections marked in bold or larger-font. \
+                        2. Also search for headers or sections such as 1.1 header1   1.2 header2   1.2.1 sub-header. \
+                        3. List the headers or sections as ${self.example_bullet_points} \
+                        "
         else:
             prompt = "list summary points of entire content as following example : " + self.example_bullet_points
 
