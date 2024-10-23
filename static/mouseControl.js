@@ -83,12 +83,7 @@ class MouseControl {
 
     onMouseDown = (event) => {
 
-        const touchOrEvent = event.touches ? event.touches[0] : event;
-
-        const px = touchOrEvent.pageX;
-        const py = touchOrEvent.pageY;
-
-        this.setRegionStartOnMouseClick(px, py, event.offsetX, event.offsetY);
+        this.setRegionStartOnMouseClick(event.pageX, event.pageY, event.offsetX, event.offsetY);
 
         this.container.addEventListener('mousemove', this.onMouseMove);
         this.container.addEventListener('mouseup', this.onMouseUp);
@@ -98,13 +93,8 @@ class MouseControl {
 
         const [xAdj, yAdj] = this.computeXYAdjustmentAsPerScrollBars();
 
-        const touchOrEvent = event.touches ? event.touches[0] : event;
-
-        const px = touchOrEvent.pageX;
-        const py = touchOrEvent.pageY;
-
-        this.regionEndX = px;
-        this.regionEndY = py + yAdj;
+        this.regionEndX = event.pageX;
+        this.regionEndY = event.pageY + yAdj;
 
         this.regionImageEndX = event.offsetX;
         this.regionImageEndY = event.offsetY;
