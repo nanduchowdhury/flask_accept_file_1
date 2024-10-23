@@ -27,6 +27,11 @@ class CameraSupport {
         };
     }
 
+    // Utility function to detect if the device is mobile
+    isMobileDevice() {
+        return /Mobi|Android/i.test(navigator.userAgent);
+    }
+
     // Taking a picture and opening the camera popup with error handling
     onTakePicture = async () => {
         const popup = document.getElementById('cameraPopup');
@@ -36,9 +41,17 @@ class CameraSupport {
         const canvas = document.getElementById('cameraCanvas');
 
         try {
+            let facingMode = 'user'; // Default to front-camera for desktops
+
+            // Use back camera (environment) if it's a mobile device
+            if (this.isMobileDevice()) {
+                facingMode = { exact: 'environment' };
+            }
+    
             this.videoStream = await navigator.mediaDevices.getUserMedia({
-                video: { facingMode: { exact: 'environment' } } // Force back-camera
+                video: { facingMode: facingMode }
             });
+
             video.srcObject = this.videoStream;
             video.onloadedmetadata = () => video.play();
         } catch (err) {
@@ -128,7 +141,7 @@ class CameraSupport {
             document.getElementById('startRecording').style.display = 'block';
 
             document.getElementById('cameraPopup').style.display = 'none';
-            
+
         } catch (err) {
             errorManager.showError(1036, err); // Error code 1015 for stopping recording
         }
