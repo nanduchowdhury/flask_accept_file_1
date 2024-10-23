@@ -145,6 +145,10 @@ class MouseControl {
             this.selectionBoxMgr.getOffsetHeight() <= BasicInitializer.ACCEPTABLE_REGION_SIZE ) {
                 this.selectionBoxMgr.clear();
         }
+
+        this.previewAreaRmb.updateRegionBbox(this.regionImageStartX, this.regionImageStartY, 
+            this.regionImageEndX, this.regionImageEndY);
+        this.previewAreaRmb.updateSelectionRegionRect(this.selectionRegionRect);
     }
 
     onMouseUp = () => {
