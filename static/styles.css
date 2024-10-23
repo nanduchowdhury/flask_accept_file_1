@@ -169,20 +169,35 @@
             padding: 10px;
             display: none;
             z-index: 1000;
-            font-family: 'Patrick Hand', cursive; /* Apply the hand-written font */
-            font-weight: bold; /* Set the font weight to normal */
-            font-size: 14px; /* Text size */
-            top: 80%;
-            left: 50%;
-            width: 800px;
-            height: 400px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            font-family: 'Patrick Hand', cursive; /* Handwritten font */
+            font-weight: normal; /* Set font weight to normal */
+            font-size: 14px;
+            top: 50%; /* Vertically center the popout */
+            left: 50%; /* Horizontally center the popout */
             transform: translate(-50%, -50%);
-            overflow: auto; /* Adds scrollbars when content overflows */
-            white-space: normal; /* Allows text to wrap and break into multiple lines */
-            word-wrap: break-word; /* Breaks long words if needed */
-            line-height: 1.5; /* Adjusts line spacing for readability */
+            width: 80%; /* Flexible width to adapt to different screen sizes */
+            max-width: 800px; /* Limit maximum width for desktop */
+            height: auto; /* Adjust height based on content */
+            max-height: 80vh; /* Prevent the popout from taking up too much height */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            overflow: auto; /* Scroll if content overflows */
+            white-space: normal; /* Wrap text */
+            word-wrap: break-word; /* Break long words */
+            line-height: 1.5; /* Improve readability with better line spacing */
+            box-sizing: border-box; /* Include padding in the element’s width/height */
         }
+        
+        /* Responsive adjustments for mobile devices */
+        @media (max-width: 600px) {
+            .genericPopout {
+                width: 95%; /* More flexible width for small screens */
+                max-width: 100%; /* Allow the popout to use full width on mobile */
+                max-height: 90vh; /* Slightly larger max height for mobile devices */
+                font-size: 13px; /* Slightly smaller font size for better fit */
+                padding: 8px; /* Reduce padding for mobile */
+            }
+        }
+        
         
         .previewResultRoughAreaMaximized {
             position: fixed;
