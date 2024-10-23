@@ -36,7 +36,9 @@ class CameraSupport {
         const canvas = document.getElementById('cameraCanvas');
 
         try {
-            this.videoStream = await navigator.mediaDevices.getUserMedia({ video: true });
+            this.videoStream = await navigator.mediaDevices.getUserMedia({
+                video: { facingMode: { exact: 'environment' } } // Force back-camera
+            });
             video.srcObject = this.videoStream;
             video.onloadedmetadata = () => video.play();
         } catch (err) {
@@ -124,6 +126,9 @@ class CameraSupport {
 
             document.getElementById('stopRecording').style.display = 'none';
             document.getElementById('startRecording').style.display = 'block';
+
+            document.getElementById('cameraPopup').style.display = 'none';
+            
         } catch (err) {
             errorManager.showError(1036, err); // Error code 1015 for stopping recording
         }
