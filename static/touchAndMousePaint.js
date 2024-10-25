@@ -14,7 +14,7 @@ class TouchPaintDraw {
         rect.style.top = `${y}px`;
         rect.style.width = '10px';
         rect.style.height = '10px';
-        rect.style.backgroundColor = 'rgba(0, 0, 255, 0.2)';  // Transparent blue
+        rect.style.backgroundColor = 'rgba(0, 0, 255, 0.5)';  // Transparent blue
 
         // Append the rectangle to the container and track it
         this.container.appendChild(rect);

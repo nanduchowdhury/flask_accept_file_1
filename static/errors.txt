@@ -69,6 +69,8 @@
 1053 : Error getting key %s - %s
 1054 : Start learning before selection-explanation
 1055 : Selected region size is very small or invalid
+1056 : Error enabling full-screen mode for camera - %s
+1057 : Error toggling full-screen mode for camera - %s
 
 
 // Server side

@@ -13,7 +13,9 @@ class CameraSupport {
         document.getElementById('startRecording').addEventListener('click', this.handleErrors(this.onStartRecording));
         document.getElementById('closePopup').addEventListener('click', this.handleErrors(this.onCloseCamera));
         document.getElementById('captureButton').addEventListener('click', this.handleErrors(this.onCaptureButton));
+        document.getElementById('fullscreenToggle').addEventListener('click', this.handleErrors(this.onToggle));
         document.getElementById('takePicture').addEventListener('click', this.handleErrors(this.onTakePicture));
+        
     }
 
     // Utility to handle errors and wrap methods
@@ -31,6 +33,21 @@ class CameraSupport {
     isMobileDevice() {
         return /Mobi|Android/i.test(navigator.userAgent);
     }
+
+    onToggle = async () => {
+        try {
+            const cameraPopup = document.getElementById("cameraPopup");
+            if (!document.fullscreenElement) {
+                cameraPopup.requestFullscreen().catch(err => {
+                    errorManager.showError(1056, err.message);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        } catch (err) {
+            errorManager.showError(1057, err); // Error code 1011 for failed video stream
+        }
+    };
 
     // Taking a picture and opening the camera popup with error handling
     onTakePicture = async () => {

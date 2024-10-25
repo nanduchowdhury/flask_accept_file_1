@@ -27,3 +27,8 @@
     background-color: #ffffff; /* Color of the separator */
     margin: 0 10px; /* Space around the separator */
 }
+@media (max-width: 768px) { /* Adjust breakpoint as needed */
+    .horizontal_space_separator {
+        margin: 0 5px;
+    }
+}
