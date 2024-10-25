@@ -5,6 +5,11 @@ class MouseControl {
     constructor(containerId) {
         this.container = document.getElementById(containerId);
 
+        this.pdfCanvas = document.getElementById('pdfCanvas');
+        this.ctx = this.pdfCanvas.getContext('2d');
+
+        this.touchPaintMode = false;
+
         this.previewAreaRmb = new PreviewAreaRmb();
         this.mainTopicsAreaRmb = new MainTopicsAreaRmb();
         this.detailExplanationAreaRmb = new DetailExplanationAreaRmb();
@@ -21,6 +26,8 @@ class MouseControl {
         this.regionEndY = 0;
 
         this.selectionBoxMgr = new SelectionBoxManager();
+
+        this.touchPaintDraw = new TouchPaintDraw(this.container);
     }
 
     clearSelectionRegion() {
@@ -57,15 +64,73 @@ class MouseControl {
         return [xAdj, yAdj];
     }
 
-    setRegionStartOnMouseClick(pageX, pageY, offsetX, offsetY) {
-
+    // Return what-we-see-coord & actual-coord
+    getRelevantEventCoords(pageX, pageY, offsetX, offsetY){
         const [xAdj, yAdj] = this.computeXYAdjustmentAsPerScrollBars();
 
-        this.regionStartX = pageX;
-        this.regionStartY = pageY + yAdj;
+        const whatWeSeeX = pageX;
+        const whatWeSeeY = pageY + yAdj;
 
-        this.regionImageStartX = offsetX;
-        this.regionImageStartY = offsetY;
+        const actualX = offsetX;
+        const actualY = offsetY;
+
+        return [whatWeSeeX, whatWeSeeY, actualX, actualY];
+    }
+
+    startTouchPaint() {
+        this.touchPaintMode = true;
+        this.clearSelectionRegion();
+    }
+
+    clearTouchPaint() {
+        this.touchPaintMode = false;
+        this.touchPaintDraw.clear();
+    }
+
+    endTouchPaint() {
+        this.touchPaintMode = false;
+
+        const bbox = this.touchPaintDraw.getBbox();
+        const actual_bbox = this.touchPaintDraw.getActualBbox();
+
+        if ( bbox && actual_bbox ) {
+            
+            const {minX, minY, maxX, maxY} = bbox;
+            const { minActualX, minActualY, maxActualX, maxActualY } = actual_bbox;
+
+            this.touchPaintDraw.clear();
+
+            const width = Math.abs(Math.round(maxX - minX));
+            const height = Math.abs(Math.round(maxY - minY));
+
+            this.selectionRegionRect.left = Math.round(minX);
+            this.selectionRegionRect.top = Math.round(minY);
+            this.selectionRegionRect.width = width;
+            this.selectionRegionRect.height = height;
+
+            this.selectionBoxMgr.create(minX, minY);
+            this.selectionBoxMgr.updateDimension(`${minY}px`,
+                                                    `${minX}px`,
+                                                    `${width}px`,
+                                                    `${height}px`);
+            this.container.appendChild(this.selectionBoxMgr.getSelectionBox());
+
+            this.previewAreaRmb.updateRegionBbox(minActualX, minActualY, maxActualX, maxActualY);
+            this.previewAreaRmb.updateSelectionRegionRect(this.selectionRegionRect);
+        }
+    }
+
+    handleTouchPaint(pageX, pageY, offsetX, offsetY) {
+        
+        const [whatWeSeeX, whatWeSeeY, actualX, actualY] = this.getRelevantEventCoords(pageX, pageY, offsetX, offsetY);
+
+        this.touchPaintDraw.draw(whatWeSeeX, whatWeSeeY, actualX, actualY);
+    }
+
+    setRegionStartOnMouseClick(pageX, pageY, offsetX, offsetY) {
+
+        [this.regionStartX, this.regionStartY, this.regionImageStartX, this.regionImageStartY] = 
+                            this.getRelevantEventCoords(pageX, pageY, offsetX, offsetY);
 
         this.selectionBoxMgr.clear();
 
@@ -83,7 +148,13 @@ class MouseControl {
 
     onMouseDown = (event) => {
 
-        this.setRegionStartOnMouseClick(event.pageX, event.pageY, event.offsetX, event.offsetY);
+        if ( this.touchPaintMode ) {
+            if ( event.target === this.pdfCanvas ) {
+                this.handleTouchPaint(event.pageX, event.pageY, event.offsetX, event.offsetY);
+            }
+        } else {
+            this.setRegionStartOnMouseClick(event.pageX, event.pageY, event.offsetX, event.offsetY);
+        }
 
         this.container.addEventListener('mousemove', this.onMouseMove);
         this.container.addEventListener('mouseup', this.onMouseUp);
@@ -91,77 +162,47 @@ class MouseControl {
 
     onMouseMove = (event) => {
 
-        const [xAdj, yAdj] = this.computeXYAdjustmentAsPerScrollBars();
+        if ( this.touchPaintMode ) {
+            if ( event.target === this.pdfCanvas ) {
+                this.handleTouchPaint(event.pageX, event.pageY, event.offsetX, event.offsetY);
+            }
+        } else {
 
-        this.regionEndX = event.pageX;
-        this.regionEndY = event.pageY + yAdj;
+        
+            [this.regionEndX, this.regionEndY, this.regionImageEndX, this.regionImageEndY] = 
+                                this.getRelevantEventCoords(event.pageX, event.pageY, event.offsetX, event.offsetY);
 
-        this.regionImageEndX = event.offsetX;
-        this.regionImageEndY = event.offsetY;
+            if ( this.regionEndX < this.regionStartX ) {
+                this.selectionRegionRect.left = Math.round(this.regionEndX);
+            }
+            if ( this.regionEndY < this.regionStartY ) {
+                this.selectionRegionRect.top = Math.round(this.regionEndY);
+            }
+            this.selectionRegionRect.width = Math.abs(Math.round(this.regionEndX - this.regionStartX));
+            this.selectionRegionRect.height = Math.abs(Math.round(this.regionEndY - this.regionStartY));
 
-        if ( this.regionEndX < this.regionStartX ) {
-            this.selectionRegionRect.left = Math.round(this.regionEndX);
+            this.selectionBoxMgr.updateDimension(`${this.selectionRegionRect.top}px`,
+                                                `${this.selectionRegionRect.left}px`,
+                                                `${this.selectionRegionRect.width}px`,
+                                                `${this.selectionRegionRect.height}px`);
+
         }
-        if ( this.regionEndY < this.regionStartY ) {
-            this.selectionRegionRect.top = Math.round(this.regionEndY);
-        }
-        this.selectionRegionRect.width = Math.abs(Math.round(this.regionEndX - this.regionStartX));
-        this.selectionRegionRect.height = Math.abs(Math.round(this.regionEndY - this.regionStartY));
-
-        this.selectionBoxMgr.updateDimension(`${this.selectionRegionRect.top}px`,
-                                            `${this.selectionRegionRect.left}px`,
-                                            `${this.selectionRegionRect.width}px`,
-                                            `${this.selectionRegionRect.height}px`);
-
-
-    }
-
-    setRegionEndOnMouseClick(pageX, pageY, offsetX, offsetY) {
-
-        const [xAdj, yAdj] = this.computeXYAdjustmentAsPerScrollBars();
-
-        this.regionEndX = pageX;
-        this.regionEndY = pageY + yAdj;
-
-        this.regionImageEndX = offsetX;
-        this.regionImageEndY = offsetY;
-
-        if ( this.regionEndX < this.regionStartX ) {
-            this.selectionRegionRect.left = Math.round(this.regionEndX);
-        }
-        if ( this.regionEndY < this.regionStartY ) {
-            this.selectionRegionRect.top = Math.round(this.regionEndY);
-        }
-
-        this.selectionRegionRect.width = Math.abs(Math.round(this.regionEndX - this.regionStartX));
-        this.selectionRegionRect.height = Math.abs(Math.round(this.regionEndY - this.regionStartY));
-
-        this.selectionBoxMgr.updateDimension(`${this.selectionRegionRect.top}px`,
-                                            `${this.selectionRegionRect.left}px`,
-                                            `${this.selectionRegionRect.width}px`,
-                                            `${this.selectionRegionRect.height}px`);
-                                            
-        if ( this.selectionBoxMgr.getOffsetWidth() <= BasicInitializer.ACCEPTABLE_REGION_SIZE ||
-            this.selectionBoxMgr.getOffsetHeight() <= BasicInitializer.ACCEPTABLE_REGION_SIZE ) {
-                this.selectionBoxMgr.clear();
-        }
-
-        this.previewAreaRmb.updateRegionBbox(this.regionImageStartX, this.regionImageStartY, 
-            this.regionImageEndX, this.regionImageEndY);
-        this.previewAreaRmb.updateSelectionRegionRect(this.selectionRegionRect);
     }
 
     onMouseUp = () => {
 
-        if ( this.selectionBoxMgr.getOffsetWidth() <= BasicInitializer.ACCEPTABLE_REGION_SIZE ||
-            this.selectionBoxMgr.getOffsetHeight() <= BasicInitializer.ACCEPTABLE_REGION_SIZE ) {
-                this.selectionBoxMgr.clear();
+        if ( this.touchPaintMode ) {
+
+        } else {
+            if ( this.selectionBoxMgr.getOffsetWidth() <= BasicInitializer.ACCEPTABLE_REGION_SIZE ||
+                this.selectionBoxMgr.getOffsetHeight() <= BasicInitializer.ACCEPTABLE_REGION_SIZE ) {
+                    this.selectionBoxMgr.clear();
+            }
+
+            this.previewAreaRmb.updateRegionBbox(this.regionImageStartX, this.regionImageStartY, 
+                this.regionImageEndX, this.regionImageEndY);
+            this.previewAreaRmb.updateSelectionRegionRect(this.selectionRegionRect);
         }
-
-        this.previewAreaRmb.updateRegionBbox(this.regionImageStartX, this.regionImageStartY, 
-            this.regionImageEndX, this.regionImageEndY);
-        this.previewAreaRmb.updateSelectionRegionRect(this.selectionRegionRect);
-
         this.container.removeEventListener('mousemove', this.onMouseMove);
         this.container.removeEventListener('mouseup', this.onMouseUp);
     }

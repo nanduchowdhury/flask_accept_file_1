@@ -145,11 +145,11 @@ class RoughAreaRmb extends RmbBase {
 class PreviewAreaRmb extends RmbBase {
     constructor() {
         super('previewArea', [BasicInitializer.EXPLAIN_REGION_RMB, 
-            BasicInitializer.POP_OUT_RMB, BasicInitializer.REGION_START_END_RMB]);
+            BasicInitializer.POP_OUT_RMB, BasicInitializer.TOUCH_PAINT_REGION_START_END_RMB]);
 
         this.selectRegionMgr = new SelectRegionManager();
 
-        this.regionStartOrEndIndicator = '';
+        this.touchPaintRegionStartOrEndIndicator = '';
     }
 
     updateRegionBbox(startX, startY, endX, endY) {
@@ -179,26 +179,43 @@ class PreviewAreaRmb extends RmbBase {
         }
     }
 
-    onRegionStartEnd() {
-        if ( this.regionStartOrEndIndicator != 'START' ) {
-            mouseControl.setRegionStartOnMouseClick(this.pageX, this.pageY, this.offsetX, this.offsetY);
-            this.regionStartOrEndIndicator = 'START';
-        } else {
-            mouseControl.setRegionEndOnMouseClick(this.pageX, this.pageY, this.offsetX, this.offsetY);
-            this.regionStartOrEndIndicator = 'END';
+    triggerTapPaintRegionStart() {
+        if ( this.touchPaintRegionStartOrEndIndicator != 'START' ) {
+            mouseControl.startTouchPaint();
+            this.touchPaintRegionStartOrEndIndicator = 'START';
+            return true;
+        }
+        return false;
+    }
+
+    triggerTapPaintRegionEnd() {
+        if ( this.touchPaintRegionStartOrEndIndicator === 'START' ) {
+            mouseControl.endTouchPaint();
+            this.touchPaintRegionStartOrEndIndicator = 'END';
+            return true;
+        }
+        return false;
+    }
+
+    onTouchPaintStartEnd() {
+        if ( !this.triggerTapPaintRegionStart() ) {
+            this.triggerTapPaintRegionEnd();
         }
     }
 
     onAction(actionIndex) {
+
         switch (actionIndex) {
             case 1:
+                this.triggerTapPaintRegionEnd();
                 this.onExplainRegion();
                 break;
             case 2:
+                mouseControl.clearTouchPaint();
                 this.onPopInOut();
                 break;
             case 3:
-                this.onRegionStartEnd();
+                this.onTouchPaintStartEnd();
                 break;
             default:
                 alert(`Preview Area Action-${actionIndex} clicked!`);
