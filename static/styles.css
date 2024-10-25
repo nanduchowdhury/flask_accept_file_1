@@ -169,8 +169,8 @@
             padding: 10px;
             display: none;
             z-index: 1000;
-            font-family: 'Patrick Hand', cursive; /* Handwritten font */
-            font-weight: normal; /* Set font weight to normal */
+            font-family: 'Patrick Hand'; /* Handwritten font */
+            font-weight: bold; /* Set font weight to normal */
             font-size: 14px;
             top: 50%; /* Vertically center the popout */
             left: 50%; /* Horizontally center the popout */
