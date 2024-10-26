@@ -40,6 +40,7 @@ class MouseControl {
                 this.onMouseDown(event);
             }
         });
+        this.container.addEventListener('touchstart', this.onMouseDown);
     }
 
     activateRegionSelection() {
@@ -48,6 +49,7 @@ class MouseControl {
                 this.onMouseDown(event);
             }
         });
+        this.container.removeEventListener('touchstart', this.onMouseDown);
     }
 
     computeXYAdjustmentAsPerScrollBars() {
@@ -146,14 +148,34 @@ class MouseControl {
         this.container.appendChild(this.selectionBoxMgr.getSelectionBox());
     }
 
+    getMouseOrTouchCoords(event) {
+        if (event.type === 'touchstart') {
+            event.preventDefault();
+            // Get coordinates from the first touch point
+            const touch = event.touches[0];
+            const pageX = touch.pageX;
+            const pageY = touch.pageY;
+            const offsetX = touch.clientX - this.pdfCanvas.getBoundingClientRect().left;
+            const offsetY = touch.clientY - this.pdfCanvas.getBoundingClientRect().top;
+
+            return [pageX, pageY, offsetX, offsetY];
+        } else {
+            const { pageX, pageY, offsetX, offsetY } = event;
+
+            return [pageX, pageY, offsetX, offsetY];
+        }
+    }
+
     onMouseDown = (event) => {
+
+        const [pageX, pageY, offsetX, offsetY] = this.getMouseOrTouchCoords(event);
 
         if ( this.touchPaintMode ) {
             if ( event.target === this.pdfCanvas ) {
-                this.handleTouchPaint(event.pageX, event.pageY, event.offsetX, event.offsetY);
+                this.handleTouchPaint(pageX, pageY, offsetX, offsetY);
             }
         } else {
-            this.setRegionStartOnMouseClick(event.pageX, event.pageY, event.offsetX, event.offsetY);
+            this.setRegionStartOnMouseClick(pageX, pageY, offsetX, offsetY);
         }
 
         this.container.addEventListener('mousemove', this.onMouseMove);

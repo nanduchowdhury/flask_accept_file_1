@@ -30,5 +30,6 @@
 @media (max-width: 768px) { /* Adjust breakpoint as needed */
     .horizontal_space_separator {
         margin: 0 5px;
+        width: 60px;
     }
 }
