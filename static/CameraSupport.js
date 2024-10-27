@@ -97,6 +97,7 @@ class CameraSupport {
             if (this.videoStream) {
                 this.videoStream.getTracks().forEach(track => track.stop());
             }
+            document.exitFullscreen();
             document.getElementById('cameraPopup').style.display = 'none';
         } catch (err) {
             errorManager.showError(1033, err); // Error code 1012 for image capture failure
@@ -109,6 +110,7 @@ class CameraSupport {
             if (this.videoStream) {
                 this.videoStream.getTracks().forEach(track => track.stop());
             }
+            document.exitFullscreen();
             document.getElementById('cameraPopup').style.display = 'none';
         } catch (err) {
             errorManager.showError(1034, err); // Error code 1013 for closing camera issues
@@ -153,6 +155,8 @@ class CameraSupport {
                 SharedData.DataSource = 'video';
                 this.previewAreaControl.showVideoInCanvas(videoUrl);
             };
+
+            document.exitFullscreen();
 
             document.getElementById('stopRecording').style.display = 'none';
             document.getElementById('startRecording').style.display = 'block';

@@ -57,10 +57,12 @@ class MouseControl {
         let yAdj = 0;
         if ( containerMaximizeManager.isAnyContainerMaximized() ) {
             yAdj = this.container.scrollTop;
-            let browserScroll = window.scrollY || document.documentElement.scrollTop;
-            yAdj -= browserScroll;
+            let browserScrollY = window.scrollY || document.documentElement.scrollTop;
+            yAdj -= browserScrollY;
 
-            // TBD : xAdj
+            xAdj = this.container.scrollLeft;
+            let browserScrollX = window.scrollX || document.documentElement.scrollLeft;
+            xAdj -= browserScrollX;
         }
 
         return [xAdj, yAdj];
@@ -70,7 +72,7 @@ class MouseControl {
     getRelevantEventCoords(pageX, pageY, offsetX, offsetY){
         const [xAdj, yAdj] = this.computeXYAdjustmentAsPerScrollBars();
 
-        const whatWeSeeX = pageX;
+        const whatWeSeeX = pageX + xAdj;
         const whatWeSeeY = pageY + yAdj;
 
         const actualX = offsetX;
