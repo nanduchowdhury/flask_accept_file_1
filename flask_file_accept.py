@@ -36,6 +36,7 @@ from flask_session import Session
 # from reportlab.lib.pagesizes import letter
 
 from datetime import datetime
+import time
 
 import google.generativeai as genai
 
@@ -43,6 +44,11 @@ from error_message_manager import ErrorManager
 from gemini_access import GeminiAccess
 from base_client_manager import BaseClientManager
 from emailSupport import EmailSupport
+
+from ThreadPool import ThreadPool, TaskStatus, TaskBase
+from headerResponseTask import HeaderResponseTask
+
+from JsonSettings import JsonSettings
 
 import constants
 
@@ -60,7 +66,8 @@ class ScholarKM(Flask):
         self.route('/explain_region', methods=['POST'])(self.explain_region)
         self.route('/report_to_user', methods=['POST'])(self.report_to_user)
 
-        # Constants
+        self.serverSettings = JsonSettings("server_settings.json")
+
         self.BASE_FOLDER = os.path.join(constants.ROOT_FOLDER)
         os.makedirs(self.BASE_FOLDER, exist_ok=True)
         
@@ -72,6 +79,8 @@ class ScholarKM(Flask):
         self.BASE_REPORT_TO_USER_FOLDER = 'report_by_user/'
         self.FIRST_TITLE_LEVEL = 0
         self.ALL_TITLES_LEVEL = -1
+
+        self.pool = ThreadPool(constants.MAX_THREADS_TO_USE)
 
         self.error_manager = ErrorManager(self.client_ip, self.client_uuid, 'static/errors.txt', 
                     log_dir=self.SERVER_LOGS_FOLDER)
@@ -220,7 +229,8 @@ class ScholarKM(Flask):
             uuid = self.get_or_generate_uuid(data)
             self.request_prelude(uuid)
 
-            self.sess.dump_session(uuid)
+            is_threading_on = self.serverSettings.getParam('run.threading')
+            # self.sess.dump_session(uuid)
 
             learnLevel = data['additionalData']
             learnLevel = learnLevel['learnLevel']
@@ -251,18 +261,19 @@ class ScholarKM(Flask):
 
                 self.sess.save_client_data(uuid, 'upload_file.first_response', first_response)
 
-                hindi_response = self.gemini_access.convert_to_hindi(english_response)
-
+                if is_threading_on:
+                    print("NC - starting header thread...")
+                    self.startHeaderResponseThread(uuid, learnLevel + 1)
+                
                 return jsonify({'numPoints': num_learn_points,
-                                'firstResponse' : first_response,
-                                'result1': english_response, 
-                                'result2': hindi_response})
+                                'firstResponse' : first_response})
             else:
 
-                first_response = self.sess.get_client_data(uuid, 'upload_file.first_response')
+                english_response, hindi_response = self.getHeaderResponse(uuid, learnLevel, is_threading_on)
+                
+                if is_threading_on:
+                    self.startHeaderResponseThread(uuid, learnLevel + 1)
 
-                english_response = self.gemini_access.get_header_summary(uuid, first_response[learnLevel])
-                hindi_response = self.gemini_access.convert_to_hindi(english_response)
                 self.error_manager.show_message(2010, learnLevel)
 
                 return jsonify({'result1': english_response, 
@@ -270,6 +281,41 @@ class ScholarKM(Flask):
 
         except Exception as e:
             return jsonify({"error": str(e)}), 500
+
+    def isHeaderResponseForceRun(self, headerTask, is_threading_on):
+
+        if not is_threading_on:
+            return True
+
+        english_response = ''
+        hindi_response = ''
+
+        force_run = not constants.check_condition(headerTask.is_task_completed)
+            
+        if not force_run:
+            english_response, hindi_response = headerTask.get_results()
+            if not english_response or not hindi_response:
+                force_run = True
+
+        return force_run, english_response, hindi_response
+
+    def getHeaderResponse(self, uuid, learnLevel, is_threading_on):
+
+        english_response = ''
+        hindi_response = ''
+
+        headerTask = HeaderResponseTask(uuid, self.sess, self.gemini_access, learnLevel)
+        force_run, english_response, hindi_response = self.isHeaderResponseForceRun(headerTask, is_threading_on)
+
+        if force_run:
+            english_response, hindi_response = headerTask.perform_actual_task()
+                
+        return english_response, hindi_response
+
+    def startHeaderResponseThread(self, uuid, learnLevel):
+        headerTask = HeaderResponseTask(uuid, self.sess, self.gemini_access, learnLevel)
+        task_name = f'task_learnLevel_{learnLevel}'
+        self.pool.startTask(uuid, task_name, headerTask)
 
     def report_to_user(self):
         try:
@@ -292,7 +338,7 @@ class ScholarKM(Flask):
             uuid = self.get_or_generate_uuid(data)
             self.request_prelude(uuid)
 
-            self.sess.dump_session(uuid)
+            # self.sess.dump_session(uuid)
 
             explain_region_file = self.extract_image(uuid, data)
 

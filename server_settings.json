@@ -1,0 +1,9 @@
+{
+    "run": {
+        "threading": true,
+        "mode": "production"
+    },
+    "logging": {
+        "level": "info"
+    }
+}

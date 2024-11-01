@@ -281,3 +281,24 @@ class BaseClientManager:
         finally:
             self.lock_release()
 
+    def is_client_data_present(self, cuuid, key):
+        """
+        Checks if the given key is present for the specified cuuid in client data.
+
+        :param cuuid: The UUID for the client data.
+        :param key: The key to check within the client's data.
+        :return: True if the key exists, False otherwise.
+        """
+        if not self.lock():
+            return False
+
+        try:
+            self._force_read_session()  # Ensure data is up-to-date from the session
+            # Try to retrieve the key, returning True if successful
+            try:
+                self._get_key(cuuid, key)
+                return True
+            except Exception as e:
+                return False
+        finally:
+            self.lock_release()
