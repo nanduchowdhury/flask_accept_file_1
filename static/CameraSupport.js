@@ -103,6 +103,9 @@ class CameraSupport {
             }
 
             document.getElementById('cameraPopup').style.display = 'none';
+
+            sendRecvManager.performAIModelInit();
+
         } catch (err) {
             errorManager.showError(1033, err); // Error code 1012 for image capture failure
         }
@@ -172,6 +175,8 @@ class CameraSupport {
             document.getElementById('startRecording').style.display = 'block';
 
             document.getElementById('cameraPopup').style.display = 'none';
+
+            sendRecvManager.performAIModelInit();
 
         } catch (err) {
             errorManager.showError(1036, err); // Error code 1015 for stopping recording

@@ -21,7 +21,7 @@ class GeminiAccess(BaseModelAccess):
             genai.configure(api_key=GOOGLE_API_KEY)
 
             # model = genai.GenerativeModel("gemini-pro")
-            self.model = genai.GenerativeModel(model_name="models/gemini-1.5-flash")
+            self.model = genai.GenerativeModel(model_name="models/gemini-1.5-flash-8b")
 
         except Exception as e:
             raise ValueError(self.eManager.show_message(2020, e))
@@ -41,16 +41,13 @@ class GeminiAccess(BaseModelAccess):
 
             while google_file.state.name == "PROCESSING":
                 self.eManager.show_message(2006)
-                time.sleep(10)
+                time.sleep(1)
                 google_file = genai.get_file(google_file.name)
 
             if google_file.state.name == "FAILED":
                 raise ValueError(self.eManager.show_message(2007, google_file.state.name))
 
-            self.sess.save_client_data(uuid, 'upload_file.genai_upload_file_name', google_file.name)
-
-            self.generate_base_response(uuid)            
-            self.eManager.show_message(2008, google_file.uri)
+            return google_file.name, google_file.uri
 
         except Exception as e:
             raise ValueError(self.eManager.show_message(2022, e))

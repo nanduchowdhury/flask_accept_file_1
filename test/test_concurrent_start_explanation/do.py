@@ -39,6 +39,10 @@ class TestConcurrentStartExplanation(CommonBaseClass):
             # Collect results
             for idx, test_instance in enumerate(test_instances):
                 print(f"Worker {idx + 1} completed")
+                server_output = test_instance.grab_result2_output()
+                print("==================================")
+                print(server_output)
+                print("==================================")
 
 
 if __name__ == '__main__':

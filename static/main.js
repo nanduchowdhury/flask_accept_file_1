@@ -17,15 +17,6 @@ const detailAreaManager = new DetailAreaManager('result1');
 
 const mouseControl = new MouseControl('previewArea');
 
-const previewAreaControl = new PreviewAreaControl('loadingSpinner');
-const cameraSupport = new CameraSupport(previewAreaControl);
-
-const containerMaximizeManager = new ContainerMaximizeManager();
-
-const geoInfo = new GeolocationInfo();
-geoInfo.getFormattedInfo().then(info => errorManager.log(1013, info));
-
-const reportToDeveloper = new ReportToDeveloper();
 
 const sendRecvManager = new SendReceiveManager(
     'fileInput',
@@ -36,3 +27,15 @@ const sendRecvManager = new SendReceiveManager(
     'previewArea',
     'pdfCanvas'
 );
+
+const previewAreaControl = new PreviewAreaControl('loadingSpinner');
+const cameraSupport = new CameraSupport(previewAreaControl);
+
+const containerMaximizeManager = new ContainerMaximizeManager();
+
+const geoInfo = new GeolocationInfo();
+geoInfo.getFormattedInfo().then(info => errorManager.log(1013, info));
+
+const reportToDeveloper = new ReportToDeveloper();
+
+

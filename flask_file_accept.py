@@ -59,9 +59,12 @@ class ScholarKM(Flask):
         self.client_ip = 'client_ip'
         self.client_uuid = 'client_uuid'
 
+        self.main_content_file = ''
+
         self.route('/')(self.index)
         self.route('/basic_init', methods=['POST'])(self.basic_init)
-        self.route('/upload', methods=['POST'])(self.upload_file)
+        self.route('/ai_model_init', methods=['POST'])(self.ai_model_init)
+        self.route('/learn_response', methods=['POST'])(self.learn_response)
         self.route('/save_logs', methods=['POST'])(self.save_logs)
         self.route('/explain_region', methods=['POST'])(self.explain_region)
         self.route('/report_to_user', methods=['POST'])(self.report_to_user)
@@ -222,8 +225,114 @@ class ScholarKM(Flask):
 
         return file_path
 
-    def upload_file(self):
+    def is_main_content_changed(self, uuid, main_content_file):
+        existing_main_file =  self.sess.check_and_get_client_data(uuid, 'upload_file.main_content_file')
+        if existing_main_file != main_content_file:
+            return True
+        return False
+
+    def gemini_setup_google_file(self, uuid, main_content_file):
+        existing_google_file_name = self.sess.check_and_get_client_data(uuid, 'upload_file.genai_upload_file_name')
+        if not existing_google_file_name:
+            google_file_name, google_uri = self.gemini_access.upload_file(uuid, main_content_file)
+            self.error_manager.show_message(2008, google_uri)
+            self.sess.save_client_data(uuid, 'upload_file.genai_upload_file_name', google_file_name)
+
+    def gemini_setup_base_response(self, uuid):
+        existing_base_response = self.sess.check_and_get_client_data(uuid, 'upload_file.base_response_text')
+        if not existing_base_response:
+            base_response = self.gemini_access.generate_base_response(uuid)
+            self.sess.save_client_data(uuid, 'upload_file.base_response_text', base_response)
+
+    def gemini_setup_content_clarity(self, uuid):
+        is_academic_content = self.sess.check_and_get_client_data(uuid, 'upload_file.is_academic_content')
+        is_text_in_content = self.sess.check_and_get_client_data(uuid, 'upload_file.is_text_in_content')
+        is_header_in_content = self.sess.check_and_get_client_data(uuid, 'upload_file.is_header_in_content')
+
+        if (not is_academic_content) or (not is_text_in_content) or (not is_header_in_content):
+            is_academic_content, is_text_in_content, is_header_in_content = self.gemini_access.is_academic_text_header_present(uuid)
+            self.sess.save_client_data(uuid, 'upload_file.is_academic_content', is_academic_content)
+            self.sess.save_client_data(uuid, 'upload_file.is_text_in_content', is_text_in_content)
+            self.sess.save_client_data(uuid, 'upload_file.is_header_in_content', is_header_in_content)
+
+        if not is_academic_content:
+            raise ValueError(self.error_manager.show_message(2011))
+
+        return is_academic_content, is_text_in_content, is_header_in_content
+
+    def gemini_setup_learn_contents(self, uuid, is_text_in_content, is_header_in_content):
+        existing_num_learn_points = self.sess.check_and_get_client_data(uuid, 'upload_file.num_learn_points')
+        if not existing_num_learn_points:
+
+            if is_header_in_content:
+                self.error_manager.show_message(2014, "YES")
+            else:
+                self.error_manager.show_message(2014, "NO")
+
+            if ( is_text_in_content ):
+                self.error_manager.show_message(2012, "TEXT")
+                english_response = self.gemini_access.get_all_headers_of_text(uuid, is_header_in_content)
+            else:
+                self.error_manager.show_message(2012, "PICTURE")
+                english_response = self.gemini_access.get_all_headers_of_picture(uuid)
+
+            first_response = english_response.splitlines()
+
+            num_learn_points = len(first_response)
+            self.sess.save_client_data(uuid, 'upload_file.num_learn_points', num_learn_points)
+            self.sess.save_client_data(uuid, 'upload_file.first_response', first_response)
+
+            self.error_manager.show_message(2009, num_learn_points)
+
+    def gemini_setup(self, uuid, main_content_file):
+
+        if self.is_main_content_changed(uuid, main_content_file):
+            self.sess.clear_client_data(uuid, 'upload_file')
+            self.sess.save_client_data(uuid, 'upload_file.main_content_file', main_content_file)
+
+        if self.is_main_content_changed(uuid, main_content_file):
+            return
+
+        self.gemini_setup_google_file(uuid, main_content_file)
+
+        if self.is_main_content_changed(uuid, main_content_file):
+            return
+
+        self.gemini_setup_base_response(uuid)
+
+        if self.is_main_content_changed(uuid, main_content_file):
+            return
+
+        is_academic_content, is_text_in_content, is_header_in_content = self.gemini_setup_content_clarity(uuid, )
+
+        if self.is_main_content_changed(uuid, main_content_file):
+            return
+
+        self.gemini_setup_learn_contents(uuid, is_text_in_content, is_header_in_content)
         
+    def ai_model_init(self):
+        try:
+            data = request.json
+            uuid = self.get_or_generate_uuid(data)
+            self.request_prelude(uuid)
+
+            self.main_content_file = self.receive_and_save_file(uuid, data)
+
+            self.gemini_setup(uuid, self.main_content_file)
+
+            return jsonify({'success': 'true'})
+
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
+
+    def is_ai_model_init_completed(self, uuid):
+        if self.sess.is_client_data_present(uuid, 'upload_file.first_response'):
+            if self.sess.get_client_data(uuid, 'upload_file.first_response'):
+                return True
+        return False
+
+
+    def learn_response(self):
         try:
             data = request.json
             uuid = self.get_or_generate_uuid(data)
@@ -237,32 +346,19 @@ class ScholarKM(Flask):
 
             if learnLevel == self.ALL_TITLES_LEVEL:
 
-                self.sess.clear_client_data(uuid, 'upload_file')
+                constants.check_condition(lambda: self.is_ai_model_init_completed(uuid))
 
-                main_content_file = self.receive_and_save_file(uuid, data)
-                self.sess.save_client_data(uuid, 'upload_file.main_content_file', main_content_file)
-                self.gemini_access.upload_file(uuid, main_content_file)
+                if not self.main_content_file:
+                    raise ValueError(self.error_manager.show_message(2035))
 
-                self.gemini_access.check_content_student_related(uuid)
+                if (not self.sess.is_client_data_present(uuid, 'upload_file.num_learn_points')) or \
+                    (not self.sess.is_client_data_present(uuid, 'upload_file.first_response')):
+                    self.gemini_setup(uuid, self.main_content_file)
 
-                if ( self.gemini_access.is_there_text_in_content(uuid) ):
-                    self.error_manager.show_message(2012, "TEXT")
-                    english_response = self.gemini_access.get_all_headers_of_text(uuid)
-                else:
-                    self.error_manager.show_message(2012, "PICTURE")
-                    english_response = self.gemini_access.get_all_headers_of_picture(uuid)
-
-                first_response = english_response.splitlines()
-
-                num_learn_points = len(first_response)
-                self.sess.save_client_data(uuid, 'upload_file.num_learn_points', num_learn_points)
-
-                self.error_manager.show_message(2009, learnLevel, num_learn_points)
-
-                self.sess.save_client_data(uuid, 'upload_file.first_response', first_response)
+                num_learn_points = self.sess.get_client_data(uuid, 'upload_file.num_learn_points')
+                first_response = self.sess.get_client_data(uuid, 'upload_file.first_response')
 
                 if is_threading_on:
-                    print("NC - starting header thread...")
                     self.startHeaderResponseThread(uuid, learnLevel + 1)
                 
                 return jsonify({'numPoints': num_learn_points,

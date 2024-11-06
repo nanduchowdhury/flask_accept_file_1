@@ -16,26 +16,28 @@ class BaseModelAccess():
                 main_string_lower = main_string.lower()  # Convert the main string to lowercase
                 return any(substring.lower() in main_string_lower for substring in substrings)  # Convert substrings to lowercase
 
-    def check_content_student_related(self, uuid):
-
-        substr_in_result = ["no"]
-
-        prompt = self.base_prompt.get_prompt_to_check_academics();
-        response = self.query_google_file(uuid, prompt)
-
-        if ( self.contains_any_substring(response, substr_in_result) ):
-            raise ValueError(self.eManager.show_message(2011))
-
-    def is_there_text_in_content(self, uuid):
-        substr_in_result = ["no"]
-
-        prompt = self.base_prompt.get_prompt_to_check_text_content();
-        response = self.query_google_file(uuid, prompt)
-
-        if ( self.contains_any_substring(response, substr_in_result) ):
-            return False
+    def is_academic_text_header_present(self, uuid):
         
-        return True
+        substr_in_result = ["no"]
+
+        is_academic_content = True
+        is_text_content = True
+        is_header_content = True
+        
+        prompt = self.base_prompt.get_prompt_to_check_academic_text_header_in_content()
+        response = self.query_google_file(uuid, prompt)
+
+        lines = response.splitlines()
+
+        if len(lines) == 3:
+            if self.contains_any_substring(lines[0], substr_in_result):
+                is_academic_content = False
+            if self.contains_any_substring(lines[1], substr_in_result):
+                is_text_content = False
+            if self.contains_any_substring(lines[2], substr_in_result):
+                is_header_content = False
+
+        return is_academic_content, is_text_content, is_header_content
 
     def get_all_headers_of_picture(self, uuid):
         
@@ -62,14 +64,12 @@ class BaseModelAccess():
         
         return True
 
-    def get_all_headers_of_text(self, uuid):
+    def get_all_headers_of_text(self, uuid, is_header_in_content):
 
         prompt = ''
-        if ( self.is_there_headers_in_content(uuid) ):
-            self.eManager.show_message(2014, "YES")
+        if ( is_header_in_content ):
             prompt = self.base_prompt.get_prompt_get_all_headers_of_text()
         else:
-            self.eManager.show_message(2014, "NO")
             prompt = self.base_prompt.get_prompt_get_all_headers_of_text(False)
         
         response = self.query_google_file(uuid, prompt)
@@ -90,7 +90,7 @@ class BaseModelAccess():
         prompt = self.base_prompt.get_prompt_detail_response()
         response = self.query_google_file(uuid, prompt)
 
-        self.sess.save_client_data(uuid, 'upload_file.base_response_text', response)
+        return response
 
     def explain_region(self, uuid, explain_region_file):
 
@@ -109,12 +109,11 @@ class BasePrompt():
         # Constants
         self.example_bullet_points = "for example: 1. point-1   2. point-2"
 
-    def get_prompt_to_check_academics(self):
-        prompt = "is the content related to academics which is taught in school or college? please answer yes or no."
-        return prompt
-
-    def get_prompt_to_check_text_content(self):
-        prompt = "is there text in content? please answer yes or no."
+    def get_prompt_to_check_academic_text_header_in_content(self):
+        prompt = "Please answer following questions yes or no: \
+                    1. is the content related to academics which is taught in school or college? \
+                    2. is there text in content? \
+                    3. are there headers or sections marked in bold in content?"
         return prompt
 
     def get_prompt_get_all_headers_of_picture(self):

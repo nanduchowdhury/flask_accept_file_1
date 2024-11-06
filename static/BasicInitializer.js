@@ -8,7 +8,8 @@ class BasicInitializer {
     static POP_OUT_RMB = "Pop Out/In";
     static TOUCH_PAINT_REGION_START_END_RMB = "Start/End Paint Region";
     static START_LEARN = "Start Learning";
-    static LEARN_NEXT = "Learn Next Topic/Section";
+    static LEARN_NEXT = "Learn More";
+    static WAIT_TIME_FOR_AI_MODEL_INIT = 90000;
 
     constructor() {
         this.clientId = 'client-' + this.getFormattedTimestamp();

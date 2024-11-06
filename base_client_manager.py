@@ -224,7 +224,7 @@ class BaseClientManager:
                 current_data = current_data[k]
             return current_data
         except Exception as e:
-            raise ValueError(self.eManager.show_message(1053, key, str(e)))
+            raise ValueError(f"UUID '{cuuid}' key {key} not found.")
 
     def clear_client_data(self, cuuid, key):
         if not self.lock():
@@ -257,11 +257,17 @@ class BaseClientManager:
 
         except Exception as e:
             # Log any exceptions
-            print(f"Error in saving client data for UUID {cuuid}: {str(e)}")
+            raise ValueError(f"Error in saving client data for UUID {cuuid}: {str(e)}")
             raise
 
         finally:
             self.lock_release()
+
+    def check_and_get_client_data(self, cuuid, key):
+        if (self.is_client_data_present(cuuid, key)):
+            return self.get_client_data(cuuid, key)
+
+        return None
 
     def get_client_data(self, cuuid, key):
 

@@ -71,6 +71,8 @@ class PreviewAreaControl extends ContainerScrollBarControl {
                 errorManager.showError(1039, file.type);  // Unsupported file type error
             }
             this.currentSelectedFile = file;
+
+            sendRecvManager.performAIModelInit();
         }
     }
 

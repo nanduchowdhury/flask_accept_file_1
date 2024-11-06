@@ -35,49 +35,40 @@ class SendReceiveManager {
 
     handleSendButtonClick() {
         try {
+            if ( !previewAreaControl.currentSelectedFile ) {
+                errorManager.showError(1050);
+                return;
+            }
 
-            if ( cTracker.isInitLevel() ) {
-                if ( SharedData.DataSource == 'File' ) {
-                    this.sendFile();
-                } else if ( SharedData.DataSource == 'Picture' ) {
-                    this.sendImage();
-                } else if ( SharedData.DataSource == 'video' ) {
-                    this.sendVideo();
-                } else {
-                    errorManager.showError(1050);
-                }
-            } else if ( !cTracker.isMaxLevelReached() ) {
-                const data = {
-                    client_uuid: basicInitializer.getClient_UUID(),
-                    additionalData: {
-                        // Add any additional data you want to include in the JSON object
-                        someKey: "someValue"
-                    }
-                };
-                this.sendDataToServer(data);
+            if ( !cTracker.isMaxLevelReached() ) {
+                this.recvLearningResponse();
             } else {
                 errorManager.showError(1044);
             }
         } catch (error) {
             errorManager.showError(1015, error);
         } finally {
-            // this.spinner.hide();
+        }
+    }
+
+    performAIModelInit() {
+        if ( SharedData.DataSource == 'File' ) {
+            this.sendFile();
+        } else if ( SharedData.DataSource == 'Picture' ) {
+            this.sendImage();
+        } else if ( SharedData.DataSource == 'video' ) {
+            this.sendVideo();
+        } else {
         }
     }
 
     sendFile() {
 
-        if ( !previewAreaControl.currentSelectedFile ) {
-            errorManager.showError(1050);
-            return;
-        }
-
-        const file = fileInput.files[0];
+        const file = previewAreaControl.currentSelectedFile;
         const reader = new FileReader();
 
         reader.onloadend = () => {
             const base64File = reader.result.split(',')[1];
-
             const data = {
                 client_uuid: basicInitializer.getClient_UUID(),
                 fileName: file.name,
@@ -91,6 +82,22 @@ class SendReceiveManager {
             this.sendDataToServer(data);
         };
         reader.readAsDataURL(file);
+    }
+
+    sendImage() {
+
+        const dataUrl = this.pdfCanvas.toDataURL('image/png');
+        errorManager.log(1016);
+        // console.log('%c ', `font-size:300px; background:url(${dataUrl}) no-repeat;`);
+
+        const data = {
+            client_uuid: basicInitializer.getClient_UUID(),
+            image: dataUrl,
+            additionalData: {
+                someKey: "someValue"
+            }
+        };
+        this.sendDataToServer(data);
     }
 
     sendVideo() {
@@ -113,35 +120,90 @@ class SendReceiveManager {
         }
     }
 
-    sendImage() {
-
-        const dataUrl = this.pdfCanvas.toDataURL('image/png');
-        errorManager.log(1016);
-        // console.log('%c ', `font-size:300px; background:url(${dataUrl}) no-repeat;`);
-
+    async recvLearningResponse() {
         const data = {
             client_uuid: basicInitializer.getClient_UUID(),
-            image: dataUrl,
             additionalData: {
-                someKey: "someValue"
+                someKey: "someValue",
+                learnLevel: cTracker.getCurrentLevel()
             }
         };
-        this.sendDataToServer(data);
-    }
-
-    sendDataToServer(data) {
-
-        if ( this.sendButtonInProcess ) {
+    
+        if (this.sendButtonInProcess) {
             return;
         }
         this.sendButtonInProcess = true;
         this.spinner.show();
+    
+        // Step 1: Check if AI model initialization is done
+        if (this.aiModelInitDone) {
+            if (this.aiModelInitError) {
+                errorManager.showError(1018, this.aiModelInitError);
+                this.aiModelInitError = "";
+                this.spinner.hide();
+                this.sendButtonInProcess = false;
+                return;
+            }
+        } else {
+            // Step 2: Wait for aiModelInitDone to become true, up to 20 seconds
+            let waitStart = Date.now();
+            while (!this.aiModelInitDone && (Date.now() - waitStart < 20000)) {
+                await new Promise(resolve => setTimeout(resolve, 100)); // Check every 100ms
+            }
 
-        data.additionalData.learnLevel = cTracker.getCurrentLevel();
+            // Check again after waiting
+            if (!this.aiModelInitDone) {
+                errorManager.showError(1018, "AI model initialization timed out.");
+                this.spinner.hide();
+                this.sendButtonInProcess = false;
+                return;
+            }
 
+            if (this.aiModelInitError) {
+                errorManager.showError(1018, this.aiModelInitError);
+                this.aiModelInitError = "";
+                this.spinner.hide();
+                this.sendButtonInProcess = false;
+                return;
+            }
+        }
+    
+        // Log data and proceed to send the request
         errorManager.log(1017, data);
+    
+        fetch('/learn_response', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(data => {
+                    throw new Error(data.error);
+                });
+            }
+            return response.json();
+        })
+        .then(data => {
+            this.handleServerResponse(data);
+            this.spinner.hide();
+            this.sendButtonInProcess = false;
+        })
+        .catch(error => {
+            errorManager.showError(1018, error.message);
+            this.spinner.hide();
+            this.sendButtonInProcess = false;
+        });
+    }
+    
+    sendDataToServer(data) {
 
-        fetch('/upload', {
+        this.aiModelInitError = "";
+        this.aiModelInitDone = false;
+
+        fetch('/ai_model_init', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -152,20 +214,18 @@ class SendReceiveManager {
             if (!response.ok) {
                 // Handle HTTP errors (like 500)
                 return response.json().then(data => {
-                    throw new Error(data.error); // Access the error message
+                    this.aiModelInitError = data.error;
+                    this.aiModelInitDone = true;
                 });
             }
             return response.json(); // Process successful response
         })
         .then(data => {
-            this.handleServerResponse(data)
-            this.spinner.hide();
-            this.sendButtonInProcess = false;
+            this.aiModelInitDone = true;
         })
         .catch(error => {
-            errorManager.showError(1018, error.message);
-            this.spinner.hide();
-            this.sendButtonInProcess = false;
+            this.aiModelInitError = error.message;
+            this.aiModelInitDone = true;
         });
     }
 
