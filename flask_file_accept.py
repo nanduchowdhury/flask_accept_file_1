@@ -348,6 +348,7 @@ class ScholarKM(Flask):
 
                 constants.check_condition(lambda: self.is_ai_model_init_completed(uuid))
 
+                self.main_content_file = self.sess.check_and_get_client_data(uuid, 'upload_file.main_content_file')
                 if not self.main_content_file:
                     raise ValueError(self.error_manager.show_message(2035))
 
