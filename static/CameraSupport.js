@@ -92,8 +92,6 @@ class CameraSupport {
 
             this.previewAreaControl.hideVideoShowCanvas();
 
-            SharedData.DataSource = 'Picture';
-
             if (this.videoStream) {
                 this.videoStream.getTracks().forEach(track => track.stop());
             }
@@ -104,6 +102,7 @@ class CameraSupport {
 
             document.getElementById('cameraPopup').style.display = 'none';
 
+            SharedData.DataSource = 'Picture';
             sendRecvManager.performAIModelInit();
 
         } catch (err) {
@@ -164,6 +163,8 @@ class CameraSupport {
                 const videoUrl = URL.createObjectURL(SharedData.videoBlob);
 
                 SharedData.DataSource = 'video';
+                sendRecvManager.performAIModelInit();
+
                 this.previewAreaControl.showVideoInCanvas(videoUrl);
             };
 
@@ -175,8 +176,6 @@ class CameraSupport {
             document.getElementById('startRecording').style.display = 'block';
 
             document.getElementById('cameraPopup').style.display = 'none';
-
-            sendRecvManager.performAIModelInit();
 
         } catch (err) {
             errorManager.showError(1036, err); // Error code 1015 for stopping recording

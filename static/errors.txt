@@ -28,7 +28,6 @@
 1020 : Received server data for NON-INIT level - %s.
 
 // PDF reading
-1021 : INFO - PDF being read in background - you may start learning process now...
 1022 : ERROR - rendering all pages - %s.
 1023 : ERROR - in rendering process - %s.
 1024 : ERROR - loading PDF - %s.
@@ -63,7 +62,7 @@
 1047 : Reported message successfuly.
 1048 : Error during basic-initialization - %s.
 1049 : Convert Microsoft ppts docx files externally into PDF and upload here.
-1050 : Select PDF JPG PNG file to start.
+1050 : Select PDF JPG PNG file of study-material. Or take picture/video of study material.
 1051 : Error reading JSON distributed shared-file %s - %s
 1052 : Error writing JSON distributed shared-file %s - %s
 1053 : Error getting key %s - %s

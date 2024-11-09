@@ -7,6 +7,8 @@ class SharedData {
     static DataSource;
 }
 
+const pdfLoader = new PdfLoader('pdfCanvas', 'loadingSpinner')
+
 const cTracker = new ConceptTracker('result2', 
             "Let's learn following topics/sections:", 
             { color: 'brown', font: 'Courier', bold: true });

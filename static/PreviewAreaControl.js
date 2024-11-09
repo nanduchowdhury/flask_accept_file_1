@@ -55,6 +55,8 @@ class PreviewAreaControl extends ContainerScrollBarControl {
         // Case 2: File was selected
         const file = files[0];
         SharedData.DataSource = 'File';
+        
+        event.target.value = '';
 
         basicInitializer.clearBeforeStartNewExplanation();
 
@@ -162,99 +164,10 @@ class PreviewAreaControl extends ContainerScrollBarControl {
         }
     }
 
-    async renderPDFtoCanvas(pdf, scale = 1) {
-        const pdfCanvas = document.getElementById('pdfCanvas');
-        const context = pdfCanvas.getContext('2d');
-        const canvases = [];  // Store the rendered canvases (images) of each page
-        let totalHeight = 0;   // Track the current total height of the canvas
-        let maxWidth = 0;      // Track the maximum width across all pages
-    
-        const renderPage = async (pageNumber) => {
-            try {
-                const page = await pdf.getPage(pageNumber);
-                const viewport = page.getViewport({ scale });
-    
-                const offScreenCanvas = document.createElement('canvas');
-                offScreenCanvas.width = viewport.width;
-                offScreenCanvas.height = viewport.height;
-                const offScreenContext = offScreenCanvas.getContext('2d');
-    
-                // Render the page to the off-screen canvas
-                await page.render({
-                    canvasContext: offScreenContext,
-                    viewport: viewport
-                }).promise;
-    
-                // Store the off-screen canvas in the list
-                canvases.push(offScreenCanvas);
-    
-                // Update the max width and total height
-                maxWidth = Math.max(maxWidth, viewport.width);
-                totalHeight += viewport.height;
-    
-            } catch (err) {
-                errorManager.showError(1042, err);
-            }
-        };
-    
-        const redrawAllPages = () => {
-            // Set the final size of the pdfCanvas based on all pages' dimensions
-            pdfCanvas.width = maxWidth;
-            pdfCanvas.height = totalHeight;
-    
-            let currentHeight = 0;
-    
-            // Redraw all the stored canvases (pages) on the pdfCanvas
-            canvases.forEach((canvas) => {
-                context.drawImage(canvas, 0, currentHeight);
-                currentHeight += canvas.height;  // Move down for the next page
-            });
-        };
-    
-        const renderAllPages = async () => {
-            try {
-                const numPages = pdf.numPages;
-                errorManager.showInfo(1021);
-    
-                // Render each page and redraw all previous pages after each render
-                for (let pageNumber = 1; pageNumber <= numPages; pageNumber++) {
-                    await renderPage(pageNumber);
-    
-                    // After rendering the current page, redraw all the pages
-                    redrawAllPages();
-                }
-            } catch (err) {
-                errorManager.showError(1022, err);
-            }
-        };
-    
+    supportPdfReading(file) {
         try {
-            await renderAllPages();
-            pdfCanvas.style.display = 'block';
-            previewAreaControl.hideVideoShowCanvas();
-        } catch (err) {
-            errorManager.showError(1023, err);
-        }
-    }
-    
-    async supportPdfReading(file) {
-        try {
-            const reader = new FileReader();
-    
-            reader.onload = async (e) => {
-                try {
-                    const pdf = await pdfjsLib.getDocument({ data: e.target.result }).promise;
-                    await this.renderPDFtoCanvas(pdf);  // Each page will be rendered and displayed as it is read
-                } catch (err) {
-                    errorManager.showError(1024, err); // Error while loading PDF
-                }
-            };
-    
-            reader.onerror = (err) => {
-                errorManager.showError(1025, err); // FileReader error
-            };
-    
-            reader.readAsArrayBuffer(file);
+            pdfLoader.stopLoadPdf();
+            pdfLoader.loadPdf(file);
         } catch (err) {
             errorManager.showError(1026, err); // General error handling
         }

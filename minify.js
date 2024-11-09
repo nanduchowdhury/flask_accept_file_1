@@ -1,3 +1,20 @@
+
+//////////////////////////////////////////////////////////////////////
+//
+// Follow these steps to minify:
+//      1. Create package.json
+//          npm init -y
+//      2. Install Terser
+//          npm install --save-dev terser
+//      3. For each .js file inside static/ directory, create 
+//          minified version inside static/min/ directory.
+//          node minify.js
+//      4. Replace all lines inside index.html file to 
+//          pick .js files from static/min/ directory
+//          python update_index_html_use_minify.py
+//
+///////////////////////////////////////////////////////////////////////
+
 const fs = require('fs');
 const path = require('path');
 const terser = require('terser');

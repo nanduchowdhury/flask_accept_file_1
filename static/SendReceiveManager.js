@@ -35,7 +35,8 @@ class SendReceiveManager {
 
     handleSendButtonClick() {
         try {
-            if ( !previewAreaControl.currentSelectedFile ) {
+
+            if ( !SharedData.DataSource ) {
                 errorManager.showError(1050);
                 return;
             }
@@ -147,7 +148,7 @@ class SendReceiveManager {
         } else {
             // Step 2: Wait for aiModelInitDone to become true, up to 20 seconds
             let waitStart = Date.now();
-            while (!this.aiModelInitDone && (Date.now() - waitStart < 20000)) {
+            while (!this.aiModelInitDone && (Date.now() - waitStart < BasicInitializer.WAIT_TIME_FOR_AI_MODEL_INIT)) {
                 await new Promise(resolve => setTimeout(resolve, 100)); // Check every 100ms
             }
 
