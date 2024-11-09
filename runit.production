@@ -1,0 +1,10 @@
+#!/bin/bash
+
+export GOOGLE_API_KEY=AIzaSyAQCZ2bJHOI6yapnei35Eyrd2IL19ts9GM
+
+# screen
+# gunicorn -w 4 --timeout 300 -k gevent flask_file_accept:app
+# gunicorn -w 4 --timeout 500 --log-level debug --worker-class sync --bind 0.0.0.0:8000 flask_file_accept:app
+screen -dmS gunicorn_scholarKM_service sudo -E /home/nandu_chowdhury/.local/bin/gunicorn --certfile=/home/nandu_chowdhury/ssl/flask.crt --keyfile=/home/nandu_chowdhury/ssl/flask.key -w 4 --timeout 500 --log-level debug --worker-class sync --bind 0.0.0.0:443 flask_file_accept:app
+
+# python flask_file_accept.py
