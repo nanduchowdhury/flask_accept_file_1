@@ -1,29 +1,34 @@
-class PdfLoader {
-    constructor(pdfCanvasId, spinnerId) {
+class PdfLoader extends ContainerScrollBarControl {
+    constructor(containerId, pdfCanvasId, spinnerId) {
+        super(containerId);
         this.pdfCanvasId = pdfCanvasId;
         this.pdfCanvas = document.getElementById(this.pdfCanvasId);
         this.spinner = document.getElementById(spinnerId);
-        this.currentLoadingTask = null; // Holds the current loading task for cancellation
-        this.canvases = []; // Store the rendered canvases of each page
+        this.currentLoadingTask = null;
+        this.pageCanvases = [];
+        this.pdfDocument = null;
+        this.pageHeights = [];
+        this.pageYOffset = [];
+        this.renderedPages = new Set();
+        this.renderingStatus = {}; // Track rendering status for each page
+        this.scrollTimeout = null; // Debounce timer
+        this.scrollDelay = BasicInitializer.PDF_PAGE_RENDERING_DEBOUNCE_DELAY; // Adjust delay as needed
     }
 
-    // Start the spinner
     startSpinner() {
         if (this.spinner) {
             this.spinner.style.display = 'block';
         }
     }
 
-    // Stop the spinner
     stopSpinner() {
         if (this.spinner) {
             this.spinner.style.display = 'none';
         }
     }
 
-    // Load PDF asynchronously
     async loadPdf(file) {
-        this.stopLoadPdf(); // Stop any ongoing loading process
+        this.stopLoadPdf();
         this.startSpinner();
 
         const reader = new FileReader();
@@ -32,122 +37,127 @@ class PdfLoader {
                 const loadingTask = pdfjsLib.getDocument({ data: e.target.result });
                 this.currentLoadingTask = loadingTask;
 
-                const pdf = await loadingTask.promise;
-                await this.renderPDFtoCanvas(pdf); // Each page will be rendered and displayed as it is read
+                this.pdfDocument = await loadingTask.promise;
+                await this.calculateDocumentDimensions();
+                await this.renderPage(1); // Start by rendering the first page
 
             } catch (err) {
-                errorManager.showError(1024, err); // Error while loading PDF
+                errorManager.showError(1024, err);
             } finally {
                 this.stopSpinner();
-                this.clearCanvases(); // Clear memory after loading is complete
             }
         };
 
         reader.onerror = (err) => {
-            errorManager.showError(1025, err); // FileReader error
+            errorManager.showError(1025, err);
             this.stopSpinner();
-            this.clearCanvases(); // Ensure cleanup even in case of error
         };
 
         reader.readAsArrayBuffer(file);
     }
 
-    // Stop any ongoing PDF loading task
+    async calculateDocumentDimensions() {
+        const numPages = this.pdfDocument.numPages;
+        let totalHeight = 0;
+        let maxWidth = 0;
+
+        for (let pageNum = 1; pageNum <= numPages; pageNum++) {
+            const page = await this.pdfDocument.getPage(pageNum);
+            const viewport = page.getViewport({ scale: 1 });
+
+            if (viewport.width > maxWidth) {
+                maxWidth = viewport.width;
+            }
+
+            this.pageHeights[pageNum - 1] = viewport.height;
+            this.pageYOffset[pageNum - 1] = totalHeight;
+            totalHeight += viewport.height;
+        }
+
+        this.pdfCanvas.width = maxWidth;
+        this.pdfCanvas.height = totalHeight;
+        this.pdfCanvas.style.display = 'block';
+    }
+
+    async renderPage(pageNum) {
+        // Check rendering status to avoid redundant renders
+        if (this.renderedPages.has(pageNum) || this.renderingStatus[pageNum]) return;
+
+        console.log("NC - start rendering page : ", pageNum);
+
+        // Mark the page as currently being rendered
+        this.renderingStatus[pageNum] = true;
+
+        try {
+            const page = await this.pdfDocument.getPage(pageNum);
+            const viewport = page.getViewport({ scale: 1 });
+
+            const offScreenCanvas = document.createElement('canvas');
+            offScreenCanvas.width = viewport.width;
+            offScreenCanvas.height = viewport.height;
+
+            await page.render({
+                canvasContext: offScreenCanvas.getContext('2d'),
+                viewport: viewport
+            }).promise;
+
+            const context = this.pdfCanvas.getContext('2d');
+            context.drawImage(offScreenCanvas, 0, this.pageYOffset[pageNum - 1]);
+            this.renderedPages.add(pageNum);
+
+        } catch (err) {
+            console.error(`Error rendering page ${pageNum}:`, err);
+        } finally {
+            // Reset rendering status for this page
+            this.renderingStatus[pageNum] = false;
+        }
+
+        console.log("NC - end rendering page : ", pageNum);
+    }
+
+    debounceScroll() {
+        clearTimeout(this.scrollTimeout);
+        this.scrollTimeout = setTimeout(() => this.renderVisiblePages(), this.scrollDelay);
+    }
+
+    async renderVisiblePages() {
+        if (!this.pdfDocument) return;
+
+        const scrollTop = this.container.scrollTop;
+        const viewportHeight = this.container.clientHeight;
+
+        for (let pageNum = 1; pageNum <= this.pdfDocument.numPages; pageNum++) {
+            const pageTop = this.pageYOffset[pageNum - 1];
+            const pageBottom = pageTop + this.pageHeights[pageNum - 1];
+
+            if ((pageTop < scrollTop + viewportHeight) && (pageBottom > scrollTop)) {
+                await this.renderPage(pageNum);
+            }
+        }
+    }
+
+    onScroll() {
+        this.debounceScroll(); // Call debounced scroll handler
+    }
+
     stopLoadPdf() {
         if (this.currentLoadingTask) {
             this.currentLoadingTask.destroy();
             this.currentLoadingTask = null;
-            this.clearPdfResources(); // Clear any ongoing resources when stopping the task
+            this.clearResources();
         }
     }
 
-    // Render PDF to canvas
-    async renderPDFtoCanvas(pdf, scale = 1) {
-        const context = this.pdfCanvas.getContext('2d');
-        let totalHeight = 0;   // Track the current total height of the canvas
-        let maxWidth = 0;      // Track the maximum width across all pages
-
-        const renderPage = async (pageNumber) => {
-            try {
-                const page = await pdf.getPage(pageNumber);
-                const viewport = page.getViewport({ scale });
-
-                const offScreenCanvas = document.createElement('canvas');
-                offScreenCanvas.width = viewport.width;
-                offScreenCanvas.height = viewport.height;
-                const offScreenContext = offScreenCanvas.getContext('2d');
-
-                // Render the page to the off-screen canvas
-                await page.render({
-                    canvasContext: offScreenContext,
-                    viewport: viewport
-                }).promise;
-
-                // Store the off-screen canvas in the list
-                this.canvases.push(offScreenCanvas);
-
-                // Update the max width and total height
-                maxWidth = Math.max(maxWidth, viewport.width);
-                totalHeight += viewport.height;
-
-            } catch (err) {
-                errorManager.showError(1042, err);
-                this.stopSpinner();
-                this.clearCanvases();
-            }
-        };
-
-        const redrawAllPages = () => {
-            // Set the final size of the pdfCanvas based on all pages' dimensions
-            this.pdfCanvas.width = maxWidth;
-            this.pdfCanvas.height = totalHeight;
-
-            let currentHeight = 0;
-
-            // Redraw all the stored canvases (pages) on the pdfCanvas
-            this.canvases.forEach((canvas) => {
-                context.drawImage(canvas, 0, currentHeight);
-                currentHeight += canvas.height;  // Move down for the next page
-            });
-        };
-
-        const renderAllPages = async () => {
-            try {
-                const numPages = pdf.numPages;
-                // Render each page and redraw all previous pages after each render
-                for (let pageNumber = 1; pageNumber <= numPages; pageNumber++) {
-                    await renderPage(pageNumber);
-                }
-                redrawAllPages();
-            } catch (err) {
-                errorManager.showError(1022, err);
-                this.stopSpinner();
-                this.clearCanvases();
-            }
-        };
-
-        try {
-            await renderAllPages();
-            this.pdfCanvas.style.display = 'block';
-            previewAreaControl.hideVideoShowCanvas();
-        } catch (err) {
-            errorManager.showError(1023, err);
-            this.stopSpinner();
-            this.clearCanvases();
-        }
-    }
-
-    // Method to clear any canvases or other memory-intensive objects
-    clearPdfResources() {
-        // Clear canvas resources
-        if (this.pdfCanvas) {
-            const context = this.pdfCanvas.getContext('2d');
-            context.clearRect(0, 0, this.pdfCanvas.width, this.pdfCanvas.height);
-            this.pdfCanvas.width = 0;
-            this.pdfCanvas.height = 0;
-            this.pdfCanvas = null; // Nullify the canvas to ensure it's eligible for garbage collection
-            this.pdfCanvas = document.getElementById(this.pdfCanvasId);
-        }
+    clearResources() {
+        this.pdfCanvas.getContext('2d').clearRect(0, 0, this.pdfCanvas.width, this.pdfCanvas.height);
+        this.pdfCanvas.width = 0;
+        this.pdfCanvas.height = 0;
+        this.pdfDocument = null;
+        this.pageCanvases = [];
+        this.pageHeights = [];
+        this.pageYOffset = [];
+        this.renderedPages.clear();
+        this.renderingStatus = {}; // Clear rendering status on reload
     }
 
     clearCanvases() {

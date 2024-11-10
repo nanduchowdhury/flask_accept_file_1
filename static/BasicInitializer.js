@@ -10,6 +10,7 @@ class BasicInitializer {
     static START_LEARN = "Start Learning";
     static LEARN_NEXT = "Learn More";
     static WAIT_TIME_FOR_AI_MODEL_INIT = 90000;
+    static PDF_PAGE_RENDERING_DEBOUNCE_DELAY = 200; // 200ms
 
     constructor() {
         this.clientId = 'client-' + this.getFormattedTimestamp();
