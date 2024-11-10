@@ -29,7 +29,7 @@
 
 // PDF reading
 1022 : ERROR - rendering all pages - %s.
-1023 : ERROR - in rendering page %s - %s.
+1023 : ERROR - in rendering process - %s.
 1024 : ERROR - loading PDF - %s.
 1025 : ERROR - reading PDF file - %s.
 1026 : ERROR - in PDF reading - %s.

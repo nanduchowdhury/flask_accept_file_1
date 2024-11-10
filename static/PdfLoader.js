@@ -1,5 +1,5 @@
 class PdfLoader extends ContainerScrollBarControl {
-    constructor(containerId, pdfCanvasId, spinnerId, pdfCache = false) {
+    constructor(containerId, pdfCanvasId, spinnerId) {
         super(containerId);
         this.pdfCanvasId = pdfCanvasId;
         this.pdfCanvas = document.getElementById(this.pdfCanvasId);
@@ -13,7 +13,6 @@ class PdfLoader extends ContainerScrollBarControl {
         this.renderingStatus = {}; // Track rendering status for each page
         this.scrollTimeout = null; // Debounce timer
         this.scrollDelay = BasicInitializer.PDF_PAGE_RENDERING_DEBOUNCE_DELAY; // Adjust delay as needed
-        this.pdfCache = pdfCache; // Optional PDF caching
     }
 
     startSpinner() {
@@ -29,7 +28,7 @@ class PdfLoader extends ContainerScrollBarControl {
     }
 
     async loadPdf(file) {
-        this.stopLoadPdf(); // Stop any ongoing PDF loading/rendering
+        this.stopLoadPdf();
         this.startSpinner();
 
         const reader = new FileReader();
@@ -41,6 +40,7 @@ class PdfLoader extends ContainerScrollBarControl {
                 this.pdfDocument = await loadingTask.promise;
                 await this.calculateDocumentDimensions();
                 await this.renderPage(1); // Start by rendering the first page
+
             } catch (err) {
                 errorManager.showError(1024, err);
             } finally {
@@ -63,7 +63,7 @@ class PdfLoader extends ContainerScrollBarControl {
 
         for (let pageNum = 1; pageNum <= numPages; pageNum++) {
             const page = await this.pdfDocument.getPage(pageNum);
-            const viewport = this.getViewportForDevice(page);
+            const viewport = page.getViewport({ scale: 1 });
 
             if (viewport.width > maxWidth) {
                 maxWidth = viewport.width;
@@ -79,21 +79,18 @@ class PdfLoader extends ContainerScrollBarControl {
         this.pdfCanvas.style.display = 'block';
     }
 
-    getViewportForDevice(page) {
-        const isMobile = window.innerWidth < 768;
-        const scale = isMobile ? (window.innerWidth / page.getViewport({ scale: 1 }).width) : 1;
-        return page.getViewport({ scale });
-    }
-
     async renderPage(pageNum) {
+        // Check rendering status to avoid redundant renders
         if (this.renderedPages.has(pageNum) || this.renderingStatus[pageNum]) return;
 
         console.log("NC - start rendering page : ", pageNum);
+
+        // Mark the page as currently being rendered
         this.renderingStatus[pageNum] = true;
 
         try {
             const page = await this.pdfDocument.getPage(pageNum);
-            const viewport = this.getViewportForDevice(page);
+            const viewport = page.getViewport({ scale: 1 });
 
             const offScreenCanvas = document.createElement('canvas');
             offScreenCanvas.width = viewport.width;
@@ -108,15 +105,10 @@ class PdfLoader extends ContainerScrollBarControl {
             context.drawImage(offScreenCanvas, 0, this.pageYOffset[pageNum - 1]);
             this.renderedPages.add(pageNum);
 
-            if (!this.pdfCache) {
-                // Free up memory for non-cached mode
-                offScreenCanvas.width = 0;
-                offScreenCanvas.height = 0;
-            }
-
         } catch (err) {
-            errorManager.showError(1023, pageNum, err);
+            console.error(`Error rendering page ${pageNum}:`, err);
         } finally {
+            // Reset rendering status for this page
             this.renderingStatus[pageNum] = false;
         }
 
@@ -145,7 +137,7 @@ class PdfLoader extends ContainerScrollBarControl {
     }
 
     onScroll() {
-        this.debounceScroll();
+        this.debounceScroll(); // Call debounced scroll handler
     }
 
     stopLoadPdf() {
@@ -169,10 +161,11 @@ class PdfLoader extends ContainerScrollBarControl {
     }
 
     clearCanvases() {
-        this.pageCanvases.forEach((canvas) => {
+        // Clear the canvases array
+        this.canvases.forEach((canvas) => {
             canvas.width = 0;
             canvas.height = 0;
         });
-        this.pageCanvases = [];
+        this.canvases = []; // Reset the canvases array
     }
 }
