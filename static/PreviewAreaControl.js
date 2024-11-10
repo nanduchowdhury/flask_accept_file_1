@@ -168,6 +168,9 @@ class PreviewAreaControl extends ContainerScrollBarControl {
         try {
             pdfLoader.stopLoadPdf();
             pdfLoader.loadPdf(file);
+
+            this.hideVideoShowCanvas();
+
         } catch (err) {
             errorManager.showError(1026, err); // General error handling
         }

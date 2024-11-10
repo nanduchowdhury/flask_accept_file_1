@@ -106,7 +106,7 @@ class PdfLoader extends ContainerScrollBarControl {
             this.renderedPages.add(pageNum);
 
         } catch (err) {
-            console.error(`Error rendering page ${pageNum}:`, err);
+            errorManager.showError(1023, pageNum, err);
         } finally {
             // Reset rendering status for this page
             this.renderingStatus[pageNum] = false;
@@ -158,14 +158,5 @@ class PdfLoader extends ContainerScrollBarControl {
         this.pageYOffset = [];
         this.renderedPages.clear();
         this.renderingStatus = {}; // Clear rendering status on reload
-    }
-
-    clearCanvases() {
-        // Clear the canvases array
-        this.canvases.forEach((canvas) => {
-            canvas.width = 0;
-            canvas.height = 0;
-        });
-        this.canvases = []; // Reset the canvases array
     }
 }
