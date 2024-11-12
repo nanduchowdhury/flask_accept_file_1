@@ -1,3 +1,25 @@
+/////////////////////////////////////////////////////////////////
+//
+// Following is how large PDF loaded and shown:
+//
+//      1.  At any time only 3 pages are shown - pdfCanvas shows image of 3 pages.
+//          This is because if we append all pages to pdfCanvas, mobile devices
+//              do not show anything but only a smiley.
+//      2.  When scroll is triggered, read more 3 pages.
+//      3.  'renderedPages' and 'renderingStatus' - are used to 
+//              restrict async renderPage() re-entry.
+//      4.  'pageImageCache' holds off-screen-canvases of all pages that were rendered.
+//           This could be optimized to hold only certain numbe of pages - to
+//              save memory-hold.
+//      5.  Whenever scroll reaches extreme top or bottom, load/render pages.
+//              But also move the scroll-bar - this facilitates smooth viewing
+//              as scrolling happens.
+//
+//          Validation : Desktop PDF : 20MB
+//                       Mobile PDF : 16MB
+//
+/////////////////////////////////////////////////////////////////
+
 class PdfLoader extends ContainerScrollBarControl {
     constructor(containerId, pdfCanvasId, spinnerId) {
         super(containerId);
@@ -10,6 +32,7 @@ class PdfLoader extends ContainerScrollBarControl {
         this.pageHeights = [];
         this.pageYOffset = [];
         this.renderedPages = new Set();
+        this.pageImageCache = new Map();
         this.renderingStatus = {}; // Track rendering status for each page
         this.scrollTimeout = null; // Debounce timer
         this.scrollDelay = BasicInitializer.PDF_PAGE_RENDERING_DEBOUNCE_DELAY; // Adjust delay as needed
@@ -108,7 +131,15 @@ class PdfLoader extends ContainerScrollBarControl {
     async renderPage(pageNum) {
         if (this.renderedPages.has(pageNum) || this.renderingStatus[pageNum]) return;
 
-        console.log("NC - start rendering page : ", pageNum);
+        // console.log("NC - start rendering page : ", pageNum);
+
+        // If page image is cached, use it directly
+        if (this.pageImageCache.has(pageNum)) {
+            this.drawCachedPage(pageNum);
+            // console.log("NC - cache rendering page : ", pageNum);
+            return;
+        }
+
         this.renderingStatus[pageNum] = true;
 
         try {
@@ -124,9 +155,11 @@ class PdfLoader extends ContainerScrollBarControl {
                 viewport: viewport
             }).promise;
 
-            const context = this.pdfCanvas.getContext('2d');
-            const pageY = this.pageYOffset[pageNum - 1] - this.pageYOffset[this.currentPageRange[0] - 1]; // Adjust y-position based on range start
-            context.drawImage(offScreenCanvas, 0, pageY);
+            // Cache the rendered page image
+            this.pageImageCache.set(pageNum, offScreenCanvas);
+
+            // Draw the image on pdfCanvas
+            this.drawCachedPage(pageNum);
             this.renderedPages.add(pageNum);
 
         } catch (err) {
@@ -135,7 +168,14 @@ class PdfLoader extends ContainerScrollBarControl {
             this.renderingStatus[pageNum] = false;
         }
 
-        console.log("NC - end rendering page : ", pageNum);
+        // console.log("NC - end rendering page : ", pageNum);
+    }
+
+    drawCachedPage(pageNum) {
+        const cachedCanvas = this.pageImageCache.get(pageNum);
+        const context = this.pdfCanvas.getContext('2d');
+        const pageY = this.pageYOffset[pageNum - 1] - this.pageYOffset[this.currentPageRange[0] - 1]; // Adjust y-position based on range start
+        context.drawImage(cachedCanvas, 0, pageY);
     }
 
     debounceScroll() {
@@ -144,24 +184,29 @@ class PdfLoader extends ContainerScrollBarControl {
     }
 
     async handleScroll() {
+
+        if ( !this.pdfDocument ) {
+            return;
+        }
+
         const { scrollTop, scrollHeight, clientHeight } = this.container;
         const scrollMiddle = scrollTop + clientHeight / 2;
 
-	const tolerance = 1; // Set a tolerance to account for minor differences
-	const isBottomMost = scrollTop + clientHeight >= scrollHeight - tolerance;
-	const isTopMost = scrollTop <= tolerance;
+        const tolerance = 1; // Set a tolerance to account for minor differences
+        const isBottomMost = scrollTop + clientHeight >= scrollHeight - tolerance;
+        const isTopMost = scrollTop <= tolerance;
 
 
         if (isBottomMost && this.currentPageRange[1] < this.pdfDocument.numPages) {
             this.currentPageRange = [this.currentPageRange[1], this.currentPageRange[1] + 2];
             await this.renderPagesInRange();
             // this.container.scrollTop = scrollMiddle;
-	    this.container.scrollTop -= 100; 
+	        this.container.scrollTop = 100;
         } else if (isTopMost && this.currentPageRange[0] > 1) {
             this.currentPageRange = [this.currentPageRange[0] - 2, this.currentPageRange[0]];
             await this.renderPagesInRange();
             // this.container.scrollTop = scrollMiddle;
-	    this.container.scrollTop += 100;
+	        this.container.scrollTop = scrollHeight / 2;
         }
     }
 
@@ -187,6 +232,7 @@ class PdfLoader extends ContainerScrollBarControl {
         this.pageYOffset = [];
         this.renderedPages.clear();
         this.renderingStatus = {};
+        this.pageImageCache.clear();
     }
 }
 
