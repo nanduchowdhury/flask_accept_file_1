@@ -21,7 +21,7 @@
 /////////////////////////////////////////////////////////////////
 
 class PdfLoader extends ContainerScrollBarControl {
-    constructor(containerId, pdfCanvasId, spinnerId) {
+    constructor(containerId, pdfCanvasId, spinnerId, numPagesAtATime = 3) {
         super(containerId);
         this.pdfCanvasId = pdfCanvasId;
         this.pdfCanvas = document.getElementById(this.pdfCanvasId);
@@ -36,7 +36,43 @@ class PdfLoader extends ContainerScrollBarControl {
         this.renderingStatus = {}; // Track rendering status for each page
         this.scrollTimeout = null; // Debounce timer
         this.scrollDelay = BasicInitializer.PDF_PAGE_RENDERING_DEBOUNCE_DELAY; // Adjust delay as needed
-        this.currentPageRange = [1, 3]; // Initialize with pages 1 to 3
+        this.numPagesAtATime = numPagesAtATime; // Number of pages to render at a time
+        this.currentPageRange = [1, numPagesAtATime]; // Initialize with pages 1 to numPagesAtATime
+
+        // Create and style the scroll tag
+        this.scrollTag = document.createElement('div');
+
+        // this.container.style.position = "relative";
+        this.scrollTag.style.position = 'absolute';
+
+
+        // this.scrollTag.style.top = '10px';
+        // this.scrollTag.style.right = '10px';
+        this.scrollTag.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+        this.scrollTag.style.color = 'white';
+        this.scrollTag.style.padding = '5px 10px';
+        this.scrollTag.style.borderRadius = '5px';
+        this.scrollTag.style.display = 'none'; // Hide by default
+        this.container.appendChild(this.scrollTag); // Append to container
+    }
+
+    updateScrollTagPosition() {
+        const {top, left} = basicInitializer.getTopLeftCoordsOfContainer(this.container);
+        this.scrollTag.style.top = `${top}px`;
+        this.scrollTag.style.left = `${left}px`;
+    }
+
+    showScrollTag(currentPage, numPages) {
+        // Update and show the scroll tag
+        this.scrollTag.textContent = `Page ${currentPage} of ${numPages}`;
+        this.updateScrollTagPosition();
+        this.scrollTag.style.display = 'block';
+
+        // Hide the tag after a delay if scrolling stops
+        clearTimeout(this.scrollTimeout);
+        this.scrollTimeout = setTimeout(() => {
+            this.scrollTag.style.display = 'none';
+        }, 1000); // Adjust delay as needed
     }
 
     startSpinner() {
@@ -63,7 +99,7 @@ class PdfLoader extends ContainerScrollBarControl {
 
                 this.pdfDocument = await loadingTask.promise;
                 await this.calculateDocumentDimensions();
-                await this.renderPagesInRange(); // Start by rendering the initial range (1-3)
+                await this.renderPagesInRange(); // Start by rendering the initial range (1 to numPagesAtATime)
 
             } catch (err) {
                 errorManager.showError(1024, err);
@@ -104,11 +140,9 @@ class PdfLoader extends ContainerScrollBarControl {
 
     async renderPagesInRange() {
         const [start, end] = this.currentPageRange;
-        
-        // Clear the canvas before rendering the new range of pages
+
         this.clearCanvas();
 
-        // Calculate total height for the current 3-page range and adjust canvas height
         let totalHeight = 0;
         for (let pageNum = start; pageNum <= end && pageNum <= this.pdfDocument.numPages; pageNum++) {
             totalHeight += this.pageHeights[pageNum - 1];
@@ -155,10 +189,8 @@ class PdfLoader extends ContainerScrollBarControl {
                 viewport: viewport
             }).promise;
 
-            // Cache the rendered page image
             this.pageImageCache.set(pageNum, offScreenCanvas);
 
-            // Draw the image on pdfCanvas
             this.drawCachedPage(pageNum);
             this.renderedPages.add(pageNum);
 
@@ -174,7 +206,7 @@ class PdfLoader extends ContainerScrollBarControl {
     drawCachedPage(pageNum) {
         const cachedCanvas = this.pageImageCache.get(pageNum);
         const context = this.pdfCanvas.getContext('2d');
-        const pageY = this.pageYOffset[pageNum - 1] - this.pageYOffset[this.currentPageRange[0] - 1]; // Adjust y-position based on range start
+        const pageY = this.pageYOffset[pageNum - 1] - this.pageYOffset[this.currentPageRange[0] - 1];
         context.drawImage(cachedCanvas, 0, pageY);
     }
 
@@ -184,26 +216,38 @@ class PdfLoader extends ContainerScrollBarControl {
     }
 
     async handleScroll() {
-
-        if ( !this.pdfDocument ) {
+        if (!this.pdfDocument) {
             return;
         }
 
         const { scrollTop, scrollHeight, clientHeight } = this.container;
         const scrollMiddle = scrollTop + clientHeight / 2;
 
-        const tolerance = 1; // Set a tolerance to account for minor differences
+        const tolerance = 1;
         const isBottomMost = scrollTop + clientHeight >= scrollHeight - tolerance;
         const isTopMost = scrollTop <= tolerance;
 
+        const numPages = this.pdfDocument.numPages;
+        const midPage = Math.min(
+            Math.ceil((scrollTop + clientHeight / 2) / (scrollHeight / this.numPagesAtATime)),
+            this.numPagesAtATime
+        );
+        
+        this.showScrollTag(midPage + this.currentPageRange[0] - 1, numPages);
 
-        if (isBottomMost && this.currentPageRange[1] < this.pdfDocument.numPages) {
-            this.currentPageRange = [this.currentPageRange[1], this.currentPageRange[1] + 2];
+        if (isBottomMost && this.currentPageRange[1] < numPages) {
+            this.currentPageRange = [
+                this.currentPageRange[1],
+                this.currentPageRange[1] + this.numPagesAtATime - 1
+            ];
             await this.renderPagesInRange();
             // this.container.scrollTop = scrollMiddle;
 	        this.container.scrollTop = 100;
         } else if (isTopMost && this.currentPageRange[0] > 1) {
-            this.currentPageRange = [this.currentPageRange[0] - 2, this.currentPageRange[0]];
+            this.currentPageRange = [
+                this.currentPageRange[0] - (this.numPagesAtATime - 1),
+                this.currentPageRange[0]
+            ];
             await this.renderPagesInRange();
             // this.container.scrollTop = scrollMiddle;
 	        this.container.scrollTop = scrollHeight / 2;
@@ -235,4 +279,3 @@ class PdfLoader extends ContainerScrollBarControl {
         this.pageImageCache.clear();
     }
 }
-

@@ -122,4 +122,31 @@ class BasicInitializer {
         document.getElementById('result1').innerHTML = '';
         document.getElementById('roughArea').innerHTML = '';
     }
+
+    //////////////////////////////////////////////////////
+    //
+    // Based on container 'position', get the top and left.
+    // This is particularly useful for containers which can
+    // be maximized.
+    //
+    ///////////////////////////////////////////////////////
+    getTopLeftCoordsOfContainer(container) {
+        const computedStyle = window.getComputedStyle(container);
+        const containerRect = container.getBoundingClientRect();
+
+        const position = computedStyle.position;
+
+        let left = 0;
+        let top = 0;
+
+        if ( position == "fixed" ) {
+            top = container.scrollTop;
+            left = container.scrollLeft;
+        } else {
+            top = window.scrollY + containerRect.top;
+            left = window.scrollX + containerRect.left;
+        }
+
+        return {top, left};
+    }
 }

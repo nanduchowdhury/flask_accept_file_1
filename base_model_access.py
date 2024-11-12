@@ -122,7 +122,7 @@ class BasePrompt():
         return prompt
 
     def get_prompt_header_summary(self, header_point):
-        prompt = "summarize about following header in the content in context to the uploaded file - \
+        prompt = "create summary points about following header in the content in context to the uploaded file - \
                            also answer if any question present. also help if there is any activity to be done : \"" + header_point + "\""
 
         return prompt
@@ -137,6 +137,7 @@ class BasePrompt():
                         1. Search for headers or sections marked in bold or larger-font. \
                         2. Also search for headers or sections such as 1.1 header1   1.2 header2   1.2.1 sub-header. \
                         3. List the headers or sections as ${self.example_bullet_points} \
+                        4. While listing the points, also mention the page-number where the header is found. \
                         "
         else:
             prompt = "list summary points of entire content as following example : " + self.example_bullet_points
