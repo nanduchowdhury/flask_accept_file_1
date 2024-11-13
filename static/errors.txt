@@ -108,14 +108,8 @@
 2033 : File-path to send email as attachment not found - %s
 2034 : Error sending email - %s
 2035 : Error recognizing the file or data to be analyzed. Load the content again.
-
-
-
-
-
-
-
-
-
+2036 : No match found for text - %s
+2037 : Error while text searching in PDF - %s
+2038 : Page %s does not exist in PDF
 
 

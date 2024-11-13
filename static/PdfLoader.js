@@ -33,46 +33,182 @@ class PdfLoader extends ContainerScrollBarControl {
         this.pageYOffset = [];
         this.renderedPages = new Set();
         this.pageImageCache = new Map();
+        this.searchMatches = new Map();
         this.renderingStatus = {}; // Track rendering status for each page
         this.scrollTimeout = null; // Debounce timer
         this.scrollDelay = BasicInitializer.PDF_PAGE_RENDERING_DEBOUNCE_DELAY; // Adjust delay as needed
         this.numPagesAtATime = numPagesAtATime; // Number of pages to render at a time
         this.currentPageRange = [1, numPagesAtATime]; // Initialize with pages 1 to numPagesAtATime
 
-        // Create and style the scroll tag
-        this.scrollTag = document.createElement('div');
-
-        // this.container.style.position = "relative";
-        this.scrollTag.style.position = 'absolute';
-
-
-        // this.scrollTag.style.top = '10px';
-        // this.scrollTag.style.right = '10px';
-        this.scrollTag.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
-        this.scrollTag.style.color = 'white';
-        this.scrollTag.style.padding = '5px 10px';
-        this.scrollTag.style.borderRadius = '5px';
-        this.scrollTag.style.display = 'none'; // Hide by default
-        this.container.appendChild(this.scrollTag); // Append to container
+        this.initControlTag();
     }
 
-    updateScrollTagPosition() {
+    initControlTag() {
+        this.controlTag = document.createElement('div');
+        this.controlTag.style.position = 'absolute';
+        // this.controlTag.style.top = '10px';
+        // this.controlTag.style.right = '10px';
+        this.controlTag.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+        this.controlTag.style.color = 'white';
+        this.controlTag.style.padding = '5px 10px';
+        this.controlTag.style.borderRadius = '5px';
+        this.container.appendChild(this.controlTag);
+
+        // Page label
+        this.pageLabel = document.createElement('span');
+        this.pageLabel.style.marginRight = '5px';
+        this.controlTag.appendChild(this.pageLabel);
+
+        // Navigation buttons
+        const upButton = document.createElement('button');
+        upButton.style.marginRight = '5px';
+        upButton.style.padding = '5px 10px';
+        upButton.textContent = '↑↑';
+        upButton.onclick = () => this.goToFirstPage();
+        this.controlTag.appendChild(upButton);
+
+        const downButton = document.createElement('button');
+        downButton.style.marginRight = '5px';
+        downButton.style.padding = '5px 10px';
+        downButton.textContent = '↓↓';
+        downButton.onclick = () => this.goToLastPage();
+        this.controlTag.appendChild(downButton);
+
+        // Search box and button
+        this.searchBox = document.createElement('input');
+        this.searchBox.style.marginRight = '5px';
+        this.searchBox.type = 'text';
+        this.searchBox.placeholder = 'Search text...';
+        this.searchBox.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                this.searchText(this.searchBox.value);
+            }
+        });
+        this.controlTag.appendChild(this.searchBox);
+
+        const searchButton = document.createElement('button');
+        searchButton.textContent = '🔍';
+        searchButton.onclick = () => this.searchText(this.searchBox.value);
+        this.controlTag.appendChild(searchButton);
+
+        this.controlTag.style.display = 'none'; // Hide initially
+    }
+
+    async searchText(text) {
+        try {
+
+            // Clear all pages where last matches were found.
+            for (const [key, value] of this.searchMatches) {
+                if ( this.pageImageCache.has(key) ) {
+                    this.pageImageCache.delete(key);
+                }
+            }
+
+            // Loop through each page to find text
+            let matchFound = false;
+            for (let pageNum = 1; pageNum <= this.pdfDocument.numPages; pageNum++) {
+                const page = await this.pdfDocument.getPage(pageNum);
+                const textContent = await page.getTextContent();
+
+                // Check for occurrences of the text on this page
+                const matches = this.findTextOnPage(textContent, text);
+
+                if (matches.length > 0) {
+                    this.searchMatches.set(pageNum, matches);
+
+                    // Clear page where this match is found.
+                    if ( this.pageImageCache.has(pageNum) ) {
+                        this.pageImageCache.delete(pageNum);
+                    }
+                    matchFound = true;
+                } else {
+                    this.searchMatches.delete(pageNum);
+                }
+            }
+            if ( !matchFound ) {
+                errorManager.showError(2036, text);
+            } else {
+                this.renderPagesInRange();
+            }
+        } catch (error) {
+            errorManager.showError(2037, error.message); // Use your error manager to display the error
+        }
+    }
+
+    findTextOnPage(textContent, searchText) {
+        const matches = [];
+        searchText = searchText.toLowerCase();
+
+        textContent.items.forEach((item) => {
+            const itemText = item.str.toLowerCase();
+            if (itemText.includes(searchText)) {
+                matches.push({
+                    transform: item.transform,
+                    width: item.width,
+                    height: item.height,
+                    text: item.str,
+                });
+            }
+        });
+        return matches;
+    }
+
+    highlightMatchesOnCanvas(pageNum, canvas, viewport) {
+
+        if ( !this.searchMatches.has(pageNum) ) {
+            return canvas;
+        }
+
+        let context = canvas.getContext('2d')
+        const matches = this.searchMatches.get(pageNum);
+
+        matches.forEach((match) => {
+            const [x, y, , scaleX, scaleY] = match.transform;
+            const canvasX = x * scaleX;
+            const canvasY = viewport.height - y * scaleY; // Flip y-axis for canvas
+
+            context.fillStyle = 'rgba(255, 255, 0, 0.3)'; // Semi-transparent yellow
+            context.fillRect(canvasX, canvasY - match.height, match.width, match.height);
+        });
+
+        return canvas;
+    }
+
+    goToFirstPage() {
+        this.goToPageNumber(1);
+    }
+
+    goToLastPage() {
+        this.goToPageNumber(this.pdfDocument.numPages);
+    }
+
+    async goToPageNumber(pageNumber) {
+        if (pageNumber < 1 || pageNumber > this.pdfDocument.numPages) {
+            errorManager.showError(2038, pageNumber);
+            return;
+        }
+        this.currentPageRange = [pageNumber, pageNumber + this.numPagesAtATime - 1];
+        await this.renderPagesInRange();
+        this.showControlTag(pageNumber, this.pdfDocument.numPages);
+    }
+
+    updateControlTagPosition() {
         const {top, left} = basicInitializer.getTopLeftCoordsOfContainer(this.container);
-        this.scrollTag.style.top = `${top}px`;
-        this.scrollTag.style.left = `${left}px`;
+        this.controlTag.style.top = `${top}px`;
+        this.controlTag.style.left = `${left}px`;
     }
 
-    showScrollTag(currentPage, numPages) {
+    showControlTag(currentPage, numPages) {
         // Update and show the scroll tag
-        this.scrollTag.textContent = `Page ${currentPage} of ${numPages}`;
-        this.updateScrollTagPosition();
-        this.scrollTag.style.display = 'block';
+        this.pageLabel.textContent = `${currentPage} / ${numPages}`;
+        this.updateControlTagPosition();
+        this.controlTag.style.display = 'block';
 
         // Hide the tag after a delay if scrolling stops
         clearTimeout(this.scrollTimeout);
         this.scrollTimeout = setTimeout(() => {
-            this.scrollTag.style.display = 'none';
-        }, 1000); // Adjust delay as needed
+            this.controlTag.style.display = 'none';
+        }, 15000); // Adjust delay as needed
     }
 
     startSpinner() {
@@ -180,14 +316,37 @@ class PdfLoader extends ContainerScrollBarControl {
             const page = await this.pdfDocument.getPage(pageNum);
             const viewport = page.getViewport({ scale: 1 });
 
-            const offScreenCanvas = document.createElement('canvas');
+            let offScreenCanvas = document.createElement('canvas');
             offScreenCanvas.width = viewport.width;
             offScreenCanvas.height = viewport.height;
 
+            const context = offScreenCanvas.getContext('2d');
+
             await page.render({
-                canvasContext: offScreenCanvas.getContext('2d'),
+                canvasContext: context,
                 viewport: viewport
             }).promise;
+
+
+
+            // offScreenCanvas = this.highlightMatchesOnCanvas(pageNum, offScreenCanvas, viewport);
+            if ( this.searchMatches.has(pageNum) ) {
+                const matches = this.searchMatches.get(pageNum);
+
+                matches.forEach((match) => {
+                    // const [x, y, , scaleX, scaleY] = match.transform;
+                    // const canvasX = x * scaleX;
+                    // const canvasY = viewport.height - y * scaleY; // Flip y-axis for canvas
+
+                    const [x, skewX, skewY, y, translateX, translateY] = match.transform;
+
+                    context.fillStyle = 'rgba(255, 255, 0, 0.3)'; // Semi-transparent yellow
+                    // context.fillRect(canvasX, canvasY - match.height, match.width, match.height);
+                    context.fillRect(translateX, viewport.height - (translateY + y), match.width, match.height);
+                });
+            }
+
+
 
             this.pageImageCache.set(pageNum, offScreenCanvas);
 
@@ -233,7 +392,7 @@ class PdfLoader extends ContainerScrollBarControl {
             this.numPagesAtATime
         );
         
-        this.showScrollTag(midPage + this.currentPageRange[0] - 1, numPages);
+        this.showControlTag(midPage + this.currentPageRange[0] - 1, numPages);
 
         if (isBottomMost && this.currentPageRange[1] < numPages) {
             this.currentPageRange = [
