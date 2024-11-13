@@ -53,46 +53,53 @@ class PdfLoader extends ContainerScrollBarControl {
         this.controlTag.style.padding = '5px 10px';
         this.controlTag.style.borderRadius = '5px';
         this.container.appendChild(this.controlTag);
-
-        // Page label
+      
+        // Top section with page label and navigation
+        const topSection = document.createElement('div');
+        topSection.style.display = 'flex'; // Arrange elements horizontally
+        this.controlTag.appendChild(topSection);
+      
         this.pageLabel = document.createElement('span');
         this.pageLabel.style.marginRight = '5px';
-        this.controlTag.appendChild(this.pageLabel);
-
-        // Navigation buttons
+        topSection.appendChild(this.pageLabel);
+      
         const upButton = document.createElement('button');
         upButton.style.marginRight = '5px';
         upButton.style.padding = '5px 10px';
         upButton.textContent = '↑↑';
         upButton.onclick = () => this.goToFirstPage();
-        this.controlTag.appendChild(upButton);
-
+        topSection.appendChild(upButton);
+      
         const downButton = document.createElement('button');
         downButton.style.marginRight = '5px';
         downButton.style.padding = '5px 10px';
         downButton.textContent = '↓↓';
         downButton.onclick = () => this.goToLastPage();
-        this.controlTag.appendChild(downButton);
-
-        // Search box and button
+        topSection.appendChild(downButton);
+      
+        // Bottom section with search box and button
+        const bottomSection = document.createElement('div');
+        bottomSection.style.display = 'flex'; // Arrange elements horizontally
+        this.controlTag.appendChild(bottomSection);
+      
         this.searchBox = document.createElement('input');
         this.searchBox.style.marginRight = '5px';
         this.searchBox.type = 'text';
         this.searchBox.placeholder = 'Search text...';
         this.searchBox.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter') {
-                this.searchText(this.searchBox.value);
-            }
+          if (event.key === 'Enter') {
+            this.searchText(this.searchBox.value);
+          }
         });
-        this.controlTag.appendChild(this.searchBox);
-
+        bottomSection.appendChild(this.searchBox);
+      
         const searchButton = document.createElement('button');
         searchButton.textContent = '🔍';
         searchButton.onclick = () => this.searchText(this.searchBox.value);
-        this.controlTag.appendChild(searchButton);
-
+        bottomSection.appendChild(searchButton);
+      
         this.controlTag.style.display = 'none'; // Hide initially
-    }
+      }
 
     async searchText(text) {
         try {
