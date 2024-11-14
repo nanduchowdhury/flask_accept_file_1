@@ -43,12 +43,23 @@ class PdfLoader extends ContainerScrollBarControl {
         this.initControlTag();
     }
 
+    setButtonSize(button, width = '25px', height = '15px', fontSize = '12px') {
+        button.style.width = width;
+        button.style.height = height;
+        button.style.fontSize = fontSize;
+        button.style.padding = '5px 10px'; // Optional: adjust padding as needed
+        button.style.fontSize = '10px';
+        button.style.fontWeight = 'bold';
+
+        button.style.display = 'flex';
+        button.style.alignItems = 'center';
+        button.style.justifyContent = 'center';
+    }
+
     initControlTag() {
         this.controlTag = document.createElement('div');
         this.controlTag.style.position = 'absolute';
-        // this.controlTag.style.top = '10px';
-        // this.controlTag.style.right = '10px';
-        this.controlTag.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+        this.controlTag.style.backgroundColor = 'rgba(128, 128, 128, 0.5)';
         this.controlTag.style.color = 'white';
         this.controlTag.style.padding = '5px 10px';
         this.controlTag.style.borderRadius = '5px';
@@ -56,34 +67,42 @@ class PdfLoader extends ContainerScrollBarControl {
       
         // Top section with page label and navigation
         const topSection = document.createElement('div');
-        topSection.style.display = 'flex'; // Arrange elements horizontally
+        topSection.style.display = 'flex';
         this.controlTag.appendChild(topSection);
       
+        // Make the font for pageLabel smaller
         this.pageLabel = document.createElement('span');
+        this.pageLabel.style.fontSize = '12px'; // Smaller font size
         this.pageLabel.style.marginRight = '5px';
         topSection.appendChild(this.pageLabel);
       
+        // Make the upButton and downButton smaller
         const upButton = document.createElement('button');
         upButton.style.marginRight = '5px';
-        upButton.style.padding = '5px 10px';
-        upButton.textContent = '↑↑';
+        this.setButtonSize(upButton);
+        upButton.textContent = '⬆';
         upButton.onclick = () => this.goToFirstPage();
         topSection.appendChild(upButton);
       
+        topSection.style.marginBottom = '8px';
+
         const downButton = document.createElement('button');
         downButton.style.marginRight = '5px';
-        downButton.style.padding = '5px 10px';
-        downButton.textContent = '↓↓';
+        this.setButtonSize(downButton);
+        downButton.textContent = '⬇';
         downButton.onclick = () => this.goToLastPage();
         topSection.appendChild(downButton);
       
         // Bottom section with search box and button
         const bottomSection = document.createElement('div');
-        bottomSection.style.display = 'flex'; // Arrange elements horizontally
+        bottomSection.style.display = 'flex';
         this.controlTag.appendChild(bottomSection);
       
+        // Make the width of searchBox smaller
         this.searchBox = document.createElement('input');
         this.searchBox.style.marginRight = '5px';
+        this.searchBox.style.width = '80px'; // Smaller width for search box
+        this.searchBox.style.height = '10px';
         this.searchBox.type = 'text';
         this.searchBox.placeholder = 'Search text...';
         this.searchBox.addEventListener('keydown', (event) => {
@@ -93,13 +112,16 @@ class PdfLoader extends ContainerScrollBarControl {
         });
         bottomSection.appendChild(this.searchBox);
       
+        // Make the searchButton smaller
         const searchButton = document.createElement('button');
+        this.setButtonSize(searchButton);
         searchButton.textContent = '🔍';
         searchButton.onclick = () => this.searchText(this.searchBox.value);
         bottomSection.appendChild(searchButton);
       
         this.controlTag.style.display = 'none'; // Hide initially
-      }
+    }
+    
 
     async searchText(text) {
         try {
@@ -109,6 +131,10 @@ class PdfLoader extends ContainerScrollBarControl {
                 if ( this.pageImageCache.has(key) ) {
                     this.pageImageCache.delete(key);
                 }
+            }
+
+            if ( !text.length ) {
+                return;
             }
 
             // Loop through each page to find text
@@ -160,25 +186,23 @@ class PdfLoader extends ContainerScrollBarControl {
         return matches;
     }
 
-    highlightMatchesOnCanvas(pageNum, canvas, viewport) {
+    highlightSearchMatchesOnContext(pageNum, context, viewport) {
 
-        if ( !this.searchMatches.has(pageNum) ) {
-            return canvas;
+        if ( this.searchMatches.has(pageNum) ) {
+            const matches = this.searchMatches.get(pageNum);
+
+            matches.forEach((match) => {
+                // const [x, y, , scaleX, scaleY] = match.transform;
+                // const canvasX = x * scaleX;
+                // const canvasY = viewport.height - y * scaleY; // Flip y-axis for canvas
+
+                const [x, skewX, skewY, y, translateX, translateY] = match.transform;
+
+                context.fillStyle = 'rgba(255, 255, 0, 0.3)'; // Semi-transparent yellow
+                // context.fillRect(canvasX, canvasY - match.height, match.width, match.height);
+                context.fillRect(translateX, viewport.height - (translateY + y), match.width, match.height);
+            });
         }
-
-        let context = canvas.getContext('2d')
-        const matches = this.searchMatches.get(pageNum);
-
-        matches.forEach((match) => {
-            const [x, y, , scaleX, scaleY] = match.transform;
-            const canvasX = x * scaleX;
-            const canvasY = viewport.height - y * scaleY; // Flip y-axis for canvas
-
-            context.fillStyle = 'rgba(255, 255, 0, 0.3)'; // Semi-transparent yellow
-            context.fillRect(canvasX, canvasY - match.height, match.width, match.height);
-        });
-
-        return canvas;
     }
 
     goToFirstPage() {
@@ -334,26 +358,7 @@ class PdfLoader extends ContainerScrollBarControl {
                 viewport: viewport
             }).promise;
 
-
-
-            // offScreenCanvas = this.highlightMatchesOnCanvas(pageNum, offScreenCanvas, viewport);
-            if ( this.searchMatches.has(pageNum) ) {
-                const matches = this.searchMatches.get(pageNum);
-
-                matches.forEach((match) => {
-                    // const [x, y, , scaleX, scaleY] = match.transform;
-                    // const canvasX = x * scaleX;
-                    // const canvasY = viewport.height - y * scaleY; // Flip y-axis for canvas
-
-                    const [x, skewX, skewY, y, translateX, translateY] = match.transform;
-
-                    context.fillStyle = 'rgba(255, 255, 0, 0.3)'; // Semi-transparent yellow
-                    // context.fillRect(canvasX, canvasY - match.height, match.width, match.height);
-                    context.fillRect(translateX, viewport.height - (translateY + y), match.width, match.height);
-                });
-            }
-
-
+            this.highlightSearchMatchesOnContext(pageNum, context, viewport);
 
             this.pageImageCache.set(pageNum, offScreenCanvas);
 
