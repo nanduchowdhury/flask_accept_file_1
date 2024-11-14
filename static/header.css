@@ -1,17 +1,38 @@
 .header-container {
+    position: relative;
+    height: 40px; /* Adjust height as needed */
     display: flex;
     align-items: center;
+    width: 100%;  /* Ensure the container takes the full width of the screen */
 }
 
-.header-container img {
-    margin-right: 10px; /* Space between the image and text */
+/* Logo styling */
+.logo {
+    position: absolute;
+    top: 10px;        /* Position from top */
+    left: 10px;       /* Position from left */
+    width: 80px;      /* Smaller size for the logo */
+    height: auto;
 }
 
-.header-container h1 {
-    font-size: 24px;
-    color: rgb(106, 188, 55);
-    margin: 0; /* Remove any default margin */
-    flex-grow: 1; /* Ensures the header text takes available space */
+/* App name styling - center the app name */
+.app-name {
+    position: absolute;
+    top: 10px;         /* Align vertically with the logo */
+    left: 50%;         /* Position the app name at the center horizontally */
+    transform: translateX(-50%);  /* Adjust the centering by shifting it back by 50% of its width */
+    width: 200px;      /* Adjust size as needed */
+    height: auto;
+}
+
+/* Drop-down menu styling */
+.tr_menu_dropdown-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    z-index: 1000; /* Ensures it stays on top of other content */
 }
 
 .separator {

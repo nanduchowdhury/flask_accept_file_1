@@ -16,9 +16,12 @@
 
     <body>
         <div class="header-container">
-            <img src="{{ url_for('static', filename='frog.jpg') }}" width="50" height="50" alt="Kupamanduk" title="Kupamanduk">
-            <h1 style="font-size: 24px; color: rgb(106, 188, 55);">Scholar-KM</h1>
-
+            <!-- Company logo - positioned left and smaller -->
+        <img src="{{ url_for('static', filename='kupmanduk-copper-black-font.jpg') }}" class="logo" alt="Kupamanduk" title="Kupamanduk">
+        
+        <!-- Web app name - positioned in the center and larger -->
+        <img src="{{ url_for('static', filename='scholar-KM-copper-black-font.jpg') }}" class="app-name" alt="Scholar-KM" title="Scholar-KM">
+        
             <!-- top-right drop-down -->
             <div class="tr_menu_dropdown-container">
                 <div class="tr_menu_dropdown">
