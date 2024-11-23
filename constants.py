@@ -3,8 +3,9 @@ import time
 
 USE_REDIS = 'USE_REDIS'
 USE_FSYSTEM = 'USE_FSYSTEM'
-server_database = USE_FSYSTEM
-ROOT_FOLDER = os.getenv('ROOT_FOLDER', '/tmp/dummy_root_folder/')
+USE_GCS = 'USE_GCS'
+server_database = USE_GCS
+GCS_ROOT_FOLDER = "scholar_km"
 MAX_THREADS_TO_USE = 4
 MAX_TIME_CONDITION_WAIT = 15
 

@@ -111,5 +111,6 @@
 2036 : No match found for text - %s
 2037 : Error while text searching in PDF - %s
 2038 : Page %s does not exist in PDF
-
+2039 : Error reading JSON GCS shared-file %s - %s
+2040 : Error writing JSON GCS shared-file %s - %s
 

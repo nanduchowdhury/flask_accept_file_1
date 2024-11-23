@@ -1,47 +1,28 @@
-import re
 import logging
+import re
 from datetime import datetime
+from google.cloud import storage  # Ensure the Google Cloud Storage client library is installed
+
+import constants
+
+from gcs_manager import GCSManager
 
 class ErrorManager:
-    def __init__(self, client_ip, client_uuid, file_path, log_dir='./logs'):
+    def __init__(self, client_ip, client_uuid, file_path, bucket_name, gcs_log_file_path):
         self.error_map = {}
         self.client_ip = client_ip
         self.client_uuid = client_uuid
-        self.log_dir = log_dir
-        self.log_file = self.generate_log_file_name()
-        self.setup_logger()
+        self.bucket_name = bucket_name
+        self.gcs_log_file_path = gcs_log_file_path
         self.load_errors(file_path)
+
+        self.gcs_manager = GCSManager("kupmanduk-bucket", constants.GCS_ROOT_FOLDER)
 
     def update_client_ip(self, client_ip):
         self.client_ip = client_ip
 
     def update_client_uuid(self, client_uuid):
         self.client_uuid = client_uuid
-
-    def generate_log_file_name(self):
-        """
-        Generates a log file name with a timestamp (e.g., server-YYYYMMDD-HHMMSS.log).
-        """
-        current_time = datetime.now().strftime('%Y%m%d-%H%M%S')
-        log_file_name = f"server-{current_time}.log"
-        return f"{self.log_dir}/{log_file_name}"
-
-    def setup_logger(self):
-        """
-        Sets up the logger to log messages to the file with the generated timestamp.
-        """
-        self.logger = logging.getLogger('ErrorManager')
-        self.logger.setLevel(logging.INFO)
-
-        # File handler to write logs to the generated log file
-        file_handler = logging.FileHandler(self.log_file)
-        file_handler.setLevel(logging.INFO)
-
-        # Log format
-        formatter = logging.Formatter('%(asctime)s - %(message)s')
-        file_handler.setFormatter(formatter)
-
-        self.logger.addHandler(file_handler)
 
     def load_errors(self, file_path):
         """
@@ -77,14 +58,11 @@ class ErrorManager:
                 return f"Error message for code {code} expects different number of arguments."
 
         # Complete message with error code
-        msg_for_client = f"{message}"
-
         full_msg = f"MSG-{code}: IP {self.client_ip} UUID {self.client_uuid} - {message}"
 
         # Print the message to the console
         print(full_msg)
 
-        # Log the message to the server.log file
-        self.logger.info(full_msg)
+        self.gcs_manager.append_to_text_file(self.gcs_log_file_path, full_msg)
 
-        return msg_for_client
+        return message

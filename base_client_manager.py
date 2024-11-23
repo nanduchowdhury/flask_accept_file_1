@@ -2,199 +2,91 @@ import json
 import threading
 import uuid
 from flask import session, jsonify, current_app, request
+from google.cloud import storage
 
-#import redis
-#from redis.exceptions import LockError
-#from redis.lock import Lock
+from gcs_manager import GCSManager
 
 import os
 import fcntl
-
 import constants
+import time
 
 class BaseClientManager:
-    def __init__(self, eManager, server_database):
+    def __init__(self, eManager, client_folder):
 
         self.eManager = eManager
-        self.server_database = server_database
+        self.client_folder = client_folder
 
+        # key -> uuid       data -> json
         self.data = {}
-        
-        self.BASE_FOLDER = os.path.join(constants.ROOT_FOLDER)
-        self.SERVER_LOGS_FOLDER = os.path.join(self.BASE_FOLDER, 'server_logs/')
 
-        self.fsystem_lock_file = os.path.join(self.SERVER_LOGS_FOLDER, 'shared_lock.lock')
-        # self.fsystem_lock_fd
+        self.gcs_manager = GCSManager("kupmanduk-bucket", constants.GCS_ROOT_FOLDER)
 
-        # Constants
-        self.SERVER_SHARED_FILE = os.path.join(self.SERVER_LOGS_FOLDER, 'shared_file.json')
+    def _read_gcs_file(self, file_path):
+        blob = self.gcs_bucket.blob(file_path)
+        if blob.exists():
+            content = blob.download_as_text()
+            return json.loads(content)
+        return {}
 
-        if self.server_database == constants.USE_REDIS:
-            if self.check_redis_connection():
-                self.redis_lock = Lock(self.redis_client, 'session_lock', timeout=60)
-            else:
-                self.eManager.show_message(2028, str(e))
-                exit
+    def _write_gcs_file(self, file_path, data):
+        blob = self.gcs_bucket.blob(file_path)
+        blob.upload_from_string(json.dumps(data, indent=4))
 
-    def check_redis_connection(self):
-        try:
-            self.redis_client = redis.Redis(host='localhost', port=6379)
-            if self.redis_client:
-                self.redis_client.ping()
-                return True
-            else:
-                return False
-        except Exception as e:
-            self.eManager.show_message(2027, str(e))
-
+    def _delete_gcs_file(self, file_path):
+        blob = self.gcs_bucket.blob(file_path)
+        if blob.exists():
+            blob.delete()
 
     def dump_session(self, uuid):
-        if not self.lock():
-            return None
+        print(json.dumps(self.data[uuid], indent=4))
+
+    def force_read_session(self, cuuid, is_merge=False):
+        json_file = self.get_client_json_file(cuuid)
 
         try:
-            self._force_read_session()
-            print(json.dumps(self.data[uuid], indent=4))
+            if is_merge:
+                data_1 = self.gcs_manager.read_json(json_file)
+                self.data[cuuid] = self.merge_json(data_1, self.data[cuuid])
+            else:
+                self.data[cuuid] = self.gcs_manager.read_json(json_file)
 
-        finally:
-            self.lock_release()
-
-    ########################################################
-    # Following 2 APIs can be used if Redis database is used 
-    # share data among workers.
-    # Make sure to run following in a terminal:
-    #           redis-server
-    # You can also run following from another terminal:
-    #           redis-cli
-    # Following commands can be used to inspect the database:
-    #                KEYS *
-    #                FLUSHALL
-    #                GET <key>
-    # Caveat :
-    # It has been seen that writing/reading across 
-    # multiple-workers is not synchronized - data integrity issues.
-    ########################################################
-    def _force_read_session_redis(self):
-        session_interface = current_app.session_interface
-
-        if not request:
-            raise RuntimeError("Request context is required to read the session.")
-
-        session_obj = session_interface.open_session(current_app, request)
-        session.update(session_obj or {})
-
-        self.data = session.get('data', {})
-
-    def _force_save_session_redis(self):
-
-        session['data'] = self.data
-        session.modified = True
-        response = current_app.response_class()  # Dummy response object
-        current_app.session_interface.save_session(current_app, session, response)
-
-    def _force_read_session_fsystem(self):
-        try:
-            with open(self.SERVER_SHARED_FILE, 'r') as f:
-                self.data = json.load(f)
-        except FileNotFoundError:
-            self.data = {}
         except Exception as e:
-            raise ValueError(self.eManager.show_message(1051, self.SERVER_SHARED_FILE, str(e)))
+            raise ValueError(self.eManager.show_message(2039, json_file, str(e)))
 
-    def _force_save_session_fsystem(self):
+    def force_save_session(self, cuuid, is_merge=False):
+        json_file = self.get_client_json_file(cuuid)
+
         try:
-            with open(self.SERVER_SHARED_FILE, 'w') as f:
-                json.dump(self.data, f, indent=4)
-        except Exception as e:
-            raise ValueError(self.eManager.show_message(1052, self.SERVER_SHARED_FILE, str(e)))
-    
-    def _force_read_session(self):
-        
-        if self.server_database == constants.USE_REDIS:
-            self._force_read_session_redis()
-        elif self.server_database == constants.USE_FSYSTEM:
-            self._force_read_session_fsystem()
+            if is_merge:
+                data_1 = self.gcs_manager.read_json(json_file)
+                self.data[cuuid] = self.merge_json(data_1, self.data[cuuid])
 
-    def _force_save_session(self):
-        
-        if self.server_database == constants.USE_REDIS:
-            self._force_save_session_redis()
-        elif self.server_database == constants.USE_FSYSTEM:
-            self._force_save_session_fsystem()
+            self.gcs_manager.write_json(json_file, self.data[cuuid])
+
+        except Exception as e:
+            raise ValueError(self.eManager.show_message(2040, json_file, str(e)))
+
+    def get_client_json_file(self, cuuid):
+        return f"{self.client_folder}/{cuuid}.json"
 
     def _set_uuid(self, cuuid):
+
         if cuuid not in self.data:
             self.data[cuuid] = {}
 
     def _clear_uuid(self, uuid):
+        
         if uuid in self.data:
             del self.data[uuid]
 
-    def acquire_redis_lock(self):
-        if not self.redis_lock.acquire(blocking=True):
-            return None
-
-    def acquire_fsystem_lock(self):
-        try:
-            self.fsystem_lock_fd = os.open(self.fsystem_lock_file, os.O_CREAT | os.O_RDWR)
-            fcntl.flock(self.fsystem_lock_fd, fcntl.LOCK_EX)
-            return self.fsystem_lock_fd
-        except Exception as e:
-            self.eManager.show_message(2029, str(e))
-
-    def release_redis_lock(self):
-        self.redis_lock.release()
-
-    def release_fsystem_lock(self):
-        try:
-            fcntl.flock(self.fsystem_lock_fd, fcntl.LOCK_UN)
-            os.close(self.fsystem_lock_fd)
-        except Exception as e:
-            self.eManager.show_message(2030, str(e))
-
-    def lock(self):
-        try:
-            if self.server_database == constants.USE_REDIS:
-                return self.acquire_redis_lock()
-            else:
-                return self.acquire_fsystem_lock()
-        except Exception as e:
-            self.eManager.show_message(2031, str(e))
-
-    def lock_release(self):
-        try:
-            if self.server_database == constants.USE_REDIS:
-                return self.release_redis_lock()
-            else:
-                return self.release_fsystem_lock()
-        except Exception as e:
-            self.eManager.show_message(2032, str(e))
-
-    def clear_client_uuid(self, cuuid):
-        if not self.lock():
-            return None
-
-        try:
-            self._force_read_session()
-            self._clear_uuid(cuuid)
-            self._force_save_session()
-
-        finally:
-            self.lock_release()
-
     def set_client_uuid(self, cuuid=None):
-        if not self.lock():
-            return None
 
-        try:
-            if cuuid is None:
-                cuuid = str(uuid.uuid4())  # Generate a new UUID if none is provided
+        if cuuid is None:
+            cuuid = str(uuid.uuid4())  # Generate a new UUID if none is provided
 
-            self._set_uuid(cuuid)
-            return cuuid
-
-        finally:
-            self.lock_release()
+        self._set_uuid(cuuid)
+        return cuuid
 
     def _clear_key(self, uuid, key):
         if uuid in self.data:
@@ -227,41 +119,15 @@ class BaseClientManager:
             raise ValueError(f"UUID '{cuuid}' key {key} not found.")
 
     def clear_client_data(self, cuuid, key):
-        if not self.lock():
-            return None
-
-        try:
-            self._force_read_session()
-            self._clear_key(cuuid, key)
-            self._force_save_session()
-
-        finally:
-            self.lock_release()
+        
+        self._clear_key(cuuid, key)
 
     def save_client_data(self, cuuid, key, value):
-        if not self.lock():
-            return None
+        
+        if cuuid not in self.data:
+            self.data[cuuid] = {}
 
-        try:
-            self._force_read_session()  # Load existing data from session
-
-            # Ensure that the UUID exists in self.data
-            if cuuid not in self.data:
-                self.data[cuuid] = {}
-
-            # Update the key with the new value, preserving existing data
-            self._set_key(cuuid, key, value)
-
-            # Save the updated data back to the session
-            self._force_save_session()
-
-        except Exception as e:
-            # Log any exceptions
-            raise ValueError(f"Error in saving client data for UUID {cuuid}: {str(e)}")
-            raise
-
-        finally:
-            self.lock_release()
+        self._set_key(cuuid, key, value)
 
     def check_and_get_client_data(self, cuuid, key):
         if (self.is_client_data_present(cuuid, key)):
@@ -270,41 +136,40 @@ class BaseClientManager:
         return None
 
     def get_client_data(self, cuuid, key):
-
-        if not self.lock():
-            return None
-
         try:
-            self._force_read_session()  # Refresh data from session
-
-            # Step 3: Try to get the key from the session-loaded data
-            try:
-                value = self._get_key(cuuid, key)
-                return value  # Return value if found after session read
-            except KeyError:
-                raise ValueError(f"Key '{key}' not found in the session data.")
-
-        finally:
-            self.lock_release()
+            value = self._get_key(cuuid, key)
+            return value  # Return value if found after session read
+        except KeyError:
+            raise ValueError(f"Key '{key}' not found in the session data.") 
 
     def is_client_data_present(self, cuuid, key):
-        """
-        Checks if the given key is present for the specified cuuid in client data.
-
-        :param cuuid: The UUID for the client data.
-        :param key: The key to check within the client's data.
-        :return: True if the key exists, False otherwise.
-        """
-        if not self.lock():
+        try:
+            self._get_key(cuuid, key)
+            return True
+        except Exception as e:
             return False
 
-        try:
-            self._force_read_session()  # Ensure data is up-to-date from the session
-            # Try to retrieve the key, returning True if successful
-            try:
-                self._get_key(cuuid, key)
-                return True
-            except Exception as e:
-                return False
-        finally:
-            self.lock_release()
+    def merge_json(self, data_1, data_2):
+        if isinstance(data_1, dict) and isinstance(data_2, dict):
+            merged = {**data_1}
+            for key, value in data_2.items():
+                if key in merged:
+                    merged[key] = self.merge_json(merged[key], value)
+                else:
+                    merged[key] = value
+            return merged
+        elif isinstance(data_1, list) and isinstance(data_2, list):
+            # Merge lists intelligently
+            merged_list = []
+            for item in data_1:
+                if item not in merged_list:
+                    merged_list.append(item)
+            for item in data_2:
+                if item not in merged_list:
+                    merged_list.append(item)
+            return merged_list
+        else:
+            return data_2  # Overwrite scalar values
+
+
+

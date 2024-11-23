@@ -14,6 +14,8 @@ import PyPDF2
 import pathlib
 import textwrap
 
+import json
+
 import base64
 from io import BytesIO
 import io
@@ -50,6 +52,8 @@ from headerResponseTask import HeaderResponseTask
 
 from JsonSettings import JsonSettings
 
+from gcs_manager import GCSManager
+
 import constants
 
 class ScholarKM(Flask):
@@ -71,28 +75,25 @@ class ScholarKM(Flask):
 
         self.serverSettings = JsonSettings("server_settings.json")
 
-        self.BASE_FOLDER = os.path.join(constants.ROOT_FOLDER)
-        os.makedirs(self.BASE_FOLDER, exist_ok=True)
-        
-        self.SERVER_LOGS_FOLDER = os.path.join(self.BASE_FOLDER, 'server_logs/')
-        os.makedirs(self.SERVER_LOGS_FOLDER, exist_ok=True)
-
-        self.BASE_UPLOAD_FOLDER = 'uploads/'
-        self.BASE_LOG_FOLDER = 'client_logs/'
-        self.BASE_REPORT_TO_USER_FOLDER = 'report_by_user/'
         self.FIRST_TITLE_LEVEL = 0
         self.ALL_TITLES_LEVEL = -1
 
+        self.client_folder = f'clients'
+
         self.pool = ThreadPool(constants.MAX_THREADS_TO_USE)
 
-        self.error_manager = ErrorManager(self.client_ip, self.client_uuid, 'static/errors.txt', 
-                    log_dir=self.SERVER_LOGS_FOLDER)
+        current_time = datetime.now().strftime('%Y_%m_%d-%H_%M_%S')
 
-        self.sess = BaseClientManager(self.error_manager, constants.server_database)
+        self.error_manager = ErrorManager(self.client_ip, self.client_uuid, 'static/errors.txt', 
+                    "kupmanduk-bucket", f"server_logs/server_log_{current_time}.txt")
+
+        self.sess = BaseClientManager(self.error_manager, self.client_folder)
         self.gemini_access = GeminiAccess(self.sess, self.error_manager)
         self.gemini_access.initialize()
 
         self.email_support = EmailSupport(self.error_manager)
+
+        self.gcs_manager = GCSManager("kupmanduk-bucket", constants.GCS_ROOT_FOLDER)
 
     def extract_text_from_pdf(self, pdf_path):
         text = ""
@@ -107,30 +108,18 @@ class ScholarKM(Flask):
 
         client_ip = self.sess.get_client_data(uuid, 'basic_init.client_ip')
         
-        client_folder = os.path.join(self.BASE_FOLDER, f'{client_ip}_{uuid}/')
+        cfolder = f'{self.client_folder}/{client_ip}_{uuid}'
 
-        if not os.path.exists(client_folder):
-            os.makedirs(client_folder, exist_ok=True)
-
-        upload_folder = os.path.join(client_folder, self.BASE_UPLOAD_FOLDER)
+        upload_folder = f'{cfolder}/uploads'
         self.sess.save_client_data(uuid, 'basic_init.upload_folder', upload_folder)
-
-        if not os.path.exists(upload_folder):
-            os.makedirs(upload_folder, exist_ok=True)
         
-        log_folder = os.path.join(client_folder, self.BASE_LOG_FOLDER)
+        log_folder = f'{cfolder}/client_logs'
         self.sess.save_client_data(uuid, 'basic_init.log_folder', log_folder)
 
-        if not os.path.exists(log_folder):
-            os.makedirs(log_folder, exist_ok=True)
-
-        report_to_user_folder = os.path.join(client_folder, self.BASE_REPORT_TO_USER_FOLDER)
+        report_to_user_folder = f'{cfolder}/report_by_user'
         self.sess.save_client_data(uuid, 'basic_init.report_to_user_folder', report_to_user_folder)
-
-        if not os.path.exists(report_to_user_folder):
-            os.makedirs(report_to_user_folder, exist_ok=True)
         
-        log_file_path = os.path.join(log_folder, f'client_log.txt')
+        log_file_path = f'{log_folder}/client_log.txt'
         self.sess.save_client_data(uuid, 'basic_init.log_file_path', log_file_path)
 
     def extract_file(self, uuid, data):
@@ -138,13 +127,13 @@ class ScholarKM(Flask):
         file_name = data['fileName']
 
         upload_folder = self.sess.get_client_data(uuid, 'basic_init.upload_folder')
+        file_name = f"{upload_folder}/{file_name}"
 
-        file_name = os.path.join(upload_folder, file_name)
         file_content = base64.b64decode(data['fileContent'])
 
-        with open(file_name, 'wb') as f:
-            f.write(file_content)
-        return file_name
+        self.gcs_manager.write_file(file_name, data['fileContent'])
+
+        return file_name, file_content
 
     def save_report_to_user_file(self, uuid, data):
 
@@ -179,13 +168,16 @@ class ScholarKM(Flask):
 
         upload_folder = self.sess.get_client_data(uuid, 'basic_init.upload_folder')
 
+        file_name = f"{upload_folder}/{file_name}"
+
         image_data_url = data['image']
         header, base64_image = image_data_url.split(',', 1)
         file_content = base64.b64decode(base64_image)
         image = Image.open(io.BytesIO(file_content))
-        filename = os.path.join(upload_folder, file_name)
-        image.save(filename)
-        return filename
+
+        self.gcs_manager.write_image(file_name, image)
+
+        return file_name, file_content
 
     def extract_video(self, uuid, data):
 
@@ -194,39 +186,45 @@ class ScholarKM(Flask):
 
         upload_folder = self.sess.get_client_data(uuid, 'basic_init.upload_folder')
 
+        file_name = f"{upload_folder}/{file_name}"
+
         video_data = data['video']
         video_binary = base64.b64decode(video_data)
-        video_path = os.path.join(upload_folder, file_name)
-        with open(video_path, 'wb') as video_file:
-            video_file.write(video_binary)
-        return video_path
+        
+        self.gcs_manager.write_video(file_name, video_binary)
+
+        return file_name, video_binary
 
     def index(self):
         return render_template('index.html')
 
     def receive_and_save_file(self, uuid, data):
-        file_path = ''
+        
+        file_name = ''
+        file_content = ''
 
         if 'fileContent' in data:
-            file_path = self.extract_file(uuid, data)
+            file_name, file_content = self.extract_file(uuid, data)
 
-            self.error_manager.show_message(2002, file_path)
+            self.error_manager.show_message(2002, file_name)
 
         elif 'image' in data:
-            file_path = self.extract_image(uuid, data)
-            self.error_manager.show_message(2003, file_path)
+            file_name, file_content = self.extract_image(uuid, data)
+            self.error_manager.show_message(2003, file_name)
 
         elif 'video' in data:
-            file_path = self.extract_video(uuid, data)
-            self.error_manager.show_message(2004, file_path)
+            file_name, file_content = self.extract_video(uuid, data)
+            self.error_manager.show_message(2004, file_name)
 
         else:
             raise ValueError(self.error_manager.show_message(2001))
 
-        return file_path
+        return file_name, file_content
 
     def is_main_content_changed(self, uuid, main_content_file):
+        self.sess.force_read_session(uuid)
         existing_main_file =  self.sess.check_and_get_client_data(uuid, 'upload_file.main_content_file')
+
         if existing_main_file != main_content_file:
             return True
         return False
@@ -234,7 +232,8 @@ class ScholarKM(Flask):
     def gemini_setup_google_file(self, uuid, main_content_file):
         existing_google_file_name = self.sess.check_and_get_client_data(uuid, 'upload_file.genai_upload_file_name')
         if not existing_google_file_name:
-            google_file_name, google_uri = self.gemini_access.upload_file(uuid, main_content_file)
+            local_file = self.gcs_manager.get_local_file(main_content_file)
+            google_file_name, google_uri = self.gemini_access.upload_file(uuid, local_file)
             self.error_manager.show_message(2008, google_uri)
             self.sess.save_client_data(uuid, 'upload_file.genai_upload_file_name', google_file_name)
 
@@ -289,21 +288,25 @@ class ScholarKM(Flask):
         if self.is_main_content_changed(uuid, main_content_file):
             self.sess.clear_client_data(uuid, 'upload_file')
             self.sess.save_client_data(uuid, 'upload_file.main_content_file', main_content_file)
+            self.sess.force_save_session(uuid)
 
         if self.is_main_content_changed(uuid, main_content_file):
             return
 
         self.gemini_setup_google_file(uuid, main_content_file)
+        self.sess.force_save_session(uuid)
 
         if self.is_main_content_changed(uuid, main_content_file):
             return
 
         self.gemini_setup_base_response(uuid)
+        self.sess.force_save_session(uuid)
 
         if self.is_main_content_changed(uuid, main_content_file):
             return
 
         is_academic_content, is_text_in_content, is_header_in_content = self.gemini_setup_content_clarity(uuid, )
+        self.sess.force_save_session(uuid)
 
         if self.is_main_content_changed(uuid, main_content_file):
             return
@@ -314,11 +317,16 @@ class ScholarKM(Flask):
         try:
             data = request.json
             uuid = self.get_or_generate_uuid(data)
+
+            self.sess.force_read_session(uuid)
+
             self.request_prelude(uuid)
 
-            self.main_content_file = self.receive_and_save_file(uuid, data)
+            self.main_content_file, file_content = self.receive_and_save_file(uuid, data)
 
             self.gemini_setup(uuid, self.main_content_file)
+
+            self.sess.force_save_session(uuid)
 
             return jsonify({'success': 'true'})
 
@@ -326,6 +334,9 @@ class ScholarKM(Flask):
             return jsonify({"error": str(e)}), 500
 
     def is_ai_model_init_completed(self, uuid):
+
+        self.sess.force_read_session(uuid)
+
         if self.sess.is_client_data_present(uuid, 'upload_file.first_response'):
             if self.sess.get_client_data(uuid, 'upload_file.first_response'):
                 return True
@@ -336,6 +347,9 @@ class ScholarKM(Flask):
         try:
             data = request.json
             uuid = self.get_or_generate_uuid(data)
+
+            self.sess.force_read_session(uuid)
+
             self.request_prelude(uuid)
 
             is_threading_on = self.serverSettings.getParam('run.threading')
@@ -379,7 +393,7 @@ class ScholarKM(Flask):
         except Exception as e:
             return jsonify({"error": str(e)}), 500
 
-    def isHeaderResponseForceRun(self, headerTask, is_threading_on):
+    def isHeaderResponseForceRunReqd(self, headerTask, is_threading_on):
 
         if not is_threading_on:
             return True
@@ -402,7 +416,7 @@ class ScholarKM(Flask):
         hindi_response = ''
 
         headerTask = HeaderResponseTask(uuid, self.sess, self.gemini_access, learnLevel)
-        force_run, english_response, hindi_response = self.isHeaderResponseForceRun(headerTask, is_threading_on)
+        force_run, english_response, hindi_response = self.isHeaderResponseForceRunReqd(headerTask, is_threading_on)
 
         if force_run:
             english_response, hindi_response = headerTask.perform_actual_task()
@@ -418,6 +432,9 @@ class ScholarKM(Flask):
         try:
             data = request.get_json()
             uuid = self.get_or_generate_uuid(data)
+
+            self.sess.force_read_session(uuid)
+
             self.request_prelude(uuid)
 
             saved_report_by_user = self.save_report_to_user_file(uuid, data)
@@ -433,6 +450,9 @@ class ScholarKM(Flask):
         try:
             data = request.get_json()
             uuid = self.get_or_generate_uuid(data)
+
+            self.sess.force_read_session(uuid)
+
             self.request_prelude(uuid)
 
             # self.sess.dump_session(uuid)
@@ -484,6 +504,8 @@ class ScholarKM(Flask):
 
             self.error_manager.show_message(2019, client_uuid)
 
+            self.sess.force_save_session(client_uuid)
+
             return jsonify({"client_uuid": client_uuid}), 200
 
         except Exception as e:
@@ -493,6 +515,9 @@ class ScholarKM(Flask):
         try:
             data = request.get_json()
             client_uuid = self.get_or_generate_uuid(data)
+
+            self.sess.force_read_session(client_uuid)
+
             self.request_prelude(client_uuid)
 
             logs = data.get('logs', [])
@@ -502,11 +527,8 @@ class ScholarKM(Flask):
             
             log_file_path = self.sess.get_client_data(client_uuid, 'basic_init.log_file_path')
 
-            # Append the logs to the client's log file
-            with open(log_file_path, 'a') as log_file:
-                for log in logs:
-                    log_file.write(f"{log}\n")
-
+            for log in logs:
+                self.gcs_manager.append_to_text_file(log_file_path, json.dumps(log))
 
             return jsonify({"status": "logs saved"}), 200
 

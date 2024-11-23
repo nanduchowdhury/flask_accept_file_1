@@ -58,6 +58,8 @@ class HeaderResponseTask(TaskBase):
         self.sess.save_client_data(self.uuid, self.tag_job_status, job_status)
         self.sess.save_client_data(self.uuid, self.tag_job_error, job_error)
 
+        self.sess.force_save_session(self.uuid)
+
     def run(self):
         english_response = ''
         hindi_response = ''
