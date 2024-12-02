@@ -116,7 +116,7 @@ class ScholarKM(Flask):
         log_folder = f'{cfolder}/client_logs'
         self.sess.save_client_data(uuid, 'basic_init.log_folder', log_folder)
 
-        report_to_user_folder = f'{cfolder}/report_by_user'
+        report_to_user_folder = f'{self.client_folder}/report_by_user'
         self.sess.save_client_data(uuid, 'basic_init.report_to_user_folder', report_to_user_folder)
         
         log_file_path = f'{log_folder}/client_log.txt'
@@ -142,14 +142,13 @@ class ScholarKM(Flask):
         file_name = self.append_timestamp_to_filename(file_name)
 
         report_to_user_folder = self.sess.get_client_data(uuid, 'basic_init.report_to_user_folder')
+        file_name = f"{report_to_user_folder}/{file_name}"
+        self.gcs_manager.write_file(file_name, data['fileContent'])
 
-        file_name = os.path.join(report_to_user_folder, file_name)
-        file_content = base64.b64decode(data['fileContent'])
+        local_file = self.gcs_manager.get_local_file(file_name)
+        localFileManager = constants.LocalFileManager(local_file)
 
-        with open(file_name, 'wb') as f:
-            f.write(file_content)
-
-        # self.email_support.send_email_with_attachment("subject", "body", file_name)
+        # self.email_support.send_email_with_attachment("subject", "body", local_file)
 
         return file_name
 
