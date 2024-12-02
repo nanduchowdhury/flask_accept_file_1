@@ -103,7 +103,7 @@ class CameraSupport {
             document.getElementById('cameraPopup').style.display = 'none';
 
             SharedData.DataSource = 'Picture';
-            sendRecvManager.performAIModelInit();
+            sendRecvManager.uploadGcsAndInitAIModel(this.previewAreaControl.lamdaOnGcsUploadFinish);
 
         } catch (err) {
             errorManager.showError(1033, err); // Error code 1012 for image capture failure
@@ -163,7 +163,7 @@ class CameraSupport {
                 const videoUrl = URL.createObjectURL(SharedData.videoBlob);
 
                 SharedData.DataSource = 'video';
-                sendRecvManager.performAIModelInit();
+                sendRecvManager.uploadGcsAndInitAIModel(this.previewAreaControl.lamdaOnGcsUploadFinish);
 
                 this.previewAreaControl.showVideoInCanvas(videoUrl);
             };

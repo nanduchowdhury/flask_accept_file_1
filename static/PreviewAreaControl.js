@@ -8,7 +8,12 @@ class PreviewAreaControl extends ContainerScrollBarControl {
         this.spinner = new Spinner(spinnerId);
         this.currentSelectedFile = '';
 
-        document.getElementById('fileInput').addEventListener('change', this.onFileInput);
+        this.pdfCanvas = document.getElementById('pdfCanvas');
+        this.fileInputButton = document.getElementById('fileInput');
+        this.takePictureButton = document.getElementById('takePicture');
+        this.learnButton = document.getElementById('sendButton');
+
+        this.fileInputButton.addEventListener('change', this.onFileInput);
     }
 
     onScroll() {
@@ -56,10 +61,30 @@ class PreviewAreaControl extends ContainerScrollBarControl {
         const file = files[0];
         SharedData.DataSource = 'File';
         
+        // This is required.
         event.target.value = '';
 
         basicInitializer.clearBeforeStartNewExplanation();
 
+        this.showInPreviewArea(file);
+
+        
+
+        this.fileInputButton.disabled = true;
+        this.takePictureButton.disabled = true;
+        this.learnButton.disabled = true;
+
+        sendRecvManager.uploadGcsAndInitAIModel(this.lamdaOnGcsUploadFinish);
+    }
+
+    lamdaOnGcsUploadFinish = () => {
+        this.fileInputButton.disabled = false;
+        this.takePictureButton.disabled = false;
+        this.learnButton.disabled = false;
+
+    }
+
+    showInPreviewArea(file) {
         if (file) {
             if (file.type === 'application/pdf') {
                 this.supportPdfReading(file);
@@ -73,8 +98,6 @@ class PreviewAreaControl extends ContainerScrollBarControl {
                 errorManager.showError(1039, file.type);  // Unsupported file type error
             }
             this.currentSelectedFile = file;
-
-            sendRecvManager.performAIModelInit();
         }
     }
 
@@ -168,7 +191,7 @@ class PreviewAreaControl extends ContainerScrollBarControl {
         try {
             pdfLoader.stopLoadPdf();
             pdfLoader.loadPdf(file);
-
+            
             this.hideVideoShowCanvas();
 
         } catch (err) {

@@ -9,6 +9,8 @@ class SendReceiveManager {
         this.pdfCanvas = document.getElementById(pdfCanvasId);
         this.sendButtonInProcess = false;
 
+        this.gcsManager = new GCSManager();
+
         // this.restartButton = document.getElementById('restartButton');
 
         this.addEventListeners();
@@ -36,6 +38,10 @@ class SendReceiveManager {
     handleSendButtonClick() {
         try {
 
+            if ( this.sendButtonInProcess ) {
+                return;
+            }
+
             if ( !SharedData.DataSource ) {
                 errorManager.showError(1050);
                 return;
@@ -50,6 +56,38 @@ class SendReceiveManager {
             errorManager.showError(1015, error);
         } finally {
         }
+    }
+
+    uploadGcsAndInitAIModel(lamdaOnGcsUploadFinish) {
+
+        let gcsObjectToSend;
+
+        if ( SharedData.DataSource == 'File' ) {
+            gcsObjectToSend = previewAreaControl.currentSelectedFile;
+        } else if ( SharedData.DataSource == 'Picture' ) {
+            const dataUrl = this.pdfCanvas.toDataURL('image/png');
+            gcsObjectToSend = this.gcsManager._dataURLToBlob(dataUrl);
+        } else if ( SharedData.DataSource == 'video' ) {
+            gcsObjectToSend = SharedData.videoBlob;
+        }
+
+        const signedUrl = basicInitializer.getMainContentSignedURL();
+
+        this.spinner.show();
+
+        this.gcsManager.uploadFile(signedUrl, gcsObjectToSend)
+            .then((response) => {
+                // console.log(`Upload successful for file: ${file.name}`, response);
+                lamdaOnGcsUploadFinish();
+                this.spinner.hide();
+                this.performAIModelInit();
+            })
+            .catch((error) => {
+                // console.error(`Upload failed for file: ${file.name}`, error);
+                lamdaOnGcsUploadFinish();
+                this.spinner.hide();
+                throw error;
+            });
     }
 
     performAIModelInit() {
@@ -74,7 +112,7 @@ class SendReceiveManager {
                 client_uuid: basicInitializer.getClient_UUID(),
                 fileName: file.name,
                 fileType: file.type,
-                fileContent: base64File,
+                // fileContent: base64File,
                 additionalData: {
                     // Add any additional data you want to include in the JSON object
                     someKey: "someValue"
@@ -93,7 +131,8 @@ class SendReceiveManager {
 
         const data = {
             client_uuid: basicInitializer.getClient_UUID(),
-            image: dataUrl,
+            fileName: 'camera_image-' + basicInitializer.getFormattedTimestamp() + '.png',
+            // image: dataUrl,
             additionalData: {
                 someKey: "someValue"
             }
@@ -110,7 +149,8 @@ class SendReceiveManager {
 
                 const data = {
                     client_uuid: basicInitializer.getClient_UUID(),
-                    video: base64Video,
+                    fileName: 'camera_video-' + basicInitializer.getFormattedTimestamp() + '.webm',
+                    // video: base64Video,
                     additionalData: {
                         someKey: "someValue"
                     }
@@ -129,10 +169,7 @@ class SendReceiveManager {
                 learnLevel: cTracker.getCurrentLevel()
             }
         };
-    
-        if (this.sendButtonInProcess) {
-            return;
-        }
+
         this.sendButtonInProcess = true;
         this.spinner.show();
     
@@ -211,23 +248,32 @@ class SendReceiveManager {
             },
             body: JSON.stringify(data)
         })
-        .then(response => {
-            if (!response.ok) {
-                // Handle HTTP errors (like 500)
-                return response.json().then(data => {
-                    this.aiModelInitError = data.error;
-                    this.aiModelInitDone = true;
-                });
-            }
-            return response.json(); // Process successful response
-        })
-        .then(data => {
-            this.aiModelInitDone = true;
-        })
-        .catch(error => {
-            this.aiModelInitError = error.message;
-            this.aiModelInitDone = true;
-        });
+            .then(response => {
+                if (!response.ok) {
+                    // Handle HTTP errors (like 500)
+                    return response.json()
+                        .then(data => {
+                            this.aiModelInitError = data.error;
+                            this.aiModelInitDone = true;
+                        })
+                        .catch(() => {
+                            // Fallback for invalid JSON responses
+                            throw new Error(`HTTP error ${response.status}`);
+                        });
+                }
+                return response.json(); // Process successful response
+            })
+            .then(data => {
+                // Handle successful response
+                this.aiModelInitDone = true;
+                // Add logic to process the successful response if needed
+            })
+            .catch(error => {
+                // Handle both HTTP and network errors
+                this.aiModelInitError = error.message || 'An unknown error occurred.';
+                this.aiModelInitDone = true;
+            });
+        
     }
 
     handleServerResponse(data) {

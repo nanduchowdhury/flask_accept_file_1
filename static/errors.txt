@@ -113,4 +113,6 @@
 2038 : Page %s does not exist in PDF
 2039 : Error reading JSON GCS shared-file %s - %s
 2040 : Error writing JSON GCS shared-file %s - %s
+2041 : Upload GCS signed-URL failed with status - %s
+2042 : Error upload signed-URL to GCS
 

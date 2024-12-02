@@ -16,6 +16,8 @@ class BasicInitializer {
         this.clientId = 'client-' + this.getFormattedTimestamp();
         this.client_uuid = '';
 
+        this.signed_main_content_url = '';
+
         this.initializeVoices();
         this.sendInitToServer();
 
@@ -93,6 +95,7 @@ class BasicInitializer {
         })
         .then(data => {
             this.setClient_UUID(data.client_uuid);
+            this.setMainContentSignedURL(data.signed_main_content_url);
             console.log(data.client_uuid);
             if ( !this.getClient_UUID() ) {
                 console.error("No client-UUID recvd from server.");
@@ -113,6 +116,14 @@ class BasicInitializer {
 
     getClient_UUID() {    
         return this.client_uuid;
+    }
+
+    setMainContentSignedURL(signed_main_content_url) {
+        this.signed_main_content_url = signed_main_content_url;
+    }
+
+    getMainContentSignedURL() {
+        return this.signed_main_content_url;
     }
 
     clearBeforeStartNewExplanation() {

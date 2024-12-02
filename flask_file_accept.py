@@ -63,8 +63,6 @@ class ScholarKM(Flask):
         self.client_ip = 'client_ip'
         self.client_uuid = 'client_uuid'
 
-        self.main_content_file = ''
-
         self.route('/')(self.index)
         self.route('/basic_init', methods=['POST'])(self.basic_init)
         self.route('/ai_model_init', methods=['POST'])(self.ai_model_init)
@@ -79,6 +77,8 @@ class ScholarKM(Flask):
         self.ALL_TITLES_LEVEL = -1
 
         self.client_folder = f'clients'
+
+        self.start_time_aiModelInit = ''
 
         self.pool = ThreadPool(constants.MAX_THREADS_TO_USE)
 
@@ -198,41 +198,23 @@ class ScholarKM(Flask):
     def index(self):
         return render_template('index.html')
 
-    def receive_and_save_file(self, uuid, data):
-        
-        file_name = ''
-        file_content = ''
-
-        if 'fileContent' in data:
-            file_name, file_content = self.extract_file(uuid, data)
-
-            self.error_manager.show_message(2002, file_name)
-
-        elif 'image' in data:
-            file_name, file_content = self.extract_image(uuid, data)
-            self.error_manager.show_message(2003, file_name)
-
-        elif 'video' in data:
-            file_name, file_content = self.extract_video(uuid, data)
-            self.error_manager.show_message(2004, file_name)
-
-        else:
-            raise ValueError(self.error_manager.show_message(2001))
-
-        return file_name, file_content
 
     def is_main_content_changed(self, uuid, main_content_file):
         self.sess.force_read_session(uuid)
-        existing_main_file =  self.sess.check_and_get_client_data(uuid, 'upload_file.main_content_file')
 
-        if existing_main_file != main_content_file:
+        json_start_time = self.sess.check_and_get_client_data(uuid, 'upload_file.start_time')
+
+        if not constants.compareTime(json_start_time, self.start_time_aiModelInit):
             return True
+
         return False
 
     def gemini_setup_google_file(self, uuid, main_content_file):
         existing_google_file_name = self.sess.check_and_get_client_data(uuid, 'upload_file.genai_upload_file_name')
         if not existing_google_file_name:
             local_file = self.gcs_manager.get_local_file(main_content_file)
+            localFileManager = constants.LocalFileManager(local_file)
+
             google_file_name, google_uri = self.gemini_access.upload_file(uuid, local_file)
             self.error_manager.show_message(2008, google_uri)
             self.sess.save_client_data(uuid, 'upload_file.genai_upload_file_name', google_file_name)
@@ -286,12 +268,7 @@ class ScholarKM(Flask):
     def gemini_setup(self, uuid, main_content_file):
 
         if self.is_main_content_changed(uuid, main_content_file):
-            self.sess.clear_client_data(uuid, 'upload_file')
-            self.sess.save_client_data(uuid, 'upload_file.main_content_file', main_content_file)
-            self.sess.force_save_session(uuid)
-
-        if self.is_main_content_changed(uuid, main_content_file):
-            return
+           return
 
         self.gemini_setup_google_file(uuid, main_content_file)
         self.sess.force_save_session(uuid)
@@ -313,18 +290,54 @@ class ScholarKM(Flask):
 
         self.gemini_setup_learn_contents(uuid, is_text_in_content, is_header_in_content)
         
+    def rename_main_content_file(self, data, main_content_file):
+
+        file_name = data['fileName']
+        new_file = ''
+
+        if file_name:
+            new_file = self.gcs_manager.copy_file(main_content_file, file_name)
+
+        return new_file
+
+    def dump_request_info(self, uuid, request_name):
+        print("***********************************************************")
+        print(f"\t uuid : {uuid}")
+        print(f"\t Request : {request_name}")
+        print("\t ++++++++++++++++++++++++++++++++++++++++++")
+        print(f"\t Payload size: {len(request.data)} bytes")
+        # print("\t Headers:", request.headers)
+        print("\t Content-Length:", request.content_length)
+        print(f"\t JSON length: {len(request.json)}")
+        print("***********************************************************")
+
     def ai_model_init(self):
         try:
+
             data = request.json
+
             uuid = self.get_or_generate_uuid(data)
+
+            self.dump_request_info(uuid, "ai_model_init")
 
             self.sess.force_read_session(uuid)
 
             self.request_prelude(uuid)
 
-            self.main_content_file, file_content = self.receive_and_save_file(uuid, data)
+            existing_main_file = self.sess.check_and_get_client_data(uuid, 'upload_file.main_content_file')
+            if not self.gcs_manager.is_exist(existing_main_file):
+                    raise ValueError(self.error_manager.show_message(2035))
 
-            self.gemini_setup(uuid, self.main_content_file)
+            self.start_time_aiModelInit = constants.getTimeStamp()
+
+            self.sess.save_client_data(uuid, 'upload_file.start_time', self.start_time_aiModelInit)
+            self.sess.clear_client_data_selected_preserve(uuid, 'upload_file', ['main_content_file', 'start_time'])
+
+            new_file = self.rename_main_content_file(data, existing_main_file)
+
+            self.sess.force_save_session(uuid)
+
+            self.gemini_setup(uuid, new_file)
 
             self.sess.force_save_session(uuid)
 
@@ -362,13 +375,13 @@ class ScholarKM(Flask):
 
                 constants.check_condition(lambda: self.is_ai_model_init_completed(uuid))
 
-                self.main_content_file = self.sess.check_and_get_client_data(uuid, 'upload_file.main_content_file')
-                if not self.main_content_file:
+                existing_main_file = self.sess.check_and_get_client_data(uuid, 'upload_file.main_content_file')
+                if not existing_main_file:
                     raise ValueError(self.error_manager.show_message(2035))
 
                 if (not self.sess.is_client_data_present(uuid, 'upload_file.num_learn_points')) or \
                     (not self.sess.is_client_data_present(uuid, 'upload_file.first_response')):
-                    self.gemini_setup(uuid, self.main_content_file)
+                    self.gemini_setup(uuid, existing_main_file)
 
                 num_learn_points = self.sess.get_client_data(uuid, 'upload_file.num_learn_points')
                 first_response = self.sess.get_client_data(uuid, 'upload_file.first_response')
@@ -453,14 +466,17 @@ class ScholarKM(Flask):
 
             self.sess.force_read_session(uuid)
 
+            self.dump_request_info(uuid, "explain_region")
+
             self.request_prelude(uuid)
 
-            # self.sess.dump_session(uuid)
+            gcs_file, file_content = self.extract_image(uuid, data)
 
-            explain_region_file = self.extract_image(uuid, data)
+            local_file = self.gcs_manager.get_local_file(gcs_file)
+            localFileManager = constants.LocalFileManager(local_file)
 
-            english_response = self.gemini_access.explain_region(uuid, explain_region_file)
-            self.error_manager.show_message(2013, explain_region_file)
+            english_response = self.gemini_access.explain_region(uuid, local_file)
+            self.error_manager.show_message(2013, gcs_file)
 
             hindi_response = self.gemini_access.convert_to_hindi(english_response)
 
@@ -506,7 +522,17 @@ class ScholarKM(Flask):
 
             self.sess.force_save_session(client_uuid)
 
-            return jsonify({"client_uuid": client_uuid}), 200
+            upload_folder = self.sess.get_client_data(client_uuid, 'basic_init.upload_folder')
+            gcs_main_content_file = f"{upload_folder}/{constants.GCS_UPLOAD_MAIN_CONTENT_FILE_NAME}"
+            self.gcs_manager.cors_configuration()
+            signed_url = self.gcs_manager.get_signed_url(gcs_main_content_file)
+
+            self.sess.save_client_data(client_uuid, 'upload_file.main_content_file', gcs_main_content_file)
+
+            self.sess.force_save_session(client_uuid)
+
+            return jsonify({"client_uuid": client_uuid,
+                            "signed_main_content_url": signed_url}), 200
 
         except Exception as e:
             return jsonify({"error": str(e)}), 500
@@ -538,18 +564,8 @@ class ScholarKM(Flask):
 
 app = ScholarKM()
 
-if constants.server_database == constants.USE_REDIS:
-    app.config['SESSION_TYPE'] = 'redis'
-    app.config['SESSION_PERMANENT'] = False
-    app.config['SESSION_USE_SIGNER'] = True  # Prevents tampering of session cookies
-    app.config['SESSION_KEY_PREFIX'] = 'kupamanduk-session:'
-    app.config['SESSION_REDIS'] = redis.StrictRedis(host='localhost', port=6379)
-
-    # app.config['SECRET_KEY'] = os.urandom(32)
-    app.config['SECRET_KEY'] = "kupamanduk-10987"
-    # app.secret_key = os.urandom(32)
-else:
-    app.config['SESSION_TYPE'] = 'filesystem'
+app.config['SESSION_TYPE'] = 'filesystem'
+app.config['MAX_CONTENT_LENGTH'] = 32 * 1024 * 1024  # 32 MB
 
 Session(app)
 

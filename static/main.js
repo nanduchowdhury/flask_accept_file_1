@@ -7,7 +7,7 @@ class SharedData {
     static DataSource;
 }
 
-const pdfLoader = new PdfLoader('previewArea', 'pdfCanvas', 'loadingSpinner')
+const pdfLoader = new PdfLoader('previewArea', 'pdfCanvas')
 
 const cTracker = new ConceptTracker('result2', 
             "Let's learn following topics/sections:", 

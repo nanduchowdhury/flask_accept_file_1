@@ -94,6 +94,22 @@ class BaseClientManager:
                 # Remove the 'key' and all its data
                 del self.data[uuid][key]
 
+    def _clear_key_selected_preserve(self, uuid, key, selected_preserve_children):
+        if uuid in self.data:
+            if key in self.data[uuid]:
+                # Get the target data
+                target_data = self.data[uuid][key]
+                
+                # Create a new dictionary preserving only the specified children
+                preserved_data = {
+                    child_key: target_data[child_key]
+                    for child_key in selected_preserve_children
+                    if child_key in target_data
+                }
+                
+                # Replace the original data with the preserved data
+                self.data[uuid][key] = preserved_data
+
     def _set_key(self, cuuid, key, value):
         if cuuid not in self.data:
             self.data[cuuid] = {}
@@ -121,6 +137,10 @@ class BaseClientManager:
     def clear_client_data(self, cuuid, key):
         
         self._clear_key(cuuid, key)
+
+    def clear_client_data_selected_preserve(self, cuuid, key, selected_preserve):
+        
+        self._clear_key_selected_preserve(cuuid, key, selected_preserve)
 
     def save_client_data(self, cuuid, key, value):
         

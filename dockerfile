@@ -43,4 +43,4 @@ COPY . .
 EXPOSE 8080
 
 # Command to run the Flask app.
-CMD ["gunicorn", "-b", "0.0.0.0:8080", "--timeout", "300", "flask_file_accept:app"]
+CMD ["gunicorn", "-b", "0.0.0.0:8080", "--timeout", "300", "--limit-request-line", "8190", "--limit-request-field-size", "8190", "flask_file_accept:app"]

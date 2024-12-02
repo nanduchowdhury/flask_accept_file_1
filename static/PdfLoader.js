@@ -21,11 +21,10 @@
 /////////////////////////////////////////////////////////////////
 
 class PdfLoader extends ContainerScrollBarControl {
-    constructor(containerId, pdfCanvasId, spinnerId, numPagesAtATime = 3) {
+    constructor(containerId, pdfCanvasId, numPagesAtATime = 3) {
         super(containerId);
         this.pdfCanvasId = pdfCanvasId;
         this.pdfCanvas = document.getElementById(this.pdfCanvasId);
-        this.spinner = document.getElementById(spinnerId);
         this.currentLoadingTask = null;
         this.pageCanvases = [];
         this.pdfDocument = null;
@@ -242,21 +241,8 @@ class PdfLoader extends ContainerScrollBarControl {
         }, 15000); // Adjust delay as needed
     }
 
-    startSpinner() {
-        if (this.spinner) {
-            this.spinner.style.display = 'block';
-        }
-    }
-
-    stopSpinner() {
-        if (this.spinner) {
-            this.spinner.style.display = 'none';
-        }
-    }
-
     async loadPdf(file) {
         this.stopLoadPdf();
-        this.startSpinner();
 
         const reader = new FileReader();
         reader.onload = async (e) => {
@@ -271,13 +257,11 @@ class PdfLoader extends ContainerScrollBarControl {
             } catch (err) {
                 errorManager.showError(1024, err);
             } finally {
-                this.stopSpinner();
             }
         };
 
         reader.onerror = (err) => {
             errorManager.showError(1025, err);
-            this.stopSpinner();
         };
 
         reader.readAsArrayBuffer(file);

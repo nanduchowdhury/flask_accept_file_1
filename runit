@@ -3,6 +3,8 @@
 # export GOOGLE_API_KEY=AIzaSyAQCZ2bJHOI6yapnei35Eyrd2IL19ts9GM
 export GOOGLE_API_KEY=AIzaSyDJDcvSAXCnz3sQaj1_cFWj2JY_hmrW0-g
 
+export GOOGLE_APPLICATION_CREDENTIALS="kupmanduk_GCS_signed_URL_key.json"
+
 gunicorn -w 4 --timeout 300 -k gevent flask_file_accept:app
 
 # python flask_file_accept.py
