@@ -77,33 +77,23 @@ class BasicInitializer {
             }
         };
 
-        fetch('/basic_init', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => {
-            if (!response.ok) {
-                // Handle HTTP errors (like 500)
-                return response.json().then(data => {
-                    throw new Error(data.error); // Access the error message
-                });
-            }
-            return response.json(); // Process successful response
-        })
-        .then(data => {
-            this.setClient_UUID(data.client_uuid);
-            this.setMainContentSignedURL(data.signed_main_content_url);
-            console.log(data.client_uuid);
-            if ( !this.getClient_UUID() ) {
-                console.error("No client-UUID recvd from server.");
-            }
-        })
-        .catch(error => {
-            errorManager.showError(1048, error.message);
-        });
+        this.makeServerRequest('/basic_init', data, 
+            this.lamdaOnBasicInitRequestSuccess, this.lamdaOnBasicInitRequestFailure);
+    }
+
+    lamdaOnBasicInitRequestSuccess = (data) => {
+        this.setClient_UUID(data.client_uuid);
+        this.setMainContentSignedURL(data.signed_main_content_url);
+        console.log(data.client_uuid);
+        if ( !this.getClient_UUID() ) {
+            errorManager.showError(2044);
+        }
+    }
+
+    lamdaOnBasicInitRequestFailure = (msg) => {
+        if ( msg ) {
+            errorManager.showError(1048, msg);
+        }
     }
 
     getClientId() {    
@@ -160,4 +150,41 @@ class BasicInitializer {
 
         return {top, left};
     }
+
+    makeServerRequest(requestRoute, data, lamdaOnServerRequestSuccess, lamdaOnServerRequestFailure) {
+        fetch(requestRoute, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(data => {
+                    throw new Error(data.error);
+                });
+            }
+            return response.json();
+        })
+        .then(data => {
+            lamdaOnServerRequestSuccess(data);
+        })
+        .catch(error => {
+            let message = error.message;
+
+            if (error.message.includes('<html')) {
+                errorManager.showError(2043);
+                message = '';
+            } else if (error.message.includes('Failed to fetch')) {
+                errorManager.showError(2043);
+                message = '';
+            }
+            lamdaOnServerRequestFailure(message);
+        });
+    }
+
+
+
+
 }

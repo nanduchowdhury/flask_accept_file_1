@@ -123,31 +123,22 @@ class SelectRegionManager {
             }
         };
 
-        fetch('/explain_region', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => {
-            if (!response.ok) {
-                // Handle HTTP errors (like 500)
-                return response.json().then(data => {
-                    throw new Error(data.error); // Access the error message
-                });
-            }
-            return response.json(); // Process successful response
-        })
-        .then(data => {
-            this.processResultsRecvdFromServer(data);
-            this.spinner.hide();
-        })
-        .catch(error => {
-            errorManager.showError(1038, error.message);
-            this.spinner.hide();
-        });
+        basicInitializer.makeServerRequest('/explain_region', data, 
+            this.lamdaOnSelectRegionRequestSuccess, this.lamdaOnSelectRegionRequestFailure);
     }
+
+    lamdaOnSelectRegionRequestSuccess = (data) => {
+        this.processResultsRecvdFromServer(data);
+        this.spinner.hide();
+    }
+
+    lamdaOnSelectRegionRequestFailure = (msg) => {
+        this.spinner.hide();
+        if ( msg ) {
+            errorManager.showError(1038, error.message);
+        }
+    }
+
 
     processResultsRecvdFromServer(data) {
         const postIt = new PostItNote(data.result1, data.result2);

@@ -68,13 +68,14 @@ class PreviewAreaControl extends ContainerScrollBarControl {
 
         this.showInPreviewArea(file);
 
-        
+        this.lamdaEntryBeforeGcsUpload();
+        sendRecvManager.uploadGcsAndInitAIModel(this.lamdaOnGcsUploadFinish);
+    }
 
+    lamdaEntryBeforeGcsUpload() {
         this.fileInputButton.disabled = true;
         this.takePictureButton.disabled = true;
         this.learnButton.disabled = true;
-
-        sendRecvManager.uploadGcsAndInitAIModel(this.lamdaOnGcsUploadFinish);
     }
 
     lamdaOnGcsUploadFinish = () => {

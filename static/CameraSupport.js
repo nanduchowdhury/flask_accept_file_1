@@ -103,6 +103,8 @@ class CameraSupport {
             document.getElementById('cameraPopup').style.display = 'none';
 
             SharedData.DataSource = 'Picture';
+
+            this.previewAreaControl.lamdaEntryBeforeGcsUpload();
             sendRecvManager.uploadGcsAndInitAIModel(this.previewAreaControl.lamdaOnGcsUploadFinish);
 
         } catch (err) {
@@ -163,6 +165,8 @@ class CameraSupport {
                 const videoUrl = URL.createObjectURL(SharedData.videoBlob);
 
                 SharedData.DataSource = 'video';
+
+                this.previewAreaControl.lamdaEntryBeforeGcsUpload();
                 sendRecvManager.uploadGcsAndInitAIModel(this.previewAreaControl.lamdaOnGcsUploadFinish);
 
                 this.previewAreaControl.showVideoInCanvas(videoUrl);

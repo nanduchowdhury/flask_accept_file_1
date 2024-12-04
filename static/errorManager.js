@@ -80,20 +80,24 @@ class ErrorManager {
 
 
     sendLogsToServer(logs) {
-        fetch(this.serverEndpoint, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                client_uuid: basicInitializer.getClient_UUID(),
-                clientId: basicInitializer.getClientId(),
-                logs: logs
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
 
-        })
-        .catch(error => console.error('Error sending logs:', error));
+        const data = {
+            client_uuid: basicInitializer.getClient_UUID(),
+            clientId: basicInitializer.getClientId(),
+            logs: logs
+        };
+
+        basicInitializer.makeServerRequest(this.serverEndpoint, data, 
+            this.lamdaOnSaveLogsRequestSuccess, this.lamdaOnSaveLogsRequestFailure);
+    }
+
+    lamdaOnSaveLogsRequestSuccess = (data) => {
+    }
+
+    lamdaOnSaveLogsRequestFailure = (msg) => {
+        if ( msg ) {
+            this.showError(2045, msg);
+        }
     }
 
     loadErrorsFromFile() {

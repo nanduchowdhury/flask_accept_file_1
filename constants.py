@@ -44,8 +44,18 @@ def compareTime(time_1, time_2):
     dt2 = datetime.fromisoformat(time_2)
     return dt1 <= dt2
 
-import os
 
+def remove_empty_lines(lines):
+    non_empty_lines = [line for line in lines if line.strip() != ""]
+    
+    return non_empty_lines
+
+
+#########################################################
+# 
+# This class will remove the local-file when out-of-scope.
+#
+##########################################################
 class LocalFileManager:
     def __init__(self, local_file_name):
         self._local_file_name = local_file_name

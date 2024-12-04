@@ -257,6 +257,7 @@ class ScholarKM(Flask):
                 english_response = self.gemini_access.get_all_headers_of_picture(uuid)
 
             first_response = english_response.splitlines()
+            first_response = constants.remove_empty_lines(first_response)
 
             num_learn_points = len(first_response)
             self.sess.save_client_data(uuid, 'upload_file.num_learn_points', num_learn_points)

@@ -115,4 +115,7 @@
 2040 : Error writing JSON GCS shared-file %s - %s
 2041 : Upload GCS signed-URL failed with status - %s
 2042 : Error upload signed-URL to GCS
+2043 : Could not connect to server. Please try again later.
+2044 : Error communicating with server. Please try again later.
+2045 : Error sending logs to server - %s.
 

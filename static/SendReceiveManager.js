@@ -208,72 +208,43 @@ class SendReceiveManager {
     
         // Log data and proceed to send the request
         errorManager.log(1017, data);
-    
-        fetch('/learn_response', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => {
-            if (!response.ok) {
-                return response.json().then(data => {
-                    throw new Error(data.error);
-                });
-            }
-            return response.json();
-        })
-        .then(data => {
+
+        basicInitializer.makeServerRequest('/learn_response', data, 
+            this.lamdaOnLearnResponseRequestSuccess, this.lamdaOnLearnResponseRequestFailure);
+    }
+
+    lamdaOnLearnResponseRequestSuccess = (data) => {
             this.handleServerResponse(data);
             this.spinner.hide();
             this.sendButtonInProcess = false;
-        })
-        .catch(error => {
-            errorManager.showError(1018, error.message);
+        }
+
+    lamdaOnLearnResponseRequestFailure = (msg) => {
+            if ( msg ) {
+                errorManager.showError(1018, msg);
+            }
             this.spinner.hide();
             this.sendButtonInProcess = false;
-        });
-    }
+        }
     
     sendDataToServer(data) {
 
         this.aiModelInitError = "";
         this.aiModelInitDone = false;
 
-        fetch('/ai_model_init', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-            .then(response => {
-                if (!response.ok) {
-                    // Handle HTTP errors (like 500)
-                    return response.json()
-                        .then(data => {
-                            this.aiModelInitError = data.error;
-                            this.aiModelInitDone = true;
-                        })
-                        .catch(() => {
-                            // Fallback for invalid JSON responses
-                            throw new Error(`HTTP error ${response.status}`);
-                        });
-                }
-                return response.json(); // Process successful response
-            })
-            .then(data => {
-                // Handle successful response
-                this.aiModelInitDone = true;
-                // Add logic to process the successful response if needed
-            })
-            .catch(error => {
-                // Handle both HTTP and network errors
-                this.aiModelInitError = error.message || 'An unknown error occurred.';
-                this.aiModelInitDone = true;
-            });
-        
+        basicInitializer.makeServerRequest('/ai_model_init', data, 
+            this.lamdaOnAiModelInitRequestSuccess, this.lamdaOnAiModelInitRequestFailure);
+    }
+
+    lamdaOnAiModelInitRequestSuccess = (data) => {
+        this.aiModelInitDone = true;
+    }
+
+    lamdaOnAiModelInitRequestFailure = (msg) => {
+        this.aiModelInitDone = true;
+        if ( msg ) {
+            this.aiModelInitError = msg;
+        }
     }
 
     handleServerResponse(data) {

@@ -49,31 +49,21 @@ class ReportToDeveloper {
                   }
               };
 
-              fetch('/report_to_user', {
-                  method: 'POST',
-                  headers: {
-                      'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify(data)
-              })
-              .then(response => {
-                  if (!response.ok) {
-                    return response.json().then(data => {
-                      throw new Error(data.error); // Access the error message
-                  });
-                  }
-                  return response.json(); // Process successful response
-              })
-              .then(data => {
-                  // Process received data
-                  errorManager.showError(1047);
-              })
-              .catch(error => {
-                errorManager.showInfo(1046, error.message);
-              });
+              basicInitializer.makeServerRequest('/report_to_user', data, 
+                this.lamdaOnReportToServerRequestSuccess, this.lamdaOnReportToServerRequestFailure);
           });
       });
   }
+
+  lamdaOnReportToServerRequestSuccess = (data) => {
+    errorManager.showError(1047);
+    }
+
+    lamdaOnReportToServerRequestFailure = (msg) => {
+        if ( msg ) {
+            errorManager.showInfo(1046, error.message);
+        }
+    }
 
   onReportItem() {
       this.captureScreenshot();
