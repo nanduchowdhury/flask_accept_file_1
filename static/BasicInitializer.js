@@ -5,6 +5,7 @@ class BasicInitializer {
     static LEFT_MOUSE_BUTTON = 0;
     static ACCEPTABLE_REGION_SIZE = 10;
     static EXPLAIN_REGION_RMB = "Explain Selection";
+    static MCQ_RMB = "Multi-Choice Questions (MCQ)"
     static POP_OUT_RMB = "Pop Out/In";
     static TOUCH_PAINT_REGION_START_END_RMB = "Start/End Paint Region";
     static START_LEARN = "Start Learning";

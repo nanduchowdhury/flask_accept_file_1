@@ -118,4 +118,6 @@
 2043 : Could not connect to server. Please try again later.
 2044 : Error communicating with server. Please try again later.
 2045 : Error sending logs to server - %s.
+2046 : Start learning before trying MCQ.
+2047 : Error from server generating MCQ - %s.
 

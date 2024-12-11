@@ -50,6 +50,40 @@ def remove_empty_lines(lines):
     
     return non_empty_lines
 
+def remove_all_chars_upto_char_from_begin(string, upto_char):
+    """Removes characters from the beginning of a string up to a specific character.
+
+    Args:
+        string: The input string.
+        char: The character to stop removing at.
+
+    Returns:
+        The string without the removed characters.
+    """
+
+    index = string.find(upto_char)
+    if index != -1:
+        return string[index:]
+    else:
+        return string
+
+
+def remove_all_chars_upto_char_from_end(string, char):
+    """Removes characters from the end of a string up to a specific character, including the character itself.
+
+    Args:
+        string: The input string.
+        char: The character to stop removing at.
+
+    Returns:
+        The string without the removed characters.
+    """
+
+    index = string.rfind(char)
+    if index != -1:
+        return string[:index + 1]
+    else:
+        return string
 
 #########################################################
 # 

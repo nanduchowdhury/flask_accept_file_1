@@ -1,0 +1,85 @@
+.mcq-popout {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    z-index: 1000;
+    background-color: rgb(243, 243, 165);
+    border: 5px solid #ccc;
+    font-family: 'Patrick Hand'; /* Handwritten font */
+    font-weight: bold; /* Set font weight to normal */
+    font-size: 14px;
+    width: 80%; /* Flexible width to adapt to different screen sizes */
+    max-width: 800px; /* Limit maximum width for desktop */
+    height: auto; /* Adjust height based on content */
+    max-height: 80vh; /* Prevent the popout from taking up too much height */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    overflow: auto; /* Scroll if content overflows */
+    white-space: normal; /* Wrap text */
+    word-wrap: break-word; /* Break long words */
+    line-height: 1.5; /* Improve readability with better line spacing */
+    box-sizing: border-box; /* Include padding in the element’s width/height */
+}
+
+/* Responsive adjustments for mobile devices */
+@media (max-width: 600px) {
+    .mcq-popout {
+        width: 95%; /* More flexible width for small screens */
+        max-width: 100%; /* Allow the popout to use full width on mobile */
+        max-height: 90vh; /* Slightly larger max height for mobile devices */
+        font-size: 13px; /* Slightly smaller font size for better fit */
+        padding: 8px; /* Reduce padding for mobile */
+    }
+}
+
+.mcq-title {
+    text-align: center;
+    font-size: 10px;
+    font-weight: bold;
+    background: #eee98c;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #333;
+    background: none;
+    border: none;
+    font-weight: bold;
+}
+
+.eval-btn {
+    background-color: #3498db;
+    color: white;
+    padding: 6px 12px;  /* Reduced size */
+    border: none;
+    cursor: pointer;
+    font-weight: bold;  /* Made font bold */
+    font-size: 14px;    /* Adjusted font size */
+}
+
+.question {
+    margin-bottom: 15px;
+}
+
+label {
+    cursor: pointer;
+}
+
+label.red {
+    color: red;
+}
+
+label.green {
+    color: green;
+}

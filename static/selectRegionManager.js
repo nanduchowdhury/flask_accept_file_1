@@ -135,7 +135,7 @@ class SelectRegionManager {
     lamdaOnSelectRegionRequestFailure = (msg) => {
         this.spinner.hide();
         if ( msg ) {
-            errorManager.showError(1038, error.message);
+            errorManager.showError(1038, msg);
         }
     }
 

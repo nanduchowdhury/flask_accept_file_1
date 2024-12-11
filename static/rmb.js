@@ -145,7 +145,7 @@ class RoughAreaRmb extends RmbBase {
 class PreviewAreaRmb extends RmbBase {
     constructor() {
         super('previewArea', [BasicInitializer.EXPLAIN_REGION_RMB, 
-            BasicInitializer.POP_OUT_RMB, BasicInitializer.TOUCH_PAINT_REGION_START_END_RMB]);
+            BasicInitializer.POP_OUT_RMB, BasicInitializer.TOUCH_PAINT_REGION_START_END_RMB, BasicInitializer.MCQ_RMB]);
 
         this.selectRegionMgr = new SelectRegionManager();
 
@@ -159,6 +159,15 @@ class PreviewAreaRmb extends RmbBase {
 
     updateSelectionRegionRect(rect) {
         this.selectRegionMgr.updateSelectionRegionRect(rect);
+    }
+
+    onMCQ() {
+        if ( cTracker.isInitLevel() ) {
+            errorManager.showError(2046);
+        } else {
+            let mcq = new mcqServerManager();
+            mcq.getMcqFromServer();
+        }
     }
 
     onExplainRegion() {
@@ -216,6 +225,9 @@ class PreviewAreaRmb extends RmbBase {
                 break;
             case 3:
                 this.onTouchPaintStartEnd();
+                break;
+            case 4:
+                this.onMCQ();
                 break;
             default:
                 alert(`Preview Area Action-${actionIndex} clicked!`);

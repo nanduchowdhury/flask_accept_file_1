@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='buttonCombination.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='MessageBox.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='postItNote.css') }}">    
+    <link rel="stylesheet" href="{{ url_for('static', filename='postItNote.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='mcqManager.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='top_right_menu.css') }}">
 </head>
 <body>
@@ -17,8 +18,10 @@
     <body>
         <div class="header-container">
             <!-- Company logo - positioned left and smaller -->
-        <img src="{{ url_for('static', filename='kupmanduk-copper-black-font.jpg') }}" class="logo" alt="Kupamanduk" title="Kupamanduk">
-        
+            <a href="https://www.kupmanduk.co.in/home" target="_blank">
+                <img src="{{ url_for('static', filename='kupmanduk-copper-black-font.jpg') }}" class="logo" alt="Kupamanduk" title="Kupamanduk">
+            </a>
+            
         <!-- Web app name - positioned in the center and larger -->
         <img src="{{ url_for('static', filename='scholar-KM-copper-black-font.jpg') }}" class="app-name" alt="Scholar-KM" title="Scholar-KM">
         
@@ -170,6 +173,7 @@
     <script src="{{ url_for('static', filename='touchAndMousePaint.js') }}"></script>
     <script src="{{ url_for('static', filename='PdfLoader.js') }}"></script>
     <script src="{{ url_for('static', filename='GCSManager.js') }}"></script>
+    <script src="{{ url_for('static', filename='mcqManager.js') }}"></script>
     <script src="{{ url_for('static', filename='main.js') }}"></script>
 
 </body>

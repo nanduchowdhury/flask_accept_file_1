@@ -69,6 +69,7 @@ class ScholarKM(Flask):
         self.route('/learn_response', methods=['POST'])(self.learn_response)
         self.route('/save_logs', methods=['POST'])(self.save_logs)
         self.route('/explain_region', methods=['POST'])(self.explain_region)
+        self.route('/generate_MCQ', methods=['POST'])(self.generate_MCQ)
         self.route('/report_to_user', methods=['POST'])(self.report_to_user)
 
         self.serverSettings = JsonSettings("server_settings.json")
@@ -458,6 +459,25 @@ class ScholarKM(Flask):
 
         except Exception as e:
             return jsonify({"error": str(e)}), 500
+
+    def generate_MCQ(self):
+        try:
+            data = request.get_json()
+            uuid = self.get_or_generate_uuid(data)
+
+            self.sess.force_read_session(uuid)
+
+            self.dump_request_info(uuid, "generate_MCQ")
+
+            self.request_prelude(uuid)
+
+            english_response = self.gemini_access.generate_MCQ(uuid)
+
+            return jsonify({'result1': english_response})
+
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
+
 
     def explain_region(self):
         try:

@@ -63,7 +63,7 @@ class PostItNote {
         try {
             let tabContentDiv = document.createElement('div');
             tabContentDiv.className = className;
-            tabContentDiv.innerText = tabContent;
+            tabContentDiv.innerHTML = tabContent;
 
             return tabContentDiv;
         } catch (error) {

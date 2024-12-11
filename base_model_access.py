@@ -1,6 +1,9 @@
 import re
 import os
 
+import json
+import constants
+
 import time
 from PIL import Image
 
@@ -92,6 +95,24 @@ class BaseModelAccess():
 
         return response
 
+    def generate_MCQ(self, uuid):
+
+        base_response = self.sess.get_client_data(uuid, 'upload_file.base_response_text')
+        prompt = self.base_prompt.get_prompt_generate_MCQ_wrt_content(base_response)
+
+        # print(f"MCQ prompt : {prompt}")
+
+        response = self.query_google_file(uuid, prompt)
+
+        # Remove some unwanted chars at the begining - so that json
+        # format is preserved.
+        response = constants.remove_all_chars_upto_char_from_begin(response, '{')
+        response = constants.remove_all_chars_upto_char_from_end(response, '}')
+
+        # print(f"MCQ response : {response}")
+
+        return response
+
     def explain_region(self, uuid, explain_region_file):
 
         base_response = self.sess.get_client_data(uuid, 'upload_file.base_response_text')
@@ -109,6 +130,17 @@ class BasePrompt():
         # Constants
         self.example_bullet_points = "for example: 1. point-1   2. point-2"
 
+        self.example_MCQ_xml = {
+            "What is the capital of France?": {
+                "choices": { "a": "Berlin", "b": "Paris", "c": "Rome" },
+                "answer": "b"
+            },
+            "What is 2 + 2?": {
+                "choices": { "a": "3", "b": "4", "c": "5" },
+                "answer": "b"
+            }
+        }
+
     def get_prompt_to_check_academic_text_header_in_content(self):
         prompt = "Please answer following questions yes or no: \
                     1. is the content related to academics which is taught in school or college? \
@@ -122,8 +154,9 @@ class BasePrompt():
         return prompt
 
     def get_prompt_header_summary(self, header_point):
-        prompt = "create summary points about following header in the content in context to the uploaded file - \
-                           also answer if any question present. also help if there is any activity to be done : \"" + header_point + "\""
+        prompt = "Create summary points about following header in the content in context to the uploaded file. \
+                           Also answer if any question present. Also help if there is any activity to be done. \
+                           Write the point-title in bold. Give new-line after each point : \"" + header_point + "\""
 
         return prompt
 
@@ -149,9 +182,14 @@ class BasePrompt():
         return prompt
 
     def get_prompt_detail_response(self):
-        prompt = "generate detail explanation"
+        prompt = "Generate detail explanation of the uploaded file."
         return prompt
 
+    def get_prompt_generate_MCQ_wrt_content(self, content):
+        prompt = "Generate fresh set of MCQ in context of the uploaded file."
+        prompt = prompt + " Make sure the MCQ is of the following JSON format without \
+                            any leading or trailing characters: " + json.dumps(self.example_MCQ_xml)
+        return prompt
 
     def get_prompt_explain_image_wrt_content(self, content):
         prompt = "explain the image specified in context to the detailed \
