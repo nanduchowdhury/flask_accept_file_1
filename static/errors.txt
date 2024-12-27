@@ -121,3 +121,15 @@
 2046 : Start learning before trying MCQ.
 2047 : Error from server generating MCQ - %s.
 
+2048 : Cannot convert to multi-line-string for input that is not string.
+2049 : Cannot convert to multi-line-string for max-chars-per-line not a number.
+2050 : Cannot convert to multi-line-string for max-chars-per-line not a positive-number.
+
+2051 : Error copy-paste-text - no input text provided.
+2052 : Error copy-paste-text - failed to create PNG blob.
+2053 : Error copy-paste-text - %s.
+2054 : Error copy-paste-image - could not load image from clipboard.
+2055 : Error copy-paste - could not find text or image in clipboard.
+2056 : Error copy-paste - %s.
+
+

@@ -154,9 +154,11 @@ class BasePrompt():
         return prompt
 
     def get_prompt_header_summary(self, header_point):
-        prompt = "Create summary points about following header in the content in context to the uploaded file. \
-                           Also answer if any question present. Also help if there is any activity to be done. \
-                           Write the point-title in bold. Give new-line after each point : \"" + header_point + "\""
+        prompt = f"1. Give summary points about following topic in context to the uploaded file : {header_point}. \
+                        If summary points cannot be created, explain it in detail. \
+                   2. Answer if any questions present. If no question present, do not mention about questions in the response. \
+                   3. Comment or give suggestions, if any activity to be done. If no activity present, do not mention about activity in the response. \
+                   4. Write the point-title in bold. Give new-line after each point."
 
         return prompt
 
@@ -168,9 +170,10 @@ class BasePrompt():
         if ( is_headers_present ):
             prompt = f"Process the entire content as follows: \
                         1. Search for headers or sections marked in bold or larger-font. \
-                        2. Also search for headers or sections such as 1.1 header1   1.2 header2   1.2.1 sub-header. \
+                        2. Also search for headers or sections such as 1.1 header1   1.2 header2   1.2.1 sub-header etc. \
                         3. List the headers or sections as ${self.example_bullet_points} \
-                        4. While listing the points, also mention the page-number where the header is found. \
+                            [If no header present, do not mention about header in the response.] \
+                        5. While listing the points, also mention the page-number where the header is found. \
                         "
         else:
             prompt = "list summary points of entire content as following example : " + self.example_bullet_points
@@ -192,9 +195,11 @@ class BasePrompt():
         return prompt
 
     def get_prompt_explain_image_wrt_content(self, content):
-        prompt = "explain the image specified in context to the detailed \
-                            explanation of the document as follows : " + content + "."
-        prompt = prompt + " also answer if any question present. also help if there is any activity to be done."
+        prompt = f"1. Explain the image specified in context to the detailed \
+                        explanation of the document as follows : {content}. \
+                   2. Answer if any question present. If no question present, do not mention about questions. \
+                   3. Give suggestions or comments if there is any activity to be done. \
+                      If no activity present, do not mention about activities."
         return prompt
 
         

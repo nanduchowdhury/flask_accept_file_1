@@ -145,11 +145,17 @@ class RoughAreaRmb extends RmbBase {
 class PreviewAreaRmb extends RmbBase {
     constructor() {
         super('previewArea', [BasicInitializer.EXPLAIN_REGION_RMB, 
-            BasicInitializer.POP_OUT_RMB, BasicInitializer.TOUCH_PAINT_REGION_START_END_RMB, BasicInitializer.MCQ_RMB]);
+            BasicInitializer.POP_OUT_RMB, 
+            BasicInitializer.TOUCH_PAINT_REGION_START_END_RMB, 
+            BasicInitializer.MCQ_RMB,
+            BasicInitializer.PASTE_FROM_CLIPBOARD]);
 
         this.selectRegionMgr = new SelectRegionManager();
 
         this.touchPaintRegionStartOrEndIndicator = '';
+
+        this.pdfCanvas = document.getElementById('pdfCanvas');
+        this.ctx = pdfCanvas.getContext('2d');
     }
 
     updateRegionBbox(startX, startY, endX, endY) {
@@ -179,12 +185,98 @@ class PreviewAreaRmb extends RmbBase {
         }
     }
 
+    onPaste() {
+        this.pasteFromClipboard();
+    }
+
     onPopInOut() {
 
         if ( containerMaximizeManager.isAnyContainerMaximized() ) {
             containerMaximizeManager.revertLayout();
         } else {
             containerMaximizeManager.popOutPreviewArea();
+        }
+    }
+
+    pasteImage(blob) {
+        // Convert the blob to an image
+        const img = new Image();
+        const imgSrc = URL.createObjectURL(blob);
+
+        img.onerror = () => {
+            errorManager.showError(2054);
+        };
+
+        img.onload = () => {
+            // Set canvas size to match image dimensions
+            this.pdfCanvas.width = img.width;
+            this.pdfCanvas.height = img.height;
+
+            basicInitializer.clearBeforeStartNewExplanation();
+            SharedData.DataSource = 'Picture';
+
+            // Draw the image on the canvas
+            this.ctx.drawImage(img, 0, 0, this.pdfCanvas.width, this.pdfCanvas.height);
+
+            previewAreaControl.lamdaEntryBeforeGcsUpload();
+            sendRecvManager.uploadGcsAndInitAIModel(previewAreaControl.lamdaOnGcsUploadFinish);
+        };
+
+        img.src = imgSrc;
+    }
+
+    pasteText(text, x = 10, y = 20, lineHeight = 30) {
+        const lines = basicInitializer.convertMultiLine(text, 30);
+
+        basicInitializer.createInMemoryPngFromText(lines)
+        .then((file) => {
+    
+            basicInitializer.clearBeforeStartNewExplanation();
+            SharedData.DataSource = 'File';
+
+            previewAreaControl.showInPreviewArea(file);
+
+            previewAreaControl.lamdaEntryBeforeGcsUpload();
+            sendRecvManager.uploadGcsAndInitAIModel(previewAreaControl.lamdaOnGcsUploadFinish);
+
+            previewAreaControl.hideVideoShowCanvas();
+
+        })
+        .catch((err) => {
+            errorManager.showError(2053, err);
+        });
+    }
+
+    async pasteFromClipboard() {
+        try {
+            // Reset the width & height.
+            this.pdfCanvas.width = 300;
+            this.pdfCanvas.height = 300;
+
+            const clipboardItems = await navigator.clipboard.read();
+
+            for (const item of clipboardItems) {
+                if (item.types.includes('image/png') || item.types.includes('image/jpeg')) {
+
+                    const imageType = item.types.find(type => type.startsWith('image/'));
+                    if (imageType) {
+                        // Get the image blob from the clipboard
+                        const blob = await item.getType(imageType);
+                        this.pasteImage(blob);
+                    }
+
+                } else if (item.types.includes('text/plain')) {
+
+                    const blob = await item.getType('text/plain');
+                    const text = await blob.text(); // Get text from clipboard
+                    this.pasteText(text);
+
+                } else {
+                    errorManager.showError(2055);
+                }
+            }
+        } catch (err) {
+            errorManager.showError(2056, err);
         }
     }
 
@@ -228,6 +320,9 @@ class PreviewAreaRmb extends RmbBase {
                 break;
             case 4:
                 this.onMCQ();
+                break;
+            case 5:
+                this.onPaste();
                 break;
             default:
                 alert(`Preview Area Action-${actionIndex} clicked!`);
