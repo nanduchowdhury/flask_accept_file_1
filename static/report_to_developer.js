@@ -2,25 +2,52 @@
 
 class ReportToDeveloper {
   constructor() {
-      this.reportItem = document.getElementById('report-item');
-      this.reportPopup = document.getElementById('reportPopup');
-      this.cancelButton = document.getElementById('reportIssueCancelButton');
-      this.sendButton = document.getElementById('reportIssueSendButton');
-      this.screenshotImage = document.getElementById('screenshotImage');
-      this.reportMessage = document.getElementById('reportMessage');
+      this.reportIssueItem = document.getElementById('report-item');
+      this.reportIssuePopup = document.getElementById('reportIssuePopup');
+      this.reportIssueCancelButton = document.getElementById('reportIssueCancelButton');
+      this.reportIssueSendButton = document.getElementById('reportIssueSendButton');
+      this.reportIssueScreenshotImage = document.getElementById('screenshotImage');
+      this.reportIssueMessage = document.getElementById('reportMessage');
+
+      this.settingsItem = document.getElementById('settings-item');
+      this.settingsPopup = document.getElementById('settingsPopup');
+      this.settingsCancelButton = document.getElementById('settingsCancelButton');
+      this.settingsOkButton = document.getElementById('settingsOkButton');
 
       // Bind methods to the class instance
-      this.onReportItem = this.onReportItem.bind(this);
-      this.onCancel = this.onCancel.bind(this);
-      this.onSend = this.onSend.bind(this);
+      this.onreportIssueItem = this.onreportIssueItem.bind(this);
+      this.onReportIssueCancel = this.onReportIssueCancel.bind(this);
+      this.onReportIssueSend = this.onReportIssueSend.bind(this);
 
-      this.reportItem.addEventListener('click', this.onReportItem);
-      this.cancelButton.addEventListener('click', this.onCancel);
-      this.sendButton.addEventListener('click', this.onSend);
+      this.onSettingsItem = this.onSettingsItem.bind(this);
+      this.onSettingsCancel = this.onSettingsCancel.bind(this);
+      this.onSettingsOk = this.onSettingsOk.bind(this);
+
+      this.reportIssueItem.addEventListener('click', this.onreportIssueItem);
+      this.reportIssueCancelButton.addEventListener('click', this.onReportIssueCancel);
+      this.reportIssueSendButton.addEventListener('click', this.onReportIssueSend);
+
+      this.settingsItem.addEventListener('click', this.onSettingsItem);
+      this.settingsCancelButton.addEventListener('click', this.onSettingsCancel);
+      this.settingsOkButton.addEventListener('click', this.onSettingsOk);
   }
 
-  onCancel() {
-      this.reportPopup.classList.add('report_issue_hidden');
+  onReportIssueCancel() {
+      this.reportIssuePopup.classList.add('tr_dialog_hidden');
+  }
+
+  onSettingsCancel() {
+
+  }
+
+  onSettingsOk() {
+    const selectedLanguage = document.querySelector('input[name="language"]:checked');
+    if (selectedLanguage) {
+        console.log(`Selected language: ${selectedLanguage.value}`);
+    } else {
+        console.log('No language selected.');
+    }
+    this.settingsPopup.classList.add('tr_dialog_hidden');
   }
 
   generateBase64File(pdfBlob, callback) {
@@ -31,9 +58,9 @@ class ReportToDeveloper {
       reader.readAsDataURL(pdfBlob);
   }
 
-  onSend() {
+  onReportIssueSend() {
     this.createPdfAndSendToServer();
-    this.reportPopup.classList.add('report_issue_hidden');
+    this.reportIssuePopup.classList.add('tr_dialog_hidden');
   }
 
   createPdfAndSendToServer() {
@@ -65,20 +92,25 @@ class ReportToDeveloper {
         }
     }
 
-  onReportItem() {
+  onreportIssueItem() {
       this.captureScreenshot();
-      this.reportPopup.classList.remove('report_issue_hidden');
+      this.reportIssuePopup.classList.remove('tr_dialog_hidden');
+  }
+
+  onSettingsItem() {
+    this.captureScreenshot();
+    this.settingsPopup.classList.remove('tr_dialog_hidden');
   }
 
   captureScreenshot() {
       html2canvas(document.body).then((canvas) => {
-          this.screenshotImage.src = canvas.toDataURL('image/jpeg');
+          this.reportIssueScreenshotImage.src = canvas.toDataURL('image/jpeg');
       });
   }
 
   generatePDF(callback) {
-      const message = this.reportMessage.value;
-      const screenshot = this.screenshotImage.src;
+      const message = this.reportIssueMessage.value;
+      const screenshot = this.reportIssueScreenshotImage.src;
 
       const { jsPDF } = window.jspdf;
       const pdf = new jsPDF();

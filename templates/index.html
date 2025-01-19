@@ -31,25 +31,46 @@
                     <div class="tr_menu_menu-icon"></div>
                     <div class="tr_menu_dropdown-content">
                         <a id="report-item" href="#">Report</a>
+                        <a id="settings-item" href="#">Settings</a>
                     </div>
                 </div>
             </div>
 
             <!-- top-right report-issue popup -->
-            <div id="reportPopup" class="report_issue_popup report_issue_hidden">
-                <div class="report_issue_popup-content">
+            <div id="reportIssuePopup" class="tr_dialog_popup tr_dialog_hidden">
+                <div class="tr_dialog_popup-content">
                     <h2>Report Issue</h2>
-                    <div class="report_issue_screenshot-area">
+                    <div class="tr_dialog_screenshot-area">
                         <h3>Screenshot</h3>
                         <img id="screenshotImage" alt="Screenshot" />
                     </div>
-                    <div class="report_issue_message-area">
+                    <div class="tr_dialog_message-area">
                         <h3>Message</h3>
                         <textarea id="reportMessage" placeholder="Enter your message and email."></textarea>
                     </div>
-                    <div class="report_issue_popup-buttons">
+                    <div class="tr_dialog_popup-buttons">
                         <button id="reportIssueSendButton">Send</button>
                         <button id="reportIssueCancelButton">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- settings popup -->
+            <div id="settingsPopup" class="tr_dialog_popup tr_dialog_hidden">
+                <div class="tr_dialog_popup-content">
+                    <h2>Settings</h2>
+                    <div class="settings_tab-content">
+                        <h3>Language</h3>
+                        <div class="language-options">
+                            <label><input type="radio" name="language" value="Hindi"> Hindi</label><br>
+                            <label><input type="radio" name="language" value="Bengali"> Bengali</label><br>
+                            <label><input type="radio" name="language" value="Japanese"> Japanese</label><br>
+                            <label><input type="radio" name="language" value="Chinese"> Chinese</label>
+                        </div>
+                    </div>
+                    <div class="tr_dialog_popup-buttons">
+                        <button id="settingsOkButton">Ok</button>
+                        <button id="settingsCancelButton">Cancel</button>
                     </div>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 Chrome driver title is : Kupamanduk - Scholar-M
 *****************************
 ID is : report-item
-ID is : reportPopup
+ID is : reportIssuePopup
 ID is : screenshotImage
 ID is : reportMessage
 ID is : reportIssueSendButton
