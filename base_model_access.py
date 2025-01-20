@@ -79,9 +79,9 @@ class BaseModelAccess():
 
         return response
 
-    def convert_to_hindi(self, text):
+    def convert_to_second_lang(self, text, second_lang):
         
-        prompt = self.base_prompt.get_prompt_convert_to_hindi(text)
+        prompt = self.base_prompt.get_prompt_convert_to_second_lang(text, second_lang)
         response = self.query_only_prompt(prompt)
 
         return response
@@ -180,8 +180,8 @@ class BasePrompt():
 
         return prompt
 
-    def get_prompt_convert_to_hindi(self, text):
-        prompt = "convert following text in such a way that most of the content is in hindi and all hard words are in english : \n\n" + text
+    def get_prompt_convert_to_second_lang(self, text, second_lang):
+        prompt = f"convert following text in such a way that most of the content is in {second_lang} and all hard words are in english : \n\n" + text
         return prompt
 
     def get_prompt_detail_response(self):

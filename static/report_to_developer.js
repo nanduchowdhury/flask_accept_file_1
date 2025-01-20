@@ -2,6 +2,9 @@
 
 class ReportToDeveloper {
   constructor() {
+
+      this.secondLang = 'Hindi';
+
       this.reportIssueItem = document.getElementById('report-item');
       this.reportIssuePopup = document.getElementById('reportIssuePopup');
       this.reportIssueCancelButton = document.getElementById('reportIssueCancelButton');
@@ -37,15 +40,15 @@ class ReportToDeveloper {
   }
 
   onSettingsCancel() {
-
+    this.settingsPopup.classList.add('tr_dialog_hidden');
   }
 
   onSettingsOk() {
     const selectedLanguage = document.querySelector('input[name="language"]:checked');
     if (selectedLanguage) {
-        console.log(`Selected language: ${selectedLanguage.value}`);
+        this.secondLang = selectedLanguage.value;
+        errorManager.showError(2057, this.secondLang);
     } else {
-        console.log('No language selected.');
     }
     this.settingsPopup.classList.add('tr_dialog_hidden');
   }

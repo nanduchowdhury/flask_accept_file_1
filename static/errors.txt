@@ -132,4 +132,5 @@
 2055 : Error copy-paste - could not find text or image in clipboard.
 2056 : Error copy-paste - %s.
 
+2057 : Second language %s will be used for all explanation when new learning is started.
 

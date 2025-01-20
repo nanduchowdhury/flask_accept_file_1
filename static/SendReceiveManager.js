@@ -110,6 +110,7 @@ class SendReceiveManager {
             const base64File = reader.result.split(',')[1];
             const data = {
                 client_uuid: basicInitializer.getClient_UUID(),
+                secondLang: reportToDeveloper.secondLang,
                 fileName: file.name,
                 fileType: file.type,
                 // fileContent: base64File,
@@ -131,6 +132,7 @@ class SendReceiveManager {
 
         const data = {
             client_uuid: basicInitializer.getClient_UUID(),
+            secondLang: reportToDeveloper.secondLang,
             fileName: 'camera_image-' + basicInitializer.getFormattedTimestamp() + '.png',
             // image: dataUrl,
             additionalData: {
@@ -149,6 +151,7 @@ class SendReceiveManager {
 
                 const data = {
                     client_uuid: basicInitializer.getClient_UUID(),
+                    secondLang: reportToDeveloper.secondLang,
                     fileName: 'camera_video-' + basicInitializer.getFormattedTimestamp() + '.webm',
                     // video: base64Video,
                     additionalData: {

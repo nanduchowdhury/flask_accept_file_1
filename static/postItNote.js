@@ -22,7 +22,7 @@ class PostItNote {
             this.tab1Button = this.createTabButtonWithSpeakers('eng', this.tab1Content);
             tabContainer.appendChild(this.tab1Button);
 
-            this.tab2Button = this.createTabButtonWithSpeakers('hindi', this.tab2Content);
+            this.tab2Button = this.createTabButtonWithSpeakers(reportToDeveloper.secondLang, this.tab2Content);
             tabContainer.appendChild(this.tab2Button);
             
             this.postItNote.appendChild(tabContainer);
@@ -50,9 +50,12 @@ class PostItNote {
     createLanguageMap() {
         try {
             this.langMap = new Map([
-            ['hi-IN', 'hindi'],
-            ['bn-IN', 'bengali'],
-            ['en-US', 'english']
+                ['hi-IN', 'hindi'],
+                ['bn-IN', 'bengali'],
+                ['en-US', 'english'],
+                ['zh-CN', 'chinese'],
+                ['ja-JP', 'japanese'],
+                ['ta-IN', 'tamil']
             ]);
         } catch (error) {
             errorManager.showError(1003, error.message);
@@ -116,6 +119,12 @@ class PostItNote {
                 utterance.lang = 'hi-IN';
             } else if (text.match(/[\u0980-\u09FF]/)) { // Bengali
                 utterance.lang = 'bn-IN';
+            } else if (text.match(/[\u4E00-\u9FFF]/)) { // Chinese
+                utterance.lang = 'zh-CN';
+            } else if (text.match(/[\u3040-\u30FF]/)) { // Japanese
+                utterance.lang = 'ja-JP';
+            } else if (text.match(/[\u0B80-\u0BFF]/)) { // Tamil
+                utterance.lang = 'ta-IN';
             } else { // Default to English
                 utterance.lang = 'en-US';
             }

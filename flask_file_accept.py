@@ -325,6 +325,8 @@ class ScholarKM(Flask):
 
             self.request_prelude(uuid)
 
+            second_lang = data['secondLang']
+
             existing_main_file = self.sess.check_and_get_client_data(uuid, 'upload_file.main_content_file')
             if not self.gcs_manager.is_exist(existing_main_file):
                     raise ValueError(self.error_manager.show_message(2035))
@@ -335,6 +337,8 @@ class ScholarKM(Flask):
             self.sess.clear_client_data_selected_preserve(uuid, 'upload_file', ['main_content_file', 'start_time'])
 
             new_file = self.rename_main_content_file(data, existing_main_file)
+
+            self.sess.save_client_data(uuid, 'upload_file.second_lang', second_lang)
 
             self.sess.force_save_session(uuid)
 
@@ -394,7 +398,7 @@ class ScholarKM(Flask):
                                 'firstResponse' : first_response})
             else:
 
-                english_response, hindi_response = self.getHeaderResponse(uuid, learnLevel, is_threading_on)
+                english_response, second_lang_response = self.getHeaderResponse(uuid, learnLevel, is_threading_on)
                 
                 if is_threading_on:
                     self.startHeaderResponseThread(uuid, learnLevel + 1)
@@ -402,7 +406,7 @@ class ScholarKM(Flask):
                 self.error_manager.show_message(2010, learnLevel)
 
                 return jsonify({'result1': english_response, 
-                                'result2': hindi_response})
+                                'result2': second_lang_response})
 
         except Exception as e:
             return jsonify({"error": str(e)}), 500
@@ -413,32 +417,37 @@ class ScholarKM(Flask):
             return True
 
         english_response = ''
-        hindi_response = ''
+        second_lang_response = ''
 
         force_run = not constants.check_condition(headerTask.is_task_completed)
             
         if not force_run:
-            english_response, hindi_response = headerTask.get_results()
-            if not english_response or not hindi_response:
+            english_response, second_lang_response = headerTask.get_results()
+            if not english_response or not second_lang_response:
                 force_run = True
 
-        return force_run, english_response, hindi_response
+        return force_run, english_response, second_lang_response
 
     def getHeaderResponse(self, uuid, learnLevel, is_threading_on):
 
         english_response = ''
-        hindi_response = ''
+        second_lang_response = ''
 
-        headerTask = HeaderResponseTask(uuid, self.sess, self.gemini_access, learnLevel)
-        force_run, english_response, hindi_response = self.isHeaderResponseForceRunReqd(headerTask, is_threading_on)
+        second_lang = self.sess.get_client_data(uuid, 'upload_file.second_lang')
+
+        headerTask = HeaderResponseTask(uuid, self.sess, self.gemini_access, learnLevel, second_lang)
+        force_run, english_response, second_lang_response = self.isHeaderResponseForceRunReqd(headerTask, is_threading_on)
 
         if force_run:
-            english_response, hindi_response = headerTask.perform_actual_task()
+            english_response, second_lang_response = headerTask.perform_actual_task()
                 
-        return english_response, hindi_response
+        return english_response, second_lang_response
 
     def startHeaderResponseThread(self, uuid, learnLevel):
-        headerTask = HeaderResponseTask(uuid, self.sess, self.gemini_access, learnLevel)
+
+        second_lang = self.sess.get_client_data(uuid, 'upload_file.second_lang')
+
+        headerTask = HeaderResponseTask(uuid, self.sess, self.gemini_access, learnLevel, second_lang)
         task_name = f'task_learnLevel_{learnLevel}'
         self.pool.startTask(uuid, task_name, headerTask)
 
@@ -498,10 +507,12 @@ class ScholarKM(Flask):
             english_response = self.gemini_access.explain_region(uuid, local_file)
             self.error_manager.show_message(2013, gcs_file)
 
-            hindi_response = self.gemini_access.convert_to_hindi(english_response)
+            second_lang = self.sess.get_client_data(uuid, 'upload_file.second_lang')
+
+            second_lang_response = self.gemini_access.convert_to_second_lang(english_response, second_lang)
 
             return jsonify({'result1': english_response, 
-                            'result2': hindi_response})
+                            'result2': second_lang_response})
 
         except Exception as e:
             return jsonify({"error": str(e)}), 500
