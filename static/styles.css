@@ -185,6 +185,7 @@
             word-wrap: break-word; /* Break long words */
             line-height: 1.5; /* Improve readability with better line spacing */
             box-sizing: border-box; /* Include padding in the element’s width/height */
+            white-space: pre-wrap; /* IMPORTANT - Preserve whitespace and line breaks etc. Otherwise all text will appear as one-long-line.*/
         }
         
         /* Responsive adjustments for mobile devices */

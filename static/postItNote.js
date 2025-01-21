@@ -68,7 +68,16 @@ class PostItNote {
             tabContentDiv.className = className;
             tabContentDiv.innerHTML = tabContent;
 
+            if ( basicInitializer.isTextHindi(tabContent) || basicInitializer.isTextBengali(tabContent) ) {
+                tabContentDiv.style.fontFamily = BasicInitializer.HINID_BENGALI_TEXT_FONT;
+            } else if ( basicInitializer.isTextEnglish(tabContent) ) {
+                tabContentDiv.style.fontFamily = BasicInitializer.ENGLISH_TEXT_FONT;
+            } else {
+                tabContentDiv.style.fontFamily = BasicInitializer.ENGLISH_TEXT_FONT;
+            }
+
             return tabContentDiv;
+
         } catch (error) {
             errorManager.showError(1004, error.message);
         }
@@ -115,15 +124,15 @@ class PostItNote {
             this.currentUtterance = utterance;
 
             // Set language based on text content or other criteria
-            if (text.match(/[\u0900-\u097F]/)) { // Hindi
+            if (BasicInitializer.isTextHindi(text)) { // Hindi
                 utterance.lang = 'hi-IN';
-            } else if (text.match(/[\u0980-\u09FF]/)) { // Bengali
+            } else if (BasicInitializer.isTextBengali(text)) { // Bengali
                 utterance.lang = 'bn-IN';
-            } else if (text.match(/[\u4E00-\u9FFF]/)) { // Chinese
+            } else if (BasicInitializer.isTextChinese(text)) { // Chinese
                 utterance.lang = 'zh-CN';
-            } else if (text.match(/[\u3040-\u30FF]/)) { // Japanese
+            } else if (BasicInitializer.isTextJapanese(text)) { // Japanese
                 utterance.lang = 'ja-JP';
-            } else if (text.match(/[\u0B80-\u0BFF]/)) { // Tamil
+            } else if (BasicInitializer.isTextTamil(text)) { // Tamil
                 utterance.lang = 'ta-IN';
             } else { // Default to English
                 utterance.lang = 'en-US';

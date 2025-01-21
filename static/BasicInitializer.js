@@ -14,6 +14,9 @@ class BasicInitializer {
     static WAIT_TIME_FOR_AI_MODEL_INIT = 90000;
     static PDF_PAGE_RENDERING_DEBOUNCE_DELAY = 200; // 200ms
 
+    static ENGLISH_TEXT_FONT = 'Arial';
+    static HINID_BENGALI_TEXT_FONT = 'Courier New';
+
     constructor() {
         this.clientId = 'client-' + this.getFormattedTimestamp();
         this.client_uuid = '';
@@ -216,6 +219,49 @@ class BasicInitializer {
         cTracker.reset();
         document.getElementById('result1').innerHTML = '';
         document.getElementById('roughArea').innerHTML = '';
+    }
+
+    isTextEnglish(text) {
+        // Check if the text contains English letters (A-Z, a-z)
+        if (text.match(/[A-Za-z]/)) {
+            return true;
+        }
+        return false;
+    }
+    
+    isTextHindi(text) {
+        if (text.match(/[\u0900-\u097F]/)) { // Hindi
+            return true;
+        }
+        return false;
+    }
+
+    isTextBengali(text) {
+        if (text.match(/[\u0980-\u09FF]/)) { // Bengali
+            return true;
+        }
+        return false;
+    }
+
+    isTextChinese(text) {
+        if (text.match(/[\u4E00-\u9FFF]/)) { // Chinese
+            return true;
+        }
+        return false;
+    }
+
+    isTextJapanese(text) {
+        if (text.match(/[\u3040-\u30FF]/)) { // Japanese
+            return true;
+        }
+        return false;
+    }
+
+    isTextTamil(text) {
+        if (text.match(/[\u0B80-\u0BFF]/)) { // Tamil
+            return true;
+        }
+        return false;
     }
 
     //////////////////////////////////////////////////////

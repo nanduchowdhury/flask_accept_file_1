@@ -28,15 +28,26 @@ class PopoutManager extends ContainerScrollBarControl {
     // API to append an item (either simple text or a DOM element)
     appendItem(item) {
         let elementToAppend;
-
+    
         // Check if the item is a string (text) or a DOM element
         if (typeof item === 'string') {
-            elementToAppend = document.createTextNode(item); // Handle simple text
+            elementToAppend = document.createElement('div'); // Create a container div
+
+            if ( basicInitializer.isTextHindi(item) || basicInitializer.isTextBengali(item) ) {
+                elementToAppend.style.fontFamily = BasicInitializer.HINID_BENGALI_TEXT_FONT;
+            } else if ( basicInitializer.isTextEnglish(item) ) {
+                elementToAppend.style.fontFamily = BasicInitializer.ENGLISH_TEXT_FONT;
+            } else {
+                elementToAppend.style.fontFamily = BasicInitializer.ENGLISH_TEXT_FONT;
+            }
+
+            elementToAppend.innerHTML = item; // Preserve rich text formatting (HTML tags)
+
         } else {
             elementToAppend = item; // DOM element
         }
-
-        // Append the text node or element to the container
+    
+        // Append the styled element to the container
         this.popout.appendChild(elementToAppend);
     }
 
