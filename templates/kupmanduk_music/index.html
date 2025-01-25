@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kupamanduk - Music</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='buttonCombination.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='MessageBox.css') }}">
+</head>
+<body>
+
+    <div class="header-container">
+        <!-- Company logo - positioned left and smaller -->
+        <a href="https://www.kupmanduk.co.in/home" target="_blank">
+            <img src="{{ url_for('static', filename='kupmanduk-copper-black-font.jpg') }}" class="logo" alt="Kupamanduk" title="Kupamanduk">
+        </a>
+        
+    <!-- Web app name - positioned in the center and larger -->
+    <img src="{{ url_for('static', filename='music-KM-copper-black-font.jpg') }}" class="app-name" alt="music-KM" title="music-KM">
+        
+    </div>
+
+    <div class="separator"></div> <!-- Custom Separator -->
+      
+    <div class="topic-label-container">
+        <span id="topic-label" class="topic-label"></span>
+    </div>
+
+    <div class="separator"></div> <!-- Custom Separator -->
+
+    <div class="view-area-container">
+        <div id="ViewArea_1" class="view-area">
+            <!-- Content for ViewArea_1 goes here -->
+            <p>ViewArea_1: Add your content here...</p>
+        </div>
+        <div id="ViewArea_2" class="view-area">
+            <!-- Content for ViewArea_2 goes here -->
+            <p>ViewArea_2: Add your content here...</p>
+        </div>
+    </div>
+
+    <script>
+        const musicJsonData = {{ json_data | tojson | safe }};
+        
+        // This code will execute as soon as the page has loaded.
+        console.log("kupmanduk music page loaded successfuly-1."); 
+    </script>
+
+    <script src="{{ url_for('static', filename='kupmanduk_music.js') }}"></script>
+    
+
+</body>
+</html>

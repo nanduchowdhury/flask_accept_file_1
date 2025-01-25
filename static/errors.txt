@@ -134,3 +134,5 @@
 
 2057 : Second language %s will be used for all explanation when new learning is started.
 
+2058 : Error initializing Google custom-search-key - %s.
+2059 : Error searching YoutTube link - %s.

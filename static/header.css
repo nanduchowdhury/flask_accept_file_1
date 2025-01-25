@@ -25,6 +25,44 @@
     height: auto;
 }
 
+.view-area-container {
+    display: flex;
+    gap: 10px; /* Horizontal distance between the two areas */
+    margin-left: 10px; /* Adds left margin to the whole container */
+    margin-right: 10px; /* Adds right margin to the whole container */
+}
+.view-area {
+    flex: 1;
+    height: 400px; /* Adjust height as needed */
+    background-color: #f9f9f9;
+    justify-content: center;  /* Center horizontally */
+    align-items: center;      /* Center vertically, if needed */
+    width: 98%;
+    overflow: auto; /* Enables both horizontal and vertical scrolling */
+    border: 5px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+    white-space: pre-wrap;
+    font-family: "Courier New", Courier, monospace;
+    font-weight: 600; /* Bold text */
+    font-size: 14px; /* Smaller text size */
+}
+
+.topic-label-container {
+    text-align: center; /* Centers the text horizontally */
+    margin-top: 10px;   /* Adds space above the text label */
+}
+
+.topic-label {
+    font-weight: bold;  /* Makes the text bold */
+    color: #333;        /* Optional: Set text color */
+    font-size: 1.5em;      /* Increases the font size */
+    display: inline-block; /* Ensures the element respects height adjustments */
+    height: 100px;          /* Adjust height as needed */
+    line-height: 100px;     /* Ensures the text is vertically centered */
+    padding: 0 10px;       /* Adds horizontal padding for better spacing */
+}
+
 /* Drop-down menu styling */
 .tr_menu_dropdown-container {
     position: absolute;

@@ -50,6 +50,8 @@ from emailSupport import EmailSupport
 from ThreadPool import ThreadPool, TaskStatus, TaskBase
 from headerResponseTask import HeaderResponseTask
 
+from kmMusic import KupmandukMusic
+
 from JsonSettings import JsonSettings
 
 from gcs_manager import GCSManager
@@ -63,7 +65,9 @@ class ScholarKM(Flask):
         self.client_ip = 'client_ip'
         self.client_uuid = 'client_uuid'
 
-        self.route('/')(self.index)
+        self.route('/scholar_km')(self.scholar_km_index)
+        self.route('/kupmanduk_music')(self.kupmanduk_music_index)
+
         self.route('/basic_init', methods=['POST'])(self.basic_init)
         self.route('/ai_model_init', methods=['POST'])(self.ai_model_init)
         self.route('/learn_response', methods=['POST'])(self.learn_response)
@@ -195,9 +199,23 @@ class ScholarKM(Flask):
 
         return file_name, video_binary
 
-    def index(self):
-        return render_template('index.html')
+    def scholar_km_index(self):
+        return render_template('scholar_km/index.html')
 
+    def kupmanduk_music_index(self):
+
+        kmMusic = KupmandukMusic(self.gemini_access, self.error_manager)
+        raga = kmMusic.get_one_raga()
+        youtube_response = kmMusic.generate_youtube_response(raga)
+        raga_response = kmMusic.generate_explain_raga_response(raga)
+
+        json_data = {
+            "topicLabel": f"Raga : {raga}",
+            "viewArea_1": raga_response,
+            "viewArea_2": youtube_response
+        }
+
+        return render_template('kupmanduk_music/index.html', json_data=json_data)
 
     def is_main_content_changed(self, uuid, main_content_file):
         self.sess.force_read_session(uuid)

@@ -123,6 +123,12 @@ class BaseModelAccess():
 
         return response
 
+    def generate_explain_raga_response(self, raga):
+
+        prompt = self.base_prompt.get_prompt_explain_raga(raga)
+        response = self.query_only_prompt(prompt)
+
+        return response
 
 class BasePrompt():
     def __init__(self):
@@ -202,8 +208,9 @@ class BasePrompt():
                       If no activity present, do not mention about activities."
         return prompt
 
-        
+    def get_prompt_explain_raga(self, raga):
 
+        prompt = f"Explain following raga : {raga}."
 
-
+        return prompt
 
