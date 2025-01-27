@@ -50,7 +50,7 @@ from emailSupport import EmailSupport
 from ThreadPool import ThreadPool, TaskStatus, TaskBase
 from headerResponseTask import HeaderResponseTask
 
-from kmMusic import KupmandukMusic
+from kmMusic import KupmandukMusic, KupmandukYoga
 
 from JsonSettings import JsonSettings
 
@@ -66,7 +66,9 @@ class ScholarKM(Flask):
         self.client_uuid = 'client_uuid'
 
         self.route('/scholar_km')(self.scholar_km_index)
-        self.route('/kupmanduk_music')(self.kupmanduk_music_index)
+        self.route('/music_km')(self.music_km_index)
+        self.route('/yoga_km')(self.yoga_km_index)
+
 
         self.route('/basic_init', methods=['POST'])(self.basic_init)
         self.route('/ai_model_init', methods=['POST'])(self.ai_model_init)
@@ -202,7 +204,7 @@ class ScholarKM(Flask):
     def scholar_km_index(self):
         return render_template('scholar_km/index.html')
 
-    def kupmanduk_music_index(self):
+    def music_km_index(self):
 
         kmMusic = KupmandukMusic(self.gemini_access, self.error_manager)
         raga = kmMusic.get_one_raga()
@@ -216,6 +218,21 @@ class ScholarKM(Flask):
         }
 
         return render_template('kupmanduk_music/index.html', json_data=json_data)
+
+    def yoga_km_index(self):
+
+        kmYoga = KupmandukYoga(self.gemini_access, self.error_manager)
+        yoga = kmYoga.get_one_yoga()
+        youtube_response = kmYoga.generate_youtube_response(yoga)
+        yoga_response = kmYoga.generate_explain_yoga_response(yoga)
+
+        json_data = {
+            "topicLabel": f"Yoga : {yoga}",
+            "viewArea_1": yoga_response,
+            "viewArea_2": youtube_response
+        }
+
+        return render_template('kupmanduk_yoga/index.html', json_data=json_data)
 
     def is_main_content_changed(self, uuid, main_content_file):
         self.sess.force_read_session(uuid)

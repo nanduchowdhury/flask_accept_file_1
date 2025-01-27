@@ -130,6 +130,13 @@ class BaseModelAccess():
 
         return response
 
+    def generate_explain_yoga_response(self, yoga):
+
+        prompt = self.base_prompt.get_prompt_explain_yoga(yoga)
+        response = self.query_only_prompt(prompt)
+
+        return response
+
 class BasePrompt():
     def __init__(self):
 
@@ -214,3 +221,8 @@ class BasePrompt():
 
         return prompt
 
+    def get_prompt_explain_yoga(self, yoga):
+
+        prompt = f"Explain following yoga : {yoga}."
+
+        return prompt

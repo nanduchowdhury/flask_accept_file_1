@@ -31,21 +31,49 @@
     margin-left: 10px; /* Adds left margin to the whole container */
     margin-right: 10px; /* Adds right margin to the whole container */
 }
+
 .view-area {
     flex: 1;
     height: 400px; /* Adjust height as needed */
     background-color: #f9f9f9;
-    justify-content: center;  /* Center horizontally */
-    align-items: center;      /* Center vertically, if needed */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically, if needed */
     width: 98%;
     overflow: auto; /* Enables both horizontal and vertical scrolling */
     border: 5px solid #ccc;
     padding: 10px;
     box-sizing: border-box;
     white-space: pre-wrap;
-    font-family: "Courier New", Courier, monospace;
-    font-weight: 600; /* Bold text */
-    font-size: 14px; /* Smaller text size */
+    font-family: 'Patrick Hand'; /* Handwritten font */
+    font-weight: bold; /* Set font weight to normal */
+    font-size: 14px;
+}
+
+/* Desktop layout */
+@media (min-width: 768px) {
+    .view-area-container {
+        flex-direction: row; /* Side-by-side layout */
+    }
+    .view-area {
+        width: auto; /* Let flex handle the width */
+    }
+}
+
+/* Mobile layout */
+@media (max-width: 767px) {
+    .view-area-container {
+        flex-direction: column; /* Stack the view areas vertically */
+    }
+
+    #ViewArea_1 {
+        width: 80%;
+        align-self: flex-start; /* Align to the left */
+    }
+
+    #ViewArea_2 {
+        width: 90%;
+        align-self: flex-end; /* Align to the right */
+    }
 }
 
 .topic-label-container {
