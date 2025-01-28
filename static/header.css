@@ -33,13 +33,8 @@
 }
 
 .view-area {
-    flex: 1;
-    height: 400px; /* Adjust height as needed */
     background-color: #f9f9f9;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically, if needed */
-    width: 98%;
-    overflow: auto; /* Enables both horizontal and vertical scrolling */
+    overflow: auto;
     border: 5px solid #ccc;
     padding: 10px;
     box-sizing: border-box;
@@ -54,8 +49,11 @@
     .view-area-container {
         flex-direction: row; /* Side-by-side layout */
     }
+
     .view-area {
-        width: auto; /* Let flex handle the width */
+        flex: 1;
+        height: 400px; /* Adjust height as needed */
+        width: auto;
     }
 }
 
@@ -63,32 +61,37 @@
 @media (max-width: 767px) {
     .view-area-container {
         flex-direction: column; /* Stack the view areas vertically */
+        height: 100vh; /* Full viewport height */
     }
 
     #ViewArea_1 {
-        width: 80%;
-        align-self: flex-start; /* Align to the left */
+        width: 100%;
+        align-self: flex-start;
+        height: 48%; /* Occupies 48% of the screen height */
     }
 
     #ViewArea_2 {
-        width: 90%;
-        align-self: flex-end; /* Align to the right */
+        width: 100%;
+        align-self: flex-end;
+        height: 48%; /* Occupies 48% of the screen height */
     }
 }
 
 .topic-label-container {
     text-align: center; /* Centers the text horizontally */
-    margin-top: 10px;   /* Adds space above the text label */
+    margin-top: 5px;   /* Adds space above the text label */
 }
 
 .topic-label {
-    font-weight: bold;  /* Makes the text bold */
+    font-family: "Courier New", Courier, monospace;
+    font-weight: bold;
+    font-size: 14px;
     color: #333;        /* Optional: Set text color */
-    font-size: 1.5em;      /* Increases the font size */
-    display: inline-block; /* Ensures the element respects height adjustments */
-    height: 100px;          /* Adjust height as needed */
-    line-height: 100px;     /* Ensures the text is vertically centered */
-    padding: 0 10px;       /* Adds horizontal padding for better spacing */
+    display: inline-flex; /* Use flexbox for vertical alignment */
+    align-items: center; /* Vertically center text */
+    min-height: 50px;    /* Ensure the label has at least 50px height */
+    padding: 0 10px;     /* Adds horizontal padding for better spacing */
+    white-space: normal; /* Allows text wrapping to new lines */
 }
 
 /* Drop-down menu styling */
