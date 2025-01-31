@@ -12,6 +12,25 @@ GCS_SIGNED_URL_EXPIRATION_TIME = 3600 * 5
 
 GCS_UPLOAD_MAIN_CONTENT_FILE_NAME = "gcs_main_content_file"
 
+import os
+
+def is_first_gunicorn_worker():
+    """Returns True if this process is the first Gunicorn worker."""
+    try:
+        # Get all active Gunicorn process IDs
+        all_pids = [int(p) for p in os.popen("pgrep gunicorn").read().split() if p.isdigit()]
+
+        if not all_pids:
+            return False  # No Gunicorn process found, likely running in development mode
+
+        current_pid = os.getpid()  # Get current process ID
+        first_worker_pid = max(all_pids)  # Select the first worker process (smallest PID)
+
+        return current_pid == first_worker_pid
+    except Exception as e:
+        raise ValueError(f"Error checking first gunicorn worker : {e}")
+        return False
+
 def check_condition(condition_func, max_seconds=MAX_TIME_CONDITION_WAIT):
     start_time = time.time()
     while True:
@@ -44,7 +63,11 @@ def compareTime(time_1, time_2):
     dt2 = datetime.fromisoformat(time_2)
     return dt1 <= dt2
 
+# Removes lines containing nothing
+def remove_blank_lines(text):
+        return "\n".join(line for line in text.splitlines() if line.strip())
 
+# Removes items from list 'lines' that are empty
 def remove_empty_lines(lines):
     non_empty_lines = [line for line in lines if line.strip() != ""]
     

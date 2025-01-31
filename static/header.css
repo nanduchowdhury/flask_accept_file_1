@@ -27,7 +27,7 @@
 
 .view-area-container {
     display: flex;
-    gap: 10px; /* Horizontal distance between the two areas */
+    gap: 20px; /* Horizontal distance between the two areas */
     margin-left: 10px; /* Adds left margin to the whole container */
     margin-right: 10px; /* Adds right margin to the whole container */
 }

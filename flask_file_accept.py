@@ -50,7 +50,7 @@ from emailSupport import EmailSupport
 from ThreadPool import ThreadPool, TaskStatus, TaskBase
 from headerResponseTask import HeaderResponseTask
 
-from kmMusic import KupmandukMusic, KupmandukYoga
+from ContentCreator import ContentCreatorHindustaniClassical, ContentCreatorYoga, MusicCreatorTask, YogaCreatorTask
 
 from JsonSettings import JsonSettings
 
@@ -101,6 +101,8 @@ class ScholarKM(Flask):
         self.email_support = EmailSupport(self.error_manager)
 
         self.gcs_manager = GCSManager("kupmanduk-bucket", constants.GCS_ROOT_FOLDER)
+
+        self.start_all_content_creator_threads()
 
     def extract_text_from_pdf(self, pdf_path):
         text = ""
@@ -206,10 +208,10 @@ class ScholarKM(Flask):
 
     def music_km_index(self):
 
-        kmMusic = KupmandukMusic(self.gemini_access, self.error_manager)
-        raga = kmMusic.get_one_raga()
+        kmMusic = ContentCreatorHindustaniClassical(self.gemini_access, self.error_manager)
+        raga = kmMusic.get_random_topic()
         youtube_response = kmMusic.generate_youtube_response(raga)
-        raga_response = kmMusic.generate_explain_raga_response(raga)
+        raga_response = kmMusic.get_content_for_key(raga)
 
         json_data = {
             "topicLabel": f"Raga : {raga}",
@@ -221,10 +223,10 @@ class ScholarKM(Flask):
 
     def yoga_km_index(self):
 
-        kmYoga = KupmandukYoga(self.gemini_access, self.error_manager)
-        yoga = kmYoga.get_one_yoga()
+        kmYoga = ContentCreatorYoga(self.gemini_access, self.error_manager)
+        yoga = kmYoga.get_random_topic()
         youtube_response = kmYoga.generate_youtube_response(yoga)
-        yoga_response = kmYoga.generate_explain_yoga_response(yoga)
+        yoga_response = kmYoga.get_content_for_key(yoga)
 
         json_data = {
             "topicLabel": f"Yoga : {yoga}",
@@ -485,6 +487,32 @@ class ScholarKM(Flask):
         headerTask = HeaderResponseTask(uuid, self.sess, self.gemini_access, learnLevel, second_lang)
         task_name = f'task_learnLevel_{learnLevel}'
         self.pool.startTask(uuid, task_name, headerTask)
+
+    ##################################################
+    #
+    # Content creator thread is invoked only when ENV is set.
+    # It need not be done in production env - content can
+    # be created once locally which will put all contents
+    # in GCS-bucket.
+    #
+    ##################################################
+    def start_all_content_creator_threads(self):
+        if os.getenv('GENERATE_CONTENT_THREAD'):
+            if constants.is_first_gunicorn_worker():
+                self.hindustani_classical_content_creator_task()
+                self.yoga_content_creator_task()
+
+    def hindustani_classical_content_creator_task(self):
+        task = MusicCreatorTask(self.gemini_access, self.error_manager)
+        task_name = "hindustani_classical"
+        uuid = task_name + "_UUID"
+        self.pool.startTask(uuid, task_name, task)
+
+    def yoga_content_creator_task(self):
+        task = YogaCreatorTask(self.gemini_access, self.error_manager)
+        task_name = "yoga"
+        uuid = task_name + "_UUID"
+        self.pool.startTask(uuid, task_name, task)
 
     def report_to_user(self):
         try:

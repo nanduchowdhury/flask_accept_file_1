@@ -128,6 +128,8 @@ class BaseModelAccess():
         prompt = self.base_prompt.get_prompt_explain_raga(raga)
         response = self.query_only_prompt(prompt)
 
+        response = constants.remove_blank_lines(response)
+
         return response
 
     def generate_explain_yoga_response(self, yoga):
@@ -153,6 +155,8 @@ class BasePrompt():
                 "answer": "b"
             }
         }
+
+        self.prompt_HTML_tag = "Give the response using HTML tagging of headers."
 
     def get_prompt_to_check_academic_text_header_in_content(self):
         prompt = "Please answer following questions yes or no: \
@@ -218,11 +222,13 @@ class BasePrompt():
     def get_prompt_explain_raga(self, raga):
 
         prompt = f"Explain following raga : {raga}."
+        prompt += self.prompt_HTML_tag
 
         return prompt
 
     def get_prompt_explain_yoga(self, yoga):
 
         prompt = f"Explain following yoga : {yoga}."
+        prompt += self.prompt_HTML_tag
 
         return prompt

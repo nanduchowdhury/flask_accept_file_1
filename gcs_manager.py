@@ -142,6 +142,20 @@ class GCSManager:
             # Get the blob for the given file path
             blob = self._get_blob(file_path)
             
+            blob_list = self.bucket.list_blobs()
+
+            match = False
+            for b in blob_list:
+                if b.name == blob.name:
+                    match = True
+                    break
+
+            if not match:
+                return False
+
+            if not blob.exists():
+                return False
+
             # Load the blob metadata
             blob.reload()
 
