@@ -1,24 +1,5 @@
 "use strict";
 
-class KupmandukMusic {
-    constructor(jsonData) {
-
-        this.jsonData = jsonData;
-
-        this.topicLabel = document.getElementById('topic-label');
-        this.viewArea_1 = document.getElementById('ViewArea_1');
-        this.viewArea_2 = document.getElementById('ViewArea_2');
-
-        this.youtubeMgr = new YoutubeManager('ViewArea_2');
-    }
-
-    update() {
-        this.topicLabel.innerHTML = this.jsonData.topicLabel;
-        // this.viewArea_1.innerHTML = this.jsonData.viewArea_1;
-        this.viewArea_1.innerHTML = this.jsonData.viewArea_1.replace(/\n/g, '<br>');
-        this.youtubeMgr.showByUrl(this.jsonData.viewArea_2);
-    }
-}
 
 class YoutubeManager {
     constructor(containerId) {
@@ -69,10 +50,7 @@ class YoutubeManager {
     }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    const kMusic = new KupmandukMusic(musicJsonData);
-    kMusic.update();
-});
+
 
 
 

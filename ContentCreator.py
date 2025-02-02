@@ -70,7 +70,8 @@ class ContentCreatorBase:
 
         self.section_json_root_map = {
             "hindustani_classical_music": "hindustani_classical_music_json_root",
-            "yoga": "yoga_json_root"
+            "yoga": "yoga_json_root",
+            "internal_organ": "internal_organ_json_root"
         }
 
         self.topic_list = {
@@ -119,8 +120,38 @@ class ContentCreatorBase:
                 "Kapotasana (Pigeon Pose)",
                 "Eka Pada Rajakapotasana (One-Legged King Pigeon Pose)",
                 "Shavasana (Corpse Pose)"
+                ],
+            "internal_organ":
+                [
+                "Brain",
+                "Spinal Cord",
+                "Heart",
+                "Lungs", 
+                "Liver", 
+                "Kidneys",
+                "Spleen",
+                "Pancreas",
+                "Stomach",
+                "Intestines", 
+                "Small Intestine",
+                "Large Intestine",
+                "Gallbladder",
+                "Bladder",
+                "Endocrine Glands", 
+                "Thyroid",
+                "Pituitary Gland",
+                "Adrenal Glands",
+                "Musculoskeletal System", 
+                "Bones",
+                "Muscles",
+                "Joints",
+                "Immune System",
+                "Lymphatic System",
+                "Reproductive System",
+                "Male Reproductive System",
+                "Female Reproductive System"
                 ]
-        }
+            }
 
         self.json_store = JsonDataStore(self.section_json_root_map[self.section])
         self.gcs_json_file = f"{self.section}.json"
@@ -158,8 +189,8 @@ class ContentCreatorBase:
             print(f"Generating content for topic {t}")
             self.generate_content(t)
 
-    def generate_content_implementation(self):
-        response = self.gemini_access.generate_content(self.section, self.topic)
+    def generate_content_implementation(self, topic):
+        response = self.gemini_access.generate_content(self.section, topic)
         return response
 
     def finish(self):

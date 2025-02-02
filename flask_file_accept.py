@@ -68,6 +68,7 @@ class ScholarKM(Flask):
         self.route('/scholar_km')(self.scholar_km_index)
         self.route('/music_km')(self.music_km_index)
         self.route('/yoga_km')(self.yoga_km_index)
+        self.route('/internal_organ_km')(self.internal_organ_km_index)
 
 
         self.route('/basic_init', methods=['POST'])(self.basic_init)
@@ -219,7 +220,7 @@ class ScholarKM(Flask):
             "viewArea_2": youtube_response
         }
 
-        return render_template('kupmanduk_music/index.html', json_data=json_data)
+        return render_template('content/index.html', json_data=json_data)
 
     def yoga_km_index(self):
 
@@ -234,7 +235,22 @@ class ScholarKM(Flask):
             "viewArea_2": youtube_response
         }
 
-        return render_template('kupmanduk_yoga/index.html', json_data=json_data)
+        return render_template('content/index.html', json_data=json_data)
+
+    def internal_organ_km_index(self):
+
+        obj = ContentCreatorBase("internal_organ", self.gemini_access, self.error_manager)
+        topic = obj.get_random_topic()
+        youtube_response = obj.generate_youtube_response(topic)
+        content_response = obj.get_content_for_topic(topic)
+
+        json_data = {
+            "topicLabel": f"Internal Organ : {topic}",
+            "viewArea_1": content_response,
+            "viewArea_2": youtube_response
+        }
+
+        return render_template('content/index.html', json_data=json_data)
 
     def is_main_content_changed(self, uuid, main_content_file):
         self.sess.force_read_session(uuid)
@@ -501,6 +517,7 @@ class ScholarKM(Flask):
             if constants.is_first_gunicorn_worker():
                 self.hindustani_classical_content_creator_task()
                 self.yoga_content_creator_task()
+                self.internal_organ_content_creator_task()
 
     def hindustani_classical_content_creator_task(self):
         task_name = "hindustani_classical_music"
@@ -510,6 +527,12 @@ class ScholarKM(Flask):
 
     def yoga_content_creator_task(self):
         task_name = "yoga"
+        task = ContentCreatorTask(task_name, self.gemini_access, self.error_manager)
+        uuid = task_name + "_UUID"
+        self.pool.startTask(uuid, task_name, task)
+
+    def internal_organ_content_creator_task(self):
+        task_name = "internal_organ"
         task = ContentCreatorTask(task_name, self.gemini_access, self.error_manager)
         uuid = task_name + "_UUID"
         self.pool.startTask(uuid, task_name, task)

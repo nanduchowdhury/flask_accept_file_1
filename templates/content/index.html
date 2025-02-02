@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kupamanduk - Content</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='buttonCombination.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='MessageBox.css') }}">
+</head>
+<body>
+
+    <div class="header-container">
+        
+    <!-- Web app name - positioned in the center and larger -->
+    <img id="appNameImage" class="app-name" alt="kupmanduk-content" title="kupmanduk-content">
+    </div>
+
+    <div class="separator"></div> <!-- Custom Separator -->
+      
+    <div class="topic-label-container">
+        <span id="topic-label" class="topic-label"></span>
+    </div>
+
+    <div class="separator"></div> <!-- Custom Separator -->
+
+    <div class="view-area-container">
+        <div id="ViewArea_1" class="view-area">
+            <!-- Content for ViewArea_1 goes here -->
+            <p>Explanation...</p>
+        </div>
+        <div id="ViewArea_2" class="view-area">
+            <!-- Content for ViewArea_2 goes here -->
+            <p>YouTube Video...</p>
+        </div>
+    </div>
+
+    <script>
+        const JsonData = {{ json_data | tojson | safe }};
+        
+        "use strict";
+
+        const yogaImage = "{{ url_for('static', filename='yoga-KM-copper-black-font.jpg') }}";
+        const ragaImage = "{{ url_for('static', filename='music-KM-copper-black-font.jpg') }}";
+
+        class KupmandukMusic {
+            constructor(jsonData) {
+                this.jsonData = jsonData;
+
+                this.appNameImage = document.getElementById("appNameImage");
+                this.topicLabel = document.getElementById('topic-label');
+                this.viewArea_1 = document.getElementById('ViewArea_1');
+                this.viewArea_2 = document.getElementById('ViewArea_2');
+
+                this.youtubeMgr = new YoutubeManager('ViewArea_2');
+            }
+
+            update() {
+                if (this.jsonData.topicLabel.includes("Yoga")) {
+                    this.appNameImage.src = yogaImage;
+                } else if (this.jsonData.topicLabel.includes("Raga")) {
+                    this.appNameImage.src = ragaImage;
+                }
+
+                this.topicLabel.innerHTML = this.jsonData.topicLabel;
+                this.viewArea_1.innerHTML = this.jsonData.viewArea_1.replace(/\n/g, '<br>');
+                this.youtubeMgr.showByUrl(this.jsonData.viewArea_2);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const kMusic = new KupmandukMusic(JsonData);
+            kMusic.update();
+        });
+
+        // This code will execute as soon as the page has loaded.
+        console.log("kupmanduk page loaded successfuly-1."); 
+    </script>
+
+    <script src="{{ url_for('static', filename='content_render.js') }}"></script>
+    
+
+</body>
+</html>
