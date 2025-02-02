@@ -50,7 +50,7 @@ from emailSupport import EmailSupport
 from ThreadPool import ThreadPool, TaskStatus, TaskBase
 from headerResponseTask import HeaderResponseTask
 
-from ContentCreator import ContentCreatorHindustaniClassical, ContentCreatorYoga, MusicCreatorTask, YogaCreatorTask
+from ContentCreator import ContentCreatorBase, ContentCreatorTask
 
 from JsonSettings import JsonSettings
 
@@ -208,13 +208,13 @@ class ScholarKM(Flask):
 
     def music_km_index(self):
 
-        kmMusic = ContentCreatorHindustaniClassical(self.gemini_access, self.error_manager)
-        raga = kmMusic.get_random_topic()
-        youtube_response = kmMusic.generate_youtube_response(raga)
-        raga_response = kmMusic.get_content_for_key(raga)
+        kmMusic = ContentCreatorBase("hindustani_classical_music", self.gemini_access, self.error_manager)
+        topic = kmMusic.get_random_topic()
+        youtube_response = kmMusic.generate_youtube_response(topic)
+        raga_response = kmMusic.get_content_for_topic(topic)
 
         json_data = {
-            "topicLabel": f"Raga : {raga}",
+            "topicLabel": f"Raga : {topic}",
             "viewArea_1": raga_response,
             "viewArea_2": youtube_response
         }
@@ -223,13 +223,13 @@ class ScholarKM(Flask):
 
     def yoga_km_index(self):
 
-        kmYoga = ContentCreatorYoga(self.gemini_access, self.error_manager)
-        yoga = kmYoga.get_random_topic()
-        youtube_response = kmYoga.generate_youtube_response(yoga)
-        yoga_response = kmYoga.get_content_for_key(yoga)
+        kmYoga = ContentCreatorBase("yoga", self.gemini_access, self.error_manager)
+        topic = kmYoga.get_random_topic()
+        youtube_response = kmYoga.generate_youtube_response(topic)
+        yoga_response = kmYoga.get_content_for_topic(topic)
 
         json_data = {
-            "topicLabel": f"Yoga : {yoga}",
+            "topicLabel": f"Yoga : {topic}",
             "viewArea_1": yoga_response,
             "viewArea_2": youtube_response
         }
@@ -503,14 +503,14 @@ class ScholarKM(Flask):
                 self.yoga_content_creator_task()
 
     def hindustani_classical_content_creator_task(self):
-        task = MusicCreatorTask(self.gemini_access, self.error_manager)
-        task_name = "hindustani_classical"
+        task_name = "hindustani_classical_music"
+        task = ContentCreatorTask(task_name, self.gemini_access, self.error_manager)
         uuid = task_name + "_UUID"
         self.pool.startTask(uuid, task_name, task)
 
     def yoga_content_creator_task(self):
-        task = YogaCreatorTask(self.gemini_access, self.error_manager)
         task_name = "yoga"
+        task = ContentCreatorTask(task_name, self.gemini_access, self.error_manager)
         uuid = task_name + "_UUID"
         self.pool.startTask(uuid, task_name, task)
 

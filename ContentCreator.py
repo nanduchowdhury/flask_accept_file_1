@@ -43,48 +43,89 @@ class JsonDataStore:
         except json.JSONDecodeError:
             pass
 
-
-class MusicCreatorTask(TaskBase):
-    def __init__(self, gemini_access, error_manager):
+class ContentCreatorTask(TaskBase):
+    def __init__(self, section, gemini_access, error_manager):
         super().__init__()
+
+        self.section = section
+
         self.gemini_access = gemini_access
         self.error_manager = error_manager
 
     def run(self):
-        obj = ContentCreatorHindustaniClassical(self.gemini_access, self.error_manager)
+        obj = ContentCreatorBase(self.section, self.gemini_access, self.error_manager)
 
-        obj.generate_all_contents()
-        obj.finish()
-
-class YogaCreatorTask(TaskBase):
-    def __init__(self, gemini_access, error_manager):
-        super().__init__()
-        self.gemini_access = gemini_access
-        self.error_manager = error_manager
-
-    def run(self):
-        obj = ContentCreatorYoga(self.gemini_access, self.error_manager)
+        print(f"Generating content for section {self.section}")
 
         obj.generate_all_contents()
         obj.finish()
 
 class ContentCreatorBase:
-    def __init__(self, content_topic, gemini_access, error_manager):
+    def __init__(self, section, gemini_access, error_manager):
 
-        self.content_json_root_map = {
+        self.section = section
+
+        self.gemini_access = gemini_access
+        self.error_manager = error_manager
+
+        self.section_json_root_map = {
             "hindustani_classical_music": "hindustani_classical_music_json_root",
             "yoga": "yoga_json_root"
         }
 
-        self.topic_list = []
+        self.topic_list = {
+            "hindustani_classical_music": 
+                [
+                "Yaman", "Bhairav", "Bhairavi", "Todi", "Marwa", "Kafi", 
+                "Khamaj", "Darbari Kanada", "Desh", "Bageshree", 
+                "Malhar", "Hamsadhwani", "Chakravakam", "Charukesi", 
+                "Shankarabharanam", "Kalyani", "Kharaharapriya", "Natabhairavi", 
+                "Puriya Dhanashree", "Miyan ki Todi", "Jaijaivanti", "Tilak Kamod",
+                "Rageshree", "Ahir Bhairav", "Jog", "Madhuvanti", "Kirwani", 
+                "Hemant", "Bihag", "Alhaiya Bilawal", "Shuddha Sarang",
+                "Kamod", "Basant", "Miyan ki Malhar", "Gaud Malhar",
+                "Patdeep", "Shivranjani", "Hansdhwani", "Durga", "Kalingada"
+                ],
+            "yoga":
+                [
+                "Tadasana (Mountain Pose)",
+                "Vrikshasana (Tree Pose)",
+                "Adho Mukha Svanasana (Downward Dog Pose)",
+                "Uttanasana (Standing Forward Bend)",
+                "Trikonasana (Triangle Pose)",
+                "Virabhadrasana I (Warrior I Pose)",
+                "Virabhadrasana II (Warrior II Pose)",
+                "Virabhadrasana III (Warrior III Pose)",
+                "Parivrtta Trikonasana (Revolved Triangle Pose)",
+                "Utkatasana (Chair Pose)",
+                "Bhujangasana (Cobra Pose)",
+                "Dhanurasana (Bow Pose)",
+                "Salabhasana (Locust Pose)",
+                "Setu Bandhasana (Bridge Pose)",
+                "Paschimottanasana (Seated Forward Bend)",
+                "Janu Sirsasana (Head-to-Knee Pose)",
+                "Ardha Matsyendrasana (Half Lord of the Fishes Pose)",
+                "Padmasana (Lotus Pose)",
+                "Sukhasana (Easy Pose)",
+                "Balasana (Child's Pose)",
+                "Matsyasana (Fish Pose)",
+                "Halasana (Plow Pose)",
+                "Sarvangasana (Shoulder Stand Pose)",
+                "Sirsasana (Headstand Pose)",
+                "Chaturanga Dandasana (Four-Limbed Staff Pose)",
+                "Navasana (Boat Pose)",
+                "Anjaneyasana (Low Lunge Pose)",
+                "Bakasana (Crow Pose)",
+                "Kapotasana (Pigeon Pose)",
+                "Eka Pada Rajakapotasana (One-Legged King Pigeon Pose)",
+                "Shavasana (Corpse Pose)"
+                ]
+        }
 
-        self.json_store = JsonDataStore(self.content_json_root_map[content_topic])
-        self.gcs_json_file = f"{content_topic}.json"
+        self.json_store = JsonDataStore(self.section_json_root_map[self.section])
+        self.gcs_json_file = f"{self.section}.json"
 
         self.gcs_manager = GCSManager("kupmanduk-bucket", constants.GCS_ROOT_FOLDER)
-
-        self.gemini_access = gemini_access
-        self.error_manager = error_manager
 
         self.google_cse_access = GoogleCSEAccess(self.error_manager)
         self.google_cse_access.initialize()
@@ -96,102 +137,37 @@ class ContentCreatorBase:
             d = self.gcs_manager.read_json(self.gcs_json_file)
             self.json_store.update_from_json_data(d)
 
-    def update_topic_list(self, topic_list):
-        self.topic_list = topic_list
-
     def get_random_topic(self):
-        return random.choice(self.topic_list)
+        topics = self.topic_list[self.section]
+        return random.choice(topics)
 
-    def get_content_for_key(self, key):
-        content = self.json_store.read_key(key)
+    def get_content_for_topic(self, topic):
+        content = self.json_store.read_key(topic)
 
         return content
 
-    def generate_content_for_key(self, key):
-        content = self.get_content_for_key(key)
+    def generate_content(self, topic):
+        content = self.get_content_for_topic(topic)
         if not content:
-            content = self.generate_content_implementation(key)
-            self.json_store.save_key(key, content)
+            content = self.generate_content_implementation(topic)
+            self.json_store.save_key(topic, content)
 
     def generate_all_contents(self):
-        for key in self.topic_list:
-            self.generate_content_for_key(key)
+        topics = self.topic_list[self.section]
+        for t in topics:
+            print(f"Generating content for topic {t}")
+            self.generate_content(t)
 
-    def generate_content_implementation(self, key):
-        """Derived classes should override this method with task logic."""
-        raise NotImplementedError("Subclasses must implement this method")
+    def generate_content_implementation(self):
+        response = self.gemini_access.generate_content(self.section, self.topic)
+        return response
 
     def finish(self):
         self.gcs_manager.write_json(self.gcs_json_file, self.json_store.get_json_data())
 
-class ContentCreatorHindustaniClassical(ContentCreatorBase):
-    def __init__(self, gemini_access, error_manager):
-        super().__init__("hindustani_classical_music", gemini_access, error_manager)
-
-        self.update_topic_list([
-            "Yaman", "Bhairav", "Bhairavi", "Todi", "Marwa", "Kafi", 
-            "Khamaj", "Darbari Kanada", "Desh", "Bageshree", 
-            "Malhar", "Hamsadhwani", "Chakravakam", "Charukesi", 
-            "Shankarabharanam", "Kalyani", "Kharaharapriya", "Natabhairavi", 
-            "Puriya Dhanashree", "Miyan ki Todi", "Jaijaivanti", "Tilak Kamod",
-            "Rageshree", "Ahir Bhairav", "Jog", "Madhuvanti", "Kirwani", 
-            "Hemant", "Bihag", "Alhaiya Bilawal", "Shuddha Sarang",
-            "Kamod", "Basant", "Miyan ki Malhar", "Gaud Malhar",
-            "Patdeep", "Shivranjani", "Hansdhwani", "Durga", "Kalingada"
-        ])
-
-    def generate_youtube_response(self, raga):
-        search_line = f"youtube raga {raga}"
+    def generate_youtube_response(self, topic):
+        search_line = f"youtube {self.section} {topic}"
         response = self.google_cse_access.search(search_line)
         return response
 
-    def generate_content_implementation(self, key):
-        response = self.gemini_access.generate_explain_raga_response(key)
-        return response
 
-class ContentCreatorYoga(ContentCreatorBase):
-    def __init__(self, gemini_access, error_manager):
-        super().__init__("yoga", gemini_access, error_manager)
-
-        self.update_topic_list([
-            "Tadasana (Mountain Pose)",
-            "Vrikshasana (Tree Pose)",
-            "Adho Mukha Svanasana (Downward Dog Pose)",
-            "Uttanasana (Standing Forward Bend)",
-            "Trikonasana (Triangle Pose)",
-            "Virabhadrasana I (Warrior I Pose)",
-            "Virabhadrasana II (Warrior II Pose)",
-            "Virabhadrasana III (Warrior III Pose)",
-            "Parivrtta Trikonasana (Revolved Triangle Pose)",
-            "Utkatasana (Chair Pose)",
-            "Bhujangasana (Cobra Pose)",
-            "Dhanurasana (Bow Pose)",
-            "Salabhasana (Locust Pose)",
-            "Setu Bandhasana (Bridge Pose)",
-            "Paschimottanasana (Seated Forward Bend)",
-            "Janu Sirsasana (Head-to-Knee Pose)",
-            "Ardha Matsyendrasana (Half Lord of the Fishes Pose)",
-            "Padmasana (Lotus Pose)",
-            "Sukhasana (Easy Pose)",
-            "Balasana (Child's Pose)",
-            "Matsyasana (Fish Pose)",
-            "Halasana (Plow Pose)",
-            "Sarvangasana (Shoulder Stand Pose)",
-            "Sirsasana (Headstand Pose)",
-            "Chaturanga Dandasana (Four-Limbed Staff Pose)",
-            "Navasana (Boat Pose)",
-            "Anjaneyasana (Low Lunge Pose)",
-            "Bakasana (Crow Pose)",
-            "Kapotasana (Pigeon Pose)",
-            "Eka Pada Rajakapotasana (One-Legged King Pigeon Pose)",
-            "Shavasana (Corpse Pose)"
-        ])
-
-    def generate_youtube_response(self, yoga):
-        search_line = f"youtube yoga {yoga}"
-        response = self.google_cse_access.search(search_line)
-        return response
-
-    def generate_content_implementation(self, key):
-        response = self.gemini_access.generate_explain_yoga_response(key)
-        return response

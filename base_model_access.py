@@ -123,20 +123,9 @@ class BaseModelAccess():
 
         return response
 
-    def generate_explain_raga_response(self, raga):
-
-        prompt = self.base_prompt.get_prompt_explain_raga(raga)
+    def generate_content(self, section, topic):
+        prompt = self.base_prompt.get_prompt_to_generate_content(section, topic)
         response = self.query_only_prompt(prompt)
-
-        response = constants.remove_blank_lines(response)
-
-        return response
-
-    def generate_explain_yoga_response(self, yoga):
-
-        prompt = self.base_prompt.get_prompt_explain_yoga(yoga)
-        response = self.query_only_prompt(prompt)
-
         return response
 
 class BasePrompt():
@@ -219,16 +208,7 @@ class BasePrompt():
                       If no activity present, do not mention about activities."
         return prompt
 
-    def get_prompt_explain_raga(self, raga):
-
-        prompt = f"Explain following raga : {raga}."
+    def get_prompt_to_generate_content(self, section, topic):
+        prompt = f"Explain following section : {topic}."
         prompt += self.prompt_HTML_tag
-
-        return prompt
-
-    def get_prompt_explain_yoga(self, yoga):
-
-        prompt = f"Explain following yoga : {yoga}."
-        prompt += self.prompt_HTML_tag
-
         return prompt
