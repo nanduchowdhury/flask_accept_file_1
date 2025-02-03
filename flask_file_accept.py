@@ -66,9 +66,13 @@ class ScholarKM(Flask):
         self.client_uuid = 'client_uuid'
 
         self.route('/scholar_km')(self.scholar_km_index)
+        
         self.route('/music_km')(self.music_km_index)
         self.route('/yoga_km')(self.yoga_km_index)
         self.route('/internal_organ_km')(self.internal_organ_km_index)
+        self.route('/golf_km')(self.golf_km_index)
+        self.route('/nutrition_km')(self.nutrition_km_index)
+        self.route('/astronomy_km')(self.astronomy_km_index)
 
 
         self.route('/basic_init', methods=['POST'])(self.basic_init)
@@ -207,50 +211,37 @@ class ScholarKM(Flask):
     def scholar_km_index(self):
         return render_template('scholar_km/index.html')
 
-    def music_km_index(self):
 
-        kmMusic = ContentCreatorBase("hindustani_classical_music", self.gemini_access, self.error_manager)
-        topic = kmMusic.get_random_topic()
-        youtube_response = kmMusic.generate_youtube_response(topic)
-        raga_response = kmMusic.get_content_for_topic(topic)
-
-        json_data = {
-            "topicLabel": f"Raga : {topic}",
-            "viewArea_1": raga_response,
-            "viewArea_2": youtube_response
-        }
-
-        return render_template('content/index.html', json_data=json_data)
-
-    def yoga_km_index(self):
-
-        kmYoga = ContentCreatorBase("yoga", self.gemini_access, self.error_manager)
-        topic = kmYoga.get_random_topic()
-        youtube_response = kmYoga.generate_youtube_response(topic)
-        yoga_response = kmYoga.get_content_for_topic(topic)
-
-        json_data = {
-            "topicLabel": f"Yoga : {topic}",
-            "viewArea_1": yoga_response,
-            "viewArea_2": youtube_response
-        }
-
-        return render_template('content/index.html', json_data=json_data)
-
-    def internal_organ_km_index(self):
-
-        obj = ContentCreatorBase("internal_organ", self.gemini_access, self.error_manager)
+    def content_creator_index(self, section):
+        obj = ContentCreatorBase(section, self.gemini_access, self.error_manager)
         topic = obj.get_random_topic()
         youtube_response = obj.generate_youtube_response(topic)
         content_response = obj.get_content_for_topic(topic)
 
         json_data = {
-            "topicLabel": f"Internal Organ : {topic}",
+            "topicLabel": f"{section} : {topic}",
             "viewArea_1": content_response,
             "viewArea_2": youtube_response
         }
-
         return render_template('content/index.html', json_data=json_data)
+
+    def music_km_index(self):
+        return self.content_creator_index("hindustani_classical_music")
+
+    def yoga_km_index(self):
+        return self.content_creator_index("yoga")
+
+    def internal_organ_km_index(self):
+        return self.content_creator_index("internal_organ")
+
+    def golf_km_index(self):
+        return self.content_creator_index("golf")
+
+    def astronomy_km_index(self):
+        return self.content_creator_index("astronomy")
+
+    def nutrition_km_index(self):
+        return self.content_creator_index("nutrition")
 
     def is_main_content_changed(self, uuid, main_content_file):
         self.sess.force_read_session(uuid)
@@ -515,24 +506,16 @@ class ScholarKM(Flask):
     def start_all_content_creator_threads(self):
         if os.getenv('GENERATE_CONTENT_THREAD'):
             if constants.is_first_gunicorn_worker():
-                self.hindustani_classical_content_creator_task()
-                self.yoga_content_creator_task()
-                self.internal_organ_content_creator_task()
+                self.content_creator_task("hindustani_classical_music")
+                self.content_creator_task("yoga")
+                self.content_creator_task("internal_organ")
+                self.content_creator_task("astronomy")
+                self.content_creator_task("golf")
+                self.content_creator_task("nutrition")
 
-    def hindustani_classical_content_creator_task(self):
-        task_name = "hindustani_classical_music"
-        task = ContentCreatorTask(task_name, self.gemini_access, self.error_manager)
-        uuid = task_name + "_UUID"
-        self.pool.startTask(uuid, task_name, task)
 
-    def yoga_content_creator_task(self):
-        task_name = "yoga"
-        task = ContentCreatorTask(task_name, self.gemini_access, self.error_manager)
-        uuid = task_name + "_UUID"
-        self.pool.startTask(uuid, task_name, task)
-
-    def internal_organ_content_creator_task(self):
-        task_name = "internal_organ"
+    def content_creator_task(self, section):
+        task_name = section
         task = ContentCreatorTask(task_name, self.gemini_access, self.error_manager)
         uuid = task_name + "_UUID"
         self.pool.startTask(uuid, task_name, task)
