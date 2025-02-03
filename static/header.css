@@ -6,6 +6,27 @@
     width: 100%;  /* Ensure the container takes the full width of the screen */
 }
 
+.header-container-1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Space between label and button */
+    height: 60px; /* Adjust height as needed */
+}
+
+.topic-label-text {
+    font-family: "Arial Black", Gadget, sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    color: rgb(45, 198, 45); /* Green color */
+}
+
+.learn-more-btn {
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
 /* Logo styling */
 .logo {
     position: absolute;

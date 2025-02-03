@@ -12,10 +12,11 @@
 </head>
 <body>
 
-    <div class="header-container">
-        
-    <!-- Web app name - positioned in the center and larger -->
-    <img id="appNameImage" class="app-name" alt="kupmanduk-content" title="kupmanduk-content">
+    <div class="header-container-1">
+        <!-- Topic Label -->
+        <label id="topicLabelName" class="topic-label-text">Topic Label</label>
+        <!-- Learn More Button -->
+        <button id="learnMoreButton" class="learn-more-btn" title="Click to learn another item on this topic.">Learn more</button>
     </div>
 
     <div class="separator"></div> <!-- Custom Separator -->
@@ -42,14 +43,11 @@
         
         "use strict";
 
-        const yogaImage = "{{ url_for('static', filename='yoga-KM-copper-black-font.jpg') }}";
-        const ragaImage = "{{ url_for('static', filename='music-KM-copper-black-font.jpg') }}";
-
         class KupmandukMusic {
             constructor(jsonData) {
                 this.jsonData = jsonData;
 
-                this.appNameImage = document.getElementById("appNameImage");
+                this.topicLabelName = document.getElementById("topicLabelName");
                 this.topicLabel = document.getElementById('topic-label');
                 this.viewArea_1 = document.getElementById('ViewArea_1');
                 this.viewArea_2 = document.getElementById('ViewArea_2');
@@ -59,11 +57,19 @@
 
             update() {
                 if (this.jsonData.topicLabel.includes("yoga")) {
-                    this.appNameImage.src = yogaImage;
-                } else if (this.jsonData.topicLabel.includes("raga")) {
-                    this.appNameImage.src = ragaImage;
+                    this.topicLabelName.textContent = "Yoga";
+                } else if (this.jsonData.topicLabel.includes("hindustani")) {
+                    this.topicLabelName.textContent = "Raga";
+                } else if (this.jsonData.topicLabel.includes("astronomy")) {
+                    this.topicLabelName.textContent = "Astronomy";
+                } else if (this.jsonData.topicLabel.includes("golf")) {
+                    this.topicLabelName.textContent = "Golf";
+                } else if (this.jsonData.topicLabel.includes("nutrition")) {
+                    this.topicLabelName.textContent = "Nutrition";
+                } else if (this.jsonData.topicLabel.includes("internal")) {
+                    this.topicLabelName.textContent = "Body";
                 }
-
+                
                 this.topicLabel.innerHTML = this.jsonData.topicLabel;
                 this.viewArea_1.innerHTML = this.jsonData.viewArea_1.replace(/\n/g, '<br>');
                 this.youtubeMgr.showByUrl(this.jsonData.viewArea_2);
@@ -73,6 +79,10 @@
         document.addEventListener("DOMContentLoaded", () => {
             const kMusic = new KupmandukMusic(JsonData);
             kMusic.update();
+        });
+
+        document.getElementById("learnMoreButton").addEventListener("click", function() {
+        location.reload();
         });
 
         // This code will execute as soon as the page has loaded.
