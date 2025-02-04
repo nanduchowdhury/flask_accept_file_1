@@ -73,6 +73,9 @@ class ScholarKM(Flask):
         self.route('/golf_km')(self.golf_km_index)
         self.route('/nutrition_km')(self.nutrition_km_index)
         self.route('/astronomy_km')(self.astronomy_km_index)
+        self.route('/stocks_km')(self.stocks_km_index)
+        self.route('/mutual_funds_km')(self.mutual_funds_km_index)
+        self.route('/economics_km')(self.economics_km_index)
 
 
         self.route('/basic_init', methods=['POST'])(self.basic_init)
@@ -231,11 +234,20 @@ class ScholarKM(Flask):
     def yoga_km_index(self):
         return self.content_creator_index("yoga")
 
+    def economics_km_index(self):
+        return self.content_creator_index("economics")
+
     def internal_organ_km_index(self):
         return self.content_creator_index("internal_organ")
 
     def golf_km_index(self):
         return self.content_creator_index("golf")
+
+    def stocks_km_index(self):
+        return self.content_creator_index("stocks")
+
+    def mutual_funds_km_index(self):
+        return self.content_creator_index("mutual_funds")
 
     def astronomy_km_index(self):
         return self.content_creator_index("astronomy")
@@ -511,7 +523,10 @@ class ScholarKM(Flask):
                 self.content_creator_task("internal_organ")
                 self.content_creator_task("astronomy")
                 self.content_creator_task("golf")
+                self.content_creator_task("stocks")
+                self.content_creator_task("mutual_funds")
                 self.content_creator_task("nutrition")
+                self.content_creator_task("economics")
 
 
     def content_creator_task(self, section):

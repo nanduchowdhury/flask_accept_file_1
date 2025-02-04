@@ -90,8 +90,8 @@ class CameraSupport {
             // At present there is no provision for user to make the
             // picture small/large. So make the picture appear smaller here.
 
-            pdfCanvas.width = video.videoWidth / 2;
-            pdfCanvas.height = video.videoHeight / 2;
+            // pdfCanvas.width = video.videoWidth / 2;
+            // pdfCanvas.height = video.videoHeight / 2;
 
             ctx.drawImage(video, 0, 0, pdfCanvas.width, pdfCanvas.height);
             const dataURL = pdfCanvas.toDataURL('image/png');

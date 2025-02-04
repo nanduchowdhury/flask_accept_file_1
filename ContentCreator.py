@@ -74,7 +74,10 @@ class ContentCreatorBase:
             "internal_organ": "internal_organ_json_root",
             "astronomy": "astronomy_json_root",
             "golf": "golf_json_root",
-            "nutrition": "nutrition_json_root"
+            "nutrition": "nutrition_json_root",
+            "stocks": "stocks_json_root",
+            "mutual_funds": "mutual_funds_json_root",
+            "economics": "economics_json_root"
         }
 
         self.topic_list = {
@@ -257,6 +260,148 @@ class ContentCreatorBase:
                     "Research and Methodology", 
                     "Nutritional Epidemiology", 
                     "Clinical Nutrition" 
+                ],
+            "mutual_funds":
+                [
+                    "Types of Mutual Funds",
+                    "Equity Mutual Funds",
+                    "Debt Mutual Funds",
+                    "Hybrid Mutual Funds",
+                    "Index Funds",
+                    "Exchange-Traded Funds (ETFs)",
+                    "Mutual Fund NAV (Net Asset Value)",
+                    "Expense Ratio in Mutual Funds",
+                    "Risk and Returns in Mutual Funds",
+                    "Systematic Investment Plan (SIP)",
+                    "Lumpsum Investment vs SIP",
+                    "Mutual Fund Taxation",
+                    "Growth vs Dividend Option in Mutual Funds",
+                    "Direct vs Regular Mutual Funds",
+                    "Fund Manager and Their Role",
+                    "How to Choose a Mutual Fund",
+                    "Mutual Fund Ratings and Analysis",
+                    "Asset Management Companies (AMCs)",
+                    "SEBI Regulations for Mutual Funds",
+                    "Mutual Fund Benchmarks and Performance Evaluation",
+                    "Mutual Fund Portfolio Diversification",
+                    "Exit Load and Other Charges",
+                    "Mutual Fund Investment Strategies",
+                    "Fund of Funds (FoF)",
+                    "Sectoral and Thematic Funds",
+                    "International Mutual Funds",
+                    "Open-ended vs Close-ended Mutual Funds",
+                    "Mutual Funds vs Fixed Deposits",
+                    "Mutual Funds vs Stocks",
+                    "Liquid Funds and Emergency Funds",
+                    "ELSS (Equity Linked Savings Scheme) and Tax Saving Mutual Funds"
+                ],
+            "stocks":
+                [
+                    "Introduction to Stock Market",
+                    "Types of Stocks (Common vs Preferred)",
+                    "Stock Exchanges (NYSE, NASDAQ, BSE, NSE, etc.)",
+                    "Primary Market vs Secondary Market",
+                    "Stock Indices (S&P 500, Dow Jones, NIFTY 50, etc.)",
+                    "Blue-Chip Stocks",
+                    "Penny Stocks",
+                    "Growth Stocks vs Value Stocks",
+                    "Dividend Stocks",
+                    "IPO (Initial Public Offering)",
+                    "Stock Market Orders (Market Order, Limit Order, Stop-Loss Order, etc.)",
+                    "Fundamental Analysis of Stocks",
+                    "Technical Analysis of Stocks",
+                    "Stock Valuation Methods (PE Ratio, PB Ratio, EV/EBITDA, etc.)",
+                    "Stock Market Trends and Cycles",
+                    "Bull Market vs Bear Market",
+                    "Short Selling and Margin Trading",
+                    "Stock Market Risks and Volatility",
+                    "Sectoral Stocks (Technology, Healthcare, Finance, etc.)",
+                    "Stock Splits and Reverse Splits",
+                    "Market Capitalization (Large Cap, Mid Cap, Small Cap)",
+                    "Stock Dividends and Buybacks",
+                    "Day Trading vs Swing Trading vs Long-Term Investing",
+                    "ETFs (Exchange-Traded Funds) vs Stocks",
+                    "Stock Portfolio Diversification",
+                    "Insider Trading and Market Regulations",
+                    "Stock Market Psychology and Behavioral Finance",
+                    "Derivatives (Options, Futures, etc.)",
+                    "Cryptocurrency vs Stocks",
+                    "Impact of Interest Rates on Stocks",
+                    "Role of Central Banks in Stock Markets"
+                ],
+            "economics":
+                [
+                    # Microeconomics
+                    "Demand and Supply",
+                    "Elasticity of Demand and Supply",
+                    "Consumer Behavior and Utility Theory",
+                    "Market Structures (Perfect Competition, Monopoly, Oligopoly)",
+                    "Game Theory and Strategic Behavior",
+                    "Production and Costs",
+                    "Labor Markets and Wages",
+                    "Externalities and Market Failure",
+                    "Public Goods and Free Rider Problem",
+                    "Behavioral Economics",
+
+                    # Macroeconomics
+                    "Gross Domestic Product (GDP) and Economic Growth",
+                    "Inflation and Deflation",
+                    "Unemployment and Labor Market Dynamics",
+                    "Fiscal Policy and Government Spending",
+                    "Monetary Policy and Central Banks",
+                    "Interest Rates and Money Supply",
+                    "Business Cycles and Economic Recessions",
+                    "International Trade and Balance of Payments",
+                    "Exchange Rates and Currency Markets",
+                    "National Debt and Deficit",
+
+                    # Development Economics
+                    "Poverty and Income Inequality",
+                    "Human Development Index (HDI)",
+                    "Economic Growth vs Economic Development",
+                    "Sustainable Development",
+                    "Foreign Aid and Economic Assistance",
+                    "Microfinance and Financial Inclusion",
+                    "Industrialization and Urbanization",
+
+                    # International Economics
+                    "Comparative Advantage and Trade Theories",
+                    "Globalization and Trade Liberalization",
+                    "WTO, IMF, and World Bank",
+                    "Tariffs, Quotas, and Trade Barriers",
+                    "Foreign Direct Investment (FDI)",
+                    "Exchange Rate Systems (Fixed, Floating, Pegged)",
+                    "Economic Integration (EU, NAFTA, ASEAN)",
+                    "Currency Crises and Sovereign Debt",
+
+                    # Financial Economics
+                    "Stock Markets and Asset Pricing",
+                    "Bonds and Interest Rate Determination",
+                    "Risk and Uncertainty in Financial Markets",
+                    "Financial Crises and Market Bubbles",
+                    "Banking System and Financial Intermediation",
+                    "Cryptocurrency and Decentralized Finance (DeFi)",
+
+                    # Environmental & Resource Economics
+                    "Climate Change and Economic Policy",
+                    "Carbon Tax and Emissions Trading",
+                    "Renewable vs Non-Renewable Resources",
+                    "Sustainability and Green Economics",
+                    "Natural Resource Management",
+
+                    # Political Economy
+                    "Capitalism vs Socialism vs Mixed Economy",
+                    "Economic Systems and Government Intervention",
+                    "Public Choice Theory",
+                    "Economic Policies and Political Ideologies",
+                    "Economic Consequences of War",
+
+                    # Emerging Topics
+                    "Digital Economy and E-Commerce",
+                    "Gig Economy and Freelancing",
+                    "Automation and AI in the Workforce",
+                    "Universal Basic Income (UBI)",
+                    "Future of Work and Remote Economy"
                 ]
             }
 

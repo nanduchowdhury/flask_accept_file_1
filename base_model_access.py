@@ -209,6 +209,6 @@ class BasePrompt():
         return prompt
 
     def get_prompt_to_generate_content(self, section, topic):
-        prompt = f"Explain following section : {topic}."
+        prompt = f"Explain {topic} in {section}."
         prompt += self.prompt_HTML_tag
         return prompt
