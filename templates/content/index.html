@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kupamanduk - Content</title>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='header.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='buttonCombination.css') }}">
@@ -47,6 +48,7 @@
             constructor(jsonData) {
                 this.jsonData = jsonData;
 
+                this.learnMoreButton = document.getElementById("learnMoreButton");
                 this.topicLabelName = document.getElementById("topicLabelName");
                 this.topicLabel = document.getElementById('topic-label');
                 this.viewArea_1 = document.getElementById('ViewArea_1');
@@ -56,20 +58,25 @@
             }
 
             update() {
+
+                let section = "content";
                 if (this.jsonData.topicLabel.includes("yoga")) {
-                    this.topicLabelName.textContent = "Yoga";
+                    section = "Yoga";
                 } else if (this.jsonData.topicLabel.includes("hindustani")) {
-                    this.topicLabelName.textContent = "Raga";
+                    section = "Raga";
                 } else if (this.jsonData.topicLabel.includes("astronomy")) {
-                    this.topicLabelName.textContent = "Astronomy";
+                    section = "Astronomy";
                 } else if (this.jsonData.topicLabel.includes("golf")) {
-                    this.topicLabelName.textContent = "Golf";
+                    section = "Golf";
                 } else if (this.jsonData.topicLabel.includes("nutrition")) {
-                    this.topicLabelName.textContent = "Nutrition";
+                    section = "Nutrition";
                 } else if (this.jsonData.topicLabel.includes("internal")) {
-                    this.topicLabelName.textContent = "Body";
+                    section = "Body";
                 }
-                
+
+                this.topicLabelName.textContent = section;
+                this.learnMoreButton.textContent += " about " + section;
+
                 this.topicLabel.innerHTML = this.jsonData.topicLabel;
                 this.viewArea_1.innerHTML = this.jsonData.viewArea_1.replace(/\n/g, '<br>');
                 this.youtubeMgr.showByUrl(this.jsonData.viewArea_2);

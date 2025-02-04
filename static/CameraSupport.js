@@ -85,8 +85,14 @@ class CameraSupport {
             const video = document.getElementById('cameraFeed');
             const pdfCanvas = document.getElementById('pdfCanvas');
             const ctx = pdfCanvas.getContext('2d');
-            pdfCanvas.width = video.videoWidth;
-            pdfCanvas.height = video.videoHeight;
+
+            // The video width & height is too large.
+            // At present there is no provision for user to make the
+            // picture small/large. So make the picture appear smaller here.
+
+            pdfCanvas.width = video.videoWidth / 2;
+            pdfCanvas.height = video.videoHeight / 2;
+
             ctx.drawImage(video, 0, 0, pdfCanvas.width, pdfCanvas.height);
             const dataURL = pdfCanvas.toDataURL('image/png');
 
