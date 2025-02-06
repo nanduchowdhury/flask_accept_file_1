@@ -71,6 +71,12 @@ class ContentCreatorBase:
         self.section_json_root_map = {
             "hindustani_classical_music": "hindustani_classical_music_json_root",
             "yoga": "yoga_json_root",
+            "racing": "racing_json_root",
+            "winter_sports": "winter_sports_json_root",
+            "general_machines": "general_machines_json_root",
+            "industrial_machines": "industrial_machines_json_root",
+            "oscar_nominated_movies": "oscar_nominated_movies_json_root",
+            "grammy_songs": "grammy_songs_json_root",
             "internal_organ": "internal_organ_json_root",
             "astronomy": "astronomy_json_root",
             "golf": "golf_json_root",
@@ -402,6 +408,616 @@ class ContentCreatorBase:
                     "Automation and AI in the Workforce",
                     "Universal Basic Income (UBI)",
                     "Future of Work and Remote Economy"
+                ],
+            "racing":
+                [
+                    # Types of Racing
+                    "Formula 1 (F1)",
+                    "MotoGP",
+                    "NASCAR",
+                    "IndyCar",
+                    "Drag Racing",
+                    "Rally Racing",
+                    "Touring Car Racing",
+                    "Endurance Racing (Le Mans, WEC)",
+                    "Electric Racing (Formula E)",
+                    "Kart Racing",
+                    "Off-Road Racing (Baja, Dakar Rally)",
+                    "Truck Racing",
+                    "Snowmobile Racing",
+                    "Boat Racing",
+                    "Drone Racing",
+
+                    # Racing Strategies & Techniques
+                    "Overtaking Techniques",
+                    "Racing Line and Cornering",
+                    "Braking Techniques (Trail Braking, Threshold Braking)",
+                    "Tire Management Strategies",
+                    "Slipstreaming and Drafting",
+                    "Fuel Management",
+                    "Aerodynamics in Racing",
+                    "Qualifying Strategies",
+
+                    # Racing Cars & Motorcycles
+                    "Aerodynamics in Race Cars",
+                    "Engine Performance and Tuning",
+                    "Hybrid and Electric Racing Cars",
+                    "Chassis Design and Suspension Setup",
+                    "Transmission and Gear Ratios",
+                    "Tires and Tire Compounds",
+                    "Weight Distribution and Balance",
+
+                    # Famous Races and Championships
+                    "Monaco Grand Prix (F1)",
+                    "24 Hours of Le Mans",
+                    "Daytona 500 (NASCAR)",
+                    "Indianapolis 500 (IndyCar)",
+                    "Dakar Rally",
+                    "Isle of Man TT",
+                    "Pikes Peak International Hill Climb",
+                    "Bathurst 1000",
+                    "Goodwood Festival of Speed",
+
+                    # Racing Safety & Regulations
+                    "Helmet and Fireproof Suit Regulations",
+                    "HANS Device and Safety Innovations",
+                    "FIA and Racing Rulebooks",
+                    "Track Safety and Barriers",
+                    "Pit Stop Safety Protocols",
+                    "Race Flags and Their Meanings",
+                    "Penalties and Race Steward Decisions",
+
+                    # Racing Technology & Data Analysis
+                    "Telemetrics and Car Data Analysis",
+                    "Simulation and Racing Simulators",
+                    "Virtual Racing and eSports (iRacing, Gran Turismo)",
+                    "Wind Tunnel Testing",
+                    "Driver Fitness and Training",
+
+                    # Racing Legends & Teams
+                    "Michael Schumacher",
+                    "Ayrton Senna",
+                    "Lewis Hamilton",
+                    "Valentino Rossi",
+                    "Dale Earnhardt",
+                    "Sebastian Loeb",
+                    "Famous Racing Teams (Ferrari, Red Bull Racing, Mercedes AMG, McLaren)",
+
+                    # Business & Sponsorships in Racing
+                    "Sponsorship and Advertising in Motorsport",
+                    "Team Budgets and Financial Management",
+                    "TV Rights and Media Coverage",
+                    "Merchandising and Fan Engagement",
+                    
+                    # Future of Racing
+                    "Autonomous Racing (RoboRace)",
+                    "Sustainable Racing (Biofuels, Hydrogen, EVs)",
+                    "AI in Racing Strategies",
+                    "Virtual Reality in Racing Training"
+                ],
+            "winter_sports":
+                [
+                    # Ice-Based Sports
+                    "Ice Hockey",
+                    "Figure Skating",
+                    "Speed Skating",
+                    "Short Track Speed Skating",
+                    "Curling",
+
+                    # Snow-Based Sports
+                    "Alpine Skiing",
+                    "Cross-Country Skiing",
+                    "Ski Jumping",
+                    "Snowboarding",
+                    "Freestyle Skiing",
+                    "Nordic Combined",
+                    "Biathlon",
+
+                    # Sledding & Sliding Sports
+                    "Bobsleigh",
+                    "Luge",
+                    "Skeleton",
+
+                    # Extreme & Adventure Winter Sports
+                    "Ice Climbing",
+                    "Snowmobiling",
+                    "Winter Triathlon",
+                    "Backcountry Skiing",
+                    "Snowshoeing"
+                ],
+            "industrial_machines":
+                [
+                    # Industrial Machines
+                    "Lathe Machine",
+                    "Milling Machine",
+                    "CNC Machine",
+                    "3D Printer",
+                    "Drilling Machine",
+                    "Grinding Machine",
+                    "Injection Molding Machine",
+                    "Press Machine",
+                    "Welding Machine",
+
+                    # Construction Machines
+                    "Excavator",
+                    "Bulldozer",
+                    "Crane",
+                    "Concrete Mixer",
+                    "Road Roller",
+                    "Forklift",
+                    "Dump Truck",
+
+                    # Automotive Machines
+                    "Internal Combustion Engine",
+                    "Electric Motor",
+                    "Turbocharger",
+                    "Transmission System",
+                    "Car Suspension System",
+
+                    # Agricultural Machines
+                    "Tractor",
+                    "Combine Harvester",
+                    "Plow",
+                    "Seeder",
+                    "Irrigation Pump",
+
+                    # Computing & Robotics
+                    "Supercomputer",
+                    "Quantum Computer",
+                    "Autonomous Robot",
+                    "3D Scanner",
+                    "Industrial Robot Arm",
+
+                    # Medical Machines
+                    "MRI Machine",
+                    "CT Scanner",
+                    "X-ray Machine",
+                    "Ultrasound Machine",
+                    "Dialysis Machine",
+                    "Ventilator",
+
+                    # Aerospace Machines
+                    "Jet Engine",
+                    "Rocket Engine",
+                    "Flight Simulator",
+                    "Autopilot System",
+
+                    # Energy Machines
+                    "Wind Turbine",
+                    "Hydroelectric Generator",
+                    "Solar Panel",
+                    "Nuclear Reactor",
+                    "Steam Turbine"
+                ],
+            "general_machines":
+                [
+                    # Office Machines
+                    "Printer",
+                    "Scanner",
+                    "Photocopier",
+                    "Shredder",
+                    "Laminating Machine",
+
+                    # Household Machines
+                    "Washing Machine",
+                    "Refrigerator",
+                    "Microwave Oven",
+                    "Vacuum Cleaner",
+                    "Dishwasher",
+
+                    # Simple Machines
+                    "Lever",
+                    "Pulley",
+                    "Wheel and Axle",
+                    "Inclined Plane",
+                    "Wedge",
+                    "Screw"
+                ],
+            "oscar_nominated_movies":
+                [
+                    # 2024
+                    "The Holdovers",
+                    "Killers of the Flower Moon",
+                    "Oppenheimer",
+                    "Barbie",
+                    "The Fabelmans",
+                    "The Color Purple",
+                    "Poor Things",
+                    "The Bikeriders",
+                    "American Fiction",
+                    
+                    # 2023
+                    "Everything Everywhere All at Once",
+                    "The Banshees of Inisherin",
+                    "All Quiet on the Western Front",
+                    "Avatar: The Way of Water",
+                    "Top Gun: Maverick",
+                    "Elvis",
+                    "The Whale",
+                    "Tár",
+                    "Triangle of Sadness",
+                    
+                    # 2022
+                    "CODA",
+                    "The Power of the Dog",
+                    "Dune",
+                    "King Richard",
+                    "Belfast",
+                    "Licorice Pizza",
+                    "Don't Look Up",
+                    "Drive My Car",
+                    "Nightmare Alley",
+                    
+                    # 2021
+                    "Nomadland",
+                    "The Trial of the Chicago 7",
+                    "Mank",
+                    "Promising Young Woman",
+                    "Minari",
+                    "Sound of Metal",
+                    "Judas and the Black Messiah",
+                    "The Father",
+                    "A Promising Young Woman",
+                    
+                    # 2020
+                    "Parasite",
+                    "1917",
+                    "Once Upon a Time in Hollywood",
+                    "Jojo Rabbit",
+                    "Little Women",
+                    "Marriage Story",
+                    "The Irishman",
+                    "Ford v Ferrari",
+                    "Joker",
+                    
+                    # 2019
+                    "Green Book",
+                    "A Star is Born",
+                    "Roma",
+                    "Black Panther",
+                    "BlacKkKlansman",
+                    "Vice",
+                    "The Favourite",
+                    "Bohemian Rhapsody",
+                    "Green Book",
+                    
+                    # 2018
+                    "The Shape of Water",
+                    "Three Billboards Outside Ebbing, Missouri",
+                    "Darkest Hour",
+                    "Dunkirk",
+                    "Phantom Thread",
+                    "Call Me by Your Name",
+                    "Lady Bird",
+                    "The Post",
+                    "Get Out",
+                    
+                    # 2017
+                    "Moonlight",
+                    "La La Land",
+                    "Manchester by the Sea",
+                    "Arrival",
+                    "Hacksaw Ridge",
+                    "Lion",
+                    "Hidden Figures",
+                    "Fences",
+                    "Hell or High Water",
+                    
+                    # 2016
+                    "Spotlight",
+                    "The Revenant",
+                    "The Big Short",
+                    "Mad Max: Fury Road",
+                    "Bridge of Spies",
+                    "The Martian",
+                    "Brooklyn",
+                    "Room",
+                    "Steve Jobs",
+                    
+                    # 2015
+                    "Birdman",
+                    "The Theory of Everything",
+                    "Selma",
+                    "The Imitation Game",
+                    "Whiplash",
+                    "American Sniper",
+                    "Boyhood",
+                    "The Grand Budapest Hotel",
+                    "Foxcatcher",
+                    
+                    # 2014
+                    "12 Years a Slave",
+                    "Gravity",
+                    "American Hustle",
+                    "The Wolf of Wall Street",
+                    "Captain Phillips",
+                    "Dallas Buyers Club",
+                    "Her",
+                    "Nebraska",
+                    "The Lego Movie",
+                    
+                    # 2013
+                    "Argo",
+                    "Les Misérables",
+                    "Life of Pi",
+                    "Lincoln",
+                    "Silver Linings Playbook",
+                    "Zero Dark Thirty",
+                    "Django Unchained",
+                    "Beasts of the Southern Wild",
+                    "Amour",
+                    
+                    # 2012
+                    "The Artist",
+                    "Hugo",
+                    "The Help",
+                    "Moneyball",
+                    "Midnight in Paris",
+                    "The Tree of Life",
+                    "War Horse",
+                    "Extremely Loud & Incredibly Close",
+                    "Bridesmaids",
+                    
+                    # 2011
+                    "The King's Speech",
+                    "The Social Network",
+                    "Black Swan",
+                    "Inception",
+                    "The Fighter",
+                    "127 Hours",
+                    "Toy Story 3",
+                    "True Grit",
+                    "Winter's Bone",
+                    
+                    # 2010
+                    "The Hurt Locker",
+                    "Avatar",
+                    "Inglourious Basterds",
+                    "Precious",
+                    "Up",
+                    "District 9",
+                    "Up in the Air",
+                    "A Serious Man",
+                    "An Education",
+                    
+                    # 2009
+                    "Slumdog Millionaire",
+                    "The Curious Case of Benjamin Button",
+                    "Milk",
+                    "The Reader",
+                    "Frost/Nixon",
+                    "The Wrestler",
+                    "Frozen River",
+                    "Inglourious Basterds",
+                    "Star Trek",
+                    
+                    # 2008
+                    "No Country for Old Men",
+                    "There Will Be Blood",
+                    "Atonement",
+                    "Juno",
+                    "Michael Clayton",
+                    "Sweeney Todd",
+                    "The Diving Bell and the Butterfly",
+                    "Into the Wild",
+                    "Elizabeth: The Golden Age",
+                    
+                    # 2007
+                    "The Departed",
+                    "Letters from Iwo Jima",
+                    "The Queen",
+                    "Babel",
+                    "The Pursuit of Happyness",
+                    "Little Miss Sunshine",
+                    "The Prestige",
+                    "Dreamgirls",
+                    "The Lives of Others",
+                    
+                    # 2006
+                    "Crash",
+                    "Brokeback Mountain",
+                    "Capote",
+                    "Good Night, and Good Luck",
+                    "Munich",
+                    "The Constant Gardener",
+                    "Syriana",
+                    "Walk the Line",
+                    "King Kong",
+                    
+                    # 2005
+                    "Million Dollar Baby",
+                    "The Aviator",
+                    "Ray",
+                    "Sideways",
+                    "Finding Neverland",
+                    "Hotel Rwanda",
+                    "The Incredibles",
+                    "The Polar Express",
+                    "Kinsey",
+                    
+                    # 2004
+                    "The Lord of the Rings: The Return of the King",
+                    "Lost in Translation",
+                    "Master and Commander",
+                    "Mystic River",
+                    "Seabiscuit",
+                    "Cold Mountain",
+                    "The Last Samurai",
+                    "The Cooler",
+                    "The Big Fish",
+                    
+                    # 2003
+                    "Chicago",
+                    "The Pianist",
+                    "The Hours",
+                    "Lord of the Rings: The Two Towers",
+                    "Gangs of New York",
+                    "The Good Girl",
+                    "Catch Me If You Can",
+                    "The Lord of the Rings: The Fellowship of the Ring",
+                    "The Lord of the Rings: The Fellowship",
+                    
+                    # 2002
+                    "A Beautiful Mind",
+                    "Moulin Rouge!",
+                    "Black Hawk Down",
+                    "Gosford Park",
+                    "The Lord of the Rings: The Fellowship of the Ring",
+                ],
+            "grammy_songs":
+                [
+                    # 2023
+                    "Just Like That - Bonnie Raitt",
+                    "About Damn Time - Lizzo",
+                    "The Heart Part 5 - Kendrick Lamar",
+                    "Easy on Me - Adele",
+                    "Bad Habit - Steve Lacy",
+                    "As It Was - Harry Styles",
+                    "Break My Soul - Beyoncé",
+                    "God Did - DJ Khaled ft. Rick Ross, Lil Wayne, Jay-Z, John Legend, and Fridayy",
+                    "ABCDEFU - GAYLE",
+                    "All Too Well (10 Minute Version) - Taylor Swift",
+
+                    # 2022
+                    "Leave the Door Open - Silk Sonic (Bruno Mars & Anderson .Paak)",
+                    "drivers license - Olivia Rodrigo",
+                    "Happier Than Ever - Billie Eilish",
+                    "Kiss Me More - Doja Cat ft. SZA",
+                    "Peaches - Justin Bieber ft. Daniel Caesar & Giveon",
+                    "Right on Time - Brandi Carlile",
+                    "Montero (Call Me By Your Name) - Lil Nas X",
+                    "Bad Habits - Ed Sheeran",
+                    "A Beautiful Noise - Alicia Keys & Brandi Carlile",
+                    "Fight for You - H.E.R.",
+
+                    # 2021
+                    "I Can't Breathe - H.E.R.",
+                    "Black Parade - Beyoncé",
+                    "The Box - Roddy Ricch",
+                    "Cardigan - Taylor Swift",
+                    "Circles - Post Malone",
+                    "Don't Start Now - Dua Lipa",
+                    "Everything I Wanted - Billie Eilish",
+                    "If the World Was Ending - JP Saxe ft. Julia Michaels",
+
+                    # 2020
+                    "Bad Guy - Billie Eilish",
+                    "Always Remember Us This Way - Lady Gaga",
+                    "Bring My Flowers Now - Tanya Tucker",
+                    "Hard Place - H.E.R.",
+                    "Lover - Taylor Swift",
+                    "Norman F***ing Rockwell - Lana Del Rey",
+                    "Someone You Loved - Lewis Capaldi",
+                    "Truth Hurts - Lizzo",
+
+                    # 2019
+                    "This Is America - Childish Gambino",
+                    "All the Stars - Kendrick Lamar & SZA",
+                    "Boo'd Up - Ella Mai",
+                    "God's Plan - Drake",
+                    "In My Blood - Shawn Mendes",
+                    "The Joke - Brandi Carlile",
+                    "The Middle - Zedd, Maren Morris & Grey",
+                    "Shallow - Lady Gaga & Bradley Cooper",
+
+                    # 2018
+                    "That's What I Like - Bruno Mars",
+                    "Despacito - Luis Fonsi & Daddy Yankee ft. Justin Bieber",
+                    "4:44 - Jay-Z",
+                    "Issues - Julia Michaels",
+                    "1-800-273-8255 - Logic ft. Alessia Cara & Khalid",
+                    "Praying - Kesha",
+                    "Broken Halos - Chris Stapleton",
+                    "Stay - Zedd & Alessia Cara",
+
+                    # 2017
+                    "Hello - Adele",
+                    "Formation - Beyoncé",
+                    "I Took a Pill in Ibiza - Mike Posner",
+                    "Love Yourself - Justin Bieber",
+                    "7 Years - Lukas Graham",
+
+                    # 2016
+                    "Thinking Out Loud - Ed Sheeran",
+                    "Alright - Kendrick Lamar",
+                    "Blank Space - Taylor Swift",
+                    "Girl Crush - Little Big Town",
+                    "See You Again - Wiz Khalifa ft. Charlie Puth",
+
+                    # 2015
+                    "Stay with Me (Darkchild Version) - Sam Smith",
+                    "All About That Bass - Meghan Trainor",
+                    "Chandelier - Sia",
+                    "Shake It Off - Taylor Swift",
+                    "Take Me to Church - Hozier",
+
+                    # 2014
+                    "Royals - Lorde",
+                    "Just Give Me a Reason - Pink ft. Nate Ruess",
+                    "Locked Out of Heaven - Bruno Mars",
+                    "Roar - Katy Perry",
+                    "Same Love - Macklemore & Ryan Lewis ft. Mary Lambert",
+
+                    # 2013
+                    "We Are Young - Fun. ft. Janelle Monáe",
+                    "Adorn - Miguel",
+                    "Call Me Maybe - Carly Rae Jepsen",
+                    "Stronger (What Doesn't Kill You) - Kelly Clarkson",
+                    "The A Team - Ed Sheeran",
+
+                    # 2012
+                    "Rolling in the Deep - Adele",
+                    "All of the Lights - Kanye West, Rihanna, Kid Cudi & Fergie",
+                    "The Cave - Mumford & Sons",
+                    "Grenade - Bruno Mars",
+                    "Holocene - Bon Iver",
+
+                    # 2011
+                    "Need You Now - Lady Antebellum",
+                    "Beg Steal or Borrow - Ray LaMontagne",
+                    "F*** You - CeeLo Green",
+                    "The House That Built Me - Miranda Lambert",
+                    "Love the Way You Lie - Eminem ft. Rihanna",
+
+                    # 2010
+                    "Single Ladies (Put a Ring on It) - Beyoncé",
+                    "Poker Face - Lady Gaga",
+                    "Pretty Wings - Maxwell",
+                    "Use Somebody - Kings of Leon",
+                    "You Belong with Me - Taylor Swift",
+
+                    # 2009
+                    "Viva la Vida - Coldplay",
+                    "American Boy - Estelle ft. Kanye West",
+                    "Chasing Pavements - Adele",
+                    "I'm Yours - Jason Mraz",
+                    "Love Song - Sara Bareilles",
+
+                    # 2008
+                    "Rehab - Amy Winehouse",
+                    "Before He Cheats - Carrie Underwood",
+                    "Hey There Delilah - Plain White T's",
+                    "Like a Star - Corinne Bailey Rae",
+                    "Umbrella - Rihanna ft. Jay-Z",
+
+                    # 2007
+                    "Not Ready to Make Nice - Dixie Chicks",
+                    "Be Without You - Mary J. Blige",
+                    "Jesus, Take the Wheel - Carrie Underwood",
+                    "Put Your Records On - Corinne Bailey Rae",
+                    "You're Beautiful - James Blunt",
+
+                    # 2006
+                    "Sometimes You Can't Make It on Your Own - U2",
+                    "Bless the Broken Road - Rascal Flatts",
+                    "Devils & Dust - Bruce Springsteen",
+                    "Ordinary People - John Legend",
+                    "We Belong Together - Mariah Carey",
+
+                    # 2005
+                    "Daughters - John Mayer",
+                    "If I Ain't Got You - Alicia Keys",
+                    "Jesus Walks - Kanye West"
                 ]
             }
 

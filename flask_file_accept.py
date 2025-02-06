@@ -69,6 +69,12 @@ class ScholarKM(Flask):
         
         self.route('/music_km')(self.music_km_index)
         self.route('/yoga_km')(self.yoga_km_index)
+        self.route('/racing_km')(self.racing_km_index)
+        self.route('/winter_sports_km')(self.winter_sports_km_index)
+        self.route('/general_machines_km')(self.general_machines_km_index)
+        self.route('/industrial_machines_km')(self.industrial_machines_km_index)
+        self.route('/oscar_nominated_movies_km')(self.oscar_nominated_movies_km_index)
+        self.route('/grammy_songs_km')(self.grammy_songs_km_index)
         self.route('/internal_organ_km')(self.internal_organ_km_index)
         self.route('/golf_km')(self.golf_km_index)
         self.route('/nutrition_km')(self.nutrition_km_index)
@@ -233,6 +239,24 @@ class ScholarKM(Flask):
 
     def yoga_km_index(self):
         return self.content_creator_index("yoga")
+
+    def racing_km_index(self):
+        return self.content_creator_index("racing")
+
+    def winter_sports_km_index(self):
+        return self.content_creator_index("winter_sports")
+
+    def general_machines_km_index(self):
+        return self.content_creator_index("general_machines")
+
+    def industrial_machines_km_index(self):
+        return self.content_creator_index("industrial_machines")
+
+    def oscar_nominated_movies_km_index(self):
+        return self.content_creator_index("oscar_nominated_movies")
+
+    def grammy_songs_km_index(self):
+        return self.content_creator_index("grammy_songs")
 
     def economics_km_index(self):
         return self.content_creator_index("economics")
@@ -527,6 +551,12 @@ class ScholarKM(Flask):
                 self.content_creator_task("mutual_funds")
                 self.content_creator_task("nutrition")
                 self.content_creator_task("economics")
+                self.content_creator_task("racing")
+                self.content_creator_task("winter_sports")
+                self.content_creator_task("general_machines")
+                self.content_creator_task("industrial_machines")
+                self.content_creator_task("oscar_nominated_movies")
+                self.content_creator_task("grammy_songs")
 
 
     def content_creator_task(self, section):
