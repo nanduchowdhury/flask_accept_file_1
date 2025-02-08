@@ -1066,6 +1066,7 @@ class ContentCreatorBase:
 
     def generate_youtube_response(self, topic):
         search_line = f"youtube {self.section} {topic}"
+        search_line = search_line.replace('_', ' ')
         response = self.google_cse_access.search(search_line)
         return response
 

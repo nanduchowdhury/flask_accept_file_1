@@ -99,6 +99,51 @@
     }
 }
 
+.triple-dot {
+    cursor: pointer;
+    font-size: 24px;
+    display: inline-block;
+    padding: 5px;
+}
+
+/* Desktop View: Show Vertical Triple Dots */
+.triple-dot.vertical {
+    display: inline-block;
+}
+
+.triple-dot.horizontal {
+    display: none;
+}
+
+/* Mobile View: Show Horizontal Triple Dots */
+@media (max-width: 768px) {
+    .triple-dot.vertical {
+        display: none;
+    }
+    .triple-dot.horizontal {
+        display: inline-block;
+    }
+}
+
+/* Menu Styles */
+.triple-dot-menu {
+    position: absolute;
+    background: white;
+    border: 1px solid gray;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 5px;
+    z-index: 1000;
+}
+
+.menu-item {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.menu-item:hover {
+    background: lightgray;
+}
+
 .topic-label-container {
     text-align: center; /* Centers the text horizontally */
     margin-top: 5px;   /* Adds space above the text label */

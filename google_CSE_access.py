@@ -44,7 +44,7 @@ class GoogleCSEAccess():
                         youtube_links.append(item['link'])
 
             if youtube_links:
-                return random.choice(youtube_links)  # Return a random YouTube link
+                return youtube_links
 
             return None  # No YouTube links found
 

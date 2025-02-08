@@ -30,14 +30,19 @@
 
     <div class="view-area-container">
         <div id="ViewArea_1" class="view-area">
-            <!-- Content for ViewArea_1 goes here -->
             <p>Explanation...</p>
         </div>
+    
+        <!-- Triple-dot button -->
+        <div id="triple-dot" class="triple-dot" tabindex="0">⋮</div>
+    
         <div id="ViewArea_2" class="view-area">
-            <!-- Content for ViewArea_2 goes here -->
             <p>YouTube Video...</p>
         </div>
     </div>
+    
+    <!-- Drop-down menu -->
+    <ul id="dropdown-menu" class="dropdown-menu"></ul>
 
     <script>
         const JsonData = {{ json_data | tojson | safe }};
@@ -60,44 +65,47 @@
             update() {
 
                 let section = "content";
-                if (this.jsonData.topicLabel.includes("yoga")) {
+                if (this.jsonData.section.includes("yoga")) {
                     section = "Yoga";
-                } else if (this.jsonData.topicLabel.includes("hindustani")) {
+                } else if (this.jsonData.section.includes("hindustani")) {
                     section = "Raga";
-                } else if (this.jsonData.topicLabel.includes("racing")) {
+                } else if (this.jsonData.section.includes("racing")) {
                     section = "Racing";
-                } else if (this.jsonData.topicLabel.includes("winter_sports")) {
+                } else if (this.jsonData.section.includes("winter_sports")) {
                     section = "Winter Sports";
-                } else if (this.jsonData.topicLabel.includes("general_machines")) {
+                } else if (this.jsonData.section.includes("general_machines")) {
                     section = "General Machines";
-                } else if (this.jsonData.topicLabel.includes("industrial_machines")) {
+                } else if (this.jsonData.section.includes("industrial_machines")) {
                     section = "Industrial Machines";
-                } else if (this.jsonData.topicLabel.includes("oscar_nominated_movies")) {
+                } else if (this.jsonData.section.includes("oscar_nominated_movies")) {
                     section = "Oscar Nominated";
-                } else if (this.jsonData.topicLabel.includes("grammy_songs")) {
+                } else if (this.jsonData.section.includes("grammy_songs")) {
                     section = "Grammy";
-                } else if (this.jsonData.topicLabel.includes("astronomy")) {
+                } else if (this.jsonData.section.includes("astronomy")) {
                     section = "Astronomy";
-                } else if (this.jsonData.topicLabel.includes("golf")) {
+                } else if (this.jsonData.section.includes("golf")) {
                     section = "Golf";
-                } else if (this.jsonData.topicLabel.includes("stocks")) {
+                } else if (this.jsonData.section.includes("stocks")) {
                     section = "Stocks";
-                } else if (this.jsonData.topicLabel.includes("mutual_funds")) {
+                } else if (this.jsonData.section.includes("mutual_funds")) {
                     section = "Mutual Funds";
-                } else if (this.jsonData.topicLabel.includes("economics")) {
+                } else if (this.jsonData.section.includes("economics")) {
                     section = "Economics";
-                } else if (this.jsonData.topicLabel.includes("nutrition")) {
+                } else if (this.jsonData.section.includes("nutrition")) {
                     section = "Nutrition";
-                } else if (this.jsonData.topicLabel.includes("internal")) {
+                } else if (this.jsonData.section.includes("internal")) {
                     section = "Body";
                 }
 
                 this.topicLabelName.textContent = section;
                 this.learnMoreButton.textContent += " about " + section;
 
-                this.topicLabel.innerHTML = this.jsonData.topicLabel;
-                this.viewArea_1.innerHTML = this.jsonData.viewArea_1.replace(/\n/g, '<br>');
-                this.youtubeMgr.showByUrl(this.jsonData.viewArea_2);
+                this.topicLabel.innerHTML = this.jsonData.section + " : " + this.jsonData.topic;
+                this.viewArea_1.innerHTML = this.jsonData.content_response.replace(/\n/g, '<br>');
+
+                if (this.jsonData.youtube_response.length) {
+                    this.youtubeMgr.showByUrl(this.jsonData.youtube_response[0]);
+                }
             }
         }
 
@@ -116,6 +124,18 @@
 
     <script src="{{ url_for('static', filename='content_render.js') }}"></script>
     
+
+    <script>
+
+        const menuActions = {
+            "Convert to Hindi": new ConvertToHindi(JsonData),
+            "Try another YouTube video": new TryAnotherVideo(JsonData)
+        };
+
+        // Initialize TripleDot with menu items and their respective handlers
+        new TripleDot('triple-dot', 'dropdown-menu', menuActions);
+
+    </script>
 
 </body>
 </html>

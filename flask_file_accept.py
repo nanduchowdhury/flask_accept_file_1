@@ -83,6 +83,8 @@ class ScholarKM(Flask):
         self.route('/mutual_funds_km')(self.mutual_funds_km_index)
         self.route('/economics_km')(self.economics_km_index)
 
+        self.route('/content_triple_dot_action_km', methods=['POST'])(self.content_triple_dot_action_km)
+
 
         self.route('/basic_init', methods=['POST'])(self.basic_init)
         self.route('/ai_model_init', methods=['POST'])(self.ai_model_init)
@@ -224,13 +226,14 @@ class ScholarKM(Flask):
     def content_creator_index(self, section):
         obj = ContentCreatorBase(section, self.gemini_access, self.error_manager)
         topic = obj.get_random_topic()
-        youtube_response = obj.generate_youtube_response(topic)
+        youtube_response_list = obj.generate_youtube_response(topic)
         content_response = obj.get_content_for_topic(topic)
 
         json_data = {
-            "topicLabel": f"{section} : {topic}",
-            "viewArea_1": content_response,
-            "viewArea_2": youtube_response
+            "section": section,
+            "topic" : topic,
+            "content_response": content_response,
+            "youtube_response": youtube_response_list
         }
         return render_template('content/index.html', json_data=json_data)
 
@@ -278,6 +281,23 @@ class ScholarKM(Flask):
 
     def nutrition_km_index(self):
         return self.content_creator_index("nutrition")
+
+    def content_triple_dot_action_km(self):
+        data = request.json
+
+        action = data['action']
+        section = data['section']
+        topic = data['topic']
+        
+        obj = ContentCreatorBase(section, self.gemini_access, self.error_manager)
+
+        if action == 'hindi':
+            content = obj.get_content_for_topic(topic)
+            second_lang_response = self.gemini_access.convert_to_second_lang(content, 'hindi')
+            return jsonify({'content': second_lang_response})
+        else:
+            return jsonify({'error': 'Invalid action'})
+
 
     def is_main_content_changed(self, uuid, main_content_file):
         self.sess.force_read_session(uuid)
