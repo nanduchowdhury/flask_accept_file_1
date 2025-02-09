@@ -11,7 +11,7 @@
     justify-content: center;
     align-items: center;
     gap: 10px; /* Space between label and button */
-    height: 60px; /* Adjust height as needed */
+    height: 40px; /* Adjust height as needed */
 }
 
 .topic-label-text {
@@ -50,15 +50,15 @@
 .view-area-container {
     display: flex;
     gap: 20px; /* Horizontal distance between the two areas */
-    margin-left: 10px; /* Adds left margin to the whole container */
-    margin-right: 10px; /* Adds right margin to the whole container */
+    margin-left: 5px; /* Adds left margin to the whole container */
+    margin-right: 5px; /* Adds right margin to the whole container */
 }
 
 .view-area {
     background-color: #f9f9f9;
     overflow: auto;
     border: 5px solid #ccc;
-    padding: 10px;
+    padding: 5px;
     box-sizing: border-box;
     white-space: pre-wrap;
     font-family: 'Patrick Hand'; /* Handwritten font */
@@ -156,8 +156,8 @@
     color: #333;        /* Optional: Set text color */
     display: inline-flex; /* Use flexbox for vertical alignment */
     align-items: center; /* Vertically center text */
-    min-height: 50px;    /* Ensure the label has at least 50px height */
-    padding: 0 10px;     /* Adds horizontal padding for better spacing */
+    min-height: 30px;    /* Ensure the label has at least 50px height */
+    padding: 0 5px;     /* Adds horizontal padding for better spacing */
     white-space: normal; /* Allows text wrapping to new lines */
 }
 

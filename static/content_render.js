@@ -125,8 +125,11 @@ class TripleDot {
                 // Get dot position & set menu position dynamically
                 const rect = dot.getBoundingClientRect();
 
-                this.menu.style.left = `${rect.left}px`;
-                this.menu.style.top = `${rect.top}px`;
+                const menu_left = rect.left + window.scrollX;
+                const menu_top = rect.top + window.scrollY;
+
+                this.menu.style.left = `${menu_left}px`;
+                this.menu.style.top = `${menu_top}px`;
                 this.menu.style.display = 'block';
             });
         });

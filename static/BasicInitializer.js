@@ -291,6 +291,18 @@ class BasicInitializer {
         return {top, left};
     }
 
+    getActualObjectBbox(object) {
+        const rect = object.getBoundingClientRect();
+
+        const left = rect.left + window.scrollX;
+        const top = rect.top + window.scrollY;
+        const right = rect.right + window.scrollX;
+        const bottom = rect.bottom + window.scrollY;
+
+        return {left, top, right, bottom};
+    }
+
+
     makeServerRequest(requestRoute, data, lamdaOnServerRequestSuccess, lamdaOnServerRequestFailure) {
         fetch(requestRoute, {
             method: 'POST',
