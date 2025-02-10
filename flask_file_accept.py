@@ -67,6 +67,8 @@ class ScholarKM(Flask):
 
         self.route('/scholar_km')(self.scholar_km_index)
         
+        self.route('/home_km')(self.home_km_index)
+
         self.route('/music_km')(self.music_km_index)
         self.route('/yoga_km')(self.yoga_km_index)
         self.route('/racing_km')(self.racing_km_index)
@@ -222,6 +224,8 @@ class ScholarKM(Flask):
     def scholar_km_index(self):
         return render_template('scholar_km/index.html')
 
+    def home_km_index(self):
+        return render_template('home/index.html')
 
     def content_creator_index(self, section):
         obj = ContentCreatorBase(section, self.gemini_access, self.error_manager)
