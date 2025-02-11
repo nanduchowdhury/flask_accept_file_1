@@ -17,66 +17,36 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <!-- Custom Styles -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='buttonCombination.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='MessageBox.css') }}">
 
-    <style>
-        /* Styling for ViewArea_3 */
-        #ViewArea_3 {
-            font-family: 'Black Ops One', sans-serif;
-            font-size: 2em;
-            font-weight: bold;
-            text-align: center;
-            color: #333;
-            white-space: nowrap;
-            overflow: hidden;
-            border-right: 2px solid #333;
-            display: inline-block;
-            animation: typing 4s steps(40, end) infinite, blink 0.8s step-end infinite;
-        }
-
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-
-        @keyframes blink {
-            50% { border-color: transparent; }
-        }
-    </style>
 </head>
 <body>
 
     <div class="separator"></div> <!-- Custom Separator -->
 
-    <div class="view-area-container">
-        <div id="ViewArea_3" class="view-area"></div>
-        <div id="ViewArea_4" class="view-area">
-            <p>YouTube Video...</p>
+    <div class="home-area-container">
+        <div id="HomeArea_1" class="home-area"></div>
+        <div id="HomeArea_2" class="home-area"></div>
+        <div id="HomeArea_3" class="home-area">
+            <div class="social-links">
+                <a href="https://x.com/hashtag/kupmandukWebAppEducation?src=hashtag_click" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.linkedin.com/company/kupmanduk/about/?viewAsMember=true" target="_blank" class="social-icon"><i class="fab fa-linkedin"></i></a>
+            </div>
         </div>
     </div>
 
     <script>
-        // JavaScript to animate text letter by letter
-        document.addEventListener("DOMContentLoaded", function() {
-            const text = "Learn and know more about several things around us...";
-            const viewArea = document.getElementById("ViewArea_3");
-            let index = 0;
-
-            function typeText() {
-                if (index < text.length) {
-                    viewArea.textContent += text[index];
-                    index++;
-                    setTimeout(typeText, 100); // Adjust speed as needed
-                }
-            }
-
-            typeText();
+        document.addEventListener("DOMContentLoaded", function () {
+            const render = new HomeRender();
+            render.renderHomeArea_1();
+            render.renderHomeArea_2();
         });
     </script>
 
+    <script src="{{ url_for('static', filename='home_render.js') }}"></script>
+
 </body>
 </html>
-

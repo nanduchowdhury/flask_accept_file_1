@@ -1,0 +1,120 @@
+.home-area-container {
+    display: flex;
+    flex-direction: column; /* Ensure all sections are in column format */
+    gap: 10px;
+    height: 100vh; /* Full viewport height */
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.home-area {
+    background-color: #f9f9f9;
+    overflow: auto;
+    border: 5px solid #ccc;
+    padding: 5px;
+    box-sizing: border-box;
+    white-space: pre-wrap;
+    font-family: 'Patrick Hand';
+    font-size: 14px;
+}
+
+/* Assigning height percentages */
+#HomeArea_1 {
+    height: 40%;
+}
+
+#HomeArea_2 {
+    height: 40%;
+}
+
+#HomeArea_3 {
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Social Media Icons */
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icon {
+    font-size: 24px;
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.social-icon:hover {
+    color: #0077b5; /* LinkedIn color */
+}
+
+.social-icon:nth-child(1):hover {
+    color: #1DA1F2; /* Twitter color */
+}
+
+/* Desktop Layout */
+@media (min-width: 768px) {
+    .home-area {
+        width: auto;
+    }
+}
+
+/* Mobile Layout */
+@media (max-width: 767px) {
+    .home-area-container {
+        height: 100vh;
+    }
+
+    #HomeArea_1, #HomeArea_2, #HomeArea_3 {
+        width: 100%;
+    }
+}
+
+/* Typing Animation */
+#HomeArea_1 {
+    font-family: 'Black Ops One', sans-serif;
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    color: #f90202;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid #333;
+    display: inline-block;
+
+    /* Background Image */
+    background-image: url("/static/kupmanduk_background_home_area_1.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#HomeArea_2 {
+    font-family: 'Black Ops One', sans-serif;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    color: #28f604;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid #333;
+    display: inline-block;
+
+    /* Background Image */
+    background-image: url("/static/kupmanduk_background_home_area_2.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink {
+    50% { border-color: transparent; }
+}
