@@ -76,35 +76,17 @@
 /* Typing Animation */
 #HomeArea_1 {
     font-family: 'Black Ops One', sans-serif;
-    font-size: 2em;
-    font-weight: bold;
-    text-align: center;
-    color: #f90202;
-    white-space: nowrap;
-    overflow: hidden;
-    border-right: 2px solid #333;
-    display: inline-block;
-
-    /* Background Image */
-    background-image: url("/static/kupmanduk_background_home_area_1.jpeg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-#HomeArea_2 {
-    font-family: 'Black Ops One', sans-serif;
     font-size: 1em;
     font-weight: bold;
     text-align: center;
-    color: #28f604;
+    color: #f3f5f6;
     white-space: nowrap;
     overflow: hidden;
     border-right: 2px solid #333;
     display: inline-block;
 
     /* Background Image */
-    background-image: url("/static/kupmanduk_background_home_area_2.jpg");
+    background-image: url("/static/kupmanduk_background_home_area_1.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
