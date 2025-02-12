@@ -102,6 +102,10 @@ class HomeRender {
         });
     }    
     
+    getRandomItemsFromList(array, numItems) {
+        const shuffled = array.slice().sort(() => 0.5 - Math.random()); // Shuffle the array
+        return shuffled.slice(0, numItems); // Take the first 'count' items
+    }
 
     renderHomeArea_2() {
         
@@ -113,9 +117,14 @@ class HomeRender {
             { image: "/static/images/yoga.jpg", link: "https://sites.google.com/view/kupmanduk/health-and-body/yoga?authuser=0", title: "Yoga" },
             { image: "/static/images/oscars.jpg", link: "https://sites.google.com/view/kupmanduk/entertainment/oscar-movies?authuser=0", title: "Oscars" },
             { image: "/static/images/astronomy.jpg", link: "https://sites.google.com/view/kupmanduk/science/astronomy?authuser=0", title: "Astronomy" },
+            { image: "/static/images/stocks.jpg", link: "https://sites.google.com/view/kupmanduk/finance/stocks?authuser=0", title: "Stocks" },
+            { image: "/static/images/nutrition.jpg", link: "https://sites.google.com/view/kupmanduk/health-and-body/nutrition?authuser=0", title: "Nutrition" },
+            { image: "/static/images/grammy.jpg", link: "https://sites.google.com/view/kupmanduk/entertainment/grammy-songs?authuser=0", title: "Grammy" },
             { image: "/static/images/machines.jpg", link: "https://sites.google.com/view/kupmanduk/machines/general?authuser=0", title: "Machines" }
         ];
         
-        this.showImageTiles(images, homeArea_2);
+        const randomImages = this.getRandomItemsFromList(images, 6);
+
+        this.showImageTiles(randomImages, homeArea_2);
     }
 }
