@@ -149,15 +149,98 @@ class TripleDot {
     }
 }
 
-class ConvertToHindi extends TripleDotMenuBase {
+class TranslateLanguage extends TripleDotMenuBase {
     constructor(JsonData) {
         super();
         this.JsonData = JsonData;
+
+        this.currentLanguage = 'English';
+        this.supportedLanguages = ['Hindi', 'Telugu', 'Bengali', 'English'];
     }
+
+    createPopupAndGetRadioSettings(listOfRadioItemNames, defaultSelected) {
+        return new Promise((resolve) => {
+          // Create a popup container
+          const popupContainer = document.createElement('div');
+          popupContainer.style.position = 'fixed';
+          popupContainer.style.top = '50%';
+          popupContainer.style.left = '50%';
+          popupContainer.style.transform = 'translate(-50%, -50%)';
+          popupContainer.style.padding = '20px';
+          popupContainer.style.border = '1px solid #ccc';
+          popupContainer.style.backgroundColor = 'white';
+          popupContainer.style.zIndex = '1000';
+          popupContainer.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
+          popupContainer.style.borderRadius = '8px';
+      
+          // Add radio buttons to the popup
+          listOfRadioItemNames.forEach((item) => {
+            const radioContainer = document.createElement('div');
+            radioContainer.style.marginBottom = '12px'; // Add spacing between radio buttons
+      
+            const radioInput = document.createElement('input');
+            radioInput.type = 'radio';
+            radioInput.name = 'popupRadioGroup';
+            radioInput.value = item;
+            if (item === defaultSelected) {
+              radioInput.checked = true;
+            }
+      
+            const label = document.createElement('label');
+            label.textContent = item;
+            label.style.marginLeft = '5px';
+      
+            radioContainer.appendChild(radioInput);
+            radioContainer.appendChild(label);
+            popupContainer.appendChild(radioContainer);
+          });
+      
+          // Create OK button
+          const okButton = document.createElement('button');
+          okButton.textContent = 'OK';
+          okButton.style.marginRight = '10px';
+          okButton.onclick = () => {
+            const selectedRadio = document.querySelector('input[name="popupRadioGroup"]:checked');
+            document.body.removeChild(popupContainer);
+            resolve(selectedRadio ? selectedRadio.value : null);
+          };
+      
+          // Create Cancel button
+          const cancelButton = document.createElement('button');
+          cancelButton.textContent = 'Cancel';
+          cancelButton.onclick = () => {
+            document.body.removeChild(popupContainer);
+            resolve(null);
+          };
+      
+          popupContainer.appendChild(okButton);
+          popupContainer.appendChild(cancelButton);
+      
+          // Append the popup to the body
+          document.body.appendChild(popupContainer);
+        });
+    }
+      
     onSelected() {
 
+        // Create a new list excluding the current language
+        const filteredLanguages = this.supportedLanguages.filter(
+            (language) => language !== this.currentLanguage
+        );
+
+        this.createPopupAndGetRadioSettings(filteredLanguages, filteredLanguages[0]).then((selectedValue) => {
+            if ( selectedValue ) {
+                this.currentLanguage = selectedValue;
+                this.makeServerRequestForLanguageTranslation();
+            }
+          });
+    }
+
+
+    makeServerRequestForLanguageTranslation() {
+
         const data = {
-            action: 'hindi',
+            action: this.currentLanguage,
             section: this.JsonData.section,
             topic: this.JsonData.topic
         };

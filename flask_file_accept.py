@@ -295,12 +295,9 @@ class ScholarKM(Flask):
         
         obj = ContentCreatorBase(section, self.gemini_access, self.error_manager)
 
-        if action == 'hindi':
-            content = obj.get_content_for_topic(topic)
-            second_lang_response = self.gemini_access.convert_to_second_lang(content, 'hindi')
-            return jsonify({'content': second_lang_response})
-        else:
-            return jsonify({'error': 'Invalid action'})
+        content = obj.get_content_for_topic(topic)
+        second_lang_response = self.gemini_access.convert_to_second_lang(content, action)
+        return jsonify({'content': second_lang_response})
 
 
     def is_main_content_changed(self, uuid, main_content_file):
