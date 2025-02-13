@@ -83,6 +83,16 @@ class ScholarKM(Flask):
         self.route('/astronomy_km')(self.astronomy_km_index)
         self.route('/stocks_km')(self.stocks_km_index)
         self.route('/mutual_funds_km')(self.mutual_funds_km_index)
+        self.route('/medicare_km')(self.medicare_km_index)
+        self.route('/painting_km')(self.painting_km_index)
+        self.route('/physics_km')(self.physics_km_index)
+        self.route('/chemistry_km')(self.chemistry_km_index)
+        self.route('/biology_km')(self.biology_km_index)
+        self.route('/computer_science_km')(self.computer_science_km_index)
+        self.route('/electronics_km')(self.electronics_km_index)
+        self.route('/geography_km')(self.geography_km_index)
+        self.route('/political_science_km')(self.political_science_km_index)
+        self.route('/authors_km')(self.authors_km_index)
         self.route('/economics_km')(self.economics_km_index)
 
         self.route('/content_triple_dot_action_km', methods=['POST'])(self.content_triple_dot_action_km)
@@ -247,6 +257,36 @@ class ScholarKM(Flask):
     def yoga_km_index(self):
         return self.content_creator_index("yoga")
 
+    def medicare_km_index(self):
+        return self.content_creator_index("medicare")
+
+    def painting_km_index(self):
+        return self.content_creator_index("painting")
+
+    def physics_km_index(self):
+        return self.content_creator_index("physics")
+
+    def chemistry_km_index(self):
+        return self.content_creator_index("chemistry")
+
+    def biology_km_index(self):
+        return self.content_creator_index("biology")
+
+    def computer_science_km_index(self):
+        return self.content_creator_index("computer_science")
+
+    def electronics_km_index(self):
+        return self.content_creator_index("electronics")
+
+    def geography_km_index(self):
+        return self.content_creator_index("geography")
+
+    def political_science_km_index(self):
+        return self.content_creator_index("political_science")
+
+    def authors_km_index(self):
+        return self.content_creator_index("authors")
+
     def racing_km_index(self):
         return self.content_creator_index("racing")
 
@@ -282,6 +322,36 @@ class ScholarKM(Flask):
 
     def astronomy_km_index(self):
         return self.content_creator_index("astronomy")
+
+    def medicare_km_index(self):
+        return self.content_creator_index("medicare")
+
+    def painting_km_index(self):
+        return self.content_creator_index("painting")
+
+    def physics_km_index(self):
+        return self.content_creator_index("physics")
+
+    def chemistry_km_index(self):
+        return self.content_creator_index("chemistry")
+
+    def biology_km_index(self):
+        return self.content_creator_index("biology")
+
+    def computer_science_km_index(self):
+        return self.content_creator_index("computer_science")
+
+    def electronics_km_index(self):
+        return self.content_creator_index("electronics")
+
+    def geography_km_index(self):
+        return self.content_creator_index("geography")
+
+    def political_science_km_index(self):
+        return self.content_creator_index("political_science")
+
+    def authors_km_index(self):
+        return self.content_creator_index("authors")
 
     def nutrition_km_index(self):
         return self.content_creator_index("nutrition")
@@ -563,6 +633,10 @@ class ScholarKM(Flask):
     def start_all_content_creator_threads(self):
         if os.getenv('GENERATE_CONTENT_THREAD'):
             if constants.is_first_gunicorn_worker():
+
+                self.content_creator_task("geography")
+                self.content_creator_task("authors")
+                
                 self.content_creator_task("hindustani_classical_music")
                 self.content_creator_task("yoga")
                 self.content_creator_task("internal_organ")
@@ -578,6 +652,16 @@ class ScholarKM(Flask):
                 self.content_creator_task("industrial_machines")
                 self.content_creator_task("oscar_nominated_movies")
                 self.content_creator_task("grammy_songs")
+
+                self.content_creator_task("medicare")
+                self.content_creator_task("painting")
+                self.content_creator_task("physics")
+                self.content_creator_task("chemistry")
+                self.content_creator_task("biology")
+                self.content_creator_task("computer_science")
+                self.content_creator_task("electronics")
+                
+                self.content_creator_task("political_science")
 
 
     def content_creator_task(self, section):

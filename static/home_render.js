@@ -108,6 +108,15 @@ class HomeRender {
     }
 
     renderHomeArea_2() {
+
+        // Initial call to display images immediately
+        this.refreshImages();
+
+        // Set an interval to refresh images every 8 seconds
+        setInterval(this.refreshImages.bind(this), 8000); // 8 seconds
+    }
+
+    refreshImages() {
         
         const homeArea_2 = document.getElementById("HomeArea_2");
         
@@ -120,6 +129,11 @@ class HomeRender {
             { image: "/static/images/stocks.jpg", link: "https://sites.google.com/view/kupmanduk/finance/stocks?authuser=0", title: "Stocks" },
             { image: "/static/images/nutrition.jpg", link: "https://sites.google.com/view/kupmanduk/health-and-body/nutrition?authuser=0", title: "Nutrition" },
             { image: "/static/images/grammy.jpg", link: "https://sites.google.com/view/kupmanduk/entertainment/grammy-songs?authuser=0", title: "Grammy" },
+            { image: "/static/images/books.jpg", link: "https://sites.google.com/view/kupmanduk/arts/books?authuser=0", title: "Books" },
+            { image: "/static/images/electronics.jpg", link: "https://sites.google.com/view/kupmanduk/science/electronics?authuser=0", title: "Electronics" },
+            { image: "/static/images/painting.jpg", link: "https://sites.google.com/view/kupmanduk/arts/painting?authuser=0", title: "Painting" },
+            { image: "/static/images/medicare.jpg", link: "https://sites.google.com/view/kupmanduk/health-and-body/medicare?authuser=0", title: "Medicare" },
+            { image: "/static/images/chemistry.jpg", link: "https://sites.google.com/view/kupmanduk/science/chemistry?authuser=0", title: "Chemistry" },
             { image: "/static/images/machines.jpg", link: "https://sites.google.com/view/kupmanduk/machines/general?authuser=0", title: "Machines" }
         ];
         
