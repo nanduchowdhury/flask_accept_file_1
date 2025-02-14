@@ -83,7 +83,7 @@ class ContentCreatorBase:
             "nutrition": "nutrition_json_root",
             "stocks": "stocks_json_root",
             "mutual_funds": "mutual_funds_json_root",
-            "medicare": "medicare_json_root",
+            "medical_care": "medical_care_json_root",
             "painting": "painting_json_root",
             "physics": "physics_json_root",
             "chemistry": "chemistry_json_root",
@@ -1081,7 +1081,7 @@ class ContentCreatorBase:
                     "If I Ain't Got You - Alicia Keys",
                     "Jesus Walks - Kanye West"
                 ],
-            "medicare":
+            "medical_care":
                 [
                     "Primary Care",
                     "Preventive Care",

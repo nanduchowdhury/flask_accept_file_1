@@ -41,11 +41,19 @@
 }
 
 .social-icon {
-    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px; /* Set consistent size for icons */
+    height: 40px;
+    border-radius: 50%; /* Optional: round icons */
+    font-size: 20px; /* Ensure all icons have the same font size */
+    color: #333; /* Default color */
+    background-color: #f0f0f0; /* Optional: background color */
     text-decoration: none;
-    color: #333;
-    transition: color 0.3s;
 }
+
+
 
 .social-icon:hover {
     color: #0077b5; /* LinkedIn color */

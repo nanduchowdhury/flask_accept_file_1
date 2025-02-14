@@ -83,7 +83,7 @@ class ScholarKM(Flask):
         self.route('/astronomy_km')(self.astronomy_km_index)
         self.route('/stocks_km')(self.stocks_km_index)
         self.route('/mutual_funds_km')(self.mutual_funds_km_index)
-        self.route('/medicare_km')(self.medicare_km_index)
+        self.route('/medical_care_km')(self.medical_care_km_index)
         self.route('/painting_km')(self.painting_km_index)
         self.route('/physics_km')(self.physics_km_index)
         self.route('/chemistry_km')(self.chemistry_km_index)
@@ -257,8 +257,8 @@ class ScholarKM(Flask):
     def yoga_km_index(self):
         return self.content_creator_index("yoga")
 
-    def medicare_km_index(self):
-        return self.content_creator_index("medicare")
+    def medical_care_km_index(self):
+        return self.content_creator_index("medical_care")
 
     def painting_km_index(self):
         return self.content_creator_index("painting")
@@ -323,8 +323,8 @@ class ScholarKM(Flask):
     def astronomy_km_index(self):
         return self.content_creator_index("astronomy")
 
-    def medicare_km_index(self):
-        return self.content_creator_index("medicare")
+    def medical_care_km_index(self):
+        return self.content_creator_index("medical_care")
 
     def painting_km_index(self):
         return self.content_creator_index("painting")
@@ -653,7 +653,7 @@ class ScholarKM(Flask):
                 self.content_creator_task("oscar_nominated_movies")
                 self.content_creator_task("grammy_songs")
 
-                self.content_creator_task("medicare")
+                self.content_creator_task("medical_care")
                 self.content_creator_task("painting")
                 self.content_creator_task("physics")
                 self.content_creator_task("chemistry")
