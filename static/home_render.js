@@ -132,7 +132,7 @@ class HomeRender {
             { image: "/static/images/books.jpg", link: "https://www.kupmanduk.co.in/arts/authors-books?authuser=0", title: "Books" },
             { image: "/static/images/electronics.jpg", link: "https://www.kupmanduk.co.in/science/electronics?authuser=0", title: "Electronics" },
             { image: "/static/images/painting.jpg", link: "https://www.kupmanduk.co.in/arts/painting?authuser=0", title: "Painting" },
-            { image: "/static/images/medical_care.jpg", link: "https://www.kupmanduk.co.in/health-and-body/medical_care?authuser=0", title: "medical_care" },
+            { image: "/static/images/medical_care.jpg", link: "https://www.kupmanduk.co.in/health-and-body/medicare?authuser=0", title: "medical_care" },
             { image: "/static/images/chemistry.jpg", link: "https://www.kupmanduk.co.in/science/chemistry?authuser=0", title: "Chemistry" },
             { image: "/static/images/machines.jpg", link: "https://www.kupmanduk.co.in/machines/general?authuser=0", title: "Machines" }
         ];
