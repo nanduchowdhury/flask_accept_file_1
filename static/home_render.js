@@ -121,21 +121,21 @@ class HomeRender {
         const homeArea_2 = document.getElementById("HomeArea_2");
         
         const images = [
-            { image: "/static/images/golf.jpg", link: "https://www.kupmanduk.co.in/sports/golf?authuser=0", title: "Golf" },
-            { image: "/static/images/raga.jpg", link: "https://www.kupmanduk.co.in/entertainment/hindustani-classical?authuser=0", title: "Raga" },
-            { image: "/static/images/yoga.jpg", link: "https://www.kupmanduk.co.in/health-and-body/yoga?authuser=0", title: "Yoga" },
-            { image: "/static/images/oscars.jpg", link: "https://www.kupmanduk.co.in/entertainment/oscar-movies?authuser=0", title: "Oscars" },
-            { image: "/static/images/astronomy.jpg", link: "https://www.kupmanduk.co.in/science/astronomy?authuser=0", title: "Astronomy" },
-            { image: "/static/images/stocks.jpg", link: "https://www.kupmanduk.co.in/finance/stocks?authuser=0", title: "Stocks" },
-            { image: "/static/images/nutrition.jpg", link: "https://www.kupmanduk.co.in/health-and-body/nutrition?authuser=0", title: "Nutrition" },
-            { image: "/static/images/grammy.jpg", link: "https://www.kupmanduk.co.in/entertainment/grammy-songs?authuser=0", title: "Grammy" },
-            { image: "/static/images/books.jpg", link: "https://www.kupmanduk.co.in/arts/authors-books?authuser=0", title: "Books" },
-            { image: "/static/images/electronics.jpg", link: "https://www.kupmanduk.co.in/science/electronics?authuser=0", title: "Electronics" },
-            { image: "/static/images/painting.jpg", link: "https://www.kupmanduk.co.in/arts/painting?authuser=0", title: "Painting" },
-            { image: "/static/images/medical_care.jpg", link: "https://www.kupmanduk.co.in/health-and-body/medicare?authuser=0", title: "medical_care" },
-            { image: "/static/images/chemistry.jpg", link: "https://www.kupmanduk.co.in/science/chemistry?authuser=0", title: "Chemistry" },
-            { image: "/static/images/machines.jpg", link: "https://www.kupmanduk.co.in/machines/general?authuser=0", title: "Machines" }
-        ];
+            { image: "/static/images/golf.webp", link: "https://www.kupmanduk.co.in/sports/golf?authuser=0", title: "Golf" },
+            { image: "/static/images/raga.webp", link: "https://www.kupmanduk.co.in/entertainment/hindustani-classical?authuser=0", title: "Raga" },
+            { image: "/static/images/yoga.webp", link: "https://www.kupmanduk.co.in/health-and-body/yoga?authuser=0", title: "Yoga" },
+            { image: "/static/images/oscars.webp", link: "https://www.kupmanduk.co.in/entertainment/oscar-movies?authuser=0", title: "Oscars" },
+            { image: "/static/images/astronomy.webp", link: "https://www.kupmanduk.co.in/science/astronomy?authuser=0", title: "Astronomy" },
+            { image: "/static/images/stocks.webp", link: "https://www.kupmanduk.co.in/finance/stocks?authuser=0", title: "Stocks" },
+            { image: "/static/images/nutrition.webp", link: "https://www.kupmanduk.co.in/health-and-body/nutrition?authuser=0", title: "Nutrition" },
+            { image: "/static/images/grammy.webp", link: "https://www.kupmanduk.co.in/entertainment/grammy-songs?authuser=0", title: "Grammy" },
+            { image: "/static/images/books.webp", link: "https://www.kupmanduk.co.in/arts/authors-books?authuser=0", title: "Books" },
+            { image: "/static/images/electronics.webp", link: "https://www.kupmanduk.co.in/science/electronics?authuser=0", title: "Electronics" },
+            { image: "/static/images/painting.webp", link: "https://www.kupmanduk.co.in/arts/painting?authuser=0", title: "Painting" },
+            { image: "/static/images/medical_care.webp", link: "https://www.kupmanduk.co.in/health-and-body/medicare?authuser=0", title: "medical_care" },
+            { image: "/static/images/chemistry.webp", link: "https://www.kupmanduk.co.in/science/chemistry?authuser=0", title: "Chemistry" },
+            { image: "/static/images/machines.webp", link: "https://www.kupmanduk.co.in/machines/general?authuser=0", title: "Machines" }
+        ];        
         
         const randomImages = this.getRandomItemsFromList(images, 6);
 
