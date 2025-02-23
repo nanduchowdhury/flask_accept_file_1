@@ -95,6 +95,8 @@ class ScholarKM(Flask):
         self.route('/authors_km')(self.authors_km_index)
         self.route('/economics_km')(self.economics_km_index)
 
+        self.route('/content_init', methods=['POST'])(self.content_init)
+        self.route('/content_learn_more', methods=['POST'])(self.content_learn_more)
         self.route('/content_triple_dot_action_km', methods=['POST'])(self.content_triple_dot_action_km)
 
 
@@ -235,6 +237,9 @@ class ScholarKM(Flask):
         return render_template('scholar_km/index.html')
 
     def home_km_index(self):
+
+        self.error_manager.show_message(2067)
+
         return render_template('home/index.html')
 
     def content_creator_index(self, section):
@@ -242,6 +247,8 @@ class ScholarKM(Flask):
         topic = obj.get_random_topic()
         youtube_response_list = obj.generate_youtube_response(topic)
         content_response = obj.get_content_for_topic(topic)
+
+        self.error_manager.show_message(2066, section, topic)
 
         json_data = {
             "section": section,
@@ -751,6 +758,57 @@ class ScholarKM(Flask):
 
         self.error_manager.update_client_uuid(uuid)
         self.error_manager.update_client_ip(cip)
+
+    def content_learn_more(self):
+
+        data = request.get_json()
+
+        section = data.get('section', '')
+
+        obj = ContentCreatorBase(section, self.gemini_access, self.error_manager)
+        topic = obj.get_random_topic()
+        youtube_response_list = obj.generate_youtube_response(topic)
+        content_response = obj.get_content_for_topic(topic)
+
+        json_data = {
+            "section": section,
+            "topic" : topic,
+            "content_response": content_response,
+            "youtube_response": youtube_response_list
+        }
+        return jsonify(json_data), 200
+
+    def content_init(self):
+        try:
+            data = request.get_json()
+            client_uuid = self.get_or_generate_uuid(data, True)
+
+            self.sess.save_client_data(client_uuid, 'basic_init.client_uuid', client_uuid)
+
+            client_id = data.get('clientId', 'unknown')
+            self.sess.save_client_data(client_uuid, 'basic_init.client_id', client_id)
+            client_ip = request.remote_addr
+            self.sess.save_client_data(client_uuid, 'basic_init.client_ip', client_ip)
+
+            self.error_manager.update_client_uuid(client_uuid)
+            self.error_manager.update_client_ip(client_ip)
+
+            cfolder = f'{self.client_folder}/{client_ip}_{client_uuid}'
+            
+            log_folder = f'{cfolder}/client_logs'
+            self.sess.save_client_data(client_uuid, 'basic_init.log_folder', log_folder)
+            
+            log_file_path = f'{log_folder}/client_log.txt'
+            self.sess.save_client_data(client_uuid, 'basic_init.log_file_path', log_file_path)
+
+            self.error_manager.show_message(2065, client_uuid)
+
+            self.sess.force_save_session(client_uuid)
+
+            return jsonify({"client_uuid": client_uuid}), 200
+
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
 
     def basic_init(self):
         try:

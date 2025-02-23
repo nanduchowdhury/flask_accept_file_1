@@ -57,8 +57,10 @@ class ErrorManager:
             except TypeError:
                 return f"Error message for code {code} expects different number of arguments."
 
+        current_time = datetime.now().strftime('%Y_%m_%d-%H_%M_%S')
+
         # Complete message with error code
-        full_msg = f"MSG-{code}: IP {self.client_ip} UUID {self.client_uuid} - {message}"
+        full_msg = f"MSG-{code}: {current_time} IP {self.client_ip} UUID {self.client_uuid} - {message}"
 
         # Print the message to the console
         print(full_msg)

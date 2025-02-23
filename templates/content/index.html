@@ -30,131 +30,46 @@
 
     <div class="view-area-container">
         <div id="ViewArea_1" class="view-area">
-            <p>No Explanation...</p>
+            <p>No explanation available</p>
         </div>
     
         <!-- Triple-dot button -->
         <div id="triple-dot" class="triple-dot" tabindex="0">⋮</div>
     
         <div id="ViewArea_2" class="view-area">
-            <p>No YouTube Video...</p>
+            <p>No youtube video available</p>
         </div>
     </div>
     
     <!-- Drop-down menu -->
     <ul id="dropdown-menu" class="dropdown-menu"></ul>
 
+    <div id="messageBox" class="message-box hidden">
+        <span id="messageBoxText"></span>
+        <button id="messageBoxOkButton">OK</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/log4javascript/1.4.9/log4javascript.min.js"></script>
+    <script src="{{ url_for('static', filename='content_render.js') }}"></script>
+    <script src="{{ url_for('static', filename='errorManager.js') }}"></script>
+    <script src="{{ url_for('static', filename='BasicInitializer.js') }}"></script>
+    <script src="{{ url_for('static', filename='geologicalInfo.js') }}"></script>
+
     <script>
         const JsonData = {{ json_data | tojson | safe }};
         
         "use strict";
 
-        class KupmandukMusic {
-            constructor(jsonData) {
-                this.jsonData = jsonData;
-
-                this.learnMoreButton = document.getElementById("learnMoreButton");
-                this.topicLabelName = document.getElementById("topicLabelName");
-                this.topicLabel = document.getElementById('topic-label');
-                this.viewArea_1 = document.getElementById('ViewArea_1');
-                this.viewArea_2 = document.getElementById('ViewArea_2');
-
-                this.youtubeMgr = new YoutubeManager('ViewArea_2');
-            }
-
-            update() {
-
-                let section = "content";
-                if (this.jsonData.section.includes("yoga")) {
-                    section = "Yoga";
-                } else if (this.jsonData.section.includes("hindustani")) {
-                    section = "Raga";
-                } else if (this.jsonData.section.includes("racing")) {
-                    section = "Racing";
-                } else if (this.jsonData.section.includes("winter_sports")) {
-                    section = "Winter Sports";
-                } else if (this.jsonData.section.includes("general_machines")) {
-                    section = "General Machines";
-                } else if (this.jsonData.section.includes("industrial_machines")) {
-                    section = "Industrial Machines";
-                } else if (this.jsonData.section.includes("oscar_nominated_movies")) {
-                    section = "Oscar Nominated";
-                } else if (this.jsonData.section.includes("grammy_songs")) {
-                    section = "Grammy";
-                } else if (this.jsonData.section.includes("astronomy")) {
-                    section = "Astronomy";
-                } else if (this.jsonData.section.includes("golf")) {
-                    section = "Golf";
-                } else if (this.jsonData.section.includes("stocks")) {
-                    section = "Stocks";
-                } else if (this.jsonData.section.includes("mutual_funds")) {
-                    section = "Mutual Funds";
-                } else if (this.jsonData.section.includes("economics")) {
-                    section = "Economics";
-                } else if (this.jsonData.section.includes("nutrition")) {
-                    section = "Nutrition";
-                } else if (this.jsonData.section.includes("medical_care")) {
-                    section = "Medical Care";
-                } else if (this.jsonData.section.includes("painting")) {
-                    section = "Painting";
-                } else if (this.jsonData.section.includes("physics")) {
-                    section = "Physics";
-                } else if (this.jsonData.section.includes("chemistry")) {
-                    section = "Chemistry";
-                } else if (this.jsonData.section.includes("biology")) {
-                    section = "Biology";
-                } else if (this.jsonData.section.includes("computer_science")) {
-                    section = "Computer Science";
-                } else if (this.jsonData.section.includes("electronics")) {
-                    section = "Electronics";
-                } else if (this.jsonData.section.includes("geography")) {
-                    section = "Geography";
-                } else if (this.jsonData.section.includes("political_science")) {
-                    section = "Political Science";
-                } else if (this.jsonData.section.includes("authors")) {
-                    section = "Authors";
-                } else if (this.jsonData.section.includes("internal")) {
-                    section = "Body";
-                }
-
-                this.topicLabelName.textContent = section;
-                this.learnMoreButton.textContent += " about " + section;
-
-                this.topicLabel.innerHTML = this.jsonData.section + " : " + this.jsonData.topic;
-                this.viewArea_1.innerHTML = this.jsonData.content_response.replace(/\n/g, '<br>');
-
-                if (this.jsonData.youtube_response.length) {
-                    this.youtubeMgr.showByUrl(this.jsonData.youtube_response[0]);
-                }
-            }
-        }
+        const errorManager = new ErrorManager();
+        const basicInitializer = new ContentInitializer();
 
         document.addEventListener("DOMContentLoaded", () => {
-            const kMusic = new KupmandukMusic(JsonData);
-            kMusic.update();
-        });
 
-        document.getElementById("learnMoreButton").addEventListener("click", function() {
-        location.reload();
+            const cRender = new ContentRender(JsonData);
         });
 
         // This code will execute as soon as the page has loaded.
-        console.log("kupmanduk page loaded successfuly-1."); 
-    </script>
-
-    <script src="{{ url_for('static', filename='content_render.js') }}"></script>
-    
-
-    <script>
-
-        const menuActions = {
-            "Translate language": new TranslateLanguage(JsonData),
-            "Try another YouTube video": new TryAnotherVideo(JsonData)
-        };
-
-        // Initialize TripleDot with menu items and their respective handlers
-        new TripleDot('triple-dot', 'dropdown-menu', menuActions);
-
+        console.log("kupmanduk-content page loaded successfully."); 
     </script>
 
 </body>

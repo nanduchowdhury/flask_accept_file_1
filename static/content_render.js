@@ -29,14 +29,20 @@ class YoutubeManager {
         this.container.appendChild(iframe);
     }
 
+    clear() {
+        this.container.innerHTML = "No youtube video available";
+    }
+
     getYouTubeVideoId(url) {
-        const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|embed|shorts)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+        const regex = /(?:https?:\/\/)?(?:www\.|m\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|embed|shorts)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
         const match = url.match(regex);
         return match ? match[1] : null; // Return the video ID or null if no match
     }
 
     showByUrl(videoUrl) {
         try {
+
+            this.clear();
 
             const videoId = this.getYouTubeVideoId(videoUrl);
             if(videoId) {
@@ -93,6 +99,15 @@ class TripleDot {
 
         this.createMenu();
         this.attachEventListeners();
+    }
+
+    updateJsonData(jsonData) {
+        
+        for (const [item, handlerObj] of Object.entries(this.menuItemsMap)) {
+            if (handlerObj) {
+                handlerObj.updateJsonData(jsonData);
+            }
+        }
     }
 
     createMenu() {
@@ -156,6 +171,14 @@ class TranslateLanguage extends TripleDotMenuBase {
 
         this.currentLanguage = 'English';
         this.supportedLanguages = ['Hindi', 'Telugu', 'Bengali', 'English'];
+    }
+
+    updateJsonData(jsonData) {
+        this.JsonData = jsonData;
+    }
+
+    resetCurrentLanguage() {
+        this.currentLanguage = 'English';
     }
 
     createPopupAndGetRadioSettings(listOfRadioItemNames, defaultSelected) {
@@ -231,6 +254,9 @@ class TranslateLanguage extends TripleDotMenuBase {
         this.createPopupAndGetRadioSettings(filteredLanguages, filteredLanguages[0]).then((selectedValue) => {
             if ( selectedValue ) {
                 this.currentLanguage = selectedValue;
+
+                errorManager.showInfo(2064, this.currentLanguage);
+
                 this.makeServerRequestForLanguageTranslation();
             }
           });
@@ -253,6 +279,8 @@ class TranslateLanguage extends TripleDotMenuBase {
         let ViewArea_1 = document.getElementById('ViewArea_1');
         
         ViewArea_1.innerHTML = data.content;
+
+        errorManager.log(2063, this.currentLanguage);
     }
 
     lamdaOnBasicInitRequestFailure = (msg) => {
@@ -268,19 +296,156 @@ class TryAnotherVideo extends TripleDotMenuBase {
         this.lastYoutubeVideoIndex = 0;
     }
 
+    updateJsonData(jsonData) {
+        this.JsonData = jsonData;
+    }
+
     onSelected() {
 
         this.youtubeMgr = new YoutubeManager('ViewArea_2');
 
-        if ( this.lastYoutubeVideoIndex >= this.JsonData.youtube_response.length ) {
+        if ( this.lastYoutubeVideoIndex >= this.JsonData.youtube_response.length - 1 ) {
             this.lastYoutubeVideoIndex = 0;
         } else {
             this.lastYoutubeVideoIndex++;
         }
 
-        this.youtubeMgr.showByUrl(this.JsonData.youtube_response[this.lastYoutubeVideoIndex]);
+        const url = this.JsonData.youtube_response[this.lastYoutubeVideoIndex];
+        this.youtubeMgr.showByUrl(url);
+
+        errorManager.log(2062, url);
     }
 }
 
+class ContentRender {
+    constructor(jsonData) {
+        this.jsonData = jsonData;
 
+        this.learnMoreButton = document.getElementById("learnMoreButton");
+        this.topicLabelName = document.getElementById("topicLabelName");
+        this.topicLabel = document.getElementById('topic-label');
+        this.viewArea_1 = document.getElementById('ViewArea_1');
+        this.viewArea_2 = document.getElementById('ViewArea_2');
+
+        this.youtubeMgr = new YoutubeManager('ViewArea_2');
+
+        document.getElementById("learnMoreButton").addEventListener("click", this.onLearnMoreButtonClick.bind(this));
+
+        this.createTripleDotMenu(this.jsonData);
+        this.update();
+        this.logGeoLocation();
+
+        // errorManager.log(2060, this.jsonData.section, this.jsonData.topic);
+    }
+
+    createTripleDotMenu(JsonData) {
+
+        this.translateLanguage = new TranslateLanguage(JsonData);
+        this.tryAnotherVideo = new TryAnotherVideo(JsonData);
+
+        const menuActions = {
+            "Translate language": this.translateLanguage,
+            "Try another YouTube video": this.tryAnotherVideo
+        };
+
+        // Initialize TripleDot with menu items and their respective handlers
+        this.tripleDot = new TripleDot('triple-dot', 'dropdown-menu', menuActions);
+    }
+
+    onLearnMoreButtonClick() {
+
+        const data = {
+            section: this.jsonData.section,
+        };
+
+        basicInitializer.makeServerRequest('/content_learn_more', data, 
+        this.lamdaOnBasicInitRequestSuccess, this.lamdaOnBasicInitRequestFailure);
+    }
+
+    lamdaOnBasicInitRequestSuccess = (data) => {
+
+        this.jsonData = data;
+        this.tripleDot.updateJsonData(this.jsonData);
+
+        this.update();
+
+        this.translateLanguage.resetCurrentLanguage();
+
+        errorManager.log(2061, this.jsonData.section, this.jsonData.topic);
+    }
+
+    lamdaOnBasicInitRequestFailure = (msg) => {
+        
+    }
+    
+    logGeoLocation() {
+        const geoInfo = new GeolocationInfo();
+        geoInfo.getFormattedInfo().then(info => errorManager.log(1013, info));
+    }
+
+    update() {
+
+        let section = "content";
+        if (this.jsonData.section.includes("yoga")) {
+            section = "Yoga";
+        } else if (this.jsonData.section.includes("hindustani")) {
+            section = "Raga";
+        } else if (this.jsonData.section.includes("racing")) {
+            section = "Racing";
+        } else if (this.jsonData.section.includes("winter_sports")) {
+            section = "Winter Sports";
+        } else if (this.jsonData.section.includes("general_machines")) {
+            section = "General Machines";
+        } else if (this.jsonData.section.includes("industrial_machines")) {
+            section = "Industrial Machines";
+        } else if (this.jsonData.section.includes("oscar_nominated_movies")) {
+            section = "Oscar Nominated";
+        } else if (this.jsonData.section.includes("grammy_songs")) {
+            section = "Grammy";
+        } else if (this.jsonData.section.includes("astronomy")) {
+            section = "Astronomy";
+        } else if (this.jsonData.section.includes("golf")) {
+            section = "Golf";
+        } else if (this.jsonData.section.includes("stocks")) {
+            section = "Stocks";
+        } else if (this.jsonData.section.includes("mutual_funds")) {
+            section = "Mutual Funds";
+        } else if (this.jsonData.section.includes("economics")) {
+            section = "Economics";
+        } else if (this.jsonData.section.includes("nutrition")) {
+            section = "Nutrition";
+        } else if (this.jsonData.section.includes("medical_care")) {
+            section = "Medical Care";
+        } else if (this.jsonData.section.includes("painting")) {
+            section = "Painting";
+        } else if (this.jsonData.section.includes("physics")) {
+            section = "Physics";
+        } else if (this.jsonData.section.includes("chemistry")) {
+            section = "Chemistry";
+        } else if (this.jsonData.section.includes("biology")) {
+            section = "Biology";
+        } else if (this.jsonData.section.includes("computer_science")) {
+            section = "Computer Science";
+        } else if (this.jsonData.section.includes("electronics")) {
+            section = "Electronics";
+        } else if (this.jsonData.section.includes("geography")) {
+            section = "Geography";
+        } else if (this.jsonData.section.includes("political_science")) {
+            section = "Political Science";
+        } else if (this.jsonData.section.includes("authors")) {
+            section = "Authors";
+        } else if (this.jsonData.section.includes("internal")) {
+            section = "Body";
+        }
+
+        this.topicLabelName.textContent = section;
+
+        this.topicLabel.innerHTML = this.jsonData.section + " : " + this.jsonData.topic;
+        this.viewArea_1.innerHTML = this.jsonData.content_response.replace(/\n/g, '<br>');
+
+        if (this.jsonData.youtube_response.length) {
+            this.youtubeMgr.showByUrl(this.jsonData.youtube_response[0]);
+        }
+    }
+}
 

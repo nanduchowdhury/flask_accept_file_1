@@ -1,6 +1,111 @@
 "use strict";
 
-class BasicInitializer {
+class RootInitializer {
+
+    constructor() {
+
+        this.clientId = '';
+        this.client_uuid = '';
+    }
+
+    getClientId() {    
+        return this.clientId;
+    }
+
+    setClient_UUID(uuid) {
+        this.client_uuid = uuid;
+    }
+
+    getClient_UUID() {    
+        return this.client_uuid;
+    }
+
+    getFormattedTimestamp() {
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        const now = new Date();
+    
+        const day = String(now.getDate()).padStart(2, '0');
+        const month = months[now.getMonth()];
+        const year = now.getFullYear();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+    
+        return `${day}${month}${year}-${hours}:${minutes}:${seconds}`;
+    }
+
+    makeServerRequest(requestRoute, data, lamdaOnServerRequestSuccess, lamdaOnServerRequestFailure) {
+        fetch(requestRoute, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(data => {
+                    throw new Error(data.error);
+                });
+            }
+            return response.json();
+        })
+        .then(data => {
+            lamdaOnServerRequestSuccess(data);
+        })
+        .catch(error => {
+            let message = error.message;
+
+            if (error.message.includes('<html')) {
+                errorManager.showError(2043);
+                message = '';
+            } else if (error.message.includes('Failed to fetch')) {
+                errorManager.showError(2043);
+                message = '';
+            }
+            lamdaOnServerRequestFailure(message);
+        });
+    }
+}
+
+class ContentInitializer extends RootInitializer {
+
+    constructor() {
+        super();
+
+        this.clientId = 'client-' + this.getFormattedTimestamp();
+        this.client_uuid = '';
+
+        const data = {
+            client_uuid: this.getClient_UUID(),
+            clientId: this.getClientId(),
+            additionalData: {
+                someKey: "someValue"
+            }
+        };
+    
+        this.makeServerRequest('/content_init', data, 
+            this.lamdaOnContentInitRequestSuccess, this.lamdaOnContentInitRequestFailure);
+    
+    }
+
+    lamdaOnContentInitRequestSuccess = (data) => {
+        this.setClient_UUID(data.client_uuid);
+        console.log(data.client_uuid);
+        if ( !this.getClient_UUID() ) {
+            errorManager.showError(2044);
+        }
+    }
+
+    lamdaOnContentInitRequestFailure = (msg) => {
+        if ( msg ) {
+            errorManager.showError(1048, msg);
+        }
+    }
+    
+}
+
+class BasicInitializer extends RootInitializer{
 
     static LEFT_MOUSE_BUTTON = 0;
     static ACCEPTABLE_REGION_SIZE = 10;
@@ -18,6 +123,9 @@ class BasicInitializer {
     static HINID_BENGALI_TEXT_FONT = 'Courier New';
 
     constructor() {
+
+        super();
+
         this.clientId = 'client-' + this.getFormattedTimestamp();
         this.client_uuid = '';
 
@@ -35,20 +143,6 @@ class BasicInitializer {
         const confirmationMessage = 'Are you sure you want to leave this page? Current learning session will be lost.';
         event.returnValue = confirmationMessage; // Standard
         return confirmationMessage; // For older browsers
-    }
-
-    getFormattedTimestamp() {
-        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        const now = new Date();
-    
-        const day = String(now.getDate()).padStart(2, '0');
-        const month = months[now.getMonth()];
-        const year = now.getFullYear();
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        const seconds = String(now.getSeconds()).padStart(2, '0');
-    
-        return `${day}${month}${year}-${hours}:${minutes}:${seconds}`;
     }
 
     /******************************************************************
@@ -193,18 +287,6 @@ class BasicInitializer {
         }
     }
 
-    getClientId() {    
-        return this.clientId;
-    }
-
-    setClient_UUID(uuid) {
-        this.client_uuid = uuid;
-    }
-
-    getClient_UUID() {    
-        return this.client_uuid;
-    }
-
     setMainContentSignedURL(signed_main_content_url) {
         this.signed_main_content_url = signed_main_content_url;
     }
@@ -301,42 +383,5 @@ class BasicInitializer {
 
         return {left, top, right, bottom};
     }
-
-
-    makeServerRequest(requestRoute, data, lamdaOnServerRequestSuccess, lamdaOnServerRequestFailure) {
-        fetch(requestRoute, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => {
-            if (!response.ok) {
-                return response.json().then(data => {
-                    throw new Error(data.error);
-                });
-            }
-            return response.json();
-        })
-        .then(data => {
-            lamdaOnServerRequestSuccess(data);
-        })
-        .catch(error => {
-            let message = error.message;
-
-            if (error.message.includes('<html')) {
-                errorManager.showError(2043);
-                message = '';
-            } else if (error.message.includes('Failed to fetch')) {
-                errorManager.showError(2043);
-                message = '';
-            }
-            lamdaOnServerRequestFailure(message);
-        });
-    }
-
-
-
 
 }
