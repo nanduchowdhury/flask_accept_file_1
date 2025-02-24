@@ -121,8 +121,15 @@ class ScholarKM(Flask):
 
         current_time = datetime.now().strftime('%Y_%m_%d-%H_%M_%S')
 
+        server_log_file = ''
+        if os.getenv('RUN_SERVER_IN_LOCAL_MACHINE'):
+            server_log_file = f'server_logs/server_non_production.log'
+        else:
+            server_log_file = f'server_logs/server_production.log'
+
+
         self.error_manager = ErrorManager(self.client_ip, self.client_uuid, 'static/errors.txt', 
-                    "kupmanduk-bucket", f"server_logs/server_log_{current_time}.txt")
+                    "kupmanduk-bucket", server_log_file)
 
         self.sess = BaseClientManager(self.error_manager, self.client_folder)
         self.gemini_access = GeminiAccess(self.sess, self.error_manager)
@@ -238,7 +245,7 @@ class ScholarKM(Flask):
 
     def home_km_index(self):
 
-        self.error_manager.show_message(2067)
+        self.error_manager.show_page_invoke_message(f"home-km")
 
         return render_template('home/index.html')
 
@@ -248,7 +255,7 @@ class ScholarKM(Flask):
         youtube_response_list = obj.generate_youtube_response(topic)
         content_response = obj.get_content_for_topic(topic)
 
-        self.error_manager.show_message(2066, section, topic)
+        self.error_manager.show_page_invoke_message(f"content-km-{section}")
 
         json_data = {
             "section": section,
@@ -638,7 +645,7 @@ class ScholarKM(Flask):
     #
     ##################################################
     def start_all_content_creator_threads(self):
-        if os.getenv('GENERATE_CONTENT_THREAD'):
+        if os.getenv('RUN_SERVER_IN_LOCAL_MACHINE'):
             if constants.is_first_gunicorn_worker():
 
                 self.content_creator_task("geography")

@@ -144,5 +144,4 @@
 2064 : Translating to %s.
 
 2065 : Basic-init done for content-km client UUID - %s
-2066 : Content client invoked from home-page for section %s and topic %s.
-2067 : Invoked home-page.
+

@@ -7,7 +7,7 @@ export GOOGLE_APPLICATION_CREDENTIALS="kupmanduk_GCS_signed_URL_key.json"
 
 export GOOGLE_CSE_ID="86bcdaa3e3cf148e8"
 
-export GENERATE_CONTENT_THREAD=t
+export RUN_SERVER_IN_LOCAL_MACHINE=t
 
 gunicorn -w 4 --timeout 300 -k gevent flask_file_accept:app
 

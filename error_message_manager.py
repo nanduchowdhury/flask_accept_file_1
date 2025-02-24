@@ -1,3 +1,4 @@
+import os
 import logging
 import re
 from datetime import datetime
@@ -42,7 +43,7 @@ class ErrorManager:
                     error_message = match.group(2)
                     self.error_map[error_code] = error_message
 
-    def show_message(self, code, *args):
+    def get_message_for_code_and_args(self, code, *args):
         """
         Retrieves the error message for the given code, replaces %s placeholders,
         and automatically prints/logs the full message with the error code.
@@ -57,10 +58,17 @@ class ErrorManager:
             except TypeError:
                 return f"Error message for code {code} expects different number of arguments."
 
+        return message
+
+    def show_message(self, code, *args):
+
+        message = self.get_message_for_code_and_args(code, args)
+
         current_time = datetime.now().strftime('%Y_%m_%d-%H_%M_%S')
+        pid = os.getpid()
 
         # Complete message with error code
-        full_msg = f"MSG-{code}: {current_time} IP {self.client_ip} UUID {self.client_uuid} - {message}"
+        full_msg = f"MSG-{code}: ({current_time}) IP ({self.client_ip}) UUID ({self.client_uuid}) PID ({pid}) - {message}"
 
         # Print the message to the console
         print(full_msg)
@@ -68,3 +76,18 @@ class ErrorManager:
         self.gcs_manager.append_to_text_file(self.gcs_log_file_path, full_msg)
 
         return message
+
+    def show_page_invoke_message(self, page_name):
+
+        current_time = datetime.now().strftime('%Y_%m_%d-%H_%M_%S')
+        pid = os.getpid()
+
+        # Complete message with error code
+        full_msg = f"MSG: ({current_time}) PID ({pid}) - Invoked page : {page_name}"
+
+        # Print the message to the console
+        print(full_msg)
+
+        self.gcs_manager.append_to_text_file(self.gcs_log_file_path, full_msg)
+
+

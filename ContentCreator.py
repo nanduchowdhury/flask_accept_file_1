@@ -55,8 +55,6 @@ class ContentCreatorTask(TaskBase):
     def run(self):
         obj = ContentCreatorBase(self.section, self.gemini_access, self.error_manager)
 
-        print(f"Generating content for section {self.section}")
-
         obj.generate_all_contents()
         obj.finish()
 
@@ -1999,6 +1997,7 @@ class ContentCreatorBase:
         if not content:
             content = self.generate_content_implementation(topic)
             self.json_store.save_key(topic, content)
+            print(f"Generated content for section {self.section} and topic {topic}")
 
     # The topic may have complex set of items seperated by 
     # commas - such as in 'authors'
@@ -2014,7 +2013,6 @@ class ContentCreatorBase:
         topics = self.topic_list[self.section]
         for t in topics:
             t = self.normalize_topic(t)
-            print(f"Generating content for topic {t}")
             self.generate_content(t)
 
     def generate_content_implementation(self, topic):
