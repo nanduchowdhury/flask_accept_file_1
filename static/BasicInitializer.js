@@ -408,8 +408,8 @@ class ShowTips {
   
       if (this.element) {
         const rect = this.element.getBoundingClientRect();
-        this.tipElement.style.top = `${rect.top + window.scrollY - this.tipElement.offsetHeight + 25}px`;
-        this.tipElement.style.left = `${rect.left + window.scrollX}px`;
+        this.tipElement.style.top = `${rect.top + window.scrollY - this.tipElement.offsetHeight + 40}px`;
+        this.tipElement.style.left = `${rect.left + window.scrollX - 60}px`;
       } else {
         this.tipElement.style.top = `${window.innerHeight / 2 - this.tipElement.offsetHeight / 2}px`;
         this.tipElement.style.left = `${window.innerWidth / 2 - this.tipElement.offsetWidth / 2}px`;
