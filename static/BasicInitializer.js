@@ -385,3 +385,39 @@ class BasicInitializer extends RootInitializer{
     }
 
 }
+
+class ShowTips {
+    constructor(elementId) {
+      this.element = elementId ? document.getElementById(elementId) : null;
+      this.tipElement = document.createElement("div");
+      this.tipElement.style.position = "absolute";
+      this.tipElement.style.backgroundColor = "yellow";
+      this.tipElement.style.padding = "5px";
+      this.tipElement.style.border = "1px solid black";
+      this.tipElement.style.borderRadius = "5px";
+      this.tipElement.style.display = "none";
+      this.tipElement.style.zIndex = "1000";
+      document.body.appendChild(this.tipElement);
+
+      this.disappearanceTime = 15000;
+    }
+  
+    show(text) {
+      this.tipElement.textContent = text;
+      this.tipElement.style.display = "block";
+  
+      if (this.element) {
+        const rect = this.element.getBoundingClientRect();
+        this.tipElement.style.top = `${rect.top + window.scrollY - this.tipElement.offsetHeight + 25}px`;
+        this.tipElement.style.left = `${rect.left + window.scrollX}px`;
+      } else {
+        this.tipElement.style.top = `${window.innerHeight / 2 - this.tipElement.offsetHeight / 2}px`;
+        this.tipElement.style.left = `${window.innerWidth / 2 - this.tipElement.offsetWidth / 2}px`;
+      }
+  
+      setTimeout(() => {
+        this.tipElement.style.display = "none";
+      }, this.disappearanceTime);
+    }
+  }
+

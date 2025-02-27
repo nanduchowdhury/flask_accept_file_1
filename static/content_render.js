@@ -335,6 +335,9 @@ class ContentRender {
         this.update();
         this.logGeoLocation();
 
+        this.showTips = new ShowTips('learnMoreButton');
+        this.showTips.show("click here to learn more");
+
         // errorManager.log(2060, this.jsonData.section, this.jsonData.topic);
     }
 
