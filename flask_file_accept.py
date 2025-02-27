@@ -94,6 +94,11 @@ class ScholarKM(Flask):
         self.route('/political_science_km')(self.political_science_km_index)
         self.route('/authors_km')(self.authors_km_index)
         self.route('/economics_km')(self.economics_km_index)
+        self.route('/cricket_km')(self.cricket_km_index)
+        self.route('/career_km')(self.career_km_index)
+        self.route('/student_tips_km')(self.student_tips_km_index)
+        self.route('/philosophy_km')(self.philosophy_km_index)
+        self.route('/photography_km')(self.photography_km_index)
 
         self.route('/content_init', methods=['POST'])(self.content_init)
         self.route('/content_learn_more', methods=['POST'])(self.content_learn_more)
@@ -369,6 +374,21 @@ class ScholarKM(Flask):
 
     def nutrition_km_index(self):
         return self.content_creator_index("nutrition")
+
+    def cricket_km_index(self):
+        return self.content_creator_index("cricket")
+
+    def career_km_index(self):
+        return self.content_creator_index("career")
+
+    def student_tips_km_index(self):
+        return self.content_creator_index("student_tips")
+
+    def philosophy_km_index(self):
+        return self.content_creator_index("philosophy")
+
+    def photography_km_index(self):
+        return self.content_creator_index("photography")
 
     def content_triple_dot_action_km(self):
         data = request.json
@@ -676,6 +696,12 @@ class ScholarKM(Flask):
                 self.content_creator_task("electronics")
                 
                 self.content_creator_task("political_science")
+
+                self.content_creator_task("cricket")
+                self.content_creator_task("career")
+                self.content_creator_task("student_tips")
+                self.content_creator_task("philosophy")
+                self.content_creator_task("photography")
 
 
     def content_creator_task(self, section):

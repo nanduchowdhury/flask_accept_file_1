@@ -385,58 +385,43 @@ class ContentRender {
 
     update() {
 
-        let section = "content";
-        if (this.jsonData.section.includes("yoga")) {
-            section = "Yoga";
-        } else if (this.jsonData.section.includes("hindustani")) {
-            section = "Raga";
-        } else if (this.jsonData.section.includes("racing")) {
-            section = "Racing";
-        } else if (this.jsonData.section.includes("winter_sports")) {
-            section = "Winter Sports";
-        } else if (this.jsonData.section.includes("general_machines")) {
-            section = "General Machines";
-        } else if (this.jsonData.section.includes("industrial_machines")) {
-            section = "Industrial Machines";
-        } else if (this.jsonData.section.includes("oscar_nominated_movies")) {
-            section = "Oscar Nominated";
-        } else if (this.jsonData.section.includes("grammy_songs")) {
-            section = "Grammy";
-        } else if (this.jsonData.section.includes("astronomy")) {
-            section = "Astronomy";
-        } else if (this.jsonData.section.includes("golf")) {
-            section = "Golf";
-        } else if (this.jsonData.section.includes("stocks")) {
-            section = "Stocks";
-        } else if (this.jsonData.section.includes("mutual_funds")) {
-            section = "Mutual Funds";
-        } else if (this.jsonData.section.includes("economics")) {
-            section = "Economics";
-        } else if (this.jsonData.section.includes("nutrition")) {
-            section = "Nutrition";
-        } else if (this.jsonData.section.includes("medical_care")) {
-            section = "Medical Care";
-        } else if (this.jsonData.section.includes("painting")) {
-            section = "Painting";
-        } else if (this.jsonData.section.includes("physics")) {
-            section = "Physics";
-        } else if (this.jsonData.section.includes("chemistry")) {
-            section = "Chemistry";
-        } else if (this.jsonData.section.includes("biology")) {
-            section = "Biology";
-        } else if (this.jsonData.section.includes("computer_science")) {
-            section = "Computer Science";
-        } else if (this.jsonData.section.includes("electronics")) {
-            section = "Electronics";
-        } else if (this.jsonData.section.includes("geography")) {
-            section = "Geography";
-        } else if (this.jsonData.section.includes("political_science")) {
-            section = "Political Science";
-        } else if (this.jsonData.section.includes("authors")) {
-            section = "Authors";
-        } else if (this.jsonData.section.includes("internal")) {
-            section = "Body";
-        }
+        const sectionMap = {
+            yoga: "Yoga",
+            hindustani: "Raga",
+            racing: "Racing",
+            winter_sports: "Winter Sports",
+            general_machines: "General Machines",
+            industrial_machines: "Industrial Machines",
+            oscar_nominated_movies: "Oscar Nominated",
+            grammy_songs: "Grammy",
+            astronomy: "Astronomy",
+            golf: "Golf",
+            stocks: "Stocks",
+            mutual_funds: "Mutual Funds",
+            economics: "Economics",
+            nutrition: "Nutrition",
+            medical_care: "Medical Care",
+            painting: "Painting",
+            cricket: "Cricket",
+            career: "Career",
+            student_tips: "Student Tips",
+            philosophy: "Philosophy",
+            photography: "Photography",
+            physics: "Physics",
+            chemistry: "Chemistry",
+            biology: "Biology",
+            computer_science: "Computer Science",
+            electronics: "Electronics",
+            geography: "Geography",
+            political_science: "Political Science",
+            authors: "Authors",
+            internal: "Body"
+        };
+        
+        let section = Object.keys(sectionMap).find(key => this.jsonData.section.includes(key)) 
+                      ? sectionMap[Object.keys(sectionMap).find(key => this.jsonData.section.includes(key))]
+                      : "content";
+        
 
         this.topicLabelName.textContent = section;
 
