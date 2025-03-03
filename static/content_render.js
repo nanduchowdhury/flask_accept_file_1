@@ -429,7 +429,60 @@ class ContentRender {
         this.topicLabelName.textContent = section;
 
         this.topicLabel.innerHTML = this.jsonData.section + " : " + this.jsonData.topic;
-        this.viewArea_1.innerHTML = this.jsonData.content_response.replace(/\n/g, '<br>');
+
+        // Preprocess content to remove markdown-style delimiters
+        let htmlContent = this.jsonData.content_response.replace(/^```html\n|```$/g, '').trim();
+
+        // Clear previous content
+        this.viewArea_1.replaceChildren();
+
+        // Create the iframe element
+        let iframe = document.createElement("iframe");
+        iframe.id = "myIframe";
+        iframe.frameBorder = "0";
+
+        // Set iframe dimensions to occupy the viewArea
+        iframe.style.width = "100%";
+        iframe.style.overflow = "hidden";  // No iframe scrollbars
+        iframe.scrolling = "no";           // Force disable iframe scrollbar
+
+        // Apply overflow to viewArea to allow scrolling
+        this.viewArea_1.style.overflow = "auto";
+        this.viewArea_1.style.padding = "0";
+        this.viewArea_1.style.margin = "0";
+
+        // Append the iframe to viewArea
+        this.viewArea_1.appendChild(iframe);
+
+        // Write content into iframe
+        iframe.onload = () => {
+            let doc = iframe.contentDocument || iframe.contentWindow.document;
+            doc.open();
+            doc.write(`<style>
+                        html, body { margin: 0; padding: 0; overflow: hidden; }
+                        body { width: 100%; }
+                    </style>` + htmlContent);
+            doc.close();
+
+            // Adjust iframe height to content height
+            setTimeout(() => {
+                let body = doc.body,
+                    html = doc.documentElement;
+                
+                let height = Math.max(body.scrollHeight, html.scrollHeight);
+                iframe.style.height = height + "px";
+            }, 100); // Give content time to render
+        };
+
+        // Use srcdoc if supported
+        if ('srcdoc' in iframe) {
+            iframe.srcdoc = `<style>
+                                html, body { margin: 0; padding: 0; overflow: hidden; }
+                                body { width: 100%; }
+                            </style>` + htmlContent;
+
+            iframe.onload();
+        }
 
         if (this.jsonData.youtube_response.length) {
             this.youtubeMgr.showByUrl(this.jsonData.youtube_response[0]);
