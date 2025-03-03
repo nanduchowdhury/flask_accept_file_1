@@ -388,16 +388,16 @@ class BasicInitializer extends RootInitializer{
 
 class ShowTips {
     constructor(elementId) {
-      this.element = elementId ? document.getElementById(elementId) : null;
-      this.tipElement = document.createElement("div");
-      this.tipElement.style.position = "absolute";
-      this.tipElement.style.backgroundColor = "yellow";
-      this.tipElement.style.padding = "5px";
-      this.tipElement.style.border = "1px solid black";
-      this.tipElement.style.borderRadius = "5px";
-      this.tipElement.style.display = "none";
-      this.tipElement.style.zIndex = "1000";
-      document.body.appendChild(this.tipElement);
+        this.element = elementId ? document.getElementById(elementId) : null;
+        this.tipElement = document.createElement("div");
+        this.tipElement.style.position = "absolute";
+        this.tipElement.style.backgroundColor = "rgba(255, 255, 0, 0.6)"; // Yellow with 70% opacity
+        this.tipElement.style.padding = "5px";
+        this.tipElement.style.border = "1px solid black";
+        this.tipElement.style.borderRadius = "5px";
+        this.tipElement.style.display = "none";
+        this.tipElement.style.zIndex = "1000";
+        document.body.appendChild(this.tipElement);
 
       this.disappearanceTime = 15000;
     }
@@ -418,6 +418,63 @@ class ShowTips {
       setTimeout(() => {
         this.tipElement.style.display = "none";
       }, this.disappearanceTime);
+    }
+  }
+
+  class HtmlIframeRender {
+    constructor() {
+    }
+
+    render(viewArea, htmlContent) {
+        // Clear previous content
+        viewArea.replaceChildren();
+
+        // Create the iframe element
+        let iframe = document.createElement("iframe");
+        iframe.id = "myIframe";
+        iframe.frameBorder = "0";
+        iframe.style.width = "100%";
+        iframe.scrolling = "no"; // No iframe scrollbars
+        iframe.style.overflow = "hidden"; 
+
+        // Append the iframe to viewArea
+        viewArea.appendChild(iframe);
+
+        // Write content into iframe with custom styles
+        iframe.onload = () => {
+            let doc = iframe.contentDocument || iframe.contentWindow.document;
+            doc.open();
+            doc.write(`
+                <style>
+                    html, body { margin: 0; padding: 0; overflow: hidden; width: 100%; }
+                    h1 { background-color: lightblue; padding: 10px; color: navy; }
+                    h2 { background-color: lightgreen; padding: 10px; color: darkgreen; }
+                </style>
+                ${htmlContent}
+            `);
+            doc.close();
+
+            // Adjust iframe height dynamically to fit content
+            setTimeout(() => {
+                let body = doc.body,
+                    html = doc.documentElement;
+                
+                let height = Math.max(body.scrollHeight, html.scrollHeight);
+                iframe.style.height = height + "px";
+            }, 100); // Small delay for content rendering
+        };
+
+        if ('srcdoc' in iframe) {
+            iframe.srcdoc = `
+                <style>
+                    html, body { margin: 0; padding: 0; overflow: hidden; width: 100%; }
+                    h1 { background-color: lightblue; padding: 10px; color: navy; }
+                    h2 { background-color: lightgreen; padding: 10px; color: darkgreen; }
+                </style>
+                ${htmlContent}
+            `;
+            iframe.onload();
+        }
     }
   }
 
