@@ -338,8 +338,11 @@ class ContentRender {
         this.update();
         this.logGeoLocation();
 
-        this.showTips = new ShowTips('learnMoreButton');
-        this.showTips.show("click here to learn more");
+        this.showTipsLearnMore = new ShowTips('learnMoreButton');
+        this.showTipsLearnMore.show("Click here to learn more");
+
+        this.showTipsJoinFB = new ShowTips('');
+        this.showTipsJoinFB.show("If you like the portal,\nplease join the Facebook group below.", 20);
 
         // errorManager.log(2060, this.jsonData.section, this.jsonData.topic);
     }

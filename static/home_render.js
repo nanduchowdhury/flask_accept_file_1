@@ -116,7 +116,7 @@ class HomeRender {
         setInterval(this.refreshImages.bind(this), 8000); // 8 seconds
 
         this.showTips = new ShowTips('');
-        this.showTips.show("click any topic here");
+        this.showTips.show("Click any topic here");
     }
 
     refreshImages() {
