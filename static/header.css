@@ -49,7 +49,7 @@
 
 .view-area-container {
     display: flex;
-    gap: 20px; /* Horizontal distance between the two areas */
+    gap: 5px; /* Horizontal distance between the two areas */
     margin-left: 5px; /* Adds left margin to the whole container */
     margin-right: 5px; /* Adds right margin to the whole container */
 }
@@ -58,12 +58,58 @@
     background-color: #f9f9f9;
     overflow: auto;
     border: 1px solid #ccc;
-    padding: 5px;
+    padding: 2px;
     box-sizing: border-box;
     white-space: pre-wrap;
     font-family: 'Patrick Hand'; /* Handwritten font */
     font-weight: bold; /* Set font weight to normal */
     font-size: 14px;
+}
+
+.social-area {
+    margin-top: 5px;
+    background-color: #f9f9f9;
+    overflow: auto;
+    border: 1px solid #ccc;
+    padding: 2px;
+    box-sizing: border-box;
+    white-space: pre-wrap;
+    font-family: 'Patrick Hand';
+    font-size: 14px;
+}
+
+#SocialArea {
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Social Media Icons */
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px; /* Set consistent size for icons */
+    height: 40px;
+    border-radius: 50%; /* Optional: round icons */
+    font-size: 20px; /* Ensure all icons have the same font size */
+    color: #333; /* Default color */
+    background-color: #f0f0f0; /* Optional: background color */
+    text-decoration: none;
+}
+
+.social-icon:hover {
+    color: #0077b5; /* LinkedIn color */
+}
+
+.social-icon:nth-child(1):hover {
+    color: #1DA1F2; /* Twitter color */
 }
 
 /* Desktop layout */
@@ -83,7 +129,7 @@
 @media (max-width: 767px) {
     .view-area-container {
         flex-direction: column; /* Stack the view areas vertically */
-        height: 100vh; /* Full viewport height */
+        height: 70vh; /* Full viewport height */
     }
 
     #ViewArea_1 {
@@ -103,7 +149,7 @@
     cursor: pointer;
     font-size: 24px;
     display: inline-block;
-    padding: 5px;
+    padding: 2px;
 }
 
 /* Desktop View: Show Vertical Triple Dots */
@@ -146,7 +192,7 @@
 
 .topic-label-container {
     text-align: center; /* Centers the text horizontally */
-    margin-top: 5px;   /* Adds space above the text label */
+    margin-top: 2px;   /* Adds space above the text label */
 }
 
 .topic-label {
@@ -156,7 +202,7 @@
     color: #333;        /* Optional: Set text color */
     display: inline-flex; /* Use flexbox for vertical alignment */
     align-items: center; /* Vertically center text */
-    min-height: 30px;    /* Ensure the label has at least 50px height */
+    min-height: 10px;    /* Ensure the label has at least 50px height */
     padding: 0 5px;     /* Adds horizontal padding for better spacing */
     white-space: normal; /* Allows text wrapping to new lines */
 }
@@ -175,7 +221,7 @@
     width: 100%;
     height: 1px; /* Thickness of the separator */
     background-color: #ccc; /* Color of the separator */
-    margin: 10px 0; /* Space around the separator */
+    margin: 4px 0; /* Space around the separator */
 }
 
 .horizontal_space_separator {
