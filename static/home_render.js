@@ -115,8 +115,11 @@ class HomeRender {
         // Set an interval to refresh images every 8 seconds
         setInterval(this.refreshImages.bind(this), 8000); // 8 seconds
 
-        this.showTips = new ShowTips('');
-        this.showTips.show("Click any topic here");
+        this.showTipsWhereToStart = new ShowTips('');
+        this.showTipsWhereToStart.show("Click any topic here");
+
+        this.showTipsJoinFB = new ShowTips('');
+        this.showTipsJoinFB.show("If you like the portal,\nplease join the Facebook group below.", 40);
     }
 
     refreshImages() {
