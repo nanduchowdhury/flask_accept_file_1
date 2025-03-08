@@ -118,8 +118,8 @@ class HomeRender {
         this.showTipsWhereToStart = new ShowTips('');
         this.showTipsWhereToStart.show("Click any topic here");
 
-        this.showTipsJoinFB = new ShowTips('');
-        this.showTipsJoinFB.show("If you like the portal,\nplease join the Facebook group below.", 40);
+        // this.showTipsJoinFB = new ShowTips('');
+        // this.showTipsJoinFB.show("If you like the portal,\nplease consider the Facebook page below.", 40);
     }
 
     refreshImages() {
