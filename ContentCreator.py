@@ -2457,7 +2457,7 @@ class ContentCreatorBase:
         self.gcs_manager.write_json(self.gcs_json_file, self.json_store.get_json_data())
 
     def generate_youtube_response(self, topic):
-        search_line = f"youtube {self.section} {topic}"
+        search_line = f"youtube {self.section} {topic} site:youtube.com/watch"
         search_line = search_line.replace('_', ' ')
         response = self.google_cse_access.search(search_line)
         return response
