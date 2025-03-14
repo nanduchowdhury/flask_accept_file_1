@@ -256,7 +256,9 @@ class ScholarKM(Flask):
 
     def content_creator_index(self, section):
         obj = ContentCreatorBase(section, self.gemini_access, self.error_manager)
-        topic = obj.get_random_topic()
+
+        alreadyDoneTopicList = []
+        [topic, alreadyDoneTopicList] = obj.get_random_topic(alreadyDoneTopicList)
         youtube_response_list = obj.generate_youtube_response(topic)
         content_response = obj.get_content_for_topic(topic)
 
@@ -797,15 +799,20 @@ class ScholarKM(Flask):
         data = request.get_json()
 
         section = data.get('section', '')
+        alreadyDoneTopicList = data.get('alreadyDoneTopicList', '')
 
         obj = ContentCreatorBase(section, self.gemini_access, self.error_manager)
-        topic = obj.get_random_topic()
+        [topic, alreadyDoneTopicList] = obj.get_random_topic(alreadyDoneTopicList)
+
+        # print(f"alreadyDoneList : {alreadyDoneTopicList}")
+
         youtube_response_list = obj.generate_youtube_response(topic)
         content_response = obj.get_content_for_topic(topic)
 
         json_data = {
             "section": section,
-            "topic" : topic,
+            "topic": topic,
+            "alreadyDoneTopicList": alreadyDoneTopicList,
             "content_response": content_response,
             "youtube_response": youtube_response_list
         }

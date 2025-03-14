@@ -2417,9 +2417,23 @@ class ContentCreatorBase:
             d = self.gcs_manager.read_json(self.gcs_json_file)
             self.json_store.update_from_json_data(d)
 
-    def get_random_topic(self):
+    def get_random_topic(self, alreadyDoneTopicList):
         topics = self.topic_list[self.section]
-        return self.normalize_topic(random.choice(topics))
+        
+        # If all topics are already done, clear the list
+        if set(alreadyDoneTopicList) >= set(topics):
+            alreadyDoneTopicList.clear()
+        
+        # Get remaining topics (those not in alreadyDoneTopicList)
+        remaining_topics = list(set(topics) - set(alreadyDoneTopicList))
+
+        # Pick a random topic from the remaining topics
+        new_topic = self.normalize_topic(random.choice(remaining_topics))
+
+        # Append to the already done list
+        alreadyDoneTopicList.append(new_topic)
+
+        return new_topic, alreadyDoneTopicList
 
     def get_content_for_topic(self, topic):
         content = self.json_store.read_key(topic)

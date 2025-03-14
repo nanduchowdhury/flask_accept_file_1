@@ -123,7 +123,10 @@ class TripleDot {
             menuItem.classList.add('menu-item');
             menuItem.innerText = item;
             menuItem.addEventListener('click', () => {
-                this.menu.style.display = 'none';
+                setTimeout(() => {
+                    this.menu.style.display = 'none';
+                }, 2000); // menu disappear after 2000ms = 2 seconds
+            
                 if (handlerObj) {
                     handlerObj.onSelected(item);
                 }
@@ -345,6 +348,8 @@ class ContentRender {
         this.showTipsJoinFB.show("If you like the portal,\nplease follow the social links below.", 20);
 
         // errorManager.log(2060, this.jsonData.section, this.jsonData.topic);
+
+        this.alreadyDoneTopicList = [];
     }
 
     createTripleDotMenu(JsonData) {
@@ -365,6 +370,7 @@ class ContentRender {
 
         const data = {
             section: this.jsonData.section,
+            alreadyDoneTopicList: this.alreadyDoneTopicList
         };
 
         basicInitializer.makeServerRequest('/content_learn_more', data, 
@@ -374,6 +380,9 @@ class ContentRender {
     lamdaOnBasicInitRequestSuccess = (data) => {
 
         this.jsonData = data;
+
+        this.alreadyDoneTopicList = this.jsonData.alreadyDoneTopicList;
+
         this.tripleDot.updateJsonData(this.jsonData);
 
         this.update();
