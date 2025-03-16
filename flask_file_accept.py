@@ -807,7 +807,8 @@ class ScholarKM(Flask):
         youtube_response_list = obj.generate_youtube_response(topic)
         content_response = obj.get_content_for_topic(topic)
 
-        print(f"Invoked Learn-More : {section}")
+        msg = f"Invoked Learn-More : {section}"
+        self.error_manager.show_any_message(msg)
 
         json_data = {
             "section": section,
