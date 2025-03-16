@@ -1,3 +1,5 @@
+from flask import request
+
 import os
 import logging
 import re
@@ -88,6 +90,28 @@ class ErrorManager:
         # Print the message to the console
         print(full_msg)
 
+        self.print_request_info()
+
         self.gcs_manager.append_to_text_file(self.gcs_log_file_path, full_msg)
 
 
+    def print_request_info(self):
+
+        print(f"\t request.headers:")
+        for key, value in request.headers.items():
+            print(f"\t\t{key}: {value}")
+
+        client_ip = request.remote_addr
+        print(f"\tClient IP: {client_ip}")
+
+        print(f"\tAccepted Content Types: {request.accept_mimetypes}")
+
+        print(f"\tPreferred Language: {request.accept_languages}")
+
+        print(f"\tConnection Type: {request.headers.get('Connection')}")
+
+        print(f"\tRequest Method: {request.method}")
+
+        user_agent = request.user_agent
+        print(f"\tUser-Agent: {user_agent}")
+        print(f"\tBrowser: {user_agent.browser}, Version: {user_agent.version}, Platform: {user_agent.platform}")

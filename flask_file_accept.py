@@ -804,10 +804,10 @@ class ScholarKM(Flask):
         obj = ContentCreatorBase(section, self.gemini_access, self.error_manager)
         [topic, alreadyDoneTopicList] = obj.get_random_topic(alreadyDoneTopicList)
 
-        # print(f"alreadyDoneList : {alreadyDoneTopicList}")
-
         youtube_response_list = obj.generate_youtube_response(topic)
         content_response = obj.get_content_for_topic(topic)
+
+        print(f"Invoked Learn-More : {section}")
 
         json_data = {
             "section": section,
