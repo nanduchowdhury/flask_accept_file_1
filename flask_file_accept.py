@@ -798,8 +798,9 @@ class ScholarKM(Flask):
     def user_exit(self):
         client_ip = request.remote_addr
         elapsed_time = request.form.get("elapsed_time", "0")
+        user_close_action = request.form.get("close_action_invoked", "unknown")
         
-        msg = f"User with IP {client_ip} closed the browser after {int(elapsed_time) / 1000:.2f} seconds."
+        msg = f"User with IP {client_ip} closed the browser after {int(elapsed_time) / 1000:.2f} seconds - action : {user_close_action}"
         self.error_manager.show_any_message(msg)
 
         return '', 204  # No content response

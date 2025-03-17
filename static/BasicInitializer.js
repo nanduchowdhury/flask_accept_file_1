@@ -486,17 +486,45 @@ class ShowTips {
     constructor() {
         this.startTime = Date.now();
 
+        // Store start time in sessionStorage to handle page reloads
+        if (!sessionStorage.getItem("startTime")) {
+            sessionStorage.setItem("startTime", this.startTime);
+        }
+
         this.ackServerBeforeExit();
     }
 
+    sendExitData(closeActionInvoked) {
+        let elapsedTime = Date.now() - sessionStorage.getItem("startTime");
+        let data = new URLSearchParams({ "elapsed_time": elapsedTime,
+                                        "close_action_invoked": closeActionInvoked
+         });
+
+        if (!navigator.sendBeacon("/user-exit", data)) {
+            fetch("/user-exit", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: data
+            });
+        }
+    }
+
     ackServerBeforeExit() {
-        window.addEventListener("beforeunload", () => {  // ✅ Use arrow function
-            let elapsedTime = Date.now() - this.startTime; // Correctly accesses instance variable
-            let data = new URLSearchParams();
-            data.append("elapsed_time", elapsedTime);
-        
-            navigator.sendBeacon("/user-exit", data);
+        // Handle normal page unload
+        window.addEventListener("beforeunload", () => this.sendExitData("tab-close"));
+
+        // Handle tab becoming inactive (user switches tabs or minimizes window)
+        document.addEventListener("visibilitychange", () => {
+            if (document.hidden) this.sendExitData("tab_switch_or_minimize");
         });
+
+        // Handle mobile/tab freezing or app switch
+        window.addEventListener("pagehide", () => this.sendExitData("mobile_app_switch_freeze"));
+
+        // Handle if running inside an iframe
+        if (window !== window.top) {
+            window.addEventListener("unload", () => this.sendExitData("run_in_iframe"));
+        }
     }
 }
 
