@@ -495,10 +495,11 @@ class ShowTips {
     }
 
     sendExitData(closeActionInvoked) {
-        let elapsedTime = Date.now() - sessionStorage.getItem("startTime");
+        let elapsedTime = Date.now() - Number(sessionStorage.getItem("startTime")); // Convert to number
+
         let data = new URLSearchParams({ "elapsed_time": elapsedTime,
-                                        "close_action_invoked": closeActionInvoked
-         });
+            "close_action_invoked": closeActionInvoked
+});
 
         if (!navigator.sendBeacon("/user-exit", data)) {
             fetch("/user-exit", {
