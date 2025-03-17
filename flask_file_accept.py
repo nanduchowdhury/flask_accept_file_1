@@ -104,6 +104,7 @@ class ScholarKM(Flask):
         self.route('/content_learn_more', methods=['POST'])(self.content_learn_more)
         self.route('/content_triple_dot_action_km', methods=['POST'])(self.content_triple_dot_action_km)
 
+        self.route('/user-exit', methods=['POST'])(self.user_exit)
 
         self.route('/basic_init', methods=['POST'])(self.basic_init)
         self.route('/ai_model_init', methods=['POST'])(self.ai_model_init)
@@ -793,6 +794,15 @@ class ScholarKM(Flask):
 
         self.error_manager.update_client_uuid(uuid)
         self.error_manager.update_client_ip(cip)
+
+    def user_exit(self):
+        client_ip = request.remote_addr
+        elapsed_time = request.form.get("elapsed_time", "0")
+        
+        msg = f"User with IP {client_ip} closed the browser after {int(elapsed_time) / 1000:.2f} seconds."
+        self.error_manager.show_any_message(msg)
+
+        return '', 204  # No content response
 
     def content_learn_more(self):
 

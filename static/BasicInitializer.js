@@ -482,3 +482,21 @@ class ShowTips {
     }
   }
 
+  class BrowserStartStop {
+    constructor() {
+        this.startTime = Date.now();
+
+        this.ackServerBeforeExit();
+    }
+
+    ackServerBeforeExit() {
+        window.addEventListener("beforeunload", () => {  // ✅ Use arrow function
+            let elapsedTime = Date.now() - this.startTime; // Correctly accesses instance variable
+            let data = new URLSearchParams();
+            data.append("elapsed_time", elapsedTime);
+        
+            navigator.sendBeacon("/user-exit", data);
+        });
+    }
+}
+

@@ -90,11 +90,11 @@ class ErrorManager:
         # Print the message to the console
         print(full_msg)
 
-        request_info = self.get_request_info()
-        print(request_info)
+        # request_info = self.get_request_info()
+        # print(request_info)
 
         self.gcs_manager.append_to_text_file(self.gcs_log_file_path, full_msg)
-        self.gcs_manager.append_to_text_file(self.gcs_log_file_path, request_info)
+        # self.gcs_manager.append_to_text_file(self.gcs_log_file_path, request_info)
 
     def show_any_message(self, message):
         self.gcs_manager.append_to_text_file(self.gcs_log_file_path, message)
