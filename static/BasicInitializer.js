@@ -388,42 +388,56 @@ class BasicInitializer extends RootInitializer{
 
 class ShowTips {
     constructor(elementId) {
-      this.element = elementId ? document.getElementById(elementId) : null;
-      this.tipElement = document.createElement("div");
-      this.tipElement.style.position = "absolute";
-      this.tipElement.style.backgroundColor = "rgba(255, 255, 0, 0.6)"; // Yellow with 70% opacity
-      this.tipElement.style.padding = "5px";
-      this.tipElement.style.border = "1px solid black";
-      this.tipElement.style.borderRadius = "5px";
-      this.tipElement.style.display = "none";
-      this.tipElement.style.zIndex = "1000";
-      this.tipElement.style.whiteSpace = "pre-wrap"; // Allow new lines
-      
-      document.body.appendChild(this.tipElement);
-  
-      this.disappearanceTime = 15000; // 15 seconds
+        this.element = elementId ? document.getElementById(elementId) : null;
+        this.tipElement = document.createElement("div");
+        this.tipElement.style.position = "absolute";
+        this.tipElement.style.backgroundColor = "rgba(255, 255, 0, 0.6)"; // Yellow with opacity
+        this.tipElement.style.padding = "5px";
+        this.tipElement.style.border = "1px solid black";
+        this.tipElement.style.borderRadius = "5px";
+        this.tipElement.style.display = "none";
+        this.tipElement.style.zIndex = "1000";
+        this.tipElement.style.whiteSpace = "pre-wrap"; // Allow new lines
+        
+        document.body.appendChild(this.tipElement);
+
+        this.disappearanceTime = 15000; // 15 seconds
+        this.blinkDuration = this.disappearanceTime; // Blink for the first 5 seconds
+        this.blinkInterval = null;
     }
-  
+
     show(text, afterSeconds = 0) {
-      setTimeout(() => {
-        this.tipElement.textContent = text;
-        this.tipElement.style.display = "block";
-  
-        if (this.element) {
-          const rect = this.element.getBoundingClientRect();
-          this.tipElement.style.top = `${rect.top + window.scrollY - this.tipElement.offsetHeight + 40}px`;
-          this.tipElement.style.left = `${rect.left + window.scrollX - 60}px`;
-        } else {
-          this.tipElement.style.top = `${window.innerHeight / 2 - this.tipElement.offsetHeight / 2}px`;
-          this.tipElement.style.left = `${window.innerWidth / 2 - this.tipElement.offsetWidth / 2}px`;
-        }
-  
         setTimeout(() => {
-          this.tipElement.style.display = "none";
-        }, this.disappearanceTime);
-      }, afterSeconds * 1000); // Convert seconds to milliseconds
+            this.tipElement.textContent = text;
+            this.tipElement.style.display = "block";
+            
+            if (this.element) {
+                const rect = this.element.getBoundingClientRect();
+                this.tipElement.style.top = `${rect.top + window.scrollY - this.tipElement.offsetHeight + 40}px`;
+                this.tipElement.style.left = `${rect.left + window.scrollX - 60}px`;
+            } else {
+                this.tipElement.style.top = `${window.innerHeight / 2 - this.tipElement.offsetHeight / 2}px`;
+                this.tipElement.style.left = `${window.innerWidth / 2 - this.tipElement.offsetWidth / 2}px`;
+            }
+            
+            let visible = true;
+            this.blinkInterval = setInterval(() => {
+                this.tipElement.style.visibility = visible ? "hidden" : "visible";
+                visible = !visible;
+            }, 500); // Blink every 500ms
+            
+            setTimeout(() => {
+                clearInterval(this.blinkInterval);
+                this.tipElement.style.visibility = "visible";
+                
+                setTimeout(() => {
+                    this.tipElement.style.display = "none";
+                }, this.disappearanceTime - this.blinkDuration);
+            }, this.blinkDuration);
+        }, afterSeconds * 1000); // Convert seconds to milliseconds
     }
-  }
+}
+
 
   class HtmlIframeRender {
     constructor() {
