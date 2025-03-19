@@ -72,3 +72,8 @@
 @keyframes blink {
     50% { border-color: transparent; }
 }
+
+iframe {
+    overflow: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+}
