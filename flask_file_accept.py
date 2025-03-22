@@ -348,23 +348,11 @@ class ScholarKM(Flask):
     def medical_care_km_index(self):
         return self.content_creator_index("medical_care")
 
-    def painting_km_index(self):
-        return self.content_creator_index("painting")
-
-    def physics_km_index(self):
-        return self.content_creator_index("physics")
-
-    def chemistry_km_index(self):
-        return self.content_creator_index("chemistry")
-
     def biology_km_index(self):
         return self.content_creator_index("biology")
 
     def computer_science_km_index(self):
         return self.content_creator_index("computer_science")
-
-    def electronics_km_index(self):
-        return self.content_creator_index("electronics")
 
     def geography_km_index(self):
         return self.content_creator_index("geography")

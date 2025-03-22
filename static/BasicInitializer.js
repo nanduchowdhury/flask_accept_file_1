@@ -719,20 +719,19 @@ class TripleDashMenuCreator {
         this.menu.addMenuItem("Science", "Physics", new SampleMenuItem("physics_km"));
         this.menu.addMenuItem("Science", "Chemistry", new SampleMenuItem("chemistry_km"));
         this.menu.addMenuItem("Science", "Biology", new SampleMenuItem("biology_km"));
-        this.menu.addMenuItem("Science", "Electronics", new SampleMenuItem("electronics_km"));
         this.menu.addMenuItem("Science", "Computer Science", new SampleMenuItem("computer_science_km"));
         this.menu.addMenuItem("Science", "Electronics", new SampleMenuItem("electronics_km"));
         this.menu.addMenuItem("Science", "Geography", new SampleMenuItem("geography_km"));
         this.menu.addMenuItem("Science", "Political Science", new SampleMenuItem("political_science_km"));
         this.menu.addMenuItem("Science", "Astronomy", new SampleMenuItem("astronomy_km"));
-        this.menu.addMenuItem("Science", "Indistrial Machines", new SampleMenuItem("indistrial_machines_km"));
+        this.menu.addMenuItem("Science", "Indistrial Machines", new SampleMenuItem("industrial_machines_km"));
         this.menu.addMenuItem("Science", "General Machines", new SampleMenuItem("general_machines_km"));
 
         this.menu.addMenuItem("", "Wellness", new SampleMenuItem());
         this.menu.addMenuItem("Wellness", "Nutrition", new SampleMenuItem("nutrition_km"));
         this.menu.addMenuItem("Wellness", "Yoga", new SampleMenuItem("yoga_km"));
         this.menu.addMenuItem("Wellness", "Medical Care", new SampleMenuItem("medical_care_km"));
-        this.menu.addMenuItem("Wellness", "Body", new SampleMenuItem("body_km"));
+        this.menu.addMenuItem("Wellness", "Body", new SampleMenuItem("internal_organ_km"));
 
         this.menu.addMenuItem("", "Sports", new SampleMenuItem());
         this.menu.addMenuItem("Sports", "Cricket", new SampleMenuItem("cricket_km"));
@@ -742,7 +741,7 @@ class TripleDashMenuCreator {
 
         this.menu.addMenuItem("", "Entertainment", new SampleMenuItem());
         this.menu.addMenuItem("Entertainment", "Oscar Movies", new SampleMenuItem("oscar_nominated_movies_km"));
-        this.menu.addMenuItem("Entertainment", "Grammy Music", new SampleMenuItem("grammy_km"));
+        this.menu.addMenuItem("Entertainment", "Grammy Music", new SampleMenuItem("grammy_songs_km"));
         this.menu.addMenuItem("Entertainment", "Author & Books", new SampleMenuItem("authors_km"));
         this.menu.addMenuItem("Entertainment", "Hindustani Classical", new SampleMenuItem("music_km"));
 
