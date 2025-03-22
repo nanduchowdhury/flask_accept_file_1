@@ -5,6 +5,8 @@ class HomeRender {
     constructor() {
         const gaTracker = new GoogleAnalytics();
         gaTracker.trackPageView();
+
+        const menuObj = new TripleDashMenuCreator("TripleDashMenuContainer");
     }
 
     showLinesFading(linesList, container) {

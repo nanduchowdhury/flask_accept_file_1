@@ -330,6 +330,8 @@ class ContentRender {
         const gaTracker = new GoogleAnalytics();
         gaTracker.trackPageView(this.jsonData.section);
 
+        const menuObj = new TripleDashMenuCreator("TripleDashMenuContainer");
+        
         this.learnMoreButton = document.getElementById("learnMoreButton");
         this.topicLabelName = document.getElementById("topicLabelName");
         this.topicLabel = document.getElementById('topic-label');

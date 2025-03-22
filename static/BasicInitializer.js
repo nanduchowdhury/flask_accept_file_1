@@ -585,5 +585,176 @@ class GoogleAnalytics {
     }
 }
 
+class TripleDashMenuItem {
+    doOnClick() {
+        throw new Error("doOnClick() must be implemented in a derived class");
+    }
+}
+
+class TripleDashMenu {
+    constructor(containerId) {
+        this.container = document.getElementById(containerId);
+        this.menuData = {};
+        this.timeoutId = null;
+        this.createMenu();
+    }
+
+    createMenu() {
+        this.menuButton = document.createElement("div");
+        this.menuButton.innerHTML = "≡"; // Triple dash menu icon
+        this.menuButton.style.cssText = `
+            position: absolute; top: 10px; right: 10px; 
+            font-size: 24px; cursor: pointer; 
+            background: white; padding: 5px; border-radius: 5px; 
+            z-index: 9999; /* Keeps it above all elements */
+        `;
+
+        this.menuContainer = document.createElement("ul");
+        this.menuContainer.style.cssText = `
+            display: none; position: absolute; top: 40px; right: 10px; 
+            background: white; border: 1px solid black; 
+            list-style: none; padding: 5px; min-width: 120px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); /* Adds visibility */
+            z-index: 9999; /* Ensures it's always on top */
+        `;
+
+        this.menuButton.addEventListener("mouseenter", () => this.showMenu());
+        this.menuContainer.addEventListener("mouseenter", () => this.resetTimeout());
+        this.menuContainer.addEventListener("mouseleave", () => this.startTimeout());
+
+        this.container.appendChild(this.menuButton);
+        this.container.appendChild(this.menuContainer);
+    }
+
+    showMenu() {
+        this.menuContainer.style.display = "block";
+        this.resetTimeout();
+    }
+
+    startTimeout() {
+        this.timeoutId = setTimeout(() => this.menuContainer.style.display = "none", 10000);
+    }
+
+    resetTimeout() {
+        if (this.timeoutId) clearTimeout(this.timeoutId);
+    }
+
+    addMenuItem(parentItemName, thisItemName, itemObj) {
+        if (!(itemObj instanceof TripleDashMenuItem)) {
+            throw new Error("itemObj must be an instance of TripleDashMenuItem");
+        }
+
+        const menuItem = document.createElement("li");
+        menuItem.textContent = thisItemName;
+        menuItem.style.cssText = `
+            padding: 5px; cursor: pointer; position: relative;
+        `;
+        menuItem.addEventListener("click", () => itemObj.doOnClick());
+
+        if (!parentItemName) {
+            this.menuContainer.appendChild(menuItem);
+        } else {
+            let parentItem = this.menuData[parentItemName];
+            if (!parentItem) {
+                throw new Error(`Parent item '${parentItemName}' not found`);
+            }
+
+            if (!parentItem.submenu) {
+                parentItem.submenu = document.createElement("ul");
+                parentItem.submenu.style.cssText = `
+                    display: none; position: absolute; right: 100%; top: 0; 
+                    background: white; border: 1px solid black; 
+                    list-style: none; padding: 5px; min-width: 120px;
+                    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); /* Improves visibility */
+                    z-index: 1000;
+                `;
+                parentItem.element.appendChild(parentItem.submenu);
+
+                parentItem.element.addEventListener("mouseenter", () => {
+                    parentItem.element.style.fontWeight = "bold"; // Bold parent item
+                    parentItem.submenu.style.display = "block";
+                });
+
+                parentItem.element.addEventListener("mouseleave", () => {
+                    parentItem.element.style.fontWeight = "normal"; // Reset parent item
+                    parentItem.submenu.style.display = "none";
+                });
+            }
+
+            parentItem.submenu.appendChild(menuItem);
+        }
+
+        this.menuData[thisItemName] = { element: menuItem };
+    }
+}
+
+// Example of a derived class implementing doOnClick()
+class SampleMenuItem extends TripleDashMenuItem {
+    constructor(itemName = '') {
+        super();
+        this.itemName = itemName;
+    }
+
+    doOnClick() {
+        if ( this.itemName != '' ) {
+            const link = "https://kupmanduk.co.in/" + this.itemName;
+            window.open(link, "_blank"); // Open link in a new tab
+        }
+    }
+}
+
+class TripleDashMenuCreator {
+    constructor(containerId) {
+        this.menu = new TripleDashMenu(containerId);
+        this.addItems();
+    }
+
+    addItems() {
+        this.menu.addMenuItem("", "Arts", new SampleMenuItem());
+        this.menu.addMenuItem("Arts", "Painting", new SampleMenuItem("painting_km"));
+        this.menu.addMenuItem("Arts", "Photography", new SampleMenuItem("photography_km"));
+        this.menu.addMenuItem("Arts", "Philosophy", new SampleMenuItem("philosophy_km"));
+
+        this.menu.addMenuItem("", "Science", new SampleMenuItem());
+        this.menu.addMenuItem("Science", "Physics", new SampleMenuItem("physics_km"));
+        this.menu.addMenuItem("Science", "Chemistry", new SampleMenuItem("chemistry_km"));
+        this.menu.addMenuItem("Science", "Biology", new SampleMenuItem("biology_km"));
+        this.menu.addMenuItem("Science", "Electronics", new SampleMenuItem("electronics_km"));
+        this.menu.addMenuItem("Science", "Computer Science", new SampleMenuItem("computer_science_km"));
+        this.menu.addMenuItem("Science", "Electronics", new SampleMenuItem("electronics_km"));
+        this.menu.addMenuItem("Science", "Geography", new SampleMenuItem("geography_km"));
+        this.menu.addMenuItem("Science", "Political Science", new SampleMenuItem("political_science_km"));
+        this.menu.addMenuItem("Science", "Astronomy", new SampleMenuItem("astronomy_km"));
+        this.menu.addMenuItem("Science", "Indistrial Machines", new SampleMenuItem("indistrial_machines_km"));
+        this.menu.addMenuItem("Science", "General Machines", new SampleMenuItem("general_machines_km"));
+
+        this.menu.addMenuItem("", "Wellness", new SampleMenuItem());
+        this.menu.addMenuItem("Wellness", "Nutrition", new SampleMenuItem("nutrition_km"));
+        this.menu.addMenuItem("Wellness", "Yoga", new SampleMenuItem("yoga_km"));
+        this.menu.addMenuItem("Wellness", "Medical Care", new SampleMenuItem("medical_care_km"));
+        this.menu.addMenuItem("Wellness", "Body", new SampleMenuItem("body_km"));
+
+        this.menu.addMenuItem("", "Sports", new SampleMenuItem());
+        this.menu.addMenuItem("Sports", "Cricket", new SampleMenuItem("cricket_km"));
+        this.menu.addMenuItem("Sports", "Golf", new SampleMenuItem("golf_km"));
+        this.menu.addMenuItem("Sports", "Racing", new SampleMenuItem("racing_km"));
+        this.menu.addMenuItem("Sports", "Winter Sports", new SampleMenuItem("winter_sports_km"));
+
+        this.menu.addMenuItem("", "Entertainment", new SampleMenuItem());
+        this.menu.addMenuItem("Entertainment", "Oscar Movies", new SampleMenuItem("oscar_nominated_movies_km"));
+        this.menu.addMenuItem("Entertainment", "Grammy Music", new SampleMenuItem("grammy_km"));
+        this.menu.addMenuItem("Entertainment", "Author & Books", new SampleMenuItem("authors_km"));
+        this.menu.addMenuItem("Entertainment", "Hindustani Classical", new SampleMenuItem("music_km"));
+
+        this.menu.addMenuItem("", "Finance", new SampleMenuItem());
+        this.menu.addMenuItem("Finance", "Stocks", new SampleMenuItem("stocks_km"));
+        this.menu.addMenuItem("Finance", "Economics", new SampleMenuItem("economics_km"));
+        this.menu.addMenuItem("Finance", "Mutual Funds", new SampleMenuItem("mutual_funds_km"));
+
+        this.menu.addMenuItem("", "Students", new SampleMenuItem());
+        this.menu.addMenuItem("Students", "Student Tips", new SampleMenuItem("student_tips_km"));
+        this.menu.addMenuItem("Students", "Career", new SampleMenuItem("career_km"));
+    }
+}
 
 
