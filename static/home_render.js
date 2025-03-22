@@ -3,7 +3,8 @@
 
 class HomeRender {
     constructor() {
-        
+        const gaTracker = new GoogleAnalytics();
+        gaTracker.trackPageView();
     }
 
     showLinesFading(linesList, container) {

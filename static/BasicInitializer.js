@@ -543,3 +543,47 @@ class ShowTips {
     }
 }
 
+class GoogleAnalytics {
+    constructor(measurementId = "G-4NLLJX710S") {
+        this.measurementId = measurementId;
+        this.initializeGA();
+    }
+
+    initializeGA() {
+        if (!window.dataLayer) {
+            window.dataLayer = [];
+        }
+        
+        function gtag(){ window.dataLayer.push(arguments); }
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', this.measurementId);
+    }
+
+    trackEvent(eventName, eventParams = {}) {
+        if (typeof window.gtag === 'function') {
+            window.gtag('event', eventName, eventParams);
+        } else {
+            console.warn('Google Analytics is not initialized');
+        }
+    }
+
+    trackPageView(screenName = "default_screen") {
+
+        const pagePath = window.location.pathname;
+        const pageTitle = /* document.title + " - " + */ screenName;
+
+        this.trackEvent('page_view', { 
+            page_path: pagePath,
+            page_title: pageTitle,
+            screen_name: screenName
+        });
+    }
+
+    trackButtonClick(buttonName) {
+        this.trackEvent('button_click', { button_name: buttonName });
+    }
+}
+
+
+
