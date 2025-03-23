@@ -350,7 +350,7 @@ class ContentRender {
         this.showTipsLearnMore.show("Click here to learn more");
 
         this.showTipsJoinFB = new ShowTips('');
-        this.showTipsJoinFB.show("If you like the portal,\nplease follow the social links below.", 20);
+        this.showTipsJoinFB.show("If you like the portal,\nplease follow the social links below.", 100);
 
         // errorManager.log(2060, this.jsonData.section, this.jsonData.topic);
 
@@ -372,6 +372,8 @@ class ContentRender {
     }
 
     onLearnMoreButtonClick() {
+
+        errorManager.showInfo(2066);
 
         const data = {
             section: this.jsonData.section,

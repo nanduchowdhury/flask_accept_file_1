@@ -697,7 +697,7 @@ class SampleMenuItem extends TripleDashMenuItem {
 
     doOnClick() {
         if ( this.itemName != '' ) {
-            const link = "https://kupmanduk.co.in/" + this.itemName;
+            const link = "https://www.kupmanduk.co.in/" + this.itemName;
             window.open(link, "_blank"); // Open link in a new tab
         }
     }

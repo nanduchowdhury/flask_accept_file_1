@@ -145,3 +145,5 @@
 
 2065 : Basic-init done for content-km client UUID - %s
 
+2066 : Getting next item to know & learn...
+

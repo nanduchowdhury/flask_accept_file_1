@@ -38,8 +38,8 @@ class HomeRender {
 
     renderHomeArea_1() {
         const texts = [
-            "choose a topic below...",
-            "...or browse the menu..."
+            "select a topic below or browse menu...",
+            "to know & learn more about it..."
         ];
         const homeArea = document.getElementById("HomeArea_1");
     
@@ -137,26 +137,26 @@ class HomeRender {
         */
 
         const images = [
-            { image: "/static/images/golf.jpg", link: "https://kupmanduk.co.in/golf_km", title: "Golf" },
-            { image: "/static/images/raga.jpg", link: "https://kupmanduk.co.in/music_km", title: "Raga" },
-            { image: "/static/images/yoga.jpg", link: "https://kupmanduk.co.in/yoga_km", title: "Yoga" },
-            { image: "/static/images/oscars.jpg", link: "https://kupmanduk.co.in/oscar_nominated_movies_km", title: "Oscars" },
-            { image: "/static/images/astronomy.jpg", link: "https://kupmanduk.co.in/astronomy_km", title: "Astronomy" },
-            { image: "/static/images/stocks.jpg", link: "https://kupmanduk.co.in/stocks_km", title: "Stocks" },
-            { image: "/static/images/nutrition.jpg", link: "https://kupmanduk.co.in/nutrition_km", title: "Nutrition" },
-            { image: "/static/images/grammy.jpg", link: "https://kupmanduk.co.in/grammy_songs_km", title: "Grammy" },
-            { image: "/static/images/books.jpg", link: "https://kupmanduk.co.in/authors_km", title: "Books" },
-            { image: "/static/images/electronics.jpg", link: "https://kupmanduk.co.in/electronics_km", title: "Electronics" },
-            { image: "/static/images/painting.jpg", link: "https://kupmanduk.co.in/painting_km", title: "Painting" },
-            { image: "/static/images/medical_care.jpg", link: "https://kupmanduk.co.in/medicare_km", title: "Medical care" },
-            { image: "/static/images/chemistry.jpg", link: "https://kupmanduk.co.in/chemistry_km", title: "Chemistry" },
-            { image: "/static/images/physics.jpg", link: "https://kupmanduk.co.in/physics_km", title: "Physics" },
-            { image: "/static/images/student_tips.jpg", link: "https://kupmanduk.co.in/student_tips_km", title: "Student tips" },
-            { image: "/static/images/cricket.jpg", link: "https://kupmanduk.co.in/cricket_km", title: "Cricket" },
-            { image: "/static/images/philosophy.jpg", link: "https://kupmanduk.co.in/philosophy_km", title: "Philosophy" },
-            { image: "/static/images/photography.jpg", link: "https://kupmanduk.co.in/photography_km", title: "Photography" },
-            { image: "/static/images/career.jpg", link: "https://kupmanduk.co.in/career_km", title: "Career" },
-            { image: "/static/images/machines.jpg", link: "https://kupmanduk.co.in/general_machines_km", title: "Machines" }
+            { image: "/static/images/golf.jpg", link: "https://www.kupmanduk.co.in/golf_km", title: "Golf" },
+            { image: "/static/images/raga.jpg", link: "https://www.kupmanduk.co.in/music_km", title: "Raga" },
+            { image: "/static/images/yoga.jpg", link: "https://www.kupmanduk.co.in/yoga_km", title: "Yoga" },
+            { image: "/static/images/oscars.jpg", link: "https://www.kupmanduk.co.in/oscar_nominated_movies_km", title: "Oscars" },
+            { image: "/static/images/astronomy.jpg", link: "https://www.kupmanduk.co.in/astronomy_km", title: "Astronomy" },
+            { image: "/static/images/stocks.jpg", link: "https://www.kupmanduk.co.in/stocks_km", title: "Stocks" },
+            { image: "/static/images/nutrition.jpg", link: "https://www.kupmanduk.co.in/nutrition_km", title: "Nutrition" },
+            { image: "/static/images/grammy.jpg", link: "https://www.kupmanduk.co.in/grammy_songs_km", title: "Grammy" },
+            { image: "/static/images/books.jpg", link: "https://www.kupmanduk.co.in/authors_km", title: "Books" },
+            { image: "/static/images/electronics.jpg", link: "https://www.kupmanduk.co.in/electronics_km", title: "Electronics" },
+            { image: "/static/images/painting.jpg", link: "https://www.kupmanduk.co.in/painting_km", title: "Painting" },
+            { image: "/static/images/medical_care.jpg", link: "https://www.kupmanduk.co.in/medicare_km", title: "Medical care" },
+            { image: "/static/images/chemistry.jpg", link: "https://www.kupmanduk.co.in/chemistry_km", title: "Chemistry" },
+            { image: "/static/images/physics.jpg", link: "https://www.kupmanduk.co.in/physics_km", title: "Physics" },
+            { image: "/static/images/student_tips.jpg", link: "https://www.kupmanduk.co.in/student_tips_km", title: "Student tips" },
+            { image: "/static/images/cricket.jpg", link: "https://www.kupmanduk.co.in/cricket_km", title: "Cricket" },
+            { image: "/static/images/philosophy.jpg", link: "https://www.kupmanduk.co.in/philosophy_km", title: "Philosophy" },
+            { image: "/static/images/photography.jpg", link: "https://www.kupmanduk.co.in/photography_km", title: "Photography" },
+            { image: "/static/images/career.jpg", link: "https://www.kupmanduk.co.in/career_km", title: "Career" },
+            { image: "/static/images/machines.jpg", link: "https://www.kupmanduk.co.in/general_machines_km", title: "Machines" }
         ];        
         
         const randomImages = this.getRandomItemsFromList(images, 6);
