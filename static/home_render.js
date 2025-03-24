@@ -39,7 +39,7 @@ class HomeRender {
     renderHomeArea_1() {
         const texts = [
             "select a topic below or browse menu...",
-            "to know & learn more about it..."
+            "to know, learn & develop interest..."
         ];
         const homeArea = document.getElementById("HomeArea_1");
     
