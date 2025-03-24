@@ -122,6 +122,8 @@ class BasicInitializer extends RootInitializer{
     static ENGLISH_TEXT_FONT = 'Arial';
     static HINID_BENGALI_TEXT_FONT = 'Courier New';
 
+    static FLASK_URL = 'https://kupmanduk-flask-asia-east-966683554322.asia-east1.run.app/home_km/';
+
     constructor() {
 
         super();
@@ -595,8 +597,8 @@ class TripleDashMenu {
     constructor(containerId) {
         this.container = document.getElementById(containerId);
         this.menuData = {};
-        this.timeoutId = null;
         this.createMenu();
+        this.setupOutsideClickHandler();
     }
 
     createMenu() {
@@ -618,25 +620,49 @@ class TripleDashMenu {
             z-index: 9999; /* Ensures it's always on top */
         `;
 
-        this.menuButton.addEventListener("mouseenter", () => this.showMenu());
-        this.menuContainer.addEventListener("mouseenter", () => this.resetTimeout());
-        this.menuContainer.addEventListener("mouseleave", () => this.startTimeout());
+        this.menuButton.addEventListener("click", (event) => {
+            event.stopPropagation(); // Prevent immediate closure
+            this.toggleMenu();
+        });
 
         this.container.appendChild(this.menuButton);
         this.container.appendChild(this.menuContainer);
     }
 
+    toggleMenu() {
+        if (this.menuContainer.style.display === "block") {
+            this.hideMenu();
+        } else {
+            this.showMenu();
+        }
+    }
+
     showMenu() {
         this.menuContainer.style.display = "block";
-        this.resetTimeout();
     }
 
-    startTimeout() {
-        this.timeoutId = setTimeout(() => this.menuContainer.style.display = "none", 10000);
+    hideMenu() {
+        this.menuContainer.style.display = "none";
     }
 
-    resetTimeout() {
-        if (this.timeoutId) clearTimeout(this.timeoutId);
+    setupOutsideClickHandler() {
+        document.addEventListener("click", (event) => {
+            if (
+                !this.menuContainer.contains(event.target) && 
+                event.target !== this.menuButton
+            ) {
+                this.hideMenu();
+            }
+        });
+
+        document.addEventListener("touchstart", (event) => {
+            if (
+                !this.menuContainer.contains(event.target) && 
+                event.target !== this.menuButton
+            ) {
+                this.hideMenu();
+            }
+        });
     }
 
     addMenuItem(parentItemName, thisItemName, itemObj) {
@@ -646,10 +672,12 @@ class TripleDashMenu {
 
         const menuItem = document.createElement("li");
         menuItem.textContent = thisItemName;
-        menuItem.style.cssText = `
-            padding: 5px; cursor: pointer; position: relative;
-        `;
-        menuItem.addEventListener("click", () => itemObj.doOnClick());
+        menuItem.style.cssText = `padding: 5px; cursor: pointer; position: relative;`;
+
+        menuItem.addEventListener("click", () => {
+            itemObj.doOnClick(); // Executes the menu action
+            // **No hideMenu() here** so the menu stays open
+        });
 
         if (!parentItemName) {
             this.menuContainer.appendChild(menuItem);
@@ -688,6 +716,8 @@ class TripleDashMenu {
     }
 }
 
+
+
 // Example of a derived class implementing doOnClick()
 class SampleMenuItem extends TripleDashMenuItem {
     constructor(itemName = '') {
@@ -697,7 +727,7 @@ class SampleMenuItem extends TripleDashMenuItem {
 
     doOnClick() {
         if ( this.itemName != '' ) {
-            const link = "https://www.kupmanduk.co.in/" + this.itemName;
+            const link = BasicInitializer.FLASK_URL + this.itemName;
             window.open(link, "_blank"); // Open link in a new tab
         }
     }
