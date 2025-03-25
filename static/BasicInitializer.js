@@ -548,6 +548,7 @@ class ShowTips {
 class GoogleAnalytics {
     constructor(measurementId = "G-4NLLJX710S") {
         this.measurementId = measurementId;
+        this.isGAInitialized = false;
         this.initializeGA();
     }
 
@@ -555,25 +556,36 @@ class GoogleAnalytics {
         if (!window.dataLayer) {
             window.dataLayer = [];
         }
-        
+
         function gtag(){ window.dataLayer.push(arguments); }
         window.gtag = gtag;
         gtag('js', new Date());
-        gtag('config', this.measurementId);
+        gtag('config', this.measurementId, {
+            send_page_view: false // Prevents automatic page_view to avoid conflicts
+        });
+
+        // Ensure GA is initialized before sending the first event
+        setTimeout(() => {
+            this.isGAInitialized = true;
+        }, 1000); // Adjust the delay if needed
     }
 
     trackEvent(eventName, eventParams = {}) {
-        if (typeof window.gtag === 'function') {
+        if (typeof window.gtag === 'function' && this.isGAInitialized) {
             window.gtag('event', eventName, eventParams);
         } else {
-            console.warn('Google Analytics is not initialized');
+            console.warn('Google Analytics is not initialized yet');
         }
     }
 
     trackPageView(screenName = "default_screen") {
-
         const pagePath = window.location.pathname;
-        const pageTitle = /* document.title + " - " + */ screenName;
+        const pageTitle = screenName;
+
+        if (!this.isGAInitialized) {
+            setTimeout(() => this.trackPageView(screenName), 500);
+            return;
+        }
 
         this.trackEvent('page_view', { 
             page_path: pagePath,

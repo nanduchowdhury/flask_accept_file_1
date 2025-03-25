@@ -50,30 +50,28 @@ class HomeRender {
         container.style.display = "grid";
         container.style.gridTemplateColumns = "repeat(auto-fit, minmax(100px, 1fr))";
         container.style.gridAutoRows = "auto";
-        container.style.gap = "5px"; // Space between images
-        container.style.overflow = "hidden";
-        container.style.width = "100%";
-        container.style.height = "100%";
+        container.style.gap = "5px";
+        container.style.overflow = "visible"; // Changed from hidden
     
-        // Clear any previous images
         container.innerHTML = "";
     
         imageList.forEach(item => {
             const tile = document.createElement("a");
             tile.href = item.link;
-            tile.target = "_blank"; 
-            tile.style.position = "relative"; // Ensures the title can be positioned over it
-            tile.style.display = "block";
+            tile.target = "_blank";
+            tile.style.position = "relative";
+            tile.style.display = "inline-block"; // Ensures proper behavior on mobile
             tile.style.width = "100%";
-            tile.style.height = "100%";
+            tile.style.height = "auto";
+            tile.style.padding = "5px"; // Increases tap area
+            tile.style.boxSizing = "border-box";
     
             const img = document.createElement("img");
             img.src = item.image;
             img.style.width = "100%";
             img.style.height = "100%";
-            img.style.objectFit = "cover"; // Ensures images cover the tile without distortion
+            img.style.objectFit = "cover";
     
-            // Create title overlay
             const titleOverlay = document.createElement("div");
             titleOverlay.innerText = item.title;
             titleOverlay.style.position = "absolute";
@@ -84,9 +82,9 @@ class HomeRender {
             titleOverlay.style.fontWeight = "bold";
             titleOverlay.style.textShadow = "2px 2px 4px rgba(0, 0, 0, 0.7)";
             titleOverlay.style.padding = "5px";
-            titleOverlay.style.backgroundColor = "rgba(0, 0, 0, 0.4)"; // Slight background to improve readability
-            
-            // Randomly position the title
+            titleOverlay.style.backgroundColor = "rgba(0, 0, 0, 0.4)";
+            titleOverlay.style.pointerEvents = "none"; // Allows taps to go through to the link
+    
             const positions = ["top", "center", "bottom"];
             const randomPosition = positions[Math.floor(Math.random() * positions.length)];
             if (randomPosition === "top") {
@@ -98,12 +96,11 @@ class HomeRender {
                 titleOverlay.style.bottom = "5px";
             }
     
-            // Append elements
             tile.appendChild(img);
             tile.appendChild(titleOverlay);
             container.appendChild(tile);
         });
-    }    
+    }        
     
     getRandomItemsFromList(array, numItems) {
         const shuffled = array.slice().sort(() => 0.5 - Math.random()); // Shuffle the array
