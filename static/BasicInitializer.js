@@ -122,7 +122,7 @@ class BasicInitializer extends RootInitializer{
     static ENGLISH_TEXT_FONT = 'Arial';
     static HINID_BENGALI_TEXT_FONT = 'Courier New';
 
-    static FLASK_URL = 'https://kupmanduk-flask-asia-east-966683554322.asia-east1.run.app/home_km/';
+    static FLASK_URL = 'https://kupmanduk.co.in/';
 
     constructor() {
 
