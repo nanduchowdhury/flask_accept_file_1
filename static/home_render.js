@@ -197,7 +197,7 @@ class HomeRender {
             { image: "/static/images/photography.jpg", link: BasicInitializer.FLASK_URL + "photography_km", title: "Photography", description: HomeRender.photography_description },
             { image: "/static/images/career.jpg", link: BasicInitializer.FLASK_URL + "career_km", title: "Career", description: HomeRender.raga_description },
             { image: "/static/images/painting.jpg", link: BasicInitializer.FLASK_URL + "painting_km", title: "Painting", description: HomeRender.painting_description },
-            { image: "/static/images/medical_care.jpg", link: BasicInitializer.FLASK_URL + "medicare_km", title: "Medical Care", description: HomeRender.medical_care_description },
+            { image: "/static/images/medical_care.jpg", link: BasicInitializer.FLASK_URL + "medical_care_km", title: "Medical Care", description: HomeRender.medical_care_description },
             { image: "/static/images/oscars.jpg", link: BasicInitializer.FLASK_URL + "oscar_nominated_movies_km", title: "Oscar Movies", description: HomeRender.oscar_description },
             { image: "/static/images/astronomy.jpg", link: BasicInitializer.FLASK_URL + "astronomy_km", title: "Astronomy", description: HomeRender.astronomy_description },
             { image: "/static/images/stocks.jpg", link: BasicInitializer.FLASK_URL + "stocks_km", title: "Stocks", description: HomeRender.stocks_description },
