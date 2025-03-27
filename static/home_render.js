@@ -152,7 +152,7 @@ class HomeRender {
         images.forEach(item => {
             let row = document.createElement("div");
             row.className = "image-row";
-            row.onclick = () => window.open(item.link, "_blank");
+            row.onclick = () => window.location.href = item.link;
     
             let img = document.createElement("img");
             img.src = item.image;
