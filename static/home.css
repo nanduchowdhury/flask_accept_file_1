@@ -78,19 +78,31 @@ iframe {
     -webkit-overflow-scrolling: touch !important;
 }
 
-.image-row {
+.row {
     display: flex;
-    align-items: center;
+    flex-wrap: wrap;
     gap: 15px;
-    padding: 15px;
-    background-color: #f5f5f5; /* Light off-white background */
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f8f8f8; /* Light off-white background */
     border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    justify-content: flex-start;
 }
 
-.image-row:hover {
-    background-color: #e0e0e0; /* Slightly darker on hover */
+.image-text-wrapper {
+    display: flex;
+    align-items: center; /* Align image and text in one line */
+    gap: 10px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+    flex: 1 1 auto;
+    min-width: 200px;
+    max-width: calc(50% - 15px); /* Ensures at most 2 items per row */
+}
+
+.image-text-wrapper:hover {
+    background-color: #e0e0e0;
 }
 
 .image {
@@ -102,17 +114,28 @@ iframe {
 .text-container {
     display: flex;
     flex-direction: column;
+    max-width: 300px;
 }
 
 .title {
     font-size: 18px;
     font-weight: bold;
-    margin: 0;
     color: black;
+    margin-bottom: 5px;
 }
 
 .description {
     font-size: 14px;
-    margin: 5px 0 0 0;
     color: black;
 }
+
+/* Special case: Single image in row - prevent wrapping */
+.single-image .description {
+    white-space: nowrap;
+}
+
+/* Multiple images in row - allow wrapping */
+.multi-image .description {
+    white-space: normal;
+}
+
