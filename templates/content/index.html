@@ -3,22 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kupmanduk - know & learn</title>
-    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+    <meta name="description" content="Kupmanduk - A platform to know and learn about various topics.">
+    <meta name="keywords" content="Kupmanduk, learn, knowledge, education, hobby, hindustani classical music, yoga, golf, oscars, grammy, cricket, philosophy, photography, painting, nutrition, astronomy, stocks, mutual funds">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Kupmanduk - Know & Learn">
+    <meta property="og:description" content="A platform to explore knowledge and learning resources.">
+    <meta property="og:image" content="{{ url_for('static', filename='kupmanduk-copper-black-font.jpg') }}">
+    <meta property="og:url" content="https://kupmanduk.co.in/">
+    <meta property="og:type" content="website">
+
+    <title>Kupmanduk - Know & Learn</title>
+
+    <!-- Preload Fonts -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" as="style">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='header.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='buttonCombination.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='MessageBox.css') }}">
 
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4NLLJX710S"></script>
+
 </head>
 <body>
 
     <div class="header-container">
         <!-- Company logo - positioned left and smaller -->
         <a href="https://kupmanduk.co.in/" target="_blank">
-            <img src="{{ url_for('static', filename='kupmanduk-copper-black-font.jpg') }}" class="logo" alt="Kupmanduk" title="Kupmanduk">
+            <img src="{{ url_for('static', filename='kupmanduk-copper-black-font.jpg') }}" class="logo" alt="Kupmanduk Logo" title="Kupmanduk" loading="lazy">
         </a>
     </div>
 
@@ -43,25 +62,25 @@
 
     <div class="view-area-container">
         <div id="ViewArea_1" class="view-area">
-            <p>No explanation available</p>
+            <p>Loading description...</p>
         </div>
     
         <!-- Triple-dot button -->
         <div id="triple-dot" class="triple-dot" tabindex="0">⋮</div>
     
         <div id="ViewArea_2" class="view-area">
-            <p>No youtube video available</p>
+            <p>Loading YouTube video...</p>
         </div>
     </div>
 
     <div id="SocialArea" class="social-area">
         <div class="social-links">
-            <a href="https://x.com/_kupmanduk" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
-            <a href="https://www.linkedin.com/company/kupmanduk/about/?viewAsMember=true" target="_blank" class="social-icon"><i class="fab fa-linkedin"></i></a>
-            <a href="mailto:nandu.chowdhury@kupmanduk.co.in?subject=kupmanduk%20website%20user" class="social-icon">
+            <a href="https://x.com/_kupmanduk" target="_blank" class="social-icon" aria-label="Follow on Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.linkedin.com/company/kupmanduk/about/?viewAsMember=true" target="_blank" class="social-icon" aria-label="Connect on LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:nandu.chowdhury@kupmanduk.co.in?subject=kupmanduk%20website%20user" class="social-icon" aria-label="Send an Email">
                 <i class="fas fa-envelope"></i>
             </a>
-            <a href="https://www.facebook.com/profile.php?id=61573069120308" target="_blank" class="social-icon">
+            <a href="https://www.facebook.com/profile.php?id=61573069120308" target="_blank" class="social-icon" aria-label="Follow on Facebook">
                 <i class="fab fa-facebook"></i>
             </a>
         </div>
@@ -75,29 +94,29 @@
         <button id="messageBoxOkButton">OK</button>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/log4javascript/1.4.9/log4javascript.min.js"></script>
-    <script src="{{ url_for('static', filename='content_render.js') }}"></script>
-    <script src="{{ url_for('static', filename='errorManager.js') }}"></script>
-    <script src="{{ url_for('static', filename='BasicInitializer.js') }}"></script>
-    <script src="{{ url_for('static', filename='geologicalInfo.js') }}"></script>
+    <!-- Scripts -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/log4javascript/1.4.9/log4javascript.min.js"></script>
+    <script defer src="{{ url_for('static', filename='content_render.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='errorManager.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='BasicInitializer.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='geologicalInfo.js') }}"></script>
 
     <script>
         const JsonData = {{ json_data | tojson | safe }};
         
         "use strict";
 
-        const errorManager = new ErrorManager();
-        const basicInitializer = new ContentInitializer();
 
         document.addEventListener("DOMContentLoaded", () => {
-
+            window.errorManager = new ErrorManager();
+            window.basicInitializer = new ContentInitializer();
             const cRender = new ContentRender(JsonData);
         });
 
-        // This code will execute as soon as the page has loaded.
-        console.log("kupmanduk-content page loaded successfully."); 
+        console.log("Kupmanduk content page loaded successfully.");
     </script>
 
+    <!-- Microsoft Clarity Tracking -->
     <script type="text/javascript">
         (function(c,l,a,r,i,t,y){
             c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};

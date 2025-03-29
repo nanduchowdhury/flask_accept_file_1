@@ -1,3 +1,10 @@
+.welcome-heading {
+    font-family: "Black Ops One", sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(45, 198, 45); /* Green color */
+}
+
 .header-container {
     position: relative;
     height: 40px; /* Adjust height as needed */

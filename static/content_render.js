@@ -258,7 +258,7 @@ class TranslateLanguage extends TripleDotMenuBase {
             if ( selectedValue ) {
                 this.currentLanguage = selectedValue;
 
-                errorManager.showInfo(2064, this.currentLanguage);
+                window.errorManager.showInfo(2064, this.currentLanguage);
 
                 this.makeServerRequestForLanguageTranslation();
             }
@@ -286,7 +286,7 @@ class TranslateLanguage extends TripleDotMenuBase {
         const iframeRender = new HtmlIframeRender();
         iframeRender.render(ViewArea_1, htmlContent);
 
-        errorManager.log(2063, this.currentLanguage);
+        window.errorManager.log(2063, this.currentLanguage);
     }
 
     lamdaOnBasicInitRequestFailure = (msg) => {
@@ -319,7 +319,7 @@ class TryAnotherVideo extends TripleDotMenuBase {
         const url = this.JsonData.youtube_response[this.lastYoutubeVideoIndex];
         this.youtubeMgr.showByUrl(url);
 
-        errorManager.log(2062, url);
+        window.errorManager.log(2062, url);
     }
 }
 
@@ -352,7 +352,7 @@ class ContentRender {
         this.showTipsJoinFB = new ShowTips('');
         this.showTipsJoinFB.show("If you like the portal,\nplease follow the social links below.", 100);
 
-        // errorManager.log(2060, this.jsonData.section, this.jsonData.topic);
+        // window.errorManager.log(2060, this.jsonData.section, this.jsonData.topic);
 
         this.alreadyDoneTopicList = [];
     }
@@ -373,14 +373,14 @@ class ContentRender {
 
     onLearnMoreButtonClick() {
 
-        errorManager.showInfo(2066);
+        window.errorManager.showInfo(2066);
 
         const data = {
             section: this.jsonData.section,
             alreadyDoneTopicList: this.alreadyDoneTopicList
         };
 
-        basicInitializer.makeServerRequest('/content_learn_more', data, 
+        window.basicInitializer.makeServerRequest('/content_learn_more', data, 
         this.lamdaOnBasicInitRequestSuccess, this.lamdaOnBasicInitRequestFailure);
     }
 
@@ -396,7 +396,7 @@ class ContentRender {
 
         this.translateLanguage.resetCurrentLanguage();
 
-        errorManager.log(2061, this.jsonData.section, this.jsonData.topic);
+        window.errorManager.log(2061, this.jsonData.section, this.jsonData.topic);
     }
 
     lamdaOnBasicInitRequestFailure = (msg) => {
@@ -405,7 +405,7 @@ class ContentRender {
     
     logGeoLocation() {
         const geoInfo = new GeolocationInfo();
-        geoInfo.getFormattedInfo().then(info => errorManager.log(1013, info));
+        geoInfo.getFormattedInfo().then(info => window.errorManager.log(1013, info));
     }
 
     update() {
