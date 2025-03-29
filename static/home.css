@@ -20,11 +20,11 @@
 
 /* Assigning height percentages */
 #HomeArea_1 {
-    height: 20%;
+    height: 30%;
 }
 
 #HomeArea_2 {
-    height: 60%;
+    height: 50%;
 }
 
 /* Desktop Layout */
@@ -52,16 +52,7 @@
     font-weight: bold;
     text-align: center;
     color: #fcf805;
-    white-space: nowrap;
-    overflow: hidden;
-    /* border-right: 2px solid #333; */
-    display: inline-block;
-
-    /* Background Image */
-    background-image: url("/static/kupmanduk_background_home_area_1.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background: #cfdbf5;
 }
 
 @keyframes typing {
@@ -84,7 +75,7 @@ iframe {
     gap: 15px;
     margin-bottom: 15px;
     padding: 10px;
-    background-color: #f8f8f8; /* Light off-white background */
+    /*background-color: #f8f8f8; /* Light off-white background */
     border-radius: 5px;
     justify-content: flex-start;
 }

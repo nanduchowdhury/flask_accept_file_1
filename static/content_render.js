@@ -413,6 +413,8 @@ class ContentRender {
         const sectionMap = {
             yoga: "Yoga",
             hindustani: "Raga",
+            ISS: "International Space Station",
+            space_travel: "Space Travel",
             racing: "Racing",
             winter_sports: "Winter Sports",
             general_machines: "General Machines",

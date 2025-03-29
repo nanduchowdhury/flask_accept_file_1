@@ -3,6 +3,8 @@
 
 class HomeRender {
 
+    static ISS_description = "Know about the International Space Station - life inside and the experiments done there.";
+    static space_travel_description = "Know about space travel and it's complexities.";
     static golf_description = "Know about the sport and the technicalities. Find out about major tournaments played worldwide.";
     static raga_description = "Find out about the age old ragas of hindustani classical music.";
     static yoga_description = "Different yoga poses are taught. Know about the benefits and how to do the asanas.";
@@ -61,13 +63,9 @@ class HomeRender {
     }
 
     renderHomeArea_1() {
-        const texts = [
-            "select a topic below or browse menu...",
-            "to know, learn & develop interest..."
-        ];
-        const homeArea = document.getElementById("HomeArea_1");
-    
-        this.showLinesFading(texts, homeArea);
+
+        this.showImageRowsHomeArea_1();
+
     }        
     
     getRandomItemsFromList(array, numItems) {
@@ -77,7 +75,7 @@ class HomeRender {
 
     renderHomeArea_2() {
        
-        this.showImageRows();
+        this.showImageRowsHomeArea_2();
 
         this.showTipsWhereToStart = new ShowTips('TripleDashMenuContainer');
         this.showTipsWhereToStart.show("Browse complete menu");
@@ -87,15 +85,19 @@ class HomeRender {
         const container = document.getElementById(containerId);
         if (!container) return;
     
-        let row = document.querySelector(`.row[data-row="${rowNumber}"]`);
+        // Ensure the row is specific to the container by searching within the container
+        let row = container.querySelector(`.row[data-row="${rowNumber}"]`);
         if (!row) {
             row = document.createElement("div");
             row.className = "row";
             row.dataset.row = rowNumber;
             container.appendChild(row);
+        } else {
+            // Clear the row to prevent duplicate images if function is called again
+            row.innerHTML = "";
         }
     
-        images.forEach((item, index) => {
+        images.forEach((item) => {
             const wrapper = document.createElement("div");
             wrapper.className = "image-text-wrapper";
             wrapper.onclick = () => window.location.href = item.link;
@@ -124,14 +126,25 @@ class HomeRender {
         });
     
         // Adjust description wrapping based on image count in row
-        if (images.length === 1) {
-            row.classList.add("single-image");
-        } else {
-            row.classList.add("multi-image");
+        row.classList.toggle("single-image", images.length === 1);
+        row.classList.toggle("multi-image", images.length > 1);
+    }
+    
+
+    showImageRowsHomeArea_1() {
+
+        const images = [
+            { image: "/static/images/ISS.jpg", link: BasicInitializer.FLASK_URL + "ISS_km", title: "Sunita Williams spent months in ISS", description: HomeRender.ISS_description },
+            { image: "/static/images/space_travel.jpg", link: BasicInitializer.FLASK_URL + "space_travel_km", title: "Sunita Williams returns from ISS", description: HomeRender.space_travel_description }
+        ];
+
+        {
+            const newImages = images.slice(0, 2);
+            this.populateImageRowsColumns("HomeArea_1", 1, newImages);
         }
     }
 
-    showImageRows() {
+    showImageRowsHomeArea_2() {
 
         /*
             Images are downloaded from below - site mentions that images

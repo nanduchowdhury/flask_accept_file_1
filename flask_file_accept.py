@@ -73,6 +73,8 @@ class ScholarKM(Flask):
         self.route('/yoga_km')(self.yoga_km_index)
         self.route('/racing_km')(self.racing_km_index)
         self.route('/winter_sports_km')(self.winter_sports_km_index)
+        self.route('/ISS_km')(self.ISS_km_index)
+        self.route('/space_travel_km')(self.space_travel_km_index)
         self.route('/general_machines_km')(self.general_machines_km_index)
         self.route('/industrial_machines_km')(self.industrial_machines_km_index)
         self.route('/oscar_nominated_movies_km')(self.oscar_nominated_movies_km_index)
@@ -281,6 +283,12 @@ class ScholarKM(Flask):
 
     def medical_care_km_index(self):
         return self.content_creator_index("medical_care")
+
+    def ISS_km_index(self):
+        return self.content_creator_index("ISS")
+
+    def space_travel_km_index(self):
+        return self.content_creator_index("space_travel")
 
     def painting_km_index(self):
         return self.content_creator_index("painting")
@@ -665,6 +673,8 @@ class ScholarKM(Flask):
                 self.content_creator_task("hindustani_classical_music")
                 self.content_creator_task("yoga")
                 self.content_creator_task("internal_organ")
+                self.content_creator_task("ISS")
+                self.content_creator_task("space_travel")
                 self.content_creator_task("astronomy")
                 self.content_creator_task("golf")
                 self.content_creator_task("stocks")

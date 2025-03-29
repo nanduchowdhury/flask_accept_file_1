@@ -768,6 +768,8 @@ class TripleDashMenuCreator {
         this.menu.addMenuItem("Science", "Astronomy", new SampleMenuItem("astronomy_km"));
         this.menu.addMenuItem("Science", "Indistrial Machines", new SampleMenuItem("industrial_machines_km"));
         this.menu.addMenuItem("Science", "General Machines", new SampleMenuItem("general_machines_km"));
+        this.menu.addMenuItem("Science", "ISS", new SampleMenuItem("ISS_km"));
+        this.menu.addMenuItem("Science", "Space Travel", new SampleMenuItem("space_travel_km"));
 
         this.menu.addMenuItem("", "Wellness", new SampleMenuItem());
         this.menu.addMenuItem("Wellness", "Nutrition", new SampleMenuItem("nutrition_km"));
