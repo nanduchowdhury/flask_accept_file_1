@@ -3,7 +3,9 @@ from flask import request
 import os
 import logging
 import re
-from datetime import datetime
+
+from datetime import datetime, timedelta, timezone
+
 from google.cloud import storage  # Ensure the Google Cloud Storage client library is installed
 
 import constants
@@ -62,11 +64,19 @@ class ErrorManager:
 
         return message
 
+
+    def get_current_india_time(self):
+
+        # Convert to India time-zone.
+        ist_offset = timezone(timedelta(hours=5, minutes=30))  # IST is UTC+5:30
+        current_time = datetime.now(ist_offset).strftime('%Y_%m_%d-%H_%M_%S')
+        return current_time
+
     def show_message(self, code, *args):
 
         message = self.get_message_for_code_and_args(code, args)
 
-        current_time = datetime.now().strftime('%Y_%m_%d-%H_%M_%S')
+        current_time = self.get_current_india_time()
         pid = os.getpid()
 
         # Complete message with error code
@@ -81,7 +91,7 @@ class ErrorManager:
 
     def show_page_invoke_message(self, page_name):
 
-        current_time = datetime.now().strftime('%Y_%m_%d-%H_%M_%S')
+        current_time = self.get_current_india_time()
         pid = os.getpid()
 
         # Complete message with error code
