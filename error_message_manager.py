@@ -48,21 +48,22 @@ class ErrorManager:
                     self.error_map[error_code] = error_message
 
     def get_message_for_code_and_args(self, code, *args):
-        """
-        Retrieves the error message for the given code, replaces %s placeholders,
-        and automatically prints/logs the full message with the error code.
-        """
-        if code not in self.error_map:
-            message = f"Unknown error code: {code}"
-        else:
-            message = self.error_map[code]
-            try:
-                # Replace %s in the message with provided arguments
-                message = message % args
-            except TypeError:
-                return f"Error message for code {code} expects different number of arguments."
 
-        return message
+        if code not in self.error_map:
+            return f"Unknown error code: {code}"
+        
+        message = self.error_map[code]
+
+        # If there are no placeholders OR no args are provided, return message as-is
+        if "%s" not in message or not args:
+            return message
+
+        try:
+            # Replace %s placeholders with provided arguments
+            return message % args
+        except TypeError:
+            return f"Error message for code {code} expects a different number of arguments."
+
 
 
     def get_current_india_time(self):

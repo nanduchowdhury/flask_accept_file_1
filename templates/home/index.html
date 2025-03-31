@@ -56,8 +56,19 @@
                 <a href="mailto:nandu.chowdhury@kupmanduk.co.in?subject=kupmanduk%20website%20user" class="social-icon" aria-label="Email"><i class="fas fa-envelope"></i></a>
                 <a href="https://www.facebook.com/profile.php?id=61573069120308" target="_blank" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
             </div>
+        
+            <!-- Newsletter Subscription Form -->
+            <div class="newsletter">
+                <input type="text" id="newsletter-input" placeholder="Monthly Newsletter : email or phone">
+                <button id="subscribeButton">Subscribe</button>
+            </div>
         </aside>
     </main>
+
+    <div id="messageBox" class="message-box hidden">
+        <span id="messageBoxText"></span>
+        <button id="messageBoxOkButton">OK</button>
+    </div>
 
     <script>
         if (window !== window.top) {
@@ -66,6 +77,10 @@
         }
 
         document.addEventListener("DOMContentLoaded", function () {
+            
+            window.errorManager = new ErrorManager();
+            window.basicInitializer = new ContentInitializer();
+
             const browser = new BrowserStartStop();
             const render = new HomeRender();
             render.renderHomeArea_1();
@@ -90,8 +105,11 @@
     </script>
 
     <!-- Defer JS -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/log4javascript/1.4.9/log4javascript.min.js"></script>
     <script defer src="{{ url_for('static', filename='home_render.js') }}"></script>
     <script defer src="{{ url_for('static', filename='BasicInitializer.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='errorManager.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='geologicalInfo.js') }}"></script>
 
 </body>
 </html>

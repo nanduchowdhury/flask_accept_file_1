@@ -102,6 +102,8 @@ class ScholarKM(Flask):
         self.route('/philosophy_km')(self.philosophy_km_index)
         self.route('/photography_km')(self.photography_km_index)
 
+        self.route('/subscribe', methods=['POST'])(self.subscribe)
+
         self.route('/content_init', methods=['POST'])(self.content_init)
         self.route('/content_learn_more', methods=['POST'])(self.content_learn_more)
         self.route('/content_triple_dot_action_km', methods=['POST'])(self.content_triple_dot_action_km)
@@ -851,7 +853,7 @@ class ScholarKM(Flask):
             log_file_path = f'{log_folder}/client_log.txt'
             self.sess.save_client_data(client_uuid, 'basic_init.log_file_path', log_file_path)
 
-            self.error_manager.show_message(2065, client_uuid)
+            self.error_manager.show_message(2065)
 
             self.sess.force_save_session(client_uuid)
 
@@ -895,6 +897,24 @@ class ScholarKM(Flask):
         except Exception as e:
             return jsonify({"error": str(e)}), 500
 
+    def subscribe(self):
+        try:
+            data = request.get_json()
+
+            user_input = data.get('userInput', '')
+            geo_info = data.get('geoInfo', '')
+
+            json_response = jsonify(user_input=user_input, geo_info=geo_info)
+            json_text = json_response.get_data(as_text=True)
+
+            self.gcs_manager.append_to_text_file("subscription_file.txt", json_text)
+        
+            return jsonify({"status": "subscribe success"}), 200
+
+        except Exception as e:
+            print(f"Error during subscribe : {str(e)}")
+            return jsonify({"error": str(e)}), 500
+
     def save_logs(self):
         try:
             data = request.get_json()
@@ -913,6 +933,10 @@ class ScholarKM(Flask):
 
             for log in logs:
                 self.gcs_manager.append_to_text_file(log_file_path, json.dumps(log))
+
+                # Print geo-location info from client into server-log.
+                if "MSG-1013" in json.dumps(log):
+                    self.error_manager.show_any_message(f"Client {client_uuid} : {log}")
 
             return jsonify({"status": "logs saved"}), 200
 

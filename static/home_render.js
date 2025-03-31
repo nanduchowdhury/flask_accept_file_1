@@ -33,6 +33,47 @@ class HomeRender {
         gaTracker.trackPageView();
 
         const menuObj = new TripleDashMenuCreator("TripleDashMenuContainer");      
+
+        this.subscribeButton = document.getElementById("subscribeButton");
+        this.subscribeButton.addEventListener("click", this.onSubscribeButtonClick.bind(this));
+
+        this.subscribeUserInput = document.getElementById("newsletter-input");
+
+        this.geoLocInfo = '';
+        this.logGeoLocation();
+    }
+
+    logGeoLocation() {
+        const geoInfo = new GeolocationInfo();
+        
+        geoInfo.getFormattedInfo().then(info => {
+    
+            this.geoLocInfo = info;
+            window.errorManager.log(1013, info)
+    
+        }).catch(error => {
+            console.error("Failed to retrieve geolocation info :", error);
+        });
+    }
+
+    onSubscribeButtonClick() {
+        
+        const data = {
+            userInput: this.subscribeUserInput.value,
+            geoInfo: this.geoLocInfo  // Store formatted geolocation info here
+        };
+
+        window.basicInitializer.makeServerRequest('/subscribe', data, 
+            this.lamdaOnSubscribeSuccess, this.lamdaOnSubscribeFailure);
+
+        window.errorManager.showInfo(2067);
+    }
+
+    lamdaOnSubscribeSuccess = (data) => {
+    }
+
+    lamdaOnSubscribeFailure = (msg) => {
+        console.log("Subscribe failed : ", msg);
     }
 
     showLinesFading(linesList, container) {
@@ -77,13 +118,23 @@ class HomeRender {
        
         this.showImageRowsHomeArea_2();
 
-        this.showTipsWhereToStart = new ShowTips('TripleDashMenuContainer');
-        this.showTipsWhereToStart.show("Browse complete menu");
     }
 
-    populateImageRowsColumns(containerId, rowNumber, images) {
+    populateImageRowsColumns(containerId, rowNumber, images, titleText = "") {
         const container = document.getElementById(containerId);
         if (!container) return;
+    
+        // Ensure the title exists at the top of the container
+        let title = container.querySelector(".container-title");
+        if (!title && titleText) {
+            title = document.createElement("div");
+            title.className = "container-title";
+            title.textContent = titleText;
+            title.style.fontSize = "18px";
+            title.style.fontWeight = "bold";
+            title.style.marginBottom = "10px";
+            container.prepend(title);
+        }
     
         // Ensure the row is specific to the container by searching within the container
         let row = container.querySelector(`.row[data-row="${rowNumber}"]`);
@@ -129,7 +180,6 @@ class HomeRender {
         row.classList.toggle("single-image", images.length === 1);
         row.classList.toggle("multi-image", images.length > 1);
     }
-    
 
     showImageRowsHomeArea_1() {
 
@@ -140,7 +190,7 @@ class HomeRender {
 
         {
             const newImages = images.slice(0, 2);
-            this.populateImageRowsColumns("HomeArea_1", 1, newImages);
+            this.populateImageRowsColumns("HomeArea_1", 1, newImages, "Featured Learning");
         }
     }
 

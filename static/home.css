@@ -50,8 +50,7 @@
     font-family: 'Patrick Hand';
     font-size: 1em;
     font-weight: bold;
-    text-align: center;
-    color: #fcf805;
+    color: #f98497;
     background: #cfdbf5;
 }
 
@@ -72,9 +71,9 @@ iframe {
 .row {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
-    margin-bottom: 15px;
-    padding: 10px;
+    gap: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
     /*background-color: #f8f8f8; /* Light off-white background */
     border-radius: 5px;
     justify-content: flex-start;
@@ -83,13 +82,13 @@ iframe {
 .image-text-wrapper {
     display: flex;
     align-items: center; /* Align image and text in one line */
-    gap: 10px;
-    padding: 10px;
+    gap: 5px;
+    padding: 2px;
     cursor: pointer;
     transition: background 0.3s;
     flex: 1 1 auto;
     min-width: 200px;
-    max-width: calc(50% - 15px); /* Ensures at most 2 items per row */
+    /* max-width: calc(50% - 15px); /* Ensures at most 2 items per row */
 }
 
 .image-text-wrapper:hover {
@@ -97,9 +96,9 @@ iframe {
 }
 
 .image {
-    width: 100px;
+    width: 200px;
     height: auto;
-    border-radius: 5px;
+    border-radius: 2px;
 }
 
 .text-container {
@@ -111,7 +110,7 @@ iframe {
 .title {
     font-size: 18px;
     font-weight: bold;
-    color: black;
+    color: rgb(241, 81, 95);
     margin-bottom: 5px;
 }
 
@@ -122,7 +121,7 @@ iframe {
 
 /* Special case: Single image in row - prevent wrapping */
 .single-image .description {
-    white-space: nowrap;
+    white-space: normal;
 }
 
 /* Multiple images in row - allow wrapping */

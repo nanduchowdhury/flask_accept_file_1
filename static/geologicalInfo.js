@@ -93,12 +93,12 @@ class GeolocationInfo {
         const country = await this.getCountry();
         const region = await this.getRegion();
         const city = await this.getCity();
-        const location = await this.getLocation();
-        const postalCode = await this.getPostalCode();
-        const timezone = await this.getTimezone();
-        const organization = await this.getOrganization();
+        // const location = await this.getLocation();
+        // const postalCode = await this.getPostalCode();
+        // const timezone = await this.getTimezone();
+        // const organization = await this.getOrganization();
 
-        return `Country - ${country}    Region - ${region}      City - ${city}      Location - ${location}      Postal-Code - ${postalCode}     Timezone - ${timezone}      Organization - ${organization}`;
+        return `Country - ${country}    Region - ${region}      City - ${city}`;
     }
 }
 
