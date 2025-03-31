@@ -31,7 +31,7 @@
 
 .topic-label-text {
     font-family: "Black Ops One", sans-serif;
-    font-size: 28px;
+    font-size: 18px;
     font-weight: bold;
     color: rgb(45, 198, 45); /* Green color */
     margin-right: 80px;
@@ -91,6 +91,8 @@
     white-space: pre-wrap;
     font-family: 'Patrick Hand';
     font-size: 14px;
+
+    flex-direction: column;
 }
 
 #SocialArea {
@@ -225,7 +227,7 @@
 }
 
 .topic-label {
-    font-family: "Courier New", Courier, monospace;
+    font-family: 'Patrick Hand';
     font-weight: bold;
     font-size: 14px;
     color: #333;        /* Optional: Set text color */

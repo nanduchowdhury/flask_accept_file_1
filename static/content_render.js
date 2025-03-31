@@ -452,7 +452,7 @@ class ContentRender {
 
         this.topicLabelName.textContent = section;
 
-        this.topicLabel.innerHTML = this.jsonData.section + " : " + this.jsonData.topic;
+        this.topicLabel.innerHTML = this.jsonData.topic;
 
         // Preprocess content to remove markdown-style delimiters if any
         let htmlContent = this.jsonData.content_response.replace(/^```html\n|```$/g, '').trim();
