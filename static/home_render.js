@@ -130,9 +130,9 @@ class HomeRender {
             title = document.createElement("div");
             title.className = "container-title";
             title.textContent = titleText;
-            title.style.fontSize = "18px";
+            title.style.fontSize = "12px";
             title.style.fontWeight = "bold";
-            title.style.marginBottom = "10px";
+            title.style.marginBottom = "5px";
             container.prepend(title);
         }
     

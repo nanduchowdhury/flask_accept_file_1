@@ -20,11 +20,11 @@
 
 /* Assigning height percentages */
 #HomeArea_1 {
-    height: 30%;
+    height: 35%;
 }
 
 #HomeArea_2 {
-    height: 50%;
+    height: 45%;
 }
 
 /* Desktop Layout */
@@ -48,9 +48,9 @@
 /* Typing Animation */
 #HomeArea_1 {
     font-family: 'Patrick Hand';
-    font-size: 1em;
-    font-weight: bold;
-    color: #f98497;
+    font-size: 8px;
+    /* font-weight: bold; */
+    color: rgba(237, 92, 44, 0.425);
     background: #cfdbf5;
 }
 

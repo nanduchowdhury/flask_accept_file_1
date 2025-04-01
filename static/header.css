@@ -1,5 +1,5 @@
 .welcome-heading {
-    font-family: "Black Ops One", sans-serif;
+    font-family: 'Patrick Hand';
     font-size: 18px;
     font-weight: bold;
     color: rgb(45, 198, 45); /* Green color */
@@ -30,7 +30,7 @@
 }
 
 .topic-label-text {
-    font-family: "Black Ops One", sans-serif;
+    font-family: 'Patrick Hand';
     font-size: 12px;
     font-weight: bold;
     color: rgb(45, 198, 45); /* Green color */
