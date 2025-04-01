@@ -31,7 +31,7 @@
 
 .topic-label-text {
     font-family: "Black Ops One", sans-serif;
-    font-size: 18px;
+    font-size: 12px;
     font-weight: bold;
     color: rgb(45, 198, 45); /* Green color */
     margin-right: 80px;
@@ -82,7 +82,7 @@
 }
 
 .social-area {
-    margin-top: 5px;
+    margin-top: 2px;
     background-color: #f9f9f9;
     overflow: auto;
     border: 1px solid #ccc;
