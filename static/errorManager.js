@@ -15,18 +15,17 @@ class ErrorManager {
 
         this.startSendingLogs();
         
-        this.loadErrorsFromFile().then(() => {
+        this.loadErrorsFromFile();
         
-            this.initLog4jAndMessageBox();
+        this.initLog4jAndMessageBox();
 
-            // Override console.log to capture logs
-            const originalConsoleLog = console.log;
-            console.log = (...args) => {
-                const logMessage = args.join(' ');
-                this.logs.push({ message: logMessage, level: 'INFO' });
-                originalConsoleLog.apply(console, args);
-            };
-        });
+        // Override console.log to capture logs
+        const originalConsoleLog = console.log;
+        console.log = (...args) => {
+            const logMessage = args.join(' ');
+            this.logs.push({ message: logMessage, level: 'INFO' });
+            originalConsoleLog.apply(console, args);
+        };
     }
 
     initLog4jAndMessageBox() {
@@ -103,32 +102,30 @@ class ErrorManager {
     }
 
     loadErrorsFromFile() {
-        return fetch(this.errorFilePath)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Failed to load the error messages file.');
-                }
-                return response.text();
-            })
-            .then(data => {
-                const lines = data.split('\n');
-                lines.forEach(line => {
-                    line = line.trim();
-                    // Ignore lines that start with //
-                    if (line.startsWith('//') || line.length === 0) {
-                        return;
-                    }
+        const request = new XMLHttpRequest();
+        request.open("GET", this.errorFilePath, false); // Synchronous request (blocking)
+        request.send(null);
     
-                    const [code, message] = line.split(':', 2);
-                    if (code && message) {
-                        this.errors.set(parseInt(code.trim()), message.trim());
-                    }
-                });
-            })
-            .catch(error => {
-                console.error('Error loading errors:', error);
+        if (request.status === 200) {
+            const lines = request.responseText.split('\n');
+            this.errors = new Map(); // Ensure errors map is initialized
+    
+            lines.forEach(line => {
+                line = line.trim();
+                if (line.startsWith('//') || line.length === 0) {
+                    return;
+                }
+    
+                const [code, message] = line.split(':', 2);
+                if (code && message) {
+                    this.errors.set(parseInt(code.trim()), message.trim());
+                }
             });
+        } else {
+            console.error('Failed to load the error messages file.');
+        }
     }
+    
     
 
     showMessage(type, message) {
