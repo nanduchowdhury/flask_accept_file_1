@@ -149,6 +149,8 @@ class ScholarKM(Flask):
 
         self.gcs_manager = GCSManager("kupmanduk-bucket", constants.GCS_ROOT_FOLDER)
 
+        self.content_creator_obj = ContentCreatorBase(self.gemini_access, self.error_manager)
+
         self.start_all_content_creator_threads()
 
     def extract_text_from_pdf(self, pdf_path):
@@ -260,12 +262,13 @@ class ScholarKM(Flask):
         return render_template('home/index.html')
 
     def content_creator_index(self, section):
-        obj = ContentCreatorBase(section, self.gemini_access, self.error_manager)
 
         alreadyDoneTopicList = []
-        [topic, alreadyDoneTopicList] = obj.get_random_topic(alreadyDoneTopicList)
-        youtube_response_list = obj.generate_youtube_response(topic)
-        content_response = obj.get_content_for_topic(topic)
+        [topic, alreadyDoneTopicList] = self.content_creator_obj.get_random_topic(section, alreadyDoneTopicList)
+
+        youtube_response_list = self.content_creator_obj.generate_youtube_response(section, topic)
+
+        content_response = self.content_creator_obj.get_content_for_topic(section, topic)
 
         self.error_manager.show_page_invoke_message(f"content-km-{section}")
 
@@ -398,9 +401,7 @@ class ScholarKM(Flask):
         section = data['section']
         topic = data['topic']
         
-        obj = ContentCreatorBase(section, self.gemini_access, self.error_manager)
-
-        content = obj.get_content_for_topic(topic)
+        content = self.content_creator_obj.get_content_for_topic(section, topic)
         second_lang_response = self.gemini_access.convert_to_second_lang(content, action)
         return jsonify({'content': second_lang_response})
 
@@ -812,11 +813,10 @@ class ScholarKM(Flask):
         section = data.get('section', '')
         alreadyDoneTopicList = data.get('alreadyDoneTopicList', '')
 
-        obj = ContentCreatorBase(section, self.gemini_access, self.error_manager)
-        [topic, alreadyDoneTopicList] = obj.get_random_topic(alreadyDoneTopicList)
+        [topic, alreadyDoneTopicList] = self.content_creator_obj.get_random_topic(section, alreadyDoneTopicList)
 
-        youtube_response_list = obj.generate_youtube_response(topic)
-        content_response = obj.get_content_for_topic(topic)
+        youtube_response_list = self.content_creator_obj.generate_youtube_response(section, topic)
+        content_response = self.content_creator_obj.get_content_for_topic(section, topic)
 
         msg = f"Invoked Learn-More : {section}"
         self.error_manager.show_any_message(msg)

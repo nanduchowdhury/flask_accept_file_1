@@ -14,17 +14,19 @@ class ErrorManager {
         this.timeoutID = null; // Holds the timeout ID
 
         this.startSendingLogs();
-        this.loadErrorsFromFile();
         
-        this.initLog4jAndMessageBox();
+        this.loadErrorsFromFile().then(() => {
+        
+            this.initLog4jAndMessageBox();
 
-        // Override console.log to capture logs
-        const originalConsoleLog = console.log;
-        console.log = (...args) => {
-            const logMessage = args.join(' ');
-            this.logs.push({ message: logMessage, level: 'INFO' });
-            originalConsoleLog.apply(console, args);
-        };
+            // Override console.log to capture logs
+            const originalConsoleLog = console.log;
+            console.log = (...args) => {
+                const logMessage = args.join(' ');
+                this.logs.push({ message: logMessage, level: 'INFO' });
+                originalConsoleLog.apply(console, args);
+            };
+        });
     }
 
     initLog4jAndMessageBox() {
@@ -101,7 +103,7 @@ class ErrorManager {
     }
 
     loadErrorsFromFile() {
-        fetch(this.errorFilePath)
+        return fetch(this.errorFilePath)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Failed to load the error messages file.');
@@ -116,7 +118,7 @@ class ErrorManager {
                     if (line.startsWith('//') || line.length === 0) {
                         return;
                     }
-
+    
                     const [code, message] = line.split(':', 2);
                     if (code && message) {
                         this.errors.set(parseInt(code.trim()), message.trim());
@@ -127,6 +129,7 @@ class ErrorManager {
                 console.error('Error loading errors:', error);
             });
     }
+    
 
     showMessage(type, message) {
         // Log the message using log4javascript

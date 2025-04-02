@@ -53,15 +53,12 @@ class ContentCreatorTask(TaskBase):
         self.error_manager = error_manager
 
     def run(self):
-        obj = ContentCreatorBase(self.section, self.gemini_access, self.error_manager)
+        obj = ContentCreatorBase(self.gemini_access, self.error_manager)
 
-        obj.generate_all_contents()
-        obj.finish()
+        obj.generate_all_contents(self.section)
 
 class ContentCreatorBase:
-    def __init__(self, section, gemini_access, error_manager):
-
-        self.section = section
+    def __init__(self, gemini_access, error_manager):
 
         self.gemini_access = gemini_access
         self.error_manager = error_manager
@@ -2460,23 +2457,27 @@ class ContentCreatorBase:
                 ]
             }
 
-        self.json_store = JsonDataStore(self.section_json_root_map[self.section])
-        self.gcs_json_file = f"{self.section}.json"
+        self.map_section_to_json_store = {}
 
         self.gcs_manager = GCSManager("kupmanduk-bucket", constants.GCS_ROOT_FOLDER)
 
         self.google_cse_access = GoogleCSEAccess(self.error_manager)
         self.google_cse_access.initialize()
 
-        self.init()
+        self.pre_read_all_json()
 
-    def init(self):
-        if self.gcs_manager.is_exist(self.gcs_json_file):
-            d = self.gcs_manager.read_json(self.gcs_json_file)
-            self.json_store.update_from_json_data(d)
 
-    def get_random_topic(self, alreadyDoneTopicList):
-        topics = self.topic_list[self.section]
+    def pre_read_all_json(self):
+        for section in self.topic_list:
+            gcs_json_file = f"{section}.json"
+            d = self.gcs_manager.read_json(gcs_json_file)
+            json_store = JsonDataStore(self.section_json_root_map[section])
+            json_store.update_from_json_data(d)
+            self.map_section_to_json_store[section] = json_store
+            
+
+    def get_random_topic(self, section, alreadyDoneTopicList):
+        topics = self.topic_list[section]
         
         # If all topics are already done, clear the list
         if set(alreadyDoneTopicList) >= set(topics):
@@ -2493,17 +2494,23 @@ class ContentCreatorBase:
 
         return new_topic, alreadyDoneTopicList
 
-    def get_content_for_topic(self, topic):
-        content = self.json_store.read_key(topic)
+    def get_content_for_topic(self, section, topic):
+        json_store = self.map_section_to_json_store[section]
+        content = json_store.read_key(topic)
 
         return content
 
-    def generate_content(self, topic):
-        content = self.get_content_for_topic(topic)
+    def generate_content(self, section, topic):
+        content = self.get_content_for_topic(section, topic)
         if not content:
-            content = self.generate_content_implementation(topic)
-            self.json_store.save_key(topic, content)
-            print(f"Generated content for section {self.section} and topic {topic}")
+            content = self.generate_content_implementation(section, topic)
+            json_store = self.map_section_to_json_store[section]
+            json_store.save_key(topic, content)
+            print(f"Generated content for section {section} and topic {topic}")
+
+            return True
+
+        return False
 
     # The topic may have complex set of items seperated by 
     # commas - such as in 'authors'
@@ -2515,21 +2522,30 @@ class ContentCreatorBase:
 
         return concatenated_string
 
-    def generate_all_contents(self):
-        topics = self.topic_list[self.section]
+    def generate_all_contents(self, section):
+        
+        something_generated = False
+
+        topics = self.topic_list[section]
         for t in topics:
             t = self.normalize_topic(t)
-            self.generate_content(t)
+            something_generated = self.generate_content(section, t)
 
-    def generate_content_implementation(self, topic):
-        response = self.gemini_access.generate_content(self.section, topic)
+        if something_generated:
+            self.finish(section)
+            
+
+    def generate_content_implementation(self, section, topic):
+        response = self.gemini_access.generate_content(section, topic)
         return response
 
-    def finish(self):
-        self.gcs_manager.write_json(self.gcs_json_file, self.json_store.get_json_data())
+    def finish(self, section):
+        gcs_json_file = f"{section}.json"
+        json_store = self.map_section_to_json_store[section]
+        self.gcs_manager.write_json(gcs_json_file, json_store.get_json_data())
 
-    def generate_youtube_response(self, topic):
-        search_line = f"youtube {self.section} {topic} site:youtube.com/watch"
+    def generate_youtube_response(self, section, topic):
+        search_line = f"youtube {section} {topic} site:youtube.com/watch"
         search_line = search_line.replace('_', ' ')
         response = self.google_cse_access.search(search_line)
         return response
