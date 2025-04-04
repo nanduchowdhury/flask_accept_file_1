@@ -2,7 +2,7 @@
     font-family: 'Patrick Hand';
     font-size: 18px;
     font-weight: bold;
-    color: rgb(45, 198, 45); /* Green color */
+    color: rgba(2, 19, 2, 0.993); /* Green color */
 }
 
 .header-container {
@@ -33,7 +33,7 @@
     font-family: 'Patrick Hand';
     font-size: 12px;
     font-weight: bold;
-    color: rgb(45, 198, 45); /* Green color */
+    color: rgb(16, 125, 213); /* Green color */
     margin-right: 80px;
 }
 
