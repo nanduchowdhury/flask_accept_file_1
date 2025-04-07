@@ -72,6 +72,12 @@ class ScholarKM(Flask):
         self.route('/music_km')(self.music_km_index)
         self.route('/yoga_km')(self.yoga_km_index)
         self.route('/racing_km')(self.racing_km_index)
+        self.route('/tariff_km')(self.tariff_km_index)
+        self.route('/crypto_km')(self.crypto_km_index)
+        self.route('/AI_km')(self.AI_km_index)
+        self.route('/jazz_km')(self.jazz_km_index)
+        self.route('/rock_km')(self.rock_km_index)
+        self.route('/country_km')(self.country_km_index)
         self.route('/winter_sports_km')(self.winter_sports_km_index)
         self.route('/ISS_km')(self.ISS_km_index)
         self.route('/space_travel_km')(self.space_travel_km_index)
@@ -285,6 +291,24 @@ class ScholarKM(Flask):
 
     def yoga_km_index(self):
         return self.content_creator_index("yoga")
+
+    def tariff_km_index(self):
+        return self.content_creator_index("tariff")
+
+    def crypto_km_index(self):
+        return self.content_creator_index("crypto")
+
+    def AI_km_index(self):
+        return self.content_creator_index("AI")
+
+    def rock_km_index(self):
+        return self.content_creator_index("rock")
+
+    def jazz_km_index(self):
+        return self.content_creator_index("jazz")
+
+    def country_km_index(self):
+        return self.content_creator_index("country")
 
     def medical_care_km_index(self):
         return self.content_creator_index("medical_care")
@@ -676,6 +700,12 @@ class ScholarKM(Flask):
                 self.content_creator_task("hindustani_classical_music")
                 self.content_creator_task("yoga")
                 self.content_creator_task("internal_organ")
+                self.content_creator_task("tariff")
+                self.content_creator_task("crypto")
+                self.content_creator_task("AI")
+                self.content_creator_task("jazz")
+                self.content_creator_task("rock")
+                self.content_creator_task("country")
                 self.content_creator_task("ISS")
                 self.content_creator_task("space_travel")
                 self.content_creator_task("astronomy")

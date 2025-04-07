@@ -769,17 +769,26 @@ class TripleDashMenuCreator {
         this.menu.addMenuItem("Science", "Electronics", new SampleMenuItem("electronics_km"));
         this.menu.addMenuItem("Science", "Geography", new SampleMenuItem("geography_km"));
         this.menu.addMenuItem("Science", "Political Science", new SampleMenuItem("political_science_km"));
-        this.menu.addMenuItem("Science", "Astronomy", new SampleMenuItem("astronomy_km"));
+        this.menu.addMenuItem("Science", "AI", new SampleMenuItem("AI_km"));
         this.menu.addMenuItem("Science", "Indistrial Machines", new SampleMenuItem("industrial_machines_km"));
         this.menu.addMenuItem("Science", "General Machines", new SampleMenuItem("general_machines_km"));
-        this.menu.addMenuItem("Science", "ISS", new SampleMenuItem("ISS_km"));
-        this.menu.addMenuItem("Science", "Space Travel", new SampleMenuItem("space_travel_km"));
+        
+        this.menu.addMenuItem("", "Space & Astronomy", new SampleMenuItem());
+        this.menu.addMenuItem("Space & Astronomy", "ISS", new SampleMenuItem("ISS_km"));
+        this.menu.addMenuItem("Space & Astronomy", "Space Travel", new SampleMenuItem("space_travel_km"));
+        this.menu.addMenuItem("Space & Astronomy", "Astronomy", new SampleMenuItem("astronomy_km"));
 
         this.menu.addMenuItem("", "Wellness", new SampleMenuItem());
         this.menu.addMenuItem("Wellness", "Nutrition", new SampleMenuItem("nutrition_km"));
         this.menu.addMenuItem("Wellness", "Yoga", new SampleMenuItem("yoga_km"));
         this.menu.addMenuItem("Wellness", "Medical Care", new SampleMenuItem("medical_care_km"));
         this.menu.addMenuItem("Wellness", "Body", new SampleMenuItem("internal_organ_km"));
+
+        this.menu.addMenuItem("", "Music", new SampleMenuItem());
+        this.menu.addMenuItem("Music", "Jazz", new SampleMenuItem("jazz_km"));
+        this.menu.addMenuItem("Music", "Rock", new SampleMenuItem("rock_km"));
+        this.menu.addMenuItem("Music", "Country", new SampleMenuItem("country_km"));
+        this.menu.addMenuItem("Music", "Hindustani Classical", new SampleMenuItem("music_km"));
 
         this.menu.addMenuItem("", "Sports", new SampleMenuItem());
         this.menu.addMenuItem("Sports", "Cricket", new SampleMenuItem("cricket_km"));
@@ -791,9 +800,10 @@ class TripleDashMenuCreator {
         this.menu.addMenuItem("Entertainment", "Oscar Movies", new SampleMenuItem("oscar_nominated_movies_km"));
         this.menu.addMenuItem("Entertainment", "Grammy Music", new SampleMenuItem("grammy_songs_km"));
         this.menu.addMenuItem("Entertainment", "Author & Books", new SampleMenuItem("authors_km"));
-        this.menu.addMenuItem("Entertainment", "Hindustani Classical", new SampleMenuItem("music_km"));
 
         this.menu.addMenuItem("", "Finance", new SampleMenuItem());
+        this.menu.addMenuItem("Finance", "Crypto", new SampleMenuItem("crypto_km"));
+        this.menu.addMenuItem("Finance", "Tariff", new SampleMenuItem("tariff_km"));
         this.menu.addMenuItem("Finance", "Stocks", new SampleMenuItem("stocks_km"));
         this.menu.addMenuItem("Finance", "Economics", new SampleMenuItem("economics_km"));
         this.menu.addMenuItem("Finance", "Mutual Funds", new SampleMenuItem("mutual_funds_km"));

@@ -66,6 +66,12 @@ class ContentCreatorBase:
         self.section_json_root_map = {
             "hindustani_classical_music": "hindustani_classical_music_json_root",
             "yoga": "yoga_json_root",
+            "tariff": "tariff_json_root",
+            "crypto": "crypto_json_root",
+            "AI": "AI_json_root",
+            "jazz": "jazz_json_root",
+            "rock": "rock_json_root",
+            "country": "country_json_root",
             "ISS": "ISS_json_root",
             "space_travel": "space_travel_json_root",
             "racing": "racing_json_root",
@@ -166,6 +172,206 @@ class ContentCreatorBase:
                 "Space Debris and Its Impact on Future Missions",
                 "Nuclear and Electric Propulsion for Deep Space Missions",
                 "Terraforming and Possibilities of Habitability on Other Planets"
+                ],
+            "tariff":
+                [
+                "Import tariffs",
+                "Export tariffs",
+                "Ad valorem tariffs",
+                "Specific tariffs",
+                "Compound tariffs",
+                "Protective tariffs",
+                "Revenue tariffs",
+                "Anti-dumping duties",
+                "Countervailing duties",
+                "Retaliatory tariffs",
+                "Tariff rate quotas",
+                "Most Favored Nation (MFN) tariffs",
+                "Binding tariffs",
+                "Tariff escalation",
+                "Tariff barriers vs. non-tariff barriers",
+                "Harmonized System (HS) codes",
+                "World Trade Organization (WTO) tariff rules",
+                "Trade wars and tariff retaliation",
+                "Trade agreements and tariff reductions",
+                "Customs unions and common external tariffs",
+                "Preferential tariffs",
+                "Temporary tariffs or safeguards",
+                "Sector-specific tariffs (e.g., steel, agriculture)",
+                "Tariff schedules",
+                "Tariff harmonization"
+                ],
+            "crypto":
+                [
+                "Blockchain technology",
+                "Bitcoin (BTC)",
+                "Ethereum (ETH)",
+                "Altcoins",
+                "Smart contracts",
+                "Decentralized Finance (DeFi)",
+                "Non-Fungible Tokens (NFTs)",
+                "Cryptographic hashing",
+                "Proof of Work (PoW)",
+                "Proof of Stake (PoS)",
+                "Consensus mechanisms",
+                "Crypto wallets (hot & cold)",
+                "Public and private keys",
+                "Decentralized exchanges (DEXs)",
+                "Centralized exchanges (CEXs)",
+                "Initial Coin Offerings (ICOs)",
+                "Tokenomics",
+                "Stablecoins",
+                "Mining and staking",
+                "Gas fees",
+                "Layer 1 vs Layer 2 solutions",
+                "Crypto regulation and compliance",
+                "KYC and AML in crypto",
+                "Crypto taxation",
+                "Blockchain scalability",
+                "Forks (hard fork, soft fork)",
+                "Metaverse and crypto",
+                "Web3 and decentralization",
+                "Crypto security and scams",
+                "Privacy coins (e.g., Monero, Zcash)",
+                "Cross-chain interoperability",
+                "DAOs (Decentralized Autonomous Organizations)"
+                ],
+            "AI":
+                [
+                "Machine Learning",
+                "Deep Learning",
+                "Neural Networks",
+                "Natural Language Processing (NLP)",
+                "Computer Vision",
+                "Reinforcement Learning",
+                "Supervised Learning",
+                "Unsupervised Learning",
+                "Semi-supervised Learning",
+                "Generative AI",
+                "Large Language Models (LLMs)",
+                "Transfer Learning",
+                "Explainable AI (XAI)",
+                "Bias and Fairness in AI",
+                "AI Ethics",
+                "AI Governance",
+                "AI in Healthcare",
+                "AI in Finance",
+                "AI in Robotics",
+                "AI for Cybersecurity",
+                "Recommendation Systems",
+                "Speech Recognition",
+                "Image Classification",
+                "Object Detection",
+                "Autonomous Vehicles",
+                "AI-powered Chatbots",
+                "Federated Learning",
+                "Edge AI",
+                "AI Model Training and Optimization",
+                "AI Regulation and Policy",
+                "Turing Test and General AI (AGI)",
+                "Prompt Engineering",
+                "Synthetic Data Generation"
+                ],
+            "jazz":
+                [
+                "Origins of Jazz",
+                "New Orleans Jazz",
+                "Swing Era",
+                "Bebop",
+                "Cool Jazz",
+                "Hard Bop",
+                "Free Jazz",
+                "Jazz Fusion",
+                "Modal Jazz",
+                "Latin Jazz",
+                "Smooth Jazz",
+                "Jazz Improvisation",
+                "Jazz Harmony and Chord Progressions",
+                "Scat Singing",
+                "Jazz Standards",
+                "Big Band Jazz",
+                "Jazz Ensembles and Instrumentation",
+                "Influential Jazz Musicians",
+                "Jazz Piano Techniques",
+                "Jazz Guitar Styles",
+                "Jazz Saxophone Legends",
+                "Role of the Double Bass in Jazz",
+                "Jazz Drumming Patterns",
+                "Jazz Festivals",
+                "Jazz and Civil Rights Movement",
+                "Jazz Education and Pedagogy",
+                "Jazz Composition and Arranging",
+                "Jazz Record Labels (e.g., Blue Note, Verve)",
+                "Improvisation Techniques",
+                "Rhythmic Complexity in Jazz",
+                "Influence of Blues and Ragtime on Jazz"
+                ],
+            "rock":
+                [
+                "Origins of Rock and Roll",
+                "Classic Rock",
+                "Hard Rock",
+                "Psychedelic Rock",
+                "Progressive Rock (Prog Rock)",
+                "Alternative Rock",
+                "Indie Rock",
+                "Punk Rock",
+                "Garage Rock",
+                "Grunge",
+                "Glam Rock",
+                "Folk Rock",
+                "Southern Rock",
+                "Blues Rock",
+                "Rock Ballads",
+                "Heavy Metal (and its roots in rock)",
+                "Arena Rock",
+                "Post-Rock",
+                "Art Rock",
+                "Rock Guitar Techniques",
+                "Power Chords and Riffs",
+                "Rock Drumming Patterns",
+                "Rock Basslines",
+                "Famous Rock Bands and Artists",
+                "Influence of The Beatles and The Rolling Stones",
+                "Rock Festivals (e.g., Woodstock, Glastonbury)",
+                "The British Invasion",
+                "MTV and the Rise of Rock Videos",
+                "Rock Subcultures and Fashion",
+                "Political and Social Themes in Rock",
+                "Evolution of Rock Production Techniques"
+                ],
+            "country":
+                [
+                "Origins of Country Music",
+                "Bluegrass",
+                "Honky Tonk",
+                "Outlaw Country",
+                "Country Pop",
+                "Country Rock",
+                "Neo-traditional Country",
+                "Americana",
+                "Alternative Country (Alt-Country)",
+                "Western Swing",
+                "Southern Gospel and Country",
+                "Nashville Sound",
+                "Bakersfield Sound",
+                "Country Music Instruments",
+                "Steel Guitar and Slide Guitar",
+                "Banjo in Country Music",
+                "Fiddle and Mandolin Usage",
+                "Country Songwriting Techniques",
+                "Storytelling in Country Lyrics",
+                "Country Duets and Collaborations",
+                "Influential Country Artists",
+                "Country Music Hall of Fame",
+                "Grand Ole Opry",
+                "Country Music Festivals (e.g., CMA Fest)",
+                "Country Radio and Billboard Charts",
+                "Evolution of Country Fashion",
+                "Themes in Country Music (love, loss, home, etc.)",
+                "Role of Religion in Country Music",
+                "Crossover Artists (Country to Pop and vice versa)",
+                "Modern Country vs Traditional Country"
                 ],
             "yoga":
                 [
@@ -2470,10 +2676,12 @@ class ContentCreatorBase:
     def pre_read_all_json(self):
         for section in self.topic_list:
             gcs_json_file = f"{section}.json"
-            d = self.gcs_manager.read_json(gcs_json_file)
-            json_store = JsonDataStore(self.section_json_root_map[section])
-            json_store.update_from_json_data(d)
-            self.map_section_to_json_store[section] = json_store
+
+            if self.gcs_manager.is_exist(gcs_json_file):
+                d = self.gcs_manager.read_json(gcs_json_file)
+                json_store = JsonDataStore(self.section_json_root_map[section])
+                json_store.update_from_json_data(d)
+                self.map_section_to_json_store[section] = json_store
             
 
     def get_random_topic(self, section, alreadyDoneTopicList):
@@ -2495,6 +2703,12 @@ class ContentCreatorBase:
         return new_topic, alreadyDoneTopicList
 
     def get_content_for_topic(self, section, topic):
+        
+        if section not in self.map_section_to_json_store:
+            json_store = JsonDataStore(self.section_json_root_map[section])
+            self.map_section_to_json_store[section] = json_store
+            return None
+
         json_store = self.map_section_to_json_store[section]
         content = json_store.read_key(topic)
 

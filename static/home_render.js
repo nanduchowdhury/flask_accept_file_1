@@ -8,11 +8,18 @@ class HomeRender {
     static golf_description = "Know about the sport and the technicalities. Find out about major tournaments played worldwide.";
     static raga_description = "Find out about the age old ragas of hindustani classical music.";
     static yoga_description = "Different yoga poses are taught. Know about the benefits and how to do the asanas.";
+    static tariff_description = "Know about what these tariffs are that countries are imposing on one another.";
     static oscar_description = "Oscar movies are awarded each year. Know about the nominations - who missed it and who won it.";
     static astronomy_description = "Space around us is almost infinite. Find out what's there in the stars.";
     static stocks_description = "Know about the technicals of stock market. Find out about trading and markets.";
     static nutrition_description = "Our body requires nutrition. Know about the sources of food, vegetables, fruits etc.";
     static grammy_description = "Grammy music awards are the most prestigous. Find out who won and who got nominated over the years.";
+    static crypto_description = "Crypto currencies are coming up fast. What are they and do we realy need them";
+    static AI_description = "Artificial Intelligence (AI) is the buzzword. Find out more about it";
+    static rock_description = "Rock music and it's history and popularity.";
+    static jazz_description = "Jazz music, saxophones and it's history and popularity";
+    static country_description = "Sweet country music - and all the history behind it.";
+
     static books_description = "Authors and their books are shown here. Know about authors. And find out what books they published.";
     static electronics_description = "Electronics is the behind the technology that surrounds us. Find out more about the subject.";
     static painting_description = "Learn about different tyes of painting. Find out about famous painters. Learn the process of painting.";
@@ -188,6 +195,10 @@ class HomeRender {
                         link: BasicInitializer.FLASK_URL + "ISS_km", 
                         title: "Sunita Williams spent months in ISS", 
                         description: HomeRender.ISS_description },
+            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "tariff.jpg", 
+                        link: BasicInitializer.FLASK_URL + "tariff_km", 
+                        title: "Trump Tariffs - what actually are tariffs?", 
+                        description: HomeRender.tariff_description },
             { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "space_travel.jpg", 
                         link: BasicInitializer.FLASK_URL + "space_travel_km", 
                         title: "Sunita Williams returns from ISS", 
@@ -197,6 +208,10 @@ class HomeRender {
         {
             const newImages = images.slice(0, 2);
             this.populateImageRowsColumns("HomeArea_1", 1, newImages, "Featured Learning");
+        }
+        {
+            const newImages = images.slice(2, 3);
+            this.populateImageRowsColumns("HomeArea_1", 2, newImages);
         }
     }
 
@@ -225,6 +240,11 @@ class HomeRender {
             { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "astronomy.jpg", link: BasicInitializer.FLASK_URL + "astronomy_km", title: "Astronomy", description: HomeRender.astronomy_description },
             { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "golf.jpg", link: BasicInitializer.FLASK_URL + "golf_km", title: "Golf", description: HomeRender.golf_description },
             { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "grammy.jpg", link: BasicInitializer.FLASK_URL + "grammy_songs_km", title: "Grammy Music", description: HomeRender.grammy_description },
+            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "crypto.jpg", link: BasicInitializer.FLASK_URL + "crypto_km", title: "Crypto", description: HomeRender.crypto_description },
+            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "jazz.jpg", link: BasicInitializer.FLASK_URL + "jazz_km", title: "Jazz Music", description: HomeRender.jazz_description },
+            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "rock.jpg", link: BasicInitializer.FLASK_URL + "rock_km", title: "Rock Music", description: HomeRender.rock_description },
+            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "AI.jpg", link: BasicInitializer.FLASK_URL + "AI_km", title: "Artificial Intelligence", description: HomeRender.AI_description },
+            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "country.jpg", link: BasicInitializer.FLASK_URL + "country_km", title: "Country Music", description: HomeRender.country_description },
             { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "electronics.jpg", link: BasicInitializer.FLASK_URL + "electronics_km", title: "Electronics", description: HomeRender.electronics_description },
             { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "chemistry.jpg", link: BasicInitializer.FLASK_URL + "chemistry_km", title: "Chemistry", description: HomeRender.chemistry_description },
             { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "physics.jpg", link: BasicInitializer.FLASK_URL + "physics_km", title: "Physics", description: HomeRender.physics_description },
@@ -274,6 +294,18 @@ class HomeRender {
         {
             const newImages = images.slice(18, 19);
             this.populateImageRowsColumns("HomeArea_2", 11, newImages);
+        }
+        {
+            const newImages = images.slice(19, 21);
+            this.populateImageRowsColumns("HomeArea_2", 12, newImages);
+        }
+        {
+            const newImages = images.slice(21, 23);
+            this.populateImageRowsColumns("HomeArea_2", 13, newImages);
+        }
+        {
+            const newImages = images.slice(23, 25);
+            this.populateImageRowsColumns("HomeArea_2", 14, newImages);
         }
     }
 
