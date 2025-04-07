@@ -127,78 +127,131 @@ class HomeRender {
 
     }
 
-    populateImageRowsColumns(containerId, rowNumber, images, titleText = "") {
+    createOneImagesBlock(containerId, title, blockBackgroundColor, images) {
+
         const container = document.getElementById(containerId);
-        if (!container) return;
+
+        if (!container || !images || images.length === 0) return;
     
-        // Ensure the title exists at the top of the container
-        let title = container.querySelector(".container-title");
-        if (!title && titleText) {
-            title = document.createElement("div");
-            title.className = "container-title";
-            title.textContent = titleText;
-            title.style.fontSize = "12px";
-            title.style.fontWeight = "bold";
-            title.style.marginBottom = "5px";
-            container.prepend(title);
-        }
+        const titleFontFamily = 'Arial';
+        const titleFontSize = "18px";
+        const titleFontWeight = "bold";
+        const titleTextColor = "red";
+       
+        const descFontFamily = 'Arial';
+        const descFontSize = "12px";
+        const descFontWeight = "bold";
+        const descTextColor = "black";
+
+        const block = document.createElement("div");
+        block.className = "image-block";
+        block.style.border = "1px solid #ccc";
+        block.style.borderRadius = "10px";
+        block.style.padding = "10px";
+        block.style.margin = "10px 0";
+        block.style.backgroundColor = blockBackgroundColor;
+        block.style.maxWidth = "500px";
+        block.style.width = "fit-content"; // or "auto" depending on your layout
     
-        // Ensure the row is specific to the container by searching within the container
-        let row = container.querySelector(`.row[data-row="${rowNumber}"]`);
-        if (!row) {
-            row = document.createElement("div");
-            row.className = "row";
-            row.dataset.row = rowNumber;
-            container.appendChild(row);
-        } else {
-            // Clear the row to prevent duplicate images if function is called again
-            row.innerHTML = "";
-        }
+        // Main block title
+        const blockTitle = document.createElement("div");
+        blockTitle.textContent = title;      
+        blockTitle.style.fontWeight = "bold";
+        blockTitle.style.marginBottom = "10px";
+        blockTitle.style.fontSize = "20px";
+
+        blockTitle.style.backgroundColor = "darkblue";
+        blockTitle.style.color = "white";               // for contrast
+        blockTitle.style.padding = "4px 8px";           // to add some space around text
+        blockTitle.style.borderTopLeftRadius = "8px";   // optional: match rounded corners
+        blockTitle.style.borderTopRightRadius = "8px";  // optional: match rounded corners
+
+        block.appendChild(blockTitle);
     
-        images.forEach((item) => {
+        images.forEach((item, index) => {
             const wrapper = document.createElement("div");
-            wrapper.className = "image-text-wrapper";
-            wrapper.onclick = () => window.location.href = item.link;
+            wrapper.className = "image-entry";
+            wrapper.style.display = "flex";
+            wrapper.style.alignItems = "center";
+            wrapper.style.borderRadius = "8px";
+            wrapper.style.padding = "8px";
+            wrapper.style.cursor = "pointer";
+            wrapper.style.transition = "background-color 0.3s";
+            wrapper.style.textDecoration = "none";
+            wrapper.style.marginBottom = "8px";
+    
+            // Hover effect
+            wrapper.onmouseenter = () => wrapper.style.backgroundColor = "#f0f0f0";
+            wrapper.onmouseleave = () => wrapper.style.backgroundColor = "";
+    
+            wrapper.onclick = () => {
+                window.location.href = item.link;
+            };
     
             const img = document.createElement("img");
             img.src = item.image;
             img.alt = item.title;
-            img.className = "image";
+            img.style.width = "150px";
+            img.style.height = "100px";
+            img.style.objectFit = "contain";
+            img.style.borderRadius = "6px";
+            img.style.marginRight = "10px";
+            img.style.flexShrink = "0";
+            img.style.backgroundColor = "#eee";
     
-            const textContainer = document.createElement("div");
-            textContainer.className = "text-container";
+            const textBlock = document.createElement("div");
     
-            const title = document.createElement("div");
-            title.className = "title";
-            title.textContent = item.title;
+            const imgTitle = document.createElement("div");
+            imgTitle.textContent = item.title;
+
+            imgTitle.style.fontFamily = titleFontFamily;
+            imgTitle.style.fontSize = titleFontSize;
+            imgTitle.style.fontWeight = titleFontWeight;
+            imgTitle.style.color = titleTextColor;
+
+            imgTitle.style.marginBottom = "4px";
     
-            const description = document.createElement("div");
-            description.className = "description";
-            description.textContent = item.description;
+            const imgDescription = document.createElement("div");
+            imgDescription.textContent = item.description;
+
+            imgDescription.style.fontFamily = descFontFamily;
+            imgDescription.style.fontSize = descFontSize;
+            imgDescription.style.fontWeight = descFontWeight;
+            imgDescription.style.color = descTextColor
     
-            textContainer.appendChild(title);
-            textContainer.appendChild(description);
+            textBlock.appendChild(imgTitle);
+            textBlock.appendChild(imgDescription);
+    
             wrapper.appendChild(img);
-            wrapper.appendChild(textContainer);
-            row.appendChild(wrapper);
+            wrapper.appendChild(textBlock);
+            block.appendChild(wrapper);
+    
+            // Separator (except after the last item)
+            if (index < images.length - 1) {
+                const separator = document.createElement("div");
+                separator.style.height = "1px";
+                separator.style.margin = "4px 0";
+                separator.style.backgroundColor = "#ccc";
+                separator.style.marginLeft = "10px";
+                separator.style.marginRight = "10px";
+                block.appendChild(separator);
+            }
         });
     
-        // Adjust description wrapping based on image count in row
-        row.classList.toggle("single-image", images.length === 1);
-        row.classList.toggle("multi-image", images.length > 1);
+        container.appendChild(block);
     }
 
     showImageRowsHomeArea_1() {
 
         const images = [
+            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "tariff.jpg", 
+                link: BasicInitializer.FLASK_URL + "tariff_km", 
+                title: "Trump Tariffs - what actually are tariffs?", 
+                description: HomeRender.tariff_description },
             { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "ISS.jpg", 
                         link: BasicInitializer.FLASK_URL + "ISS_km", 
                         title: "Sunita Williams spent months in ISS", 
                         description: HomeRender.ISS_description },
-            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "tariff.jpg", 
-                        link: BasicInitializer.FLASK_URL + "tariff_km", 
-                        title: "Trump Tariffs - what actually are tariffs?", 
-                        description: HomeRender.tariff_description },
             { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "space_travel.jpg", 
                         link: BasicInitializer.FLASK_URL + "space_travel_km", 
                         title: "Sunita Williams returns from ISS", 
@@ -207,11 +260,11 @@ class HomeRender {
 
         {
             const newImages = images.slice(0, 2);
-            this.populateImageRowsColumns("HomeArea_1", 1, newImages, "Featured Learning");
+            this.createOneImagesBlock("HomeArea_1", "Featured", "LightBlue", newImages);
         }
         {
             const newImages = images.slice(2, 3);
-            this.populateImageRowsColumns("HomeArea_1", 2, newImages);
+            this.createOneImagesBlock("HomeArea_1", "More Featured", "LightBlue", newImages);
         }
     }
 
@@ -223,90 +276,113 @@ class HomeRender {
 
             https://pixabay.com/
         */
-        const images = [
-            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "yoga.jpg", link: BasicInitializer.FLASK_URL + "yoga_km", title: "Yoga", description: HomeRender.yoga_description },
-            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "photography.jpg", link: BasicInitializer.FLASK_URL + "photography_km", title: "Photography", description: HomeRender.photography_description },
-            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "stocks.jpg", link: BasicInitializer.FLASK_URL + "stocks_km", title: "Stocks", description: HomeRender.stocks_description },
-            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "books.jpg", link: BasicInitializer.FLASK_URL + "authors_km", title: "Authors & Books", description: HomeRender.books_description },
-            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "nutrition.jpg", link: BasicInitializer.FLASK_URL + "nutrition_km", title: "Nutrition", description: HomeRender.nutrition_description },
-            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "raga.jpg", link: BasicInitializer.FLASK_URL + "music_km", title: "Hindustani Classical Music", description: HomeRender.raga_description },
-            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "student_tips.jpg", link: BasicInitializer.FLASK_URL + "student_tips_km", title: "Student Tips", description: HomeRender.student_tips_description },
-            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "cricket.jpg", link: BasicInitializer.FLASK_URL + "cricket_km", title: "Cricket", description: HomeRender.cricket_description },
-            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "philosophy.jpg", link: BasicInitializer.FLASK_URL + "philosophy_km", title: "Philosophy", description: HomeRender.philosophy_description },
-            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "career.jpg", link: BasicInitializer.FLASK_URL + "career_km", title: "Career", description: HomeRender.raga_description },
-            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "painting.jpg", link: BasicInitializer.FLASK_URL + "painting_km", title: "Painting", description: HomeRender.painting_description },
-            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "medical_care.jpg", link: BasicInitializer.FLASK_URL + "medical_care_km", title: "Medical Care", description: HomeRender.medical_care_description },
-            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "oscars.jpg", link: BasicInitializer.FLASK_URL + "oscar_nominated_movies_km", title: "Oscar Movies", description: HomeRender.oscar_description },
-            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "astronomy.jpg", link: BasicInitializer.FLASK_URL + "astronomy_km", title: "Astronomy", description: HomeRender.astronomy_description },
-            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "golf.jpg", link: BasicInitializer.FLASK_URL + "golf_km", title: "Golf", description: HomeRender.golf_description },
-            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "grammy.jpg", link: BasicInitializer.FLASK_URL + "grammy_songs_km", title: "Grammy Music", description: HomeRender.grammy_description },
-            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "crypto.jpg", link: BasicInitializer.FLASK_URL + "crypto_km", title: "Crypto", description: HomeRender.crypto_description },
-            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "jazz.jpg", link: BasicInitializer.FLASK_URL + "jazz_km", title: "Jazz Music", description: HomeRender.jazz_description },
-            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "rock.jpg", link: BasicInitializer.FLASK_URL + "rock_km", title: "Rock Music", description: HomeRender.rock_description },
-            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "AI.jpg", link: BasicInitializer.FLASK_URL + "AI_km", title: "Artificial Intelligence", description: HomeRender.AI_description },
-            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "country.jpg", link: BasicInitializer.FLASK_URL + "country_km", title: "Country Music", description: HomeRender.country_description },
-            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "electronics.jpg", link: BasicInitializer.FLASK_URL + "electronics_km", title: "Electronics", description: HomeRender.electronics_description },
-            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "chemistry.jpg", link: BasicInitializer.FLASK_URL + "chemistry_km", title: "Chemistry", description: HomeRender.chemistry_description },
-            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "physics.jpg", link: BasicInitializer.FLASK_URL + "physics_km", title: "Physics", description: HomeRender.physics_description },
-            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "machines.jpg", link: BasicInitializer.FLASK_URL + "general_machines_km", title: "Machines", description: HomeRender.machines_description }
-        ];
 
         {
-            const newImages = images.slice(0, 2);
-            this.populateImageRowsColumns("HomeArea_2", 1, newImages);
+            const images = [
+                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "grammy.jpg", 
+                    link: BasicInitializer.FLASK_URL + "grammy_songs_km", 
+                    title: "Grammy Music", description: HomeRender.grammy_description },
+                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "jazz.jpg", 
+                    link: BasicInitializer.FLASK_URL + "jazz_km", 
+                    title: "Jazz Music", description: HomeRender.jazz_description },
+                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "rock.jpg", 
+                    link: BasicInitializer.FLASK_URL + "rock_km", 
+                    title: "Rock Music", description: HomeRender.rock_description },
+                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "country.jpg", 
+                    link: BasicInitializer.FLASK_URL + "country_km", 
+                    title: "Country Music", description: HomeRender.country_description },
+                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "raga.jpg", 
+                    link: BasicInitializer.FLASK_URL + "music_km", 
+                    title: "Hindustani Classical Music", description: HomeRender.raga_description }
+            ];
+            this.createOneImagesBlock("HomeArea_2", "Music", "LightGrey", images);
         }
         {
-            const newImages = images.slice(2, 3);
-            this.populateImageRowsColumns("HomeArea_2", 2, newImages);
+            const images = [
+                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "yoga.jpg", 
+                    link: BasicInitializer.FLASK_URL + "yoga_km", 
+                    title: "Yoga", description: HomeRender.yoga_description },
+                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "nutrition.jpg", 
+                    link: BasicInitializer.FLASK_URL + "nutrition_km", 
+                    title: "Nutrition", description: HomeRender.nutrition_description },
+                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "medical_care.jpg", 
+                    link: BasicInitializer.FLASK_URL + "medical_care_km", 
+                    title: "Medical Care", description: HomeRender.medical_care_description }
+            ];
+            this.createOneImagesBlock("HomeArea_2", "Wellness", "LightYellow", images);
         }
         {
-            const newImages = images.slice(3, 5);
-            this.populateImageRowsColumns("HomeArea_2", 3, newImages);
+            const images = [
+                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "photography.jpg", 
+                    link: BasicInitializer.FLASK_URL + "photography_km", 
+                    title: "Photography", description: HomeRender.photography_description },
+                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "philosophy.jpg", 
+                    link: BasicInitializer.FLASK_URL + "philosophy_km", 
+                    title: "Philosophy", description: HomeRender.philosophy_description },
+                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "painting.jpg", 
+                    link: BasicInitializer.FLASK_URL + "painting_km", 
+                    title: "Painting", description: HomeRender.painting_description }
+            ];
+            this.createOneImagesBlock("HomeArea_2", "Arts", "LightYellow", images);
         }
         {
-            const newImages = images.slice(5, 7);
-            this.populateImageRowsColumns("HomeArea_2", 4, newImages);
+            const images = [
+                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "crypto.jpg", 
+                    link: BasicInitializer.FLASK_URL + "crypto_km", 
+                    title: "Crypto", description: HomeRender.crypto_description },
+                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "AI.jpg", 
+                    link: BasicInitializer.FLASK_URL + "AI_km", 
+                    title: "Artificial Intelligence", description: HomeRender.AI_description },
+                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "electronics.jpg", 
+                    link: BasicInitializer.FLASK_URL + "electronics_km", 
+                    title: "Electronics", description: HomeRender.electronics_description },
+                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "chemistry.jpg", 
+                    link: BasicInitializer.FLASK_URL + "chemistry_km", 
+                    title: "Chemistry", description: HomeRender.chemistry_description },
+                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "physics.jpg", 
+                    link: BasicInitializer.FLASK_URL + "physics_km", 
+                    title: "Physics", description: HomeRender.physics_description },
+                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "machines.jpg", 
+                    link: BasicInitializer.FLASK_URL + "general_machines_km", 
+                    title: "Machines", description: HomeRender.machines_description }
+            ];
+            this.createOneImagesBlock("HomeArea_2", "Science", "LightGreen", images);
         }
         {
-            const newImages = images.slice(7, 8);
-            this.populateImageRowsColumns("HomeArea_2", 5, newImages);
+            const images = [
+                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "student_tips.jpg", 
+                    link: BasicInitializer.FLASK_URL + "student_tips_km", 
+                    title: "Student Tips", description: HomeRender.student_tips_description },
+                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "career.jpg", 
+                    link: BasicInitializer.FLASK_URL + "career_km", 
+                    title: "Career", description: HomeRender.raga_description }
+            ];
+            this.createOneImagesBlock("HomeArea_2", "For Students", "LightGreen", images);
         }
         {
-            const newImages = images.slice(8, 10);
-            this.populateImageRowsColumns("HomeArea_2", 6, newImages);
+            const images = [
+                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "stocks.jpg", 
+                    link: BasicInitializer.FLASK_URL + "stocks_km", 
+                    title: "Stocks", description: HomeRender.stocks_description },
+                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "books.jpg", 
+                    link: BasicInitializer.FLASK_URL + "authors_km", 
+                    title: "Authors & Books", description: HomeRender.books_description },
+                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "cricket.jpg", 
+                    link: BasicInitializer.FLASK_URL + "cricket_km", 
+                    title: "Cricket", description: HomeRender.cricket_description },
+                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "oscars.jpg", 
+                    link: BasicInitializer.FLASK_URL + "oscar_nominated_movies_km", 
+                    title: "Oscar Movies", description: HomeRender.oscar_description },
+                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "astronomy.jpg", 
+                    link: BasicInitializer.FLASK_URL + "astronomy_km", 
+                    title: "Astronomy", description: HomeRender.astronomy_description },
+                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "golf.jpg", 
+                    link: BasicInitializer.FLASK_URL + "golf_km", 
+                    title: "Golf", description: HomeRender.golf_description }
+            ];
+            this.createOneImagesBlock("HomeArea_2", "Misc", "LightYellow", images);
         }
-        {
-            const newImages = images.slice(10, 12);
-            this.populateImageRowsColumns("HomeArea_2", 7, newImages);
-        }
-        {
-            const newImages = images.slice(12, 14);
-            this.populateImageRowsColumns("HomeArea_2", 8, newImages);
-        }
-        {
-            const newImages = images.slice(14, 16);
-            this.populateImageRowsColumns("HomeArea_2", 9, newImages);
-        }
-        {
-            const newImages = images.slice(16, 18);
-            this.populateImageRowsColumns("HomeArea_2", 10, newImages);
-        }
-        {
-            const newImages = images.slice(18, 19);
-            this.populateImageRowsColumns("HomeArea_2", 11, newImages);
-        }
-        {
-            const newImages = images.slice(19, 21);
-            this.populateImageRowsColumns("HomeArea_2", 12, newImages);
-        }
-        {
-            const newImages = images.slice(21, 23);
-            this.populateImageRowsColumns("HomeArea_2", 13, newImages);
-        }
-        {
-            const newImages = images.slice(23, 25);
-            this.populateImageRowsColumns("HomeArea_2", 14, newImages);
-        }
+        
     }
 
 }

@@ -16,6 +16,11 @@
     white-space: pre-wrap;
     font-family: 'Patrick Hand';
     font-size: 14px;
+
+    display: flex;
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 /* Assigning height percentages */
@@ -68,64 +73,4 @@ iframe {
     -webkit-overflow-scrolling: touch !important;
 }
 
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    margin-bottom: 5px;
-    padding: 5px;
-    /*background-color: #f8f8f8; /* Light off-white background */
-    border-radius: 5px;
-    justify-content: flex-start;
-}
-
-.image-text-wrapper {
-    display: flex;
-    align-items: center; /* Align image and text in one line */
-    gap: 5px;
-    padding: 2px;
-    cursor: pointer;
-    transition: background 0.3s;
-    flex: 1 1 auto;
-    min-width: 200px;
-    /* max-width: calc(50% - 15px); /* Ensures at most 2 items per row */
-}
-
-.image-text-wrapper:hover {
-    background-color: #e0e0e0;
-}
-
-.image {
-    width: 200px;
-    height: auto;
-    border-radius: 2px;
-}
-
-.text-container {
-    display: flex;
-    flex-direction: column;
-    max-width: 300px;
-}
-
-.title {
-    font-size: 18px;
-    font-weight: bold;
-    color: rgb(245, 3, 40);
-    margin-bottom: 5px;
-}
-
-.description {
-    font-size: 14px;
-    color: black;
-}
-
-/* Special case: Single image in row - prevent wrapping */
-.single-image .description {
-    white-space: normal;
-}
-
-/* Multiple images in row - allow wrapping */
-.multi-image .description {
-    white-space: normal;
-}
 
