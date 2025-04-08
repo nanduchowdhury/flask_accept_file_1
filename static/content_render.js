@@ -347,7 +347,7 @@ class ContentRender {
         this.logGeoLocation();
 
         this.showTipsLearnMore = new ShowTips('learnMoreButton');
-        this.showTipsLearnMore.show("Click here to learn more");
+        this.showTipsLearnMore.show("Click here for next topic.");
 
         this.showTipsJoinFB = new ShowTips('');
         this.showTipsJoinFB.show("If you like the portal,\nplease follow the social links below.", 100);

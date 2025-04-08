@@ -2670,18 +2670,19 @@ class ContentCreatorBase:
         self.google_cse_access = GoogleCSEAccess(self.error_manager)
         self.google_cse_access.initialize()
 
-        self.pre_read_all_json()
 
+    def read_whole_json_for_section(self, section):
 
-    def pre_read_all_json(self):
-        for section in self.topic_list:
-            gcs_json_file = f"{section}.json"
+        gcs_json_file = f"{section}.json"
 
-            if self.gcs_manager.is_exist(gcs_json_file):
-                d = self.gcs_manager.read_json(gcs_json_file)
-                json_store = JsonDataStore(self.section_json_root_map[section])
-                json_store.update_from_json_data(d)
-                self.map_section_to_json_store[section] = json_store
+        if self.gcs_manager.is_exist(gcs_json_file):
+            d = self.gcs_manager.read_json(gcs_json_file)
+            json_store = JsonDataStore(self.section_json_root_map[section])
+            json_store.update_from_json_data(d)
+            self.map_section_to_json_store[section] = json_store
+            return True
+
+        return False
             
 
     def get_random_topic(self, section, alreadyDoneTopicList):
@@ -2705,10 +2706,11 @@ class ContentCreatorBase:
     def get_content_for_topic(self, section, topic):
         
         if section not in self.map_section_to_json_store:
-            json_store = JsonDataStore(self.section_json_root_map[section])
-            self.map_section_to_json_store[section] = json_store
-            return None
-
+            if not self.read_whole_json_for_section(section):
+                json_store = JsonDataStore(self.section_json_root_map[section])
+                self.map_section_to_json_store[section] = json_store
+                return None
+                
         json_store = self.map_section_to_json_store[section]
         content = json_store.read_key(topic)
 
