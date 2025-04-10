@@ -11,15 +11,13 @@
 
     position: relative;
     height: 40px; /* Adjust height as needed */
-    display: flex;
+    /* display: flex; */
     align-items: center;
     width: 100%;  /* Ensure the container takes the full width of the screen */
+    gap: 5px;
 }
 
-.header-container > * {
-    flex: 1;
-    text-align: center;
-}
+
 
 .header-container-1 {
     display: flex;
@@ -138,7 +136,6 @@
 }
 
 .newsletter {
-    
     display: flex;
     align-items: center;
     gap: 5px;
