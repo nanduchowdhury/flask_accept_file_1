@@ -1,7 +1,7 @@
 "use strict";
 
 
-class HomeRender {
+class HomeRender extends RootRender {
 
     static ISS_description = "Know about the International Space Station - life inside and the experiments done there.";
     static space_travel_description = "Know about space travel and it's complexities.";
@@ -34,17 +34,13 @@ class HomeRender {
     static machines_description = "Find out about different machines.";
 
 
-
     constructor() {
+        super();
+
         const gaTracker = new GoogleAnalytics();
         gaTracker.trackPageView();
 
         const menuObj = new TripleDashMenuCreator("TripleDashMenuContainer");      
-
-        this.subscribeButton = document.getElementById("subscribeButton");
-        this.subscribeButton.addEventListener("click", this.onSubscribeButtonClick.bind(this));
-
-        this.subscribeUserInput = document.getElementById("newsletter-input");
 
         this.geoLocInfo = '';
         this.logGeoLocation();
@@ -61,26 +57,6 @@ class HomeRender {
         }).catch(error => {
             console.error("Failed to retrieve geolocation info :", error);
         });
-    }
-
-    onSubscribeButtonClick() {
-        
-        const data = {
-            userInput: this.subscribeUserInput.value,
-            geoInfo: this.geoLocInfo  // Store formatted geolocation info here
-        };
-
-        window.basicInitializer.makeServerRequest('/subscribe', data, 
-            this.lamdaOnSubscribeSuccess, this.lamdaOnSubscribeFailure);
-
-        window.errorManager.showInfo(2067);
-    }
-
-    lamdaOnSubscribeSuccess = (data) => {
-    }
-
-    lamdaOnSubscribeFailure = (msg) => {
-        console.log("Subscribe failed : ", msg);
     }
 
     showLinesFading(linesList, container) {
@@ -157,10 +133,10 @@ class HomeRender {
         const blockTitle = document.createElement("div");
         blockTitle.textContent = title;      
         blockTitle.style.fontWeight = "bold";
-        blockTitle.style.marginBottom = "10px";
-        blockTitle.style.fontSize = "20px";
+        blockTitle.style.marginBottom = "5px";
+        blockTitle.style.fontSize = "15px";
 
-        blockTitle.style.backgroundColor = "darkblue";
+        blockTitle.style.backgroundColor = "purple";
         blockTitle.style.color = "white";               // for contrast
         blockTitle.style.padding = "4px 8px";           // to add some space around text
         blockTitle.style.borderTopLeftRadius = "8px";   // optional: match rounded corners

@@ -814,4 +814,33 @@ class TripleDashMenuCreator {
     }
 }
 
+class RootRender {
+
+    constructor() { 
+        this.subscribeButton = document.getElementById("subscribeButton");
+        this.subscribeButton.addEventListener("click", this.onSubscribeButtonClick.bind(this));
+
+        this.subscribeUserInput = document.getElementById("newsletter-input");
+    }
+
+    onSubscribeButtonClick() {
+        
+        const data = {
+            userInput: this.subscribeUserInput.value,
+            geoInfo: this.geoLocInfo  // Store formatted geolocation info here
+        };
+
+        window.basicInitializer.makeServerRequest('/subscribe', data, 
+            this.lamdaOnSubscribeSuccess, this.lamdaOnSubscribeFailure);
+
+        window.errorManager.showInfo(2067);
+    }
+
+    lamdaOnSubscribeSuccess = (data) => {
+    }
+
+    lamdaOnSubscribeFailure = (msg) => {
+        console.log("Subscribe failed : ", msg);
+    }
+}
 

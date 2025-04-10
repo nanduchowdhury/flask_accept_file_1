@@ -323,8 +323,11 @@ class TryAnotherVideo extends TripleDotMenuBase {
     }
 }
 
-class ContentRender {
+class ContentRender extends RootRender {
+    
     constructor(jsonData) {
+        super();
+        
         this.jsonData = jsonData;
 
         const gaTracker = new GoogleAnalytics();

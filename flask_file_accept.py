@@ -939,6 +939,9 @@ class ScholarKM(Flask):
 
             self.gcs_manager.append_to_text_file("subscription_file.txt", json_text)
         
+            msg = f"Invoked subscribe : {json_text}"
+            self.error_manager.show_any_message(msg)
+
             return jsonify({"status": "subscribe success"}), 200
 
         except Exception as e:

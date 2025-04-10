@@ -40,18 +40,19 @@
 </head>
 <body>
 
-    <div class="header-container">
-        <!-- Company logo - positioned left and smaller -->
+    <header class="header-container">
         <a href="https://kupmanduk.co.in/" target="_blank">
-            <img src="https://storage.googleapis.com/kupmanduk-bucket/scholar_km/codebase/static/images/kupmanduk-copper-black-font.jpg" 
-     class="logo" 
-     alt="Kupmanduk Logo" 
-     title="Kupmanduk" 
-     loading="lazy">
+            <img src="https://storage.googleapis.com/kupmanduk-bucket/scholar_km/codebase/static/images/kupmanduk-copper-black-font.jpg" class="logo" alt="Kupmanduk Logo" title="Kupmanduk - Expand Your Knowledge" width="150" height="50" loading="lazy">
         </a>
-    </div>
+    
+        <!-- Newsletter Subscription Form now inside header -->
+        <div class="newsletter">
+            <input type="text" id="newsletter-input" placeholder="email-id">
+            <button id="subscribeButton">Subscribe</button>
+        </div>
 
-    <div id="TripleDashMenuContainer"></div>
+        <nav id="TripleDashMenuContainer"></nav>
+    </header>
 
     <div class="separator"></div> <!-- Custom Separator -->
     
@@ -106,9 +107,9 @@
 
     <!-- Scripts -->
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/log4javascript/1.4.9/log4javascript.min.js"></script>
+    <script defer src="{{ url_for('static', filename='BasicInitializer.js') }}"></script>
     <script defer src="{{ url_for('static', filename='content_render.js') }}"></script>
     <script defer src="{{ url_for('static', filename='errorManager.js') }}"></script>
-    <script defer src="{{ url_for('static', filename='BasicInitializer.js') }}"></script>
     <script defer src="{{ url_for('static', filename='geologicalInfo.js') }}"></script>
 
     <script>
