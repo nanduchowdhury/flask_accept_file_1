@@ -124,8 +124,8 @@ class BasicInitializer extends RootInitializer{
 
     static FLASK_URL = 'https://kupmanduk.co.in/';
 
-    static GCS_BUCKET_URL = "https://storage.googleapis.com/kupmanduk-bucket/scholar_km/";
-    static GCS_BUCKET_IMAGES_URL = this.GCS_BUCKET_URL + "codebase/static/images/";
+    static GITHUB_CDN = "https://cdn.jsdelivr.net/gh/nanduchowdhury/flask_accept_file_1@main/";
+    static GITHUB_CDN_IMAGES_URL = this.GITHUB_CDN + "static/images/";
     
 
     constructor() {

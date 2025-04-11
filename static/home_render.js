@@ -220,15 +220,15 @@ class HomeRender extends RootRender {
     showImageRowsHomeArea_1() {
 
         const images = [
-            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "tariff.jpg", 
+            { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "tariff.jpg", 
                 link: BasicInitializer.FLASK_URL + "tariff_km", 
                 title: "Trump Tariffs - what actually are tariffs?", 
                 description: HomeRender.tariff_description },
-            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "ISS.jpg", 
+            { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "ISS.jpg", 
                         link: BasicInitializer.FLASK_URL + "ISS_km", 
                         title: "Sunita Williams spent months in ISS", 
                         description: HomeRender.ISS_description },
-            { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "space_travel.jpg", 
+            { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "space_travel.jpg", 
                         link: BasicInitializer.FLASK_URL + "space_travel_km", 
                         title: "Sunita Williams returns from ISS", 
                         description: HomeRender.space_travel_description }
@@ -255,19 +255,19 @@ class HomeRender extends RootRender {
 
         {
             const images = [
-                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "grammy.jpg", 
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "grammy.jpg", 
                     link: BasicInitializer.FLASK_URL + "grammy_songs_km", 
                     title: "Grammy Music", description: HomeRender.grammy_description },
-                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "jazz.jpg", 
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "jazz.jpg", 
                     link: BasicInitializer.FLASK_URL + "jazz_km", 
                     title: "Jazz Music", description: HomeRender.jazz_description },
-                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "rock.jpg", 
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "rock.jpg", 
                     link: BasicInitializer.FLASK_URL + "rock_km", 
                     title: "Rock Music", description: HomeRender.rock_description },
-                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "country.jpg", 
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "country.jpg", 
                     link: BasicInitializer.FLASK_URL + "country_km", 
                     title: "Country Music", description: HomeRender.country_description },
-                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "raga.jpg", 
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "raga.jpg", 
                     link: BasicInitializer.FLASK_URL + "music_km", 
                     title: "Hindustani Classical Music", description: HomeRender.raga_description }
             ];
@@ -275,13 +275,13 @@ class HomeRender extends RootRender {
         }
         {
             const images = [
-                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "yoga.jpg", 
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "yoga.jpg", 
                     link: BasicInitializer.FLASK_URL + "yoga_km", 
                     title: "Yoga", description: HomeRender.yoga_description },
-                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "nutrition.jpg", 
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "nutrition.jpg", 
                     link: BasicInitializer.FLASK_URL + "nutrition_km", 
                     title: "Nutrition", description: HomeRender.nutrition_description },
-                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "medical_care.jpg", 
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "medical_care.jpg", 
                     link: BasicInitializer.FLASK_URL + "medical_care_km", 
                     title: "Medical Care", description: HomeRender.medical_care_description }
             ];
@@ -289,13 +289,13 @@ class HomeRender extends RootRender {
         }
         {
             const images = [
-                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "photography.jpg", 
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "photography.jpg", 
                     link: BasicInitializer.FLASK_URL + "photography_km", 
                     title: "Photography", description: HomeRender.photography_description },
-                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "philosophy.jpg", 
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "philosophy.jpg", 
                     link: BasicInitializer.FLASK_URL + "philosophy_km", 
                     title: "Philosophy", description: HomeRender.philosophy_description },
-                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "painting.jpg", 
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "painting.jpg", 
                     link: BasicInitializer.FLASK_URL + "painting_km", 
                     title: "Painting", description: HomeRender.painting_description }
             ];
@@ -303,22 +303,22 @@ class HomeRender extends RootRender {
         }
         {
             const images = [
-                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "crypto.jpg", 
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "crypto.jpg", 
                     link: BasicInitializer.FLASK_URL + "crypto_km", 
                     title: "Crypto", description: HomeRender.crypto_description },
-                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "AI.jpg", 
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "AI.jpg", 
                     link: BasicInitializer.FLASK_URL + "AI_km", 
                     title: "Artificial Intelligence", description: HomeRender.AI_description },
-                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "electronics.jpg", 
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "electronics.jpg", 
                     link: BasicInitializer.FLASK_URL + "electronics_km", 
                     title: "Electronics", description: HomeRender.electronics_description },
-                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "chemistry.jpg", 
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "chemistry.jpg", 
                     link: BasicInitializer.FLASK_URL + "chemistry_km", 
                     title: "Chemistry", description: HomeRender.chemistry_description },
-                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "physics.jpg", 
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "physics.jpg", 
                     link: BasicInitializer.FLASK_URL + "physics_km", 
                     title: "Physics", description: HomeRender.physics_description },
-                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "machines.jpg", 
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "machines.jpg", 
                     link: BasicInitializer.FLASK_URL + "general_machines_km", 
                     title: "Machines", description: HomeRender.machines_description }
             ];
@@ -326,10 +326,10 @@ class HomeRender extends RootRender {
         }
         {
             const images = [
-                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "student_tips.jpg", 
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "student_tips.jpg", 
                     link: BasicInitializer.FLASK_URL + "student_tips_km", 
                     title: "Student Tips", description: HomeRender.student_tips_description },
-                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "career.jpg", 
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "career.jpg", 
                     link: BasicInitializer.FLASK_URL + "career_km", 
                     title: "Career", description: HomeRender.raga_description }
             ];
@@ -337,22 +337,22 @@ class HomeRender extends RootRender {
         }
         {
             const images = [
-                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "stocks.jpg", 
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "stocks.jpg", 
                     link: BasicInitializer.FLASK_URL + "stocks_km", 
                     title: "Stocks", description: HomeRender.stocks_description },
-                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "books.jpg", 
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "books.jpg", 
                     link: BasicInitializer.FLASK_URL + "authors_km", 
                     title: "Authors & Books", description: HomeRender.books_description },
-                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "cricket.jpg", 
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "cricket.jpg", 
                     link: BasicInitializer.FLASK_URL + "cricket_km", 
                     title: "Cricket", description: HomeRender.cricket_description },
-                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "oscars.jpg", 
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "oscars.jpg", 
                     link: BasicInitializer.FLASK_URL + "oscar_nominated_movies_km", 
                     title: "Oscar Movies", description: HomeRender.oscar_description },
-                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "astronomy.jpg", 
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "astronomy.jpg", 
                     link: BasicInitializer.FLASK_URL + "astronomy_km", 
                     title: "Astronomy", description: HomeRender.astronomy_description },
-                { image: BasicInitializer.GCS_BUCKET_IMAGES_URL + "golf.jpg", 
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "golf.jpg", 
                     link: BasicInitializer.FLASK_URL + "golf_km", 
                     title: "Golf", description: HomeRender.golf_description }
             ];
