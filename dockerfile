@@ -24,23 +24,34 @@
 #       b.  Select "Deploy to Cloud Run"
 ####################################################
 
-# Use the official Python image.
-FROM python:3.12.3
+# Use a lighter base image
+FROM python:3.12.3-slim
 
-# Set the working directory in the container.
+# Set environment variables to prevent .pyc and enable UTF-8
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+# Set the working directory
 WORKDIR /app
 
-# Copy the requirements file into the container.
+# Copy requirements first (for Docker cache benefits)
 COPY requirements.txt .
 
-# Install dependencies.
-RUN pip3.12 install --no-cache-dir -r requirements.txt
+# Install dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        gcc \
+        libffi-dev \
+        libpq-dev \
+        build-essential \
+    && pip install --no-cache-dir -r requirements.txt \
+    && apt-get purge -y --auto-remove gcc libffi-dev libpq-dev build-essential \
+    && rm -rf /var/lib/apt/lists/*
 
-# Copy the app source code into the container.
+# Copy rest of the app
 COPY . .
 
-# Expose the port the app runs on.
+# Expose the port used by the app
 EXPOSE 8080
 
-# Command to run the Flask app.
-CMD ["gunicorn", "-b", "0.0.0.0:8080", "--timeout", "300", "flask_file_accept:app"]
+# Start Gunicorn with 1 worker (ideal for Cloud Run)
+CMD ["gunicorn", "-w", "1", "--threads", "2", "--preload", "-b", "0.0.0.0:8080", "--timeout", "300", "flask_file_accept:app"]
