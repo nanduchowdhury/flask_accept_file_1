@@ -345,8 +345,19 @@ class ContentRender extends RootRender {
 
         document.getElementById("learnMoreButton").addEventListener("click", this.onLearnMoreButtonClick.bind(this));
 
+        this.updateSectionAndTopic();
         this.createTripleDotMenu(this.jsonData);
-        this.update();
+
+        this.alreadyDoneTopicList = [];
+
+        this.doContentFollowup();
+
+        // window.errorManager.log(2060, this.jsonData.section, this.jsonData.topic);
+    }
+
+    doEverythingAfterFollowup() {
+
+        this.updateContentAndYoutube();
         this.logGeoLocation();
 
         this.showTipsLearnMore = new ShowTips('learnMoreButton');
@@ -354,10 +365,29 @@ class ContentRender extends RootRender {
 
         this.showTipsJoinFB = new ShowTips('');
         this.showTipsJoinFB.show("If you like the portal,\nplease follow the social links below.", 100);
+    }
 
-        // window.errorManager.log(2060, this.jsonData.section, this.jsonData.topic);
+    doContentFollowup() {
+        
+        const data = {
+            section: this.jsonData.section,
+            topic: this.jsonData.topic
+        };
 
-        this.alreadyDoneTopicList = [];
+        window.basicInitializer.makeServerRequest('/content_followup', data, 
+            this.lamdaOnContentFollowupRequestSuccess, this.lamdaOnContentFollowupRequestFailure);
+    }
+
+    lamdaOnContentFollowupRequestSuccess = (data) => {
+        this.jsonData.content_response = data.content_response;
+        this.jsonData.youtube_response = data.youtube_response;
+
+        this.doEverythingAfterFollowup();
+        
+    }
+
+    lamdaOnContentFollowupRequestFailure = (msg) => {
+        
     }
 
     createTripleDotMenu(JsonData) {
@@ -384,10 +414,10 @@ class ContentRender extends RootRender {
         };
 
         window.basicInitializer.makeServerRequest('/content_learn_more', data, 
-        this.lamdaOnBasicInitRequestSuccess, this.lamdaOnBasicInitRequestFailure);
+        this.lamdaOnLearnMoreRequestSuccess, this.lamdaOnLearnMoreRequestFailure);
     }
 
-    lamdaOnBasicInitRequestSuccess = (data) => {
+    lamdaOnLearnMoreRequestSuccess = (data) => {
 
         this.jsonData = data;
 
@@ -395,14 +425,14 @@ class ContentRender extends RootRender {
 
         this.tripleDot.updateJsonData(this.jsonData);
 
-        this.update();
+        this.updateContentAndYoutube();
 
         this.translateLanguage.resetCurrentLanguage();
 
         window.errorManager.log(2061, this.jsonData.section, this.jsonData.topic);
     }
 
-    lamdaOnBasicInitRequestFailure = (msg) => {
+    lamdaOnLearnMoreRequestFailure = (msg) => {
         
     }
     
@@ -411,7 +441,7 @@ class ContentRender extends RootRender {
         geoInfo.getFormattedInfo().then(info => window.errorManager.log(1013, info));
     }
 
-    update() {
+    updateSectionAndTopic() {
 
         const sectionMap = {
             yoga: "Yoga",
@@ -460,8 +490,10 @@ class ContentRender extends RootRender {
         
 
         this.topicLabelName.textContent = section;
-
         this.topicLabel.innerHTML = this.jsonData.topic;
+    }
+
+    updateContentAndYoutube() {
 
         // Preprocess content to remove markdown-style delimiters if any
         let htmlContent = this.jsonData.content_response.replace(/^```html\n|```$/g, '').trim();

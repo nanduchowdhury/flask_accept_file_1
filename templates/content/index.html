@@ -131,7 +131,7 @@
 
         document.addEventListener("DOMContentLoaded", () => {
             window.errorManager = new ErrorManager();
-            window.basicInitializer = new ContentInitializer();
+            window.basicInitializer = new ContentOrHomeInitializer();
             const cRender = new ContentRender(JsonData);
         });
 

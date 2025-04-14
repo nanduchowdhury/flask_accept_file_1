@@ -43,7 +43,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libffi-dev \
         libpq-dev \
         build-essential \
-        ca-certificates \  # 🔥 This line is critical
+        ca-certificates \ 
     && pip install --no-cache-dir -r requirements.txt \
     && apt-get purge -y --auto-remove gcc libffi-dev libpq-dev build-essential \
     && rm -rf /var/lib/apt/lists/*

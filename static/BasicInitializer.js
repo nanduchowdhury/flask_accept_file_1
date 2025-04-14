@@ -68,7 +68,7 @@ class RootInitializer {
     }
 }
 
-class ContentInitializer extends RootInitializer {
+class ContentOrHomeInitializer extends RootInitializer {
 
     constructor() {
         super();
@@ -85,11 +85,11 @@ class ContentInitializer extends RootInitializer {
         };
     
         this.makeServerRequest('/content_init', data, 
-            this.lamdaOnContentInitRequestSuccess, this.lamdaOnContentInitRequestFailure);
+            this.lamdaOnContentOrHomeInitRequestSuccess, this.lamdaOnContentOrHomeInitRequestFailure);
     
     }
 
-    lamdaOnContentInitRequestSuccess = (data) => {
+    lamdaOnContentOrHomeInitRequestSuccess = (data) => {
         this.setClient_UUID(data.client_uuid);
         console.log(data.client_uuid);
         if ( !this.getClient_UUID() ) {
@@ -97,7 +97,7 @@ class ContentInitializer extends RootInitializer {
         }
     }
 
-    lamdaOnContentInitRequestFailure = (msg) => {
+    lamdaOnContentOrHomeInitRequestFailure = (msg) => {
         if ( msg ) {
             errorManager.showError(1048, msg);
         }

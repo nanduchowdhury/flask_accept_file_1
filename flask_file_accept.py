@@ -110,6 +110,8 @@ class ScholarKM(Flask):
 
         self.route('/subscribe', methods=['POST'])(self.subscribe)
 
+        self.route('/content_followup', methods=['POST'])(self.content_followup_km)
+
         self.route('/content_init', methods=['POST'])(self.content_init)
         self.route('/content_learn_more', methods=['POST'])(self.content_learn_more)
         self.route('/content_triple_dot_action_km', methods=['POST'])(self.content_triple_dot_action_km)
@@ -267,22 +269,31 @@ class ScholarKM(Flask):
 
         return render_template('home/index.html')
 
+
+    def content_followup_km(self):
+        
+        data = request.json
+        section = data['section']
+        topic = data['topic']
+        
+        youtube_response_list = self.content_creator_obj.generate_youtube_response(section, topic)
+        content_response = self.content_creator_obj.get_content_for_topic(section, topic)
+
+        return jsonify({
+            "content_response": content_response,
+            "youtube_response": youtube_response_list
+        })
+
     def content_creator_index(self, section):
 
         alreadyDoneTopicList = []
         [topic, alreadyDoneTopicList] = self.content_creator_obj.get_random_topic(section, alreadyDoneTopicList)
 
-        youtube_response_list = self.content_creator_obj.generate_youtube_response(section, topic)
-
-        content_response = self.content_creator_obj.get_content_for_topic(section, topic)
-
         self.error_manager.show_page_invoke_message(f"content-km-{section}")
 
         json_data = {
             "section": section,
-            "topic" : topic,
-            "content_response": content_response,
-            "youtube_response": youtube_response_list
+            "topic" : topic
         }
         return render_template('content/index.html', json_data=json_data)
 
