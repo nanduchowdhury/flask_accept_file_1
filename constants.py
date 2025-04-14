@@ -1,7 +1,7 @@
 import os
 import time
 
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 
 GCS_ROOT_FOLDER = "scholar_km"
 MAX_THREADS_TO_USE = 4
@@ -43,6 +43,13 @@ def check_condition(condition_func, max_seconds=MAX_TIME_CONDITION_WAIT):
     return False
 
 from datetime import datetime
+
+def get_current_india_time():
+
+        # Convert to India time-zone.
+        ist_offset = timezone(timedelta(hours=5, minutes=30))  # IST is UTC+5:30
+        current_time = datetime.now(ist_offset).strftime('%Y_%m_%d-%H_%M_%S')
+        return current_time
 
 def getTimeStamp():
     """

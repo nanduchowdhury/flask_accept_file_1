@@ -143,7 +143,7 @@
 2063 : Content translated to %s.
 2064 : Translating to %s.
 
-2065 : Basic-init done for home or content page.
+2065 : %s - basic-init done.
 
 2066 : Getting next item to know & learn...
 2067 : Thanks for subscribing.

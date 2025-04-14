@@ -96,7 +96,7 @@
         document.addEventListener("DOMContentLoaded", function () {
             
             window.errorManager = new ErrorManager();
-            window.basicInitializer = new ContentOrHomeInitializer();
+            window.basicInitializer = new ContentOrHomeInitializer('homePage');
 
             const browser = new BrowserStartStop();
             const render = new HomeRender();

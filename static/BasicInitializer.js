@@ -70,21 +70,23 @@ class RootInitializer {
 
 class ContentOrHomeInitializer extends RootInitializer {
 
-    constructor() {
+    constructor(homeOrContentPage) {
         super();
 
+        this.homeOrContentPage = homeOrContentPage;
         this.clientId = 'client-' + this.getFormattedTimestamp();
         this.client_uuid = '';
 
         const data = {
             client_uuid: this.getClient_UUID(),
             clientId: this.getClientId(),
+            homeOrContentPage: this.homeOrContentPage,
             additionalData: {
                 someKey: "someValue"
             }
         };
     
-        this.makeServerRequest('/content_init', data, 
+        this.makeServerRequest('/home_or_content_init', data, 
             this.lamdaOnContentOrHomeInitRequestSuccess, this.lamdaOnContentOrHomeInitRequestFailure);
     
     }

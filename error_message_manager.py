@@ -65,19 +65,11 @@ class ErrorManager:
             return f"Error message for code {code} expects a different number of arguments."
 
 
-
-    def get_current_india_time(self):
-
-        # Convert to India time-zone.
-        ist_offset = timezone(timedelta(hours=5, minutes=30))  # IST is UTC+5:30
-        current_time = datetime.now(ist_offset).strftime('%Y_%m_%d-%H_%M_%S')
-        return current_time
-
     def show_message(self, code, *args):
 
         message = self.get_message_for_code_and_args(code, args)
 
-        current_time = self.get_current_india_time()
+        current_time = constants.get_current_india_time()
         pid = os.getpid()
 
         # Complete message with error code
@@ -92,7 +84,7 @@ class ErrorManager:
 
     def show_page_invoke_message(self, page_name):
 
-        current_time = self.get_current_india_time()
+        current_time = constants.get_current_india_time()
         pid = os.getpid()
 
         # Complete message with error code

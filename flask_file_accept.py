@@ -112,7 +112,7 @@ class ScholarKM(Flask):
 
         self.route('/content_followup', methods=['POST'])(self.content_followup_km)
 
-        self.route('/content_init', methods=['POST'])(self.content_init)
+        self.route('/home_or_content_init', methods=['POST'])(self.home_or_content_init)
         self.route('/content_learn_more', methods=['POST'])(self.content_learn_more)
         self.route('/content_triple_dot_action_km', methods=['POST'])(self.content_triple_dot_action_km)
 
@@ -871,10 +871,11 @@ class ScholarKM(Flask):
         }
         return jsonify(json_data), 200
 
-    def content_init(self):
+    def home_or_content_init(self):
         try:
             data = request.get_json()
             client_uuid = self.get_or_generate_uuid(data, True)
+            home_or_content_page = data.get('homeOrContentPage', 'unknown')
 
             self.sess.save_client_data(client_uuid, 'basic_init.client_uuid', client_uuid)
 
@@ -894,9 +895,8 @@ class ScholarKM(Flask):
             log_file_path = f'{log_folder}/client_log.txt'
             self.sess.save_client_data(client_uuid, 'basic_init.log_file_path', log_file_path)
 
-            self.error_manager.show_message(2065)
-
             self.sess.force_save_session(client_uuid)
+            self.error_manager.show_message(2065, home_or_content_page)
 
             return jsonify({"client_uuid": client_uuid}), 200
 
@@ -944,8 +944,9 @@ class ScholarKM(Flask):
 
             user_input = data.get('userInput', '')
             geo_info = data.get('geoInfo', '')
+            time_now = constants.get_current_india_time()
 
-            json_response = jsonify(user_input=user_input, geo_info=geo_info)
+            json_response = jsonify(user_input=user_input, geo_info=geo_info, time_now=time_now)
             json_text = json_response.get_data(as_text=True)
 
             self.gcs_manager.append_to_text_file("subscription_file.txt", json_text)

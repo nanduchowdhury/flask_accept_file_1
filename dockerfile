@@ -24,34 +24,22 @@
 #       b.  Select "Deploy to Cloud Run"
 ####################################################
 
-# Use a lighter base image
-FROM python:3.12.3-slim
+# Use the official Python image.
+FROM python:3.12.3
 
-# Set environment variables to prevent .pyc and enable UTF-8
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
-
-# Set the working directory
+# Set the working directory in the container.
 WORKDIR /app
 
-# Copy requirements first (for Docker cache benefits)
+# Copy the requirements file into the container.
 COPY requirements.txt .
 
-# Install dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
-        gcc \
-        libffi-dev \
-        libpq-dev \
-        build-essential \
-        ca-certificates \ 
-    && pip install --no-cache-dir -r requirements.txt \
-    && apt-get purge -y --auto-remove gcc libffi-dev libpq-dev build-essential \
-    && rm -rf /var/lib/apt/lists/*
+# Install dependencies.
+RUN pip3.12 install --no-cache-dir -r requirements.txt
 
-# Copy rest of the app
+# Copy the app source code into the container.
 COPY . .
 
-# Expose the port used by the app
+# Expose the port the app runs on.
 EXPOSE 8080
 
 # Start Gunicorn with 1 worker (ideal for Cloud Run)
