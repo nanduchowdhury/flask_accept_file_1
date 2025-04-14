@@ -10,24 +10,24 @@ class YoutubeManager {
     showById(videoId) {
         // Create an iframe to embed the YouTube video
         const iframe = document.createElement("iframe");
-        iframe.width = "360"; // Width of the video
-        iframe.height = "315"; // Height of the video
-        iframe.src = `https://www.youtube.com/embed/${videoId}`; // YouTube embed URL
+        iframe.src = `https://www.youtube.com/embed/${videoId}`;
         iframe.title = "YouTube video player";
-        iframe.frameBorder = "0"; // No border
+        iframe.frameBorder = "0";
         iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-        iframe.allowFullscreen = true; // Allow fullscreen playback
-
-        // Clear the container (if needed) and append the iframe
-        this.container.innerHTML = ""; // Clear any existing content
-
-        // Add other flexbox properties to center content
+        iframe.allowFullscreen = true;
+    
+        // Add responsive class
+        iframe.classList.add("youtube-frame");
+    
+        // Clear the container and center content
+        this.container.innerHTML = "";
         this.container.style.display = "flex";
-        this.container.style.justifyContent = "center"; // Center horizontally
-        this.container.style.alignItems = "center";     // Center vertically
-
+        this.container.style.justifyContent = "center";
+        this.container.style.alignItems = "center";
+    
         this.container.appendChild(iframe);
     }
+    
 
     clear() {
         this.container.innerHTML = "No youtube video available";

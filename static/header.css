@@ -314,3 +314,19 @@
         width: 60px;
     }
 }
+
+.youtube-frame {
+    width: 360px;
+    height: 230px;
+    max-width: 100%;
+    border: none;
+}
+
+/* On larger screens (desktop), increase iframe size */
+@media (min-width: 768px) {
+    .youtube-frame {
+        width: 640px;
+        height: 360px;
+    }
+}
+
