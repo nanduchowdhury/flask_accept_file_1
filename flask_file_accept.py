@@ -591,7 +591,7 @@ class ScholarKM(Flask):
             return jsonify({'success': 'true'})
 
         except Exception as e:
-            return jsonify({"error": str(e)}), 500
+            self.error_manager.show_any_message(f"Exception during route ai_model_init : {str(e)}")
 
     def is_ai_model_init_completed(self, uuid):
 
@@ -651,7 +651,7 @@ class ScholarKM(Flask):
                                 'result2': second_lang_response})
 
         except Exception as e:
-            return jsonify({"error": str(e)}), 500
+            self.error_manager.show_any_message(f"Exception during route learn_response : {str(e)}")
 
     def isHeaderResponseForceRunReqd(self, headerTask, is_threading_on):
 
@@ -771,7 +771,7 @@ class ScholarKM(Flask):
             return jsonify({"status": "success"}), 200
 
         except Exception as e:
-            return jsonify({"error": str(e)}), 500
+            self.error_manager.show_any_message(f"Exception during route report_to_user : {str(e)}")
 
     def generate_MCQ(self):
         try:
@@ -789,7 +789,7 @@ class ScholarKM(Flask):
             return jsonify({'result1': english_response})
 
         except Exception as e:
-            return jsonify({"error": str(e)}), 500
+            self.error_manager.show_any_message(f"Exception during route generate_MCQ : {str(e)}")
 
 
     def explain_region(self):
@@ -819,7 +819,7 @@ class ScholarKM(Flask):
                             'result2': second_lang_response})
 
         except Exception as e:
-            return jsonify({"error": str(e)}), 500
+            self.error_manager.show_any_message(f"Exception during route explain_region : {str(e)}")
 
     def get_or_generate_uuid(self, data, is_generate=False):
         client_uuid = data.get('client_uuid', '')
@@ -901,7 +901,7 @@ class ScholarKM(Flask):
             return jsonify({"client_uuid": client_uuid}), 200
 
         except Exception as e:
-            return jsonify({"error": str(e)}), 500
+            self.error_manager.show_any_message(f"Exception during route home_or_content_init : {str(e)}")
 
     def basic_init(self):
         try:
@@ -936,7 +936,7 @@ class ScholarKM(Flask):
                             "signed_main_content_url": signed_url}), 200
 
         except Exception as e:
-            return jsonify({"error": str(e)}), 500
+            self.error_manager.show_any_message(f"Exception during route basic_init : {str(e)}")
 
     def subscribe(self):
         try:
@@ -957,8 +957,7 @@ class ScholarKM(Flask):
             return jsonify({"status": "subscribe success"}), 200
 
         except Exception as e:
-            print(f"Error during subscribe : {str(e)}")
-            return jsonify({"error": str(e)}), 500
+            self.error_manager.show_any_message(f"Exception during route subscribe : {str(e)}")
 
     def save_logs(self):
         try:
@@ -986,7 +985,7 @@ class ScholarKM(Flask):
             return jsonify({"status": "logs saved"}), 200
 
         except Exception as e:
-            return jsonify({"error": str(e)}), 500
+            self.error_manager.show_any_message(f"Exception during route save_logs : {str(e)}")
 
 
 app = ScholarKM()

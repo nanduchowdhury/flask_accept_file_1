@@ -9,7 +9,7 @@ class ErrorManager {
 
         this.logs = [];
         this.lastSentIndex = 0;
-        this.interval = 30000;
+        this.interval = 60000; // send-logs interval 3mnts.
         this.serverEndpoint = '/save_logs';
         this.timeoutID = null; // Holds the timeout ID
 
@@ -17,7 +17,7 @@ class ErrorManager {
         
         this.loadErrorsFromFile();
         
-        this.initLog4jAndMessageBox();
+        this.initMessageBox();
 
         // Override console.log to capture logs
         const originalConsoleLog = console.log;
@@ -28,36 +28,7 @@ class ErrorManager {
         };
     }
 
-    initLog4jAndMessageBox() {
-
-        // Initialize log4javascript logger
-        this.logger = log4javascript.getLogger('ErrorManager');
-
-        // Create a BrowserConsoleAppender for client-side logs
-        const consoleAppender = new log4javascript.BrowserConsoleAppender();
-
-        // Override the append method of ConsoleAppender
-        const originalAppend = consoleAppender.append;
-        consoleAppender.append = (loggingEvent) => {
-            const logMessage = consoleAppender.getLayout().format(loggingEvent);
-            this.logs.push({
-                message: logMessage,
-                level: loggingEvent.level.name
-            });
-            // Call the original append method to continue normal logging to the console
-            originalAppend.call(consoleAppender, loggingEvent);
-        };
-
-        // Add the modified appender to the logger
-        this.logger.addAppender(consoleAppender);
-
-
-        // Set layout for the logger
-        const layout = new log4javascript.PatternLayout('%d{ISO8601} %-5p %c - %m%n');
-        consoleAppender.setLayout(layout);
-
-        // Set log level (optional)
-        this.logger.setLevel(log4javascript.Level.DEBUG);
+    initMessageBox() {
         
         // Select the message box elements
         this.messageBox = document.getElementById('messageBox');
@@ -126,30 +97,25 @@ class ErrorManager {
         }
     }
     
-    
-
     showMessage(type, message) {
-        // Log the message using log4javascript
         switch (type) {
           case 'info':
-            this.logger.info(message);
             this.messageBox.classList.add('info');
             break;
           case 'warn':
-            this.logger.warn(message);
             this.messageBox.classList.add('warn');
             break;
           case 'error':
-            this.logger.error(message);
             this.messageBox.classList.add('error');
             break;
           default:
-            this.logger.info(message);
             this.messageBox.classList.add('info');
         }
         // Set the message text and show the message box
         this.messageBoxText.textContent = message;
         this.messageBox.classList.remove('hidden');
+
+        console.log(message);
 
         // Automatically hide the message after 30 seconds
         if (this.timeoutID) clearTimeout(this.timeoutID);  // Clear any existing timeout
@@ -239,6 +205,6 @@ class ErrorManager {
 
     log(code, ...args) {
         let message = this.getRealMessage(code, args);
-        this.logger.info(message);
+        console.log(message);
     }
 }
