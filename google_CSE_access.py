@@ -31,8 +31,6 @@ class GoogleCSEAccess():
             if not self.GOOGLE_CSE_ID:
                 raise ValueError("Google CSE ID is not set.")
 
-            self.service = build("customsearch", "v1", developerKey=self.GOOGLE_API_KEY)
-
         except Exception as e:
             raise ValueError(self.eManager.show_message(2058, e))
 
@@ -65,7 +63,8 @@ class GoogleCSEAccess():
 
     def search(self, query):
         try:
-            res = self.service.cse().list(q=query, cx=self.GOOGLE_CSE_ID, num=10).execute()  # Fetch up to 10 results
+            service = build("customsearch", "v1", developerKey=self.GOOGLE_API_KEY)
+            res = service.cse().list(q=query, cx=self.GOOGLE_CSE_ID, num=10).execute()  # Fetch up to 10 results
 
             youtube_links = []  # Collect all YouTube links
             if 'items' in res:
