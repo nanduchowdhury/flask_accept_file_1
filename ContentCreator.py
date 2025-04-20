@@ -2763,7 +2763,7 @@ class ContentCreatorBase:
     def generate_youtube_response(self, section, topic):
         search_line = f"youtube {section} {topic} site:youtube.com/watch"
         search_line = search_line.replace('_', ' ')
-        response = self.google_cse_access.search(search_line)
+        response = self.google_cse_access.perform_retry_search(search_line)
         return response
 
 

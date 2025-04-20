@@ -33,6 +33,33 @@ class GoogleCSEAccess():
         except Exception as e:
             raise ValueError(self.eManager.show_message(2058, e))
 
+    def perform_retry_search(self, query, retries=3, delay=1, backoff=2):
+        """
+        Attempts to search for a YouTube link using exponential backoff.
+
+        :param query: The search query string
+        :param retries: Number of retry attempts
+        :param delay: Initial delay between retries in seconds
+        :param backoff: Backoff multiplier (2 = exponential backoff)
+        :return: List of YouTube links or None
+        """
+        attempt = 0
+        while attempt < retries:
+            try:
+                return self.search(query)
+            except Exception as e:
+                attempt += 1
+                print(f"[Retry {attempt}/{retries}] Search failed: {e}")
+                print(traceback.format_exc())
+                if attempt < retries:
+                    sleep_time = delay * (backoff ** (attempt - 1))
+                    print(f"Retrying in {sleep_time} seconds...")
+                    time.sleep(sleep_time)
+                else:
+                    print("All retries failed.")
+                    raise  # Let the final error propagate
+
+
     def search(self, query):
         try:
             res = self.service.cse().list(q=query, cx=self.GOOGLE_CSE_ID, num=10).execute()  # Fetch up to 10 results

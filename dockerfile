@@ -24,8 +24,15 @@
 #       b.  Select "Deploy to Cloud Run"
 ####################################################
 
-# Use the official Python image.
+# Use the official Python image (not slim to ensure full SSL support)
 FROM python:3.12.3
+
+# Install system packages: CA certs, and clean up
+RUN apt-get update && apt-get install -y \
+    ca-certificates \
+    curl \
+    gnupg \
+ && rm -rf /var/lib/apt/lists/*
 
 # Set the working directory in the container.
 WORKDIR /app
@@ -33,8 +40,10 @@ WORKDIR /app
 # Copy the requirements file into the container.
 COPY requirements.txt .
 
-# Install dependencies.
-RUN pip3.12 install --no-cache-dir -r requirements.txt
+# Upgrade pip and install dependencies securely
+RUN pip install --upgrade pip \
+ && pip install --no-cache-dir --upgrade certifi requests urllib3 google-api-python-client \
+ && pip install --no-cache-dir -r requirements.txt
 
 # Copy the app source code into the container.
 COPY . .
