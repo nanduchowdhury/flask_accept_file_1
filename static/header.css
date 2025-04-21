@@ -155,13 +155,19 @@
 
 /* General input styling */
 #newsletter-input {
-    padding: 8px;
-    font-size: 10px;
+    padding: 3px;
+    font-size: 14px;
+    font-weight: bold;
     border: 1px solid #ccc;
     border-radius: 5px;
     width: 220px; /* default desktop */
     flex: 1; /* allow to grow if needed */
     min-width: 0;
+}
+
+#newsletter-input::placeholder {
+    color: rgb(152, 12, 12);
+    font-weight: bold;
 }
 
 /* Mobile-specific tweaks */
