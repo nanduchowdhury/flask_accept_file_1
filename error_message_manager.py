@@ -12,16 +12,16 @@ import constants
 
 from gcs_manager import GCSManager
 
+
 class ErrorManager:
-    def __init__(self, client_ip, client_uuid, file_path, bucket_name, gcs_log_file_path):
+    def __init__(self, client_ip, client_uuid, file_path):
         self.error_map = {}
         self.client_ip = client_ip
         self.client_uuid = client_uuid
-        self.bucket_name = bucket_name
-        self.gcs_log_file_path = gcs_log_file_path
         self.load_errors(file_path)
 
-        self.gcs_manager = GCSManager("kupmanduk-bucket", constants.GCS_ROOT_FOLDER)
+        logging.basicConfig(level=logging.INFO)
+        logging.getLogger('googleapiclient.discovery_cache').setLevel(logging.ERROR)
 
     def update_client_ip(self, client_ip):
         self.client_ip = client_ip
@@ -75,10 +75,7 @@ class ErrorManager:
         # Complete message with error code
         full_msg = f"MSG-{code}: ({current_time}) IP ({self.client_ip}) UUID ({self.client_uuid}) PID ({pid}) - {message}"
 
-        # Print the message to the console
-        print(full_msg)
-
-        self.gcs_manager.append_to_text_file(self.gcs_log_file_path, full_msg)
+        logging.info(full_msg)
 
         return message
 
@@ -90,17 +87,14 @@ class ErrorManager:
         # Complete message with error code
         full_msg = f"MSG: ({current_time}) PID ({pid}) - Invoked page : {page_name}"
 
-        # Print the message to the console
-        print(full_msg)
+        logging.info(full_msg)
 
         # request_info = self.get_request_info()
         # print(request_info)
 
-        self.gcs_manager.append_to_text_file(self.gcs_log_file_path, full_msg)
-        # self.gcs_manager.append_to_text_file(self.gcs_log_file_path, request_info)
 
     def show_any_message(self, message):
-        self.gcs_manager.append_to_text_file(self.gcs_log_file_path, message)
+        logging.info(message)
 
     def get_request_info(self):
         return "\n".join([

@@ -139,15 +139,7 @@ class ScholarKM(Flask):
 
         current_time = datetime.now().strftime('%Y_%m_%d-%H_%M_%S')
 
-        server_log_file = ''
-        if os.getenv('RUN_SERVER_IN_LOCAL_MACHINE'):
-            server_log_file = f'server_logs/server_non_production.log'
-        else:
-            server_log_file = f'server_logs/server_production.log'
-
-
-        self.error_manager = ErrorManager(self.client_ip, self.client_uuid, 'static/errors.txt', 
-                    "kupmanduk-bucket", server_log_file)
+        self.error_manager = ErrorManager(self.client_ip, self.client_uuid, 'static/errors.txt')
 
         self.sess = BaseClientManager(self.error_manager, self.client_folder)
         self.gemini_access = GeminiAccess(self.sess, self.error_manager)
