@@ -55,18 +55,30 @@
     </style>
     
     <header class="header-container">
+        <!-- Logo on the left -->
         <a href="https://kupmanduk.co.in/" target="_blank">
-            <img src="https://cdn.jsdelivr.net/gh/nanduchowdhury/flask_accept_file_1@main/static/images/kupmanduk-copper-black-font.jpg" class="logo" alt="Kupmanduk Logo" title="Kupmanduk - Expand Your Knowledge" width="150" height="50" loading="lazy">
+            <img src="https://cdn.jsdelivr.net/gh/nanduchowdhury/flask_accept_file_1@main/static/images/kupmanduk-copper-black-font.jpg"
+                 class="logo" alt="Kupmanduk Logo" title="Kupmanduk - Expand Your Knowledge"
+                 width="150" height="50" loading="lazy">
         </a>
     
-        <!-- Newsletter Subscription Form now inside header -->
-        <div class="newsletter">
-            <input type="text" id="newsletter-input" placeholder="Enter your email-id">
-            <button id="subscribeButton">Subscribe</button>
+        <!-- Center container: Subscription + WhatsApp Button -->
+        <div class="center-container">
+            <div class="whatsapp-share">
+                <a href="https://wa.me/?text=Check%20out%20this%20education%20website%3A%20https%3A%2F%2Fkupmanduk.co.in" target="_blank">
+                    <button id="whatsappButton">Share on WhatsApp</button>
+                </a>
+            </div>
+            <div class="newsletter">
+                <input type="text" id="newsletter-input" placeholder="Enter your email-id">
+                <button id="subscribeButton">Subscribe</button>
+            </div>
         </div>
-
+    
+        <!-- Dash menu on the extreme right -->
         <nav id="TripleDashMenuContainer"></nav>
     </header>
+    
 
     <main class="home-area-container">
         <h1 class="welcome-heading">Welcome to Kupmanduk - learn more, develop interest and create a hobby.</h1> <!-- SEO Optimized Heading -->

@@ -4,15 +4,25 @@
     font-weight: bold;
     color: rgba(2, 19, 2, 0.993); /* Green color */
 }
+
 .header-container {
     position: relative;
-    padding: 25px 50px;
-    width: 100%;
+    padding: 20px 90px;
     display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    gap: 10px;
+    align-items: center;
+    justify-content: space-between; /* Push logo-left and menu-right */
+    gap: 20px;
 }
+
+/* Center container: Column layout */
+.center-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
 
 
 .header-container-1 {
@@ -134,14 +144,11 @@
 
 /* Newsletter in center-top for desktop */
 .newsletter {
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
+
+
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 5px;
+    gap: 10px;
+    margin-bottom: 10px; /* space between input and WhatsApp button */
 }
 
 #subscribeButton {
@@ -175,7 +182,7 @@
     .newsletter {
         position: static;
         transform: none;
-        margin-top: 20px;
+        margin-top: 10px;
         align-self: center;
         width: 100%;
         justify-content: left;
@@ -184,7 +191,7 @@
     #newsletter-input {
         width: auto;
         flex: 1;
-        max-width: 180px; /* or 100% if you want full width */
+        max-width: 130px; /* or 100% if you want full width */
     }
 
     #subscribeButton {
@@ -192,6 +199,14 @@
     }
 }
 
+.whatsapp-share button {
+    background-color: #0ad10d; /* blue */
+    color: white;              /* text color */
+    box-shadow: none;
+    padding: 5px 10px;
+    font-size: 10px;
+    cursor: pointer;
+}
 
 
 
