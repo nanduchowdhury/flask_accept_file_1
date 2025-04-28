@@ -683,6 +683,17 @@ class TripleDashMenu {
         });
     }
 
+    addSeparator(color = 'red') {
+        const separator = document.createElement("li");
+        separator.style.cssText = `
+            border-top: 1px solid ${color};
+            margin: 5px 0;
+            padding: 0;
+            pointer-events: none; /* Separator should not be clickable */
+        `;
+        this.menuContainer.appendChild(separator);
+    }
+
     addMenuItem(parentItemName, thisItemName, itemObj) {
         if (!(itemObj instanceof TripleDashMenuItem)) {
             throw new Error("itemObj must be an instance of TripleDashMenuItem");
@@ -702,8 +713,8 @@ class TripleDashMenu {
         } else {
             let parentItem = this.menuData[parentItemName];
             if (!parentItem) {
-                throw new Error(`Parent item '${parentItemName}' not found`);
-            }
+            throw new Error(`Parent item '${parentItemName}' not found`);
+        }
 
             if (!parentItem.submenu) {
                 parentItem.submenu = document.createElement("ul");
@@ -763,6 +774,8 @@ class TripleDashMenuCreator {
         this.menu.addMenuItem("Arts", "Photography", new SampleMenuItem("photography_km"));
         this.menu.addMenuItem("Arts", "Philosophy", new SampleMenuItem("philosophy_km"));
 
+        this.menu.addSeparator('grey');
+
         this.menu.addMenuItem("", "Science", new SampleMenuItem());
         this.menu.addMenuItem("Science", "Physics", new SampleMenuItem("physics_km"));
         this.menu.addMenuItem("Science", "Chemistry", new SampleMenuItem("chemistry_km"));
@@ -775,10 +788,14 @@ class TripleDashMenuCreator {
         this.menu.addMenuItem("Science", "Indistrial Machines", new SampleMenuItem("industrial_machines_km"));
         this.menu.addMenuItem("Science", "General Machines", new SampleMenuItem("general_machines_km"));
         
+        this.menu.addSeparator('grey');
+
         this.menu.addMenuItem("", "Space & Astronomy", new SampleMenuItem());
         this.menu.addMenuItem("Space & Astronomy", "ISS", new SampleMenuItem("ISS_km"));
         this.menu.addMenuItem("Space & Astronomy", "Space Travel", new SampleMenuItem("space_travel_km"));
         this.menu.addMenuItem("Space & Astronomy", "Astronomy", new SampleMenuItem("astronomy_km"));
+
+        this.menu.addSeparator();
 
         this.menu.addMenuItem("", "Wellness", new SampleMenuItem());
         this.menu.addMenuItem("Wellness", "Nutrition", new SampleMenuItem("nutrition_km"));
@@ -786,22 +803,31 @@ class TripleDashMenuCreator {
         this.menu.addMenuItem("Wellness", "Medical Care", new SampleMenuItem("medical_care_km"));
         this.menu.addMenuItem("Wellness", "Body", new SampleMenuItem("internal_organ_km"));
 
-        this.menu.addMenuItem("", "Music", new SampleMenuItem());
-        this.menu.addMenuItem("Music", "Jazz", new SampleMenuItem("jazz_km"));
-        this.menu.addMenuItem("Music", "Rock", new SampleMenuItem("rock_km"));
-        this.menu.addMenuItem("Music", "Country", new SampleMenuItem("country_km"));
-        this.menu.addMenuItem("Music", "Hindustani Classical", new SampleMenuItem("music_km"));
-
+        
+        this.menu.addSeparator('grey');
+        
         this.menu.addMenuItem("", "Sports", new SampleMenuItem());
         this.menu.addMenuItem("Sports", "Cricket", new SampleMenuItem("cricket_km"));
         this.menu.addMenuItem("Sports", "Golf", new SampleMenuItem("golf_km"));
         this.menu.addMenuItem("Sports", "Racing", new SampleMenuItem("racing_km"));
         this.menu.addMenuItem("Sports", "Winter Sports", new SampleMenuItem("winter_sports_km"));
 
+        this.menu.addSeparator();
+
+        this.menu.addMenuItem("", "Music", new SampleMenuItem());
+        this.menu.addMenuItem("Music", "Jazz", new SampleMenuItem("jazz_km"));
+        this.menu.addMenuItem("Music", "Rock", new SampleMenuItem("rock_km"));
+        this.menu.addMenuItem("Music", "Country", new SampleMenuItem("country_km"));
+        this.menu.addMenuItem("Music", "Hindustani Classical", new SampleMenuItem("music_km"));
+
+        this.menu.addSeparator('grey');
+
         this.menu.addMenuItem("", "Entertainment", new SampleMenuItem());
         this.menu.addMenuItem("Entertainment", "Oscar Movies", new SampleMenuItem("oscar_nominated_movies_km"));
         this.menu.addMenuItem("Entertainment", "Grammy Music", new SampleMenuItem("grammy_songs_km"));
         this.menu.addMenuItem("Entertainment", "Author & Books", new SampleMenuItem("authors_km"));
+
+        this.menu.addSeparator();
 
         this.menu.addMenuItem("", "Finance", new SampleMenuItem());
         this.menu.addMenuItem("Finance", "Crypto", new SampleMenuItem("crypto_km"));
@@ -809,6 +835,8 @@ class TripleDashMenuCreator {
         this.menu.addMenuItem("Finance", "Stocks", new SampleMenuItem("stocks_km"));
         this.menu.addMenuItem("Finance", "Economics", new SampleMenuItem("economics_km"));
         this.menu.addMenuItem("Finance", "Mutual Funds", new SampleMenuItem("mutual_funds_km"));
+
+        this.menu.addSeparator();
 
         this.menu.addMenuItem("", "Students", new SampleMenuItem());
         this.menu.addMenuItem("Students", "Student Tips", new SampleMenuItem("student_tips_km"));
