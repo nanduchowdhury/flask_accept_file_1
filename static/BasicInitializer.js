@@ -825,6 +825,40 @@ class RootRender {
         this.subscribeUserInput = document.getElementById("newsletter-input");
     }
 
+    checkSubscribeInput() {
+        const userInput = this.subscribeUserInput.value.trim();
+        
+        if (userInput.length === 0) {
+            return { valid: false, error: "Email address cannot be empty." };
+        }
+        
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        
+        if (!emailRegex.test(userInput)) {
+            return { valid: false, error: "Email format is invalid." };
+        }
+        
+        if (userInput.includes('..')) {
+            return { valid: false, error: "Email address cannot contain consecutive dots." };
+        }
+        
+        const [localPart, domainPart] = userInput.split('@');
+        if (!localPart || !domainPart) {
+            return { valid: false, error: "Email must have a local part and a domain part separated by '@'." };
+        }
+        
+        if (localPart.startsWith('.') || localPart.endsWith('.')) {
+            return { valid: false, error: "Local part of email cannot start or end with a dot." };
+        }
+        
+        if (domainPart.startsWith('.') || domainPart.endsWith('.')) {
+            return { valid: false, error: "Domain part of email cannot start or end with a dot." };
+        }
+        
+        return { valid: true };
+    }
+    
+
     onSubscribeButtonClick() {
         
         const data = {
@@ -835,7 +869,14 @@ class RootRender {
         window.basicInitializer.makeServerRequest('/subscribe', data, 
             this.lamdaOnSubscribeSuccess, this.lamdaOnSubscribeFailure);
 
-        window.errorManager.showInfo(2067);
+
+        const result = this.checkSubscribeInput();
+        if (!result.valid) {
+            alert(result.error);
+            // Show result.error as a hint or tooltip to the user
+        } else {
+            window.errorManager.showInfo(2067);
+        }
     }
 
     lamdaOnSubscribeSuccess = (data) => {
