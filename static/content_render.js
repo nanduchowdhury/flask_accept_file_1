@@ -445,6 +445,11 @@ class ContentRender extends RootRender {
 
         const sectionMap = {
             yoga: "Yoga",
+            IPL: "IPL",
+            nobel: "Nobel Laureates",
+            tagore: "Rabindranath Tagore",
+            gardening: "Gardening",
+            guitar: "Learning Guitar",
             hindustani: "Raga",
             ISS: "International Space Station",
             space_travel: "Space Travel",

@@ -8,6 +8,7 @@ class HomeRender extends RootRender {
     static golf_description = "Know about the sport and the technicalities. Find out about major tournaments played worldwide.";
     static raga_description = "Find out about the age old ragas of hindustani classical music.";
     static yoga_description = "Different yoga poses are taught. Know about the benefits and how to do the asanas.";
+    static nobel_description = "Know about many Nobel Laureates.";
     static tariff_description = "Know about what these tariffs are that countries are imposing on one another.";
     static oscar_description = "Oscar movies are awarded each year. Know about the nominations - who missed it and who won it.";
     static astronomy_description = "Space around us is almost infinite. Find out what's there in the stars.";
@@ -27,7 +28,7 @@ class HomeRender extends RootRender {
     static chemistry_description = "Know more about the subject.";
     static physics_description = "Physics laws govern the universe. Find out more about it.";
     static student_tips_description = "Some tips for students on studying, exams etc. Find out more.";
-    static cricket_description = "Learn more about the technicalities of the sport.";
+    static IPL_description = "Know more about Indian Premier League (IPL).";
     static philosophy_description = "Find out about great philosophers. Know more about their work and the theories.";
     static photography_description = "Learn about the subject. Develop it as a hobby.";
     static career_description = "Specially made for students and professionals. Learn about career options.";
@@ -220,18 +221,21 @@ class HomeRender extends RootRender {
     showImageRowsHomeArea_1() {
 
         const images = [
+            { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "cricket.jpg", 
+                link: BasicInitializer.FLASK_URL + "IPL_km", 
+                title: "IPL", description: HomeRender.IPL_description },
+            { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "ISS.jpg", 
+                link: BasicInitializer.FLASK_URL + "ISS_km", 
+                title: "Sunita Williams spent months in ISS", 
+                description: HomeRender.ISS_description },
             { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "tariff.jpg", 
                 link: BasicInitializer.FLASK_URL + "tariff_km", 
                 title: "Trump Tariffs - what actually are tariffs?", 
                 description: HomeRender.tariff_description },
-            { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "ISS.jpg", 
-                        link: BasicInitializer.FLASK_URL + "ISS_km", 
-                        title: "Sunita Williams spent months in ISS", 
-                        description: HomeRender.ISS_description },
             { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "space_travel.jpg", 
-                        link: BasicInitializer.FLASK_URL + "space_travel_km", 
-                        title: "Sunita Williams returns from ISS", 
-                        description: HomeRender.space_travel_description }
+                link: BasicInitializer.FLASK_URL + "space_travel_km", 
+                title: "Sunita Williams returns from ISS", 
+                description: HomeRender.space_travel_description }
         ];
 
         {
@@ -239,7 +243,7 @@ class HomeRender extends RootRender {
             this.createOneImagesBlock("HomeArea_1", "Featured", "LightBlue", newImages);
         }
         {
-            const newImages = images.slice(2, 3);
+            const newImages = images.slice(2, 4);
             this.createOneImagesBlock("HomeArea_1", "More Featured", "LightBlue", newImages);
         }
     }
@@ -253,6 +257,27 @@ class HomeRender extends RootRender {
             https://pixabay.com/
         */
 
+        {
+            const images = [
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "gardening.jpg", 
+                    link: BasicInitializer.FLASK_URL + "gardening_km", 
+                    title: "Gardening", description: HomeRender.gardening_description },
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "guitar.jpg", 
+                    link: BasicInitializer.FLASK_URL + "guitar_km", 
+                    title: "Learning Guitar", description: HomeRender.guitar_description },
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "photography.jpg", 
+                    link: BasicInitializer.FLASK_URL + "photography_km", 
+                    title: "Photography", description: HomeRender.photography_description },
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "books.jpg", 
+                    link: BasicInitializer.FLASK_URL + "authors_km", 
+                    title: "Authors & Books", description: HomeRender.books_description },
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "painting.jpg", 
+                    link: BasicInitializer.FLASK_URL + "painting_km", 
+                    title: "Painting", description: HomeRender.painting_description }
+                
+            ];
+            this.createOneImagesBlock("HomeArea_2", "Hobbies", "LightGrey", images);
+        }
         {
             const images = [
                 { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "grammy.jpg", 
@@ -289,15 +314,11 @@ class HomeRender extends RootRender {
         }
         {
             const images = [
-                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "photography.jpg", 
-                    link: BasicInitializer.FLASK_URL + "photography_km", 
-                    title: "Photography", description: HomeRender.photography_description },
+                
                 { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "philosophy.jpg", 
                     link: BasicInitializer.FLASK_URL + "philosophy_km", 
                     title: "Philosophy", description: HomeRender.philosophy_description },
-                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "painting.jpg", 
-                    link: BasicInitializer.FLASK_URL + "painting_km", 
-                    title: "Painting", description: HomeRender.painting_description }
+                
             ];
             this.createOneImagesBlock("HomeArea_2", "Arts", "LightYellow", images);
         }
@@ -340,18 +361,15 @@ class HomeRender extends RootRender {
                 { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "stocks.jpg", 
                     link: BasicInitializer.FLASK_URL + "stocks_km", 
                     title: "Stocks", description: HomeRender.stocks_description },
-                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "books.jpg", 
-                    link: BasicInitializer.FLASK_URL + "authors_km", 
-                    title: "Authors & Books", description: HomeRender.books_description },
-                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "cricket.jpg", 
-                    link: BasicInitializer.FLASK_URL + "cricket_km", 
-                    title: "Cricket", description: HomeRender.cricket_description },
                 { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "oscars.jpg", 
                     link: BasicInitializer.FLASK_URL + "oscar_nominated_movies_km", 
                     title: "Oscar Movies", description: HomeRender.oscar_description },
                 { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "astronomy.jpg", 
                     link: BasicInitializer.FLASK_URL + "astronomy_km", 
                     title: "Astronomy", description: HomeRender.astronomy_description },
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "nobel.jpg", 
+                    link: BasicInitializer.FLASK_URL + "nobel_km", 
+                    title: "Nobel Laureates", description: HomeRender.nobel_description },
                 { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "golf.jpg", 
                     link: BasicInitializer.FLASK_URL + "golf_km", 
                     title: "Golf", description: HomeRender.golf_description }

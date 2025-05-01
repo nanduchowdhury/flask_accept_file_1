@@ -75,6 +75,13 @@ class ScholarKM(Flask):
         self.route('/tariff_km')(self.tariff_km_index)
         self.route('/crypto_km')(self.crypto_km_index)
         self.route('/AI_km')(self.AI_km_index)
+
+        self.route('/IPL_km')(self.IPL_km_index)
+        self.route('/tagore_km')(self.tagore_km_index)
+        self.route('/nobel_km')(self.nobel_km_index)
+        self.route('/guitar_km')(self.guitar_km_index)
+        self.route('/gardening_km')(self.gardening_km_index)
+
         self.route('/jazz_km')(self.jazz_km_index)
         self.route('/rock_km')(self.rock_km_index)
         self.route('/country_km')(self.country_km_index)
@@ -294,6 +301,21 @@ class ScholarKM(Flask):
 
     def yoga_km_index(self):
         return self.content_creator_index("yoga")
+
+    def IPL_km_index(self):
+        return self.content_creator_index("IPL")
+
+    def guitar_km_index(self):
+        return self.content_creator_index("guitar")
+
+    def gardening_km_index(self):
+        return self.content_creator_index("gardening")  
+
+    def nobel_km_index(self):
+        return self.content_creator_index("nobel")
+
+    def tagore_km_index(self):
+        return self.content_creator_index("tagore")
 
     def tariff_km_index(self):
         return self.content_creator_index("tariff")
@@ -702,6 +724,13 @@ class ScholarKM(Flask):
                 
                 self.content_creator_task("hindustani_classical_music")
                 self.content_creator_task("yoga")
+
+                self.content_creator_task("IPL")
+                self.content_creator_task("guitar")
+                self.content_creator_task("gardening")
+                self.content_creator_task("nobel")
+                self.content_creator_task("tagore")
+
                 self.content_creator_task("internal_organ")
                 self.content_creator_task("tariff")
                 self.content_creator_task("crypto")
