@@ -47,6 +47,8 @@ from gemini_access import GeminiAccess
 from base_client_manager import BaseClientManager
 from emailSupport import EmailSupport
 
+from flask import send_from_directory
+
 from ThreadPool import ThreadPool, TaskStatus, TaskBase
 from headerResponseTask import HeaderResponseTask
 
@@ -65,11 +67,16 @@ class ScholarKM(Flask):
         self.client_ip = 'client_ip'
         self.client_uuid = 'client_uuid'
 
+        @self.route("/robots.txt")
+        def robots_txt():
+            return send_from_directory(self.root_path, "robots.txt", mimetype="text/plain")
+
         self.route('/scholar_km')(self.scholar_km_index)
         
         self.route('/')(self.home_km_index)
         self.route('/home/about')(self.about)
         self.route('/home/contact')(self.contact)
+        self.route('/home/sitemap')(self.sitemap)
 
         self.route('/music_km')(self.music_km_index)
         self.route('/yoga_km')(self.yoga_km_index)
@@ -275,6 +282,9 @@ class ScholarKM(Flask):
 
     def contact(self):
         return render_template("home/contact.html")
+
+    def sitemap(self):
+        return render_template("home/sitemap.html")
 
     def content_followup_km(self):
         
