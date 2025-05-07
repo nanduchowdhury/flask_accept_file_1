@@ -71,6 +71,10 @@ class ScholarKM(Flask):
         def robots_txt():
             return send_from_directory(self.root_path, "robots.txt", mimetype="text/plain")
 
+        @self.route("/sitemap.xml")
+        def sitemap_xml():
+            return send_from_directory(self.root_path, "sitemap.xml", mimetype="text/plain")
+
         self.route('/scholar_km')(self.scholar_km_index)
         
         self.route('/')(self.home_km_index)
