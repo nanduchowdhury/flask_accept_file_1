@@ -43,9 +43,9 @@
 
 .topic-label-text {
     font-family: 'Patrick Hand';
-    font-size: 12px;
+    font-size: 16px;
     font-weight: bold;
-    color: rgb(16, 125, 213); /* Green color */
+    color: rgb(244, 36, 36);
     margin-right: 80px;
 }
 
@@ -94,51 +94,57 @@
 }
 
 .social-area {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     margin-top: 2px;
     background-color: #f9f9f9;
     overflow: auto;
     border: 1px solid #ccc;
-    padding: 2px;
+    padding: 4px;
     box-sizing: border-box;
     white-space: pre-wrap;
     font-family: 'Patrick Hand';
     font-size: 14px;
-
-    flex-direction: column;
 }
 
-#SocialArea {
-    height: 20%;
+.left-links {
+    color: #336699;
+    font-weight: bold;
+
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px; /* small spacing between items */
+    padding: 4px;
+    margin: 4px;
 }
 
-/* Social Media Icons */
 .social-links {
     display: flex;
-    gap: 15px;
+    gap: 10px;
+    margin-top: 4px;
 }
 
 .social-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px; /* Set consistent size for icons */
+    width: 40px;
     height: 40px;
-    border-radius: 50%; /* Optional: round icons */
-    font-size: 20px; /* Ensure all icons have the same font size */
-    color: #333; /* Default color */
-    background-color: #f0f0f0; /* Optional: background color */
+    border-radius: 50%;
+    font-size: 20px;
+    color: #333;
+    background-color: #f0f0f0;
     text-decoration: none;
 }
 
 .social-icon:hover {
-    color: #0077b5; /* LinkedIn color */
+    color: #0077b5;
 }
 
 .social-icon:nth-child(1):hover {
-    color: #1DA1F2; /* Twitter color */
+    color: #1DA1F2;
 }
 
 
@@ -351,3 +357,24 @@
     }
 }
 
+.about-area {
+    max-height: 300px;       /* adjust as needed */
+    overflow-y: auto;
+    border: 1px solid #ccc;  /* optional: visual boundary */
+    padding: 10px;
+    margin: 20px 0;
+    background-color: #fdfdfd;
+  }
+
+.about-area h2 {
+    background-color: rgba(201, 172, 154, 0.957);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+  }
+  
+  .about-area p {
+    margin-top: 4px;    /* reduce space above the paragraph */
+    margin-bottom: 8px; /* optional: controls spacing between paragraphs */
+  }

@@ -33,6 +33,8 @@ class HomeRender extends RootRender {
     static photography_description = "Learn about the subject. Develop it as a hobby.";
     static career_description = "Specially made for students and professionals. Learn about career options.";
     static machines_description = "Find out about different machines.";
+    static guitar_description = "Start guitar as a hobby - learn more.";
+    static gardening_description = "Know more about gardening - learn about the techniques.";
 
 
     constructor() {

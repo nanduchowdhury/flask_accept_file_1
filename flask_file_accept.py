@@ -68,6 +68,8 @@ class ScholarKM(Flask):
         self.route('/scholar_km')(self.scholar_km_index)
         
         self.route('/')(self.home_km_index)
+        self.route('/home/about')(self.about)
+        self.route('/home/contact')(self.contact)
 
         self.route('/music_km')(self.music_km_index)
         self.route('/yoga_km')(self.yoga_km_index)
@@ -268,6 +270,11 @@ class ScholarKM(Flask):
 
         return render_template('home/index.html')
 
+    def about(self):
+        return render_template("home/about.html")
+
+    def contact(self):
+        return render_template("home/contact.html")
 
     def content_followup_km(self):
         
