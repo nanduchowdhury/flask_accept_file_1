@@ -102,6 +102,7 @@ class ContentCreatorBase:
             "electronics": "electronics_json_root",
             "geography": "geography_json_root",
             "political_science": "political_science_json_root",
+            "legal_studies": "legal_studies_json_root",
             "authors": "authors_json_root",
             "cricket": "cricket_json_root",
             "career": "career_json_root",
@@ -3028,7 +3029,77 @@ class ContentCreatorBase:
                     "Mysticism and Philosophy",
                     "Philosophy and Cognitive Science",
                     "The Future of Philosophy in the Digital Age"
-                ]
+                ],
+            "legal_studies":
+                [
+                    # Foundations
+                    "Introduction to Law",
+                    "Legal Systems",
+                    "Constitutional Law",
+                    "Administrative Law",
+                    "Statutory Interpretation",
+                    "Legal Philosophy (Jurisprudence)",
+                    "Comparative Law",
+                    "International Law",
+                    "Human Rights Law",
+
+                    # Private Law
+                    "Contract Law",
+                    "Tort Law",
+                    "Property Law",
+                    "Intellectual Property Law",
+                    "Family Law",
+                    "Succession and Inheritance Law",
+                    "Commercial Law",
+                    "Corporate Law",
+                    "Banking and Finance Law",
+                    "Consumer Protection Law",
+
+                    # Public Law
+                    "Criminal Law",
+                    "Criminal Procedure",
+                    "Evidence Law",
+                    "Civil Procedure",
+                    "Tax Law",
+                    "Environmental Law",
+                    "Labor and Employment Law",
+                    "Health Law",
+                    "Education Law",
+                    "Immigration Law",
+
+                    # Specialized / Applied Areas
+                    "Cyber Law",
+                    "Media and Communication Law",
+                    "Sports Law",
+                    "Energy Law",
+                    "Maritime Law",
+                    "Aviation Law",
+                    "Space Law",
+                    "Agricultural and Food Law",
+                    "Animal Law",
+
+                    # Theoretical and Interdisciplinary
+                    "Legal History",
+                    "Law and Economics",
+                    "Law and Society",
+                    "Law and Technology",
+                    "Critical Legal Studies",
+                    "Feminist Legal Theory",
+                    "Race and the Law",
+                    "Law and Psychology",
+                    "Law and Ethics",
+
+                    # Professional Practice
+                    "Legal Research",
+                    "Legal Writing",
+                    "Advocacy and Mooting",
+                    "Alternative Dispute Resolution",
+                    "Mediation and Arbitration",
+                    "Clinical Legal Education",
+                    "Professional Responsibility and Ethics"
+            ]
+
+
             }
 
         self.map_section_to_json_store = {}

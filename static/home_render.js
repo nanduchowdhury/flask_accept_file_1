@@ -106,6 +106,37 @@ class HomeRender extends RootRender {
 
     }
 
+    parseColorToRGB(color) {
+        // Create a dummy canvas to let the browser resolve any valid CSS color
+        const ctx = document.createElement("canvas").getContext("2d");
+        ctx.fillStyle = color;
+        return ctx.fillStyle; // returns "rgb(r,g,b)" or "#rrggbb"
+    }
+
+    adjustColor(color, percent) {
+        
+        let normalized = this.parseColorToRGB(color);
+
+        let r, g, b;
+
+        if (normalized.startsWith("rgb")) {
+            [r, g, b] = normalized.match(/\d+/g).map(Number);
+        } else {
+            if (normalized[0] === "#") normalized = normalized.slice(1);
+            let num = parseInt(normalized, 16);
+            r = num >> 16;
+            g = (num >> 8) & 0x00FF;
+            b = num & 0x0000FF;
+        }
+
+        // Apply percentage adjustment
+        r = Math.min(255, Math.max(0, r + (r * percent / 100)));
+        g = Math.min(255, Math.max(0, g + (g * percent / 100)));
+        b = Math.min(255, Math.max(0, b + (b * percent / 100)));
+
+        return `rgb(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)})`;
+    }
+
     createOneImagesBlock(containerId, title, blockBackgroundColor, images) {
 
         const container = document.getElementById(containerId);
@@ -128,7 +159,10 @@ class HomeRender extends RootRender {
         block.style.borderRadius = "10px";
         block.style.padding = "10px";
         block.style.margin = "10px 0";
-        block.style.backgroundColor = blockBackgroundColor;
+        const lighter = this.adjustColor(blockBackgroundColor, 40);  // lighter
+        const darker  = this.adjustColor(blockBackgroundColor, -40); // darker
+        block.style.background = `linear-gradient(to right, ${lighter}, ${darker})`;
+
         block.style.maxWidth = "500px";
         block.style.width = "fit-content"; // or "auto" depending on your layout
     
@@ -139,7 +173,9 @@ class HomeRender extends RootRender {
         blockTitle.style.marginBottom = "5px";
         blockTitle.style.fontSize = "15px";
 
-        blockTitle.style.backgroundColor = "purple";
+        const lighter_1 = this.adjustColor("purple", 40);  // lighter
+        const darker_1  = this.adjustColor("purple", -40); // darker
+        blockTitle.style.background = `linear-gradient(to right, ${lighter_1}, ${darker_1})`;
         blockTitle.style.color = "white";               // for contrast
         blockTitle.style.padding = "4px 8px";           // to add some space around text
         blockTitle.style.borderTopLeftRadius = "8px";   // optional: match rounded corners

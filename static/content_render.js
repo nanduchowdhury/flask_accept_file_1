@@ -485,6 +485,7 @@ class ContentRender extends RootRender {
             electronics: "Electronics",
             geography: "Geography",
             political_science: "Political Science",
+            legal_studies: "Legal Studies",
             authors: "Authors",
             internal: "Body"
         };

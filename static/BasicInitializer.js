@@ -783,6 +783,7 @@ class TripleDashMenuCreator {
 
 
         this.menu.addMenuItem("", "Arts", new SampleMenuItem());
+        this.menu.addMenuItem("Arts", "Legal Studies", new SampleMenuItem("legal_studies_km"));
         this.menu.addMenuItem("Arts", "Philosophy", new SampleMenuItem("philosophy_km"));
         this.menu.addMenuItem("Arts", "Geography", new SampleMenuItem("geography_km"));
         this.menu.addMenuItem("Arts", "Political Science", new SampleMenuItem("political_science_km"));

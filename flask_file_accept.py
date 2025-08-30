@@ -116,6 +116,7 @@ class ScholarKM(Flask):
         self.route('/physics_km')(self.physics_km_index)
         self.route('/chemistry_km')(self.chemistry_km_index)
         self.route('/biology_km')(self.biology_km_index)
+        self.route('/legal_studies_km')(self.legal_studies_km_index)
         self.route('/computer_science_km')(self.computer_science_km_index)
         self.route('/electronics_km')(self.electronics_km_index)
         self.route('/geography_km')(self.geography_km_index)
@@ -377,6 +378,9 @@ class ScholarKM(Flask):
     def biology_km_index(self):
         return self.content_creator_index("biology")
 
+    def legal_studies_km_index(self):
+        return self.content_creator_index("legal_studies")
+
     def computer_science_km_index(self):
         return self.content_creator_index("computer_science")
 
@@ -430,9 +434,6 @@ class ScholarKM(Flask):
 
     def medical_care_km_index(self):
         return self.content_creator_index("medical_care")
-
-    def biology_km_index(self):
-        return self.content_creator_index("biology")
 
     def computer_science_km_index(self):
         return self.content_creator_index("computer_science")
@@ -783,6 +784,7 @@ class ScholarKM(Flask):
                 self.content_creator_task("electronics")
                 
                 self.content_creator_task("political_science")
+                self.content_creator_task("legal_studies")
 
                 self.content_creator_task("cricket")
                 self.content_creator_task("career")
