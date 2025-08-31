@@ -396,7 +396,7 @@ class ContentRender extends RootRender {
         this.tryAnotherVideo = new TryAnotherVideo(JsonData);
 
         const menuActions = {
-            "Translate language": this.translateLanguage,
+            // "Translate language": this.translateLanguage,
             "Try another YouTube video": this.tryAnotherVideo
         };
 
