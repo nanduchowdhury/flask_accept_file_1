@@ -145,7 +145,6 @@
 
 2065 : %s - basic-init done.
 
-2066 : Getting next item to know & learn...
 2067 : Thanks for subscribing.
 
 

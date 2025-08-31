@@ -20,6 +20,7 @@ class HomeRender extends RootRender {
     static rock_description = "Rock music and it's history and popularity.";
     static jazz_description = "Jazz music, saxophones and it's history and popularity";
     static country_description = "Sweet country music - and all the history behind it.";
+    static body_description = "Know about human body internals and details.";
 
     static books_description = "Authors and their books are shown here. Know about authors. And find out what books they published.";
     static electronics_description = "Electronics is the behind the technology that surrounds us. Find out more about the subject.";
@@ -259,21 +260,19 @@ class HomeRender extends RootRender {
     showImageRowsHomeArea_1() {
 
         const images = [
-            { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "cricket.jpg", 
-                link: BasicInitializer.FLASK_URL + "IPL_km", 
-                title: "IPL", description: HomeRender.IPL_description },
-            { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "ISS.jpg", 
-                link: BasicInitializer.FLASK_URL + "ISS_km", 
-                title: "Sunita Williams spent months in ISS", 
-                description: HomeRender.ISS_description },
+            { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "AI.jpg", 
+                    link: BasicInitializer.FLASK_URL + "AI_km", 
+                    title: "Artificial Intelligence", description: HomeRender.AI_description },
+            { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "internal_organ.jpg", 
+                    link: BasicInitializer.FLASK_URL + "internal_organ_km", 
+                    title: "Human Body", description: HomeRender.body_description },
             { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "tariff.jpg", 
                 link: BasicInitializer.FLASK_URL + "tariff_km", 
                 title: "Trump Tariffs - what actually are tariffs?", 
                 description: HomeRender.tariff_description },
-            { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "space_travel.jpg", 
-                link: BasicInitializer.FLASK_URL + "space_travel_km", 
-                title: "Sunita Williams returns from ISS", 
-                description: HomeRender.space_travel_description }
+            { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "nobel.jpg", 
+                link: BasicInitializer.FLASK_URL + "nobel_km", 
+                title: "Nobel Laureates", description: HomeRender.nobel_description }
         ];
 
         {
@@ -362,12 +361,11 @@ class HomeRender extends RootRender {
         }
         {
             const images = [
-                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "crypto.jpg", 
-                    link: BasicInitializer.FLASK_URL + "crypto_km", 
-                    title: "Crypto", description: HomeRender.crypto_description },
-                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "AI.jpg", 
-                    link: BasicInitializer.FLASK_URL + "AI_km", 
-                    title: "Artificial Intelligence", description: HomeRender.AI_description },
+                
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "ISS.jpg", 
+                    link: BasicInitializer.FLASK_URL + "ISS_km", 
+                    title: "Sunita Williams spent months in ISS", 
+                    description: HomeRender.ISS_description },
                 { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "electronics.jpg", 
                     link: BasicInitializer.FLASK_URL + "electronics_km", 
                     title: "Electronics", description: HomeRender.electronics_description },
@@ -379,7 +377,11 @@ class HomeRender extends RootRender {
                     title: "Physics", description: HomeRender.physics_description },
                 { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "machines.jpg", 
                     link: BasicInitializer.FLASK_URL + "general_machines_km", 
-                    title: "Machines", description: HomeRender.machines_description }
+                    title: "Machines", description: HomeRender.machines_description },
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "space_travel.jpg", 
+                    link: BasicInitializer.FLASK_URL + "space_travel_km", 
+                    title: "Sunita Williams returns from ISS", 
+                    description: HomeRender.space_travel_description }
             ];
             this.createOneImagesBlock("HomeArea_2", "Science", "LightGreen", images);
         }
@@ -405,9 +407,12 @@ class HomeRender extends RootRender {
                 { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "astronomy.jpg", 
                     link: BasicInitializer.FLASK_URL + "astronomy_km", 
                     title: "Astronomy", description: HomeRender.astronomy_description },
-                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "nobel.jpg", 
-                    link: BasicInitializer.FLASK_URL + "nobel_km", 
-                    title: "Nobel Laureates", description: HomeRender.nobel_description },
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "crypto.jpg", 
+                    link: BasicInitializer.FLASK_URL + "crypto_km", 
+                    title: "Crypto", description: HomeRender.crypto_description },
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "cricket.jpg", 
+                    link: BasicInitializer.FLASK_URL + "IPL_km", 
+                    title: "IPL", description: HomeRender.IPL_description },
                 { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "golf.jpg", 
                     link: BasicInitializer.FLASK_URL + "golf_km", 
                     title: "Golf", description: HomeRender.golf_description }

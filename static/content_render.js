@@ -406,8 +406,6 @@ class ContentRender extends RootRender {
 
     onLearnMoreButtonClick() {
 
-        window.errorManager.showInfo(2066);
-
         const data = {
             section: this.jsonData.section,
             alreadyDoneTopicList: this.alreadyDoneTopicList

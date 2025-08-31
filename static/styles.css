@@ -219,6 +219,17 @@
             display: none;
           }
 
-        
+        .left-links a {
+        color: grey;           /* text color */
+        text-decoration: none; /* removes underline */
+        }
+
+        .left-links a:hover {
+        color: darkgrey;       /* optional hover effect */
+        text-decoration: underline; /* optional hover underline */
+        }
+
+
+
 
 
