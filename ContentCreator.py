@@ -3150,10 +3150,19 @@ class ContentCreatorBase:
                 self.map_section_to_json_store[section] = json_store
                 return None
                 
-        json_store = self.map_section_to_json_store[section]
-        content = json_store.read_key(topic)
+        if not topic:
+            all_topics = []
+            for t in self.topic_list[section]:
+                all_topics.append(self.normalize_topic(t))
 
-        return content
+            return all_topics
+
+        else:
+
+            json_store = self.map_section_to_json_store[section]
+            content = json_store.read_key(topic)
+
+            return content
 
     def generate_content(self, section, topic):
         content = self.get_content_for_topic(section, topic)

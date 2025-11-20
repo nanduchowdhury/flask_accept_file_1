@@ -335,58 +335,77 @@ class ContentRender extends RootRender {
 
         const menuObj = new TripleDashMenuCreator("TripleDashMenuContainer");
         
-        this.learnMoreButton = document.getElementById("learnMoreButton");
-        this.topicLabelName = document.getElementById("topicLabelName");
-        this.topicLabel = document.getElementById('topic-label');
         this.viewArea_1 = document.getElementById('ViewArea_1');
         this.viewArea_2 = document.getElementById('ViewArea_2');
 
         this.youtubeMgr = new YoutubeManager('ViewArea_2');
 
-        document.getElementById("learnMoreButton").addEventListener("click", this.onLearnMoreButtonClick.bind(this));
-
         this.updateSectionAndTopic();
         this.createTripleDotMenu(this.jsonData);
 
-        this.alreadyDoneTopicList = [];
-
-        this.doContentFollowup();
+        this.getSubTopics();
 
         // window.errorManager.log(2060, this.jsonData.section, this.jsonData.topic);
     }
 
-    doEverythingAfterFollowup() {
+    addOneTopicRow(text) {
+        const container = document.getElementById("topicsScrollContent");
 
-        this.updateContentAndYoutube();
+        const row = document.createElement("div");
+        row.className = "scroll-row";
+        row.textContent = text;
+
+        row.addEventListener("click", () => {
+            // Remove previous selection
+            document.querySelectorAll(".scroll-row.selected")
+                .forEach(r => r.classList.remove("selected"));
+
+            // Select this one
+            row.classList.add("selected");
+
+            // 🔥 Callback is triggered here
+            this.onTopicRowSelected(row, text);
+        });
+
+        container.appendChild(row);
+
+        // ⭐ If this is the FIRST row → select it automatically
+        if (container.children.length === 1) {
+            row.click();   // <-- triggers selection + callback
+        }
+    }
+
+
+    doEverythingAfterGetSubTopics() {
+
         this.logGeoLocation();
 
-        this.showTipsLearnMore = new ShowTips('learnMoreButton');
-        this.showTipsLearnMore.show("Click here for next topic.");
+        for (let i = 0; i < this.jsonData.sub_topics_list.length; i++) {
+            this.addOneTopicRow(this.jsonData.sub_topics_list[i]);
+        }
 
         this.showTipsJoinFB = new ShowTips('');
         this.showTipsJoinFB.show("If you like the portal,\nplease follow the social links below.", 100);
     }
 
-    doContentFollowup() {
+    getSubTopics() {
         
         const data = {
-            section: this.jsonData.section,
-            topic: this.jsonData.topic
+            section: this.jsonData.section
         };
 
-        window.basicInitializer.makeServerRequest('/content_followup', data, 
-            this.lamdaOnContentFollowupRequestSuccess, this.lamdaOnContentFollowupRequestFailure);
+        window.basicInitializer.makeServerRequest('/get_sub_topics', data, 
+            this.lamdaOnGetSubTopicsRequestSuccess, this.lamdaOnGetSubTopicsRequestFailure);
     }
 
-    lamdaOnContentFollowupRequestSuccess = (data) => {
-        this.jsonData.content_response = data.content_response;
-        this.jsonData.youtube_response = data.youtube_response;
+    lamdaOnGetSubTopicsRequestSuccess = (data) => {
+        this.jsonData.sub_topics_list = data.sub_topics_list;
 
-        this.doEverythingAfterFollowup();
+        this.doEverythingAfterGetSubTopics();
         
     }
 
-    lamdaOnContentFollowupRequestFailure = (msg) => {
+    lamdaOnGetSubTopicsRequestFailure = (msg) => {
         
     }
 
@@ -404,22 +423,20 @@ class ContentRender extends RootRender {
         this.tripleDot = new TripleDot('triple-dot', 'dropdown-menu', menuActions);
     }
 
-    onLearnMoreButtonClick() {
+    onTopicRowSelected = (row, text) => {
 
         const data = {
             section: this.jsonData.section,
-            alreadyDoneTopicList: this.alreadyDoneTopicList
+            topic: text
         };
 
-        window.basicInitializer.makeServerRequest('/content_learn_more', data, 
-        this.lamdaOnLearnMoreRequestSuccess, this.lamdaOnLearnMoreRequestFailure);
-    }
+        window.basicInitializer.makeServerRequest('/on_topic_row_selected', data, 
+        this.lamdaOnTopicRowSelectedRequestSuccess, this.lamdaOnTopicRowSelectedRequestFailure);
+    };
 
-    lamdaOnLearnMoreRequestSuccess = (data) => {
+    lamdaOnTopicRowSelectedRequestSuccess = (data) => {
 
         this.jsonData = data;
-
-        this.alreadyDoneTopicList = this.jsonData.alreadyDoneTopicList;
 
         this.tripleDot.updateJsonData(this.jsonData);
 
@@ -430,7 +447,7 @@ class ContentRender extends RootRender {
         window.errorManager.log(2061, this.jsonData.section, this.jsonData.topic);
     }
 
-    lamdaOnLearnMoreRequestFailure = (msg) => {
+    lamdaOnTopicRowSelectedRequestFailure = (msg) => {
         
     }
     
@@ -493,8 +510,6 @@ class ContentRender extends RootRender {
                       : "content";
         
 
-        this.topicLabelName.textContent = section;
-        this.topicLabel.innerHTML = this.jsonData.topic;
     }
 
     updateContentAndYoutube() {

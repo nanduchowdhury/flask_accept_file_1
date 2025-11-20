@@ -24,14 +24,38 @@
 }
 
 
-
-.header-container-1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px; /* Space between label and button */
-    height: 40px; /* Adjust height as needed */
+.topics-scroll-area {
+    width: 100%;
+    height: 150px;
+    border: 1px solid #ccc;
+    overflow: auto;
+    padding: 0;
+    background: #ffffff;
+    box-sizing: border-box;
 }
+
+.topics-scroll-content {
+    display: flex;
+    flex-direction: column;
+    white-space: nowrap;    /* Enables horizontal scrolling */
+}
+
+.scroll-row {
+    padding: 6px 10px;
+    cursor: pointer;
+    border-bottom: 1px dotted #aaa;   /* Row separator */
+    user-select: text;                /* Text inside row selectable */
+}
+
+.scroll-row:hover {
+    background: #f1f1f1;
+}
+
+.scroll-row.selected {
+    background: #cde4ff;              /* Highlight selected row */
+    font-weight: 600;
+}
+
 
 #TripleDashMenuContainer {
     position: fixed;
@@ -39,14 +63,6 @@
     right: 0;
     padding: 10px;
     z-index: 9999;
-}
-
-.topic-label-text {
-    font-family: 'Patrick Hand';
-    font-size: 16px;
-    font-weight: bold;
-    color: rgb(244, 36, 36);
-    margin-right: 80px;
 }
 
 .learn-more-btn {
@@ -295,22 +311,6 @@
     background: lightgray;
 }
 
-.topic-label-container {
-    text-align: center; /* Centers the text horizontally */
-    margin-top: 2px;   /* Adds space above the text label */
-}
-
-.topic-label {
-    font-family: 'Patrick Hand';
-    font-weight: bold;
-    font-size: 14px;
-    color: #333;        /* Optional: Set text color */
-    display: inline-flex; /* Use flexbox for vertical alignment */
-    align-items: center; /* Vertically center text */
-    min-height: 10px;    /* Ensure the label has at least 50px height */
-    padding: 0 5px;     /* Adds horizontal padding for better spacing */
-    white-space: normal; /* Allows text wrapping to new lines */
-}
 
 /* Drop-down menu styling */
 .tr_menu_dropdown-container {

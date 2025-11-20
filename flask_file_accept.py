@@ -131,10 +131,10 @@ class ScholarKM(Flask):
 
         self.route('/subscribe', methods=['POST'])(self.subscribe)
 
-        self.route('/content_followup', methods=['POST'])(self.content_followup_km)
+        self.route('/get_sub_topics', methods=['POST'])(self.get_sub_topics_km)
 
         self.route('/home_or_content_init', methods=['POST'])(self.home_or_content_init)
-        self.route('/content_learn_more', methods=['POST'])(self.content_learn_more)
+        self.route('/on_topic_row_selected', methods=['POST'])(self.get_content_and_youtube_for_topic)
         self.route('/content_triple_dot_action_km', methods=['POST'])(self.content_triple_dot_action_km)
 
         self.route('/user-exit', methods=['POST'])(self.user_exit)
@@ -291,7 +291,19 @@ class ScholarKM(Flask):
     def sitemap(self):
         return render_template("home/sitemap.html")
 
-    def content_followup_km(self):
+    def get_sub_topics_km(self):
+        
+        data = request.json
+        section = data['section']
+        topic = None
+
+        sub_topics_list = self.content_creator_obj.get_content_for_topic(section, topic)
+
+        return jsonify({
+            "sub_topics_list": sub_topics_list
+        })
+
+    def get_content_and_youtube_for_topic(self):
         
         data = request.json
         section = data['section']
@@ -301,6 +313,8 @@ class ScholarKM(Flask):
         content_response = self.content_creator_obj.get_content_for_topic(section, topic)
 
         return jsonify({
+            "section": section,
+            "topic": topic,
             "content_response": content_response,
             "youtube_response": youtube_response_list
         })
@@ -891,29 +905,6 @@ class ScholarKM(Flask):
 
         return '', 204  # No content response
 
-    def content_learn_more(self):
-
-        data = request.get_json()
-
-        section = data.get('section', '')
-        alreadyDoneTopicList = data.get('alreadyDoneTopicList', '')
-
-        [topic, alreadyDoneTopicList] = self.content_creator_obj.get_random_topic(section, alreadyDoneTopicList)
-
-        youtube_response_list = self.content_creator_obj.generate_youtube_response(section, topic)
-        content_response = self.content_creator_obj.get_content_for_topic(section, topic)
-
-        msg = f"Invoked Learn-More : {section}"
-        self.error_manager.show_any_message(msg)
-
-        json_data = {
-            "section": section,
-            "topic": topic,
-            "alreadyDoneTopicList": alreadyDoneTopicList,
-            "content_response": content_response,
-            "youtube_response": youtube_response_list
-        }
-        return jsonify(json_data), 200
 
     def home_or_content_init(self):
         try:
