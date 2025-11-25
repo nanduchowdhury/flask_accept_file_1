@@ -21,7 +21,8 @@ class GeminiAccess(BaseModelAccess):
             genai.configure(api_key=GOOGLE_API_KEY)
 
             # model = genai.GenerativeModel("gemini-pro")
-            self.model = genai.GenerativeModel(model_name="models/gemini-1.5-flash-002")
+            self.model = genai.GenerativeModel(model_name="models/gemini-2.5-flash")
+
 
         except Exception as e:
             raise ValueError(self.eManager.show_message(2020, e))
@@ -90,4 +91,3 @@ class GeminiAccess(BaseModelAccess):
             raise ValueError(self.eManager.show_message(2026, e))
 
     
-

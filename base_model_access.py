@@ -4,6 +4,8 @@ import os
 import json
 import constants
 
+import ast
+
 import time
 from PIL import Image
 
@@ -128,6 +130,63 @@ class BaseModelAccess():
         response = self.query_only_prompt(prompt)
         return response
 
+    def generate_topics(self, section):
+
+        prompt = self.base_prompt.get_prompt_to_generate_topics(section)
+        raw = self.query_only_prompt(prompt)
+
+        topics = self.extract_python_list(raw)
+
+        return topics
+
+
+    def extract_python_list(self, raw: str):
+        """
+        Extracts a Python list from messy LLM output.
+        Handles:
+        - HTML tags
+        - Markdown fences (```python)
+        - Variable assignment (x = [...])
+        - Curly quotes
+        - Extra commentary
+        - Indented blocks
+        - Multiple lists (returns first)
+        """
+
+        # 1. Remove HTML tags completely
+        raw = re.sub(r"<[^>]+>", "", raw)
+
+        # 2. Remove markdown code fences including language hints
+        raw = re.sub(r"```[\s\S]*?```", lambda m: m.group(0).replace("```", ""), raw)
+
+        # Or simpler:
+        raw = raw.replace("```python", "").replace("```", "")
+
+        # 3. Normalize quotes (“ ” ‘ ’ → ")
+        raw = raw.replace("“", '"').replace("”", '"').replace("‘", '"').replace("’", '"')
+
+        # 4. Remove variable assignment (e.g., gandhi_topics = [...])
+        raw = re.sub(r"^[A-Za-z_]\w*\s*=\s*", "", raw, flags=re.MULTILINE)
+
+        # 5. Extract first Python list (greedy across multiple lines)
+        match = re.search(r"\[[\s\S]*?\]", raw)
+        if not match:
+            raise ValueError("No Python list found in model response.")
+
+        list_str = match.group(0).strip()
+
+        # 6. Try parsing safely with literal_eval
+        try:
+            return ast.literal_eval(list_str)
+        except Exception as e:
+            # LAST RESORT: fix common trailing commas or quotes
+            cleaned = list_str.rstrip(",")
+            cleaned = cleaned.replace("'", '"')  # normalize to JSON-safe
+            return ast.literal_eval(cleaned)
+
+
+
+
 class BasePrompt():
     def __init__(self):
 
@@ -212,3 +271,23 @@ class BasePrompt():
         prompt = f"Explain {topic} in {section}."
         prompt += self.prompt_HTML_tag
         return prompt
+
+    def get_prompt_to_generate_topics(self, section):
+        
+        prompt = f"""Return ONLY a valid Python list of strings.
+                    No explanations.
+                    No formatting.
+                    No code blocks.
+                    No HTML.
+                    No extra text.
+
+                    Example format:
+                    ["a", "b", "c"]
+
+                    THE OUTPUT MUST BE VALID JSON/PYTHON-LIST. IF ANYTHING ELSE IS INCLUDED, IT IS AN ERROR.
+
+                    Now generate the list for: {section}"""
+
+        return prompt
+
+    

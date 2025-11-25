@@ -129,6 +129,8 @@ class ScholarKM(Flask):
         self.route('/philosophy_km')(self.philosophy_km_index)
         self.route('/photography_km')(self.photography_km_index)
 
+        self.route('/research_km')(self.research_km_index)
+
         self.route('/subscribe', methods=['POST'])(self.subscribe)
 
         self.route('/get_sub_topics', methods=['POST'])(self.get_sub_topics_km)
@@ -297,7 +299,14 @@ class ScholarKM(Flask):
         section = data['section']
         topic = None
 
-        sub_topics_list = self.content_creator_obj.get_content_for_topic(section, topic)
+        sub_topics_list = []
+
+        is_section_present = self.content_creator_obj.add_section_if_not_present(section)
+        if not is_section_present:
+            # this is research section
+            sub_topics_list = self.content_creator_obj.generate_topics(section)
+        else:
+            sub_topics_list = self.content_creator_obj.get_all_topics_for_section(section)
 
         return jsonify({
             "sub_topics_list": sub_topics_list
@@ -318,6 +327,18 @@ class ScholarKM(Flask):
             "content_response": content_response,
             "youtube_response": youtube_response_list
         })
+
+    def content_creator_index_for_research(self, research_query):
+        
+        section = research_query
+        topic = "dummy_research_topic"
+        self.error_manager.show_page_invoke_message(f"content-km-{section}")
+
+        json_data = {
+            "section": section,
+            "topic" : topic
+        }
+        return render_template('content/index.html', json_data=json_data)
 
     def content_creator_index(self, section):
 
@@ -478,6 +499,14 @@ class ScholarKM(Flask):
 
     def photography_km_index(self):
         return self.content_creator_index("photography")
+
+    def research_km_index(self):
+        search_text = request.args.get('q', '')
+        # For now, we'll just render the home page.
+        # You can create a new template to display search results.
+        # return render_template('home/index.html', search_query=search_text)
+
+        return self.content_creator_index_for_research(search_text)
 
     def content_triple_dot_action_km(self):
         data = request.json
@@ -1032,4 +1061,3 @@ Session(app)
 
 if __name__ == '__main__':
   app.run(debug=False, threaded=True)
-

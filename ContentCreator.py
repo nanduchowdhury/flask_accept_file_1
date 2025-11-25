@@ -3142,27 +3142,47 @@ class ContentCreatorBase:
 
         return new_topic, alreadyDoneTopicList
 
-    def get_content_for_topic(self, section, topic):
+    def add_section_if_not_present(self, section):
         
+        is_present = section in self.topic_list
+        if not is_present:
+            self.topic_list[section] = []
+
+        return is_present
+
+    def setup_json_for_section(self, section):
         if section not in self.map_section_to_json_store:
             if not self.read_whole_json_for_section(section):
-                json_store = JsonDataStore(self.section_json_root_map[section])
-                self.map_section_to_json_store[section] = json_store
-                return None
-                
-        if not topic:
-            all_topics = []
-            for t in self.topic_list[section]:
-                all_topics.append(self.normalize_topic(t))
+                if section in self.section_json_root_map:
+                    json_store = JsonDataStore(self.section_json_root_map[section])
+                    self.map_section_to_json_store[section] = json_store
+                    return None
 
-            return all_topics
 
-        else:
+    def get_all_topics_for_section(self, section):
+        
+        all_topics = []
+        for t in self.topic_list[section]:
+            all_topics.append(self.normalize_topic(t))
 
+        return all_topics
+
+
+    def get_content_for_topic(self, section, topic):
+        
+        self.setup_json_for_section(section)
+
+        if section in self.section_json_root_map:
             json_store = self.map_section_to_json_store[section]
             content = json_store.read_key(topic)
-
             return content
+        else:
+            # This is for research flow - need to generate content.
+            content = self.generate_content_implementation(section, topic)
+            print(f"Generated research content : {content}")
+            return content
+
+        return None
 
     def generate_content(self, section, topic):
         content = self.get_content_for_topic(section, topic)
@@ -3198,6 +3218,10 @@ class ContentCreatorBase:
         if something_generated:
             self.finish(section)
             
+    def generate_topics(self, section):
+        all_topics = self.gemini_access.generate_topics(section)
+        return all_topics
+
 
     def generate_content_implementation(self, section, topic):
         response = self.gemini_access.generate_content(section, topic)

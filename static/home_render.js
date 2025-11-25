@@ -46,9 +46,28 @@ class HomeRender extends RootRender {
 
         const menuObj = new TripleDashMenuCreator("TripleDashMenuContainer");      
 
+        this.researchButton = document.getElementById("ResearchButton");
+        this.researchInput = document.getElementById("research-input");
+        this.researchButton.addEventListener("click", this.onResearchButtonClick.bind(this));
+
         this.geoLocInfo = '';
         this.logGeoLocation();
     }
+
+    onResearchButtonClick() {
+        const searchTerm = this.researchInput.value.trim();
+        if (searchTerm) {
+            // Construct a search URL for your website, passing the search term as a query parameter.
+            const searchUrl = `${BasicInitializer.FLASK_URL}search?q=${encodeURIComponent(searchTerm)}`;
+            
+            // Open the search results in a new tab
+            window.open(searchUrl, '_blank');
+        } else {
+            // Optionally, inform the user that the search box is empty.
+            alert("Please enter a topic to research.");
+        }
+    }
+    
 
     logGeoLocation() {
         const geoInfo = new GeolocationInfo();

@@ -23,8 +23,8 @@ class GoogleCSEAccess():
 
     def initialize(self):
         try:
-            self.GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
-            if not self.GOOGLE_API_KEY:
+            self.GOOGLE_CSE_API_KEY = os.getenv('GOOGLE_CSE_API_KEY')
+            if not self.GOOGLE_CSE_API_KEY:
                 raise ValueError("Google API key is not set.")
 
             self.GOOGLE_CSE_ID = os.getenv('GOOGLE_CSE_ID')
@@ -63,7 +63,7 @@ class GoogleCSEAccess():
 
     def search(self, query):
         try:
-            service = build("customsearch", "v1", developerKey=self.GOOGLE_API_KEY)
+            service = build("customsearch", "v1", developerKey=self.GOOGLE_CSE_API_KEY)
             res = service.cse().list(q=query, cx=self.GOOGLE_CSE_ID, num=10).execute()  # Fetch up to 10 results
 
             youtube_links = []  # Collect all YouTube links

@@ -221,6 +221,31 @@
     }
 }
 
+.research-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+#research-input {
+    padding: 3px;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 220px;
+}
+
+#researchButton {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    box-shadow: none;
+    padding: 5px 10px;
+    font-size: 10px;
+    cursor: pointer;
+    border: none;
+}
+
 .whatsapp-share button {
     background-color: #0ad10d; /* blue */
     color: white;              /* text color */
