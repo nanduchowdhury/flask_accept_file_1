@@ -52,6 +52,9 @@
             max-width: 100vw;
             box-sizing: border-box;
         }
+        .welcome-heading .line-1 { color: #161cca; } /* Dark Blue */
+        .welcome-heading .line-2 { color: #0b1ff8; } /* Green */
+        .welcome-heading .line-3 { color: #6574f3; } /* Purple */
     </style>
     
     <header class="header-container">
@@ -81,11 +84,15 @@
     
 
     <main class="home-area-container">
-        <h1 class="welcome-heading">Welcome. Learn more thru easy description of topics. And watch selected videos.</h1> <!-- SEO Optimized Heading -->
+        <h1 class="welcome-heading">
+            <span class="line-1">Welcome.</span><br>
+            <span class="line-2">Research on a topic through easy descriptions and related YouTube videos.</span><br>
+            <span class="line-3">Or select a topic from below or in the menu.</span>
+        </h1> <!-- SEO Optimized Heading -->
         <div class="research-container">
-            <input type="text" id="research-input" placeholder="Research for topics...">
+            <input type="text" id="research-input" placeholder="example 'vietnam vacations'">
             <button id="ResearchButton">Research</button>
-        </div>        
+        </div>         
         <section id="HomeArea_1" class="home-area"></section>
         <section id="HomeArea_2" class="home-area"></section>
         <aside id="SocialArea" class="social-area">
