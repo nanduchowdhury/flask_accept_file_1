@@ -58,7 +58,7 @@ class HomeRender extends RootRender {
         const searchTerm = this.researchInput.value.trim();
         if (searchTerm) {
             // Construct a search URL for your website, passing the search term as a query parameter.
-            const searchUrl = `${BasicInitializer.FLASK_URL}search?q=${encodeURIComponent(searchTerm)}`;
+            const searchUrl = `${BasicInitializer.FLASK_URL}research_km?q=${encodeURIComponent(searchTerm)}`;
             
             // Open the search results in a new tab
             window.open(searchUrl, '_blank');
