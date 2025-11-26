@@ -1,63 +1,57 @@
 .home-area-container {
     display: flex;
-    flex-direction: column; /* Ensure all sections are in column format */
+    flex-direction: column;
     gap: 10px;
-    height: 100vh; /* Full viewport height */
-    margin-left: 5px;
-    margin-right: 5px;
+    margin: 5px;
 }
 
+/* Each home area = full-screen section */
 .home-area {
-    background-color: #f9f9f9;
-    overflow: auto;
+    min-height: 100vh;
+    box-sizing: border-box;
+    overflow: hidden; /* no scrollbar inside */
     border: 1px solid #ccc;
     padding: 5px;
-    box-sizing: border-box;
-    white-space: pre-wrap;
+    background-color: #f9f9f9;
     font-family: 'Patrick Hand';
     font-size: 14px;
+    white-space: pre-wrap;
 
     display: flex;
-    /* flex-direction: column; */
-    flex-wrap: wrap;
     gap: 10px;
+    flex-wrap: wrap; /* Desktop will use horizontal wrapping */
+    align-content: flex-start;
 }
 
-/* Assigning height percentages */
+/* Special styling for HomeArea_1 */
 #HomeArea_1 {
-    height: 35%;
-}
-
-#HomeArea_2 {
-    height: 45%;
-}
-
-/* Desktop Layout */
-@media (min-width: 768px) {
-    .home-area {
-        width: auto;
-    }
-}
-
-/* Mobile Layout */
-@media (max-width: 767px) {
-    .home-area-container {
-        height: 100vh;
-    }
-
-    #HomeArea_1, #HomeArea_2 {
-        width: 100%;
-    }
-}
-
-/* Typing Animation */
-#HomeArea_1 {
-    font-family: 'Patrick Hand';
-    font-size: 8px;
-    /* font-weight: bold; */
-    color: rgba(237, 92, 44, 0.425);
     background: #cfdbf5;
+    font-size: 8px;
+    color: rgba(237, 92, 44, 0.425);
 }
+
+
+
+/* ------------ RESPONSIVE LAYOUT RULES ------------ */
+
+/* Mobile — stack vertically (1 column) */
+@media (max-width: 767px) {
+    .home-area {
+        flex-direction: column;
+        flex-wrap: nowrap;  /* No horizontal wrapping on mobile */
+    }
+}
+
+/* Desktop — multiple items per row */
+@media (min-width: 768px) {
+    .home-area > * {
+        flex: 0 1 auto; /* allow items to wrap */
+    }
+}
+
+
+
+
 
 @keyframes typing {
     from { width: 0; }
