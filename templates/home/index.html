@@ -90,9 +90,12 @@
             <span class="line-3">Or select a topic from below or in the menu.</span>
         </h1> <!-- SEO Optimized Heading -->
         <div class="research-container">
-            <input type="text" id="research-input" placeholder="example 'vietnam vacations'">
+            <input type="text" id="research-input" placeholder="example 'vietnam vacations'" list="research-suggestions" spellcheck="true">
+            <datalist id="research-suggestions">
+                <!-- Suggestions will be populated by JavaScript -->
+            </datalist>
             <button id="ResearchButton">Research</button>
-        </div>         
+        </div>
         <section id="HomeArea_1" class="home-area"></section>
         <section id="HomeArea_2" class="home-area"></section>
         <aside id="SocialArea" class="social-area">

@@ -233,6 +233,11 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     width: 220px;
+    color: rgb(57, 54, 54);
+}
+
+#research-input::placeholder {
+    color: rgb(183, 181, 181);
 }
 
 #researchButton {

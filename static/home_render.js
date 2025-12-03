@@ -50,6 +50,11 @@ class HomeRender extends RootRender {
         this.researchInput = document.getElementById("research-input");
         this.researchButton.addEventListener("click", this.onResearchButtonClick.bind(this));
 
+        this.researchInput.addEventListener("keypress", (event) => {
+            if (event.key === "Enter") {
+                this.researchButton.click();
+            }
+        });
         this.geoLocInfo = '';
         this.logGeoLocation();
     }
@@ -57,6 +62,7 @@ class HomeRender extends RootRender {
     onResearchButtonClick() {
         const searchTerm = this.researchInput.value.trim();
         if (searchTerm) {
+            this.addToSearchHistory(searchTerm);
             // Construct a search URL for your website, passing the search term as a query parameter.
             const searchUrl = `${BasicInitializer.FLASK_URL}research_km?q=${encodeURIComponent(searchTerm)}`;
             
@@ -66,6 +72,34 @@ class HomeRender extends RootRender {
             // Optionally, inform the user that the search box is empty.
             alert("Please enter a topic to research.");
         }
+    }
+
+    addToSearchHistory(term) {
+        let history = JSON.parse(localStorage.getItem('researchHistory')) || [];
+        // Remove term if it already exists to move it to the top
+        history = history.filter(item => item !== term);
+        // Add to the beginning of the array
+        history.unshift(term);
+        // Keep history to a reasonable size, e.g., 10 items
+        if (history.length > 10) {
+            history.pop();
+        }
+        localStorage.setItem('researchHistory', JSON.stringify(history));
+        this.populateSuggestions();
+    }
+
+    populateSuggestions() {
+        const suggestions = [
+            "Artificial Intelligence", "Human Body", "Astronomy", "Nobel Laureates", "Gardening", "Learning Guitar",
+            "Photography", "Authors & Books", "Painting", "Grammy Music", "Jazz Music", "Rock Music", "Country Music",
+            "Hindustani Classical Music", "Yoga", "Nutrition", "Medical Care", "Philosophy", "International Space Station",
+            "Electronics", "Chemistry", "Physics", "Machines", "Space Travel", "Student Tips", "Career", "Stocks",
+            "Oscar Movies", "Tariffs", "Crypto", "IPL", "Golf"
+        ];
+        const history = JSON.parse(localStorage.getItem('researchHistory')) || [];
+        const combinedSuggestions = [...new Set([...history, ...suggestions])]; // History first, then unique suggestions
+        const datalist = document.getElementById('research-suggestions');
+        datalist.innerHTML = combinedSuggestions.map(item => `<option value="${item}"></option>`).join('');
     }
     
 
@@ -112,6 +146,7 @@ class HomeRender extends RootRender {
     renderHomeArea_1() {
 
         this.showImageRowsHomeArea_1();
+        this.populateSuggestions();
 
     }        
     
