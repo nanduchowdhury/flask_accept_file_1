@@ -274,7 +274,7 @@ class BasePrompt():
 
     def get_prompt_to_generate_topics(self, section):
         
-        prompt = f"""Return ONLY a valid Python list of strings.
+        prompt = f"""Return ONLY a valid Python list of sub-topics for the below mentioned topic.
                     No explanations.
                     No formatting.
                     No code blocks.
@@ -286,7 +286,7 @@ class BasePrompt():
 
                     THE OUTPUT MUST BE VALID JSON/PYTHON-LIST. IF ANYTHING ELSE IS INCLUDED, IT IS AN ERROR.
 
-                    Now generate the list for: {section}"""
+                    Now generate the list for topic: {section}"""
 
         return prompt
 
