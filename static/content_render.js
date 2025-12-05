@@ -384,8 +384,8 @@ class ContentRender extends RootRender {
             this.addOneTopicRow(this.jsonData.sub_topics_list[i]);
         }
 
-        this.showTipsJoinFB = new ShowTips('');
-        this.showTipsJoinFB.show("If you like the portal,\nplease follow the social links below.", 100);
+        // this.showTipsJoinFB = new ShowTips('');
+        // this.showTipsJoinFB.show("If you like the portal,\nplease follow the social links below.", 100);
     }
 
     getSubTopics() {

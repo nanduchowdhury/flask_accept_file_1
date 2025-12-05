@@ -1,4 +1,4 @@
-Chrome driver title is : Kupmanduk - Scholar-M
+Chrome driver title is : Kapemandake - Scholar-M
 *****************************
 ID is : report-item
 ID is : reportIssuePopup
