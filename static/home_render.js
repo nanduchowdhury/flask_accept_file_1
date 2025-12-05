@@ -331,18 +331,19 @@ class HomeRender extends RootRender {
         }
 
         const images = [
-            { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "AI.jpg", 
-                    link: BasicInitializer.FLASK_URL + "AI_km", 
-                    title: "Artificial Intelligence", description: HomeRender.AI_description },
-            { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "internal_organ.jpg", 
-                    link: BasicInitializer.FLASK_URL + "internal_organ_km", 
-                    title: "Human Body", description: HomeRender.body_description },
+            { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "space_travel.jpg", 
+                    link: BasicInitializer.FLASK_URL + "space_travel_km", 
+                    title: "Sunita Williams returns from ISS", 
+                    description: HomeRender.space_travel_description },
+            { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "nobel.jpg", 
+                    link: BasicInitializer.FLASK_URL + "nobel_km", 
+                    title: "Nobel Laureates", description: HomeRender.nobel_description },
             { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "astronomy.jpg", 
                     link: BasicInitializer.FLASK_URL + "astronomy_km", 
                     title: "Astronomy", description: HomeRender.astronomy_description },
-            { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "nobel.jpg", 
-                link: BasicInitializer.FLASK_URL + "nobel_km", 
-                title: "Nobel Laureates", description: HomeRender.nobel_description }
+            { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "AI.jpg", 
+                    link: BasicInitializer.FLASK_URL + "AI_km", 
+                    title: "Artificial Intelligence", description: HomeRender.AI_description }
         ];
 
         {
@@ -448,10 +449,9 @@ class HomeRender extends RootRender {
                 { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "machines.jpg", 
                     link: BasicInitializer.FLASK_URL + "general_machines_km", 
                     title: "Machines", description: HomeRender.machines_description },
-                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "space_travel.jpg", 
-                    link: BasicInitializer.FLASK_URL + "space_travel_km", 
-                    title: "Sunita Williams returns from ISS", 
-                    description: HomeRender.space_travel_description }
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "internal_organ.jpg", 
+                    link: BasicInitializer.FLASK_URL + "internal_organ_km", 
+                    title: "Human Body", description: HomeRender.body_description }
             ];
             this.createOneImagesBlock("HomeArea_2", "Science", "LightGreen", images);
         }

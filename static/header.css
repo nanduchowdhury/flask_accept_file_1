@@ -192,8 +192,8 @@
 }
 
 #newsletter-input::placeholder {
-    color: rgb(152, 12, 12);
-    font-weight: bold;
+    color: rgb(188, 182, 182);
+    font-size: 10px;
 }
 
 /* Mobile-specific tweaks */
