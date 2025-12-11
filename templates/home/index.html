@@ -53,8 +53,8 @@
             box-sizing: border-box;
         }
         .welcome-heading .line-1 { color: #161cca; } /* Dark Blue */
-        .welcome-heading .line-2 { color: #0b1ff8; } /* Green */
-        .welcome-heading .line-3 { color: #6574f3; } /* Purple */
+        .welcome-heading .line-2 { color: #121315; } /* Green */
+        .welcome-heading .line-3 { color: #121315; } /* Purple */
     </style>
     
     <header class="header-container">
@@ -80,16 +80,19 @@
 
     <main class="home-area-container">
         <h1 class="welcome-heading">
-            <span class="line-2">Learn about a topic through easy description and related YouTube videos.</span><br>
-            <span class="line-3">Or select a topic from below or in the top-right-menu.</span>
+            <span class="line-2">Enter a topic to learn through easy description and related YouTube videos.</span><br>
+            
         </h1> <!-- SEO Optimized Heading -->
         <div class="research-container" role="search">
-            <input type="text" id="research-input" placeholder="example 'vietnam vacations'" list="research-suggestions" spellcheck="true">
+            <input type="text" id="research-input" placeholder="try 'vietnam vacations'" list="research-suggestions" spellcheck="true">
             <datalist id="research-suggestions">
                 <!-- Suggestions will be populated by JavaScript -->
             </datalist>
             <button id="ResearchButton">Learn and Know</button>
         </div>
+        <h1 class="welcome-heading">
+            <span class="line-3">Select a trending topic from below or in the top-right-menu.</span><br>
+        </h1>
         <section id="HomeArea_1" class="home-area"></section>
         <section id="HomeArea_2" class="home-area"></section>
         <aside id="SocialArea" class="social-area">
