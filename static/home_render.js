@@ -72,7 +72,7 @@ class HomeRender extends RootRender {
             window.open(searchUrl, '_blank');
         } else {
             // Optionally, inform the user that the search box is empty.
-            alert("Please enter a topic to research.");
+            alert("Please enter a topic to learn and know more.");
         }
     }
 

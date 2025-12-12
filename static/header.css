@@ -20,9 +20,16 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    margin-top: 20px; /* Pushes the container down */
+    
 }
 
+.subscription-note {
+    color: rgb(73, 71, 71);
+    font-size: 12px;
+    font-family: 'Patrick Hand';
+    margin: 0;
+}
 
 .topics-scroll-area {
     width: 100%;
