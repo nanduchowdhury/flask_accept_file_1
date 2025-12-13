@@ -63,6 +63,13 @@ class ContentCreatorBase:
         self.gemini_access = gemini_access
         self.error_manager = error_manager
 
+        self.gcs_manager = GCSManager("kupmanduk-bucket", constants.GCS_ROOT_FOLDER)
+        self.google_cse_access = GoogleCSEAccess(self.error_manager)
+        self.google_cse_access.initialize()
+        self.topic_list_json_file = "topic_list.json"
+
+        self.map_section_to_json_store = {}
+
         self.section_json_root_map = {
             "hindustani_classical_music": "hindustani_classical_music_json_root",
             "yoga": "yoga_json_root",
@@ -112,7 +119,14 @@ class ContentCreatorBase:
             "economics": "economics_json_root"
         }
 
-        self.topic_list = {
+        if self.gcs_manager.is_exist(self.topic_list_json_file):
+            self.topic_list = self.gcs_manager.read_json(self.topic_list_json_file)
+        else:
+            self.topic_list = self._get_initial_topic_list()
+            self.gcs_manager.write_json(self.topic_list_json_file, self.topic_list)
+
+    def _get_initial_topic_list(self):
+        return {
             "hindustani_classical_music": 
                 [
                 "Yaman", "Bhairav", "Bhairavi", "Todi", "Marwa", "Kafi", 
@@ -3102,13 +3116,7 @@ class ContentCreatorBase:
 
             }
 
-        self.map_section_to_json_store = {}
-
-        self.gcs_manager = GCSManager("kupmanduk-bucket", constants.GCS_ROOT_FOLDER)
-
-        self.google_cse_access = GoogleCSEAccess(self.error_manager)
-        self.google_cse_access.initialize()
-
+        
 
     def read_whole_json_for_section(self, section):
 
@@ -3147,8 +3155,19 @@ class ContentCreatorBase:
         is_present = section in self.topic_list
         if not is_present:
             self.topic_list[section] = []
+            self.gcs_manager.write_json(self.topic_list_json_file, self.topic_list)
+
+            print(f'Written {section} into json file {self.topic_list_json_file}')
 
         return is_present
+
+    def add_topics_list_for_section(self, section, topics_list):
+        """Adds a list of topics to a section and updates the JSON file in GCS."""
+        if section not in self.topic_list:
+            self.topic_list[section] = []
+        
+        self.topic_list[section].extend(topics_list)
+        self.gcs_manager.write_json(self.topic_list_json_file, self.topic_list)
 
     def setup_json_for_section(self, section):
         if section not in self.map_section_to_json_store:
@@ -3179,7 +3198,6 @@ class ContentCreatorBase:
         else:
             # This is for research flow - need to generate content.
             content = self.generate_content_implementation(section, topic)
-            print(f"Generated research content : {content}")
             return content
 
         return None
@@ -3237,5 +3255,3 @@ class ContentCreatorBase:
         search_line = search_line.replace('_', ' ')
         response = self.google_cse_access.perform_retry_search(search_line)
         return response
-
-

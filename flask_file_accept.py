@@ -302,11 +302,13 @@ class ScholarKM(Flask):
         sub_topics_list = []
 
         is_section_present = self.content_creator_obj.add_section_if_not_present(section)
-        if not is_section_present:
+        if is_section_present:
+            sub_topics_list = self.content_creator_obj.get_all_topics_for_section(section)
+
+        if not sub_topics_list:
             # this is research section
             sub_topics_list = self.content_creator_obj.generate_topics(section)
-        else:
-            sub_topics_list = self.content_creator_obj.get_all_topics_for_section(section)
+            self.content_creator_obj.add_topics_list_for_section(section, sub_topics_list)
 
         return jsonify({
             "sub_topics_list": sub_topics_list
