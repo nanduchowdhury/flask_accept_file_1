@@ -77,7 +77,7 @@ class ScholarKM(Flask):
 
         self.route('/scholar_km')(self.scholar_km_index)
         
-        self.route('/kapemandake')(self.home_km_index)
+        self.route('/')(self.home_km_index)
         self.route('/home/about')(self.about)
         self.route('/home/contact')(self.contact)
         self.route('/home/sitemap')(self.sitemap)
