@@ -298,17 +298,22 @@ class ScholarKM(Flask):
         data = request.json
         section = data['section']
         topic = None
+        
+        require_saving_str = data['require_saving']
+        require_saving = False if require_saving_str.lower() == 'false' else True
 
         sub_topics_list = []
 
-        is_section_present = self.content_creator_obj.add_section_if_not_present(section)
+        is_section_present = self.content_creator_obj.add_section_if_not_present(section, require_saving)
         if is_section_present:
             sub_topics_list = self.content_creator_obj.get_all_topics_for_section(section)
 
         if not sub_topics_list:
             # this is research section
             sub_topics_list = self.content_creator_obj.generate_topics(section)
-            self.content_creator_obj.add_topics_list_for_section(section, sub_topics_list)
+
+            if require_saving:
+                self.content_creator_obj.add_topics_list_for_section(section, sub_topics_list)
 
         return jsonify({
             "sub_topics_list": sub_topics_list
@@ -320,8 +325,14 @@ class ScholarKM(Flask):
         section = data['section']
         topic = data['topic']
         
+        require_saving_str = data['require_saving']
+        require_saving = False if require_saving_str.lower() == 'false' else True
+
         youtube_response_list = self.content_creator_obj.generate_youtube_response(section, topic)
-        content_response = self.content_creator_obj.get_content_for_topic(section, topic)
+        content_response = self.content_creator_obj.get_content_for_topic(section, topic, require_saving)
+
+        if require_saving:
+            self.content_creator_obj.write_topic_json(section)
 
         return jsonify({
             "section": section,
@@ -330,7 +341,7 @@ class ScholarKM(Flask):
             "youtube_response": youtube_response_list
         })
 
-    def content_creator_index_for_research(self, research_query):
+    def content_creator_index_for_research(self, research_query, require_saving):
         
         section = research_query
         topic = "dummy_research_topic"
@@ -338,20 +349,23 @@ class ScholarKM(Flask):
 
         json_data = {
             "section": section,
-            "topic" : topic
+            "topic" : topic,
+            "require_saving" : str(require_saving)
         }
         return render_template('content/index.html', json_data=json_data)
 
     def content_creator_index(self, section):
 
         alreadyDoneTopicList = []
-        [topic, alreadyDoneTopicList] = self.content_creator_obj.get_random_topic(section, alreadyDoneTopicList)
+        topic, alreadyDoneTopicList = self.content_creator_obj.get_random_topic(section, alreadyDoneTopicList)
+        require_saving = False
 
         self.error_manager.show_page_invoke_message(f"content-km-{section}")
 
         json_data = {
             "section": section,
-            "topic" : topic
+            "topic": topic,
+            "require_saving": str(require_saving)
         }
         return render_template('content/index.html', json_data=json_data)
 
@@ -503,12 +517,11 @@ class ScholarKM(Flask):
         return self.content_creator_index("photography")
 
     def research_km_index(self):
+        
         search_text = request.args.get('q', '')
-        # For now, we'll just render the home page.
-        # You can create a new template to display search results.
-        # return render_template('home/index.html', search_query=search_text)
-
-        return self.content_creator_index_for_research(search_text)
+        require_saving = False if (request.args.get('r', '').lower() == 'false') else True
+            
+        return self.content_creator_index_for_research(search_text, require_saving)
 
     def content_triple_dot_action_km(self):
         data = request.json

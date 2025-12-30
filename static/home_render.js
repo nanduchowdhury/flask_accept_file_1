@@ -66,7 +66,7 @@ class HomeRender extends RootRender {
         if (searchTerm) {
             this.addToSearchHistory(searchTerm);
             // Construct a search URL for your website, passing the search term as a query parameter.
-            const searchUrl = `${BasicInitializer.FLASK_URL}research_km?q=${encodeURIComponent(searchTerm)}`;
+            const searchUrl = `${BasicInitializer.FLASK_URL}research_km?q=${encodeURIComponent(searchTerm)}&r=False`;
             
             // Open the search results in a new tab
             window.open(searchUrl, '_blank');

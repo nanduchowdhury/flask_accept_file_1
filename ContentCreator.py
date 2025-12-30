@@ -70,54 +70,7 @@ class ContentCreatorBase:
 
         self.map_section_to_json_store = {}
 
-        self.section_json_root_map = {
-            "hindustani_classical_music": "hindustani_classical_music_json_root",
-            "yoga": "yoga_json_root",
-
-            "IPL": "IPL_json_root",
-            "tagore": "tagore_json_root",
-            "gardening": "gardening_json_root",
-            "guitar": "guitar_json_root",
-            "nobel": "nobel_json_root",
-
-            "tariff": "tariff_json_root",
-            "crypto": "crypto_json_root",
-            "AI": "AI_json_root",
-            "jazz": "jazz_json_root",
-            "rock": "rock_json_root",
-            "country": "country_json_root",
-            "ISS": "ISS_json_root",
-            "space_travel": "space_travel_json_root",
-            "racing": "racing_json_root",
-            "winter_sports": "winter_sports_json_root",
-            "general_machines": "general_machines_json_root",
-            "industrial_machines": "industrial_machines_json_root",
-            "oscar_nominated_movies": "oscar_nominated_movies_json_root",
-            "grammy_songs": "grammy_songs_json_root",
-            "internal_organ": "internal_organ_json_root",
-            "astronomy": "astronomy_json_root",
-            "golf": "golf_json_root",
-            "nutrition": "nutrition_json_root",
-            "stocks": "stocks_json_root",
-            "mutual_funds": "mutual_funds_json_root",
-            "medical_care": "medical_care_json_root",
-            "painting": "painting_json_root",
-            "physics": "physics_json_root",
-            "chemistry": "chemistry_json_root",
-            "biology": "biology_json_root",
-            "computer_science": "computer_science_json_root",
-            "electronics": "electronics_json_root",
-            "geography": "geography_json_root",
-            "political_science": "political_science_json_root",
-            "legal_studies": "legal_studies_json_root",
-            "authors": "authors_json_root",
-            "cricket": "cricket_json_root",
-            "career": "career_json_root",
-            "student_tips": "student_tips_json_root",
-            "philosophy": "philosophy_json_root",
-            "photography": "photography_json_root",
-            "economics": "economics_json_root"
-        }
+        self.section_json_root_map = {}
 
         if self.gcs_manager.is_exist(self.topic_list_json_file):
             self.topic_list = self.gcs_manager.read_json(self.topic_list_json_file)
@@ -3116,20 +3069,6 @@ class ContentCreatorBase:
 
             }
 
-        
-
-    def read_whole_json_for_section(self, section):
-
-        gcs_json_file = f"{section}.json"
-
-        if self.gcs_manager.is_exist(gcs_json_file):
-            d = self.gcs_manager.read_json(gcs_json_file)
-            json_store = JsonDataStore(self.section_json_root_map[section])
-            json_store.update_from_json_data(d)
-            self.map_section_to_json_store[section] = json_store
-            return True
-
-        return False
             
 
     def get_random_topic(self, section, alreadyDoneTopicList):
@@ -3150,14 +3089,15 @@ class ContentCreatorBase:
 
         return new_topic, alreadyDoneTopicList
 
-    def add_section_if_not_present(self, section):
+    def add_section_if_not_present(self, section, require_saving):
         
         is_present = section in self.topic_list
         if not is_present:
             self.topic_list[section] = []
-            self.gcs_manager.write_json(self.topic_list_json_file, self.topic_list)
 
-            print(f'Written {section} into json file {self.topic_list_json_file}')
+            if require_saving:
+                self.gcs_manager.write_json(self.topic_list_json_file, self.topic_list)
+                print(f'Written {section} into json file {self.topic_list_json_file}')
 
         return is_present
 
@@ -3169,13 +3109,6 @@ class ContentCreatorBase:
         self.topic_list[section].extend(topics_list)
         self.gcs_manager.write_json(self.topic_list_json_file, self.topic_list)
 
-    def setup_json_for_section(self, section):
-        if section not in self.map_section_to_json_store:
-            if not self.read_whole_json_for_section(section):
-                if section in self.section_json_root_map:
-                    json_store = JsonDataStore(self.section_json_root_map[section])
-                    self.map_section_to_json_store[section] = json_store
-                    return None
 
 
     def get_all_topics_for_section(self, section):
@@ -3187,29 +3120,46 @@ class ContentCreatorBase:
         return all_topics
 
 
-    def get_content_for_topic(self, section, topic):
+    def get_content_for_topic(self, section, topic, require_saving=True):
         
-        self.setup_json_for_section(section)
+        content = None
 
-        if section in self.section_json_root_map:
-            json_store = self.map_section_to_json_store[section]
+        section_as_key = section.replace(" ", "_")
+
+        gcs_json_file = f"{section_as_key}.json"
+
+        if self.gcs_manager.is_exist(gcs_json_file):
+            d = self.gcs_manager.read_json(gcs_json_file)
+            self.section_json_root_map[section_as_key] = f"{section_as_key}_json_root"
+            json_store = JsonDataStore(self.section_json_root_map[section_as_key])
+            json_store.update_from_json_data(d)
+            self.map_section_to_json_store[section_as_key] = json_store
             content = json_store.read_key(topic)
-            return content
-        else:
-            # This is for research flow - need to generate content.
-            content = self.generate_content_implementation(section, topic)
-            return content
 
-        return None
+        if not content:
+
+            content = self.generate_content_implementation(section, topic)
+            print(f"Generated content for section {section} and topic {topic}")
+
+            if require_saving:
+                self.section_json_root_map[section_as_key] = f"{section_as_key}_json_root"
+                json_store = JsonDataStore(self.section_json_root_map[section_as_key])
+
+                if self.gcs_manager.is_exist(gcs_json_file):
+                    d = self.gcs_manager.read_json(gcs_json_file)
+                    json_store.update_from_json_data(d)
+
+                self.map_section_to_json_store[section_as_key] = json_store
+
+                json_store.save_key(topic, content)
+                print(f"Saved JSON content for section {section} and topic {topic}")
+
+        return content
+
 
     def generate_content(self, section, topic):
         content = self.get_content_for_topic(section, topic)
-        if not content:
-            content = self.generate_content_implementation(section, topic)
-            json_store = self.map_section_to_json_store[section]
-            json_store.save_key(topic, content)
-            print(f"Generated content for section {section} and topic {topic}")
-
+        if content:
             return True
 
         return False
@@ -3244,6 +3194,10 @@ class ContentCreatorBase:
     def generate_content_implementation(self, section, topic):
         response = self.gemini_access.generate_content(section, topic)
         return response
+
+    def write_topic_json(self, section):
+        section_as_key = section.replace(" ", "_")
+        self.finish(section_as_key)
 
     def finish(self, section):
         gcs_json_file = f"{section}.json"

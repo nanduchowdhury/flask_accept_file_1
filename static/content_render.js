@@ -330,6 +330,8 @@ class ContentRender extends RootRender {
         
         this.jsonData = jsonData;
 
+        this.client_require_saving = this.jsonData.require_saving
+
         const gaTracker = new GoogleAnalytics();
         gaTracker.trackPageView(this.jsonData.section);
 
@@ -391,7 +393,8 @@ class ContentRender extends RootRender {
     getSubTopics() {
         
         const data = {
-            section: this.jsonData.section
+            section: this.jsonData.section,
+            require_saving: this.client_require_saving
         };
 
         window.basicInitializer.makeServerRequest('/get_sub_topics', data, 
@@ -427,7 +430,8 @@ class ContentRender extends RootRender {
 
         const data = {
             section: this.jsonData.section,
-            topic: text
+            topic: text,
+            require_saving: this.client_require_saving
         };
 
         window.basicInitializer.makeServerRequest('/on_topic_row_selected', data, 
