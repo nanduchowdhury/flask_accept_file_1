@@ -1,1 +1,3 @@
 kupmanduk_GCS_signed_URL_key.json
+venv/
+try_firestore_semaphore.py

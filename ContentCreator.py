@@ -2,6 +2,7 @@ import random
 
 from ThreadPool import ThreadPool, TaskStatus, TaskBase
 from google_CSE_access import GoogleCSEAccess
+from FirestoreSemaphore import FirestoreSemaphore
 from gcs_manager import GCSManager
 import constants
 
@@ -58,6 +59,8 @@ class ContentCreatorTask(TaskBase):
         obj.generate_all_contents(self.section)
 
 class ContentCreatorBase:
+
+    _gemini_api_semaphore = FirestoreSemaphore(lock_id='kapemandake-firestore-lock')
     def __init__(self, gemini_access, error_manager):
 
         self.gemini_access = gemini_access
@@ -3187,13 +3190,29 @@ class ContentCreatorBase:
             self.finish(section)
             
     def generate_topics(self, section):
-        all_topics = self.gemini_access.generate_topics(section)
-        return all_topics
+        self.lock()
+        try:
+            all_topics = self.gemini_access.generate_topics(section)
+            return all_topics
+        finally:
+            self.unlock()
 
 
     def generate_content_implementation(self, section, topic):
-        response = self.gemini_access.generate_content(section, topic)
-        return response
+        self.lock()
+        try:
+            response = self.gemini_access.generate_content(section, topic)
+            return response
+        finally:
+            self.unlock()
+
+    def lock(self):
+        """Acquires the semaphore to limit concurrent access to Gemini API."""
+        ContentCreatorBase._gemini_api_semaphore.lock()
+
+    def unlock(self):
+        """Releases the semaphore."""
+        ContentCreatorBase._gemini_api_semaphore.unlock()
 
     def write_topic_json(self, section):
         section_as_key = section.replace(" ", "_")
