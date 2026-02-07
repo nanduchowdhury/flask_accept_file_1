@@ -4,6 +4,8 @@
 export GOOGLE_API_KEY=
 export GOOGLE_CSE_API_KEY=
 
+export GOOGLE_CLOUD_PROJECT=kupamanduk-scholarkm-project
+
 export GOOGLE_APPLICATION_CREDENTIALS="kupmanduk_GCS_signed_URL_key.json"
 
 export GOOGLE_CSE_ID="86bcdaa3e3cf148e8"

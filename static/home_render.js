@@ -40,6 +40,9 @@ class HomeRender extends RootRender {
     static cyclone_ditwah_description = "Cyclone Ditwah was a tropical cyclone in late 2025 that impacted Sri Lanka and southern India with heavy rainfall and strong winds.";
     static ethiopia_volcano_description = "A notable volcano in Ethiopia is Erta Ale, a continuously active shield volcano known for its long-standing lava lake.";
 
+    static what_if_earth_stops_rotating_description = "What happens if the Earth stops rotating?";
+    static what_does_bank_do_with_fd = "Lets find out what banks do with FD money...";
+
     constructor() {
         super();
 
@@ -316,19 +319,22 @@ class HomeRender extends RootRender {
     showImageRowsHomeArea_1() {
 
         {
-            const ditwahTerm = 'cyclone ditwah';
-            const ethiopiaVolcanoTerm = 'ethiopia volcano';
+            const earthStopsRotatingTerm = 'What if the Earth stops rotating';
+            const fdInvestmentTerm = 'What the banks do with FD money';
 
             const images = [
-                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "cyclone.jpg",
-                    link: `${BasicInitializer.FLASK_URL}research_km?q=${encodeURIComponent(ditwahTerm)}`,
-                    title: "Cyclone Ditwah", description: HomeRender.cyclone_ditwah_description },
-                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "volcano.jpg",
-                    link: `${BasicInitializer.FLASK_URL}research_km?q=${encodeURIComponent(ethiopiaVolcanoTerm)}`,
-                    title: "Ethiopia Volcano", description: HomeRender.ethiopia_volcano_description }
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "earth.jpg",
+                    link: `${BasicInitializer.FLASK_URL}research_km?q=${encodeURIComponent(earthStopsRotatingTerm)}`,
+                    title: "What if the Earth stops rotating", description: HomeRender.what_if_earth_stops_rotating_description },
+                { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "FD.jpg",
+                    link: `${BasicInitializer.FLASK_URL}research_km?q=${encodeURIComponent(fdInvestmentTerm)}`,
+                    title: "What happens to our Fixed Deposit money", description: HomeRender.what_does_bank_do_with_fd }
             ];
             this.createOneImagesBlock("HomeArea_1", "Featured", "LightBlue", images);
         }
+
+        const ditwahTerm = 'cyclone ditwah';
+        const ethiopiaVolcanoTerm = 'ethiopia volcano';
 
         const images = [
             { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "space_travel.jpg", 
@@ -343,15 +349,21 @@ class HomeRender extends RootRender {
                     title: "Astronomy", description: HomeRender.astronomy_description },
             { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "AI.jpg", 
                     link: BasicInitializer.FLASK_URL + "AI_km", 
-                    title: "Artificial Intelligence", description: HomeRender.AI_description }
+                    title: "Artificial Intelligence", description: HomeRender.AI_description },
+            { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "cyclone.jpg",
+                    link: `${BasicInitializer.FLASK_URL}research_km?q=${encodeURIComponent(ditwahTerm)}`,
+                    title: "Cyclone Ditwah", description: HomeRender.cyclone_ditwah_description },
+            { image: BasicInitializer.GITHUB_CDN_IMAGES_URL + "volcano.jpg",
+                    link: `${BasicInitializer.FLASK_URL}research_km?q=${encodeURIComponent(ethiopiaVolcanoTerm)}`,
+                    title: "Ethiopia Volcano", description: HomeRender.ethiopia_volcano_description }
         ];
 
         {
-            const newImages = images.slice(0, 2);
-            this.createOneImagesBlock("HomeArea_1", "More Featured", "LightBlue", newImages);
+            const newImages = images.slice(0, 3);
+            this.createOneImagesBlock("HomeArea_1", "Past Featured", "LightBlue", newImages);
         }
         {
-            const newImages = images.slice(2, 4);
+            const newImages = images.slice(3, 5);
             this.createOneImagesBlock("HomeArea_1", "Trending", "LightBlue", newImages);
         }
     }

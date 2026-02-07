@@ -330,7 +330,9 @@ class ContentRender extends RootRender {
         
         this.jsonData = jsonData;
 
-        this.client_require_saving = this.jsonData.require_saving
+        this.client_require_saving = this.jsonData.require_saving;
+
+        this.setTopicLabel();
 
         const gaTracker = new GoogleAnalytics();
         gaTracker.trackPageView(this.jsonData.section);
@@ -349,6 +351,22 @@ class ContentRender extends RootRender {
 
         // window.errorManager.log(2060, this.jsonData.section, this.jsonData.topic);
     }
+
+    setTopicLabel() {
+        const topicsLabel = document.querySelector('.topics-label');
+        topicsLabel.textContent = this.jsonData.section;
+    }
+
+    showSpinner() {
+        document.getElementById('spinner-overlay').style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+    }
+
+    hideSpinner() {
+        document.getElementById('spinner-overlay').style.display = 'none';
+        document.body.style.overflow = ''; // Restore scrolling
+    }
+
 
     addOneTopicRow(text) {
         const container = document.getElementById("topicsScrollContent");
@@ -388,6 +406,8 @@ class ContentRender extends RootRender {
 
         // this.showTipsJoinFB = new ShowTips('');
         // this.showTipsJoinFB.show("If you like the portal,\nplease follow the social links below.", 100);
+
+        this.hideSpinner();
     }
 
     getSubTopics() {
@@ -396,6 +416,8 @@ class ContentRender extends RootRender {
             section: this.jsonData.section,
             require_saving: this.client_require_saving
         };
+
+        this.showSpinner();
 
         window.basicInitializer.makeServerRequest('/get_sub_topics', data, 
             this.lamdaOnGetSubTopicsRequestSuccess, this.lamdaOnGetSubTopicsRequestFailure);
@@ -434,6 +456,8 @@ class ContentRender extends RootRender {
             require_saving: this.client_require_saving
         };
 
+        this.showSpinner();
+
         window.basicInitializer.makeServerRequest('/on_topic_row_selected', data, 
         this.lamdaOnTopicRowSelectedRequestSuccess, this.lamdaOnTopicRowSelectedRequestFailure);
     };
@@ -449,6 +473,8 @@ class ContentRender extends RootRender {
         this.translateLanguage.resetCurrentLanguage();
 
         window.errorManager.log(2061, this.jsonData.section, this.jsonData.topic);
+
+        this.hideSpinner();
     }
 
     lamdaOnTopicRowSelectedRequestFailure = (msg) => {

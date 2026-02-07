@@ -73,6 +73,10 @@
     </header>
 
     <div class="separator"></div> <!-- Custom Separator -->
+
+    <h2 class="topics-label" style="text-align: center; font-family: 'Arial', sans-serif; color: #333; margin-top: 2px; margin-bottom: 2px;">Browse Topics</h2>
+
+    <div class="separator"></div> <!-- Custom Separator -->
     
     <div id="topicsScrollArea" class="topics-scroll-area">
         <div id="topicsScrollContent" class="topics-scroll-content">
@@ -120,6 +124,11 @@
         <button id="messageBoxOkButton">OK</button>
     </div>
 
+    <!-- Spinner Overlay -->
+    <div id="spinner-overlay" class="spinner_overlay" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+
     <!-- Scripts -->
     <script defer src="{{ url_for('static', filename='BasicInitializer.js') }}"></script>
     <script defer src="{{ url_for('static', filename='content_render.js') }}"></script>
@@ -136,6 +145,7 @@
             window.errorManager = new ErrorManager();
             window.basicInitializer = new ContentOrHomeInitializer(JsonData.section);
             const cRender = new ContentRender(JsonData);
+
         });
 
         console.log("Kapemandake content page loaded successfully.");
