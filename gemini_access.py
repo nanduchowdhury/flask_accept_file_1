@@ -20,8 +20,9 @@ class GeminiAccess(BaseModelAccess):
 
             genai.configure(api_key=GOOGLE_API_KEY)
 
-            # model = genai.GenerativeModel("gemini-pro")
-            self.model = genai.GenerativeModel(model_name="models/gemini-2.5-flash")
+            # Cheaper model - but may have less features.
+            # self.model = genai.GenerativeModel(model_name="models/gemini-2.5-flash")
+            self.model = genai.GenerativeModel(model_name="gemini-2.0-flash-lite")
 
 
         except Exception as e:

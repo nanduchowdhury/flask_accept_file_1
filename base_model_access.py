@@ -272,22 +272,150 @@ class BasePrompt():
         prompt += self.prompt_HTML_tag
         return prompt
 
-    def get_prompt_to_generate_topics(self, section):
-        
-        prompt = f"""Return ONLY a valid Python list of sub-topics for the below mentioned topic.
-                    No explanations.
-                    No formatting.
-                    No code blocks.
-                    No HTML.
-                    No extra text.
+    def get_prompt_to_generate_topics(self, section: str) -> str:
 
-                    Example format:
-                    ["a", "b", "c"]
+        prompt = f"""
+            Return ONLY a valid Python list of sub-topics for the below mentioned section title.
 
-                    THE OUTPUT MUST BE VALID JSON/PYTHON-LIST. IF ANYTHING ELSE IS INCLUDED, IT IS AN ERROR.
+            Rules:
+            - No explanations
+            - No formatting
+            - No markdown/code blocks
+            - No headings
+            - No HTML
+            - No extra text
+            - Output must be a valid Python list (also valid JSON)
 
-                    Now generate the list for topic: {section}"""
+            Example output format:
+            ["a", "b", "c"]
+
+            STRICT REQUIREMENT:
+            THE OUTPUT MUST BE ONLY A VALID PYTHON LIST. ANY OTHER TEXT IS AN ERROR.
+
+            Task:
+            1) First, infer what TYPE of section this is.
+            2) Then generate sub-topics appropriate for that type.
+
+            Possible section types (pick the closest one):
+            - PERSON (singer, actor, politician, athlete, historical figure, etc.)
+            - COMPANY (business overview, products, strategy, competitors, etc.)
+            - STOCK_ANALYSIS (company stock, valuation, results, analyst view, risks, catalysts)
+            - TECHNOLOGY (tool, framework, library, protocol, etc.)
+            - HOW_TO_GUIDE (tutorial, process, step-by-step)
+            - PRODUCT_REVIEW (pros/cons, pricing, comparison, verdict)
+            - COUNTRY_OR_CITY (history, culture, economy, travel, etc.)
+            - EVENT (incident, conference, war, crisis, launch, etc.)
+            - CONCEPT (theory, definition, examples, applications)
+            - OTHER (fallback)
+
+            Type-specific topic guidance:
+
+            If PERSON:
+            - Early life/background
+            - Career timeline
+            - Major achievements
+            - Key works/projects
+            - Style/unique traits
+            - Personal life (only if public and relevant)
+            - Awards/recognition
+            - Legacy/impact
+            - Interesting facts
+
+            If COMPANY:
+            - Company overview
+            - Business model
+            - Products/services
+            - Revenue streams
+            - Key markets/geographies
+            - Competitive landscape
+            - Leadership & governance
+            - Financial highlights
+            - Strategy and growth drivers
+            - Risks and challenges
+
+            If STOCK_ANALYSIS:
+            - Company snapshot (as context)
+            - Latest news
+            - Segment-wise performance
+            - Peer comparison
+            - Key risks (macro, sector, company-specific)
+            - Bull case vs bear case
+            - Conclusion / outlook
+
+            If TECHNOLOGY:
+            - What it is
+            - Core features
+            - How it works (high-level)
+            - Common use cases
+            - Pros and cons
+            - Alternatives
+            - Ecosystem/community support
+            - Getting started
+            - Best practices
+            - Limitations
+
+            If HOW_TO_GUIDE:
+            - Prerequisites
+            - Step-by-step process
+            - Common mistakes
+            - Tips/best practices
+            - Variations/advanced steps
+            - Troubleshooting
+            - Summary checklist
+
+            If PRODUCT_REVIEW:
+            - What it is
+            - Key features
+            - Performance
+            - Pros
+            - Cons
+            - Pricing/value
+            - Alternatives
+            - Who should buy
+            - Final verdict
+
+            If COUNTRY_OR_CITY:
+            - Location overview
+            - History
+            - Culture
+            - Economy
+            - Food & lifestyle
+            - Places to visit
+            - Best time to visit
+            - Safety & travel tips
+            - Fun facts
+
+            If EVENT:
+            - Background
+            - Timeline
+            - Key players
+            - Causes
+            - What happened
+            - Impact
+            - Aftermath
+            - Lessons learned
+
+            If CONCEPT:
+            - Definition
+            - Why it matters
+            - Key components
+            - Examples
+            - Applications
+            - Advantages
+            - Limitations
+            - Related concepts
+
+            Important constraints:
+            - Generate 6 to 12 sub-topics.
+            - Keep sub-topics short and clean (2 to 6 words each).
+            - Avoid redundant items.
+            - Make them strongly relevant to the section.
+
+            Now generate the list for section:
+            {section}
+            """.strip()
 
         return prompt
+
 
     

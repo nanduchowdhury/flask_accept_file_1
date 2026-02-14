@@ -388,11 +388,6 @@ class ContentRender extends RootRender {
         });
 
         container.appendChild(row);
-
-        // ⭐ If this is the FIRST row → select it automatically
-        if (container.children.length === 1) {
-            row.click();   // <-- triggers selection + callback
-        }
     }
 
 
@@ -404,10 +399,15 @@ class ContentRender extends RootRender {
             this.addOneTopicRow(this.jsonData.sub_topics_list[i]);
         }
 
-        // this.showTipsJoinFB = new ShowTips('');
-        // this.showTipsJoinFB.show("If you like the portal,\nplease follow the social links below.", 100);
-
         this.hideSpinner();
+
+        // After adding all rows and hiding the spinner, select the first topic.
+        const container = document.getElementById("topicsScrollContent");
+        if (container.children.length > 0) {
+            const firstRow = container.children[0];
+            firstRow.click(); // This will trigger the onTopicRowSelected callback
+        }
+
     }
 
     getSubTopics() {
@@ -555,4 +555,3 @@ class ContentRender extends RootRender {
         }
     }
 }
-
