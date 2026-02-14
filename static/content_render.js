@@ -345,6 +345,8 @@ class ContentRender extends RootRender {
         this.youtubeMgr = new YoutubeManager('ViewArea_2');
 
         this.updateSectionAndTopic();
+
+        this.topicDataCache = new Map();
         this.createTripleDotMenu(this.jsonData);
 
         this.getSubTopics();
@@ -450,6 +452,15 @@ class ContentRender extends RootRender {
 
     onTopicRowSelected = (row, text) => {
 
+        const cacheKey = `${this.jsonData.section}::${text}`;
+
+        if (this.topicDataCache.has(cacheKey)) {
+            const cachedData = this.topicDataCache.get(cacheKey);
+            // Use cached data and bypass server request
+            this.lamdaOnTopicRowSelectedRequestSuccess(cachedData);
+            return;
+        }
+
         const data = {
             section: this.jsonData.section,
             topic: text,
@@ -463,6 +474,10 @@ class ContentRender extends RootRender {
     };
 
     lamdaOnTopicRowSelectedRequestSuccess = (data) => {
+
+        // Store the fetched data in the cache
+        const cacheKey = `${data.section}::${data.topic}`;
+        this.topicDataCache.set(cacheKey, data);
 
         this.jsonData = data;
 
