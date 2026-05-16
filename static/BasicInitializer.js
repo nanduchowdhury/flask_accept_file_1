@@ -124,7 +124,7 @@ class BasicInitializer extends RootInitializer{
     static ENGLISH_TEXT_FONT = 'Arial';
     static HINID_BENGALI_TEXT_FONT = 'Courier New';
 
-    static FLASK_URL = 'https://kupmanduk.co.in/';
+    static FLASK_URL = 'https://bluepayload.com/';
 
     static GITHUB_CDN = "https://cdn.jsdelivr.net/gh/nanduchowdhury/flask_accept_file_1@main/";
     static GITHUB_CDN_IMAGES_URL = this.GITHUB_CDN + "static/images/";
