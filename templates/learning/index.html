@@ -74,31 +74,28 @@
             <p class="subscription-note">[Subscribe with your email-id for our monthly newsletter]</p>
         </div>
     
+        <!-- Dash menu on the extreme right -->
+        <nav id="TripleDashMenuContainer"></nav>
     </header>
     
 
     <main class="home-area-container">
         <h1 class="welcome-heading">
-            <span class="line-2">Simple and minimal approach to several things. Try one of the below cards to find out more.</span><br>
-        </h1>
-        
-        <!-- MAIN TOPICS -->
-        <div class="card-container" style="display: flex; flex-direction: column; align-items: center; gap: 20px; justify-content: center; padding: 20px; flex-wrap: wrap;">
-            <a href="/home/learning" class="topic-card" style="text-decoration: none; color: inherit; border: 1px solid #ddd; border-radius: 8px; padding: 20px; width: 250px; text-align: center; transition: transform 0.3s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                <i class="fas fa-lightbulb" style="font-size: 2rem; color: #161cca; margin-bottom: 10px;"></i>
-                <h3 style="margin: 10px 0;">Learning</h3>
-                <p style="font-size: 0.9rem;">Learn about several topics thru easy text and youtube videos.</p>
-            </a>
-
-            <a href="/home/contact" class="topic-card" style="text-decoration: none; color: inherit; border: 1px solid #ddd; border-radius: 8px; padding: 20px; width: 250px; text-align: center; transition: transform 0.3s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                <i class="fas fa-chart-line" style="font-size: 2rem; color: #161cca; margin-bottom: 10px;"></i>
-                <h3 style="margin: 10px 0;">Stocks</h3>
-                <p style="font-size: 0.9rem;">Unique approach to stock analysis.</p>
-            </a>
+            <span class="line-2">Enter a topic to learn through easy description and related YouTube videos.</span><br>
+            
+        </h1> <!-- SEO Optimized Heading -->
+        <div class="research-container" role="search">
+            <input type="text" id="research-input" placeholder="try 'vietnam vacations'" list="research-suggestions" spellcheck="true">
+            <datalist id="research-suggestions">
+                <!-- Suggestions will be populated by JavaScript -->
+            </datalist>
+            <button id="ResearchButton">Learn and Know</button>
         </div>
-
-
-        
+        <h1 class="welcome-heading">
+            <span class="line-3">Select a trending topic from below or in the top-right-menu.</span><br>
+        </h1>
+        <section id="HomeArea_1" class="home-area"></section>
+        <section id="HomeArea_2" class="home-area"></section>
         <aside id="SocialArea" class="social-area">
             <div class="left-links">
                 <a href="/home/sitemap" style="position: absolute; left: -9999px;">Sitemap</a>
@@ -127,6 +124,13 @@
 
         document.addEventListener("DOMContentLoaded", function () {
             
+            window.errorManager = new ErrorManager();
+            window.basicInitializer = new ContentOrHomeInitializer('homePage');
+
+            const browser = new BrowserStartStop();
+            const render = new HomeRender();
+            render.renderHomeArea_1();
+            render.renderHomeArea_2();
 
             // Load Analytics After Content Loads
             setTimeout(() => {

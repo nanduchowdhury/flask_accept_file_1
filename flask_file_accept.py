@@ -82,6 +82,9 @@ class ScholarKM(Flask):
         self.route('/home/contact')(self.contact)
         self.route('/home/sitemap')(self.sitemap)
 
+        self.route('/home/learning')(self.learning_km_index)
+
+
         self.route('/music_km')(self.music_km_index)
         self.route('/yoga_km')(self.yoga_km_index)
         self.route('/racing_km')(self.racing_km_index)
@@ -283,6 +286,12 @@ class ScholarKM(Flask):
         self.error_manager.show_page_invoke_message(f"home-km")
 
         return render_template('home/index.html')
+
+    def learning_km_index(self):
+
+        self.error_manager.show_page_invoke_message(f"learning-km")
+
+        return render_template('learning/index.html')
 
     def about(self):
         return render_template("home/about.html")
