@@ -84,16 +84,19 @@
         
         <!-- MAIN TOPICS -->
         <div class="card-container" style="display: flex; flex-direction: column; align-items: center; gap: 20px; justify-content: center; padding: 20px; flex-wrap: wrap;">
-            <a href="/home/learning" class="topic-card" style="text-decoration: none; color: inherit; border: 1px solid #ddd; border-radius: 8px; padding: 20px; width: 250px; text-align: center; transition: transform 0.3s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                <i class="fas fa-lightbulb" style="font-size: 2rem; color: #161cca; margin-bottom: 10px;"></i>
-                <h3 style="margin: 10px 0;">Learning</h3>
-                <p style="font-size: 0.9rem;">Learn about several topics thru easy text and youtube videos.</p>
+            <a href="#" 
+                class="topic-card"
+                onclick="handleCardClick(event, 'sector_IT')"
+                style="text-decoration: none; color: inherit; border: 1px solid #ddd; border-radius: 8px; padding: 20px; width: 250px; text-align: center; transition: transform 0.3s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <i class="fas fa-lightbulb" style="font-size: 2rem; color: #161cca; margin-bottom: 10px;"></i>
+                    <h3 style="margin: 10px 0;">IT sector</h3>
+                    <p style="font-size: 0.9rem;">IT in red.</p>
             </a>
 
-            <a href="/home/stocks_analysis" class="topic-card" style="text-decoration: none; color: inherit; border: 1px solid #ddd; border-radius: 8px; padding: 20px; width: 250px; text-align: center; transition: transform 0.3s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <a href="/home/stocks/sector_banking" class="topic-card" style="text-decoration: none; color: inherit; border: 1px solid #ddd; border-radius: 8px; padding: 20px; width: 250px; text-align: center; transition: transform 0.3s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
                 <i class="fas fa-chart-line" style="font-size: 2rem; color: #161cca; margin-bottom: 10px;"></i>
-                <h3 style="margin: 10px 0;">Stocks</h3>
-                <p style="font-size: 0.9rem;">Unique approach to stock analysis.</p>
+                <h3 style="margin: 10px 0;">Banking sector</h3>
+                <p style="font-size: 0.9rem;">Banking in green.</p>
             </a>
         </div>
 
@@ -118,6 +121,8 @@
         <span id="messageBoxText"></span>
         <button id="messageBoxOkButton">OK</button>
     </div>
+
+    <div id="genericPopoutId" class="genericPopout"></div>
 
     <script defer>
         if (window !== window.top) {
@@ -144,6 +149,17 @@
                 document.body.appendChild(scriptClarity);
             }, 2000);
         });
+
+        window.addEventListener('load', () => {
+            window.basicInitializer = new BasicInitializer();
+            window.errorManager = new ErrorManager();
+            window.stockAnalysisMain = new StockAnalysisMain();
+        });
+
+        function handleCardClick(event, sector) {
+            event.preventDefault(); // stops link navigation
+            window.stockAnalysisMain.openSectorPage(sector);
+        }
     </script>
 
     <!-- Defer JS -->
@@ -151,6 +167,9 @@
     <script defer src="{{ url_for('static', filename='home_render.js') }}"></script>
     <script defer src="{{ url_for('static', filename='errorManager.js') }}"></script>
     <script defer src="{{ url_for('static', filename='geologicalInfo.js') }}"></script>
+    <script src="{{ url_for('static', filename='ContainerScrollBarControl.js') }}"></script>
+    <script src="{{ url_for('static', filename='popoutManager.js') }}"></script>
+    <script src="{{ url_for('static', filename='stock_analysis.js') }}"></script>
 
 </body>
 </html>

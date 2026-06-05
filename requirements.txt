@@ -60,7 +60,7 @@ google-cloud-translate==3.16.0
 google-cloud-videointelligence==2.13.5
 google-cloud-vision==3.7.4
 google-cloud-firestore>=2.0.0
-google-crc32c==1.6.0
+google-crc32c==1.5.0
 google-generativeai==0.8.2
 google-pasta==0.2.0
 google-resumable-media==2.7.2
@@ -68,10 +68,10 @@ googleapis-common-protos==1.65.0
 greenlet==3.1.1
 grpc-google-iam-v1==0.13.1
 grpc-interceptor==0.15.4
-grpcio==1.66.1
+grpcio>=1.62.0,<1.63.0
 grpcio-status==1.62.3
 gunicorn==23.0.0
-h11==0.14.0
+h11==0.16.0
 httplib2==0.22.0
 idna==3.10
 image==1.5.33
@@ -122,7 +122,7 @@ platformdirs==4.3.3
 pluggy==1.5.0
 prompt_toolkit==3.0.47
 proto-plus==1.24.0
-protobuf==4.25.4
+protobuf==5.29.5
 psycopg2-binary==2.9.9
 ptyprocess==0.7.0
 pure_eval==0.2.3
@@ -165,7 +165,8 @@ sqlparse==0.5.1
 stack-data==0.6.3
 supervisor==4.2.5
 termcolor==2.4.0
-tink==1.10.0
+tensorflow==2.18.0
+tink==1.14.1
 toml==0.10.2
 tomli==2.0.1
 tomlkit==0.13.2

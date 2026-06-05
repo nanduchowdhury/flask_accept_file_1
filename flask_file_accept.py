@@ -2,7 +2,18 @@
 #########################
 #
 # Install packages in google-shell as follows:
-#   /usr/bin/pip3.10 install PyPDF2
+#   /usr/bin/pip3.10 install --no-cache-dir \
+#       PyPDF2 \
+#       flask \
+#       flask-session \
+#       google-generativeai \
+#       google-cloud-storage \
+#       google-cloud-firestore \
+#       google-api-python-client \
+#       tensorflow==2.18.0 \
+#       protobuf==5.29.5 \
+#       pandas \
+#       Pillow
 #########################
 
 from flask import Flask, render_template, request, jsonify
@@ -83,7 +94,8 @@ class ScholarKM(Flask):
         self.route('/home/sitemap')(self.sitemap)
 
         self.route('/home/learning')(self.learning_km_index)
-
+        self.route('/home/stocks_analysis')(self.stocks_analysis_km_index)
+        self.route('/home/stocks_sectorwise_analysis')(self.stocks_sectorwise_analysis_km_index)
 
         self.route('/music_km')(self.music_km_index)
         self.route('/yoga_km')(self.yoga_km_index)
@@ -292,6 +304,18 @@ class ScholarKM(Flask):
         self.error_manager.show_page_invoke_message(f"learning-km")
 
         return render_template('learning/index.html')
+
+    def stocks_analysis_km_index(self):
+
+        self.error_manager.show_page_invoke_message(f"stocks_analysis-km")
+
+        return render_template('stocks/index.html')
+
+    def stocks_sectorwise_analysis_km_index(self):
+
+        self.error_manager.show_page_invoke_message(f"stocks_sectorwise_analysis-km")
+
+        return render_template('stocks/sectorwise.html')
 
     def about(self):
         return render_template("home/about.html")
