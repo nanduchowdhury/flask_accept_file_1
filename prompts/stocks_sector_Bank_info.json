@@ -1,0 +1,174 @@
+{
+  "header": "Nifty Bank Mid-May to Early-June Analysis",
+  "key_takeaways": [
+    "range bound consolidation phase",
+    "liquidity driven volatility",
+    "rate expectations influence",
+    "selective stock leadership"
+  ],
+  "stocks_in_momentum": {
+    "HDFC Bank": {
+      "reason": "stable retail growth",
+      "last_15_days_move": "+2% to +4%",
+      "historical_2yr_2month_blocks": [
+        "May-Jun 2024: +3% to +6%",
+        "Jul-Aug 2024: -2% to +1%",
+        "Sep-Oct 2024: +4% to +7%",
+        "Nov-Dec 2024: -1% to +2%",
+        "Jan-Feb 2025: +5% to +8%",
+        "Mar-Apr 2025: -3% to +1%",
+        "May-Jun 2025: +2% to +5%",
+        "Jul-Aug 2025: +1% to +3%",
+        "Sep-Oct 2025: +3% to +6%",
+        "Nov-Dec 2025: -2% to +1%",
+        "Jan-Feb 2026: +4% to +7%",
+        "Mar-Apr 2026: +1% to +3%"
+      ],
+      "stock_return_data": {
+        "1month": "+2.4%",
+        "2months": "+3.7%",
+        "3months": "+5.0%",
+        "4months": "+4.1%",
+        "5months": "+6.2%",
+        "6months": "+5.5%"
+      }
+    },
+    "ICICI Bank": {
+      "reason": "strong credit growth",
+      "last_15_days_move": "+3% to +6%",
+      "historical_2yr_2month_blocks": [
+        "May-Jun 2024: +4% to +8%",
+        "Jul-Aug 2024: -2% to +2%",
+        "Sep-Oct 2024: +5% to +9%",
+        "Nov-Dec 2024: -1% to +3%",
+        "Jan-Feb 2025: +6% to +10%",
+        "Mar-Apr 2025: -4% to +1%",
+        "May-Jun 2025: +3% to +6%",
+        "Jul-Aug 2025: +2% to +5%",
+        "Sep-Oct 2025: +4% to +7%",
+        "Nov-Dec 2025: -2% to +2%",
+        "Jan-Feb 2026: +5% to +9%",
+        "Mar-Apr 2026: +2% to +4%"
+      ],
+      "stock_return_data": {
+        "1month": "+3.1%",
+        "2months": "+4.8%",
+        "3months": "+6.2%",
+        "4months": "+5.1%",
+        "5months": "+7.3%",
+        "6months": "+6.4%"
+      }
+    },
+    "Axis Bank": {
+      "reason": "valuation re-rating",
+      "last_15_days_move": "+1% to +4%",
+      "historical_2yr_2month_blocks": [
+        "May-Jun 2024: +2% to +5%",
+        "Jul-Aug 2024: -3% to +1%",
+        "Sep-Oct 2024: +4% to +7%",
+        "Nov-Dec 2024: -2% to +1%",
+        "Jan-Feb 2025: +5% to +8%",
+        "Mar-Apr 2025: -3% to +1%",
+        "May-Jun 2025: +2% to +5%",
+        "Jul-Aug 2025: +1% to +4%",
+        "Sep-Oct 2025: +3% to +6%",
+        "Nov-Dec 2025: -2% to +1%",
+        "Jan-Feb 2026: +4% to +7%",
+        "Mar-Apr 2026: +1% to +3%"
+      ],
+      "stock_return_data": {
+        "1month": "+2.0%",
+        "2months": "+3.5%",
+        "3months": "+4.7%",
+        "4months": "+3.8%",
+        "5months": "+5.5%",
+        "6months": "+4.9%"
+      }
+    },
+    "SBI": {
+      "reason": "PSU credit strength",
+      "last_15_days_move": "+2% to +5%",
+      "historical_2yr_2month_blocks": [
+        "May-Jun 2024: +3% to +6%",
+        "Jul-Aug 2024: -2% to +1%",
+        "Sep-Oct 2024: +4% to +8%",
+        "Nov-Dec 2024: -1% to +2%",
+        "Jan-Feb 2025: +5% to +9%",
+        "Mar-Apr 2025: -3% to +1%",
+        "May-Jun 2025: +2% to +5%",
+        "Jul-Aug 2025: +1% to +3%",
+        "Sep-Oct 2025: +4% to +7%",
+        "Nov-Dec 2025: -2% to +1%",
+        "Jan-Feb 2026: +5% to +8%",
+        "Mar-Apr 2026: +2% to +4%"
+      ],
+      "stock_return_data": {
+        "1month": "+2.8%",
+        "2months": "+4.2%",
+        "3months": "+5.6%",
+        "4months": "+4.3%",
+        "5months": "+6.8%",
+        "6months": "+5.9%"
+      }
+    },
+    "Kotak Mahindra Bank": {
+      "reason": "retail stability",
+      "last_15_days_move": "+1% to +3%",
+      "historical_2yr_2month_blocks": [
+        "May-Jun 2024: +2% to +5%",
+        "Jul-Aug 2024: -2% to +1%",
+        "Sep-Oct 2024: +3% to +6%",
+        "Nov-Dec 2024: -1% to +2%",
+        "Jan-Feb 2025: +4% to +7%",
+        "Mar-Apr 2025: -3% to +1%",
+        "May-Jun 2025: +2% to +4%",
+        "Jul-Aug 2025: +1% to +3%",
+        "Sep-Oct 2025: +3% to +5%",
+        "Nov-Dec 2025: -2% to +1%",
+        "Jan-Feb 2026: +4% to +6%",
+        "Mar-Apr 2026: +1% to +3%"
+      ],
+      "stock_return_data": {
+        "1month": "+1.9%",
+        "2months": "+3.2%",
+        "3months": "+4.5%",
+        "4months": "+3.6%",
+        "5months": "+5.1%",
+        "6months": "+4.4%"
+      }
+    },
+    "IndusInd Bank": {
+      "reason": "high volatility recovery",
+      "last_15_days_move": "-2% to +3%",
+      "historical_2yr_2month_blocks": [
+        "May-Jun 2024: -1% to +3%",
+        "Jul-Aug 2024: -4% to 0%",
+        "Sep-Oct 2024: +2% to +6%",
+        "Nov-Dec 2024: -3% to +1%",
+        "Jan-Feb 2025: +3% to +7%",
+        "Mar-Apr 2025: -5% to +1%",
+        "May-Jun 2025: +1% to +4%",
+        "Jul-Aug 2025: -2% to +2%",
+        "Sep-Oct 2025: +3% to +6%",
+        "Nov-Dec 2025: -4% to +1%",
+        "Jan-Feb 2026: +2% to +5%",
+        "Mar-Apr 2026: -3% to +2%"
+      ],
+      "stock_return_data": {
+        "1month": "+1.5%",
+        "2months": "+2.8%",
+        "3months": "+3.9%",
+        "4months": "+2.7%",
+        "5months": "+4.6%",
+        "6months": "+3.8%"
+      }
+    }
+  },
+  "expectation_next_5_trading_days": [
+    "sideways consolidation expected",
+    "rate cut expectations impact",
+    "stock specific movement",
+    "FII flow sensitivity high",
+    "breakout needs catalyst"
+  ]
+}

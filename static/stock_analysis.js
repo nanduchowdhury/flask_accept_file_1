@@ -11,20 +11,38 @@ class StockAnalysisMain {
 
         try {
             const data = JSON.parse(tabContent);
-            let formattedHtml = '';
-            for (const [key, value] of Object.entries(data)) {
-                formattedHtml += `<strong>${key}</strong><br>`;
-                if (Array.isArray(value)) {
-                    formattedHtml += `<ol style="margin-top: 5px;">`;
-                    value.forEach(item => {
-                        formattedHtml += `<li>${item}</li>`;
+
+            const formatRecursive = (obj, level = 1) => {
+                let html = '';
+                const tab = '&nbsp;&nbsp;&nbsp;&nbsp;'.repeat(level);
+                const childTab = '&nbsp;&nbsp;&nbsp;&nbsp;'.repeat(level + 1);
+
+                if (typeof obj === 'object' && obj !== null && !Array.isArray(obj)) {
+                    for (const [key, value] of Object.entries(obj)) {
+                        html += `<div>${tab}<strong>${key}</strong>: `;
+                        if (Array.isArray(value)) {
+                            html += `<br>`;
+                            value.forEach((item, index) => {
+                                html += `<div>${childTab}${index + 1}. ${formatRecursive(item, level + 2)}</div>`;
+                            });
+                        } else if (typeof value === 'object' && value !== null) {
+                            html += `<br>${formatRecursive(value, level + 1)}`;
+                        } else {
+                            html += `${value}`;
+                        }
+                        html += `</div><br>`; // Newline after writing all values for a key
+                    }
+                } else if (Array.isArray(obj)) {
+                    obj.forEach((item, index) => {
+                        html += `<div>${tab}${index + 1}. ${formatRecursive(item, level + 1)}</div>`;
                     });
-                    formattedHtml += `</ol><br>`;
                 } else {
-                    formattedHtml += `${value}<br><br>`;
+                    html += `${obj}`;
                 }
-            }
-            tabContentDiv.innerHTML = formattedHtml;
+                return html;
+            };
+
+            tabContentDiv.innerHTML = formatRecursive(data);
         } catch (e) {
             // Fallback if tabContent is not valid JSON
             tabContentDiv.innerHTML = tabContent;

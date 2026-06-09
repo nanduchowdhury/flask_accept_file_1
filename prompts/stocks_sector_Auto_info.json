@@ -1,0 +1,148 @@
+{
+  "header": "Nifty Auto Mid-May to Early-June Analysis",
+  "key_takeaways": [
+    "range bound consolidation phase",
+    "rural demand supportive trend",
+    "margin pressure concerns",
+    "selective stock leadership"
+  ],
+  "stocks_in_momentum": {
+    "Maruti Suzuki": {
+      "reason": "strong volume recovery",
+      "last_15_days_move": "+2% to +5%",
+      "historical_2yr_2month_blocks": [
+        "May-Jun 2024: +3% to +7%",
+        "Jul-Aug 2024: -2% to +2%",
+        "Sep-Oct 2024: +4% to +8%",
+        "Nov-Dec 2024: -1% to +3%",
+        "Jan-Feb 2025: +5% to +9%",
+        "Mar-Apr 2025: -3% to +1%",
+        "May-Jun 2025: +2% to +6%",
+        "Jul-Aug 2025: +1% to +4%",
+        "Sep-Oct 2025: +3% to +7%",
+        "Nov-Dec 2025: -2% to +2%",
+        "Jan-Feb 2026: +4% to +8%",
+        "Mar-Apr 2026: +2% to +4%"
+      ],
+      "stock_return_data": {
+        "1month": "+2.8%",
+        "2months": "+4.3%",
+        "3months": "+5.6%",
+        "4months": "+4.7%",
+        "5months": "+6.5%",
+        "6months": "+5.8%"
+      }
+    },
+    "Tata Motors": {
+      "reason": "EV + JLR strength",
+      "last_15_days_move": "+3% to +7%",
+      "historical_2yr_2month_blocks": [
+        "May-Jun 2024: +4% to +9%",
+        "Jul-Aug 2024: -3% to +2%",
+        "Sep-Oct 2024: +5% to +10%",
+        "Nov-Dec 2024: -2% to +3%",
+        "Jan-Feb 2025: +6% to +12%",
+        "Mar-Apr 2025: -4% to +2%",
+        "May-Jun 2025: +3% to +7%",
+        "Jul-Aug 2025: +2% to +6%",
+        "Sep-Oct 2025: +4% to +9%",
+        "Nov-Dec 2025: -3% to +2%",
+        "Jan-Feb 2026: +5% to +11%",
+        "Mar-Apr 2026: +3% to +5%"
+      ],
+      "stock_return_data": {
+        "1month": "+3.5%",
+        "2months": "+5.8%",
+        "3months": "+7.2%",
+        "4months": "+6.1%",
+        "5months": "+8.4%",
+        "6months": "+7.0%"
+      }
+    },
+    "Bajaj Auto": {
+      "reason": "export demand strength",
+      "last_15_days_move": "+2% to +4%",
+      "historical_2yr_2month_blocks": [
+        "May-Jun 2024: +3% to +6%",
+        "Jul-Aug 2024: -2% to +1%",
+        "Sep-Oct 2024: +4% to +7%",
+        "Nov-Dec 2024: -1% to +2%",
+        "Jan-Feb 2025: +5% to +8%",
+        "Mar-Apr 2025: -3% to +1%",
+        "May-Jun 2025: +2% to +5%",
+        "Jul-Aug 2025: +1% to +3%",
+        "Sep-Oct 2025: +3% to +6%",
+        "Nov-Dec 2025: -2% to +1%",
+        "Jan-Feb 2026: +4% to +7%",
+        "Mar-Apr 2026: +2% to +4%"
+      ],
+      "stock_return_data": {
+        "1month": "+2.3%",
+        "2months": "+3.9%",
+        "3months": "+5.1%",
+        "4months": "+4.0%",
+        "5months": "+6.0%",
+        "6months": "+5.2%"
+      }
+    },
+    "Hero MotoCorp": {
+      "reason": "rural demand recovery",
+      "last_15_days_move": "+1% to +4%",
+      "historical_2yr_2month_blocks": [
+        "May-Jun 2024: +2% to +5%",
+        "Jul-Aug 2024: -3% to 0%",
+        "Sep-Oct 2024: +3% to +6%",
+        "Nov-Dec 2024: -2% to +1%",
+        "Jan-Feb 2025: +4% to +7%",
+        "Mar-Apr 2025: -4% to +1%",
+        "May-Jun 2025: +2% to +5%",
+        "Jul-Aug 2025: +1% to +3%",
+        "Sep-Oct 2025: +3% to +5%",
+        "Nov-Dec 2025: -2% to +1%",
+        "Jan-Feb 2026: +4% to +6%",
+        "Mar-Apr 2026: +1% to +3%"
+      ],
+      "stock_return_data": {
+        "1month": "+1.9%",
+        "2months": "+3.4%",
+        "3months": "+4.8%",
+        "4months": "+3.6%",
+        "5months": "+5.3%",
+        "6months": "+4.7%"
+      }
+    },
+    "Eicher Motors": {
+      "reason": "premium segment demand",
+      "last_15_days_move": "+2% to +6%",
+      "historical_2yr_2month_blocks": [
+        "May-Jun 2024: +4% to +8%",
+        "Jul-Aug 2024: -2% to +3%",
+        "Sep-Oct 2024: +5% to +9%",
+        "Nov-Dec 2024: -1% to +3%",
+        "Jan-Feb 2025: +6% to +10%",
+        "Mar-Apr 2025: -3% to +2%",
+        "May-Jun 2025: +3% to +6%",
+        "Jul-Aug 2025: +2% to +5%",
+        "Sep-Oct 2025: +4% to +8%",
+        "Nov-Dec 2025: -2% to +2%",
+        "Jan-Feb 2026: +5% to +9%",
+        "Mar-Apr 2026: +3% to +5%"
+      ],
+      "stock_return_data": {
+        "1month": "+3.0%",
+        "2months": "+5.0%",
+        "3months": "+6.5%",
+        "4months": "+5.4%",
+        "5months": "+7.1%",
+        "6months": "+6.0%"
+      }
+    }
+  },
+  "expectation_next_5_trading_days": [
+    "range bound consolidation likely",
+    "rural demand supportive factor",
+    "stock specific momentum",
+    "input cost pressure watch",
+    "breakout needs earnings trigger"
+  ]
+}
