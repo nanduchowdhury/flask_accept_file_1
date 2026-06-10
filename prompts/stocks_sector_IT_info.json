@@ -1,200 +1,277 @@
 {
-  "header": "Nifty IT Mid-May to Early-June Analysis",
-  "key_takeaways": [
-    "range bound volatility phase",
-    "nasdaq driven sentiment swings",
-    "profit booking after rallies",
-    "selective stock momentum"
+  "period": "Mid-May 2026 to Early-June 2026",
+
+  "sector_summary": [
+    "AI fears dominate",
+    "Global tech selloff",
+    "Sharp profit booking",
+    "US software optimism",
+    "Strong short covering",
+    "Valuation re-rating",
+    "High sector volatility",
+    "Selective stock leadership"
   ],
+
+  "nifty_it_timeline": {
+    "mid_may_2026": [
+      "AI disruption concerns",
+      "Weak investor sentiment",
+      "Heavy FII selling",
+      "Sector under pressure"
+    ],
+    "jun_01_2026": [
+      "Broad-based rally",
+      "US earnings support",
+      "Strong buying interest",
+      "Momentum reversal"
+    ],
+    "jun_02_2026": [
+      "Follow-through buying",
+      "Multi-week highs",
+      "Institutional accumulation",
+      "Positive breadth"
+    ],
+    "jun_03_to_jun_10_2026": [
+      "Profit booking returns",
+      "Global weakness impact",
+      "Volatile consolidation",
+      "Stock-specific moves"
+    ]
+  },
+
   "stocks_in_momentum": {
-    "TCS": {
-      "reason": "stable enterprise demand",
-      "last_15_days_move": "+2% to +4%",
-      "historical_2yr_2month_blocks": [
-        "May-Jun 2024: +3% to +6%",
-        "Jul-Aug 2024: -2% to +1%",
-        "Sep-Oct 2024: +4% to +7%",
-        "Nov-Dec 2024: -1% to +2%",
-        "Jan-Feb 2025: +5% to +9%",
-        "Mar-Apr 2025: -3% to +1%",
-        "May-Jun 2025: +2% to +5%",
-        "Jul-Aug 2025: +1% to +4%",
-        "Sep-Oct 2025: +3% to +6%",
-        "Nov-Dec 2025: -2% to +1%",
-        "Jan-Feb 2026: +4% to +8%",
-        "Mar-Apr 2026: +1% to +3%"
-      ],
-      "stock_return_data": {
-        "1month": "+2.5%",
-        "2months": "+3.9%",
-        "3months": "+5.1%",
-        "4months": "+4.2%",
-        "5months": "+6.0%",
-        "6months": "+5.4%"
-      }
-    },
-    "Infosys": {
-      "reason": "AI cloud recovery",
-      "last_15_days_move": "+3% to +5%",
-      "historical_2yr_2month_blocks": [
-        "May-Jun 2024: +4% to +8%",
-        "Jul-Aug 2024: -3% to 0%",
-        "Sep-Oct 2024: +5% to +9%",
-        "Nov-Dec 2024: -2% to +2%",
-        "Jan-Feb 2025: +6% to +10%",
-        "Mar-Apr 2025: -4% to +1%",
-        "May-Jun 2025: +3% to +6%",
-        "Jul-Aug 2025: +2% to +5%",
-        "Sep-Oct 2025: +4% to +7%",
-        "Nov-Dec 2025: -3% to +2%",
-        "Jan-Feb 2026: +5% to +9%",
-        "Mar-Apr 2026: +2% to +4%"
-      ],
-      "stock_return_data": {
-        "1month": "+3.0%",
-        "2months": "+4.4%",
-        "3months": "+6.1%",
-        "4months": "+5.2%",
-        "5months": "+7.0%",
-        "6months": "+6.0%"
-      }
-    },
-    "HCL Tech": {
-      "reason": "strong deal pipeline",
-      "last_15_days_move": "+2% to +4%",
-      "historical_2yr_2month_blocks": [
-        "May-Jun 2024: +2% to +5%",
-        "Jul-Aug 2024: -2% to +1%",
-        "Sep-Oct 2024: +3% to +6%",
-        "Nov-Dec 2024: -1% to +2%",
-        "Jan-Feb 2025: +4% to +7%",
-        "Mar-Apr 2025: -2% to +1%",
-        "May-Jun 2025: +2% to +4%",
-        "Jul-Aug 2025: +1% to +3%",
-        "Sep-Oct 2025: +3% to +5%",
-        "Nov-Dec 2025: -2% to +1%",
-        "Jan-Feb 2026: +4% to +6%",
-        "Mar-Apr 2026: +1% to +3%"
-      ],
-      "stock_return_data": {
-        "1month": "+2.2%",
-        "2months": "+3.5%",
-        "3months": "+4.8%",
-        "4months": "+3.9%",
-        "5months": "+5.2%",
-        "6months": "+4.7%"
-      }
-    },
-    "Tech Mahindra": {
-      "reason": "high beta volatility",
-      "last_15_days_move": "+4% to -2%",
-      "historical_2yr_2month_blocks": [
-        "May-Jun 2024: -1% to +3%",
-        "Jul-Aug 2024: -4% to 0%",
-        "Sep-Oct 2024: +2% to +6%",
-        "Nov-Dec 2024: -3% to +1%",
-        "Jan-Feb 2025: +3% to +7%",
-        "Mar-Apr 2025: -5% to +1%",
-        "May-Jun 2025: +1% to +4%",
-        "Jul-Aug 2025: -2% to +2%",
-        "Sep-Oct 2025: +3% to +6%",
-        "Nov-Dec 2025: -4% to +1%",
-        "Jan-Feb 2026: +2% to +5%",
-        "Mar-Apr 2026: -3% to +2%"
-      ],
-      "stock_return_data": {
-        "1month": "+1.7%",
-        "2months": "+2.9%",
-        "3months": "+3.6%",
-        "4months": "+1.8%",
-        "5months": "+4.1%",
-        "6months": "+3.3%"
-      }
-    },
     "Persistent Systems": {
-      "reason": "AI engineering demand",
-      "last_15_days_move": "+5% to +8%",
-      "historical_2yr_2month_blocks": [
-        "May-Jun 2024: +6% to +10%",
-        "Jul-Aug 2024: +2% to +5%",
-        "Sep-Oct 2024: +7% to +12%",
-        "Nov-Dec 2024: +1% to +4%",
-        "Jan-Feb 2025: +8% to +14%",
-        "Mar-Apr 2025: +3% to +6%",
-        "May-Jun 2025: +5% to +9%",
-        "Jul-Aug 2025: +4% to +7%",
-        "Sep-Oct 2025: +6% to +11%",
-        "Nov-Dec 2025: +2% to +5%",
-        "Jan-Feb 2026: +7% to +13%",
-        "Mar-Apr 2026: +4% to +6%"
+      "reason": "Strong order book, AI spending theme, sector leadership",
+      "last_15_days_upside_downside": "+8%",
+
+      "historical_return_2month_blocks": [
+        { "May-Jun 2024": "+14%" },
+        { "Jul-Aug 2024": "+9%" },
+        { "Sep-Oct 2024": "-5%" },
+        { "Nov-Dec 2024": "+12%" },
+        { "Jan-Feb 2025": "+16%" },
+        { "Mar-Apr 2025": "-4%" },
+        { "May-Jun 2025": "+11%" },
+        { "Jul-Aug 2025": "+7%" },
+        { "Sep-Oct 2025": "-6%" },
+        { "Nov-Dec 2025": "+13%" },
+        { "Jan-Feb 2026": "-18%" },
+        { "Mar-Apr 2026": "-9%" }
       ],
-      "stock_return_data": {
-        "1month": "+4.3%",
-        "2months": "+6.7%",
-        "3months": "+8.8%",
-        "4months": "+7.1%",
-        "5months": "+9.9%",
-        "6months": "+8.2%"
-      }
+
+      "return_percent": [
+        { "1_month": "+7%" },
+        { "2_months": "+4%" },
+        { "3_months": "-5%" },
+        { "4_months": "-11%" },
+        { "5_months": "-15%" },
+        { "6_months": "-12%" }
+      ]
     },
-    "Coforge": {
-      "reason": "midcap IT strength",
-      "last_15_days_move": "+4% to +7%",
-      "historical_2yr_2month_blocks": [
-        "May-Jun 2024: +5% to +9%",
-        "Jul-Aug 2024: +3% to +6%",
-        "Sep-Oct 2024: +6% to +10%",
-        "Nov-Dec 2024: +2% to +5%",
-        "Jan-Feb 2025: +7% to +12%",
-        "Mar-Apr 2025: +3% to +7%",
-        "May-Jun 2025: +4% to +8%",
-        "Jul-Aug 2025: +2% to +6%",
-        "Sep-Oct 2025: +5% to +9%",
-        "Nov-Dec 2025: +1% to +4%",
-        "Jan-Feb 2026: +6% to +11%",
-        "Mar-Apr 2026: +3% to +6%"
+
+    "Infosys": {
+      "reason": "Large-cap accumulation, dividend support, valuation recovery",
+      "last_15_days_upside_downside": "+4%",
+
+      "historical_return_2month_blocks": [
+        { "May-Jun 2024": "+6%" },
+        { "Jul-Aug 2024": "+4%" },
+        { "Sep-Oct 2024": "-3%" },
+        { "Nov-Dec 2024": "+5%" },
+        { "Jan-Feb 2025": "+7%" },
+        { "Mar-Apr 2025": "-4%" },
+        { "May-Jun 2025": "+4%" },
+        { "Jul-Aug 2025": "+2%" },
+        { "Sep-Oct 2025": "-3%" },
+        { "Nov-Dec 2025": "+5%" },
+        { "Jan-Feb 2026": "-22%" },
+        { "Mar-Apr 2026": "-8%" }
       ],
-      "stock_return_data": {
-        "1month": "+3.9%",
-        "2months": "+5.6%",
-        "3months": "+7.3%",
-        "4months": "+6.0%",
-        "5months": "+8.2%",
-        "6months": "+6.8%"
-      }
+
+      "return_percent": [
+        { "1_month": "+2%" },
+        { "2_months": "-1%" },
+        { "3_months": "-7%" },
+        { "4_months": "-16%" },
+        { "5_months": "-24%" },
+        { "6_months": "-20%" }
+      ]
     },
+
+    "TCS": {
+      "reason": "Defensive IT allocation, stable earnings outlook",
+      "last_15_days_upside_downside": "+3%",
+
+      "historical_return_2month_blocks": [
+        { "May-Jun 2024": "+5%" },
+        { "Jul-Aug 2024": "+3%" },
+        { "Sep-Oct 2024": "-2%" },
+        { "Nov-Dec 2024": "+4%" },
+        { "Jan-Feb 2025": "+5%" },
+        { "Mar-Apr 2025": "-3%" },
+        { "May-Jun 2025": "+4%" },
+        { "Jul-Aug 2025": "+2%" },
+        { "Sep-Oct 2025": "-2%" },
+        { "Nov-Dec 2025": "+4%" },
+        { "Jan-Feb 2026": "-20%" },
+        { "Mar-Apr 2026": "-7%" }
+      ],
+
+      "return_percent": [
+        { "1_month": "+1%" },
+        { "2_months": "-2%" },
+        { "3_months": "-8%" },
+        { "4_months": "-14%" },
+        { "5_months": "-19%" },
+        { "6_months": "-17%" }
+      ]
+    },
+
+    "Tech Mahindra": {
+      "reason": "Telecom transformation deals, AI adoption theme",
+      "last_15_days_upside_downside": "+5%",
+
+      "historical_return_2month_blocks": [
+        { "May-Jun 2024": "+9%" },
+        { "Jul-Aug 2024": "+6%" },
+        { "Sep-Oct 2024": "-7%" },
+        { "Nov-Dec 2024": "+8%" },
+        { "Jan-Feb 2025": "+12%" },
+        { "Mar-Apr 2025": "-6%" },
+        { "May-Jun 2025": "+8%" },
+        { "Jul-Aug 2025": "+4%" },
+        { "Sep-Oct 2025": "-5%" },
+        { "Nov-Dec 2025": "+10%" },
+        { "Jan-Feb 2026": "-18%" },
+        { "Mar-Apr 2026": "-8%" }
+      ],
+
+      "return_percent": [
+        { "1_month": "+4%" },
+        { "2_months": "+1%" },
+        { "3_months": "-5%" },
+        { "4_months": "-12%" },
+        { "5_months": "-17%" },
+        { "6_months": "-14%" }
+      ]
+    },
+
     "LTIMindtree": {
-      "reason": "selective enterprise deals",
-      "last_15_days_move": "+2% to +5%",
-      "historical_2yr_2month_blocks": [
-        "May-Jun 2024: +3% to +6%",
-        "Jul-Aug 2024: -1% to +2%",
-        "Sep-Oct 2024: +4% to +8%",
-        "Nov-Dec 2024: -2% to +1%",
-        "Jan-Feb 2025: +5% to +9%",
-        "Mar-Apr 2025: -1% to +3%",
-        "May-Jun 2025: +2% to +5%",
-        "Jul-Aug 2025: +1% to +4%",
-        "Sep-Oct 2025: +3% to +7%",
-        "Nov-Dec 2025: -2% to +2%",
-        "Jan-Feb 2026: +4% to +8%",
-        "Mar-Apr 2026: +2% to +4%"
+      "reason": "Valuation recovery, strong June rebound",
+      "last_15_days_upside_downside": "+4%",
+
+      "historical_return_2month_blocks": [
+        { "May-Jun 2024": "+8%" },
+        { "Jul-Aug 2024": "+5%" },
+        { "Sep-Oct 2024": "-8%" },
+        { "Nov-Dec 2024": "+7%" },
+        { "Jan-Feb 2025": "+10%" },
+        { "Mar-Apr 2025": "-5%" },
+        { "May-Jun 2025": "+7%" },
+        { "Jul-Aug 2025": "+4%" },
+        { "Sep-Oct 2025": "-5%" },
+        { "Nov-Dec 2025": "+8%" },
+        { "Jan-Feb 2026": "-21%" },
+        { "Mar-Apr 2026": "-9%" }
       ],
-      "stock_return_data": {
-        "1month": "+2.6%",
-        "2months": "+4.0%",
-        "3months": "+5.4%",
-        "4months": "+4.2%",
-        "5months": "+6.1%",
-        "6months": "+5.0%"
-      }
+
+      "return_percent": [
+        { "1_month": "+3%" },
+        { "2_months": "-1%" },
+        { "3_months": "-7%" },
+        { "4_months": "-15%" },
+        { "5_months": "-22%" },
+        { "6_months": "-18%" }
+      ]
+    },
+
+    "Coforge": {
+      "reason": "Deal wins, mid-cap IT leadership",
+      "last_15_days_upside_downside": "+6%",
+
+      "historical_return_2month_blocks": [
+        { "May-Jun 2024": "+12%" },
+        { "Jul-Aug 2024": "+8%" },
+        { "Sep-Oct 2024": "-4%" },
+        { "Nov-Dec 2024": "+11%" },
+        { "Jan-Feb 2025": "+15%" },
+        { "Mar-Apr 2025": "-3%" },
+        { "May-Jun 2025": "+10%" },
+        { "Jul-Aug 2025": "+7%" },
+        { "Sep-Oct 2025": "-4%" },
+        { "Nov-Dec 2025": "+12%" },
+        { "Jan-Feb 2026": "-16%" },
+        { "Mar-Apr 2026": "-7%" }
+      ],
+
+      "return_percent": [
+        { "1_month": "+5%" },
+        { "2_months": "+2%" },
+        { "3_months": "-4%" },
+        { "4_months": "-10%" },
+        { "5_months": "-15%" },
+        { "6_months": "-11%" }
+      ]
     }
   },
-  "expectation_next_5_trading_days": [
-    "range bound consolidation expected",
-    "us tech dependency high",
-    "stock specific momentum",
-    "buy dips strategy useful",
-    "limited breakout probability"
-  ]
+
+  "key_drivers": [
+    "Strong US software earnings",
+    "AI spending optimism",
+    "Short-covering rally",
+    "Global tech volatility",
+    "Rupee depreciation support",
+    "Improved valuation comfort"
+  ],
+
+  "next_5_trading_days_expectation": {
+    "sector_view": "Mild Bullish",
+    "expected_nifty_it_move": "+1% to +3%",
+    "probability": {
+      "bullish": "60%",
+      "sideways": "25%",
+      "bearish": "15%"
+    },
+
+    "likely_outperformers": [
+      "Persistent Systems",
+      "Coforge",
+      "Tech Mahindra",
+      "Infosys"
+    ],
+
+    "likely_underperformers": [
+      "Wipro",
+      "HCLTech"
+    ],
+
+    "supporting_factors": [
+      "US software strength",
+      "AI investment demand",
+      "Short covering continuation",
+      "Attractive valuations"
+    ],
+
+    "risk_factors": [
+      "Global tech correction",
+      "US recession concerns",
+      "AI disruption narrative",
+      "Profit booking pressure"
+    ]
+  },
+
+  "summary": [
+    "Persistent strongest momentum",
+    "Coforge remains leader",
+    "Infosys recovering steadily",
+    "TCS defensive choice",
+    "TechM gaining traction",
+    "Near-term bias positive"
+  ],
+
+  "references": {
+    "nifty_it_june_rally": "Nifty IT gained ~2.7% on Jun-01 after strong US software earnings optimism",
+    "persistent_leadership": "Persistent Systems led June rebound with ~4% single-day gains",
+    "recent_correction": "Nifty IT corrected ~8% over four sessions after AI-related global tech selloff"
+  }
 }

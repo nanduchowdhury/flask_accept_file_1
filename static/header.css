@@ -92,7 +92,7 @@
     position: absolute;
     top: 10px;        /* Position from top */
     left: 10px;       /* Position from left */
-    width: 140px;      /* Smaller size for the logo */
+    width: 100px;      /* Smaller size for the logo */
     height: auto;
 }
 

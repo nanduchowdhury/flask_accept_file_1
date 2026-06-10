@@ -19,12 +19,24 @@ class StockAnalysisMain {
 
                 if (typeof obj === 'object' && obj !== null && !Array.isArray(obj)) {
                     for (const [key, value] of Object.entries(obj)) {
-                        html += `<div>${tab}<strong>${key}</strong>: `;
+                        html += `<div>${tab}<strong style="color: blue;">${key}</strong>: `;
                         if (Array.isArray(value)) {
-                            html += `<br>`;
+                            html += `<br><table style="border-collapse: collapse; width: auto; margin-left: ${level * 20}px; border: 1px solid blue;">`;
                             value.forEach((item, index) => {
-                                html += `<div>${childTab}${index + 1}. ${formatRecursive(item, level + 2)}</div>`;
+                                const bgColor = index % 2 === 0 ? 'white' : 'lightblue';
+                                html += `<tr style="border-bottom: 1px solid blue; background-color: ${bgColor};">`;
+                                if (typeof item === 'object' && item !== null) {
+                                    html += `<td style="padding: 8px; border-right: 1px solid blue;">`;
+                                    for (const [subKey, subVal] of Object.entries(item)) {
+                                        html += `<strong>${subKey}</strong>: ${subVal} `;
+                                    }
+                                    html += `</td>`;
+                                } else {
+                                    html += `<td style="padding: 8px; border-right: 1px solid blue;">${item}</td>`;
+                                }
+                                html += `</tr>`;
                             });
+                            html += `</table>`;
                         } else if (typeof value === 'object' && value !== null) {
                             html += `<br>${formatRecursive(value, level + 1)}`;
                         } else {

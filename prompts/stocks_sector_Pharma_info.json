@@ -1,148 +1,273 @@
 {
-  "header": "Nifty Pharma Mid-May to Early-June Analysis",
-  "key_takeaways": [
-    "defensive sector rotation",
-    "steady demand visibility",
-    "USFDA event sensitivity",
-    "range bound consolidation"
+  "period": "Mid-May 2026 to Early-June 2026",
+
+  "sector_summary": [
+    "Defensive buying returns",
+    "US generics stable",
+    "Specialty pharma strong",
+    "API demand improving",
+    "Export outlook positive",
+    "Rupee weakness benefits",
+    "Institutional accumulation",
+    "Sector outperforms market"
   ],
+
+  "nifty_pharma_timeline": {
+    "mid_may_2026": [
+      "Defensive rotation starts",
+      "Healthcare demand steady",
+      "Export optimism rises",
+      "Large-cap buying"
+    ],
+    "jun_01_2026": [
+      "Broad pharma rally",
+      "FII participation improves",
+      "US market support",
+      "Positive sector breadth"
+    ],
+    "jun_02_2026": [
+      "Follow-through strength",
+      "Midcaps outperform",
+      "Momentum expands",
+      "Fresh breakouts emerge"
+    ],
+    "jun_03_to_jun_10_2026": [
+      "Healthy consolidation",
+      "Profit booking limited",
+      "Stock-specific movement",
+      "Trend remains positive"
+    ]
+  },
+
   "stocks_in_momentum": {
-    "Sun Pharma": {
-      "reason": "strong specialty growth",
-      "last_15_days_move": "+2% to +5%",
-      "historical_2yr_2month_blocks": [
-        "May-Jun 2024: +3% to +7%",
-        "Jul-Aug 2024: -2% to +2%",
-        "Sep-Oct 2024: +4% to +8%",
-        "Nov-Dec 2024: -1% to +3%",
-        "Jan-Feb 2025: +5% to +9%",
-        "Mar-Apr 2025: -3% to +1%",
-        "May-Jun 2025: +2% to +6%",
-        "Jul-Aug 2025: +1% to +4%",
-        "Sep-Oct 2025: +3% to +6%",
-        "Nov-Dec 2025: -2% to +1%",
-        "Jan-Feb 2026: +4% to +8%",
-        "Mar-Apr 2026: +2% to +4%"
+    "Sun Pharmaceutical": {
+      "reason": "Specialty portfolio growth, strong earnings visibility",
+      "last_15_days_upside_downside": "+7%",
+
+      "historical_return_2month_blocks": [
+        { "May-Jun 2024": "+8%" },
+        { "Jul-Aug 2024": "+6%" },
+        { "Sep-Oct 2024": "+4%" },
+        { "Nov-Dec 2024": "+7%" },
+        { "Jan-Feb 2025": "+5%" },
+        { "Mar-Apr 2025": "-2%" },
+        { "May-Jun 2025": "+8%" },
+        { "Jul-Aug 2025": "+7%" },
+        { "Sep-Oct 2025": "+3%" },
+        { "Nov-Dec 2025": "+6%" },
+        { "Jan-Feb 2026": "-3%" },
+        { "Mar-Apr 2026": "+5%" }
       ],
-      "stock_return_data": {
-        "1month": "+2.6%",
-        "2months": "+4.1%",
-        "3months": "+5.3%",
-        "4months": "+4.4%",
-        "5months": "+6.0%",
-        "6months": "+5.5%"
-      }
+
+      "return_percent": [
+        { "1_month": "+6%" },
+        { "2_months": "+8%" },
+        { "3_months": "+9%" },
+        { "4_months": "+8%" },
+        { "5_months": "+7%" },
+        { "6_months": "+11%" }
+      ]
     },
-    "Dr Reddy's Laboratories": {
-      "reason": "US generics strength",
-      "last_15_days_move": "+1% to +4%",
-      "historical_2yr_2month_blocks": [
-        "May-Jun 2024: +2% to +6%",
-        "Jul-Aug 2024: -3% to +1%",
-        "Sep-Oct 2024: +3% to +7%",
-        "Nov-Dec 2024: -2% to +2%",
-        "Jan-Feb 2025: +5% to +9%",
-        "Mar-Apr 2025: -4% to +1%",
-        "May-Jun 2025: +2% to +5%",
-        "Jul-Aug 2025: +1% to +3%",
-        "Sep-Oct 2025: +3% to +6%",
-        "Nov-Dec 2025: -2% to +1%",
-        "Jan-Feb 2026: +4% to +7%",
-        "Mar-Apr 2026: +1% to +3%"
+
+    "Dr. Reddy's Laboratories": {
+      "reason": "US generics strength, regulatory stability",
+      "last_15_days_upside_downside": "+6%",
+
+      "historical_return_2month_blocks": [
+        { "May-Jun 2024": "+7%" },
+        { "Jul-Aug 2024": "+5%" },
+        { "Sep-Oct 2024": "+2%" },
+        { "Nov-Dec 2024": "+6%" },
+        { "Jan-Feb 2025": "+4%" },
+        { "Mar-Apr 2025": "-3%" },
+        { "May-Jun 2025": "+7%" },
+        { "Jul-Aug 2025": "+6%" },
+        { "Sep-Oct 2025": "+2%" },
+        { "Nov-Dec 2025": "+5%" },
+        { "Jan-Feb 2026": "-4%" },
+        { "Mar-Apr 2026": "+4%" }
       ],
-      "stock_return_data": {
-        "1month": "+2.1%",
-        "2months": "+3.7%",
-        "3months": "+4.9%",
-        "4months": "+3.8%",
-        "5months": "+5.6%",
-        "6months": "+4.9%"
-      }
+
+      "return_percent": [
+        { "1_month": "+5%" },
+        { "2_months": "+6%" },
+        { "3_months": "+7%" },
+        { "4_months": "+6%" },
+        { "5_months": "+5%" },
+        { "6_months": "+8%" }
+      ]
     },
+
     "Cipla": {
-      "reason": "respiratory demand strength",
-      "last_15_days_move": "+2% to +4%",
-      "historical_2yr_2month_blocks": [
-        "May-Jun 2024: +3% to +6%",
-        "Jul-Aug 2024: -2% to +1%",
-        "Sep-Oct 2024: +4% to +7%",
-        "Nov-Dec 2024: -1% to +2%",
-        "Jan-Feb 2025: +5% to +8%",
-        "Mar-Apr 2025: -3% to +1%",
-        "May-Jun 2025: +2% to +5%",
-        "Jul-Aug 2025: +1% to +3%",
-        "Sep-Oct 2025: +3% to +6%",
-        "Nov-Dec 2025: -2% to +1%",
-        "Jan-Feb 2026: +4% to +7%",
-        "Mar-Apr 2026: +2% to +4%"
+      "reason": "Respiratory franchise growth, export momentum",
+      "last_15_days_upside_downside": "+5%",
+
+      "historical_return_2month_blocks": [
+        { "May-Jun 2024": "+6%" },
+        { "Jul-Aug 2024": "+5%" },
+        { "Sep-Oct 2024": "+2%" },
+        { "Nov-Dec 2024": "+5%" },
+        { "Jan-Feb 2025": "+4%" },
+        { "Mar-Apr 2025": "-2%" },
+        { "May-Jun 2025": "+6%" },
+        { "Jul-Aug 2025": "+5%" },
+        { "Sep-Oct 2025": "+2%" },
+        { "Nov-Dec 2025": "+5%" },
+        { "Jan-Feb 2026": "-3%" },
+        { "Mar-Apr 2026": "+4%" }
       ],
-      "stock_return_data": {
-        "1month": "+2.4%",
-        "2months": "+3.9%",
-        "3months": "+5.0%",
-        "4months": "+4.2%",
-        "5months": "+5.8%",
-        "6months": "+5.1%"
-      }
+
+      "return_percent": [
+        { "1_month": "+4%" },
+        { "2_months": "+5%" },
+        { "3_months": "+6%" },
+        { "4_months": "+5%" },
+        { "5_months": "+5%" },
+        { "6_months": "+7%" }
+      ]
     },
-    "Divi's Laboratories": {
-      "reason": "CDMO export demand",
-      "last_15_days_move": "+1% to +3%",
-      "historical_2yr_2month_blocks": [
-        "May-Jun 2024: +4% to +8%",
-        "Jul-Aug 2024: -3% to +2%",
-        "Sep-Oct 2024: +5% to +9%",
-        "Nov-Dec 2024: -2% to +2%",
-        "Jan-Feb 2025: +6% to +10%",
-        "Mar-Apr 2025: -4% to +1%",
-        "May-Jun 2025: +3% to +6%",
-        "Jul-Aug 2025: +2% to +4%",
-        "Sep-Oct 2025: +4% to +7%",
-        "Nov-Dec 2025: -2% to +1%",
-        "Jan-Feb 2026: +5% to +8%",
-        "Mar-Apr 2026: +2% to +4%"
-      ],
-      "stock_return_data": {
-        "1month": "+2.0%",
-        "2months": "+3.4%",
-        "3months": "+4.6%",
-        "4months": "+3.7%",
-        "5months": "+5.2%",
-        "6months": "+4.8%"
-      }
-    },
+
     "Lupin": {
-      "reason": "US pipeline recovery",
-      "last_15_days_move": "+2% to +6%",
-      "historical_2yr_2month_blocks": [
-        "May-Jun 2024: +3% to +7%",
-        "Jul-Aug 2024: -2% to +2%",
-        "Sep-Oct 2024: +4% to +8%",
-        "Nov-Dec 2024: -1% to +3%",
-        "Jan-Feb 2025: +5% to +9%",
-        "Mar-Apr 2025: -3% to +1%",
-        "May-Jun 2025: +2% to +5%",
-        "Jul-Aug 2025: +1% to +4%",
-        "Sep-Oct 2025: +3% to +6%",
-        "Nov-Dec 2025: -2% to +1%",
-        "Jan-Feb 2026: +4% to +7%",
-        "Mar-Apr 2026: +2% to +4%"
+      "reason": "US launch pipeline, margin expansion",
+      "last_15_days_upside_downside": "+8%",
+
+      "historical_return_2month_blocks": [
+        { "May-Jun 2024": "+10%" },
+        { "Jul-Aug 2024": "+8%" },
+        { "Sep-Oct 2024": "+3%" },
+        { "Nov-Dec 2024": "+9%" },
+        { "Jan-Feb 2025": "+6%" },
+        { "Mar-Apr 2025": "-4%" },
+        { "May-Jun 2025": "+9%" },
+        { "Jul-Aug 2025": "+8%" },
+        { "Sep-Oct 2025": "+3%" },
+        { "Nov-Dec 2025": "+8%" },
+        { "Jan-Feb 2026": "-5%" },
+        { "Mar-Apr 2026": "+6%" }
       ],
-      "stock_return_data": {
-        "1month": "+2.7%",
-        "2months": "+4.2%",
-        "3months": "+5.5%",
-        "4months": "+4.3%",
-        "5months": "+6.1%",
-        "6months": "+5.4%"
-      }
+
+      "return_percent": [
+        { "1_month": "+7%" },
+        { "2_months": "+9%" },
+        { "3_months": "+10%" },
+        { "4_months": "+9%" },
+        { "5_months": "+8%" },
+        { "6_months": "+13%" }
+      ]
+    },
+
+    "Aurobindo Pharma": {
+      "reason": "US business recovery, manufacturing leverage",
+      "last_15_days_upside_downside": "+7%",
+
+      "historical_return_2month_blocks": [
+        { "May-Jun 2024": "+8%" },
+        { "Jul-Aug 2024": "+7%" },
+        { "Sep-Oct 2024": "+2%" },
+        { "Nov-Dec 2024": "+7%" },
+        { "Jan-Feb 2025": "+5%" },
+        { "Mar-Apr 2025": "-3%" },
+        { "May-Jun 2025": "+8%" },
+        { "Jul-Aug 2025": "+7%" },
+        { "Sep-Oct 2025": "+2%" },
+        { "Nov-Dec 2025": "+6%" },
+        { "Jan-Feb 2026": "-4%" },
+        { "Mar-Apr 2026": "+5%" }
+      ],
+
+      "return_percent": [
+        { "1_month": "+6%" },
+        { "2_months": "+7%" },
+        { "3_months": "+8%" },
+        { "4_months": "+7%" },
+        { "5_months": "+6%" },
+        { "6_months": "+10%" }
+      ]
+    },
+
+    "Biocon": {
+      "reason": "Biosimilar growth, regulatory milestones, valuation rerating",
+      "last_15_days_upside_downside": "+11%",
+
+      "historical_return_2month_blocks": [
+        { "May-Jun 2024": "+12%" },
+        { "Jul-Aug 2024": "+10%" },
+        { "Sep-Oct 2024": "+4%" },
+        { "Nov-Dec 2024": "+11%" },
+        { "Jan-Feb 2025": "+7%" },
+        { "Mar-Apr 2025": "-5%" },
+        { "May-Jun 2025": "+10%" },
+        { "Jul-Aug 2025": "+9%" },
+        { "Sep-Oct 2025": "+4%" },
+        { "Nov-Dec 2025": "+9%" },
+        { "Jan-Feb 2026": "-6%" },
+        { "Mar-Apr 2026": "+8%" }
+      ],
+
+      "return_percent": [
+        { "1_month": "+9%" },
+        { "2_months": "+11%" },
+        { "3_months": "+12%" },
+        { "4_months": "+10%" },
+        { "5_months": "+8%" },
+        { "6_months": "+15%" }
+      ]
     }
   },
-  "expectation_next_5_trading_days": [
-    "defensive consolidation likely",
-    "USFDA event sensitivity high",
-    "stock specific momentum",
-    "steady upside bias",
-    "limited breakout chances"
+
+  "sector_drivers": [
+    "Defensive sector allocation",
+    "US generic pricing stability",
+    "Specialty pharma growth",
+    "Weak rupee support",
+    "Strong export demand",
+    "Improving regulatory outlook"
+  ],
+
+  "next_5_trading_days_expectation": {
+    "sector_view": "Bullish",
+
+    "expected_nifty_pharma_move": "+1.5% to +4.0%",
+
+    "probability": {
+      "bullish": "67%",
+      "sideways": "23%",
+      "bearish": "10%"
+    },
+
+    "likely_outperformers": [
+      "Biocon",
+      "Lupin",
+      "Sun Pharmaceutical",
+      "Aurobindo Pharma"
+    ],
+
+    "likely_defensive_choices": [
+      "Dr. Reddy's Laboratories",
+      "Cipla"
+    ],
+
+    "supporting_factors": [
+      "Defensive fund flows",
+      "Export revenue growth",
+      "Specialty product launches",
+      "Stable US market conditions"
+    ],
+
+    "risk_factors": [
+      "USFDA observations",
+      "Pricing pressure",
+      "Currency volatility",
+      "Global risk-off sentiment"
+    ]
+  },
+
+  "summary": [
+    "Biocon strongest momentum",
+    "Lupin gaining traction",
+    "Sun Pharma leader",
+    "Exports remain supportive",
+    "Sector trend positive",
+    "Bullish near-term outlook"
   ]
 }

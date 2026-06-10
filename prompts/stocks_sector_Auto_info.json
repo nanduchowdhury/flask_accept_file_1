@@ -1,148 +1,273 @@
 {
-  "header": "Nifty Auto Mid-May to Early-June Analysis",
-  "key_takeaways": [
-    "range bound consolidation phase",
-    "rural demand supportive trend",
-    "margin pressure concerns",
-    "selective stock leadership"
+  "period": "Mid-May 2026 to Early-June 2026",
+
+  "sector_summary": [
+    "Strong domestic demand",
+    "SUV sales momentum",
+    "Rural recovery visible",
+    "Monsoon optimism builds",
+    "EV adoption continues",
+    "Premium segment strong",
+    "Selective profit booking",
+    "Auto index outperforming"
   ],
+
+  "nifty_auto_timeline": {
+    "mid_may_2026": [
+      "Sales data positive",
+      "Rural sentiment improves",
+      "Tractor demand stable",
+      "Broad sector buying"
+    ],
+    "jun_01_2026": [
+      "Strong breakout attempt",
+      "FII participation rises",
+      "OEMs outperforming",
+      "Positive market breadth"
+    ],
+    "jun_02_2026": [
+      "Follow-through buying",
+      "SUV demand optimism",
+      "Volume expansion seen",
+      "Momentum strengthens"
+    ],
+    "jun_03_to_jun_10_2026": [
+      "Selective consolidation",
+      "Profit booking emerges",
+      "Large caps stable",
+      "Momentum remains intact"
+    ]
+  },
+
   "stocks_in_momentum": {
+    "Mahindra & Mahindra": {
+      "reason": "SUV leadership, tractor recovery, strong order backlog",
+      "last_15_days_upside_downside": "+9%",
+
+      "historical_return_2month_blocks": [
+        { "May-Jun 2024": "+12%" },
+        { "Jul-Aug 2024": "+15%" },
+        { "Sep-Oct 2024": "+6%" },
+        { "Nov-Dec 2024": "+10%" },
+        { "Jan-Feb 2025": "+8%" },
+        { "Mar-Apr 2025": "-3%" },
+        { "May-Jun 2025": "+11%" },
+        { "Jul-Aug 2025": "+13%" },
+        { "Sep-Oct 2025": "+5%" },
+        { "Nov-Dec 2025": "+9%" },
+        { "Jan-Feb 2026": "-4%" },
+        { "Mar-Apr 2026": "+6%" }
+      ],
+
+      "return_percent": [
+        { "1_month": "+8%" },
+        { "2_months": "+11%" },
+        { "3_months": "+15%" },
+        { "4_months": "+13%" },
+        { "5_months": "+10%" },
+        { "6_months": "+18%" }
+      ]
+    },
+
     "Maruti Suzuki": {
-      "reason": "strong volume recovery",
-      "last_15_days_move": "+2% to +5%",
-      "historical_2yr_2month_blocks": [
-        "May-Jun 2024: +3% to +7%",
-        "Jul-Aug 2024: -2% to +2%",
-        "Sep-Oct 2024: +4% to +8%",
-        "Nov-Dec 2024: -1% to +3%",
-        "Jan-Feb 2025: +5% to +9%",
-        "Mar-Apr 2025: -3% to +1%",
-        "May-Jun 2025: +2% to +6%",
-        "Jul-Aug 2025: +1% to +4%",
-        "Sep-Oct 2025: +3% to +7%",
-        "Nov-Dec 2025: -2% to +2%",
-        "Jan-Feb 2026: +4% to +8%",
-        "Mar-Apr 2026: +2% to +4%"
+      "reason": "SUV portfolio growth, export recovery, premiumization",
+      "last_15_days_upside_downside": "+6%",
+
+      "historical_return_2month_blocks": [
+        { "May-Jun 2024": "+7%" },
+        { "Jul-Aug 2024": "+9%" },
+        { "Sep-Oct 2024": "+4%" },
+        { "Nov-Dec 2024": "+6%" },
+        { "Jan-Feb 2025": "+5%" },
+        { "Mar-Apr 2025": "-2%" },
+        { "May-Jun 2025": "+8%" },
+        { "Jul-Aug 2025": "+7%" },
+        { "Sep-Oct 2025": "+3%" },
+        { "Nov-Dec 2025": "+5%" },
+        { "Jan-Feb 2026": "-3%" },
+        { "Mar-Apr 2026": "+4%" }
       ],
-      "stock_return_data": {
-        "1month": "+2.8%",
-        "2months": "+4.3%",
-        "3months": "+5.6%",
-        "4months": "+4.7%",
-        "5months": "+6.5%",
-        "6months": "+5.8%"
-      }
+
+      "return_percent": [
+        { "1_month": "+5%" },
+        { "2_months": "+7%" },
+        { "3_months": "+8%" },
+        { "4_months": "+9%" },
+        { "5_months": "+7%" },
+        { "6_months": "+11%" }
+      ]
     },
-    "Tata Motors": {
-      "reason": "EV + JLR strength",
-      "last_15_days_move": "+3% to +7%",
-      "historical_2yr_2month_blocks": [
-        "May-Jun 2024: +4% to +9%",
-        "Jul-Aug 2024: -3% to +2%",
-        "Sep-Oct 2024: +5% to +10%",
-        "Nov-Dec 2024: -2% to +3%",
-        "Jan-Feb 2025: +6% to +12%",
-        "Mar-Apr 2025: -4% to +2%",
-        "May-Jun 2025: +3% to +7%",
-        "Jul-Aug 2025: +2% to +6%",
-        "Sep-Oct 2025: +4% to +9%",
-        "Nov-Dec 2025: -3% to +2%",
-        "Jan-Feb 2026: +5% to +11%",
-        "Mar-Apr 2026: +3% to +5%"
-      ],
-      "stock_return_data": {
-        "1month": "+3.5%",
-        "2months": "+5.8%",
-        "3months": "+7.2%",
-        "4months": "+6.1%",
-        "5months": "+8.4%",
-        "6months": "+7.0%"
-      }
-    },
-    "Bajaj Auto": {
-      "reason": "export demand strength",
-      "last_15_days_move": "+2% to +4%",
-      "historical_2yr_2month_blocks": [
-        "May-Jun 2024: +3% to +6%",
-        "Jul-Aug 2024: -2% to +1%",
-        "Sep-Oct 2024: +4% to +7%",
-        "Nov-Dec 2024: -1% to +2%",
-        "Jan-Feb 2025: +5% to +8%",
-        "Mar-Apr 2025: -3% to +1%",
-        "May-Jun 2025: +2% to +5%",
-        "Jul-Aug 2025: +1% to +3%",
-        "Sep-Oct 2025: +3% to +6%",
-        "Nov-Dec 2025: -2% to +1%",
-        "Jan-Feb 2026: +4% to +7%",
-        "Mar-Apr 2026: +2% to +4%"
-      ],
-      "stock_return_data": {
-        "1month": "+2.3%",
-        "2months": "+3.9%",
-        "3months": "+5.1%",
-        "4months": "+4.0%",
-        "5months": "+6.0%",
-        "6months": "+5.2%"
-      }
-    },
-    "Hero MotoCorp": {
-      "reason": "rural demand recovery",
-      "last_15_days_move": "+1% to +4%",
-      "historical_2yr_2month_blocks": [
-        "May-Jun 2024: +2% to +5%",
-        "Jul-Aug 2024: -3% to 0%",
-        "Sep-Oct 2024: +3% to +6%",
-        "Nov-Dec 2024: -2% to +1%",
-        "Jan-Feb 2025: +4% to +7%",
-        "Mar-Apr 2025: -4% to +1%",
-        "May-Jun 2025: +2% to +5%",
-        "Jul-Aug 2025: +1% to +3%",
-        "Sep-Oct 2025: +3% to +5%",
-        "Nov-Dec 2025: -2% to +1%",
-        "Jan-Feb 2026: +4% to +6%",
-        "Mar-Apr 2026: +1% to +3%"
-      ],
-      "stock_return_data": {
-        "1month": "+1.9%",
-        "2months": "+3.4%",
-        "3months": "+4.8%",
-        "4months": "+3.6%",
-        "5months": "+5.3%",
-        "6months": "+4.7%"
-      }
-    },
+
     "Eicher Motors": {
-      "reason": "premium segment demand",
-      "last_15_days_move": "+2% to +6%",
-      "historical_2yr_2month_blocks": [
-        "May-Jun 2024: +4% to +8%",
-        "Jul-Aug 2024: -2% to +3%",
-        "Sep-Oct 2024: +5% to +9%",
-        "Nov-Dec 2024: -1% to +3%",
-        "Jan-Feb 2025: +6% to +10%",
-        "Mar-Apr 2025: -3% to +2%",
-        "May-Jun 2025: +3% to +6%",
-        "Jul-Aug 2025: +2% to +5%",
-        "Sep-Oct 2025: +4% to +8%",
-        "Nov-Dec 2025: -2% to +2%",
-        "Jan-Feb 2026: +5% to +9%",
-        "Mar-Apr 2026: +3% to +5%"
+      "reason": "Royal Enfield growth, export demand improvement",
+      "last_15_days_upside_downside": "+7%",
+
+      "historical_return_2month_blocks": [
+        { "May-Jun 2024": "+9%" },
+        { "Jul-Aug 2024": "+11%" },
+        { "Sep-Oct 2024": "+2%" },
+        { "Nov-Dec 2024": "+7%" },
+        { "Jan-Feb 2025": "+6%" },
+        { "Mar-Apr 2025": "-4%" },
+        { "May-Jun 2025": "+10%" },
+        { "Jul-Aug 2025": "+8%" },
+        { "Sep-Oct 2025": "+2%" },
+        { "Nov-Dec 2025": "+6%" },
+        { "Jan-Feb 2026": "-5%" },
+        { "Mar-Apr 2026": "+5%" }
       ],
-      "stock_return_data": {
-        "1month": "+3.0%",
-        "2months": "+5.0%",
-        "3months": "+6.5%",
-        "4months": "+5.4%",
-        "5months": "+7.1%",
-        "6months": "+6.0%"
-      }
+
+      "return_percent": [
+        { "1_month": "+6%" },
+        { "2_months": "+8%" },
+        { "3_months": "+9%" },
+        { "4_months": "+7%" },
+        { "5_months": "+5%" },
+        { "6_months": "+10%" }
+      ]
+    },
+
+    "Bajaj Auto": {
+      "reason": "Export recovery, premium motorcycles, EV traction",
+      "last_15_days_upside_downside": "+5%",
+
+      "historical_return_2month_blocks": [
+        { "May-Jun 2024": "+8%" },
+        { "Jul-Aug 2024": "+10%" },
+        { "Sep-Oct 2024": "+1%" },
+        { "Nov-Dec 2024": "+7%" },
+        { "Jan-Feb 2025": "+5%" },
+        { "Mar-Apr 2025": "-3%" },
+        { "May-Jun 2025": "+8%" },
+        { "Jul-Aug 2025": "+7%" },
+        { "Sep-Oct 2025": "+1%" },
+        { "Nov-Dec 2025": "+5%" },
+        { "Jan-Feb 2026": "-4%" },
+        { "Mar-Apr 2026": "+4%" }
+      ],
+
+      "return_percent": [
+        { "1_month": "+4%" },
+        { "2_months": "+6%" },
+        { "3_months": "+7%" },
+        { "4_months": "+6%" },
+        { "5_months": "+4%" },
+        { "6_months": "+8%" }
+      ]
+    },
+
+    "TVS Motor": {
+      "reason": "EV growth, scooter demand, market-share gains",
+      "last_15_days_upside_downside": "+8%",
+
+      "historical_return_2month_blocks": [
+        { "May-Jun 2024": "+11%" },
+        { "Jul-Aug 2024": "+13%" },
+        { "Sep-Oct 2024": "+5%" },
+        { "Nov-Dec 2024": "+9%" },
+        { "Jan-Feb 2025": "+7%" },
+        { "Mar-Apr 2025": "-2%" },
+        { "May-Jun 2025": "+10%" },
+        { "Jul-Aug 2025": "+12%" },
+        { "Sep-Oct 2025": "+4%" },
+        { "Nov-Dec 2025": "+8%" },
+        { "Jan-Feb 2026": "-3%" },
+        { "Mar-Apr 2026": "+6%" }
+      ],
+
+      "return_percent": [
+        { "1_month": "+7%" },
+        { "2_months": "+10%" },
+        { "3_months": "+12%" },
+        { "4_months": "+11%" },
+        { "5_months": "+9%" },
+        { "6_months": "+15%" }
+      ]
+    },
+
+    "Ashok Leyland": {
+      "reason": "Commercial vehicle cycle, infrastructure demand",
+      "last_15_days_upside_downside": "+6%",
+
+      "historical_return_2month_blocks": [
+        { "May-Jun 2024": "+10%" },
+        { "Jul-Aug 2024": "+12%" },
+        { "Sep-Oct 2024": "+3%" },
+        { "Nov-Dec 2024": "+8%" },
+        { "Jan-Feb 2025": "+7%" },
+        { "Mar-Apr 2025": "-4%" },
+        { "May-Jun 2025": "+9%" },
+        { "Jul-Aug 2025": "+11%" },
+        { "Sep-Oct 2025": "+2%" },
+        { "Nov-Dec 2025": "+7%" },
+        { "Jan-Feb 2026": "-5%" },
+        { "Mar-Apr 2026": "+5%" }
+      ],
+
+      "return_percent": [
+        { "1_month": "+5%" },
+        { "2_months": "+8%" },
+        { "3_months": "+10%" },
+        { "4_months": "+9%" },
+        { "5_months": "+7%" },
+        { "6_months": "+12%" }
+      ]
     }
   },
-  "expectation_next_5_trading_days": [
-    "range bound consolidation likely",
-    "rural demand supportive factor",
-    "stock specific momentum",
-    "input cost pressure watch",
-    "breakout needs earnings trigger"
+
+  "sector_drivers": [
+    "Healthy monthly sales",
+    "Rural income recovery",
+    "Normal monsoon outlook",
+    "SUV demand growth",
+    "Commercial vehicle demand",
+    "EV adoption momentum"
+  ],
+
+  "next_5_trading_days_expectation": {
+    "sector_view": "Bullish",
+
+    "expected_nifty_auto_move": "+1.5% to +4%",
+
+    "probability": {
+      "bullish": "65%",
+      "sideways": "25%",
+      "bearish": "10%"
+    },
+
+    "likely_outperformers": [
+      "Mahindra & Mahindra",
+      "TVS Motor",
+      "Eicher Motors",
+      "Ashok Leyland"
+    ],
+
+    "likely_defensive_choices": [
+      "Maruti Suzuki",
+      "Bajaj Auto"
+    ],
+
+    "supporting_factors": [
+      "Strong monthly sales",
+      "Monsoon expectations",
+      "Rural demand recovery",
+      "Positive earnings outlook"
+    ],
+
+    "risk_factors": [
+      "Commodity inflation",
+      "Fuel price volatility",
+      "Global growth concerns",
+      "Profit booking pressure"
+    ]
+  },
+
+  "summary": [
+    "M&M sector leader",
+    "TVS strong momentum",
+    "Eicher gaining strength",
+    "Maruti remains stable",
+    "Auto trend positive",
+    "Bullish near-term setup"
   ]
 }
