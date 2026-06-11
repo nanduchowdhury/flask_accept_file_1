@@ -6,23 +6,45 @@ class PopoutManager extends ContainerScrollBarControl {
         super(containerId);
 
         this.popout = document.getElementById(containerId);
+        this.boundPopstateHandler = this.onPopState.bind(this);
+        this.boundOutsideClickHandler = this.onClickOutsideToImplement.bind(this);
     }
 
     showPopout() {
         this.popout.style.display = 'block';
 
+        // Handle browser/mobile back button by pushing a state
+        window.history.pushState({ popoutId: this.popout.id }, "");
+        window.addEventListener('popstate', this.boundPopstateHandler);
+
         // Click anywhere outside the popout - to make it disappear
-        document.addEventListener('mousedown', (e) => this.onClickOutsideToImplement(e));
+        document.addEventListener('mousedown', this.boundOutsideClickHandler);
+    }
+
+    onPopState(event) {
+        // Triggered when back button is invoked; close without pushing another history change
+        this.closePopout(false);
     }
 
     onClickOutsideToImplement(event) {
         if (!this.popout.contains(event.target)) {
-            this.closePopout();
+            this.closePopout(true);
         }
     }
 
-    closePopout() {
+    closePopout(triggerHistoryBack = true) {
+        if (this.popout.style.display === 'none') return;
+
         this.popout.style.display = 'none';
+
+        // Clean up listeners
+        window.removeEventListener('popstate', this.boundPopstateHandler);
+        document.removeEventListener('mousedown', this.boundOutsideClickHandler);
+
+        // If closed manually (not via back button), pop the history state we pushed
+        if (triggerHistoryBack && window.history.state?.popoutId === this.popout.id) {
+            window.history.back();
+        }
     }
 
     // API to append an item (either simple text or a DOM element)
@@ -197,9 +219,7 @@ class PdfPopoutManager extends PopoutManager {
     onClickOutsideToImplement(event) {
         if (!this.popout.contains(event.target)) {
             this.returnPdfCanvasToOriginalParent(); // Return pdfCanvas to its original parent
-            this.closePopout();
+            this.closePopout(true);
         }
     }
 }
-
-
