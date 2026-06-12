@@ -52,12 +52,15 @@
             max-width: 100vw;
             box-sizing: border-box;
         }
+        .welcome-heading .line-1 { color: #161cca; } /* Dark Blue */
+        .welcome-heading .line-2 { color: #121315; } /* Green */
+        .welcome-heading .line-3 { color: #121315; } /* Purple */
     </style>
     
     <header class="header-container">
         <!-- Logo on the left -->
         <a href="https://bluepayload.com/" target="_blank">
-            <img src="https://cdn.jsdelivr.net/gh/nanduchowdhury/flask_accept_file_1@main/static/images/bluepayload-logo.png"
+            <img src="https://cdn.jsdelivr.net/gh/nanduchowdhury/flask_accept_file_1@main/static/images/bluepayload-logo.png" style="margin-right: 40px;"
                  class="logo" alt="bluepayload Logo" title="bluepayload - minimalist approach towards many things"
                  width="150" height="50" loading="lazy">
         </a>
@@ -66,13 +69,10 @@
         <div class="center-container">
             <div class="newsletter">
                 <input type="text" id="newsletter-input" placeholder="Enter your email-id">
-                <button id="subscribeButton">Subscribe newsletter</button>
+                <button id="subscribeButton">Subscribe</button>
             </div>
             <p class="subscription-note">[Subscribe with your email-id for our monthly newsletter]</p>
         </div>
-    
-        <!-- Dash menu on the extreme right -->
-        <nav id="TripleDashMenuContainer"></nav>
     </header>
     
 
