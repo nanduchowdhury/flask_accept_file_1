@@ -130,7 +130,7 @@ class BasicInitializer extends RootInitializer{
     static GITHUB_CDN_IMAGES_URL = this.GITHUB_CDN + "static/images/";
     
 
-    constructor() {
+    constructor(confirmBeforeBackButton = true) {
 
         super();
 
@@ -142,9 +142,12 @@ class BasicInitializer extends RootInitializer{
         this.initializeVoices();
         this.sendInitToServer();
 
-        this.onBrowserRefresh = this.onBrowserRefresh.bind(this);
-        // Add the event listener for beforeunload
-        window.addEventListener('beforeunload', this.onBrowserRefresh);
+        if ( confirmBeforeBackButton ) {
+
+            this.onBrowserRefresh = this.onBrowserRefresh.bind(this);
+            // Add the event listener for beforeunload
+            window.addEventListener('beforeunload', this.onBrowserRefresh);
+        }
     }
 
     onBrowserRefresh(event) {
@@ -912,4 +915,3 @@ class RootRender {
         console.log("Subscribe failed : ", msg);
     }
 }
-

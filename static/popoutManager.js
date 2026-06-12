@@ -13,6 +13,10 @@ class PopoutManager extends ContainerScrollBarControl {
     showPopout() {
         this.popout.style.display = 'block';
 
+        // Ensure the browser window and the popout content start at the top
+        window.scrollTo(0, 0);
+        this.popout.scrollTop = 0;
+
         // Handle browser/mobile back button by pushing a state
         window.history.pushState({ popoutId: this.popout.id }, "");
         window.addEventListener('popstate', this.boundPopstateHandler);
