@@ -89,6 +89,16 @@
                 <h3 style="margin: 10px 0;">Sector wise analysis</h3>
                 <p style="font-size: 0.9rem;">Analysis insight sector wise.</p>
             </a>
+
+            <a href="#" 
+                class="topic-card"
+                onclick="handleCardClick(event, 'DII_FII')"
+                style="text-decoration: none; color: inherit; border: 1px solid #ddd; border-radius: 8px; padding: 20px; width: 250px; text-align: center; transition: transform 0.3s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <i class="fas fa-lightbulb" style="font-size: 2rem; color: #161cca; margin-bottom: 10px;"></i>
+                    <h3 style="margin: 10px 0;">DII FII Analysis</h3>
+                    <p style="font-size: 0.9rem;">Analysis of DII & FII.</p>
+            </a>
+
         </div>
 
 
@@ -100,10 +110,11 @@
                 <a href="/home/contact">Contact</a>
             </div>
             <div class="social-links">
-                <a href="https://x.com/_kupmanduk" target="_blank" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="https://www.linkedin.com/company/kupmanduk/about/?viewAsMember=true" target="_blank" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="mailto:nandu@bluepayload.com?subject=kupmanduk%20website%20user" class="social-icon" aria-label="Email"><i class="fas fa-envelope"></i></a>
-                <a href="https://www.facebook.com/profile.php?id=61573069120308" target="_blank" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="https://x.com/nandu_chowdhury" target="_blank" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.linkedin.com/company/bluepayload/?viewAsMember=true" target="_blank" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:contact@bluepayload.com?subject=kupmanduk%20website%20user" class="social-icon" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=61590854792110" target="_blank" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.youtube.com/@bluepayload" target="_blank" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
             </div>
         </aside>
     </main>
@@ -112,6 +123,8 @@
         <span id="messageBoxText"></span>
         <button id="messageBoxOkButton">OK</button>
     </div>
+
+    <div id="genericPopoutId" class="genericPopout"></div>
 
     <script defer>
         if (window !== window.top) {
@@ -138,13 +151,29 @@
                 document.body.appendChild(scriptClarity);
             }, 2000);
         });
+
+        window.addEventListener('load', () => {
+            window.basicInitializer = new BasicInitializer(false);
+            window.errorManager = new ErrorManager();
+            window.stockAnalysisMain = new StockAnalysisMain();
+        });
+
+        function handleCardClick(event, sector) {
+            event.preventDefault(); // stops link navigation
+            window.stockAnalysisMain.openDiiFiiPage();
+        }
+
     </script>
 
     <!-- Defer JS -->
     <script defer src="{{ url_for('static', filename='BasicInitializer.js') }}"></script>
     <script defer src="{{ url_for('static', filename='home_render.js') }}"></script>
-    <script defer src="{{ url_for('static', filename='errorManager.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='errorManager.js') }}"></script>    
     <script defer src="{{ url_for('static', filename='geologicalInfo.js') }}"></script>
+    <script src="{{ url_for('static', filename='ContainerScrollBarControl.js') }}"></script>
+    <script src="{{ url_for('static', filename='popoutManager.js') }}"></script>
+    <script src="{{ url_for('static', filename='stock_analysis.js') }}"></script>
+    
 
 </body>
 </html>

@@ -1,0 +1,428 @@
+{
+  "DII_FII_sector_keys": {
+    "Banking_Financial_Services": {
+      "last_4_quarters": {
+        "2025Q3": {
+          "FII": "Strong Buying",
+          "DII": "Moderate Buying",
+          "net_flow_score": 8,
+          "drivers": [
+            "Credit growth",
+            "Private bank valuation comfort",
+            "Rate-cycle expectations"
+          ]
+        },
+        "2025Q4": {
+          "FII": "Moderate Buying",
+          "DII": "Strong Buying",
+          "net_flow_score": 8
+        },
+        "2026Q1": {
+          "FII": "Strong Buying",
+          "DII": "Strong Buying",
+          "net_flow_score": 9
+        },
+        "2026Q2": {
+          "FII": "Moderate Buying",
+          "DII": "Strong Buying",
+          "net_flow_score": 9
+        }
+      },
+      "prediction": {
+        "2026Q3": {
+          "FII": "Strong Buying",
+          "DII": "Strong Buying"
+        },
+        "2026Q4": {
+          "FII": "Moderate Buying",
+          "DII": "Strong Buying"
+        }
+      }
+    },
+
+    "Information_Technology": {
+      "last_4_quarters": {
+        "2025Q3": {
+          "FII": "Strong Buying",
+          "DII": "Moderate Buying",
+          "net_flow_score": 8
+        },
+        "2025Q4": {
+          "FII": "Moderate Buying",
+          "DII": "Moderate Buying",
+          "net_flow_score": 7
+        },
+        "2026Q1": {
+          "FII": "Strong Buying",
+          "DII": "Moderate Buying",
+          "net_flow_score": 8
+        },
+        "2026Q2": {
+          "FII": "Moderate Buying",
+          "DII": "Moderate Buying",
+          "net_flow_score": 7
+        }
+      },
+      "prediction": {
+        "2026Q3": {
+          "FII": "Strong Buying",
+          "DII": "Moderate Buying"
+        },
+        "2026Q4": {
+          "FII": "Strong Buying",
+          "DII": "Moderate Buying"
+        }
+      }
+    },
+
+    "Capital_Goods_Engineering": {
+      "last_4_quarters": {
+        "2025Q3": {
+          "FII": "Moderate Buying",
+          "DII": "Strong Buying",
+          "net_flow_score": 8
+        },
+        "2025Q4": {
+          "FII": "Strong Buying",
+          "DII": "Strong Buying",
+          "net_flow_score": 9
+        },
+        "2026Q1": {
+          "FII": "Strong Buying",
+          "DII": "Strong Buying",
+          "net_flow_score": 10
+        },
+        "2026Q2": {
+          "FII": "Strong Buying",
+          "DII": "Strong Buying",
+          "net_flow_score": 10
+        }
+      },
+      "prediction": {
+        "2026Q3": {
+          "FII": "Strong Buying",
+          "DII": "Strong Buying"
+        },
+        "2026Q4": {
+          "FII": "Strong Buying",
+          "DII": "Strong Buying"
+        }
+      }
+    },
+
+    "Automobile": {
+      "last_4_quarters": {
+        "2025Q3": {
+          "FII": "Moderate Buying",
+          "DII": "Moderate Buying",
+          "net_flow_score": 7
+        },
+        "2025Q4": {
+          "FII": "Strong Buying",
+          "DII": "Strong Buying",
+          "net_flow_score": 8
+        },
+        "2026Q1": {
+          "FII": "Strong Buying",
+          "DII": "Strong Buying",
+          "net_flow_score": 9
+        },
+        "2026Q2": {
+          "FII": "Moderate Buying",
+          "DII": "Strong Buying",
+          "net_flow_score": 8
+        }
+      },
+      "prediction": {
+        "2026Q3": {
+          "FII": "Strong Buying",
+          "DII": "Strong Buying"
+        },
+        "2026Q4": {
+          "FII": "Moderate Buying",
+          "DII": "Strong Buying"
+        }
+      }
+    },
+
+    "Power_Utilities": {
+      "last_4_quarters": {
+        "2025Q3": {
+          "FII": "Moderate Buying",
+          "DII": "Strong Buying",
+          "net_flow_score": 7
+        },
+        "2025Q4": {
+          "FII": "Moderate Buying",
+          "DII": "Strong Buying",
+          "net_flow_score": 8
+        },
+        "2026Q1": {
+          "FII": "Strong Buying",
+          "DII": "Strong Buying",
+          "net_flow_score": 9
+        },
+        "2026Q2": {
+          "FII": "Strong Buying",
+          "DII": "Strong Buying",
+          "net_flow_score": 9
+        }
+      },
+      "prediction": {
+        "2026Q3": {
+          "FII": "Strong Buying",
+          "DII": "Strong Buying"
+        },
+        "2026Q4": {
+          "FII": "Moderate Buying",
+          "DII": "Strong Buying"
+        }
+      }
+    },
+
+    "Telecom": {
+      "last_4_quarters": {
+        "2025Q3": {
+          "FII": "Moderate Buying",
+          "DII": "Moderate Buying",
+          "net_flow_score": 7
+        },
+        "2025Q4": {
+          "FII": "Strong Buying",
+          "DII": "Moderate Buying",
+          "net_flow_score": 8
+        },
+        "2026Q1": {
+          "FII": "Strong Buying",
+          "DII": "Strong Buying",
+          "net_flow_score": 9
+        },
+        "2026Q2": {
+          "FII": "Strong Buying",
+          "DII": "Strong Buying",
+          "net_flow_score": 9
+        }
+      },
+      "prediction": {
+        "2026Q3": {
+          "FII": "Strong Buying",
+          "DII": "Strong Buying"
+        },
+        "2026Q4": {
+          "FII": "Strong Buying",
+          "DII": "Moderate Buying"
+        }
+      }
+    },
+
+    "Healthcare_Pharma": {
+      "last_4_quarters": {
+        "2025Q3": {
+          "FII": "Moderate Buying",
+          "DII": "Moderate Buying",
+          "net_flow_score": 7
+        },
+        "2025Q4": {
+          "FII": "Moderate Buying",
+          "DII": "Strong Buying",
+          "net_flow_score": 7
+        },
+        "2026Q1": {
+          "FII": "Strong Buying",
+          "DII": "Strong Buying",
+          "net_flow_score": 8
+        },
+        "2026Q2": {
+          "FII": "Moderate Buying",
+          "DII": "Strong Buying",
+          "net_flow_score": 8
+        }
+      },
+      "prediction": {
+        "2026Q3": {
+          "FII": "Moderate Buying",
+          "DII": "Strong Buying"
+        },
+        "2026Q4": {
+          "FII": "Strong Buying",
+          "DII": "Strong Buying"
+        }
+      }
+    },
+
+    "Energy": {
+      "last_4_quarters": {
+        "2025Q3": {
+          "FII": "Moderate Buying",
+          "DII": "Moderate Buying",
+          "net_flow_score": 7
+        },
+        "2025Q4": {
+          "FII": "Moderate Buying",
+          "DII": "Strong Buying",
+          "net_flow_score": 7
+        },
+        "2026Q1": {
+          "FII": "Strong Buying",
+          "DII": "Strong Buying",
+          "net_flow_score": 8
+        },
+        "2026Q2": {
+          "FII": "Moderate Buying",
+          "DII": "Strong Buying",
+          "net_flow_score": 8
+        }
+      },
+      "prediction": {
+        "2026Q3": {
+          "FII": "Moderate Buying",
+          "DII": "Strong Buying"
+        },
+        "2026Q4": {
+          "FII": "Moderate Buying",
+          "DII": "Strong Buying"
+        }
+      }
+    },
+
+    "FMCG": {
+      "last_4_quarters": {
+        "2025Q3": {
+          "FII": "Selling",
+          "DII": "Strong Buying",
+          "net_flow_score": 5
+        },
+        "2025Q4": {
+          "FII": "Selling",
+          "DII": "Strong Buying",
+          "net_flow_score": 5
+        },
+        "2026Q1": {
+          "FII": "Moderate Buying",
+          "DII": "Strong Buying",
+          "net_flow_score": 6
+        },
+        "2026Q2": {
+          "FII": "Neutral",
+          "DII": "Strong Buying",
+          "net_flow_score": 6
+        }
+      },
+      "prediction": {
+        "2026Q3": {
+          "FII": "Neutral",
+          "DII": "Strong Buying"
+        },
+        "2026Q4": {
+          "FII": "Moderate Buying",
+          "DII": "Strong Buying"
+        }
+      }
+    },
+
+    "Metals_Mining": {
+      "last_4_quarters": {
+        "2025Q3": {
+          "FII": "Strong Buying",
+          "DII": "Moderate Buying",
+          "net_flow_score": 8
+        },
+        "2025Q4": {
+          "FII": "Strong Buying",
+          "DII": "Moderate Buying",
+          "net_flow_score": 8
+        },
+        "2026Q1": {
+          "FII": "Selling",
+          "DII": "Moderate Buying",
+          "net_flow_score": 4
+        },
+        "2026Q2": {
+          "FII": "Neutral",
+          "DII": "Moderate Buying",
+          "net_flow_score": 5
+        }
+      },
+      "prediction": {
+        "2026Q3": {
+          "FII": "Moderate Buying",
+          "DII": "Moderate Buying"
+        },
+        "2026Q4": {
+          "FII": "Strong Buying",
+          "DII": "Moderate Buying"
+        }
+      }
+    },
+
+    "Chemicals": {
+      "last_4_quarters": {
+        "2025Q3": {
+          "FII": "Selling",
+          "DII": "Moderate Buying",
+          "net_flow_score": 4
+        },
+        "2025Q4": {
+          "FII": "Neutral",
+          "DII": "Moderate Buying",
+          "net_flow_score": 5
+        },
+        "2026Q1": {
+          "FII": "Moderate Buying",
+          "DII": "Moderate Buying",
+          "net_flow_score": 6
+        },
+        "2026Q2": {
+          "FII": "Moderate Buying",
+          "DII": "Moderate Buying",
+          "net_flow_score": 6
+        }
+      },
+      "prediction": {
+        "2026Q3": {
+          "FII": "Moderate Buying",
+          "DII": "Moderate Buying"
+        },
+        "2026Q4": {
+          "FII": "Strong Buying",
+          "DII": "Moderate Buying"
+        }
+      }
+    },
+
+    "Real_Estate": {
+      "last_4_quarters": {
+        "2025Q3": {
+          "FII": "Moderate Buying",
+          "DII": "Moderate Buying",
+          "net_flow_score": 6
+        },
+        "2025Q4": {
+          "FII": "Strong Buying",
+          "DII": "Moderate Buying",
+          "net_flow_score": 7
+        },
+        "2026Q1": {
+          "FII": "Strong Buying",
+          "DII": "Strong Buying",
+          "net_flow_score": 8
+        },
+        "2026Q2": {
+          "FII": "Moderate Buying",
+          "DII": "Strong Buying",
+          "net_flow_score": 8
+        }
+      },
+      "prediction": {
+        "2026Q3": {
+          "FII": "Moderate Buying",
+          "DII": "Strong Buying"
+        },
+        "2026Q4": {
+          "FII": "Strong Buying",
+          "DII": "Strong Buying"
+        }
+      }
+    }
+  }
+}

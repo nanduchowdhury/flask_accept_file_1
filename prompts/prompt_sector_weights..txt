@@ -1,0 +1,5 @@
+Give me JSON format data for current sector leaders driving NIFTY as follows: 
+    1. Create all sectors as keys.
+    2. For each key or sector - give important 15 stocks, sector-weight, top-contributor.
+    3. For each key or sector - give current-trend, expected-trend-next-5-days, drivers etc.
+    

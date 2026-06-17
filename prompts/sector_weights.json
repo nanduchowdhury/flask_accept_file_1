@@ -1,0 +1,281 @@
+{
+  "Banking_Financial_Services": {
+    "sector_weight": 37.7,
+    "top_contributor": "HDFCBANK",
+    "current_trend": "Bullish",
+    "expected_trend_next_5_days": "Bullish",
+    "confidence": "High",
+    "drivers": [
+      "Strong credit growth",
+      "Expected RBI rate support",
+      "Healthy asset quality",
+      "FII buying in large banks",
+      "Strong treasury gains"
+    ],
+    "stocks": [
+      "HDFCBANK","ICICIBANK","SBIN","AXISBANK","KOTAKBANK",
+      "BAJFINANCE","BAJAJFINSV","PFC","RECLTD","JIOFIN",
+      "SHRIRAMFIN","CHOLAFIN","ICICIPRULI","SBILIFE","HDFCLIFE"
+    ]
+  },
+
+  "Information_Technology": {
+    "sector_weight": 8.8,
+    "top_contributor": "INFY",
+    "current_trend": "Neutral",
+    "expected_trend_next_5_days": "Slightly Bullish",
+    "confidence": "Medium",
+    "drivers": [
+      "US rate-cut expectations",
+      "AI spending cycle",
+      "Dollar stability",
+      "Deal wins",
+      "Margin recovery hopes"
+    ],
+    "stocks": [
+      "INFY","TCS","HCLTECH","WIPRO","TECHM",
+      "LTIM","PERSISTENT","COFORGE","MPHASIS","OFSS",
+      "KPITTECH","TATAELXSI","LTTS","BSOFT","SONATSOFTW"
+    ]
+  },
+
+  "Energy": {
+    "sector_weight": 10.0,
+    "top_contributor": "RELIANCE",
+    "current_trend": "Bullish",
+    "expected_trend_next_5_days": "Bullish",
+    "confidence": "High",
+    "drivers": [
+      "Reliance earnings momentum",
+      "Retail expansion",
+      "Jio subscriber growth",
+      "Stable crude prices",
+      "Refining margins"
+    ],
+    "stocks": [
+      "RELIANCE","ONGC","BPCL","IOC","GAIL",
+      "OIL","HINDPETRO","PETRONET","IGL","ATGL",
+      "GSPL","MGL","CASTROLIND","CHENNPETRO","MRPL"
+    ]
+  },
+
+  "Automobile": {
+    "sector_weight": 7.0,
+    "top_contributor": "M&M",
+    "current_trend": "Bullish",
+    "expected_trend_next_5_days": "Bullish",
+    "confidence": "High",
+    "drivers": [
+      "Strong SUV demand",
+      "Rural recovery",
+      "Monsoon outlook",
+      "Export growth",
+      "EV adoption"
+    ],
+    "stocks": [
+      "M&M","MARUTI","BAJAJ-AUTO","EICHERMOT","TATAMOTORS",
+      "HEROMOTOCO","TVSMOTOR","ASHOKLEY","BALKRISIND","EXIDEIND",
+      "MOTHERSON","BHARATFORG","UNOMINDA","TIINDIA","BOSCHLTD"
+    ]
+  },
+
+  "FMCG": {
+    "sector_weight": 5.9,
+    "top_contributor": "ITC",
+    "current_trend": "Neutral",
+    "expected_trend_next_5_days": "Slightly Bullish",
+    "confidence": "Medium",
+    "drivers": [
+      "Rural consumption",
+      "Input cost moderation",
+      "Monsoon expectations",
+      "Premium product demand",
+      "Defensive buying"
+    ],
+    "stocks": [
+      "ITC","HINDUNILVR","NESTLEIND","VBL","BRITANNIA",
+      "DABUR","GODREJCP","COLPAL","TATACONSUM","MARICO",
+      "UBL","EMAMILTD","RADICO","PGHH","AWL"
+    ]
+  },
+
+  "Healthcare_Pharma": {
+    "sector_weight": 4.4,
+    "top_contributor": "SUNPHARMA",
+    "current_trend": "Bullish",
+    "expected_trend_next_5_days": "Bullish",
+    "confidence": "Medium",
+    "drivers": [
+      "USFDA clearances",
+      "Export demand",
+      "Specialty portfolio growth",
+      "Weak rupee benefits",
+      "Defensive sector rotation"
+    ],
+    "stocks": [
+      "SUNPHARMA","CIPLA","DRREDDY","DIVISLAB","MANKIND",
+      "TORNTPHARM","ZYDUSLIFE","LUPIN","AUROPHARMA","BIOCON",
+      "ALKEM","GLAND","ABBOTINDIA","AJANTPHARM","LAURUSLABS"
+    ]
+  },
+
+  "Telecom": {
+    "sector_weight": 4.6,
+    "top_contributor": "BHARTIARTL",
+    "current_trend": "Bullish",
+    "expected_trend_next_5_days": "Bullish",
+    "confidence": "High",
+    "drivers": [
+      "Tariff hikes",
+      "5G rollout",
+      "ARPU growth",
+      "Subscriber additions",
+      "Strong cash flows"
+    ],
+    "stocks": [
+      "BHARTIARTL","INDUSTOWER","TATACOMM","HFCL","TEJASNET",
+      "RAILTEL","STERLITECH","ITI","GTPL","NELCO",
+      "MOSCHIP","ONMOBILE","HATHWAY","VODAFONEIDEA","ROUTE"
+    ]
+  },
+
+  "Capital_Goods_Engineering": {
+    "sector_weight": 4.4,
+    "top_contributor": "LT",
+    "current_trend": "Bullish",
+    "expected_trend_next_5_days": "Bullish",
+    "confidence": "High",
+    "drivers": [
+      "Government capex",
+      "Infrastructure orders",
+      "Manufacturing expansion",
+      "Defense spending",
+      "Execution visibility"
+    ],
+    "stocks": [
+      "LT","SIEMENS","ABB","CGPOWER","CUMMINSIND",
+      "BHEL","POLYCAB","KEI","APLAPOLLO","KAYNES",
+      "SKFINDIA","AIAENG","THERMAX","ELECON","KSB"
+    ]
+  },
+
+  "Metals_Mining": {
+    "sector_weight": 4.2,
+    "top_contributor": "TATASTEEL",
+    "current_trend": "Neutral",
+    "expected_trend_next_5_days": "Slightly Bullish",
+    "confidence": "Medium",
+    "drivers": [
+      "China stimulus hopes",
+      "Steel price recovery",
+      "Global demand",
+      "Iron ore prices",
+      "Infrastructure spending"
+    ],
+    "stocks": [
+      "TATASTEEL","HINDALCO","JSWSTEEL","VEDL","NMDC",
+      "SAIL","JINDALSTEL","NATIONALUM","HINDZINC","MOIL",
+      "RATNAMANI","WELCORP","JSL","GRAVITA","APLAPOLLO"
+    ]
+  },
+
+  "Power_Utilities": {
+    "sector_weight": 2.8,
+    "top_contributor": "NTPC",
+    "current_trend": "Bullish",
+    "expected_trend_next_5_days": "Bullish",
+    "confidence": "High",
+    "drivers": [
+      "Peak power demand",
+      "Renewable investments",
+      "Grid expansion",
+      "Power deficit concerns",
+      "Transmission growth"
+    ],
+    "stocks": [
+      "NTPC","POWERGRID","ADANIPOWER","TATAPOWER","NHPC",
+      "TORNTPOWER","SJVN","NLCINDIA","CESC","JSWENERGY",
+      "IEX","INOXWIND","SUZLON","WAAREEENER","ACME"
+    ]
+  },
+
+  "Consumer_Durables": {
+    "sector_weight": 2.5,
+    "top_contributor": "TITAN",
+    "current_trend": "Bullish",
+    "expected_trend_next_5_days": "Bullish",
+    "confidence": "Medium",
+    "drivers": [
+      "Premium consumption",
+      "Wedding season demand",
+      "Urban spending",
+      "Electronics demand",
+      "Jewellery demand"
+    ],
+    "stocks": [
+      "TITAN","VOLTAS","HAVELLS","DIXON","WHIRLPOOL",
+      "BLUESTARCO","CROMPTON","AMBER","RAJESHEXPO","TTKPRESTIG",
+      "VGUARD","ORIENTELEC","KAJARIA","CELLO","BOROSIL"
+    ]
+  },
+
+  "Cement_Building_Materials": {
+    "sector_weight": 2.2,
+    "top_contributor": "ULTRACEMCO",
+    "current_trend": "Bullish",
+    "expected_trend_next_5_days": "Bullish",
+    "confidence": "High",
+    "drivers": [
+      "Infrastructure spending",
+      "Housing demand",
+      "Price discipline",
+      "Monsoon stocking",
+      "Capex cycle"
+    ],
+    "stocks": [
+      "ULTRACEMCO","GRASIM","SHREECEM","AMBUJACEM","ACC",
+      "DALBHARAT","JKCEMENT","RAMCOCEM","NUVOCO","BIRLACORPN",
+      "ASTRAL","FINPIPE","SUPREMEIND","PRINCEPIPE","CERA"
+    ]
+  },
+
+  "Chemicals": {
+    "sector_weight": 1.8,
+    "top_contributor": "PIDILITIND",
+    "current_trend": "Neutral",
+    "expected_trend_next_5_days": "Slightly Bullish",
+    "confidence": "Medium",
+    "drivers": [
+      "Export recovery",
+      "China supply normalization",
+      "Specialty chemicals demand",
+      "Lower raw material costs",
+      "Industrial activity"
+    ],
+    "stocks": [
+      "PIDILITIND","SRF","DEEPAKNTR","AARTIIND","UPL",
+      "PIIND","NAVINFLUOR","FINEORG","BALAMINES","VINATIORGA",
+      "TATACHEM","GUJGASLTD","ATUL","CLEAN","ALKYLAMINE"
+    ]
+  },
+
+  "Real_Estate": {
+    "sector_weight": 1.5,
+    "top_contributor": "DLF",
+    "current_trend": "Bullish",
+    "expected_trend_next_5_days": "Bullish",
+    "confidence": "Medium",
+    "drivers": [
+      "Housing demand",
+      "Commercial leasing",
+      "Premium launches",
+      "Lower financing costs",
+      "Urbanization trend"
+    ],
+    "stocks": [
+      "DLF","LODHA","GODREJPROP","OBEROIRLTY","PRESTIGE",
+      "BRIGADE","PHOENIXLTD","SOBHA","SUNTECK","ANANTRAJ",
+      "MAHLIFE","KOLTEPATIL","NCC","AHLUWALIA","ARKADE"
+    ]
+  }
+}

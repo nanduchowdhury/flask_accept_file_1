@@ -7,8 +7,8 @@ class EmailSupport():
 
         self.eManager = eManager
 
-        self.sender_email = "nandu@bluepayload.com"
-        self.receiver_email = "nandu@bluepayload.com"
+        self.sender_email = "contact@bluepayload.com"
+        self.receiver_email = "contact@bluepayload.com"
         self.subject = "scholar-km - report by user"
         self.smtp_server = "smtp.gmail.com"
         self.smtp_port = 465  # For SSL

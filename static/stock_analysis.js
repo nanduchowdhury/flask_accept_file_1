@@ -160,4 +160,25 @@ class StockAnalysisMain {
             this.popoutMgr.showPopout();
         });
     }
+
+    openDiiFiiPage() {
+
+        let sector = "DII_FII";
+        console.log("Opening analysis for:", sector);
+
+        this.getSectorAnalysisInfo(sector, (info) => {
+            const result1 = info || "No analysis data available for this sector.";
+            this.popoutMgr.clear();
+
+            let negativeValuesInRed = true;
+            let listOfKeysToBeShownInTab = ['DII_FII_sector_keys']
+
+            let tabContentDiv = this.createTabContent(result1, 'tabContent active',
+                                        negativeValuesInRed, listOfKeysToBeShownInTab);
+
+            this.popoutMgr.appendItem(tabContentDiv);
+            this.popoutMgr.showPopout();
+        });
+    }
+
 }
