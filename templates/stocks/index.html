@@ -99,6 +99,24 @@
                     <p style="font-size: 0.9rem;">Analysis of DII & FII.</p>
             </a>
 
+            <a href="#" 
+                class="topic-card"
+                onclick="handleCardClick(event, 'global_cues')"
+                style="text-decoration: none; color: inherit; border: 1px solid #ddd; border-radius: 8px; padding: 20px; width: 250px; text-align: center; transition: transform 0.3s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <i class="fas fa-lightbulb" style="font-size: 2rem; color: #161cca; margin-bottom: 10px;"></i>
+                    <h3 style="margin: 10px 0;">Global cues</h3>
+                    <p style="font-size: 0.9rem;">Impact of global cues on sectors.</p>
+            </a>
+
+            <a href="#" 
+                class="topic-card"
+                onclick="handleCardClick(event, 'sector_weights')"
+                style="text-decoration: none; color: inherit; border: 1px solid #ddd; border-radius: 8px; padding: 20px; width: 250px; text-align: center; transition: transform 0.3s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <i class="fas fa-lightbulb" style="font-size: 2rem; color: #161cca; margin-bottom: 10px;"></i>
+                    <h3 style="margin: 10px 0;">Sector weights</h3>
+                    <p style="font-size: 0.9rem;">Major sectors.</p>
+            </a>
+
         </div>
 
 
@@ -158,9 +176,19 @@
             window.stockAnalysisMain = new StockAnalysisMain();
         });
 
-        function handleCardClick(event, sector) {
+        function handleCardClick(event, card_type) {
             event.preventDefault(); // stops link navigation
-            window.stockAnalysisMain.openDiiFiiPage();
+
+            if ( card_type == 'DII_FII' ) {
+                window.stockAnalysisMain.openDiiFiiPage();
+                return;
+            } else if ( card_type == 'global_cues' ) {
+                window.stockAnalysisMain.openGlobalCuesPage();
+                return;
+            } else if ( card_type == 'sector_weights' ) {
+                window.stockAnalysisMain.openSectorWeightsPage();
+                return;
+            }
         }
 
     </script>

@@ -181,4 +181,44 @@ class StockAnalysisMain {
         });
     }
 
+    openGlobalCuesPage() {
+
+        let sector = "global_cues_impact";
+        console.log("Opening analysis for:", sector);
+
+        this.getSectorAnalysisInfo(sector, (info) => {
+            const result1 = info || "No analysis data available for this sector.";
+            this.popoutMgr.clear();
+
+            let negativeValuesInRed = true;
+            let listOfKeysToBeShownInTab = ['sectors']
+
+            let tabContentDiv = this.createTabContent(result1, 'tabContent active',
+                                        negativeValuesInRed, listOfKeysToBeShownInTab);
+
+            this.popoutMgr.appendItem(tabContentDiv);
+            this.popoutMgr.showPopout();
+        });
+    }
+
+    openSectorWeightsPage() {
+
+        let sector = "sector_weights";
+        console.log("Opening analysis for:", sector);
+
+        this.getSectorAnalysisInfo(sector, (info) => {
+            const result1 = info || "No analysis data available for this sector.";
+            this.popoutMgr.clear();
+
+            let negativeValuesInRed = true;
+            let listOfKeysToBeShownInTab = ['sectors']
+
+            let tabContentDiv = this.createTabContent(result1, 'tabContent active',
+                                        negativeValuesInRed, listOfKeysToBeShownInTab);
+
+            this.popoutMgr.appendItem(tabContentDiv);
+            this.popoutMgr.showPopout();
+        });
+    }
+
 }

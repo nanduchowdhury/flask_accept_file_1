@@ -1,5 +1,4 @@
 Give me JSON format data for current NIFTY sector as follows: 
-    1. Create all sectors as keys.
+    1. Keep all sectors under top-level-key 'sectors'.
     2. For each key or sector - give current impact from global trends, dollar-index-impact, oil-prices, asian/european/japanese markets etc.
     3. For each key or sector - give expected impact from global data etc.
-    

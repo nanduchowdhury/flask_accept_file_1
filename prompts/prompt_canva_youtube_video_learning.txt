@@ -1,0 +1,14 @@
+Create a youtube video as follows:
+
+1. video to promote website for quick-and-fast learning.
+2. The website is for learning-on-the-go - about several topics 
+    such as yoga, sports, music, science, arts, philosophy etc.
+3. Use logo-image as thumbnail. Put website in thumbnail too.
+4. Tell viewers to send mail to : contact@bluepayload.com
+5. Tell viewers to visit the website at https://www.bluepayload.com/home/stocks_analysis
+6. Use soft voice and soft music.
+7. Make video duration 50s.
+8. Use red color for showing texts in the video.
+9. Use uploaded screenshot video of demo of the website for quick-and-fast learning.
+10. Use uploaded images of bluepayload.
+

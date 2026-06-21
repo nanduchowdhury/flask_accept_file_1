@@ -1,0 +1,540 @@
+{
+  "sectors": {
+    "Banking_Financial_Services": {
+      "current_global_impact": {
+        "overall_score": 8.8,
+        "global_trend": "Positive",
+        "dollar_index_impact": {
+          "impact": "Mild_Negative",
+          "score": 4,
+          "reason": "Higher DXY can slow FII inflows."
+        },
+        "oil_price_impact": {
+          "impact": "Moderate_Negative",
+          "score": 5,
+          "reason": "Higher crude may increase inflation and delay rate cuts."
+        },
+        "us_market_impact": {
+          "impact": "Positive",
+          "score": 8
+        },
+        "europe_market_impact": {
+          "impact": "Positive",
+          "score": 7
+        },
+        "japan_market_impact": {
+          "impact": "Positive",
+          "score": 7
+        },
+        "china_market_impact": {
+          "impact": "Neutral",
+          "score": 5
+        },
+        "asian_market_impact": {
+          "impact": "Positive",
+          "score": 7
+        }
+      },
+      "expected_impact_next_2_quarters": {
+        "overall_outlook": "Strong_Positive",
+        "expected_score": 9,
+        "key_drivers": [
+          "FII inflows",
+          "Credit growth",
+          "Stable rates",
+          "Economic expansion"
+        ]
+      }
+    },
+
+    "Information_Technology": {
+      "current_global_impact": {
+        "overall_score": 9.2,
+        "global_trend": "Strong_Positive",
+        "dollar_index_impact": {
+          "impact": "Positive",
+          "score": 9,
+          "reason": "Dollar strength supports export revenues."
+        },
+        "oil_price_impact": {
+          "impact": "Neutral",
+          "score": 5
+        },
+        "us_market_impact": {
+          "impact": "Very_Positive",
+          "score": 10
+        },
+        "europe_market_impact": {
+          "impact": "Positive",
+          "score": 8
+        },
+        "japan_market_impact": {
+          "impact": "Moderate_Positive",
+          "score": 7
+        },
+        "china_market_impact": {
+          "impact": "Neutral",
+          "score": 4
+        },
+        "asian_market_impact": {
+          "impact": "Positive",
+          "score": 7
+        }
+      },
+      "expected_impact_next_2_quarters": {
+        "overall_outlook": "Strong_Positive",
+        "expected_score": 9,
+        "key_drivers": [
+          "AI spending",
+          "Cloud demand",
+          "US technology budgets",
+          "Digital transformation"
+        ]
+      }
+    },
+
+    "Capital_Goods_Engineering": {
+      "current_global_impact": {
+        "overall_score": 9.5,
+        "global_trend": "Very_Strong_Positive",
+        "dollar_index_impact": {
+          "impact": "Neutral",
+          "score": 5
+        },
+        "oil_price_impact": {
+          "impact": "Mild_Negative",
+          "score": 4
+        },
+        "us_market_impact": {
+          "impact": "Positive",
+          "score": 8
+        },
+        "europe_market_impact": {
+          "impact": "Positive",
+          "score": 8
+        },
+        "japan_market_impact": {
+          "impact": "Very_Positive",
+          "score": 10
+        },
+        "china_market_impact": {
+          "impact": "Positive",
+          "score": 7
+        },
+        "asian_market_impact": {
+          "impact": "Positive",
+          "score": 8
+        }
+      },
+      "expected_impact_next_2_quarters": {
+        "overall_outlook": "Very_Strong_Positive",
+        "expected_score": 10,
+        "key_drivers": [
+          "Manufacturing shift to India",
+          "Infrastructure capex",
+          "Japan investment",
+          "Defense spending"
+        ]
+      }
+    },
+
+    "Automobile": {
+      "current_global_impact": {
+        "overall_score": 8.5,
+        "global_trend": "Positive",
+        "dollar_index_impact": {
+          "impact": "Neutral",
+          "score": 5
+        },
+        "oil_price_impact": {
+          "impact": "Negative",
+          "score": 4
+        },
+        "us_market_impact": {
+          "impact": "Positive",
+          "score": 7
+        },
+        "europe_market_impact": {
+          "impact": "Positive",
+          "score": 7
+        },
+        "japan_market_impact": {
+          "impact": "Very_Positive",
+          "score": 9
+        },
+        "china_market_impact": {
+          "impact": "Moderate_Positive",
+          "score": 6
+        },
+        "asian_market_impact": {
+          "impact": "Positive",
+          "score": 7
+        }
+      },
+      "expected_impact_next_2_quarters": {
+        "overall_outlook": "Strong_Positive",
+        "expected_score": 9,
+        "key_drivers": [
+          "Rural demand",
+          "Exports",
+          "EV adoption",
+          "Lower financing costs"
+        ]
+      }
+    },
+
+    "Healthcare_Pharma": {
+      "current_global_impact": {
+        "overall_score": 8.2,
+        "global_trend": "Positive",
+        "dollar_index_impact": {
+          "impact": "Positive",
+          "score": 8
+        },
+        "oil_price_impact": {
+          "impact": "Low",
+          "score": 3
+        },
+        "us_market_impact": {
+          "impact": "Positive",
+          "score": 9
+        },
+        "europe_market_impact": {
+          "impact": "Positive",
+          "score": 8
+        },
+        "japan_market_impact": {
+          "impact": "Neutral",
+          "score": 5
+        },
+        "china_market_impact": {
+          "impact": "Neutral",
+          "score": 4
+        },
+        "asian_market_impact": {
+          "impact": "Positive",
+          "score": 6
+        }
+      },
+      "expected_impact_next_2_quarters": {
+        "overall_outlook": "Positive",
+        "expected_score": 8,
+        "key_drivers": [
+          "USFDA approvals",
+          "Export growth",
+          "Specialty drugs",
+          "Healthcare demand"
+        ]
+      }
+    },
+
+    "Power_Utilities": {
+      "current_global_impact": {
+        "overall_score": 8.8,
+        "global_trend": "Positive",
+        "dollar_index_impact": {
+          "impact": "Low",
+          "score": 3
+        },
+        "oil_price_impact": {
+          "impact": "Moderate_Negative",
+          "score": 5
+        },
+        "us_market_impact": {
+          "impact": "Positive",
+          "score": 7
+        },
+        "europe_market_impact": {
+          "impact": "Positive",
+          "score": 7
+        },
+        "japan_market_impact": {
+          "impact": "Positive",
+          "score": 8
+        },
+        "china_market_impact": {
+          "impact": "Positive",
+          "score": 7
+        },
+        "asian_market_impact": {
+          "impact": "Positive",
+          "score": 8
+        }
+      },
+      "expected_impact_next_2_quarters": {
+        "overall_outlook": "Strong_Positive",
+        "expected_score": 9,
+        "key_drivers": [
+          "Electricity demand",
+          "Renewables",
+          "Grid expansion",
+          "Industrial growth"
+        ]
+      }
+    },
+
+    "Telecom": {
+      "current_global_impact": {
+        "overall_score": 8.4,
+        "global_trend": "Positive",
+        "dollar_index_impact": {
+          "impact": "Low",
+          "score": 3
+        },
+        "oil_price_impact": {
+          "impact": "Low",
+          "score": 2
+        },
+        "us_market_impact": {
+          "impact": "Positive",
+          "score": 7
+        },
+        "europe_market_impact": {
+          "impact": "Positive",
+          "score": 6
+        },
+        "japan_market_impact": {
+          "impact": "Positive",
+          "score": 7
+        },
+        "china_market_impact": {
+          "impact": "Neutral",
+          "score": 4
+        },
+        "asian_market_impact": {
+          "impact": "Positive",
+          "score": 7
+        }
+      },
+      "expected_impact_next_2_quarters": {
+        "overall_outlook": "Strong_Positive",
+        "expected_score": 9,
+        "key_drivers": [
+          "5G monetization",
+          "Data consumption",
+          "Enterprise cloud connectivity"
+        ]
+      }
+    },
+
+    "Energy": {
+      "current_global_impact": {
+        "overall_score": 7.5,
+        "global_trend": "Mixed",
+        "dollar_index_impact": {
+          "impact": "Negative",
+          "score": 4
+        },
+        "oil_price_impact": {
+          "impact": "Very_High",
+          "score": 10
+        },
+        "us_market_impact": {
+          "impact": "Neutral",
+          "score": 5
+        },
+        "europe_market_impact": {
+          "impact": "Neutral",
+          "score": 5
+        },
+        "japan_market_impact": {
+          "impact": "Neutral",
+          "score": 5
+        },
+        "china_market_impact": {
+          "impact": "Positive",
+          "score": 7
+        },
+        "asian_market_impact": {
+          "impact": "Positive",
+          "score": 6
+        }
+      },
+      "expected_impact_next_2_quarters": {
+        "overall_outlook": "Moderately_Positive",
+        "expected_score": 7,
+        "key_drivers": [
+          "Crude stability",
+          "Refining margins",
+          "Gas demand"
+        ]
+      }
+    },
+
+    "FMCG": {
+      "current_global_impact": {
+        "overall_score": 6.8,
+        "global_trend": "Neutral",
+        "dollar_index_impact": {
+          "impact": "Negative",
+          "score": 4
+        },
+        "oil_price_impact": {
+          "impact": "Moderate_Negative",
+          "score": 5
+        },
+        "us_market_impact": {
+          "impact": "Low",
+          "score": 3
+        },
+        "europe_market_impact": {
+          "impact": "Low",
+          "score": 3
+        },
+        "japan_market_impact": {
+          "impact": "Low",
+          "score": 3
+        },
+        "china_market_impact": {
+          "impact": "Low",
+          "score": 3
+        },
+        "asian_market_impact": {
+          "impact": "Low",
+          "score": 3
+        }
+      },
+      "expected_impact_next_2_quarters": {
+        "overall_outlook": "Positive",
+        "expected_score": 7,
+        "key_drivers": [
+          "Rural consumption",
+          "Monsoon",
+          "Input-cost moderation"
+        ]
+      }
+    },
+
+    "Metals_Mining": {
+      "current_global_impact": {
+        "overall_score": 7.8,
+        "global_trend": "Cyclical_Positive",
+        "dollar_index_impact": {
+          "impact": "Negative",
+          "score": 4
+        },
+        "oil_price_impact": {
+          "impact": "Negative",
+          "score": 4
+        },
+        "us_market_impact": {
+          "impact": "Positive",
+          "score": 6
+        },
+        "europe_market_impact": {
+          "impact": "Positive",
+          "score": 6
+        },
+        "japan_market_impact": {
+          "impact": "Positive",
+          "score": 7
+        },
+        "china_market_impact": {
+          "impact": "Very_Positive",
+          "score": 10
+        },
+        "asian_market_impact": {
+          "impact": "Positive",
+          "score": 7
+        }
+      },
+      "expected_impact_next_2_quarters": {
+        "overall_outlook": "Positive",
+        "expected_score": 8,
+        "key_drivers": [
+          "China stimulus",
+          "Infrastructure spending",
+          "Commodity cycle"
+        ]
+      }
+    },
+
+    "Chemicals": {
+      "current_global_impact": {
+        "overall_score": 7.2,
+        "global_trend": "Recovering",
+        "dollar_index_impact": {
+          "impact": "Positive",
+          "score": 7
+        },
+        "oil_price_impact": {
+          "impact": "Negative",
+          "score": 4
+        },
+        "us_market_impact": {
+          "impact": "Positive",
+          "score": 6
+        },
+        "europe_market_impact": {
+          "impact": "Positive",
+          "score": 6
+        },
+        "japan_market_impact": {
+          "impact": "Neutral",
+          "score": 5
+        },
+        "china_market_impact": {
+          "impact": "Positive",
+          "score": 7
+        },
+        "asian_market_impact": {
+          "impact": "Positive",
+          "score": 6
+        }
+      },
+      "expected_impact_next_2_quarters": {
+        "overall_outlook": "Positive",
+        "expected_score": 8,
+        "key_drivers": [
+          "China recovery",
+          "Inventory normalization",
+          "Export demand"
+        ]
+      }
+    },
+
+    "Real_Estate": {
+      "current_global_impact": {
+        "overall_score": 8.0,
+        "global_trend": "Positive",
+        "dollar_index_impact": {
+          "impact": "Mild_Negative",
+          "score": 4
+        },
+        "oil_price_impact": {
+          "impact": "Negative",
+          "score": 5
+        },
+        "us_market_impact": {
+          "impact": "Positive",
+          "score": 6
+        },
+        "europe_market_impact": {
+          "impact": "Positive",
+          "score": 6
+        },
+        "japan_market_impact": {
+          "impact": "Positive",
+          "score": 7
+        },
+        "china_market_impact": {
+          "impact": "Neutral",
+          "score": 5
+        },
+        "asian_market_impact": {
+          "impact": "Positive",
+          "score": 6
+        }
+      },
+      "expected_impact_next_2_quarters": {
+        "overall_outlook": "Positive",
+        "expected_score": 8,
+        "key_drivers": [
+          "Lower rates",
+          "Housing demand",
+          "Urbanization"
+        ]
+      }
+    }
+  }
+}
