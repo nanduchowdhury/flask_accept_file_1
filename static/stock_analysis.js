@@ -44,7 +44,9 @@ class StockAnalysisMain {
                     html += this._generateTabbedHtml(key, value, level, negativeValuesInRed, listOfKeysToBeShownInTab);
                     continue;
                 }
-                html += `<div>${tab}<strong style="color: blue;">${key}</strong>: `;
+                let key_temp = this._remove_underscore(key);
+                html += `<div>${tab}<strong style="color: blue;">${key_temp}</strong>: `;
+
                 if (Array.isArray(value)) {
                     html += `<br>` + this._generateTableHtml(value, level, negativeValuesInRed);
                 } else if (typeof value === 'object' && value !== null) {
@@ -64,9 +66,17 @@ class StockAnalysisMain {
         return html;
     }
 
+    _remove_underscore(d) {
+        let d1 = d.replace(/_/g, ' ');
+        return d1;
+    }
+
     _generateTabbedHtml(key, value, level, negativeValuesInRed, listOfKeysToBeShownInTab) {
         const tab = '&nbsp;&nbsp;&nbsp;&nbsp;'.repeat(level);
-        let html = `<div>${tab}<strong style="color: blue;">${key}</strong>: </div>`;
+
+        let key_temp = this._remove_underscore(key);
+        let html = `<div>${tab}<strong style="color: blue;">${key_temp}</strong>: </div>`;
+
         const stockEntries = Object.entries(value);
         const uniqueId = 'tabs_' + Math.random().toString(36).substr(2, 9);
 
@@ -74,6 +84,7 @@ class StockAnalysisMain {
         // Tab buttons
         html += `<div style="display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px;">`;
         stockEntries.forEach(([stockName], index) => {
+            let stockName_temp = this._remove_underscore(stockName);
             const activeStyle = index === 0 ? 'background-color: #007bff; color: white; font-weight: bold;' : 'background-color: #f8f9fa; color: #007bff;';
             html += `<button class="btn-${uniqueId}" 
                         onclick="
@@ -91,7 +102,7 @@ class StockAnalysisMain {
                                 btn.style.fontWeight = 'bold';
                             })(this)"
                         style="padding: 2px 6px; font-size: 10px; cursor: pointer; border: 1px solid #007bff; border-radius: 4px; transition: all 0.2s; flex: 0 0 auto; width: auto; white-space: nowrap; ${activeStyle}">
-                        ${stockName}
+                        ${stockName_temp}
                      </button>`;
         });
         html += `</div>`;
@@ -118,7 +129,8 @@ class StockAnalysisMain {
             if (typeof item === 'object' && item !== null) {
                 html += `<td style="padding: 8px; border-right: 1px solid blue;">`;
                 for (const [subKey, subVal] of Object.entries(item)) {
-                    html += `<strong>${subKey}</strong>: ${subVal} `;
+                    let subKey_temp = this._remove_underscore(subKey);
+                    html += `<strong>${subKey_temp}</strong>: ${subVal} `;
                 }
                 html += `</td>`;
             } else {
@@ -212,6 +224,26 @@ class StockAnalysisMain {
 
             let negativeValuesInRed = true;
             let listOfKeysToBeShownInTab = ['sectors']
+
+            let tabContentDiv = this.createTabContent(result1, 'tabContent active',
+                                        negativeValuesInRed, listOfKeysToBeShownInTab);
+
+            this.popoutMgr.appendItem(tabContentDiv);
+            this.popoutMgr.showPopout();
+        });
+    }
+
+    openIndiaEconomyPage() {
+
+        let sector = "india_economy";
+        console.log("Opening analysis for:", sector);
+
+        this.getSectorAnalysisInfo(sector, (info) => {
+            const result1 = info || "No analysis data available for this sector.";
+            this.popoutMgr.clear();
+
+            let negativeValuesInRed = true;
+            let listOfKeysToBeShownInTab = ['parameters']
 
             let tabContentDiv = this.createTabContent(result1, 'tabContent active',
                                         negativeValuesInRed, listOfKeysToBeShownInTab);

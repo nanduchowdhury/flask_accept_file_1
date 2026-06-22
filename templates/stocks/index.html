@@ -92,6 +92,15 @@
 
             <a href="#" 
                 class="topic-card"
+                onclick="handleCardClick(event, 'india_economy')"
+                style="text-decoration: none; color: inherit; border: 1px solid #ddd; border-radius: 8px; padding: 20px; width: 250px; text-align: center; transition: transform 0.3s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <i class="fas fa-lightbulb" style="font-size: 2rem; color: #161cca; margin-bottom: 10px;"></i>
+                    <h3 style="margin: 10px 0;">India Economy</h3>
+                    <p style="font-size: 0.9rem;">Parameters of India economy.</p>
+            </a>
+
+            <a href="#" 
+                class="topic-card"
                 onclick="handleCardClick(event, 'DII_FII')"
                 style="text-decoration: none; color: inherit; border: 1px solid #ddd; border-radius: 8px; padding: 20px; width: 250px; text-align: center; transition: transform 0.3s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
                     <i class="fas fa-lightbulb" style="font-size: 2rem; color: #161cca; margin-bottom: 10px;"></i>
@@ -187,6 +196,9 @@
                 return;
             } else if ( card_type == 'sector_weights' ) {
                 window.stockAnalysisMain.openSectorWeightsPage();
+                return;
+            } else if ( card_type == 'india_economy' ) {
+                window.stockAnalysisMain.openIndiaEconomyPage();
                 return;
             }
         }

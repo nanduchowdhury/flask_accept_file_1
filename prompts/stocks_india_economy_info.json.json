@@ -1,0 +1,338 @@
+{
+  "metadata": {
+    "generated_date": "2026-06-22",
+    "economy_assessment": "Strong Growth with Moderating Inflation",
+    "economy_score": 8.6,
+    "comparison_basis": "Current Quarter vs Previous Quarter",
+    "delta_scale": {
+      "+3": "Strong Improvement",
+      "+2": "Moderate Improvement",
+      "+1": "Slight Improvement",
+      "0": "Stable",
+      "-1": "Slight Deterioration",
+      "-2": "Moderate Deterioration",
+      "-3": "Significant Deterioration"
+    }
+  },
+
+  "parameters": {
+    "GDP": {
+      "status": "Strong",
+      "trend": "Improving",
+      "outlook_next_qtr": "Positive",
+      "drivers": [
+        "Domestic consumption",
+        "Infrastructure spending",
+        "Manufacturing expansion",
+        "Services exports"
+      ],
+      "change_from_last_qtr": "+1",
+      "change_description": "Growth momentum improved due to stronger capex and consumption."
+    },
+
+    "Inflation": {
+      "status": "Controlled",
+      "trend": "Improving",
+      "outlook_next_qtr": "Positive",
+      "drivers": [
+        "Food inflation moderation",
+        "Supply chain normalization",
+        "Stable commodity prices"
+      ],
+      "change_from_last_qtr": "+2",
+      "change_description": "Inflation softened further, improving consumer purchasing power."
+    },
+
+    "Interest_Rates": {
+      "status": "Growth Supportive",
+      "trend": "Stable",
+      "outlook_next_qtr": "Positive",
+      "drivers": [
+        "Moderating inflation",
+        "RBI policy flexibility",
+        "Economic growth priorities"
+      ],
+      "change_from_last_qtr": "+1",
+      "change_description": "Rate outlook became slightly more supportive for growth sectors."
+    },
+
+    "Fiscal_Position": {
+      "status": "Stable",
+      "trend": "Stable",
+      "outlook_next_qtr": "Positive",
+      "drivers": [
+        "Government capex",
+        "Tax collections",
+        "Fiscal discipline"
+      ],
+      "change_from_last_qtr": "0",
+      "change_description": "Fiscal stance remains largely unchanged."
+    },
+
+    "Current_Account": {
+      "status": "Manageable",
+      "trend": "Improving",
+      "outlook_next_qtr": "Positive",
+      "drivers": [
+        "Services exports",
+        "Remittances",
+        "Stable imports"
+      ],
+      "change_from_last_qtr": "+1",
+      "change_description": "External balances improved marginally."
+    },
+
+    "Rupee_Currency": {
+      "status": "Stable",
+      "trend": "Improving",
+      "outlook_next_qtr": "Stable",
+      "drivers": [
+        "Forex reserves",
+        "FII inflows",
+        "Services exports"
+      ],
+      "change_from_last_qtr": "+1",
+      "change_description": "Currency volatility reduced compared to previous quarter."
+    },
+
+    "Foreign_Investment_FII": {
+      "status": "Improving",
+      "trend": "Bullish",
+      "outlook_next_qtr": "Positive",
+      "drivers": [
+        "India growth premium",
+        "Stable macroeconomy",
+        "Global allocation shifts"
+      ],
+      "change_from_last_qtr": "+2",
+      "change_description": "Foreign participation improved significantly."
+    },
+
+    "Domestic_Investment_DII": {
+      "status": "Strong",
+      "trend": "Bullish",
+      "outlook_next_qtr": "Strong Positive",
+      "drivers": [
+        "SIP inflows",
+        "Retirement funds",
+        "Retail participation"
+      ],
+      "change_from_last_qtr": "+1",
+      "change_description": "Domestic institutional support remains robust."
+    },
+
+    "Urban_Consumption": {
+      "status": "Strong",
+      "trend": "Improving",
+      "outlook_next_qtr": "Positive",
+      "drivers": [
+        "Employment growth",
+        "Premium consumption",
+        "Income growth"
+      ],
+      "change_from_last_qtr": "+1",
+      "change_description": "Urban demand remains healthy."
+    },
+
+    "Rural_Consumption": {
+      "status": "Improving",
+      "trend": "Bullish",
+      "outlook_next_qtr": "Positive",
+      "drivers": [
+        "Monsoon outlook",
+        "Government support",
+        "Agriculture income"
+      ],
+      "change_from_last_qtr": "+2",
+      "change_description": "Rural demand improved materially."
+    },
+
+    "Manufacturing": {
+      "status": "Expanding",
+      "trend": "Strong Bullish",
+      "outlook_next_qtr": "Strong Positive",
+      "drivers": [
+        "China+1 strategy",
+        "PLI schemes",
+        "Electronics manufacturing",
+        "Defense production"
+      ],
+      "change_from_last_qtr": "+2",
+      "change_description": "Manufacturing growth accelerated."
+    },
+
+    "Services_Sector": {
+      "status": "Very Strong",
+      "trend": "Bullish",
+      "outlook_next_qtr": "Positive",
+      "drivers": [
+        "IT exports",
+        "Financial services",
+        "Digital economy"
+      ],
+      "change_from_last_qtr": "+1",
+      "change_description": "Services remain the largest growth contributor."
+    },
+
+    "Goods_Exports": {
+      "status": "Moderate",
+      "trend": "Stable",
+      "outlook_next_qtr": "Neutral",
+      "drivers": [
+        "Global demand",
+        "Trade conditions",
+        "Commodity cycle"
+      ],
+      "change_from_last_qtr": "0",
+      "change_description": "Export growth remains mixed."
+    },
+
+    "Services_Exports": {
+      "status": "Very Strong",
+      "trend": "Bullish",
+      "outlook_next_qtr": "Positive",
+      "drivers": [
+        "Technology spending",
+        "Global outsourcing",
+        "Consulting demand"
+      ],
+      "change_from_last_qtr": "+1",
+      "change_description": "Export services continue to expand."
+    },
+
+    "Banking_System": {
+      "status": "Healthy",
+      "trend": "Improving",
+      "outlook_next_qtr": "Positive",
+      "drivers": [
+        "Credit growth",
+        "Low NPAs",
+        "Strong capitalization"
+      ],
+      "change_from_last_qtr": "+1",
+      "change_description": "Asset quality improved further."
+    },
+
+    "Credit_Growth": {
+      "status": "Strong",
+      "trend": "Bullish",
+      "outlook_next_qtr": "Positive",
+      "drivers": [
+        "Retail lending",
+        "Corporate capex",
+        "Infrastructure financing"
+      ],
+      "change_from_last_qtr": "+1",
+      "change_description": "Loan growth remains healthy."
+    },
+
+    "Real_Estate": {
+      "status": "Bullish",
+      "trend": "Bullish",
+      "outlook_next_qtr": "Positive",
+      "drivers": [
+        "Housing demand",
+        "Urbanization",
+        "Premium housing sales"
+      ],
+      "change_from_last_qtr": "+1",
+      "change_description": "Residential demand remains robust."
+    },
+
+    "Employment": {
+      "status": "Improving",
+      "trend": "Positive",
+      "outlook_next_qtr": "Positive",
+      "drivers": [
+        "Manufacturing hiring",
+        "Infrastructure projects",
+        "Digital economy jobs"
+      ],
+      "change_from_last_qtr": "+1",
+      "change_description": "Employment trends improved moderately."
+    },
+
+    "Infrastructure": {
+      "status": "Very Strong",
+      "trend": "Strong Bullish",
+      "outlook_next_qtr": "Strong Positive",
+      "drivers": [
+        "Roads",
+        "Railways",
+        "Ports",
+        "Power infrastructure"
+      ],
+      "change_from_last_qtr": "+2",
+      "change_description": "Capex execution accelerated significantly."
+    },
+
+    "Energy_Transition": {
+      "status": "Strategic Growth Area",
+      "trend": "Strong Bullish",
+      "outlook_next_qtr": "Strong Positive",
+      "drivers": [
+        "Solar capacity",
+        "Wind projects",
+        "Green hydrogen",
+        "Battery storage"
+      ],
+      "change_from_last_qtr": "+2",
+      "change_description": "Investment momentum increased substantially."
+    },
+
+    "Government_Capex": {
+      "status": "Very Strong",
+      "trend": "Bullish",
+      "outlook_next_qtr": "Positive",
+      "drivers": [
+        "Infrastructure push",
+        "Defense spending",
+        "Manufacturing incentives"
+      ],
+      "change_from_last_qtr": "+2",
+      "change_description": "Government spending execution improved."
+    },
+
+    "Consumer_Confidence": {
+      "status": "Positive",
+      "trend": "Improving",
+      "outlook_next_qtr": "Positive",
+      "drivers": [
+        "Income visibility",
+        "Lower inflation",
+        "Job creation"
+      ],
+      "change_from_last_qtr": "+1",
+      "change_description": "Consumer sentiment strengthened."
+    },
+
+    "Major_Risks": {
+      "status": "Moderate",
+      "trend": "Improving",
+      "outlook_next_qtr": "Manageable",
+      "drivers": [
+        "Crude oil prices",
+        "Geopolitical tensions",
+        "Global slowdown risk",
+        "US dollar strength"
+      ],
+      "change_from_last_qtr": "+1",
+      "change_description": "Risk environment eased slightly but remains important."
+    },
+
+    "Overall_Economy": {
+      "status": "Strong",
+      "trend": "Bullish",
+      "outlook_next_qtr": "Strong Positive",
+      "drivers": [
+        "Consumption",
+        "Investment",
+        "Infrastructure",
+        "Manufacturing",
+        "Services exports"
+      ],
+      "change_from_last_qtr": "+1",
+      "change_description": "Broad-based economic momentum improved across major sectors."
+    }
+  }
+}
