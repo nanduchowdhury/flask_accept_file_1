@@ -306,7 +306,10 @@
 .triple-dot {
     cursor: pointer;
     font-size: 24px;
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
     padding: 2px;
 }
 
@@ -321,6 +324,9 @@
 
 /* Mobile View: Show Horizontal Triple Dots */
 @media (max-width: 768px) {
+    .triple-dot {
+        flex-direction: row;
+    }
     .triple-dot.vertical {
         display: none;
     }
@@ -443,4 +449,3 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-

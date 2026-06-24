@@ -97,8 +97,36 @@ class TripleDot {
         this.menuElement = document.getElementById(menuElementId);
         this.menuItemsMap = menuItemsMap;
 
+        this.initContainer();
         this.createMenu();
         this.attachEventListeners();
+    }
+
+    initContainer() {
+        if (!this.dotElement) return;
+
+        if (!this.dotIcon) {
+            // Create the triple-dot trigger icon (square with three dots)
+            this.dotIcon = document.createElement('div');
+            this.dotIcon.innerHTML = '&#8942;'; // Vertical Ellipsis
+            this.dotIcon.style.width = '30px';
+            this.dotIcon.style.height = '30px';
+            this.dotIcon.style.border = '1px solid #ccc';
+            this.dotIcon.style.display = 'flex';
+            this.dotIcon.style.alignItems = 'center';
+            this.dotIcon.style.justifyContent = 'center';
+            this.dotIcon.style.cursor = 'pointer';
+            this.dotIcon.style.borderRadius = '4px';
+        }
+        
+        this.dotElement.innerHTML = '';
+        this.dotElement.appendChild(this.dotIcon);
+    }
+
+    addIcon(iconElement) {
+        if (this.dotElement) {
+            this.dotElement.appendChild(iconElement);
+        }
     }
 
     updateJsonData(jsonData) {
@@ -136,25 +164,22 @@ class TripleDot {
     }
 
     attachEventListeners() {
-        document.querySelectorAll('.triple-dot').forEach(dot => {
-            dot.addEventListener('click', (event) => {
+        if (this.dotIcon) {
+            this.dotIcon.addEventListener('click', (event) => {
                 event.stopPropagation(); // Prevent unwanted close
 
-                // Get dot position & set menu position dynamically
-                const rect = dot.getBoundingClientRect();
-
-                const menu_left = rect.left + window.scrollX;
-                const menu_top = rect.top + window.scrollY;
-
-                this.menu.style.left = `${menu_left}px`;
-                this.menu.style.top = `${menu_top}px`;
+                const rect = this.dotIcon.getBoundingClientRect();
+                this.menu.style.left = `${rect.left + window.scrollX}px`;
+                this.menu.style.top = `${rect.bottom + window.scrollY}px`;
                 this.menu.style.display = 'block';
             });
-        });
+        }
 
         // Hide menu when clicking elsewhere
         document.addEventListener('click', () => {
-            this.menu.style.display = 'none';
+            if (this.menu) {
+                this.menu.style.display = 'none';
+            }
         });
     }
 
@@ -565,8 +590,32 @@ class ContentRender extends RootRender {
         const iframeRender = new HtmlIframeRender();
         iframeRender.render(this.viewArea_1, htmlContent);
 
+        // Reset container to remove previous thumbnails
+        this.tripleDot.initContainer();
+
         if (this.jsonData.youtube_response.length) {
             this.youtubeMgr.showByUrl(this.jsonData.youtube_response[0]);
+
+            // Populate the triple-dot container with thumbnails for each video
+            this.jsonData.youtube_response.forEach((url) => {
+                const videoId = this.youtubeMgr.getYouTubeVideoId(url);
+                if (videoId) {
+                    const img = document.createElement('img');
+                    img.src = `https://img.youtube.com/vi/${videoId}/default.jpg`;
+                    img.style.width = '35px';
+                    img.style.height = '25px';
+                    img.style.cursor = 'pointer';
+                    img.style.border = '1px solid #ccc';
+                    img.style.borderRadius = '3px';
+                    img.title = url; // Shows the YouTube URL on hover
+
+                    img.addEventListener('click', (event) => {
+                        event.stopPropagation();
+                        this.youtubeMgr.showByUrl(url);
+                    });
+                    this.tripleDot.addIcon(img);
+                }
+            });
         }
     }
 }
