@@ -79,9 +79,18 @@
 
     <main class="home-area-container">
         <h1 class="welcome-heading">
-            <span class="line-2">Simple and minimal approach to several things. Try one of the below cards to find out more.</span><br>
+            <span class="line-2">Long term investing in India markets - research insights.</span><br>
         </h1>
         
+        <div class="research-container" role="search">
+            <input type="text" id="research-input" placeholder="try 'infosys'" list="research-suggestions" spellcheck="true">
+            <datalist id="research-suggestions">
+                <!-- Suggestions will be populated by JavaScript -->
+            </datalist>
+            <button id="ResearchButton">Get stock analysis</button>
+        </div>
+
+
         <!-- MAIN TOPICS -->
         <div class="card-container" style="display: flex; flex-direction: column; align-items: center; gap: 20px; justify-content: center; padding: 20px; flex-wrap: wrap;">
             <a href="/home/stocks_sectorwise_analysis" class="topic-card" style="text-decoration: none; color: inherit; border: 1px solid #ddd; border-radius: 8px; padding: 20px; width: 250px; text-align: center; transition: transform 0.3s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
@@ -183,6 +192,13 @@
             window.basicInitializer = new BasicInitializer(false);
             window.errorManager = new ErrorManager();
             window.stockAnalysisMain = new StockAnalysisMain();
+
+            document.getElementById('ResearchButton').addEventListener('click', () => {
+                const stockName = document.getElementById('research-input').value.trim();
+                if (stockName) {
+                    window.stockAnalysisMain.openStockAnalysisPage(stockName);
+                }
+            });
         });
 
         function handleCardClick(event, card_type) {

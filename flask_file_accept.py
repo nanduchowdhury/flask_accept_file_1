@@ -66,7 +66,7 @@ from headerResponseTask import HeaderResponseTask
 from ContentCreator import ContentCreatorBase, ContentCreatorTask
 
 from JsonSettings import JsonSettings
-from stocks import GenerateSectorSummary
+from stocks import GenerateSectorSummary, StockDataRetriever
 
 from gcs_manager import GCSManager
 
@@ -151,6 +151,7 @@ class ScholarKM(Flask):
 
         self.route('/get_sub_topics', methods=['POST'])(self.get_sub_topics_km)
         self.route('/stock_sector_analysis_info', methods=['POST'])(self.get_stock_sector_analysis_info)
+        self.route('/general_stock_analysis_info', methods=['POST'])(self.get_general_stock_analysis_info)
 
         self.route('/home_or_content_init', methods=['POST'])(self.home_or_content_init)
         self.route('/on_topic_row_selected', methods=['POST'])(self.get_content_and_youtube_for_topic)
@@ -363,6 +364,24 @@ class ScholarKM(Flask):
             return jsonify({"info": info}), 200
         except Exception as e:
             self.error_manager.show_any_message(f"Exception during route stock_sector_analysis_info : {str(e)}")
+            return jsonify({"error": str(e)}), 500
+
+    def get_general_stock_analysis_info(self):
+        try:
+            data = request.json
+            analysis_type = data.get('type')
+            name = data.get('name')
+            
+            if analysis_type == 'stock':
+                retriever = StockDataRetriever()
+                tickers = retriever.getTicker(name)
+                if tickers:
+                    info = retriever.getData(tickers[0])
+                    return jsonify({"info": info}), 200
+                return jsonify({"info": "Stock ticker not found."}), 200
+            return jsonify({"error": "Invalid analysis type"}), 400
+        except Exception as e:
+            self.error_manager.show_any_message(f"Exception during route general_stock_analysis_info : {str(e)}")
             return jsonify({"error": str(e)}), 500
 
     def get_content_and_youtube_for_topic(self):

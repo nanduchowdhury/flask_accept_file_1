@@ -34,6 +34,105 @@ class StockAnalysisMain {
         return tabContentDiv;
     }
 
+    createStockPricePlot(tabContent, className) {
+        let tabContentDiv = document.createElement('div');
+        tabContentDiv.className = className;
+        tabContentDiv.style.padding = '20px';
+        tabContentDiv.style.backgroundColor = '#fff';
+
+        try {
+            let data = JSON.parse(tabContent);
+            
+            // Normalize data: map 'Date' to 'date_time' and 'Close' to 'stock_price' if needed
+            if (Array.isArray(data) && data.length > 0 && data[0].Date && data[0].Close) {
+                data = data.map(item => ({
+                    date_time: item.Date,
+                    stock_price: item.Close
+                }));
+            }
+
+            // Check for valid data for plotting
+            if (!Array.isArray(data) || data.length === 0 || data[0].stock_price === undefined) {
+                tabContentDiv.innerHTML = this._generateHtml(data, 1, true, []);
+                return tabContentDiv;
+            }
+
+            const canvas = document.createElement('canvas');
+            canvas.width = 800;
+            canvas.height = 400;
+            canvas.style.width = '100%';
+            canvas.style.height = 'auto';
+            canvas.style.border = '1px solid #ddd';
+            canvas.style.marginTop = '10px';
+            tabContentDiv.appendChild(canvas);
+
+            const ctx = canvas.getContext('2d');
+            const padding = { top: 50, right: 30, bottom: 80, left: 80 };
+            const chartWidth = canvas.width - padding.left - padding.right;
+            const chartHeight = canvas.height - padding.top - padding.bottom;
+
+            const prices = data.map(d => parseFloat(d.stock_price)).filter(p => !isNaN(p));
+            const dates = data.map(d => d.date_time);
+
+            const minP = Math.min(...prices);
+            const maxP = Math.max(...prices);
+            const minPrice = minP * 0.99;
+            const maxPrice = maxP === minP ? maxP + 1 : maxP * 1.01;
+            const priceRange = maxPrice - minPrice;
+
+            // Chart area background
+            ctx.fillStyle = '#fcfcfc';
+            ctx.fillRect(padding.left, padding.top, chartWidth, chartHeight);
+
+            // Y-axis grid & labels
+            ctx.strokeStyle = '#e0e0e0';
+            ctx.lineWidth = 1;
+            ctx.fillStyle = '#333';
+            ctx.font = 'bold 12px Arial';
+            ctx.textAlign = 'right';
+            const yTicks = 6;
+            for (let i = 0; i < yTicks; i++) {
+                const y = padding.top + chartHeight - (i / (yTicks - 1)) * chartHeight;
+                const price = minPrice + (i / (yTicks - 1)) * priceRange;
+                ctx.beginPath();
+                ctx.moveTo(padding.left, y);
+                ctx.lineTo(padding.left + chartWidth, y);
+                ctx.stroke();
+                ctx.fillText(price.toFixed(2), padding.left - 10, y + 4);
+            }
+
+            // Plot line
+            ctx.beginPath();
+            ctx.strokeStyle = '#28a745';
+            ctx.lineWidth = 3;
+            ctx.lineJoin = 'round';
+            data.forEach((d, i) => {
+                const x = data.length > 1 ? padding.left + (i / (data.length - 1)) * chartWidth : padding.left + chartWidth / 2;
+                const y = padding.top + chartHeight - ((parseFloat(d.stock_price) - minPrice) / priceRange) * chartHeight;
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            });
+            ctx.stroke();
+
+            // X-axis labels (Dates)
+            ctx.fillStyle = '#333';
+            ctx.textAlign = 'left';
+            const xLabelsCount = Math.min(dates.length, 5);
+            for (let i = 0; i < xLabelsCount; i++) {
+                const idx = xLabelsCount > 1 ? Math.floor(i * (dates.length - 1) / (xLabelsCount - 1)) : 0;
+                const x = dates.length > 1 ? padding.left + (idx / (dates.length - 1)) * chartWidth : padding.left + chartWidth / 2;
+                ctx.save();
+                ctx.translate(x, padding.top + chartHeight + 15);
+                ctx.rotate(Math.PI / 6);
+                ctx.fillText(dates[idx] || '', 0, 0);
+                ctx.restore();
+            }
+        } catch (e) {
+            tabContentDiv.innerHTML = "Plot Generation Error: " + e.message;
+        }
+        return tabContentDiv;
+    }
+
     _generateHtml(obj, level = 1, negativeValuesInRed, listOfKeysToBeShownInTab) {
         let html = '';
         const tab = '&nbsp;&nbsp;&nbsp;&nbsp;'.repeat(level);
@@ -253,4 +352,17 @@ class StockAnalysisMain {
         });
     }
 
+    openStockAnalysisPage(stockName) {
+        const data = { type: 'stock', name: stockName };
+        basicInitializer.makeServerRequest('/general_stock_analysis_info', data, (response) => {
+            const result1 = response.info || "No analysis data available.";
+            this.popoutMgr.clear();
+
+            let tabContentDiv = this.createStockPricePlot(result1, 'tabContent active');
+            this.popoutMgr.appendItem(tabContentDiv);
+            this.popoutMgr.showPopout();
+        }, (error) => {
+            errorManager.showError(2044, error);
+        });
+    }
 }
