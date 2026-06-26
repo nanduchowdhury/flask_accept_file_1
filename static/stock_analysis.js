@@ -5,28 +5,37 @@ class StockAnalysisMain {
         this.popoutMgr = new PopoutManager('genericPopoutId');
     }
 
-    computeContinousDeclineData(data, pct) {
+    computeRiseOrDecline(data, target_pct) {
         const segments = [];
         if (!data || data.length < 2) return segments;
 
         let startIdx = 0;
+        const isRiseMode = target_pct > 0;
+        const abs_target_pct = Math.abs(target_pct);
+
         for (let i = 1; i < data.length; i++) {
             const currentPrice = parseFloat(data[i].stock_price);
             const prevPrice = parseFloat(data[i - 1].stock_price);
 
-            if (currentPrice >= prevPrice) {
+            // Trend breaks if direction changes against our mode
+            const trendBroken = isRiseMode ? (currentPrice < prevPrice) : (currentPrice > prevPrice);
+
+            if (trendBroken) {
                 const endIdx = i - 1;
                 if (endIdx > startIdx) {
                     const startPrice = parseFloat(data[startIdx].stock_price);
                     const endPrice = parseFloat(data[endIdx].stock_price);
-                    const totalDecline = ((startPrice - endPrice) / startPrice) * 100;
-                    if (totalDecline > pct) segments.push({ start: startIdx, end: endIdx });
+                    const change = isRiseMode ? ((endPrice - startPrice) / startPrice) * 100 
+                                             : ((startPrice - endPrice) / startPrice) * 100;
+                    if (change >= abs_target_pct) segments.push({ start: startIdx, end: endIdx });
                 }
                 startIdx = i;
             } else if (i === data.length - 1) {
                 const startPrice = parseFloat(data[startIdx].stock_price);
-                const totalDecline = ((startPrice - currentPrice) / startPrice) * 100;
-                if (totalDecline > pct) segments.push({ start: startIdx, end: i });
+                const endPrice = currentPrice;
+                const change = isRiseMode ? ((endPrice - startPrice) / startPrice) * 100 
+                                         : ((startPrice - endPrice) / startPrice) * 100;
+                if (change >= abs_target_pct) segments.push({ start: startIdx, end: i });
             }
         }
         return segments;
@@ -85,8 +94,8 @@ class StockAnalysisMain {
             }
 
             const declineDropdown = document.getElementById("analysis-decline-dropdown");
-            const decline_pct = declineDropdown ? parseFloat(declineDropdown.value) : 2.0;
-            let continousDeclineData = this.computeContinousDeclineData(data, decline_pct);
+            const target_pct = declineDropdown ? parseFloat(declineDropdown.value) : -2.0;
+            let analysisSegments = this.computeRiseOrDecline(data, target_pct);
             
 
             const canvas = document.createElement('canvas');
@@ -134,7 +143,8 @@ class StockAnalysisMain {
             }
 
             // Plot line
-            ctx.lineWidth = 3;
+            const baseLineWidth = 2;
+            ctx.lineWidth = baseLineWidth;
             ctx.lineJoin = 'round';
             for (let i = 1; i < data.length; i++) {
                 const prev = data[i - 1];
@@ -146,12 +156,13 @@ class StockAnalysisMain {
                 const x2 = data.length > 1 ? padding.left + (i / (data.length - 1)) * chartWidth : padding.left + chartWidth / 2;
                 const y2 = padding.top + chartHeight - ((parseFloat(curr.stock_price) - minPrice) / priceRange) * chartHeight;
 
-                const isDecliningPortion = (continousDeclineData || []).some(seg => i > seg.start && i <= seg.end);
+                const isHighlighted = (analysisSegments || []).some(seg => i > seg.start && i <= seg.end);
 
                 ctx.beginPath();
                 ctx.moveTo(x1, y1);
                 ctx.lineTo(x2, y2);
-                ctx.strokeStyle = isDecliningPortion ? 'red' : '#28a745';
+                ctx.lineWidth = isHighlighted ? baseLineWidth + 1 : baseLineWidth;
+                ctx.strokeStyle = isHighlighted ? (target_pct > 0 ? '#28a745' : 'red') : 'black';
                 ctx.stroke();
             }
 
@@ -407,5 +418,30 @@ class StockAnalysisMain {
         }, (error) => {
             errorManager.showError(2044, error);
         });
+    }
+
+    handleTickerSuggestions(inputElement, suggestionsElement, tickers) {
+        const query = inputElement.value.toUpperCase().trim();
+        suggestionsElement.innerHTML = '';
+
+        if (query.length === 0) return;
+
+        // Filter tickers that contain the search query
+        const matches = tickers.filter(ticker => 
+            ticker.toUpperCase().includes(query)
+        );
+
+        if (matches.length > 0) {
+            // Limit suggestions to improve performance (showing top 15)
+            matches.slice(0, 15).forEach(match => {
+                const option = document.createElement('option');
+                option.value = match;
+                suggestionsElement.appendChild(option);
+            });
+        } else {
+            const noMatchOption = document.createElement('option');
+            noMatchOption.value = '--no matches--';
+            suggestionsElement.appendChild(noMatchOption);
+        }
     }
 }

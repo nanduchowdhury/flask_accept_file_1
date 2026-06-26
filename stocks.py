@@ -1,4 +1,6 @@
 import json
+import io
+import csv
 import requests
 import yfinance as yf
 from gcs_manager import GCSManager
@@ -68,3 +70,26 @@ class StockDataRetriever:
             return json.dumps(result)
         except Exception as e:
             return json.dumps({"error": str(e)})
+
+    def getTickerList(self):
+        """
+        Fetches the Nifty 500 ticker list dynamically from the official NSE source.
+        While yfinance itself doesn't provide index components directly, this 
+        ensures the symbols are current and formatted for yfinance (.NS) usage.
+        """
+        url = "https://archives.nseindia.com/content/indices/ind_nifty500list.csv"
+        headers = {'User-Agent': 'Mozilla/5.0'}
+        
+        try:
+            response = requests.get(url, headers=headers)
+            response.raise_for_status()
+            
+            csv_reader = csv.DictReader(io.StringIO(response.text))
+            tickers = [f"{row['Company Name']} - {row['Symbol']}.NS" for row in csv_reader if 'Symbol' in row and 'Company Name' in row]
+            if tickers:
+                return tickers
+        except Exception:
+            # Fallback to curated list if remote fetch fails
+            pass
+
+        return []

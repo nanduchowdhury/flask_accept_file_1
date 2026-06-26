@@ -92,8 +92,10 @@
             <div style="width: 100%; margin-top: 5px; display: flex; align-items: center; gap: 10px; justify-content: center;">
                 <label for="analysis-decline-dropdown" style="font-weight: bold; font-size: 14px; color: #333;">Analysis:</label>
                 <select id="analysis-decline-dropdown" style="padding: 6px; border-radius: 4px; border: 1px solid #ccc; background-color: white; cursor: pointer;">
-                    <option value="2.0">continous decline more than 2pct</option>
-                    <option value="5.0">continous decline more than 5pct</option>
+                    <option value="-2.0">continous decline 2%</option>
+                    <option value="-5.0">continous decline 5%</option>
+                    <option value="2.0">continous rise 2%</option>
+                    <option value="5.0">continous rise 5%</option>
                 </select>
             </div>
 
@@ -186,6 +188,10 @@
 
     <div id="genericPopoutId" class="genericPopout"></div>
 
+    <script>
+        const serverJsonData = {{ json_data | tojson | safe }};
+    </script>
+
     <script defer>
         if (window !== window.top) {
             document.body.style.overflow = "auto";
@@ -222,6 +228,15 @@
                 if (stockName) {
                     window.stockAnalysisMain.openStockAnalysisPage(stockName);
                 }
+            });
+
+            // Ticker Search Suggestion Logic
+            const researchInput = document.getElementById('research-input');
+            const suggestionsList = document.getElementById('research-suggestions');
+            const tickers = serverJsonData.tickers_list || [];
+
+            researchInput.addEventListener('input', () => {
+                window.stockAnalysisMain.handleTickerSuggestions(researchInput, suggestionsList, tickers);
             });
         });
 

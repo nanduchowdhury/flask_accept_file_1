@@ -312,7 +312,13 @@ class ScholarKM(Flask):
 
         self.error_manager.show_page_invoke_message(f"stocks_analysis-km")
 
-        return render_template('stocks/index.html')
+        retriever = StockDataRetriever()
+        tickers_list = retriever.getTickerList()
+        json_data = {
+            "tickers_list": tickers_list
+        }
+
+        return render_template('stocks/index.html', json_data=json_data)
 
     def stocks_sectorwise_analysis_km_index(self):
 
