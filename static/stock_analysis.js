@@ -412,11 +412,40 @@ class StockAnalysisMain {
             const result1 = response.info || "No analysis data available.";
             this.popoutMgr.clear();
 
-            let tabContentDiv = this.createStockPricePlot(result1, 'tabContent active');
-            this.popoutMgr.appendItem(tabContentDiv);
+            const headerJson = this._generatePlotHeaderInfoJson(stockName, period);
+            let headerTab = this.createTabContent(headerJson, 'tabContent active', false, []);
+            headerTab.style.marginLeft = '20px';
+            headerTab.style.marginTop = '15px';
+            this.popoutMgr.appendItem(headerTab);
+
+            let tabContentDiv_1 = this.createStockPricePlot(result1, 'tabContent active');
+            this.popoutMgr.appendItem(tabContentDiv_1);
+
+            const insightsHeader = document.createElement('h3');
+            insightsHeader.innerText = "Stock Insights";
+            insightsHeader.style.marginLeft = '20px';
+            insightsHeader.style.fontFamily = 'Arial';
+            this.popoutMgr.appendItem(insightsHeader);
+
+            let insights_xml = this.getStockPriceInsights(result1);
+            let tabContentDiv_2 = this.createTabContent(insights_xml, 'tabContent active', true, []);
+            this.popoutMgr.appendItem(tabContentDiv_2);
+
+
             this.popoutMgr.showPopout();
         }, (error) => {
             errorManager.showError(2044, error);
+        });
+    }
+
+    _generatePlotHeaderInfoJson(stockName, period) {
+        const declineDropdown = document.getElementById("analysis-decline-dropdown");
+        const analysisTypeText = declineDropdown ? declineDropdown.options[declineDropdown.selectedIndex].text : "N/A";
+
+        return JSON.stringify({
+            "Stock": stockName,
+            "Months": period,
+            "Analysis_type": analysisTypeText
         });
     }
 
@@ -443,5 +472,113 @@ class StockAnalysisMain {
             noMatchOption.value = '--no matches--';
             suggestionsElement.appendChild(noMatchOption);
         }
+    }
+
+    getStockPriceInsights(result1) {
+        let data;
+        try {
+            data = JSON.parse(result1);
+        } catch (e) {
+            return JSON.stringify({ error: "Invalid data format" });
+        }
+
+        if (!Array.isArray(data) || data.length === 0) {
+            return JSON.stringify({ info: "No data available for insights" });
+        }
+
+        // Normalize property names and filter valid entries
+        const items = data.map(d => ({
+            price: parseFloat(d.Close || d.stock_price || 0),
+            date: d.Date || d.date_time || ""
+        })).filter(d => !isNaN(d.price) && d.date !== "");
+
+        if (items.length === 0) return JSON.stringify({ info: "Insufficient data" });
+
+        let max = items[0], min = items[0], total = 0;
+        let upDays = 0, downDays = 0;
+        const weeklyGroups = {};
+
+        items.forEach((item, index) => {
+            if (item.price > max.price) max = item;
+            if (item.price < min.price) min = item;
+            total += item.price;
+
+            if (index > 0) {
+                if (item.price > items[index - 1].price) upDays++;
+                else if (item.price < items[index - 1].price) downDays++;
+            }
+
+            let d = this._parseStockDate(item.date);
+
+            const day = d.getDay(), diff = d.getDate() - day + (day === 0 ? -6 : 1);
+            const monday = new Date(d.setDate(diff)).toISOString().split('T')[0];
+            if (!weeklyGroups[monday]) weeklyGroups[monday] = [];
+            weeklyGroups[monday].push(item.price);
+        });
+
+        const returnPct = ((items[items.length - 1].price - items[0].price) / items[0].price) * 100;
+        const mappedItems = items.map(it => ({ stock_price: it.price }));
+        const countSegments = (pct) => this.computeRiseOrDecline(mappedItems, pct).length;
+
+        const avg_every_week = [];
+        const sortedWeeks = Object.keys(weeklyGroups).sort();
+        
+        for (let i = 0; i < sortedWeeks.length; i++) {
+            const currentWeekPrices = weeklyGroups[sortedWeeks[i]];
+            const lastOfCurrent = currentWeekPrices[currentWeekPrices.length - 1];
+            const prevClose = i === 0 ? currentWeekPrices[0] : weeklyGroups[sortedWeeks[i - 1]].slice(-1)[0];
+            
+            const pct = ((lastOfCurrent - prevClose) / prevClose) * 100;
+
+            // Convert YYYY-MM-DD back to Date object for formatting
+            const [y, m, dayPart] = sortedWeeks[i].split('-').map(Number);
+            const formattedDate = this._formatStockDate(new Date(y, m - 1, dayPart));
+            avg_every_week.push(`${formattedDate}     ${pct.toFixed(2)}%`);
+        }
+
+        const insights = {
+            highest_price: `${max.price.toFixed(2)} on ${max.date}`,
+            lowest_price: `${min.price.toFixed(2)} on ${min.date}`,
+            avg_price: (total / items.length).toFixed(2),
+            return_pct: `${returnPct.toFixed(2)}%`,
+            number_of_up_days: upDays,
+            number_of_down_days: downDays,
+            continuous_fall_counts: [
+                `2%     ${countSegments(-2)}`,
+                `5%     ${countSegments(-5)}`,
+                `7%     ${countSegments(-7)}`,
+                `10%    ${countSegments(-10)}`
+            ],
+            continuous_rise_counts: [
+                `2%     ${countSegments(2)}`,
+                `5%     ${countSegments(5)}`,
+                `7%     ${countSegments(7)}`,
+                `10%    ${countSegments(10)}`
+            ],
+            avg_return_every_week: avg_every_week
+        };
+
+        return JSON.stringify(insights);
+    }
+
+    _parseStockDate(dateStr) {
+        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        // Handle DDMonYY (e.g., 04Jun26)
+        if (dateStr.length === 7 && !isNaN(dateStr[0])) {
+            const dayNum = parseInt(dateStr.substring(0, 2));
+            const monStr = dateStr.substring(2, 5);
+            const yrNum = 2000 + parseInt(dateStr.substring(5, 7));
+            return new Date(yrNum, monthNames.indexOf(monStr), dayNum);
+        }
+        // Fallback to standard JS date parsing
+        return new Date(dateStr);
+    }
+
+    _formatStockDate(dateObj) {
+        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        const dayStr = String(dateObj.getDate()).padStart(2, '0');
+        const monStr = monthNames[dateObj.getMonth()];
+        const yrStr = String(dateObj.getFullYear()).slice(-2);
+        return `${dayStr}${monStr}${yrStr}`;
     }
 }

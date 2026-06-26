@@ -29,7 +29,12 @@ class StockDataRetriever:
         Filters results to include only National Stock Exchange (.NS) 
         and Bombay Stock Exchange (.BO) tickers.
         """
-        url = f"https://query2.finance.yahoo.com/v1/finance/search?q={name}"
+        # Extract the ticker symbol if the name is provided in "Company - SYMBOL" format
+        search_query = name
+        if " - " in name:
+            search_query = name.split(" - ")[-1].strip()
+
+        url = f"https://query2.finance.yahoo.com/v1/finance/search?q={search_query}"
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
         
         try:
@@ -63,7 +68,7 @@ class StockDataRetriever:
 
             # Prepare data for JSON: reset index to get Date, format Date as string
             df = df.reset_index()
-            df['Date'] = df['Date'].dt.strftime('%Y-%m-%d')
+            df['Date'] = df['Date'].dt.strftime('%d%b%y')
             
             # Convert selected columns to list of dictionaries
             result = df[['Date', 'Close']].to_dict(orient='records')
