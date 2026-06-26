@@ -371,12 +371,13 @@ class ScholarKM(Flask):
             data = request.json
             analysis_type = data.get('type')
             name = data.get('name')
+            months = data.get('period', '12') # Default to 12 months if not provided
             
             if analysis_type == 'stock':
                 retriever = StockDataRetriever()
                 tickers = retriever.getTicker(name)
                 if tickers:
-                    info = retriever.getData(tickers[0])
+                    info = retriever.getData(tickers[0], months)
                     return jsonify({"info": info}), 200
                 return jsonify({"info": "Stock ticker not found."}), 200
             return jsonify({"error": "Invalid analysis type"}), 400

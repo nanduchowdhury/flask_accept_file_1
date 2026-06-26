@@ -45,15 +45,16 @@ class StockDataRetriever:
         except Exception:
             return []
 
-    def getData(self, ticker):
+    def getData(self, ticker, months="12"):
         """
-        Retrieves stock price history for the specified ticker for the last 2 years.
+        Retrieves stock price history for the specified ticker for the last N months.
         Returns the data as a JSON string containing date and closing prices.
         """
         try:
             stock = yf.Ticker(ticker)
-            # Fetch history for the last 2 years
-            df = stock.history(period="2y")
+            # Fetch history for the specified period (e.g., "12mo")
+            period_str = f"{months}mo"
+            df = stock.history(period=period_str)
             
             if df.empty:
                 return json.dumps({"error": "No data found for the ticker"})

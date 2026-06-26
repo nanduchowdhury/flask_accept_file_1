@@ -5,6 +5,33 @@ class StockAnalysisMain {
         this.popoutMgr = new PopoutManager('genericPopoutId');
     }
 
+    computeContinousDeclineData(data, pct) {
+        const segments = [];
+        if (!data || data.length < 2) return segments;
+
+        let startIdx = 0;
+        for (let i = 1; i < data.length; i++) {
+            const currentPrice = parseFloat(data[i].stock_price);
+            const prevPrice = parseFloat(data[i - 1].stock_price);
+
+            if (currentPrice >= prevPrice) {
+                const endIdx = i - 1;
+                if (endIdx > startIdx) {
+                    const startPrice = parseFloat(data[startIdx].stock_price);
+                    const endPrice = parseFloat(data[endIdx].stock_price);
+                    const totalDecline = ((startPrice - endPrice) / startPrice) * 100;
+                    if (totalDecline > pct) segments.push({ start: startIdx, end: endIdx });
+                }
+                startIdx = i;
+            } else if (i === data.length - 1) {
+                const startPrice = parseFloat(data[startIdx].stock_price);
+                const totalDecline = ((startPrice - currentPrice) / startPrice) * 100;
+                if (totalDecline > pct) segments.push({ start: startIdx, end: i });
+            }
+        }
+        return segments;
+    }
+
     hasNegativeValue(item) {
         const checkNegative = (val) => {
             if (typeof val === 'number' && val < 0) return true;
@@ -57,6 +84,11 @@ class StockAnalysisMain {
                 return tabContentDiv;
             }
 
+            const declineDropdown = document.getElementById("analysis-decline-dropdown");
+            const decline_pct = declineDropdown ? parseFloat(declineDropdown.value) : 2.0;
+            let continousDeclineData = this.computeContinousDeclineData(data, decline_pct);
+            
+
             const canvas = document.createElement('canvas');
             canvas.width = 800;
             canvas.height = 400;
@@ -102,17 +134,26 @@ class StockAnalysisMain {
             }
 
             // Plot line
-            ctx.beginPath();
-            ctx.strokeStyle = '#28a745';
             ctx.lineWidth = 3;
             ctx.lineJoin = 'round';
-            data.forEach((d, i) => {
-                const x = data.length > 1 ? padding.left + (i / (data.length - 1)) * chartWidth : padding.left + chartWidth / 2;
-                const y = padding.top + chartHeight - ((parseFloat(d.stock_price) - minPrice) / priceRange) * chartHeight;
-                if (i === 0) ctx.moveTo(x, y);
-                else ctx.lineTo(x, y);
-            });
-            ctx.stroke();
+            for (let i = 1; i < data.length; i++) {
+                const prev = data[i - 1];
+                const curr = data[i];
+
+                const x1 = data.length > 1 ? padding.left + ((i - 1) / (data.length - 1)) * chartWidth : padding.left + chartWidth / 2;
+                const y1 = padding.top + chartHeight - ((parseFloat(prev.stock_price) - minPrice) / priceRange) * chartHeight;
+
+                const x2 = data.length > 1 ? padding.left + (i / (data.length - 1)) * chartWidth : padding.left + chartWidth / 2;
+                const y2 = padding.top + chartHeight - ((parseFloat(curr.stock_price) - minPrice) / priceRange) * chartHeight;
+
+                const isDecliningPortion = (continousDeclineData || []).some(seg => i > seg.start && i <= seg.end);
+
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.strokeStyle = isDecliningPortion ? 'red' : '#28a745';
+                ctx.stroke();
+            }
 
             // X-axis labels (Dates)
             ctx.fillStyle = '#333';
@@ -353,7 +394,9 @@ class StockAnalysisMain {
     }
 
     openStockAnalysisPage(stockName) {
-        const data = { type: 'stock', name: stockName };
+        const monthsDropdown = document.getElementById("analysis-months-dropdown");
+        const period = monthsDropdown ? monthsDropdown.value : "12";
+        const data = { type: 'stock', name: stockName, period: period };
         basicInitializer.makeServerRequest('/general_stock_analysis_info', data, (response) => {
             const result1 = response.info || "No analysis data available.";
             this.popoutMgr.clear();

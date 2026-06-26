@@ -50,6 +50,48 @@
 }
 
 
+/* Grid layout for topic cards */
+.card-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.topic-card {
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    width: 250px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.topic-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+}
+
+.topic-card i {
+    font-size: 2rem;
+    color: #161cca;
+    margin-bottom: 10px;
+}
+
+.topic-card h3 {
+    margin: 10px 0;
+}
+
+.topic-card p {
+    font-size: 0.9rem;
+}
+
 
 
 
