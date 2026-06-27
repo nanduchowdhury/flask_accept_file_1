@@ -248,8 +248,28 @@
     font-weight: bold;
     border: 1px solid #ccc;
     border-radius: 5px;
-    width: 220px;
+    width: 100%;
     color: rgb(57, 54, 54);
+    padding-right: 40px; /* Space for the clear button and datalist arrow */
+    box-sizing: border-box;
+}
+
+.search-wrapper {
+    position: relative;
+    width: 220px;
+    display: flex;
+    align-items: center;
+}
+
+#clear-research-input {
+    position: absolute;
+    right: 22px; /* Positioned to the left of the datalist arrow */
+    cursor: pointer;
+    color: #999;
+    font-weight: bold;
+    font-size: 18px;
+    display: none; /* Hidden by default */
+    user-select: none;
 }
 
 #research-input::placeholder {

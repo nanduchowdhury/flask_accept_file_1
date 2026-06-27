@@ -85,7 +85,10 @@
             
         </h1> <!-- SEO Optimized Heading -->
         <div class="research-container" role="search">
-            <input type="text" id="research-input" placeholder="try 'vietnam vacations'" list="research-suggestions" spellcheck="true">
+            <div class="search-wrapper">
+                <input type="text" id="research-input" placeholder="try 'vietnam vacations'" list="research-suggestions" spellcheck="true">
+                <span id="clear-research-input" title="Clear search">&times;</span>
+            </div>
             <datalist id="research-suggestions">
                 <!-- Suggestions will be populated by JavaScript -->
             </datalist>
@@ -132,6 +135,20 @@
             const render = new HomeRender();
             render.renderHomeArea_1();
             render.renderHomeArea_2();
+
+            // Clear button logic for research input
+            const researchInput = document.getElementById('research-input');
+            const clearBtn = document.getElementById('clear-research-input');
+
+            researchInput.addEventListener('input', () => {
+                clearBtn.style.display = researchInput.value ? 'block' : 'none';
+            });
+
+            clearBtn.addEventListener('click', () => {
+                researchInput.value = '';
+                clearBtn.style.display = 'none';
+                researchInput.focus();
+            });
 
             // Load Analytics After Content Loads
             setTimeout(() => {

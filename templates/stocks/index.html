@@ -83,7 +83,10 @@
         </h1>
         
         <div class="research-container" role="search" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
-            <input type="text" id="research-input" placeholder="try 'infosys'" list="research-suggestions" spellcheck="true">
+            <div class="search-wrapper">
+                <input type="text" id="research-input" placeholder="try 'infosys'" list="research-suggestions" spellcheck="true">
+                <span id="clear-research-input" title="Clear search">&times;</span>
+            </div>
             <datalist id="research-suggestions">
                 <!-- Suggestions will be populated by JavaScript -->
             </datalist>
@@ -233,10 +236,19 @@
             // Ticker Search Suggestion Logic
             const researchInput = document.getElementById('research-input');
             const suggestionsList = document.getElementById('research-suggestions');
+            const clearBtn = document.getElementById('clear-research-input');
             const tickers = serverJsonData.tickers_list || [];
 
             researchInput.addEventListener('input', () => {
                 window.stockAnalysisMain.handleTickerSuggestions(researchInput, suggestionsList, tickers);
+                // Show/hide clear button based on input content
+                clearBtn.style.display = researchInput.value ? 'block' : 'none';
+            });
+
+            clearBtn.addEventListener('click', () => {
+                researchInput.value = '';
+                clearBtn.style.display = 'none';
+                researchInput.focus();
             });
         });
 
