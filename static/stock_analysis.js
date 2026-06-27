@@ -5,6 +5,32 @@ class StockAnalysisMain {
         this.popoutMgr = new PopoutManager('genericPopoutId');
     }
 
+    initAnalysisDescription() {
+        const dropdown = document.getElementById('analysis-type-dropdown');
+        if (dropdown) {
+            dropdown.addEventListener('change', () => this.updateAnalysisDescription());
+            // Synchronize the initial description with the dropdown's current value
+            this.updateAnalysisDescription();
+        }
+    }
+
+    updateAnalysisDescription() {
+        const dropdown = document.getElementById('analysis-type-dropdown');
+        const descriptionArea = document.getElementById('analysis-description');
+        if (!dropdown || !descriptionArea) return;
+
+        const descriptions = {
+            "-2.0": "Identifies periods where the stock price has fallen by at least 2% without any intermediate rise.",
+            "-5.0": "Identifies periods where the stock price has fallen by at least 5% without any intermediate rise.",
+            "2.0": "Identifies periods where the stock price has risen by at least 2% without any intermediate fall.",
+            "5.0": "Identifies periods where the stock price has risen by at least 5% without any intermediate fall.",
+            "drawdown_5": "Shows how much the stock has fallen from its peak, highlighting drops of 5% or more.",
+            "recovery": "Analyzes how the stock has bounced back from its lowest point in the selected period."
+        };
+
+        descriptionArea.textContent = descriptions[dropdown.value] || "";
+    }
+
     computeRiseOrDecline(data, target_pct) {
         const segments = [];
         if (!data || data.length < 2) return segments;
@@ -54,6 +80,176 @@ class StockAnalysisMain {
         return checkNegative(item);
     }
 
+    computeDrawdownSegments(data, threshold_pct) {
+        const segments = [];
+        if (!data || data.length < 2) return segments;
+
+        let runningHigh = parseFloat(data[0].stock_price);
+        let currentStart = 0;
+        let lastColor = null;
+        
+        // Part boundaries
+        const GREEN_LIMIT = -2.0; 
+        const RED_LIMIT = -Math.abs(threshold_pct);
+
+        for (let i = 0; i < data.length; i++) {
+            const price = parseFloat(data[i].stock_price);
+            if (price > runningHigh) runningHigh = price;
+
+            const drawdownPct = ((price - runningHigh) / runningHigh) * 100;
+            
+            let currentColor = null; // Middle part (uncolored)
+            if (drawdownPct >= GREEN_LIMIT) {
+                currentColor = '#28a745'; // 1st Part: Green
+            } else if (drawdownPct <= RED_LIMIT) {
+                currentColor = 'red';     // 3rd Part: Red
+            }
+
+            if (i === 0) {
+                lastColor = currentColor;
+                continue;
+            }
+
+            if (currentColor !== lastColor) {
+                if (lastColor) {
+                    segments.push({ start: currentStart, end: i, color: lastColor });
+                }
+                currentStart = i - 1; // Connect segments
+                lastColor = currentColor;
+            }
+        }
+
+        if (lastColor) {
+            segments.push({ start: currentStart, end: data.length - 1, color: lastColor });
+        }
+        return segments;
+    }
+
+    computeRecoverySegments(data) {
+        const segments = [];
+        if (!data || data.length < 2) return { 
+            segments, 
+            redCutoff: "N/A", 
+            greenCutoff: "N/A", 
+            recoveryRatio: "N/A", 
+            recoveryDuration: "N/A" 
+        };
+
+        // Find Global Low
+        let minPrice = Infinity;
+        let minIdx = -1;
+        for (let i = 0; i < data.length; i++) {
+            const p = parseFloat(data[i].stock_price);
+            if (p < minPrice) {
+                minPrice = p;
+                minIdx = i;
+            }
+        }
+
+        if (minIdx === -1 || minIdx === data.length - 1) return { 
+            segments, 
+            redCutoff: "N/A", 
+            greenCutoff: "N/A", 
+            recoveryRatio: "0%", 
+            recoveryDuration: "0 points" 
+        };
+
+        const getPct = (idx) => (((parseFloat(data[idx].stock_price) - minPrice) / minPrice) * 100).toFixed(2) + "%";
+        
+        const countAfterLow = data.length - 1 - minIdx;
+        // Dynamic 'few' count based on available recovery window
+        const few = Math.max(1, Math.min(2, Math.floor(countAfterLow / 2))); 
+
+        const redEnd = minIdx + few;
+        segments.push({ start: minIdx, end: redEnd, color: 'red' });
+
+        // Ensure green zone is at least one index after red zone to provide distinct cutoffs
+        let greenStart = Math.max(redEnd + 1, data.length - 1 - (few - 1));
+        
+        // If greenStart is at the very end, it won't form a segment (needs at least 2 points)
+        // We try to pull it back by one if it doesn't collide with the red zone
+        if (greenStart >= data.length - 1 && (data.length - 2) > redEnd) {
+            greenStart = data.length - 2;
+        }
+
+        let greenCutoffText = "N/A";
+        if (greenStart < data.length - 1) {
+            segments.push({ start: greenStart, end: data.length - 1, color: '#28a745' });
+            greenCutoffText = getPct(greenStart);
+        }
+
+        return {
+            segments,
+            redCutoff: getPct(redEnd),
+            greenCutoff: greenCutoffText,
+            recoveryRatio: getPct(data.length - 1),
+            recoveryDuration: countAfterLow + " points"
+        };
+    }
+
+    computeAnalysisSegments(data) {
+        if (Array.isArray(data) && data.length > 0 && data[0].Date && data[0].Close) {
+            data = data.map(item => ({
+                date_time: item.Date,
+                stock_price: item.Close
+            }));
+        }
+
+        const dropdown = document.getElementById("analysis-type-dropdown");
+        const selection = dropdown ? dropdown.value : "-2.0";
+
+        let segments = [];
+        let info = {};
+
+        if (selection === "recovery") {
+            const result = this.computeRecoverySegments(data);
+            segments = result.segments;
+            info = {
+                "Analysis_Type": "Recovery from Low Analysis",
+                "Red_Zone_Cutoff": result.redCutoff,
+                "Green_Zone_Cutoff": result.greenCutoff,
+                "Recovery_Ratio": result.recoveryRatio,
+                "Recovery_Duration": result.recoveryDuration,
+                "Note": "Red marks initial recovery, Green marks high recovery from global low"
+            };
+        } else if (selection.startsWith("recovery")) {
+            const parts = selection.split('_');
+            const green_limit = parseFloat(parts[1]) || 10.0;
+            const red_limit = parseFloat(parts[2]) || 2.0;
+            // Fallback for legacy threshold-based calls if needed
+            const result = this.computeRecoverySegments(data); 
+            segments = result.segments;
+            info = { 
+                "Analysis_Type": "Recovery from Low", 
+                "Red_Zone_Cutoff": result.redCutoff,
+                "Green_Zone_Cutoff": result.greenCutoff,
+                "Recovery_Ratio": result.recoveryRatio,
+                "Recovery_Duration": result.recoveryDuration,
+                "Note": "Threshold parameters ignored in new logic" 
+            };
+        } else if (selection.startsWith("drawdown")) {
+            const threshold = parseFloat(selection.split('_')[1]) || 5.0;
+            segments = this.computeDrawdownSegments(data, threshold);
+            info = {
+                "Analysis_Type": "3-Part Drawdown Distribution",
+                "Green_Zone": "Drawdown >= -2.0% (Near Highs)",
+                "Middle_Part": `Drawdown between -2.0% and -${threshold}% (Ignored)`,
+                "Red_Zone": `Drawdown <= -${threshold}% (Correction)`,
+                "Segments_Found": segments.length
+            };
+        } else {
+            const target_pct = parseFloat(selection);
+            const rawSegments = Array.isArray(data) ? this.computeRiseOrDecline(data, target_pct) : [];
+            const segmentColor = target_pct > 0 ? '#28a745' : 'red';
+            segments = rawSegments.map(seg => ({ ...seg, color: segmentColor }));
+            info = {
+                "Analysis_Segments_Found": segments.length,
+                "Target_Threshold": target_pct + "%"
+            };
+        }
+        return { segments, infoJson: JSON.stringify(info), data };
+    }
+
     createTabContent(tabContent, className, negativeValuesInRed, listOfKeysToBeShownInTab) {
         let tabContentDiv = document.createElement('div');
         tabContentDiv.className = className;
@@ -70,33 +266,18 @@ class StockAnalysisMain {
         return tabContentDiv;
     }
 
-    createStockPricePlot(tabContent, className) {
+    createStockPricePlot(data, className, analysisSegments) {
         let tabContentDiv = document.createElement('div');
         tabContentDiv.className = className;
         tabContentDiv.style.padding = '20px';
         tabContentDiv.style.backgroundColor = '#fff';
 
         try {
-            let data = JSON.parse(tabContent);
-            
-            // Normalize data: map 'Date' to 'date_time' and 'Close' to 'stock_price' if needed
-            if (Array.isArray(data) && data.length > 0 && data[0].Date && data[0].Close) {
-                data = data.map(item => ({
-                    date_time: item.Date,
-                    stock_price: item.Close
-                }));
-            }
-
             // Check for valid data for plotting
             if (!Array.isArray(data) || data.length === 0 || data[0].stock_price === undefined) {
                 tabContentDiv.innerHTML = this._generateHtml(data, 1, true, []);
                 return tabContentDiv;
             }
-
-            const declineDropdown = document.getElementById("analysis-decline-dropdown");
-            const target_pct = declineDropdown ? parseFloat(declineDropdown.value) : -2.0;
-            let analysisSegments = this.computeRiseOrDecline(data, target_pct);
-            
 
             const canvas = document.createElement('canvas');
             canvas.width = 800;
@@ -156,13 +337,13 @@ class StockAnalysisMain {
                 const x2 = data.length > 1 ? padding.left + (i / (data.length - 1)) * chartWidth : padding.left + chartWidth / 2;
                 const y2 = padding.top + chartHeight - ((parseFloat(curr.stock_price) - minPrice) / priceRange) * chartHeight;
 
-                const isHighlighted = (analysisSegments || []).some(seg => i > seg.start && i <= seg.end);
+                const segmentMatch = (analysisSegments || []).find(seg => i > seg.start && i <= seg.end);
 
                 ctx.beginPath();
                 ctx.moveTo(x1, y1);
                 ctx.lineTo(x2, y2);
-                ctx.lineWidth = isHighlighted ? baseLineWidth + 1 : baseLineWidth;
-                ctx.strokeStyle = isHighlighted ? (target_pct > 0 ? '#28a745' : 'red') : 'black';
+                ctx.lineWidth = segmentMatch ? baseLineWidth + 1 : baseLineWidth;
+                ctx.strokeStyle = segmentMatch ? segmentMatch.color : 'black';
                 ctx.stroke();
             }
 
@@ -410,6 +591,13 @@ class StockAnalysisMain {
         const data = { type: 'stock', name: stockName, period: period };
         basicInitializer.makeServerRequest('/general_stock_analysis_info', data, (response) => {
             const result1 = response.info || "No analysis data available.";
+            let priceData;
+            try {
+                priceData = JSON.parse(result1);
+            } catch (e) {
+                priceData = result1;
+            }
+
             this.popoutMgr.clear();
 
             const headerJson = this._generatePlotHeaderInfoJson(stockName, period);
@@ -418,7 +606,13 @@ class StockAnalysisMain {
             headerTab.style.marginTop = '15px';
             this.popoutMgr.appendItem(headerTab);
 
-            let tabContentDiv_1 = this.createStockPricePlot(result1, 'tabContent active');
+            const analysisResult = this.computeAnalysisSegments(priceData);
+
+            let analysisInfoTab = this.createTabContent(analysisResult.infoJson, 'tabContent active', false, []);
+            analysisInfoTab.style.marginLeft = '20px';
+            this.popoutMgr.appendItem(analysisInfoTab);
+
+            let tabContentDiv_1 = this.createStockPricePlot(analysisResult.data, 'tabContent active', analysisResult.segments);
             this.popoutMgr.appendItem(tabContentDiv_1);
 
             const insightsHeader = document.createElement('h3');
@@ -439,8 +633,8 @@ class StockAnalysisMain {
     }
 
     _generatePlotHeaderInfoJson(stockName, period) {
-        const declineDropdown = document.getElementById("analysis-decline-dropdown");
-        const analysisTypeText = declineDropdown ? declineDropdown.options[declineDropdown.selectedIndex].text : "N/A";
+        const analysisTypeDropdown = document.getElementById("analysis-type-dropdown");
+        const analysisTypeText = analysisTypeDropdown ? analysisTypeDropdown.options[analysisTypeDropdown.selectedIndex].text : "N/A";
 
         return JSON.stringify({
             "Stock": stockName,
@@ -536,6 +730,13 @@ class StockAnalysisMain {
             avg_every_week.push(`${formattedDate}     ${pct.toFixed(2)}%`);
         }
 
+        const currentPrice = items[items.length - 1].price;
+        const getDMA = (p) => {
+            if (items.length < p) return "N/A";
+            const avg = items.slice(-p).reduce((sum, it) => sum + it.price, 0) / p;
+            return (((currentPrice - avg) / avg) * 100).toFixed(2) + "%";
+        };
+
         const insights = {
             highest_price: `${max.price.toFixed(2)} on ${max.date}`,
             lowest_price: `${min.price.toFixed(2)} on ${min.date}`,
@@ -543,6 +744,10 @@ class StockAnalysisMain {
             return_pct: `${returnPct.toFixed(2)}%`,
             number_of_up_days: upDays,
             number_of_down_days: downDays,
+            distance_from_20dma: getDMA(20),
+            distance_from_50dma: getDMA(50),
+            distance_from_200dma: getDMA(200),
+            
             continuous_fall_counts: [
                 `2%     ${countSegments(-2)}`,
                 `5%     ${countSegments(-5)}`,

@@ -93,13 +93,19 @@
             <button id="ResearchButton">Get stock analysis</button>
 
             <div style="width: 100%; margin-top: 5px; display: flex; align-items: center; gap: 10px; justify-content: center;">
-                <label for="analysis-decline-dropdown" style="font-weight: bold; font-size: 14px; color: #333;">Analysis:</label>
-                <select id="analysis-decline-dropdown" style="padding: 6px; border-radius: 4px; border: 1px solid #ccc; background-color: white; cursor: pointer;">
+                <label for="analysis-type-dropdown" style="font-weight: bold; font-size: 14px; color: #333;">Analysis:</label>
+                <select id="analysis-type-dropdown" style="padding: 6px; border-radius: 4px; border: 1px solid #ccc; background-color: white; cursor: pointer;">
                     <option value="-2.0">continous decline 2%</option>
                     <option value="-5.0">continous decline 5%</option>
                     <option value="2.0">continous rise 2%</option>
                     <option value="5.0">continous rise 5%</option>
+                    <option value="drawdown_5">drawdown 5% from high</option>
+                    <option value="recovery">recovery from low</option>
                 </select>
+            </div>
+
+            <div id="analysis-description" style="width: 100%; text-align: center; font-size: 11px; color: #888; margin-top: 2px;">
+                Identifies periods where the stock price has fallen by at least 2% without any intermediate rise.
             </div>
 
             <div style="width: 100%; margin-top: 5px; display: flex; align-items: center; gap: 10px; justify-content: center;">
@@ -225,6 +231,7 @@
             window.basicInitializer = new BasicInitializer(false);
             window.errorManager = new ErrorManager();
             window.stockAnalysisMain = new StockAnalysisMain();
+            window.stockAnalysisMain.initAnalysisDescription();
 
             document.getElementById('ResearchButton').addEventListener('click', () => {
                 const stockName = document.getElementById('research-input').value.trim();
