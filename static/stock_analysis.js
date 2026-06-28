@@ -3,6 +3,8 @@
 class StockAnalysisMain {
     constructor() {
         this.popoutMgr = new PopoutManager('genericPopoutId');
+
+        this.gaTracker = new GoogleAnalytics();
     }
 
     initAnalysisDescription() {
@@ -475,6 +477,7 @@ class StockAnalysisMain {
     }
 
     getSectorAnalysisInfo(sector, callback) {
+
         const data = { sector: sector };
         basicInitializer.makeServerRequest('/stock_sector_analysis_info', data, (response) => {
             callback(response.info);
@@ -485,6 +488,8 @@ class StockAnalysisMain {
 
     openSectorPage(sector) {
         console.log("Opening sector analysis for:", sector);
+
+        this.gaTracker.trackPageView(`sector-${sector}-page`);
 
         this.getSectorAnalysisInfo(sector, (info) => {
             const result1 = info || "No analysis data available for this sector.";
@@ -507,6 +512,8 @@ class StockAnalysisMain {
 
     openDiiFiiPage() {
 
+        this.gaTracker.trackPageView(`DII-FII-page`);
+
         let sector = "DII_FII";
         console.log("Opening analysis for:", sector);
 
@@ -526,6 +533,8 @@ class StockAnalysisMain {
     }
 
     openGlobalCuesPage() {
+
+        this.gaTracker.trackPageView(`global-cues-page`);
 
         let sector = "global_cues_impact";
         console.log("Opening analysis for:", sector);
@@ -547,6 +556,8 @@ class StockAnalysisMain {
 
     openSectorWeightsPage() {
 
+        this.gaTracker.trackPageView(`sector-weights-page`);
+
         let sector = "sector_weights";
         console.log("Opening analysis for:", sector);
 
@@ -567,6 +578,8 @@ class StockAnalysisMain {
 
     openIndiaEconomyPage() {
 
+        this.gaTracker.trackPageView(`indian-economy-page`);
+
         let sector = "india_economy";
         console.log("Opening analysis for:", sector);
 
@@ -586,6 +599,9 @@ class StockAnalysisMain {
     }
 
     openStockAnalysisPage(stockName) {
+
+        this.gaTracker.trackPageView(`sector-price-analysis-page`);
+
         const monthsDropdown = document.getElementById("analysis-months-dropdown");
         const period = monthsDropdown ? monthsDropdown.value : "12";
         const data = { type: 'stock', name: stockName, period: period };

@@ -47,7 +47,7 @@ class HomeRender extends RootRender {
         super();
 
         const gaTracker = new GoogleAnalytics();
-        gaTracker.trackPageView();
+        gaTracker.trackPageView("learning-main");
 
         const menuObj = new TripleDashMenuCreator("TripleDashMenuContainer");      
 

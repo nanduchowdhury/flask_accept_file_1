@@ -145,6 +145,12 @@
                 document.body.appendChild(scriptClarity);
             }, 2000);
         });
+
+        window.addEventListener('load', () => {
+
+            const gaTracker = new GoogleAnalytics();
+            gaTracker.trackPageView("bluepayload-main");
+        });
     </script>
 
     <!-- Defer JS -->
