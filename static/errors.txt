@@ -146,5 +146,4 @@
 2065 : %s - basic-init done.
 
 2067 : Thanks for subscribing.
-
-
+2068 : Please enter a stock name for analysis.

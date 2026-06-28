@@ -16,6 +16,46 @@ class StockAnalysisMain {
         }
     }
 
+    initStockSearch(tickers) {
+        this.initAnalysisDescription();
+
+        const researchInput = document.getElementById('research-input');
+        const suggestionsList = document.getElementById('research-suggestions');
+        const clearBtn = document.getElementById('clear-research-input');
+        const researchButton = document.getElementById('ResearchButton');
+
+        if (!researchInput || !researchButton) return;
+
+        // Handle Search Button Click
+        researchButton.addEventListener('click', () => {
+            const stockName = researchInput.value.trim();
+            if (stockName) {
+                this.openStockAnalysisPage(stockName);
+            } else {
+                // Show message if input is empty
+                errorManager.showInfo(2068);
+            }
+        });
+
+        // Ticker Search Suggestion Logic
+        researchInput.addEventListener('input', () => {
+            this.handleTickerSuggestions(researchInput, suggestionsList, tickers);
+            // Show/hide clear button based on input content
+            if (clearBtn) {
+                clearBtn.style.display = researchInput.value ? 'block' : 'none';
+            }
+        });
+
+        // Clear Button Logic
+        if (clearBtn) {
+            clearBtn.addEventListener('click', () => {
+                researchInput.value = '';
+                clearBtn.style.display = 'none';
+                researchInput.focus();
+            });
+        }
+    }
+
     updateAnalysisDescription() {
         const dropdown = document.getElementById('analysis-type-dropdown');
         const descriptionArea = document.getElementById('analysis-description');

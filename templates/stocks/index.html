@@ -230,32 +230,7 @@
             window.basicInitializer = new BasicInitializer(false);
             window.errorManager = new ErrorManager();
             window.stockAnalysisMain = new StockAnalysisMain();
-            window.stockAnalysisMain.initAnalysisDescription();
-
-            document.getElementById('ResearchButton').addEventListener('click', () => {
-                const stockName = document.getElementById('research-input').value.trim();
-                if (stockName) {
-                    window.stockAnalysisMain.openStockAnalysisPage(stockName);
-                }
-            });
-
-            // Ticker Search Suggestion Logic
-            const researchInput = document.getElementById('research-input');
-            const suggestionsList = document.getElementById('research-suggestions');
-            const clearBtn = document.getElementById('clear-research-input');
-            const tickers = serverJsonData.tickers_list || [];
-
-            researchInput.addEventListener('input', () => {
-                window.stockAnalysisMain.handleTickerSuggestions(researchInput, suggestionsList, tickers);
-                // Show/hide clear button based on input content
-                clearBtn.style.display = researchInput.value ? 'block' : 'none';
-            });
-
-            clearBtn.addEventListener('click', () => {
-                researchInput.value = '';
-                clearBtn.style.display = 'none';
-                researchInput.focus();
-            });
+            window.stockAnalysisMain.initStockSearch(serverJsonData.tickers_list || []);
         });
 
         function handleCardClick(event, card_type) {
