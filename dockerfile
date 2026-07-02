@@ -52,4 +52,4 @@ COPY . .
 EXPOSE 8080
 
 # Start Gunicorn with 1 worker (ideal for Cloud Run)
-CMD ["gunicorn", "-w", "1", "--threads", "2", "--preload", "-b", "0.0.0.0:8080", "--timeout", "300", "flask_file_accept:app"]
+CMD ["gunicorn", "-w", "1", "--threads", "2", "-b", "0.0.0.0:8080", "--timeout", "300", "flask_file_accept:app"]

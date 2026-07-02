@@ -1,10 +1,15 @@
 import json
 import io
 import csv
+import pandas as pd
 import requests
 import yfinance as yf
 from gcs_manager import GCSManager
 import constants
+import logging
+
+# Set timezone cache to /tmp to avoid SIGSEGV in read-only environments like Cloud Run
+yf.set_tz_cache_location("/tmp")
 
 class GenerateSectorSummary:
     def __init__(self):
@@ -53,26 +58,29 @@ class StockDataRetriever:
             return []
 
     def getData(self, ticker, months="12"):
-        """
-        Retrieves stock price history for the specified ticker for the last N months.
-        Returns the data as a JSON string containing date and closing prices.
-        """
         try:
-            stock = yf.Ticker(ticker)
-            # Fetch history for the specified period (e.g., "12mo")
-            period_str = f"{months}mo"
-            df = stock.history(period=period_str)
-            
-            if df.empty:
-                return json.dumps({"error": "No data found for the ticker"})
+            period = f"{months}mo"
 
-            # Prepare data for JSON: reset index to get Date, format Date as string
-            df = df.reset_index()
+            df = yf.download(
+                ticker,
+                period=period,
+                progress=False,
+                threads=False,
+                auto_adjust=False,
+            )
+
+            if df.empty:
+                return json.dumps({"error": "No data found"})
+
+            # Flatten MultiIndex columns if present
+            if isinstance(df.columns, pd.MultiIndex):
+                df.columns = df.columns.get_level_values(0)
+
+            df = df[['Close']].reset_index()
             df['Date'] = df['Date'].dt.strftime('%d%b%y')
-            
-            # Convert selected columns to list of dictionaries
-            result = df[['Date', 'Close']].to_dict(orient='records')
-            return json.dumps(result)
+
+            return df.to_json(orient='records')
+
         except Exception as e:
             return json.dumps({"error": str(e)})
 
