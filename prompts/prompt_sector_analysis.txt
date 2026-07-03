@@ -1,4 +1,4 @@
-Give me analysis of Nifty IT in NSE/BSE mid-May to early-June with following: 
+Give me analysis of Nifty IT in NSE/BSE mid-May to early-July with following: 
 0. header as the time-period
 1. concise pointwise - 3 or 4 words in a line. 
 2. stocks in momentum - stock-names as key.

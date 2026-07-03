@@ -1,0 +1,303 @@
+{
+  "header": "Nifty PSU Analysis (Mid-May 2026 to Early-July 2026)",
+  "summary": [
+    "Government capex continues",
+    "Banks leading rally",
+    "Defence remains strong",
+    "Power utilities stable",
+    "Railway stocks mixed",
+    "Profit booking selective",
+    "Valuations still reasonable",
+    "Institutional buying positive"
+  ],
+  "stocks_in_momentum": {
+    "State Bank of India": {
+      "reason": "Credit growth, strong earnings, FII buying",
+      "last_15_days": "+6.8%",
+      "historical_return": [
+        "May-Jun 2024 : +9.6%",
+        "Jul-Aug 2024 : +5.2%",
+        "Sep-Oct 2024 : -4.3%",
+        "Nov-Dec 2024 : +11.5%",
+        "Jan-Feb 2025 : +6.2%",
+        "Mar-Apr 2025 : -5.1%",
+        "May-Jun 2025 : +8.7%",
+        "Jul-Aug 2025 : +4.8%",
+        "Sep-Oct 2025 : -3.6%",
+        "Nov-Dec 2025 : +10.4%",
+        "Jan-Feb 2026 : +5.3%",
+        "Mar-Apr 2026 : -2.8%"
+      ],
+      "return_percent": [
+        "1-month : +8.1%",
+        "2-month : +12.4%",
+        "3-month : +15.2%",
+        "4-month : +12.8%",
+        "5-month : +10.3%",
+        "6-month : +7.4%"
+      ]
+    },
+    "Power Finance Corporation": {
+      "reason": "Power financing demand, dividend appeal",
+      "last_15_days": "+8.9%",
+      "historical_return": [
+        "May-Jun 2024 : +12.7%",
+        "Jul-Aug 2024 : +6.8%",
+        "Sep-Oct 2024 : -5.2%",
+        "Nov-Dec 2024 : +13.4%",
+        "Jan-Feb 2025 : +8.6%",
+        "Mar-Apr 2025 : -6.5%",
+        "May-Jun 2025 : +11.5%",
+        "Jul-Aug 2025 : +5.7%",
+        "Sep-Oct 2025 : -3.9%",
+        "Nov-Dec 2025 : +12.1%",
+        "Jan-Feb 2026 : +6.8%",
+        "Mar-Apr 2026 : -2.5%"
+      ],
+      "return_percent": [
+        "1-month : +10.2%",
+        "2-month : +15.8%",
+        "3-month : +20.4%",
+        "4-month : +18.3%",
+        "5-month : +16.0%",
+        "6-month : +13.6%"
+      ]
+    },
+    "REC Ltd": {
+      "reason": "Transmission financing growth, strong collections",
+      "last_15_days": "+8.1%",
+      "historical_return": [
+        "May-Jun 2024 : +11.4%",
+        "Jul-Aug 2024 : +5.6%",
+        "Sep-Oct 2024 : -4.8%",
+        "Nov-Dec 2024 : +12.2%",
+        "Jan-Feb 2025 : +7.5%",
+        "Mar-Apr 2025 : -6.3%",
+        "May-Jun 2025 : +10.9%",
+        "Jul-Aug 2025 : +5.3%",
+        "Sep-Oct 2025 : -4.1%",
+        "Nov-Dec 2025 : +11.4%",
+        "Jan-Feb 2026 : +6.2%",
+        "Mar-Apr 2026 : -2.7%"
+      ],
+      "return_percent": [
+        "1-month : +9.6%",
+        "2-month : +14.9%",
+        "3-month : +18.8%",
+        "4-month : +17.2%",
+        "5-month : +14.4%",
+        "6-month : +12.1%"
+      ]
+    },
+    "NTPC": {
+      "reason": "Power demand, renewable expansion",
+      "last_15_days": "+5.3%",
+      "historical_return": [
+        "May-Jun 2024 : +8.0%",
+        "Jul-Aug 2024 : +4.1%",
+        "Sep-Oct 2024 : -2.9%",
+        "Nov-Dec 2024 : +9.3%",
+        "Jan-Feb 2025 : +5.4%",
+        "Mar-Apr 2025 : -3.8%",
+        "May-Jun 2025 : +7.5%",
+        "Jul-Aug 2025 : +4.0%",
+        "Sep-Oct 2025 : -2.4%",
+        "Nov-Dec 2025 : +8.7%",
+        "Jan-Feb 2026 : +4.8%",
+        "Mar-Apr 2026 : -2.2%"
+      ],
+      "return_percent": [
+        "1-month : +6.2%",
+        "2-month : +9.5%",
+        "3-month : +12.1%",
+        "4-month : +10.8%",
+        "5-month : +8.6%",
+        "6-month : +6.4%"
+      ]
+    },
+    "Bharat Electronics": {
+      "reason": "Defence orders, export growth",
+      "last_15_days": "+11.5%",
+      "historical_return": [
+        "May-Jun 2024 : +15.2%",
+        "Jul-Aug 2024 : +7.3%",
+        "Sep-Oct 2024 : -3.2%",
+        "Nov-Dec 2024 : +16.1%",
+        "Jan-Feb 2025 : +9.5%",
+        "Mar-Apr 2025 : -4.6%",
+        "May-Jun 2025 : +14.7%",
+        "Jul-Aug 2025 : +6.5%",
+        "Sep-Oct 2025 : -2.5%",
+        "Nov-Dec 2025 : +15.3%",
+        "Jan-Feb 2026 : +8.6%",
+        "Mar-Apr 2026 : -1.8%"
+      ],
+      "return_percent": [
+        "1-month : +13.4%",
+        "2-month : +19.6%",
+        "3-month : +24.5%",
+        "4-month : +22.8%",
+        "5-month : +19.7%",
+        "6-month : +17.3%"
+      ]
+    },
+    "Coal India": {
+      "reason": "Strong dividends, steady production",
+      "last_15_days": "+4.4%",
+      "historical_return": [
+        "May-Jun 2024 : +7.8%",
+        "Jul-Aug 2024 : +3.9%",
+        "Sep-Oct 2024 : -3.7%",
+        "Nov-Dec 2024 : +8.6%",
+        "Jan-Feb 2025 : +4.6%",
+        "Mar-Apr 2025 : -5.0%",
+        "May-Jun 2025 : +6.8%",
+        "Jul-Aug 2025 : +3.6%",
+        "Sep-Oct 2025 : -2.8%",
+        "Nov-Dec 2025 : +7.9%",
+        "Jan-Feb 2026 : +4.2%",
+        "Mar-Apr 2026 : -2.5%"
+      ],
+      "return_percent": [
+        "1-month : +5.0%",
+        "2-month : +7.3%",
+        "3-month : +8.8%",
+        "4-month : +6.5%",
+        "5-month : +4.7%",
+        "6-month : +2.9%"
+      ]
+    },
+    "Power Grid Corporation": {
+      "reason": "Grid expansion, defensive demand",
+      "last_15_days": "+3.9%",
+      "historical_return": [
+        "May-Jun 2024 : +6.5%",
+        "Jul-Aug 2024 : +3.1%",
+        "Sep-Oct 2024 : -2.2%",
+        "Nov-Dec 2024 : +7.6%",
+        "Jan-Feb 2025 : +3.9%",
+        "Mar-Apr 2025 : -3.4%",
+        "May-Jun 2025 : +6.2%",
+        "Jul-Aug 2025 : +2.9%",
+        "Sep-Oct 2025 : -2.1%",
+        "Nov-Dec 2025 : +6.8%",
+        "Jan-Feb 2026 : +3.6%",
+        "Mar-Apr 2026 : -2.0%"
+      ],
+      "return_percent": [
+        "1-month : +4.4%",
+        "2-month : +6.8%",
+        "3-month : +8.2%",
+        "4-month : +6.5%",
+        "5-month : +5.1%",
+        "6-month : +3.8%"
+      ]
+    },
+    "Bank of Baroda": {
+      "reason": "Loan growth, asset quality improvement",
+      "last_15_days": "+7.2%",
+      "historical_return": [
+        "May-Jun 2024 : +10.3%",
+        "Jul-Aug 2024 : +5.4%",
+        "Sep-Oct 2024 : -4.7%",
+        "Nov-Dec 2024 : +11.8%",
+        "Jan-Feb 2025 : +6.6%",
+        "Mar-Apr 2025 : -5.5%",
+        "May-Jun 2025 : +9.8%",
+        "Jul-Aug 2025 : +5.0%",
+        "Sep-Oct 2025 : -4.0%",
+        "Nov-Dec 2025 : +10.6%",
+        "Jan-Feb 2026 : +5.8%",
+        "Mar-Apr 2026 : -3.0%"
+      ],
+      "return_percent": [
+        "1-month : +8.4%",
+        "2-month : +12.9%",
+        "3-month : +16.5%",
+        "4-month : +13.9%",
+        "5-month : +11.2%",
+        "6-month : +8.8%"
+      ]
+    },
+    "Indian Oil Corporation": {
+      "reason": "Lower crude, refining margins",
+      "last_15_days": "+5.0%",
+      "historical_return": [
+        "May-Jun 2024 : +8.1%",
+        "Jul-Aug 2024 : +3.5%",
+        "Sep-Oct 2024 : -4.4%",
+        "Nov-Dec 2024 : +9.1%",
+        "Jan-Feb 2025 : +4.9%",
+        "Mar-Apr 2025 : -5.8%",
+        "May-Jun 2025 : +7.4%",
+        "Jul-Aug 2025 : +3.3%",
+        "Sep-Oct 2025 : -3.6%",
+        "Nov-Dec 2025 : +8.5%",
+        "Jan-Feb 2026 : +4.7%",
+        "Mar-Apr 2026 : -2.9%"
+      ],
+      "return_percent": [
+        "1-month : +5.8%",
+        "2-month : +8.6%",
+        "3-month : +9.8%",
+        "4-month : +7.6%",
+        "5-month : +5.3%",
+        "6-month : +3.5%"
+      ]
+    },
+    "GAIL (India)": {
+      "reason": "Gas transmission growth, improved margins",
+      "last_15_days": "+6.3%",
+      "historical_return": [
+        "May-Jun 2024 : +9.4%",
+        "Jul-Aug 2024 : +4.6%",
+        "Sep-Oct 2024 : -4.0%",
+        "Nov-Dec 2024 : +10.2%",
+        "Jan-Feb 2025 : +5.8%",
+        "Mar-Apr 2025 : -5.1%",
+        "May-Jun 2025 : +8.6%",
+        "Jul-Aug 2025 : +4.3%",
+        "Sep-Oct 2025 : -3.3%",
+        "Nov-Dec 2025 : +9.5%",
+        "Jan-Feb 2026 : +5.1%",
+        "Mar-Apr 2026 : -2.7%"
+      ],
+      "return_percent": [
+        "1-month : +7.1%",
+        "2-month : +10.5%",
+        "3-month : +12.8%",
+        "4-month : +10.6%",
+        "5-month : +8.5%",
+        "6-month : +6.3%"
+      ]
+    }
+  },
+  "expectation_next_5_trading_days": {
+    "sector_view": "Bullish",
+    "probability": {
+      "Bullish": "65%",
+      "Sideways": "25%",
+      "Bearish": "10%"
+    },
+    "positive_triggers": [
+      "Government infrastructure spending",
+      "Strong PSU bank momentum",
+      "Continued defence order inflows",
+      "Healthy credit growth",
+      "Stable domestic market sentiment"
+    ],
+    "risks": [
+      "Profit booking after rally",
+      "Global market volatility",
+      "Higher bond yields",
+      "Weak quarterly guidance"
+    ],
+    "best_positioned_stocks": [
+      "Bharat Electronics",
+      "Power Finance Corporation",
+      "REC Ltd",
+      "State Bank of India",
+      "Bank of Baroda"
+    ]
+  }
+}

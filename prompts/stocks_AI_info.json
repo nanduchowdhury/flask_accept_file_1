@@ -1,0 +1,327 @@
+{
+  "sector": "India Artificial Intelligence Infrastructure & Enablers",
+  "description": "Indian listed companies that benefit directly or indirectly from global AI adoption through data center infrastructure, optical networking, power equipment, cooling systems, electronics manufacturing, semiconductors, and AI hardware supply chains. General IT services companies are intentionally excluded.",
+  "related_companies": {
+    "Dixon Technologies": {
+      "category": "Electronics Manufacturing (EMS)",
+      "ai_link": "Manufactures servers, networking equipment and electronic hardware used in AI infrastructure.",
+      "current_global_impact": [
+        "Global electronics manufacturing shift to India",
+        "AI server manufacturing demand",
+        "Hyperscaler supply-chain diversification",
+        "PLI scheme benefits"
+      ],
+      "markets_served": [
+        "India",
+        "USA OEMs",
+        "Europe OEMs"
+      ],
+      "expected_future_impact": [
+        "AI server assembly growth",
+        "Higher electronics exports",
+        "Expansion into AI hardware manufacturing"
+      ]
+    },
+
+    "Kaynes Technology": {
+      "category": "Electronics & Embedded Systems",
+      "ai_link": "Manufactures embedded electronics, industrial computing and AI-enabled hardware.",
+      "current_global_impact": [
+        "Industrial AI hardware demand",
+        "Semiconductor ecosystem expansion",
+        "Embedded AI devices"
+      ],
+      "markets_served": [
+        "USA",
+        "Europe",
+        "India"
+      ],
+      "expected_future_impact": [
+        "AI edge devices",
+        "Industrial AI systems",
+        "Semiconductor manufacturing opportunities"
+      ]
+    },
+
+    "Syrma SGS Technology": {
+      "category": "Electronics Manufacturing",
+      "ai_link": "Produces electronic assemblies for networking and industrial AI equipment.",
+      "current_global_impact": [
+        "Networking hardware demand",
+        "Data-center electronics",
+        "Industrial automation"
+      ],
+      "markets_served": [
+        "North America",
+        "Europe",
+        "India"
+      ],
+      "expected_future_impact": [
+        "Higher AI hardware production",
+        "Growth in networking equipment"
+      ]
+    },
+
+    "Tejas Networks": {
+      "category": "Optical Networking",
+      "ai_link": "Develops optical transport and fiber networking equipment connecting AI data centers.",
+      "current_global_impact": [
+        "Hyperscaler fiber expansion",
+        "400G/800G optical networking",
+        "5G backbone deployment"
+      ],
+      "markets_served": [
+        "India",
+        "Middle East",
+        "Africa",
+        "Europe"
+      ],
+      "expected_future_impact": [
+        "AI data-center interconnect growth",
+        "Higher optical equipment demand",
+        "800G networking adoption"
+      ]
+    },
+
+    "HFCL": {
+      "category": "Fiber Optics & Telecom",
+      "ai_link": "Manufactures optical fiber cables and networking products for AI data centers.",
+      "current_global_impact": [
+        "Fiber deployment acceleration",
+        "Data-center connectivity",
+        "Broadband expansion"
+      ],
+      "markets_served": [
+        "USA",
+        "Europe",
+        "Middle East",
+        "India"
+      ],
+      "expected_future_impact": [
+        "AI networking expansion",
+        "Optical cable demand",
+        "Hyperscaler infrastructure projects"
+      ]
+    },
+
+    "Polycab India": {
+      "category": "Power Cables",
+      "ai_link": "Supplies high-capacity cables for hyperscale data centers and industrial infrastructure.",
+      "current_global_impact": [
+        "Data-center construction",
+        "Power infrastructure upgrades",
+        "Industrial electrification"
+      ],
+      "markets_served": [
+        "India",
+        "Middle East",
+        "Africa"
+      ],
+      "expected_future_impact": [
+        "Higher data-center capex",
+        "Growing cable demand",
+        "AI infrastructure expansion"
+      ]
+    },
+
+    "KEI Industries": {
+      "category": "Power & Control Cables",
+      "ai_link": "Provides power and control cables for data centers and industrial AI facilities.",
+      "current_global_impact": [
+        "Commercial data-center projects",
+        "Industrial automation",
+        "Renewable power integration"
+      ],
+      "markets_served": [
+        "India",
+        "Europe",
+        "Middle East"
+      ],
+      "expected_future_impact": [
+        "Large AI campus projects",
+        "High-capacity cable demand"
+      ]
+    },
+
+    "Finolex Cables": {
+      "category": "Electrical Cables",
+      "ai_link": "Supports networking and electrical infrastructure required by AI facilities.",
+      "current_global_impact": [
+        "Infrastructure electrification",
+        "Enterprise networking"
+      ],
+      "markets_served": [
+        "India",
+        "Middle East"
+      ],
+      "expected_future_impact": [
+        "Enterprise AI infrastructure",
+        "Commercial construction demand"
+      ]
+    },
+
+    "Voltamp Transformers": {
+      "category": "Power Equipment",
+      "ai_link": "Supplies transformers required for high-power AI data centers.",
+      "current_global_impact": [
+        "Grid modernization",
+        "Power demand from hyperscalers",
+        "Industrial expansion"
+      ],
+      "markets_served": [
+        "India"
+      ],
+      "expected_future_impact": [
+        "AI campus power upgrades",
+        "Transformer demand growth"
+      ]
+    },
+
+    "CG Power & Industrial Solutions": {
+      "category": "Electrical Equipment",
+      "ai_link": "Manufactures transformers, switchgear and motors for AI infrastructure.",
+      "current_global_impact": [
+        "Industrial electrification",
+        "Data-center power systems",
+        "Grid investment"
+      ],
+      "markets_served": [
+        "India",
+        "Europe",
+        "USA"
+      ],
+      "expected_future_impact": [
+        "Large AI infrastructure projects",
+        "Power equipment replacement cycle"
+      ]
+    },
+
+    "ABB India": {
+      "category": "Industrial Automation",
+      "ai_link": "Supplies automation, power distribution and cooling systems for data centers.",
+      "current_global_impact": [
+        "Smart factories",
+        "AI automation",
+        "Data-center electrification"
+      ],
+      "markets_served": [
+        "India",
+        "Europe",
+        "USA"
+      ],
+      "expected_future_impact": [
+        "AI-powered industrial automation",
+        "Smart power distribution"
+      ]
+    },
+
+    "Blue Star": {
+      "category": "Precision Cooling",
+      "ai_link": "Provides HVAC and precision cooling systems used in data centers.",
+      "current_global_impact": [
+        "Data-center construction",
+        "Cooling demand",
+        "Commercial HVAC growth"
+      ],
+      "markets_served": [
+        "India",
+        "Middle East"
+      ],
+      "expected_future_impact": [
+        "Liquid cooling adoption",
+        "Precision cooling demand",
+        "Hyperscale AI facilities"
+      ]
+    },
+
+    "Voltas": {
+      "category": "Industrial Cooling",
+      "ai_link": "Supplies commercial HVAC systems for enterprise and hyperscale facilities.",
+      "current_global_impact": [
+        "Commercial cooling demand",
+        "Industrial HVAC expansion"
+      ],
+      "markets_served": [
+        "India",
+        "Middle East"
+      ],
+      "expected_future_impact": [
+        "Data-center HVAC growth",
+        "AI infrastructure cooling"
+      ]
+    },
+
+    "Schneider Electric Infrastructure": {
+      "category": "Power Management",
+      "ai_link": "Provides electrical distribution equipment for AI data centers.",
+      "current_global_impact": [
+        "Power distribution upgrades",
+        "UPS infrastructure",
+        "Industrial automation"
+      ],
+      "markets_served": [
+        "India",
+        "Global OEM ecosystem"
+      ],
+      "expected_future_impact": [
+        "Hyperscaler investments",
+        "Energy-efficient AI campuses"
+      ]
+    },
+
+    "Netweb Technologies": {
+      "category": "AI Servers & HPC",
+      "ai_link": "Designs high-performance computing clusters, GPU servers and AI supercomputers.",
+      "current_global_impact": [
+        "GPU cluster demand",
+        "AI training infrastructure",
+        "Research supercomputing"
+      ],
+      "markets_served": [
+        "India",
+        "Government",
+        "Research Institutions"
+      ],
+      "expected_future_impact": [
+        "Domestic AI cloud growth",
+        "Large language model infrastructure",
+        "GPU server expansion"
+      ]
+    },
+
+    "Astra Microwave Products": {
+      "category": "High-Speed Electronics",
+      "ai_link": "Provides RF and high-speed electronic systems used in advanced computing and communications.",
+      "current_global_impact": [
+        "Defense electronics",
+        "High-speed communications",
+        "Satellite networking"
+      ],
+      "markets_served": [
+        "India",
+        "Europe"
+      ],
+      "expected_future_impact": [
+        "Advanced communications",
+        "AI-enabled defense systems"
+      ]
+    },
+
+    "Data Patterns": {
+      "category": "Advanced Electronics",
+      "ai_link": "Develops intelligent embedded systems and AI-capable defense electronics.",
+      "current_global_impact": [
+        "Smart surveillance",
+        "Embedded computing",
+        "Defense modernization"
+      ],
+      "markets_served": [
+        "India"
+      ],
+      "expected_future_impact": [
+        "AI-enabled defense platforms",
+        "Intelligent sensing systems"
+      ]
+    }
+  }
+}

@@ -57,6 +57,15 @@ class StockDataRetriever:
         except Exception:
             return []
 
+    def getExpandedName(self, ticker):
+        """
+        Fetches the full company name for a given ticker symbol using yfinance.
+        """
+        try:
+            return yf.Ticker(ticker).info.get('longName', ticker)
+        except Exception:
+            return ticker
+
     def getData(self, ticker, months="12"):
         try:
             period = f"{months}mo"

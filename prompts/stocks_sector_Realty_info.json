@@ -1,0 +1,303 @@
+{
+  "header": "Nifty Realty Analysis (Mid-May 2026 to Early-July 2026)",
+  "summary": [
+    "Premium housing strong",
+    "Commercial leasing steady",
+    "Rate-cut optimism persists",
+    "Institutional inflows positive",
+    "Luxury demand resilient",
+    "Bookings remain healthy",
+    "Profit booking selective",
+    "Momentum still bullish"
+  ],
+  "stocks_in_momentum": {
+    "DLF": {
+      "reason": "Strong bookings, premium launches, FII buying",
+      "last_15_days": "+8.7%",
+      "historical_return": [
+        "May-Jun 2024 : +12.6%",
+        "Jul-Aug 2024 : +7.5%",
+        "Sep-Oct 2024 : -5.2%",
+        "Nov-Dec 2024 : +14.8%",
+        "Jan-Feb 2025 : +8.4%",
+        "Mar-Apr 2025 : -6.3%",
+        "May-Jun 2025 : +11.7%",
+        "Jul-Aug 2025 : +6.9%",
+        "Sep-Oct 2025 : -4.4%",
+        "Nov-Dec 2025 : +13.2%",
+        "Jan-Feb 2026 : +7.5%",
+        "Mar-Apr 2026 : -3.1%"
+      ],
+      "return_percent": [
+        "1-month : +10.2%",
+        "2-month : +15.6%",
+        "3-month : +19.8%",
+        "4-month : +17.5%",
+        "5-month : +14.2%",
+        "6-month : +10.8%"
+      ]
+    },
+    "Macrotech Developers": {
+      "reason": "Luxury demand, project pipeline, sales growth",
+      "last_15_days": "+10.1%",
+      "historical_return": [
+        "May-Jun 2024 : +14.2%",
+        "Jul-Aug 2024 : +8.3%",
+        "Sep-Oct 2024 : -6.0%",
+        "Nov-Dec 2024 : +16.5%",
+        "Jan-Feb 2025 : +9.8%",
+        "Mar-Apr 2025 : -6.7%",
+        "May-Jun 2025 : +13.5%",
+        "Jul-Aug 2025 : +7.8%",
+        "Sep-Oct 2025 : -4.8%",
+        "Nov-Dec 2025 : +15.3%",
+        "Jan-Feb 2026 : +8.7%",
+        "Mar-Apr 2026 : -3.5%"
+      ],
+      "return_percent": [
+        "1-month : +12.4%",
+        "2-month : +18.1%",
+        "3-month : +23.6%",
+        "4-month : +20.5%",
+        "5-month : +16.8%",
+        "6-month : +13.7%"
+      ]
+    },
+    "Godrej Properties": {
+      "reason": "Record pre-sales, premium launches",
+      "last_15_days": "+9.4%",
+      "historical_return": [
+        "May-Jun 2024 : +13.8%",
+        "Jul-Aug 2024 : +7.9%",
+        "Sep-Oct 2024 : -5.6%",
+        "Nov-Dec 2024 : +15.4%",
+        "Jan-Feb 2025 : +9.0%",
+        "Mar-Apr 2025 : -6.2%",
+        "May-Jun 2025 : +12.9%",
+        "Jul-Aug 2025 : +7.3%",
+        "Sep-Oct 2025 : -4.5%",
+        "Nov-Dec 2025 : +14.6%",
+        "Jan-Feb 2026 : +8.2%",
+        "Mar-Apr 2026 : -3.2%"
+      ],
+      "return_percent": [
+        "1-month : +11.3%",
+        "2-month : +16.5%",
+        "3-month : +21.2%",
+        "4-month : +18.6%",
+        "5-month : +15.3%",
+        "6-month : +11.9%"
+      ]
+    },
+    "Oberoi Realty": {
+      "reason": "Luxury sales, rental income growth",
+      "last_15_days": "+6.9%",
+      "historical_return": [
+        "May-Jun 2024 : +10.5%",
+        "Jul-Aug 2024 : +5.8%",
+        "Sep-Oct 2024 : -4.2%",
+        "Nov-Dec 2024 : +12.3%",
+        "Jan-Feb 2025 : +6.8%",
+        "Mar-Apr 2025 : -5.1%",
+        "May-Jun 2025 : +10.0%",
+        "Jul-Aug 2025 : +5.5%",
+        "Sep-Oct 2025 : -3.9%",
+        "Nov-Dec 2025 : +11.4%",
+        "Jan-Feb 2026 : +6.2%",
+        "Mar-Apr 2026 : -2.7%"
+      ],
+      "return_percent": [
+        "1-month : +8.1%",
+        "2-month : +12.0%",
+        "3-month : +15.7%",
+        "4-month : +13.5%",
+        "5-month : +10.8%",
+        "6-month : +8.2%"
+      ]
+    },
+    "Prestige Estates Projects": {
+      "reason": "Commercial pipeline, residential launches",
+      "last_15_days": "+8.2%",
+      "historical_return": [
+        "May-Jun 2024 : +12.0%",
+        "Jul-Aug 2024 : +6.7%",
+        "Sep-Oct 2024 : -5.0%",
+        "Nov-Dec 2024 : +13.6%",
+        "Jan-Feb 2025 : +7.8%",
+        "Mar-Apr 2025 : -5.9%",
+        "May-Jun 2025 : +11.2%",
+        "Jul-Aug 2025 : +6.3%",
+        "Sep-Oct 2025 : -4.3%",
+        "Nov-Dec 2025 : +12.8%",
+        "Jan-Feb 2026 : +7.0%",
+        "Mar-Apr 2026 : -3.0%"
+      ],
+      "return_percent": [
+        "1-month : +9.6%",
+        "2-month : +14.1%",
+        "3-month : +18.4%",
+        "4-month : +16.0%",
+        "5-month : +13.2%",
+        "6-month : +10.0%"
+      ]
+    },
+    "Brigade Enterprises": {
+      "reason": "South India demand, office leasing",
+      "last_15_days": "+7.5%",
+      "historical_return": [
+        "May-Jun 2024 : +11.3%",
+        "Jul-Aug 2024 : +6.2%",
+        "Sep-Oct 2024 : -4.6%",
+        "Nov-Dec 2024 : +12.7%",
+        "Jan-Feb 2025 : +7.4%",
+        "Mar-Apr 2025 : -5.5%",
+        "May-Jun 2025 : +10.7%",
+        "Jul-Aug 2025 : +6.0%",
+        "Sep-Oct 2025 : -4.0%",
+        "Nov-Dec 2025 : +11.9%",
+        "Jan-Feb 2026 : +6.6%",
+        "Mar-Apr 2026 : -2.8%"
+      ],
+      "return_percent": [
+        "1-month : +8.9%",
+        "2-month : +13.0%",
+        "3-month : +16.8%",
+        "4-month : +14.5%",
+        "5-month : +11.9%",
+        "6-month : +9.2%"
+      ]
+    },
+    "Phoenix Mills": {
+      "reason": "Mall footfall, retail leasing",
+      "last_15_days": "+6.3%",
+      "historical_return": [
+        "May-Jun 2024 : +9.8%",
+        "Jul-Aug 2024 : +5.4%",
+        "Sep-Oct 2024 : -3.8%",
+        "Nov-Dec 2024 : +11.2%",
+        "Jan-Feb 2025 : +6.3%",
+        "Mar-Apr 2025 : -4.9%",
+        "May-Jun 2025 : +9.4%",
+        "Jul-Aug 2025 : +5.1%",
+        "Sep-Oct 2025 : -3.6%",
+        "Nov-Dec 2025 : +10.6%",
+        "Jan-Feb 2026 : +5.9%",
+        "Mar-Apr 2026 : -2.5%"
+      ],
+      "return_percent": [
+        "1-month : +7.2%",
+        "2-month : +10.8%",
+        "3-month : +14.2%",
+        "4-month : +12.4%",
+        "5-month : +10.0%",
+        "6-month : +7.5%"
+      ]
+    },
+    "Sobha": {
+      "reason": "Premium projects, improving margins",
+      "last_15_days": "+9.1%",
+      "historical_return": [
+        "May-Jun 2024 : +13.1%",
+        "Jul-Aug 2024 : +7.2%",
+        "Sep-Oct 2024 : -5.8%",
+        "Nov-Dec 2024 : +14.9%",
+        "Jan-Feb 2025 : +8.6%",
+        "Mar-Apr 2025 : -6.3%",
+        "May-Jun 2025 : +12.3%",
+        "Jul-Aug 2025 : +6.8%",
+        "Sep-Oct 2025 : -4.7%",
+        "Nov-Dec 2025 : +13.8%",
+        "Jan-Feb 2026 : +7.9%",
+        "Mar-Apr 2026 : -3.4%"
+      ],
+      "return_percent": [
+        "1-month : +10.7%",
+        "2-month : +15.8%",
+        "3-month : +20.2%",
+        "4-month : +17.8%",
+        "5-month : +14.7%",
+        "6-month : +11.5%"
+      ]
+    },
+    "Anant Raj": {
+      "reason": "Data center expansion, residential demand",
+      "last_15_days": "+12.4%",
+      "historical_return": [
+        "May-Jun 2024 : +16.7%",
+        "Jul-Aug 2024 : +9.6%",
+        "Sep-Oct 2024 : -6.3%",
+        "Nov-Dec 2024 : +18.2%",
+        "Jan-Feb 2025 : +10.5%",
+        "Mar-Apr 2025 : -7.1%",
+        "May-Jun 2025 : +15.9%",
+        "Jul-Aug 2025 : +9.0%",
+        "Sep-Oct 2025 : -5.2%",
+        "Nov-Dec 2025 : +17.0%",
+        "Jan-Feb 2026 : +9.6%",
+        "Mar-Apr 2026 : -3.8%"
+      ],
+      "return_percent": [
+        "1-month : +14.6%",
+        "2-month : +21.5%",
+        "3-month : +27.4%",
+        "4-month : +24.1%",
+        "5-month : +19.9%",
+        "6-month : +16.4%"
+      ]
+    },
+    "Signatureglobal India": {
+      "reason": "Affordable housing, strong launch pipeline",
+      "last_15_days": "+10.8%",
+      "historical_return": [
+        "May-Jun 2024 : +15.0%",
+        "Jul-Aug 2024 : +8.5%",
+        "Sep-Oct 2024 : -5.7%",
+        "Nov-Dec 2024 : +16.8%",
+        "Jan-Feb 2025 : +9.9%",
+        "Mar-Apr 2025 : -6.8%",
+        "May-Jun 2025 : +14.2%",
+        "Jul-Aug 2025 : +8.1%",
+        "Sep-Oct 2025 : -4.9%",
+        "Nov-Dec 2025 : +15.9%",
+        "Jan-Feb 2026 : +8.9%",
+        "Mar-Apr 2026 : -3.6%"
+      ],
+      "return_percent": [
+        "1-month : +12.8%",
+        "2-month : +18.9%",
+        "3-month : +24.6%",
+        "4-month : +21.7%",
+        "5-month : +17.8%",
+        "6-month : +14.1%"
+      ]
+    }
+  },
+  "expectation_next_5_trading_days": {
+    "sector_view": "Bullish",
+    "probability": {
+      "Bullish": "68%",
+      "Sideways": "22%",
+      "Bearish": "10%"
+    },
+    "positive_triggers": [
+      "Interest-rate optimism",
+      "Strong housing demand",
+      "Healthy pre-sales",
+      "Institutional buying",
+      "Commercial leasing recovery"
+    ],
+    "risks": [
+      "Profit booking",
+      "Rising construction costs",
+      "Weak global sentiment",
+      "Premium valuation concerns"
+    ],
+    "best_positioned_stocks": [
+      "Anant Raj",
+      "Macrotech Developers",
+      "Godrej Properties",
+      "Signatureglobal India",
+      "DLF"
+    ]
+  }
+}

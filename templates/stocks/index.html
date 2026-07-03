@@ -157,6 +157,22 @@
 
             <a href="#" 
                 class="topic-card"
+                onclick="handleCardClick(event, 'semiconductor')">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Semiconductor India</h3>
+                    <p>Direct/indirect relation to semi.</p>
+            </a>
+
+            <a href="#" 
+                class="topic-card"
+                onclick="handleCardClick(event, 'AI')">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>India AI companies</h3>
+                    <p>Direct/indirect relation to global AI.</p>
+            </a>
+
+            <a href="#" 
+                class="topic-card"
                 onclick="handleCardClick(event, 'global_cues')">
                     <i class="fas fa-lightbulb"></i>
                     <h3>Global cues</h3>
@@ -270,6 +286,12 @@
                 return;
             } else if ( card_type == 'india_economy' ) {
                 window.stockAnalysisMain.openIndiaEconomyPage();
+                return;
+            } else if ( card_type == 'semiconductor' ) {
+                window.stockAnalysisMain.openIndiaSemiPage();
+                return;
+            } else if ( card_type == 'AI' ) {
+                window.stockAnalysisMain.openIndiaAIPage();
                 return;
             }
         }

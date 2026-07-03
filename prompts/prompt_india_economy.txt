@@ -4,5 +4,5 @@ Give me JSON format data for India economy as follows:
         outlook-next-qtr, drivers, change-from-last-qtr,
         change-descrition etc.
     3. Keep all parameters under top-level-key 'parameters'.
-    4. Put generated-date, deslta-scale etc in the 
+    4. Put generated-date, delta-scale etc in the 
         first-section of the JSON.

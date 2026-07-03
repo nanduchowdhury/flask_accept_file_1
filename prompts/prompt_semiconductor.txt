@@ -1,0 +1,9 @@
+Give me JSON format data for India semiconductor sector as follows:
+    1. Give info about companies which are directly or indirectly related to semiconductors.
+        Please do not include general IT-based companies.
+        Please check companies which are indirectly related to
+        fab setup, semiconductor-infra etc.
+    2. For each key or company - give current impact from global trends, 
+        US/Europe market they are caterning to, etc.
+    3. For each key or company - give expected impact from global data etc.
+    4. Keep all companies under key - related_companies.

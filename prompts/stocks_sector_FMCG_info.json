@@ -1,0 +1,225 @@
+{
+  "header": "Nifty FMCG Analysis (Mid-May 2026 to Early-July 2026)",
+  "summary": [
+    "Defensive sector rotation",
+    "Oil prices supportive",
+    "Rural demand improving",
+    "Institutional buying visible",
+    "Margin outlook stable",
+    "Monsoon remains key",
+    "Large-caps outperforming",
+    "Valuations still expensive"
+  ],
+  "stocks_in_momentum": {
+    "Nestle India": {
+      "reason": "Defensive buying, premium demand, earnings stability",
+      "last_15_days": "+4.8%",
+      "historical_return": [
+        "May-Jun 2024 : +6.4%",
+        "Jul-Aug 2024 : +2.3%",
+        "Sep-Oct 2024 : -1.8%",
+        "Nov-Dec 2024 : +8.2%",
+        "Jan-Feb 2025 : +2.7%",
+        "Mar-Apr 2025 : -3.6%",
+        "May-Jun 2025 : +4.2%",
+        "Jul-Aug 2025 : +3.1%",
+        "Sep-Oct 2025 : -2.2%",
+        "Nov-Dec 2025 : +5.4%",
+        "Jan-Feb 2026 : -1.6%",
+        "Mar-Apr 2026 : -5.8%"
+      ],
+      "return_percent": [
+        "1-month : +5.1%",
+        "2-month : +7.3%",
+        "3-month : +3.9%",
+        "4-month : +2.2%",
+        "5-month : -1.4%",
+        "6-month : -4.6%"
+      ]
+    },
+    "Hindustan Unilever": {
+      "reason": "FII accumulation, margin recovery",
+      "last_15_days": "+5.5%",
+      "historical_return": [
+        "May-Jun 2024 : +4.8%",
+        "Jul-Aug 2024 : +1.7%",
+        "Sep-Oct 2024 : -2.4%",
+        "Nov-Dec 2024 : +7.0%",
+        "Jan-Feb 2025 : +1.9%",
+        "Mar-Apr 2025 : -2.8%",
+        "May-Jun 2025 : +3.5%",
+        "Jul-Aug 2025 : +2.9%",
+        "Sep-Oct 2025 : -3.1%",
+        "Nov-Dec 2025 : +4.8%",
+        "Jan-Feb 2026 : -2.5%",
+        "Mar-Apr 2026 : -6.0%"
+      ],
+      "return_percent": [
+        "1-month : +5.6%",
+        "2-month : +7.5%",
+        "3-month : +4.4%",
+        "4-month : +1.8%",
+        "5-month : -2.1%",
+        "6-month : -6.3%"
+      ]
+    },
+    "Varun Beverages": {
+      "reason": "Summer demand, volume growth",
+      "last_15_days": "+8.6%",
+      "historical_return": [
+        "May-Jun 2024 : +14.1%",
+        "Jul-Aug 2024 : +5.3%",
+        "Sep-Oct 2024 : -3.4%",
+        "Nov-Dec 2024 : +10.7%",
+        "Jan-Feb 2025 : +8.5%",
+        "Mar-Apr 2025 : +6.1%",
+        "May-Jun 2025 : +12.4%",
+        "Jul-Aug 2025 : +4.8%",
+        "Sep-Oct 2025 : -1.5%",
+        "Nov-Dec 2025 : +9.2%",
+        "Jan-Feb 2026 : +5.0%",
+        "Mar-Apr 2026 : +3.8%"
+      ],
+      "return_percent": [
+        "1-month : +11.8%",
+        "2-month : +14.7%",
+        "3-month : +18.3%",
+        "4-month : +15.2%",
+        "5-month : +10.5%",
+        "6-month : +8.9%"
+      ]
+    },
+    "Britannia": {
+      "reason": "Consumption recovery, defensive flows",
+      "last_15_days": "+3.2%",
+      "historical_return": [
+        "May-Jun 2024 : +5.0%",
+        "Jul-Aug 2024 : +2.0%",
+        "Sep-Oct 2024 : -2.1%",
+        "Nov-Dec 2024 : +7.6%",
+        "Jan-Feb 2025 : +2.4%",
+        "Mar-Apr 2025 : -3.9%",
+        "May-Jun 2025 : +3.9%",
+        "Jul-Aug 2025 : +2.5%",
+        "Sep-Oct 2025 : -2.8%",
+        "Nov-Dec 2025 : +5.3%",
+        "Jan-Feb 2026 : -1.7%",
+        "Mar-Apr 2026 : -4.5%"
+      ],
+      "return_percent": [
+        "1-month : +3.8%",
+        "2-month : +5.4%",
+        "3-month : +2.5%",
+        "4-month : -0.8%",
+        "5-month : -3.4%",
+        "6-month : -8.5%"
+      ]
+    },
+    "Tata Consumer Products": {
+      "reason": "Tea portfolio strength, institutional buying",
+      "last_15_days": "+5.0%",
+      "historical_return": [
+        "May-Jun 2024 : +7.2%",
+        "Jul-Aug 2024 : +3.4%",
+        "Sep-Oct 2024 : -1.5%",
+        "Nov-Dec 2024 : +8.8%",
+        "Jan-Feb 2025 : +3.6%",
+        "Mar-Apr 2025 : -2.9%",
+        "May-Jun 2025 : +4.9%",
+        "Jul-Aug 2025 : +2.7%",
+        "Sep-Oct 2025 : -2.0%",
+        "Nov-Dec 2025 : +6.3%",
+        "Jan-Feb 2026 : -1.9%",
+        "Mar-Apr 2026 : -5.0%"
+      ],
+      "return_percent": [
+        "1-month : +5.2%",
+        "2-month : +7.1%",
+        "3-month : +4.6%",
+        "4-month : +2.0%",
+        "5-month : -1.7%",
+        "6-month : -6.1%"
+      ]
+    },
+    "Colgate-Palmolive India": {
+      "reason": "Oral care demand, defensive allocation",
+      "last_15_days": "+4.1%",
+      "historical_return": [
+        "May-Jun 2024 : +5.8%",
+        "Jul-Aug 2024 : +2.8%",
+        "Sep-Oct 2024 : -1.7%",
+        "Nov-Dec 2024 : +6.5%",
+        "Jan-Feb 2025 : +2.2%",
+        "Mar-Apr 2025 : -3.2%",
+        "May-Jun 2025 : +3.6%",
+        "Jul-Aug 2025 : +2.1%",
+        "Sep-Oct 2025 : -2.5%",
+        "Nov-Dec 2025 : +4.6%",
+        "Jan-Feb 2026 : -1.2%",
+        "Mar-Apr 2026 : -4.2%"
+      ],
+      "return_percent": [
+        "1-month : +4.0%",
+        "2-month : +6.5%",
+        "3-month : +4.3%",
+        "4-month : +1.5%",
+        "5-month : -1.8%",
+        "6-month : -5.4%"
+      ]
+    },
+    "ITC": {
+      "reason": "Value buying, FMCG resilience",
+      "last_15_days": "+2.4%",
+      "historical_return": [
+        "May-Jun 2024 : +4.2%",
+        "Jul-Aug 2024 : +1.5%",
+        "Sep-Oct 2024 : -2.0%",
+        "Nov-Dec 2024 : +6.8%",
+        "Jan-Feb 2025 : +1.7%",
+        "Mar-Apr 2025 : -3.4%",
+        "May-Jun 2025 : +3.2%",
+        "Jul-Aug 2025 : +2.0%",
+        "Sep-Oct 2025 : -2.7%",
+        "Nov-Dec 2025 : +5.0%",
+        "Jan-Feb 2026 : -2.3%",
+        "Mar-Apr 2026 : -6.5%"
+      ],
+      "return_percent": [
+        "1-month : +1.5%",
+        "2-month : +2.4%",
+        "3-month : -1.6%",
+        "4-month : -5.2%",
+        "5-month : -8.3%",
+        "6-month : -12.1%"
+      ]
+    }
+  },
+  "expectation_next_5_trading_days": {
+    "sector_view": "Moderately Bullish",
+    "probability": {
+      "Bullish": "60%",
+      "Sideways": "30%",
+      "Bearish": "10%"
+    },
+    "positive_triggers": [
+      "Lower crude prices",
+      "Continued FII buying",
+      "Good monsoon progress",
+      "Defensive sector rotation",
+      "Stable Q1 earnings expectations"
+    ],
+    "risks": [
+      "High valuations",
+      "Profit booking",
+      "Weak rural consumption",
+      "Disappointing earnings guidance"
+    ],
+    "best_positioned_stocks": [
+      "Varun Beverages",
+      "Nestle India",
+      "Hindustan Unilever",
+      "Tata Consumer Products",
+      "Colgate-Palmolive India"
+    ]
+  }
+}

@@ -599,6 +599,51 @@ class StockAnalysisMain {
         });
     }
 
+    openIndiaSemiPage() {
+
+        this.gaTracker.trackPageView(`indian-semiconductor-page`);
+
+        let sector = "semiconductor";
+        console.log("Opening analysis for:", sector);
+
+        this.getSectorAnalysisInfo(sector, (info) => {
+            const result1 = info || "No analysis data available for this sector.";
+            this.popoutMgr.clear();
+
+            let negativeValuesInRed = true;
+            let listOfKeysToBeShownInTab = ['related_companies']
+
+            let tabContentDiv = this.createTabContent(result1, 'tabContent active',
+                                        negativeValuesInRed, listOfKeysToBeShownInTab);
+
+            this.popoutMgr.appendItem(tabContentDiv);
+            this.popoutMgr.showPopout();
+        });
+    }
+
+    openIndiaAIPage() {
+
+        this.gaTracker.trackPageView(`indian-AI-page`);
+
+        let sector = "AI";
+        console.log("Opening analysis for:", sector);
+
+        this.getSectorAnalysisInfo(sector, (info) => {
+            const result1 = info || "No analysis data available for this sector.";
+            this.popoutMgr.clear();
+
+            let negativeValuesInRed = true;
+            let listOfKeysToBeShownInTab = ['related_companies']
+
+            let tabContentDiv = this.createTabContent(result1, 'tabContent active',
+                                        negativeValuesInRed, listOfKeysToBeShownInTab);
+
+            this.popoutMgr.appendItem(tabContentDiv);
+            this.popoutMgr.showPopout();
+        });
+    }
+
+
     openStockAnalysisPage(stockName) {
 
         this.gaTracker.trackPageView(`sector-price-analysis-page`);
@@ -612,7 +657,16 @@ class StockAnalysisMain {
         const period = monthsDropdown ? monthsDropdown.value : "12";
         const data = { type: 'stock', name: stockName, period: period };
         basicInitializer.makeServerRequest('/general_stock_analysis_info', data, (response) => {
-            const result1 = response.info || "No analysis data available.";
+            const ticker = response['stock-ticker'];
+            const info = response.info;
+            const error = response.error;
+
+            if (error && error.trim() !== "") {
+                errorManager.showError(1045, error);
+                return;
+            }
+
+            const result1 = info || "No analysis data available.";
             let priceData;
             try {
                 priceData = JSON.parse(result1);
@@ -622,7 +676,7 @@ class StockAnalysisMain {
 
             this.popoutMgr.clear();
 
-            const headerJson = this._generatePlotHeaderInfoJson(stockName, period);
+            const headerJson = this._generatePlotHeaderInfoJson(ticker, period);
             let headerTab = this.createTabContent(headerJson, 'tabContent active', false, []);
             headerTab.style.marginLeft = '20px';
             headerTab.style.marginTop = '15px';

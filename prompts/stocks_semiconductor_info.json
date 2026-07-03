@@ -1,0 +1,386 @@
+{
+  "sector": "India Semiconductor Ecosystem",
+  "description": "Indian listed companies directly or indirectly participating in the semiconductor value chain, including chip design, OSAT (Assembly, Testing, Marking & Packaging), semiconductor manufacturing, fab construction, specialty chemicals, gases, precision engineering, clean-room infrastructure, power systems and semiconductor equipment.",
+  "related_companies": {
+    "Kaynes Technology": {
+      "category": "Electronics Manufacturing & Semiconductor",
+      "role": "OSAT, embedded electronics, semiconductor manufacturing partner",
+      "current_global_impact": [
+        "India semiconductor mission",
+        "Chip packaging demand",
+        "Industrial electronics growth",
+        "Supply-chain diversification from China"
+      ],
+      "markets_served": [
+        "India",
+        "USA",
+        "Europe",
+        "Japan"
+      ],
+      "expected_future_impact": [
+        "OSAT expansion",
+        "Automotive semiconductor growth",
+        "Higher semiconductor exports",
+        "Government incentives"
+      ]
+    },
+
+    "CG Power & Industrial Solutions": {
+      "category": "Semiconductor Manufacturing",
+      "role": "Renesas-CG Power semiconductor fabrication venture",
+      "current_global_impact": [
+        "Government-backed semiconductor fabrication",
+        "Power semiconductor demand",
+        "Industrial electronics expansion"
+      ],
+      "markets_served": [
+        "India",
+        "Japan",
+        "Global OEMs"
+      ],
+      "expected_future_impact": [
+        "Domestic chip manufacturing",
+        "Power semiconductor production",
+        "Import substitution"
+      ]
+    },
+
+    "Tata Electronics (Future Listed)": {
+      "category": "Semiconductor Fab",
+      "role": "Semiconductor fabrication and OSAT",
+      "current_global_impact": [
+        "Micron ecosystem",
+        "Global fab investments",
+        "Government semiconductor mission"
+      ],
+      "markets_served": [
+        "USA",
+        "Europe",
+        "India"
+      ],
+      "expected_future_impact": [
+        "Large-scale wafer fabrication",
+        "Advanced packaging",
+        "AI chip manufacturing"
+      ]
+    },
+
+    "Netweb Technologies": {
+      "category": "High Performance Computing",
+      "role": "AI servers using NVIDIA, AMD and Intel processors",
+      "current_global_impact": [
+        "GPU server demand",
+        "AI infrastructure expansion",
+        "Research supercomputing"
+      ],
+      "markets_served": [
+        "India",
+        "Government",
+        "Research Institutes"
+      ],
+      "expected_future_impact": [
+        "Domestic AI cloud growth",
+        "High-performance computing demand",
+        "Semiconductor ecosystem expansion"
+      ]
+    },
+
+    "Dixon Technologies": {
+      "category": "Electronics Manufacturing",
+      "role": "Semiconductor-enabled electronics manufacturing",
+      "current_global_impact": [
+        "PLI benefits",
+        "Electronics exports",
+        "Consumer electronics demand"
+      ],
+      "markets_served": [
+        "USA OEMs",
+        "Europe OEMs",
+        "India"
+      ],
+      "expected_future_impact": [
+        "Advanced electronics manufacturing",
+        "Semiconductor assembly opportunities"
+      ]
+    },
+
+    "Syrma SGS Technology": {
+      "category": "Electronics Manufacturing",
+      "role": "PCB assemblies and semiconductor-based products",
+      "current_global_impact": [
+        "Industrial electronics growth",
+        "Automotive electronics",
+        "Networking equipment"
+      ],
+      "markets_served": [
+        "USA",
+        "Europe",
+        "India"
+      ],
+      "expected_future_impact": [
+        "Higher semiconductor content",
+        "Medical electronics",
+        "Industrial AI devices"
+      ]
+    },
+
+    "MosChip Technologies": {
+      "category": "Chip Design",
+      "role": "ASIC, FPGA and semiconductor IP design",
+      "current_global_impact": [
+        "Growing fabless semiconductor market",
+        "AI accelerator demand",
+        "Automotive chip design"
+      ],
+      "markets_served": [
+        "USA",
+        "Europe",
+        "Japan"
+      ],
+      "expected_future_impact": [
+        "Custom AI chips",
+        "Automotive semiconductors",
+        "Higher design outsourcing"
+      ]
+    },
+
+    "RIR Power Electronics": {
+      "category": "Power Semiconductor",
+      "role": "Power semiconductor devices",
+      "current_global_impact": [
+        "EV demand",
+        "Power electronics",
+        "Industrial automation"
+      ],
+      "markets_served": [
+        "India",
+        "Asia"
+      ],
+      "expected_future_impact": [
+        "SiC devices",
+        "Power management ICs",
+        "Renewable energy"
+      ]
+    },
+
+    "ASM Technologies": {
+      "category": "Semiconductor Engineering",
+      "role": "Engineering services for semiconductor companies",
+      "current_global_impact": [
+        "Chip design outsourcing",
+        "EDA engineering",
+        "Semiconductor R&D"
+      ],
+      "markets_served": [
+        "USA",
+        "Germany",
+        "Japan"
+      ],
+      "expected_future_impact": [
+        "Growing semiconductor engineering",
+        "EDA services",
+        "Design verification"
+      ]
+    },
+
+    "Himadri Speciality Chemical": {
+      "category": "Semiconductor Materials",
+      "role": "Advanced carbon materials and specialty chemicals",
+      "current_global_impact": [
+        "Battery materials",
+        "Electronic materials",
+        "Advanced carbon demand"
+      ],
+      "markets_served": [
+        "USA",
+        "Europe",
+        "South Korea"
+      ],
+      "expected_future_impact": [
+        "Semiconductor materials",
+        "High-purity specialty chemicals",
+        "Electronic-grade products"
+      ]
+    },
+
+    "Linde India": {
+      "category": "Industrial Gases",
+      "role": "Ultra-high purity gases for semiconductor fabs",
+      "current_global_impact": [
+        "Fab construction globally",
+        "Industrial gas demand",
+        "Chip manufacturing expansion"
+      ],
+      "markets_served": [
+        "India",
+        "Global manufacturing ecosystem"
+      ],
+      "expected_future_impact": [
+        "Semiconductor gas demand",
+        "Fab expansion",
+        "Domestic chip manufacturing"
+      ]
+    },
+
+    "Gujarat Fluorochemicals": {
+      "category": "Specialty Chemicals",
+      "role": "Fluorochemicals used in semiconductor manufacturing",
+      "current_global_impact": [
+        "Electronic chemicals",
+        "Battery materials",
+        "Specialty gas demand"
+      ],
+      "markets_served": [
+        "USA",
+        "Europe",
+        "Japan",
+        "South Korea"
+      ],
+      "expected_future_impact": [
+        "Electronic-grade fluorochemicals",
+        "Semiconductor process chemicals"
+      ]
+    },
+
+    "Deepak Nitrite": {
+      "category": "Electronic Chemicals",
+      "role": "Specialty chemicals used in electronics manufacturing",
+      "current_global_impact": [
+        "Chemical supply-chain diversification",
+        "Industrial chemicals"
+      ],
+      "markets_served": [
+        "India",
+        "Europe",
+        "USA"
+      ],
+      "expected_future_impact": [
+        "Electronic chemicals",
+        "Semiconductor process chemicals"
+      ]
+    },
+
+    "Blue Star": {
+      "category": "Clean Room & HVAC",
+      "role": "Precision cooling and clean-room HVAC for semiconductor fabs",
+      "current_global_impact": [
+        "Fab construction",
+        "Data-center cooling",
+        "Precision HVAC demand"
+      ],
+      "markets_served": [
+        "India",
+        "Middle East"
+      ],
+      "expected_future_impact": [
+        "Semiconductor fab HVAC",
+        "Ultra-clean manufacturing facilities"
+      ]
+    },
+
+    "Voltas": {
+      "category": "Industrial HVAC",
+      "role": "Large industrial cooling systems for electronics manufacturing",
+      "current_global_impact": [
+        "Manufacturing expansion",
+        "Industrial cooling demand"
+      ],
+      "markets_served": [
+        "India",
+        "Middle East"
+      ],
+      "expected_future_impact": [
+        "Fab cooling",
+        "Industrial clean rooms"
+      ]
+    },
+
+    "ABB India": {
+      "category": "Industrial Automation",
+      "role": "Power distribution and factory automation for semiconductor fabs",
+      "current_global_impact": [
+        "Factory automation",
+        "Precision manufacturing",
+        "Power quality systems"
+      ],
+      "markets_served": [
+        "India",
+        "Europe",
+        "USA"
+      ],
+      "expected_future_impact": [
+        "Smart fabs",
+        "Automated semiconductor manufacturing"
+      ]
+    },
+
+    "Schneider Electric Infrastructure": {
+      "category": "Power Infrastructure",
+      "role": "Electrical distribution systems for semiconductor fabs",
+      "current_global_impact": [
+        "High-reliability power demand",
+        "Industrial expansion"
+      ],
+      "markets_served": [
+        "India",
+        "Global OEM ecosystem"
+      ],
+      "expected_future_impact": [
+        "Fab electrical infrastructure",
+        "Energy-efficient semiconductor plants"
+      ]
+    },
+
+    "KEI Industries": {
+      "category": "Power Infrastructure",
+      "role": "High-capacity power cables for semiconductor facilities",
+      "current_global_impact": [
+        "Industrial construction",
+        "Manufacturing plants"
+      ],
+      "markets_served": [
+        "India",
+        "Middle East",
+        "Europe"
+      ],
+      "expected_future_impact": [
+        "Semiconductor fab wiring",
+        "Industrial expansion"
+      ]
+    },
+
+    "Polycab India": {
+      "category": "Electrical Infrastructure",
+      "role": "Electrical cabling and wiring for semiconductor manufacturing plants",
+      "current_global_impact": [
+        "Large industrial projects",
+        "Electronics manufacturing"
+      ],
+      "markets_served": [
+        "India",
+        "Middle East",
+        "Africa"
+      ],
+      "expected_future_impact": [
+        "New fab construction",
+        "Industrial electrification"
+      ]
+    },
+
+    "Voltamp Transformers": {
+      "category": "Power Equipment",
+      "role": "Transformers supplying uninterrupted power to fabs",
+      "current_global_impact": [
+        "Grid upgrades",
+        "Industrial power demand"
+      ],
+      "markets_served": [
+        "India"
+      ],
+      "expected_future_impact": [
+        "Semiconductor fab power systems",
+        "High-reliability electrical infrastructure"
+      ]
+    }
+  }
+}

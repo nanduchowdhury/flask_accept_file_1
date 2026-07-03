@@ -379,17 +379,45 @@ class ScholarKM(Flask):
             name = data.get('name')
             months = data.get('period', '12') # Default to 12 months if not provided
             
+            stock_ticker = ""
+            expanded_ticker_name = ""
+            info = ""
+            error = ""
+
             if analysis_type == 'stock':
                 retriever = StockDataRetriever()
                 tickers = retriever.getTicker(name)
                 if tickers:
-                    info = retriever.getData(tickers[0], months)
-                    return jsonify({"info": info}), 200
-                return jsonify({"info": "Stock ticker not found."}), 200
-            return jsonify({"error": "Invalid analysis type"}), 400
+                    stock_ticker = tickers[0]
+                    expanded_ticker_name = retriever.getExpandedName(stock_ticker)
+                    info = retriever.getData(stock_ticker, months)
+                    # Check if info contains a JSON error message
+                    try:
+                        info_json = json.loads(info)
+                        if isinstance(info_json, dict) and "error" in info_json:
+                            error = info_json["error"]
+                    except Exception:
+                        pass
+                else:
+                    info = "Stock ticker not found."
+                    error = "Stock ticker not found."
+            else:
+                error = "Invalid analysis type"
+                return jsonify({"stock-ticker": expanded_ticker_name, "info": info, "error": error}), 400
+
+            return jsonify({
+                "stock-ticker": expanded_ticker_name,
+                "info": info,
+                "error": error
+            }), 200
         except Exception as e:
-            self.error_manager.show_any_message(f"Exception during route general_stock_analysis_info : {str(e)}")
-            return jsonify({"error": str(e)}), 500
+            error_msg = str(e)
+            self.error_manager.show_any_message(f"Exception during route general_stock_analysis_info : {error_msg}")
+            return jsonify({
+                "stock-ticker": "",
+                "info": "",
+                "error": error_msg
+            }), 500
 
     def get_content_and_youtube_for_topic(self):
         
