@@ -375,39 +375,50 @@ class ScholarKM(Flask):
     def get_general_stock_analysis_info(self):
         try:
             data = request.json
-            analysis_type = data.get('type')
+            analysis_types = data.get('type', [])
+            # Handle both string (backward compatibility) and array as requested
+            if isinstance(analysis_types, str):
+                analysis_types = [analysis_types]
+
             name = data.get('name')
             months = data.get('period', '12') # Default to 12 months if not provided
             
-            stock_ticker = ""
             expanded_ticker_name = ""
-            info = ""
+            stock_basics_info = ""
+            stock_events_info = []
             error = ""
 
-            if analysis_type == 'stock':
-                retriever = StockDataRetriever()
-                tickers = retriever.getTicker(name)
-                if tickers:
-                    stock_ticker = tickers[0]
-                    expanded_ticker_name = retriever.getExpandedName(stock_ticker)
-                    info = retriever.getData(stock_ticker, months)
-                    # Check if info contains a JSON error message
-                    try:
-                        info_json = json.loads(info)
-                        if isinstance(info_json, dict) and "error" in info_json:
-                            error = info_json["error"]
-                    except Exception:
-                        pass
-                else:
-                    info = "Stock ticker not found."
-                    error = "Stock ticker not found."
+            retriever = StockDataRetriever()
+            tickers = retriever.getTicker(name)
+            
+            if tickers:
+                stock_ticker = tickers[0]
+                expanded_ticker_name = retriever.getExpandedName(stock_ticker)
+                
+                for a_type in analysis_types:
+                    if a_type == 'STOCK_BASICS' or a_type == 'stock':
+                        stock_basics_info = retriever.getData(stock_ticker, months)
+                        # Check if info contains a JSON error message
+                        try:
+                            info_json = json.loads(stock_basics_info)
+                            if isinstance(info_json, dict) and "error" in info_json:
+                                error = info_json["error"]
+                        except Exception:
+                            pass
+                    
+                    if a_type == 'STOCK_EVENTS':
+                        events = retriever.getEvents(stock_ticker)
+                        if isinstance(events, dict) and "error" in events:
+                            error = events["error"]
+                        else:
+                            stock_events_info = events
             else:
-                error = "Invalid analysis type"
-                return jsonify({"stock-ticker": expanded_ticker_name, "info": info, "error": error}), 400
+                error = "Stock ticker not found."
 
             return jsonify({
                 "stock-ticker": expanded_ticker_name,
-                "info": info,
+                "STOCK_BASICS": stock_basics_info,
+                "STOCK_EVENTS": stock_events_info,
                 "error": error
             }), 200
         except Exception as e:
@@ -415,7 +426,8 @@ class ScholarKM(Flask):
             self.error_manager.show_any_message(f"Exception during route general_stock_analysis_info : {error_msg}")
             return jsonify({
                 "stock-ticker": "",
-                "info": "",
+                "STOCK_BASICS": "",
+                "STOCK_EVENTS": [],
                 "error": error_msg
             }), 500
 

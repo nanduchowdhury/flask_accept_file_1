@@ -1,3 +1,4 @@
+from datetime import datetime
 import json
 import io
 import csv
@@ -115,3 +116,38 @@ class StockDataRetriever:
             pass
 
         return []
+
+    def getEvents(self, ticker):
+        """
+        Retrieves corporate actions (dividends, splits) and news events 
+        for a given ticker.
+        """
+        try:
+            t = yf.Ticker(ticker)
+            events = []
+
+            # 1. Get Actions (Dividends/Splits)
+            actions = t.actions
+            if not actions.empty:
+                for date, row in actions.iterrows():
+                    div = row.get('Dividends', 0)
+                    splits = row.get('Stock Splits', 0)
+                    if div > 0:
+                        events.append({"date": date.strftime('%Y-%m-%d'), "event": f"Dividend: {div}"})
+                    if splits > 0:
+                        events.append({"date": date.strftime('%Y-%m-%d'), "event": f"Stock Split: {splits}"})
+
+            # 2. Get News
+            news = t.news
+            for item in news:
+                publish_time = item.get('providerPublishTime')
+                title = item.get('title')
+                if publish_time is not None and title:
+                    dt_object = datetime.fromtimestamp(publish_time)
+                    events.append({"date": dt_object.strftime('%Y-%m-%d'), "event": title})
+
+            # Sort by date descending
+            events.sort(key=lambda x: x['date'], reverse=True)
+            return events
+        except Exception as e:
+            return {"error": str(e)}

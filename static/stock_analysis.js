@@ -28,7 +28,8 @@ class StockAnalysisMain {
             "2.0": "Identifies periods where the stock price has risen by at least 2% without any intermediate fall.",
             "5.0": "Identifies periods where the stock price has risen by at least 5% without any intermediate fall.",
             "drawdown_5": "Shows how much the stock has fallen from its peak, highlighting drops of 5% or more.",
-            "recovery": "Analyzes how the stock has bounced back from its lowest point in the selected period."
+            "recovery": "Analyzes how the stock has bounced back from its lowest point in the selected period.",
+            "event_timeline": "Displays significant corporate events, news, and market milestones for the stock."
         };
 
         descriptionArea.textContent = descriptions[dropdown.value] || "";
@@ -190,7 +191,7 @@ class StockAnalysisMain {
         };
     }
 
-    computeAnalysisSegments(data) {
+    computeAnalysisSegments(data, events = null) {
         if (Array.isArray(data) && data.length > 0 && data[0].Date && data[0].Close) {
             data = data.map(item => ({
                 date_time: item.Date,
@@ -204,7 +205,16 @@ class StockAnalysisMain {
         let segments = [];
         let info = {};
 
-        if (selection === "recovery") {
+        if (selection === "event_timeline") {
+            segments = [];
+            info = {
+                "Analysis_Type": "Event Timeline Analysis",
+                "Description": "Overview of major events influencing stock performance.",
+                "Note": "Timeline details are populated based on historical news and filings.",
+                "Events": events || "No events found."
+            };
+            return { segments, infoJson: JSON.stringify(info), data };
+        } else if (selection === "recovery") {
             const result = this.computeRecoverySegments(data);
             segments = result.segments;
             info = {
@@ -655,10 +665,20 @@ class StockAnalysisMain {
 
         const monthsDropdown = document.getElementById("analysis-months-dropdown");
         const period = monthsDropdown ? monthsDropdown.value : "12";
-        const data = { type: 'stock', name: stockName, period: period };
+
+        const analysisDropdown = document.getElementById("analysis-type-dropdown");
+        const analysisType = analysisDropdown ? analysisDropdown.value : "-2.0";
+
+        const requestTypes = ['STOCK_BASICS'];
+        if (analysisType === 'event_timeline') {
+            requestTypes.push('STOCK_EVENTS');
+        }
+
+        const data = { type: requestTypes, name: stockName, period: period, analysis_type: analysisType };
         basicInitializer.makeServerRequest('/general_stock_analysis_info', data, (response) => {
             const ticker = response['stock-ticker'];
-            const info = response.info;
+            const info = response.STOCK_BASICS;
+            const events = response.STOCK_EVENTS;
             const error = response.error;
 
             if (error && error.trim() !== "") {
@@ -682,7 +702,7 @@ class StockAnalysisMain {
             headerTab.style.marginTop = '15px';
             this.popoutMgr.appendItem(headerTab);
 
-            const analysisResult = this.computeAnalysisSegments(priceData);
+            const analysisResult = this.computeAnalysisSegments(priceData, events);
 
             let analysisInfoTab = this.createTabContent(analysisResult.infoJson, 'tabContent active', false, []);
             analysisInfoTab.style.marginLeft = '20px';
