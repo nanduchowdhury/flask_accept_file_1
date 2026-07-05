@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import json
 import io
 import csv
@@ -117,12 +117,14 @@ class StockDataRetriever:
 
         return []
 
-    def getEvents(self, ticker):
+    def getEvents(self, ticker, months="12"):
         """
         Retrieves corporate actions (dividends, splits) and news events 
-        for a given ticker.
+        for a given ticker within the specified number of months.
         """
         try:
+            cutoff_date = datetime.now() - timedelta(days=int(months) * 30)
+            
             t = yf.Ticker(ticker)
             events = []
 
@@ -130,12 +132,15 @@ class StockDataRetriever:
             actions = t.actions
             if not actions.empty:
                 for date, row in actions.iterrows():
+                    if date.timestamp() < cutoff_date.timestamp():
+                        continue
+                        
                     div = row.get('Dividends', 0)
                     splits = row.get('Stock Splits', 0)
                     if div > 0:
-                        events.append({"date": date.strftime('%Y-%m-%d'), "event": f"Dividend: {div}"})
+                        events.append({"date": date, "event": f"Dividend: {div}"})
                     if splits > 0:
-                        events.append({"date": date.strftime('%Y-%m-%d'), "event": f"Stock Split: {splits}"})
+                        events.append({"date": date, "event": f"Stock Split: {splits}"})
 
             # 2. Get News
             news = t.news
@@ -144,10 +149,19 @@ class StockDataRetriever:
                 title = item.get('title')
                 if publish_time is not None and title:
                     dt_object = datetime.fromtimestamp(publish_time)
-                    events.append({"date": dt_object.strftime('%Y-%m-%d'), "event": title})
+                    if dt_object < cutoff_date:
+                        continue
+                        
+                    events.append({"date": dt_object, "event": title})
 
-            # Sort by date descending
-            events.sort(key=lambda x: x['date'], reverse=True)
+            # Sort by date descending using the datetime objects
+            events.sort(key=lambda x: x['date'].timestamp(), reverse=True)
+
+            # Format the date strings to match getData format (%d%b%y) for frontend alignment
+            # e.g., 03Jul26
+            for e in events:
+                e['date'] = e['date'].strftime('%d%b%y')
+
             return events
         except Exception as e:
             return {"error": str(e)}

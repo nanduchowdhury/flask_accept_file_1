@@ -178,14 +178,14 @@
 
 
 .whatsapp-btn {
-    background-color: #25D366;
+    background-color: #0a9b3f;
     color: white;
     padding: 6px 14px;
     border-radius: 20px;
     text-decoration: none;
     font-family: 'Patrick Hand';
     font-weight: bold;
-    font-size: 14px;
+    font-size: 10px;
     display: flex;
     align-items: center;
     gap: 8px;

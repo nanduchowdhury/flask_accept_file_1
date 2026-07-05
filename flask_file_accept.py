@@ -407,7 +407,7 @@ class ScholarKM(Flask):
                             pass
                     
                     if a_type == 'STOCK_EVENTS':
-                        events = retriever.getEvents(stock_ticker)
+                        events = retriever.getEvents(stock_ticker, months)
                         if isinstance(events, dict) and "error" in events:
                             error = events["error"]
                         else:

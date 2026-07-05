@@ -5,6 +5,8 @@ class StockAnalysisMain {
         this.popoutMgr = new PopoutManager('genericPopoutId');
 
         this.gaTracker = new GoogleAnalytics();
+
+        this.STOCK_EVENT_COLORS = ['blue', 'green', 'red', 'yellow', 'orange', 'purple', 'brown', 'teal'];
     }
 
     initAnalysisDescription() {
@@ -204,8 +206,16 @@ class StockAnalysisMain {
 
         let segments = [];
         let info = {};
+        let highlightPoints = [];
 
         if (selection === "event_timeline") {
+            if (Array.isArray(events)) {
+                highlightPoints = events.map((ev, idx) => ({
+                    date: ev.date,
+                    color: this.STOCK_EVENT_COLORS[idx % this.STOCK_EVENT_COLORS.length]
+                }));
+            }
+
             segments = [];
             info = {
                 "Analysis_Type": "Event Timeline Analysis",
@@ -213,7 +223,7 @@ class StockAnalysisMain {
                 "Note": "Timeline details are populated based on historical news and filings.",
                 "Events": events || "No events found."
             };
-            return { segments, infoJson: JSON.stringify(info), data };
+            return { segments, infoJson: JSON.stringify(info), data, highlightPoints };
         } else if (selection === "recovery") {
             const result = this.computeRecoverySegments(data);
             segments = result.segments;
@@ -260,17 +270,19 @@ class StockAnalysisMain {
                 "Target_Threshold": target_pct + "%"
             };
         }
-        return { segments, infoJson: JSON.stringify(info), data };
+        return { segments, infoJson: JSON.stringify(info), data, highlightPoints };
     }
 
-    createTabContent(tabContent, className, negativeValuesInRed, listOfKeysToBeShownInTab) {
+    createTabContent(tabContent, className, negativeValuesInRed, 
+                                    listOfKeysToBeShownInTab, arrayKeyWithColors) {
+                                        
         let tabContentDiv = document.createElement('div');
         tabContentDiv.className = className;
 
         
         try {
             const data = JSON.parse(tabContent);
-            tabContentDiv.innerHTML = this._generateHtml(data, 1, negativeValuesInRed, listOfKeysToBeShownInTab);
+            tabContentDiv.innerHTML = this._generateHtml(data, 1, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors);
         } catch (e) {
             tabContentDiv.innerHTML = tabContent;
         }
@@ -279,7 +291,7 @@ class StockAnalysisMain {
         return tabContentDiv;
     }
 
-    createStockPricePlot(data, className, analysisSegments) {
+    createStockPricePlot(data, className, analysisSegments, highlightPointsOnPlot = []) {
         let tabContentDiv = document.createElement('div');
         tabContentDiv.className = className;
         tabContentDiv.style.padding = '20px';
@@ -373,38 +385,68 @@ class StockAnalysisMain {
                 ctx.fillText(dates[idx] || '', 0, 0);
                 ctx.restore();
             }
+
+            this._highlightPointsOnPlot(ctx, data, padding, chartWidth, chartHeight, minPrice, priceRange, highlightPointsOnPlot);
+
         } catch (e) {
             tabContentDiv.innerHTML = "Plot Generation Error: " + e.message;
         }
         return tabContentDiv;
     }
 
-    _generateHtml(obj, level = 1, negativeValuesInRed, listOfKeysToBeShownInTab) {
+    _highlightPointsOnPlot(ctx, data, padding, chartWidth, chartHeight, minPrice, priceRange, highlightPoints) {
+        if (!highlightPoints || !Array.isArray(highlightPoints)) return;
+
+        highlightPoints.forEach(item => {
+            const idx = data.findIndex(d => d.date_time === item.date);
+            if (idx === -1) return;
+
+            const x = data.length > 1 ? padding.left + (idx / (data.length - 1)) * chartWidth : padding.left + chartWidth / 2;
+            const y = padding.top + chartHeight - ((parseFloat(data[idx].stock_price) - minPrice) / priceRange) * chartHeight;
+
+            const radius = 5;
+            ctx.fillStyle = item.color || 'red';
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2);
+            ctx.fill();
+        });
+    }
+
+    _generateHtml(obj, level = 1, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors) {
         let html = '';
         const tab = '&nbsp;&nbsp;&nbsp;&nbsp;'.repeat(level);
 
         if (typeof obj === 'object' && obj !== null && !Array.isArray(obj)) {
             for (const [key, value] of Object.entries(obj)) {
                 if (listOfKeysToBeShownInTab.includes(key) && typeof value === 'object' && value !== null && !Array.isArray(value)) {
-                    html += this._generateTabbedHtml(key, value, level, negativeValuesInRed, listOfKeysToBeShownInTab);
+                    html += this._generateTabbedHtml(key, value, level, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors);
                     continue;
                 }
                 let key_temp = this._remove_underscore(key);
                 html += `<div>${tab}<strong style="color: blue;">${key_temp}</strong>: `;
 
                 if (Array.isArray(value)) {
-                    html += `<br>` + this._generateTableHtml(value, level, negativeValuesInRed);
+                    if (value.length === 0) {
+                        html += `NONE`;
+                    } else {
+                        const colors = (arrayKeyWithColors && arrayKeyWithColors.key === key) ? arrayKeyWithColors.colors : null;
+                        html += `<br>` + this._generateTableHtml(value, level, negativeValuesInRed, colors);
+                    }
                 } else if (typeof value === 'object' && value !== null) {
-                    html += `<br>${this._generateHtml(value, level + 1, negativeValuesInRed, listOfKeysToBeShownInTab)}`;
+                    html += `<br>${this._generateHtml(value, level + 1, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors)}`;
                 } else {
                     html += `${value}`;
                 }
                 html += `</div><br>`;
             }
         } else if (Array.isArray(obj)) {
-            obj.forEach((item, index) => {
-                html += `<div>${tab}${index + 1}. ${this._generateHtml(item, level + 1, negativeValuesInRed, listOfKeysToBeShownInTab)}</div>`;
-            });
+            if (obj.length === 0) {
+                html += `<div>${tab}NONE</div>`;
+            } else {
+                obj.forEach((item, index) => {
+                    html += `<div>${tab}${index + 1}. ${this._generateHtml(item, level + 1, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors)}</div>`;
+                });
+            }
         } else {
             html += `${obj}`;
         }
@@ -416,7 +458,7 @@ class StockAnalysisMain {
         return d1;
     }
 
-    _generateTabbedHtml(key, value, level, negativeValuesInRed, listOfKeysToBeShownInTab) {
+    _generateTabbedHtml(key, value, level, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors) {
         const tab = '&nbsp;&nbsp;&nbsp;&nbsp;'.repeat(level);
 
         let key_temp = this._remove_underscore(key);
@@ -456,19 +498,23 @@ class StockAnalysisMain {
         stockEntries.forEach(([stockName, stockData], index) => {
             const display = index === 0 ? 'block' : 'none';
             html += `<div id="content-${uniqueId}-${index}" class="content-${uniqueId}" style="display: ${display}; border: 1px solid #dee2e6; padding: 15px; border-radius: 4px; background-color: #fff;">`;
-            html += this._generateHtml(stockData, level + 1, negativeValuesInRed, listOfKeysToBeShownInTab);
+            html += this._generateHtml(stockData, level + 1, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors);
             html += `</div>`;
         });
         html += `</div>`;
         return html;
     }
 
-    _generateTableHtml(value, level, negativeValuesInRed) {
+    _generateTableHtml(value, level, negativeValuesInRed, colors) {
         let html = `<table style="border-collapse: collapse; width: auto; margin-left: ${level * 20}px; border: 1px solid blue;">`;
         value.forEach((item, index) => {
             const bgColor = index % 2 === 0 ? 'white' : 'lightblue';
             const isNegative = this.hasNegativeValue(item);
-            const textColor = (negativeValuesInRed && isNegative) ? 'red' : 'black';
+            
+            let textColor = (negativeValuesInRed && isNegative) ? 'red' : 'black';
+            if (colors && colors.length > 0) {
+                textColor = colors[index % colors.length];
+            }
             
             html += `<tr style="border-bottom: 1px solid blue; background-color: ${bgColor}; color: ${textColor};">`;
             if (typeof item === 'object' && item !== null) {
@@ -704,11 +750,12 @@ class StockAnalysisMain {
 
             const analysisResult = this.computeAnalysisSegments(priceData, events);
 
-            let analysisInfoTab = this.createTabContent(analysisResult.infoJson, 'tabContent active', false, []);
+            let analysisInfoTab = this.createTabContent(analysisResult.infoJson, 'tabContent active', false, [], 
+                                        { key: 'Events', colors: this.STOCK_EVENT_COLORS });
             analysisInfoTab.style.marginLeft = '20px';
             this.popoutMgr.appendItem(analysisInfoTab);
 
-            let tabContentDiv_1 = this.createStockPricePlot(analysisResult.data, 'tabContent active', analysisResult.segments);
+            let tabContentDiv_1 = this.createStockPricePlot(analysisResult.data, 'tabContent active', analysisResult.segments, analysisResult.highlightPoints);
             this.popoutMgr.appendItem(tabContentDiv_1);
 
             const insightsHeader = document.createElement('h3');
