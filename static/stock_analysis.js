@@ -273,6 +273,66 @@ class StockAnalysisMain {
         return { segments, infoJson: JSON.stringify(info), data, highlightPoints };
     }
 
+    _massageRawStockEvents(rawEvents, periodMonths) {
+        if (!rawEvents || rawEvents.error) return [];
+
+        const processed = [];
+        const news = rawEvents.news || [];
+        const actions = rawEvents.actions || [];
+
+        const cutoffDate = new Date();
+        cutoffDate.setMonth(cutoffDate.getMonth() - parseInt(periodMonths || 12));
+
+        // Process News: extract title, source link, and format date for the timeline
+        news.forEach(item => {
+            const data = item.content || item;
+            const ts = data.providerPublishTime || data.publishTime || data.pubDate || data.displayTime;
+            if (!ts) return;
+
+            // Standardize Date object creation: handles Unix timestamps (numbers) 
+            // and ISO strings (from pubDate/displayTime)
+            const dateObj = (typeof ts === 'number') ? new Date(ts * 1000) : new Date(ts);
+            if (isNaN(dateObj.getTime())) return;
+
+            if (dateObj < cutoffDate) return;
+
+            const dateStr = this._formatStockDate(dateObj);
+            const title = data.title || "Latest News";
+            const url = data.url || data.link || (data.clickThroughUrl ? data.clickThroughUrl.url : null);
+
+            const eventHtml = url 
+                ? `<small>${title}</small> &nbsp;&nbsp;&nbsp;&nbsp; [<a href='${url}' target='_blank'>Source</a>]` 
+                : `<small>${title}</small>`;
+
+            processed.push({ dateObj, date: dateStr, event: eventHtml });
+        });
+
+        // Process Actions: extract corporate actions like dividends and splits
+        actions.forEach(item => {
+            const dateObj = new Date(item.Date);
+            if (isNaN(dateObj.getTime())) return;
+
+            if (dateObj < cutoffDate) return;
+
+            const dateStr = this._formatStockDate(dateObj);
+
+            if (item.Dividends > 0) {
+                processed.push({ dateObj, date: dateStr, event: `Dividend: ${item.Dividends}` });
+            }
+            if (item['Stock Splits'] > 0) {
+                processed.push({ dateObj, date: dateStr, event: `Stock Split: ${item['Stock Splits']}` });
+            }
+        });
+
+        // Sort events by date descending
+        processed.sort((a, b) => b.dateObj - a.dateObj);
+
+        return processed.map(p => ({
+            date: p.date,
+            event: p.event
+        }));
+    }
+
     createTabContent(tabContent, className, negativeValuesInRed, 
                                     listOfKeysToBeShownInTab, arrayKeyWithColors) {
                                         
@@ -723,11 +783,11 @@ class StockAnalysisMain {
         const data = { type: requestTypes, name: stockName, period: period, analysis_type: analysisType };
         basicInitializer.makeServerRequest('/general_stock_analysis_info', data, (response) => {
             const ticker = response['stock-ticker'];
-            const info = response.STOCK_BASICS;
-            const events = response.STOCK_EVENTS;
+            let info = response.STOCK_BASICS;
+            let events = response.STOCK_EVENTS;
             const error = response.error;
 
-            if (error && error.trim() !== "") {
+            if (error && typeof error === 'string' && error.trim() !== "") {
                 errorManager.showError(1045, error);
                 return;
             }
@@ -739,6 +799,8 @@ class StockAnalysisMain {
             } catch (e) {
                 priceData = result1;
             }
+            
+            events = this._massageRawStockEvents(events, period);
 
             this.popoutMgr.clear();
 
