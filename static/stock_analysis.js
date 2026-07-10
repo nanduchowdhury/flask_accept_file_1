@@ -408,6 +408,9 @@ class StockAnalysisMain {
                 ctx.fillText(price.toFixed(2), padding.left - 10, y + 4);
             }
 
+            // Requirement 1 & 2: Area fill under the curve as separate method
+            this._drawAreaFill(ctx, data, padding, chartWidth, chartHeight, minPrice, priceRange, analysisSegments);
+
             // Plot line
             const baseLineWidth = 2;
             ctx.lineWidth = baseLineWidth;
@@ -454,6 +457,52 @@ class StockAnalysisMain {
         return tabContentDiv;
     }
 
+    _drawAreaFill(ctx, data, padding, chartWidth, chartHeight, minPrice, priceRange, analysisSegments) {
+        if (data.length < 2) return;
+
+        // Requirement 3: Determine base gradient color based on total return
+        const firstPrice = parseFloat(data[0].stock_price);
+        const lastPrice = parseFloat(data[data.length - 1].stock_price);
+        const baseFillColor = (lastPrice >= firstPrice) ? 'rgba(74, 138, 248, 0.8)' : 'rgba(231, 63, 181, 0.91)';
+        const bottomY = padding.top + chartHeight;
+
+        // Draw area fill in slices to handle segment-specific colors
+        for (let i = 1; i < data.length; i++) {
+            const prev = data[i - 1];
+            const curr = data[i];
+
+            const x1 = padding.left + ((i - 1) / (data.length - 1)) * chartWidth;
+            const x2 = padding.left + (i / (data.length - 1)) * chartWidth;
+            const y1 = padding.top + chartHeight - ((parseFloat(prev.stock_price) - minPrice) / priceRange) * chartHeight;
+            const y2 = padding.top + chartHeight - ((parseFloat(curr.stock_price) - minPrice) / priceRange) * chartHeight;
+
+            // Requirement 4: Fill color gradient for segments
+            const segmentMatch = (analysisSegments || []).find(seg => i > seg.start && i <= seg.end);
+            let sliceColor = segmentMatch ? segmentMatch.color : baseFillColor;
+
+            // Start gradient at the top of the current slice to ensure even intensity along the curve
+            const yTop = Math.min(y1, y2);
+            const gradient = ctx.createLinearGradient(0, yTop, 0, bottomY);
+            
+            // If using a segment color string directly, we wrap it in a save/restore with globalAlpha
+            // to ensure it is "light" as requested.
+            ctx.save();
+            if (segmentMatch) ctx.globalAlpha = 0.7; 
+            gradient.addColorStop(0, sliceColor);
+            gradient.addColorStop(1, 'rgba(255, 255, 255, 0)'); // Fade to transparent towards x-axis
+
+            ctx.beginPath();
+            ctx.moveTo(x1, bottomY);
+            ctx.lineTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.lineTo(x2, bottomY);
+            ctx.closePath();
+            ctx.fillStyle = gradient;
+            ctx.fill();
+            ctx.restore();
+        }
+    }
+
     _highlightPointsOnPlot(ctx, data, padding, chartWidth, chartHeight, minPrice, priceRange, highlightPoints) {
         if (!highlightPoints || !Array.isArray(highlightPoints)) return;
 
@@ -463,6 +512,17 @@ class StockAnalysisMain {
 
             const x = data.length > 1 ? padding.left + (idx / (data.length - 1)) * chartWidth : padding.left + chartWidth / 2;
             const y = padding.top + chartHeight - ((parseFloat(data[idx].stock_price) - minPrice) / priceRange) * chartHeight;
+
+            // Requirement 5: Mark a vertical-line of 5px width from point-on-curve to x-axis
+            ctx.save();
+            ctx.strokeStyle = item.color || 'red';
+            ctx.lineWidth = 5;
+            ctx.globalAlpha = 0.2; // Keep it semi-transparent so it doesn't obscure the curve
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineTo(x, padding.top + chartHeight);
+            ctx.stroke();
+            ctx.restore();
 
             const radius = 5;
             ctx.fillStyle = item.color || 'red';
