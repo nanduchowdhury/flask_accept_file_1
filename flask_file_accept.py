@@ -19,6 +19,7 @@
 from flask import Flask, render_template, request, jsonify
 from werkzeug.utils import secure_filename
 import os
+import logging
 
 import PyPDF2
 
@@ -192,6 +193,8 @@ class ScholarKM(Flask):
 
         self.content_creator_obj = ContentCreatorBase(self.gemini_access, self.error_manager)
 
+        self.retriever = StockDataRetriever()
+
         self.start_all_content_creator_threads()
 
     def extract_text_from_pdf(self, pdf_path):
@@ -312,8 +315,7 @@ class ScholarKM(Flask):
 
         self.error_manager.show_page_invoke_message(f"stocks_analysis-km")
 
-        retriever = StockDataRetriever()
-        tickers_list = retriever.getTickerList()
+        tickers_list = self.retriever.getTickerList()
         json_data = {
             "tickers_list": tickers_list
         }
@@ -386,18 +388,18 @@ class ScholarKM(Flask):
             expanded_ticker_name = ""
             stock_basics_info = ""
             stock_events_info = []
+            stock_peers_info = {}
             error = ""
 
-            retriever = StockDataRetriever()
-            tickers = retriever.getTicker(name)
+            tickers = self.retriever.getTicker(name)
             
             if tickers:
                 stock_ticker = tickers[0]
-                expanded_ticker_name = retriever.getExpandedName(stock_ticker)
+                expanded_ticker_name = self.retriever.getExpandedName(stock_ticker)
                 
                 for a_type in analysis_types:
                     if a_type == 'STOCK_BASICS' or a_type == 'stock':
-                        stock_basics_info = retriever.getData(stock_ticker, months)
+                        stock_basics_info = self.retriever.getData(stock_ticker, months)
                         # Check if info contains a JSON error message
                         try:
                             info_json = json.loads(stock_basics_info)
@@ -407,11 +409,26 @@ class ScholarKM(Flask):
                             pass
                     
                     if a_type == 'STOCK_EVENTS':
-                        events = retriever.getEvents(stock_ticker, months)
+                        events = self.retriever.getEvents(stock_ticker, months)
                         if isinstance(events, dict) and "error" in events:
                             error = events["error"]
                         else:
                             stock_events_info = events
+                    
+                    if a_type == 'STOCK_PEER_COMPARISON':
+                        peers_dict_list = self.retriever.getPeers(stock_ticker)
+
+                        for peer_info in peers_dict_list:
+                            peer_ticker = peer_info['ticker']
+                            peer_data_raw = self.retriever.getData(peer_ticker, months)
+                            try:
+                                peer_data = json.loads(peer_data_raw)
+                                # Only add if the data fetch was successful
+                                if isinstance(peer_data, list):
+                                    peer_name = peer_info.get('company_name') or self.retriever.getExpandedName(peer_ticker)
+                                    stock_peers_info[peer_name] = peer_data
+                            except Exception:
+                                continue
             else:
                 error = "Stock ticker not found."
 
@@ -419,6 +436,7 @@ class ScholarKM(Flask):
                 "stock-ticker": expanded_ticker_name,
                 "STOCK_BASICS": stock_basics_info,
                 "STOCK_EVENTS": stock_events_info,
+                "STOCK_PEER_COMPARISON": stock_peers_info,
                 "error": error
             }), 200
         except Exception as e:

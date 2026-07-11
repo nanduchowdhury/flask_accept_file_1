@@ -31,7 +31,8 @@ class StockAnalysisMain {
             "5.0": "Identifies periods where the stock price has risen by at least 5% without any intermediate fall.",
             "drawdown_5": "Shows how much the stock has fallen from its peak, highlighting drops of 5% or more.",
             "recovery": "Analyzes how the stock has bounced back from its lowest point in the selected period.",
-            "event_timeline": "Displays significant corporate events, news, and market milestones for the stock."
+            "event_timeline": "Displays significant corporate events, news, and market milestones for the stock.",
+            "peer_comparison": "Compares the performance of the selected stock with its industry peers over the chosen period."
         };
 
         descriptionArea.textContent = descriptions[dropdown.value] || "";
@@ -839,12 +840,16 @@ class StockAnalysisMain {
         if (analysisType === 'event_timeline') {
             requestTypes.push('STOCK_EVENTS');
         }
+        if (analysisType === 'peer_comparison') {
+            requestTypes.push('STOCK_PEER_COMPARISON');
+        }
 
         const data = { type: requestTypes, name: stockName, period: period, analysis_type: analysisType };
         basicInitializer.makeServerRequest('/general_stock_analysis_info', data, (response) => {
             const ticker = response['stock-ticker'];
             let info = response.STOCK_BASICS;
             let events = response.STOCK_EVENTS;
+            let peersData = response.STOCK_PEER_COMPARISON || {};
             const error = response.error;
 
             if (error && typeof error === 'string' && error.trim() !== "") {
@@ -880,16 +885,32 @@ class StockAnalysisMain {
             let tabContentDiv_1 = this.createStockPricePlot(analysisResult.data, 'tabContent active', analysisResult.segments, analysisResult.highlightPoints);
             this.popoutMgr.appendItem(tabContentDiv_1);
 
-            const insightsHeader = document.createElement('h3');
-            insightsHeader.innerText = "Stock Insights";
-            insightsHeader.style.marginLeft = '20px';
-            insightsHeader.style.fontFamily = 'Arial';
-            this.popoutMgr.appendItem(insightsHeader);
+            if (analysisType !== 'peer_comparison') {
+                const insightsHeader = document.createElement('h3');
+                insightsHeader.innerText = "Stock Insights";
+                insightsHeader.style.marginLeft = '20px';
+                insightsHeader.style.fontFamily = 'Arial';
+                this.popoutMgr.appendItem(insightsHeader);
 
-            let insights_xml = this.getStockPriceInsights(result1);
-            let tabContentDiv_2 = this.createTabContent(insights_xml, 'tabContent active', true, []);
-            this.popoutMgr.appendItem(tabContentDiv_2);
+                let insights_xml = this.getStockPriceInsights(result1);
+                let tabContentDiv_2 = this.createTabContent(insights_xml, 'tabContent active', true, []);
+                this.popoutMgr.appendItem(tabContentDiv_2);
+            } else {
+                // Handle Peer Comparison Display
+                for (const [peerName, peerPriceData] of Object.entries(peersData)) {
+                    const peerHeader = document.createElement('h3');
+                    peerHeader.innerText = `Peer Analysis: ${peerName}`;
+                    peerHeader.style.marginLeft = '20px';
+                    peerHeader.style.marginTop = '30px';
+                    peerHeader.style.fontFamily = 'Arial';
+                    peerHeader.style.color = 'blue';
+                    this.popoutMgr.appendItem(peerHeader);
 
+                    const peerAnalysis = this.computeAnalysisSegments(peerPriceData);
+                    this.popoutMgr.appendItem(this.createTabContent(peerAnalysis.infoJson, 'tabContent active', false, []));
+                    this.popoutMgr.appendItem(this.createStockPricePlot(peerAnalysis.data, 'tabContent active', peerAnalysis.segments));
+                }
+            }
 
             this.popoutMgr.showPopout();
         }, (error) => {

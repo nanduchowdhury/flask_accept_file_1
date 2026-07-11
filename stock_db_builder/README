@@ -1,0 +1,21 @@
+cd stock_db_builder
+
+1. (Optional)
+    Run 'python test_nse.py'
+    Run 'python build_database.py'
+
+    This will create output/nse_companies.json
+
+2. Create master database
+
+    python build_database.py
+
+    This will create output/stocks_master.json
+    It currently contains approx 2384 companies.
+
+
+
+
+
+
+
