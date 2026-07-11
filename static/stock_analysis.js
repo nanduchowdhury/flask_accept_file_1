@@ -25,14 +25,15 @@ class StockAnalysisMain {
         if (!dropdown || !descriptionArea) return;
 
         const descriptions = {
-            "-2.0": "Identifies periods where the stock price has fallen by at least 2% without any intermediate rise.",
-            "-5.0": "Identifies periods where the stock price has fallen by at least 5% without any intermediate rise.",
-            "2.0": "Identifies periods where the stock price has risen by at least 2% without any intermediate fall.",
-            "5.0": "Identifies periods where the stock price has risen by at least 5% without any intermediate fall.",
-            "drawdown_5": "Shows how much the stock has fallen from its peak, highlighting drops of 5% or more.",
-            "recovery": "Analyzes how the stock has bounced back from its lowest point in the selected period.",
-            "event_timeline": "Displays significant corporate events, news, and market milestones for the stock.",
-            "peer_comparison": "Compares the performance of the selected stock with its industry peers over the chosen period."
+            "ANALYSIS_CONT_DECLINE_2PCT": "Identifies periods where the stock price has fallen by at least 2% without any intermediate rise.",
+            "ANALYSIS_CONT_DECLINE_5PCT": "Identifies periods where the stock price has fallen by at least 5% without any intermediate rise.",
+            "ANALYSIS_CONT_RISE_2PCT": "Identifies periods where the stock price has risen by at least 2% without any intermediate fall.",
+            "ANALYSIS_CONT_RISE_5PCT": "Identifies periods where the stock price has risen by at least 5% without any intermediate fall.",
+            "ANALYSIS_DRAWDOWN_5": "Shows how much the stock has fallen from its peak, highlighting drops of 5% or more.",
+            "ANALYSIS_RECOVERY": "Analyzes how the stock has bounced back from its lowest point in the selected period.",
+            "ANALYSIS_EVENT_TIMELINE": "Displays significant corporate events, news, and market milestones for the stock.",
+            "ANALYSIS_PEER_COMPARISON": "Compares the performance of the selected stock with its industry peers over the chosen period.",
+            "ANALYSIS_WEEKLY_AVG_RETURN": "Calculates and displays the average percentage return for each week in the selected period."
         };
 
         descriptionArea.textContent = descriptions[dropdown.value] || "";
@@ -203,13 +204,13 @@ class StockAnalysisMain {
         }
 
         const dropdown = document.getElementById("analysis-type-dropdown");
-        const selection = dropdown ? dropdown.value : "-2.0";
+        const selection = dropdown ? dropdown.value : "ANALYSIS_CONT_DECLINE_2PCT";
 
         let segments = [];
         let info = {};
         let highlightPoints = [];
 
-        if (selection === "event_timeline") {
+        if (selection === "ANALYSIS_EVENT_TIMELINE") {
             if (Array.isArray(events)) {
                 highlightPoints = events.map((ev, idx) => ({
                     date: ev.date,
@@ -219,50 +220,48 @@ class StockAnalysisMain {
 
             segments = [];
             info = {
-                "Analysis_Type": "Event Timeline Analysis",
                 "Description": "Overview of major events influencing stock performance.",
                 "Note": "Timeline details are populated based on historical news and filings.",
                 "Events": events || "No events found."
             };
             return { segments, infoJson: JSON.stringify(info), data, highlightPoints };
-        } else if (selection === "recovery") {
+        } else if (selection === "ANALYSIS_RECOVERY") {
             const result = this.computeRecoverySegments(data);
             segments = result.segments;
             info = {
-                "Analysis_Type": "Recovery from Low Analysis",
                 "Red_Zone_Cutoff": result.redCutoff,
                 "Green_Zone_Cutoff": result.greenCutoff,
                 "Recovery_Ratio": result.recoveryRatio,
                 "Recovery_Duration": result.recoveryDuration,
                 "Note": "Red marks initial recovery, Green marks high recovery from global low"
             };
-        } else if (selection.startsWith("recovery")) {
-            const parts = selection.split('_');
-            const green_limit = parseFloat(parts[1]) || 10.0;
-            const red_limit = parseFloat(parts[2]) || 2.0;
-            // Fallback for legacy threshold-based calls if needed
-            const result = this.computeRecoverySegments(data); 
-            segments = result.segments;
-            info = { 
-                "Analysis_Type": "Recovery from Low", 
-                "Red_Zone_Cutoff": result.redCutoff,
-                "Green_Zone_Cutoff": result.greenCutoff,
-                "Recovery_Ratio": result.recoveryRatio,
-                "Recovery_Duration": result.recoveryDuration,
-                "Note": "Threshold parameters ignored in new logic" 
-            };
-        } else if (selection.startsWith("drawdown")) {
-            const threshold = parseFloat(selection.split('_')[1]) || 5.0;
+        } else if (selection == "ANALYSIS_DRAWDOWN") {
+            const threshold = parseFloat(selection.split('_')[2]) || 5.0;
             segments = this.computeDrawdownSegments(data, threshold);
             info = {
-                "Analysis_Type": "3-Part Drawdown Distribution",
                 "Green_Zone": "Drawdown >= -2.0% (Near Highs)",
                 "Middle_Part": `Drawdown between -2.0% and -${threshold}% (Ignored)`,
                 "Red_Zone": `Drawdown <= -${threshold}% (Correction)`,
                 "Segments_Found": segments.length
             };
+        } else if ( selection == "ANALYSIS_PEER_COMPARISON") {
+            segments = [];
+            info = {
+            };
+        } else if (selection === "ANALYSIS_WEEKLY_AVG_RETURN") {
+            segments = [];
+            info = {
+                "Description": "Weekly percentage return analysis.",
+                "Note": "See 'Stock Advance Insights' below for details."
+            };
         } else {
-            const target_pct = parseFloat(selection);
+            const valueMap = {
+                "ANALYSIS_CONT_DECLINE_2PCT": -2.0,
+                "ANALYSIS_CONT_DECLINE_5PCT": -5.0,
+                "ANALYSIS_CONT_RISE_2PCT": 2.0,
+                "ANALYSIS_CONT_RISE_5PCT": 5.0
+            };
+            const target_pct = valueMap[selection] !== undefined ? valueMap[selection] : (parseFloat(selection) || -2.0);
             const rawSegments = Array.isArray(data) ? this.computeRiseOrDecline(data, target_pct) : [];
             const segmentColor = target_pct > 0 ? '#28a745' : 'red';
             segments = rawSegments.map(seg => ({ ...seg, color: segmentColor }));
@@ -834,13 +833,13 @@ class StockAnalysisMain {
         const period = monthsDropdown ? monthsDropdown.value : "12";
 
         const analysisDropdown = document.getElementById("analysis-type-dropdown");
-        const analysisType = analysisDropdown ? analysisDropdown.value : "-2.0";
+        const analysisType = analysisDropdown ? analysisDropdown.value : "ANALYSIS_CONT_DECLINE_2PCT";
 
         const requestTypes = ['STOCK_BASICS'];
-        if (analysisType === 'event_timeline') {
+        if (analysisType === 'ANALYSIS_EVENT_TIMELINE') {
             requestTypes.push('STOCK_EVENTS');
         }
-        if (analysisType === 'peer_comparison') {
+        if (analysisType === 'ANALYSIS_PEER_COMPARISON') {
             requestTypes.push('STOCK_PEER_COMPARISON');
         }
 
@@ -885,17 +884,27 @@ class StockAnalysisMain {
             let tabContentDiv_1 = this.createStockPricePlot(analysisResult.data, 'tabContent active', analysisResult.segments, analysisResult.highlightPoints);
             this.popoutMgr.appendItem(tabContentDiv_1);
 
-            if (analysisType !== 'peer_comparison') {
+
+            const insightsHeader = document.createElement('h3');
+            insightsHeader.innerText = "Stock Insights";
+            insightsHeader.style.marginLeft = '20px';
+            insightsHeader.style.fontFamily = 'Arial';
+            this.popoutMgr.appendItem(insightsHeader);
+            let insights_xml = this.getStockPriceInsights(result1);
+            let tabContentDiv_2 = this.createTabContent(insights_xml, 'tabContent active', true, []);
+            this.popoutMgr.appendItem(tabContentDiv_2);
+
+            if (analysisType === 'ANALYSIS_WEEKLY_AVG_RETURN') {
                 const insightsHeader = document.createElement('h3');
-                insightsHeader.innerText = "Stock Insights";
+                insightsHeader.innerText = "Stock Advance Insights";
                 insightsHeader.style.marginLeft = '20px';
                 insightsHeader.style.fontFamily = 'Arial';
                 this.popoutMgr.appendItem(insightsHeader);
-
-                let insights_xml = this.getStockPriceInsights(result1);
+                let insights_xml = this.getAvgWeeklyReturn(result1);
                 let tabContentDiv_2 = this.createTabContent(insights_xml, 'tabContent active', true, []);
                 this.popoutMgr.appendItem(tabContentDiv_2);
-            } else {
+
+            } else if (analysisType == 'ANALYSIS_PEER_COMPARISON') {
                 // Handle Peer Comparison Display
                 for (const [peerName, peerPriceData] of Object.entries(peersData)) {
                     const peerHeader = document.createElement('h3');
@@ -976,7 +985,6 @@ class StockAnalysisMain {
 
         let max = items[0], min = items[0], total = 0;
         let upDays = 0, downDays = 0;
-        const weeklyGroups = {};
 
         items.forEach((item, index) => {
             if (item.price > max.price) max = item;
@@ -987,34 +995,11 @@ class StockAnalysisMain {
                 if (item.price > items[index - 1].price) upDays++;
                 else if (item.price < items[index - 1].price) downDays++;
             }
-
-            let d = this._parseStockDate(item.date);
-
-            const day = d.getDay(), diff = d.getDate() - day + (day === 0 ? -6 : 1);
-            const monday = new Date(d.setDate(diff)).toISOString().split('T')[0];
-            if (!weeklyGroups[monday]) weeklyGroups[monday] = [];
-            weeklyGroups[monday].push(item.price);
         });
 
         const returnPct = ((items[items.length - 1].price - items[0].price) / items[0].price) * 100;
         const mappedItems = items.map(it => ({ stock_price: it.price }));
         const countSegments = (pct) => this.computeRiseOrDecline(mappedItems, pct).length;
-
-        const avg_every_week = [];
-        const sortedWeeks = Object.keys(weeklyGroups).sort();
-        
-        for (let i = 0; i < sortedWeeks.length; i++) {
-            const currentWeekPrices = weeklyGroups[sortedWeeks[i]];
-            const lastOfCurrent = currentWeekPrices[currentWeekPrices.length - 1];
-            const prevClose = i === 0 ? currentWeekPrices[0] : weeklyGroups[sortedWeeks[i - 1]].slice(-1)[0];
-            
-            const pct = ((lastOfCurrent - prevClose) / prevClose) * 100;
-
-            // Convert YYYY-MM-DD back to Date object for formatting
-            const [y, m, dayPart] = sortedWeeks[i].split('-').map(Number);
-            const formattedDate = this._formatStockDate(new Date(y, m - 1, dayPart));
-            avg_every_week.push(`${formattedDate}     ${pct.toFixed(2)}%`);
-        }
 
         const currentPrice = items[items.length - 1].price;
         const getDMA = (p) => {
@@ -1045,10 +1030,57 @@ class StockAnalysisMain {
                 `5%     ${countSegments(5)}`,
                 `7%     ${countSegments(7)}`,
                 `10%    ${countSegments(10)}`
-            ],
-            avg_return_every_week: avg_every_week
+            ]
         };
 
+        return JSON.stringify(insights);
+    }
+
+    getAvgWeeklyReturn(result1) {
+        let data;
+        try {
+            data = JSON.parse(result1);
+        } catch (e) {
+            return [];
+        }
+
+        if (!Array.isArray(data) || data.length === 0) return [];
+
+        // Normalize property names and filter valid entries
+        const items = data.map(d => ({
+            price: parseFloat(d.Close || d.stock_price || 0),
+            date: d.Date || d.date_time || ""
+        })).filter(d => !isNaN(d.price) && d.date !== "");
+
+        if (items.length === 0) return [];
+
+        const weeklyGroups = {};
+        items.forEach((item) => {
+            let d = this._parseStockDate(item.date);
+            const day = d.getDay(), diff = d.getDate() - day + (day === 0 ? -6 : 1);
+            const monday = new Date(d.setDate(diff)).toISOString().split('T')[0];
+            if (!weeklyGroups[monday]) weeklyGroups[monday] = [];
+            weeklyGroups[monday].push(item.price);
+        });
+
+        const avg_every_week = [];
+        const sortedWeeks = Object.keys(weeklyGroups).sort();
+
+        for (let i = 0; i < sortedWeeks.length; i++) {
+            const currentWeekPrices = weeklyGroups[sortedWeeks[i]];
+            const lastOfCurrent = currentWeekPrices[currentWeekPrices.length - 1];
+            const prevClose = i === 0 ? currentWeekPrices[0] : weeklyGroups[sortedWeeks[i - 1]].slice(-1)[0];
+
+            const pct = ((lastOfCurrent - prevClose) / prevClose) * 100;
+
+            // Convert YYYY-MM-DD back to Date object for formatting
+            const [y, m, dayPart] = sortedWeeks[i].split('-').map(Number);
+            const formattedDate = this._formatStockDate(new Date(y, m - 1, dayPart));
+            avg_every_week.push(`${formattedDate}     ${pct.toFixed(2)}%`);
+        }
+        const insights = {
+            avg_return_every_week: avg_every_week
+        };
         return JSON.stringify(insights);
     }
 
