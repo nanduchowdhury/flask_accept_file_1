@@ -555,7 +555,9 @@ class StockAnalysisMain {
                 } else if (typeof value === 'object' && value !== null) {
                     html += `<br>${this._generateHtml(value, level + 1, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors)}`;
                 } else {
-                    html += `${value}`;
+                    const isNegative = negativeValuesInRed && this.hasNegativeValue(value);
+                    const colorStyle = isNegative ? 'style="color: red;"' : '';
+                    html += `<span ${colorStyle}>${value}</span>`;
                 }
                 html += `</div><br>`;
             }
@@ -568,7 +570,9 @@ class StockAnalysisMain {
                 });
             }
         } else {
-            html += `${obj}`;
+            const isNegative = negativeValuesInRed && this.hasNegativeValue(obj);
+            const colorStyle = isNegative ? 'style="color: red;"' : '';
+            html += `<span ${colorStyle}>${obj}</span>`;
         }
         return html;
     }
