@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Disclaimer | bluepayload</title>
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon/favicon-16x16.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="stylesheet" href="/static/home.css">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="/static/header.css">
+    <link rel="stylesheet" href="/static/MessageBox.css">
+</head>
+<body>
+    <header class="header-container">
+        <a href="https://bluepayload.com/" target="_blank">
+            <img src="https://cdn.jsdelivr.net/gh/nanduchowdhury/flask_accept_file_1@main/static/images/bluepayload-logo.png" class="logo" alt="bluepayload Logo" width="150" height="50">
+        </a>
+        <div class="center-container">
+            <a href="https://chat.whatsapp.com/FvVmisOUhLs4paiPPQU5Pc" target="_blank" class="whatsapp-btn">
+                <i class="fab fa-whatsapp"></i> Join WhatsApp Group
+            </a>
+        </div>
+    </header>
+
+    <main class="home-area-container">
+        <h1 class="welcome-heading">Disclaimer</h1>
+        
+        <div class="about-area">
+            <section>
+                <h2>No Financial Advice</h2>
+                <p>Disclaimer: BluePayload provides market data, analytics, and educational information only. Nothing on this website constitutes investment advice, a recommendation to buy or sell securities, or financial, legal, or tax advice. Users should perform their own research and consult a qualified financial professional before making investment decisions.</p>
+            </section>
+
+            <section>
+                <h2>Platform Nature</h2>
+                <p>BluePayload is an online stock market analytics platform that provides historical market data, charts, technical indicators, sector analysis, and educational research tools. We do not execute trades, manage investments, provide brokerage services, or offer personalized investment advice.</p>
+            </section>
+
+            <section>
+                <h2>Accuracy of Data</h2>
+                <p>While we strive for accuracy, market data is sourced from third parties and we cannot guarantee its timeliness or completeness.</p>
+            </section>
+        </div>
+
+        <aside id="SocialArea" class="social-area">
+            <div class="left-links">
+                <a href="/home/about">About</a>
+                <a href="/home/contact">Contact</a>
+                <a href="/home/privacy">Privacy Policy</a>
+                <a href="/home/terms">Terms of Service</a>
+                <a href="/home/disclaimer">Disclaimer</a>
+            </div>
+            <div class="social-links">
+                <a href="https://x.com/nandu_chowdhury" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.linkedin.com/company/bluepayload/" target="_blank" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:contact@bluepayload.com" class="social-icon"><i class="fas fa-envelope"></i></a>
+            </div>
+        </aside>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            window.errorManager = new ErrorManager();
+            window.basicInitializer = new ContentOrHomeInitializer('homePage');
+            
+            setTimeout(() => {
+                const scriptGA = document.createElement("script");
+                scriptGA.src = "https://www.googletagmanager.com/gtag/js?id=G-4NLLJX710S";
+                scriptGA.async = true;
+                document.head.appendChild(scriptGA);
+            }, 2000);
+        });
+    </script>
+    <script defer src="/static/BasicInitializer.js"></script>
+    <script defer src="/static/errorManager.js"></script>
+</body>
+</html>

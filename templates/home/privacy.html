@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Privacy Policy | bluepayload</title>
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon/favicon-16x16.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="stylesheet" href="/static/home.css">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="/static/header.css">
+    <link rel="stylesheet" href="/static/MessageBox.css">
+</head>
+<body>
+    <style>
+        html, body { margin: 0; padding: 0; overflow-x: hidden; max-width: 100vw; box-sizing: border-box; }
+        .welcome-heading .line-1 { color: #161cca; }
+    </style>
+    
+    <header class="header-container">
+        <a href="https://bluepayload.com/" target="_blank">
+            <img src="https://cdn.jsdelivr.net/gh/nanduchowdhury/flask_accept_file_1@main/static/images/bluepayload-logo.png" class="logo" alt="bluepayload Logo" width="150" height="50">
+        </a>
+        <div class="center-container">
+            <a href="https://chat.whatsapp.com/FvVmisOUhLs4paiPPQU5Pc" target="_blank" class="whatsapp-btn">
+                <i class="fab fa-whatsapp"></i> Join WhatsApp Group
+            </a>
+        </div>
+    </header>
+
+    <main class="home-area-container">
+        <h1 class="welcome-heading">Privacy Policy</h1>
+        
+        <div class="about-area">
+            <section>
+                <h2>Introduction</h2>
+                <p>BluePayload ("we", "us") respects your privacy. This policy explains how we collect and use data.</p>
+            </section>
+
+            <section>
+                <h2>Information We Collect</h2>
+                <p>We do not collect personal data unless you contact us via email. We use third-party analytics (Google Analytics and Microsoft Clarity) which may collect non-personal browser data and IP addresses.</p>
+            </section>
+
+            <section>
+                <h2>Cookies</h2>
+                <p>We use cookies to improve user experience and analyze traffic patterns. You can manage cookie settings in your browser.</p>
+            </section>
+        </div>
+
+        <aside id="SocialArea" class="social-area">
+            <div class="left-links">
+                <a href="/home/about">About</a>
+                <a href="/home/contact">Contact</a>
+                <a href="/home/privacy">Privacy Policy</a>
+                <a href="/home/terms">Terms of Service</a>
+                <a href="/home/disclaimer">Disclaimer</a>
+            </div>
+            <div class="social-links">
+                <a href="https://x.com/nandu_chowdhury" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.linkedin.com/company/bluepayload/" target="_blank" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:contact@bluepayload.com" class="social-icon"><i class="fas fa-envelope"></i></a>
+            </div>
+        </aside>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            window.errorManager = new ErrorManager();
+            window.basicInitializer = new ContentOrHomeInitializer('homePage');
+            
+            setTimeout(() => {
+                const scriptGA = document.createElement("script");
+                scriptGA.src = "https://www.googletagmanager.com/gtag/js?id=G-4NLLJX710S";
+                scriptGA.async = true;
+                document.head.appendChild(scriptGA);
+            }, 2000);
+        });
+    </script>
+    <script defer src="/static/BasicInitializer.js"></script>
+    <script defer src="/static/errorManager.js"></script>
+</body>
+</html>

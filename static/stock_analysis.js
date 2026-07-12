@@ -348,7 +348,19 @@ class StockAnalysisMain {
         }
 
         tabContentDiv.style.fontFamily = 'Arial';
+
         return tabContentDiv;
+    }
+
+    appendDisclaimer() {
+        const disclaimer = document.createElement('div');
+        disclaimer.style.fontSize = '11px';
+        disclaimer.style.color = 'gray';
+        disclaimer.style.marginTop = '20px';
+        disclaimer.style.padding = '0 20px 20px 20px';
+        disclaimer.style.lineHeight = '1.5';
+        disclaimer.innerHTML = `<hr>Disclaimer: BluePayload provides market data, analytics, and educational information only. Nothing on this website constitutes investment advice, a recommendation to buy or sell securities, or financial, legal, or tax advice. Users should perform their own research and consult a qualified financial professional before making investment decisions.`;
+        this.popoutMgr.appendItem(disclaimer);
     }
 
     createStockPricePlot(data, className, analysisSegments, highlightPointsOnPlot = []) {
@@ -361,6 +373,8 @@ class StockAnalysisMain {
             // Check for valid data for plotting
             if (!Array.isArray(data) || data.length === 0 || data[0].stock_price === undefined) {
                 tabContentDiv.innerHTML = this._generateHtml(data, 1, true, []);
+
+                tabContentDiv = this.appendDisclaimer(tabContentDiv);
                 return tabContentDiv;
             }
 
@@ -454,6 +468,7 @@ class StockAnalysisMain {
         } catch (e) {
             tabContentDiv.innerHTML = "Plot Generation Error: " + e.message;
         }
+
         return tabContentDiv;
     }
 
@@ -687,6 +702,7 @@ class StockAnalysisMain {
                                         negativeValuesInRed, listOfKeysToBeShownInTab);
 
             this.popoutMgr.appendItem(tabContentDiv);
+            this.appendDisclaimer();
             this.popoutMgr.showPopout();
         });
     }
@@ -709,6 +725,7 @@ class StockAnalysisMain {
                                         negativeValuesInRed, listOfKeysToBeShownInTab);
 
             this.popoutMgr.appendItem(tabContentDiv);
+            this.appendDisclaimer();
             this.popoutMgr.showPopout();
         });
     }
@@ -731,6 +748,7 @@ class StockAnalysisMain {
                                         negativeValuesInRed, listOfKeysToBeShownInTab);
 
             this.popoutMgr.appendItem(tabContentDiv);
+            this.appendDisclaimer();
             this.popoutMgr.showPopout();
         });
     }
@@ -753,6 +771,7 @@ class StockAnalysisMain {
                                         negativeValuesInRed, listOfKeysToBeShownInTab);
 
             this.popoutMgr.appendItem(tabContentDiv);
+            this.appendDisclaimer();
             this.popoutMgr.showPopout();
         });
     }
@@ -775,6 +794,7 @@ class StockAnalysisMain {
                                         negativeValuesInRed, listOfKeysToBeShownInTab);
 
             this.popoutMgr.appendItem(tabContentDiv);
+            this.appendDisclaimer();
             this.popoutMgr.showPopout();
         });
     }
@@ -797,6 +817,7 @@ class StockAnalysisMain {
                                         negativeValuesInRed, listOfKeysToBeShownInTab);
 
             this.popoutMgr.appendItem(tabContentDiv);
+            this.appendDisclaimer();
             this.popoutMgr.showPopout();
         });
     }
@@ -819,6 +840,7 @@ class StockAnalysisMain {
                                         negativeValuesInRed, listOfKeysToBeShownInTab);
 
             this.popoutMgr.appendItem(tabContentDiv);
+            this.appendDisclaimer();
             this.popoutMgr.showPopout();
         });
     }
@@ -925,6 +947,7 @@ class StockAnalysisMain {
                 }
             }
 
+            this.appendDisclaimer();
             this.popoutMgr.showPopout();
         }, (error) => {
             errorManager.showError(2044, error);

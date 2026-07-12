@@ -94,6 +94,9 @@ class ScholarKM(Flask):
         self.route('/home/about')(self.about)
         self.route('/home/contact')(self.contact)
         self.route('/home/sitemap')(self.sitemap)
+        self.route('/home/disclaimer')(self.disclaimer)
+        self.route('/home/terms')(self.terms)
+        self.route('/home/privacy')(self.privacy)
 
         self.route('/home/learning')(self.learning_km_index)
         self.route('/home/stocks_analysis')(self.stocks_analysis_km_index)
@@ -336,6 +339,15 @@ class ScholarKM(Flask):
 
     def sitemap(self):
         return render_template("home/sitemap.html")
+
+    def disclaimer(self):
+        return render_template("home/disclaimer.html")
+
+    def terms(self):
+        return render_template("home/terms.html")
+
+    def privacy(self):
+        return render_template("home/privacy.html")
 
     def get_sub_topics_km(self):
         
