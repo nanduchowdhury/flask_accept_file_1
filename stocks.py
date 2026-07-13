@@ -41,6 +41,9 @@ class StockDataRetriever:
     # Built once at startup
     peer_db = {}
 
+    # Cached list of available tickers
+    ticker_list = []
+
     # Internal indexes
     industry_index = defaultdict(list)
     sector_index = defaultdict(list)
@@ -221,12 +224,10 @@ class StockDataRetriever:
 
     def getExpandedName(self, ticker):
         """
-        Fetches the full company name for a given ticker symbol using yfinance.
+        Returns the full company name from the local master database.
         """
-        try:
-            return yf.Ticker(ticker).info.get('longName', ticker)
-        except Exception:
-            return ticker
+        company = self.stock_db.get(ticker, {})
+        return company.get("company_name") or company.get("short_name") or ticker
 
     def getData(self, ticker, months="12"):
         try:
@@ -257,26 +258,19 @@ class StockDataRetriever:
 
     def getTickerList(self):
         """
-        Fetches the Nifty 500 ticker list dynamically from the official NSE source.
-        While yfinance itself doesn't provide index components directly, this 
-        ensures the symbols are current and formatted for yfinance (.NS) usage.
+        Returns the list of available tickers from the local master database.
+        Maintains a cached list to avoid repeated processing.
         """
-        url = "https://archives.nseindia.com/content/indices/ind_nifty500list.csv"
-        headers = {'User-Agent': 'Mozilla/5.0'}
-        
-        try:
-            response = requests.get(url, headers=headers)
-            response.raise_for_status()
-            
-            csv_reader = csv.DictReader(io.StringIO(response.text))
-            tickers = [f"{row['Company Name']} - {row['Symbol']}.NS" for row in csv_reader if 'Symbol' in row and 'Company Name' in row]
-            if tickers:
-                return tickers
-        except Exception:
-            # Fallback to curated list if remote fetch fails
-            pass
+        if self.ticker_list:
+            return self.ticker_list
 
-        return []
+        # Prepare the list directly from stock_db
+        for ticker, company in self.stock_db.items():
+            name = company.get("company_name") or company.get("short_name") or ticker
+            self.ticker_list.append(f"{name} - {ticker}")
+
+        self.ticker_list.sort()
+        return self.ticker_list
 
     def getEvents(self, ticker, months="12"):
         """

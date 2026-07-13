@@ -190,7 +190,7 @@ class ScholarKM(Flask):
         self.gemini_access = GeminiAccess(self.sess, self.error_manager)
         self.gemini_access.initialize()
 
-        self.email_support = EmailSupport(self.error_manager)
+        # self.email_support = EmailSupport(self.error_manager)
 
         self.gcs_manager = GCSManager("kupmanduk-bucket", constants.GCS_ROOT_FOLDER)
 
@@ -198,7 +198,7 @@ class ScholarKM(Flask):
 
         self.retriever = StockDataRetriever()
 
-        self.start_all_content_creator_threads()
+        # self.start_all_content_creator_threads()
 
     def extract_text_from_pdf(self, pdf_path):
         text = ""
