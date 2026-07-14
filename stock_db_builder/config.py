@@ -37,3 +37,8 @@ USER_AGENT = (
     "(KHTML, like Gecko) "
     "Chrome/138.0 Safari/537.36"
 )
+
+KNOWLEDGE_DIR = os.path.join(
+    BASE_DIR,
+    "knowledge"
+)

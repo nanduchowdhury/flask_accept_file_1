@@ -1,0 +1,90 @@
+{
+    "AI": {
+        "keywords": [
+            "artificial intelligence",
+            "ai",
+            "machine learning",
+            "deep learning",
+            "generative ai",
+            "llm"
+        ]
+    },
+
+    "Data Center": {
+        "keywords": [
+            "data center",
+            "datacenter",
+            "server",
+            "cooling",
+            "rack",
+            "hyperscale"
+        ]
+    },
+
+    "Cloud": {
+        "keywords": [
+            "cloud",
+            "saas",
+            "iaas",
+            "paas"
+        ]
+    },
+
+    "5G": {
+        "keywords": [
+            "5g",
+            "telecom",
+            "fiber",
+            "optic fibre"
+        ]
+    },
+
+    "EV": {
+        "keywords": [
+            "electric vehicle",
+            "ev",
+            "battery",
+            "charging"
+        ]
+    },
+
+    "Defense": {
+        "keywords": [
+            "defence",
+            "defense",
+            "missile",
+            "radar",
+            "military"
+        ]
+    },
+
+    "Railway": {
+        "keywords": [
+            "railway",
+            "rail",
+            "locomotive",
+            "wagon",
+            "metro"
+        ]
+    },
+
+    "Semiconductor": {
+        "keywords": [
+            "semiconductor",
+            "chip",
+            "wafer",
+            "fab",
+            "osat"
+        ]
+    },
+
+    "Renewable Energy": {
+        "keywords": [
+            "solar",
+            "wind",
+            "renewable",
+            "green energy",
+            "hydrogen"
+        ]
+    }
+}

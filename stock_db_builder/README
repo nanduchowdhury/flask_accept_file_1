@@ -1,4 +1,9 @@
-cd stock_db_builder
+cd stock_db_builder/
+
+ The overall idea is to create master-JSON from yahoo.
+ Then add incrementally into the master-JSON - such as
+ themes, index etc. for each company.
+
 
 1. (Optional)
     Run 'python test_nse.py'
@@ -12,6 +17,22 @@ cd stock_db_builder
 
     This will create output/stocks_master.json
     It currently contains approx 2384 companies.
+
+3. Create template knowledge/themes.json
+
+    python build_themes.py
+
+    This will take the master-database from #2 
+    above - and add themes.
+
+4. No need to create JSON inside knowledge/ - the script
+   will download from NSE etc.
+
+   python build_indices.py
+
+   This will modify master-JSON with indices for each company.
+
+
 
 
 
