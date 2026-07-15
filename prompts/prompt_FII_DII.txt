@@ -5,3 +5,4 @@ Give me JSON format data for sectors in NIFTY as follows:
     3. For each key or sector - give prediction 
         of FII/DII for coming qtrs.
     4. Keep all sectors under top-level-key 'DII_FII_sector_keys'.
+    5. Give numbers as much as possible for all data-points.

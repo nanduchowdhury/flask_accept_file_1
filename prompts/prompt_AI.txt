@@ -7,3 +7,4 @@ Give me JSON format data for India AI sector as follows:
         US/Europe market they are caterning to, etc.
     3. For each key or company - give expected impact from global data etc.
     4. Keep all companies under key - related_companies.
+    5. Give numbers as much as possible for all data-points.

@@ -6,3 +6,4 @@ Give me JSON format data for India economy as follows:
     3. Keep all parameters under top-level-key 'parameters'.
     4. Put generated-date, delta-scale etc in the 
         first-section of the JSON.
+    5. Give numbers as much as possible for all data-points.
