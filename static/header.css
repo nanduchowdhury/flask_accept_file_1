@@ -5,13 +5,29 @@
     color: rgba(2, 19, 2, 0.993); /* Green color */
 }
 
-.header-container {
-    position: relative;
-    padding: 2px 90px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* Push logo-left and menu-right */
-    gap: 20px;
+.header-container{
+
+    position:relative;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:10px 30px;
+
+    gap:20px;
+
+}
+@media (max-width:768px){
+
+.header-container{
+
+    padding:10px 12px;
+
+}
+
 }
 
 /* Center container: Column layout */
@@ -88,14 +104,13 @@
 }
 
 /* Logo styling */
-.logo {
-    position: absolute;
-    top: 10px;        /* Position from top */
-    left: 10px;       /* Position from left */
-    width: 100px;      /* Smaller size for the logo */
-    height: auto;
-}
+.logo{
 
+    width:100px;
+
+    height:auto;
+
+}
 /* App name styling - center the app name */
 .app-name {
     position: absolute;
@@ -178,25 +193,39 @@
 
 
 .whatsapp-btn {
+
     background-color: #0a9b3f;
     color: white;
-    padding: 6px 14px;
-    border-radius: 20px;
-    text-decoration: none;
-    font-family: 'Patrick Hand';
-    font-weight: bold;
-    font-size: 10px;
-    display: flex;
+
+    display: inline-flex;
     align-items: center;
-    gap: 8px;
-    transition: background-color 0.3s ease, transform 0.2s;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    justify-content: center;
+
+    gap: 10px;
+
+    min-height: 48px;
+    min-width: 220px;
+
+    padding: 12px 22px;
+
+    border-radius: 24px;
+
+    font-family: 'Patrick Hand';
+    font-size: 15px;
+    font-weight: bold;
+
+    text-decoration: none;
+
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+
+    transition: background-color .2s,
+                transform .2s;
 }
 
 .whatsapp-btn:hover {
-    background-color: #128C7E;
-    color: white;
-    transform: translateY(-1px);
+    background-color:#128C7E;
+    color:white;
+    transform:translateY(-2px);
 }
 
 .research-container {
