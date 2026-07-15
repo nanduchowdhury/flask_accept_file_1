@@ -193,7 +193,6 @@
 
 
 .whatsapp-btn {
-
     background-color: #0a9b3f;
     color: white;
 
@@ -201,25 +200,36 @@
     align-items: center;
     justify-content: center;
 
-    gap: 10px;
+    gap: 8px;
 
-    min-height: 48px;
-    min-width: 220px;
+    padding: 8px 14px;
 
-    padding: 12px 22px;
+    min-height: 40px;
 
-    border-radius: 24px;
+    border-radius: 20px;
 
     font-family: 'Patrick Hand';
-    font-size: 15px;
     font-weight: bold;
+    font-size: 12px;
 
     text-decoration: none;
 
-    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    white-space: nowrap;
 
-    transition: background-color .2s,
-                transform .2s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.12);
+
+    transition: background-color .2s, transform .2s;
+}
+@media (max-width:768px) {
+
+    .header-container {
+        padding: 8px 12px;
+    }
+
+    .whatsapp-btn {
+        font-size: 11px;
+        padding: 7px 12px;
+    }
 }
 
 .whatsapp-btn:hover {
