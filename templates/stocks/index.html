@@ -223,7 +223,16 @@
         const serverJsonData = {{ json_data | tojson | safe }};
     </script>
 
-    <script defer>
+    <!-- Defer JS -->
+    <script defer src="{{ url_for('static', filename='BasicInitializer.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='home_render.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='errorManager.js') }}"></script>    
+    <script defer src="{{ url_for('static', filename='geologicalInfo.js') }}"></script>
+    <script src="{{ url_for('static', filename='ContainerScrollBarControl.js') }}"></script>
+    <script src="{{ url_for('static', filename='popoutManager.js') }}"></script>
+    <script src="{{ url_for('static', filename='stock_analysis.js') }}"></script>
+
+    <script>
         if (window !== window.top) {
             document.body.style.overflow = "auto";
             document.documentElement.style.overflow = "auto";
@@ -245,9 +254,8 @@
                 })(window, document, "clarity", "script", "qqnxtjq93c");`;
                 document.body.appendChild(scriptClarity);
             }, 2000);
-        });
 
-        window.addEventListener('load', () => {
+            // Initialize Managers
             window.basicInitializer = new BasicInitializer(false);
             window.errorManager = new ErrorManager();
             window.stockAnalysisMain = new StockAnalysisMain();
@@ -266,7 +274,6 @@
 
             researchInput.addEventListener('input', () => {
                 window.stockAnalysisMain.handleTickerSuggestions(researchInput, suggestionsList, tickers);
-                // Show/hide clear button based on input content
                 clearBtn.style.display = researchInput.value ? 'block' : 'none';
             });
 
@@ -278,39 +285,26 @@
         });
 
         function handleCardClick(event, card_type) {
-            event.preventDefault(); // stops link navigation
+            event.preventDefault();
+
+            // Safety check to prevent errors if clicked before initialization
+            if (!window.stockAnalysisMain) return;
 
             if ( card_type == 'DII_FII' ) {
                 window.stockAnalysisMain.openDiiFiiPage();
-                return;
             } else if ( card_type == 'global_cues' ) {
                 window.stockAnalysisMain.openGlobalCuesPage();
-                return;
             } else if ( card_type == 'sector_weights' ) {
                 window.stockAnalysisMain.openSectorWeightsPage();
-                return;
             } else if ( card_type == 'india_economy' ) {
                 window.stockAnalysisMain.openIndiaEconomyPage();
-                return;
             } else if ( card_type == 'semiconductor' ) {
                 window.stockAnalysisMain.openIndiaSemiPage();
-                return;
             } else if ( card_type == 'AI' ) {
                 window.stockAnalysisMain.openIndiaAIPage();
-                return;
             }
         }
-
     </script>
-
-    <!-- Defer JS -->
-    <script defer src="{{ url_for('static', filename='BasicInitializer.js') }}"></script>
-    <script defer src="{{ url_for('static', filename='home_render.js') }}"></script>
-    <script defer src="{{ url_for('static', filename='errorManager.js') }}"></script>    
-    <script defer src="{{ url_for('static', filename='geologicalInfo.js') }}"></script>
-    <script src="{{ url_for('static', filename='ContainerScrollBarControl.js') }}"></script>
-    <script src="{{ url_for('static', filename='popoutManager.js') }}"></script>
-    <script src="{{ url_for('static', filename='stock_analysis.js') }}"></script>
     
 
 </body>

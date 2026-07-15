@@ -178,7 +178,16 @@
 
     <div id="genericPopoutId" class="genericPopout"></div>
 
-    <script defer>
+    <!-- Defer JS -->
+    <script defer src="{{ url_for('static', filename='BasicInitializer.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='home_render.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='errorManager.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='geologicalInfo.js') }}"></script>
+    <script src="{{ url_for('static', filename='ContainerScrollBarControl.js') }}"></script>
+    <script src="{{ url_for('static', filename='popoutManager.js') }}"></script>
+    <script src="{{ url_for('static', filename='stock_analysis.js') }}"></script>
+
+    <script>
         if (window !== window.top) {
             document.body.style.overflow = "auto";
             document.documentElement.style.overflow = "auto";
@@ -199,29 +208,21 @@
                     y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
                 })(window, document, "clarity", "script", "qqnxtjq93c");`;
                 document.body.appendChild(scriptClarity);
-            }, 2000);            
-        });
+            }, 2000);
 
-        window.addEventListener('load', () => {
+            // Initialize Managers immediately on DOM content ready
             window.basicInitializer = new BasicInitializer(false);
             window.errorManager = new ErrorManager();
             window.stockAnalysisMain = new StockAnalysisMain();
         });
 
         function handleCardClick(event, sector) {
-            event.preventDefault(); // stops link navigation
-            window.stockAnalysisMain.openSectorPage(sector);
+            event.preventDefault();
+            // Safety check to handle clicks during initial load
+            if (window.stockAnalysisMain) {
+                window.stockAnalysisMain.openSectorPage(sector);
+            }
         }
     </script>
-
-    <!-- Defer JS -->
-    <script defer src="{{ url_for('static', filename='BasicInitializer.js') }}"></script>
-    <script defer src="{{ url_for('static', filename='home_render.js') }}"></script>
-    <script defer src="{{ url_for('static', filename='errorManager.js') }}"></script>
-    <script defer src="{{ url_for('static', filename='geologicalInfo.js') }}"></script>
-    <script src="{{ url_for('static', filename='ContainerScrollBarControl.js') }}"></script>
-    <script src="{{ url_for('static', filename='popoutManager.js') }}"></script>
-    <script src="{{ url_for('static', filename='stock_analysis.js') }}"></script>
-
 </body>
 </html>
