@@ -139,7 +139,9 @@ class BasicInitializer extends RootInitializer{
 
         this.signed_main_content_url = '';
 
-        this.initializeVoices();
+        // Need to move voice-init elsewhere.
+        // this.initializeVoices();
+
         this.sendInitToServer();
 
         if ( confirmBeforeBackButton ) {

@@ -166,7 +166,6 @@ class ScholarKM(Flask):
         self.route('/basic_init', methods=['POST'])(self.basic_init)
         self.route('/ai_model_init', methods=['POST'])(self.ai_model_init)
         self.route('/learn_response', methods=['POST'])(self.learn_response)
-        self.route('/save_logs', methods=['POST'])(self.save_logs)
         self.route('/explain_region', methods=['POST'])(self.explain_region)
         self.route('/generate_MCQ', methods=['POST'])(self.generate_MCQ)
         self.route('/report_to_user', methods=['POST'])(self.report_to_user)
@@ -1179,34 +1178,6 @@ class ScholarKM(Flask):
 
         except Exception as e:
             self.error_manager.show_any_message(f"Exception during route subscribe : {str(e)}")
-
-    def save_logs(self):
-        try:
-            data = request.get_json()
-            client_uuid = self.get_or_generate_uuid(data)
-
-            self.sess.force_read_session(client_uuid)
-
-            self.request_prelude(client_uuid)
-
-            logs = data.get('logs', [])
-
-            if not logs:
-                return jsonify({"status": "no logs to save"}), 200
-            
-            log_file_path = self.sess.get_client_data(client_uuid, 'basic_init.log_file_path')
-
-            for log in logs:
-                self.gcs_manager.append_to_text_file(log_file_path, json.dumps(log))
-
-                # Print geo-location info from client into server-log.
-                if "MSG-1013" in json.dumps(log):
-                    self.error_manager.show_any_message(f"Client {client_uuid} : {log}")
-
-            return jsonify({"status": "logs saved"}), 200
-
-        except Exception as e:
-            self.error_manager.show_any_message(f"Exception during route save_logs : {str(e)}")
 
 
 app = ScholarKM()

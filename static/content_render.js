@@ -420,8 +420,6 @@ class ContentRender extends RootRender {
 
     doEverythingAfterGetSubTopics() {
 
-        this.logGeoLocation();
-
         for (let i = 0; i < this.jsonData.sub_topics_list.length; i++) {
             this.addOneTopicRow(this.jsonData.sub_topics_list[i]);
         }
@@ -519,11 +517,6 @@ class ContentRender extends RootRender {
 
     lamdaOnTopicRowSelectedRequestFailure = (msg) => {
         
-    }
-    
-    logGeoLocation() {
-        const geoInfo = new GeolocationInfo();
-        geoInfo.getFormattedInfo().then(info => window.errorManager.log(1013, info));
     }
 
     updateSectionAndTopic() {

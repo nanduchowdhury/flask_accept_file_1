@@ -10,11 +10,8 @@ class ErrorManager {
         this.logs = [];
         this.lastSentIndex = 0;
         this.interval = 60000; // send-logs interval 3mnts.
-        this.serverEndpoint = '/save_logs';
         this.timeoutID = null; // Holds the timeout ID
 
-        this.startSendingLogs();
-        
         this.loadErrorsFromFile();
         
         this.initMessageBox();
@@ -37,39 +34,6 @@ class ErrorManager {
 
         // Add event listener to OK button
         this.messageBoxOkButton.addEventListener('click', () => this.hideMessage());
-    }
-
-    startSendingLogs() {
-        setInterval(() => {
-            if (this.logs.length > this.lastSentIndex) {
-                // Send logs to the server in batches
-                const logsToSend = this.logs.slice(this.lastSentIndex);
-                this.sendLogsToServer(logsToSend);
-                this.lastSentIndex = this.logs.length;
-            }
-        }, this.interval);
-    }
-
-
-    sendLogsToServer(logs) {
-
-        const data = {
-            client_uuid: basicInitializer.getClient_UUID(),
-            clientId: basicInitializer.getClientId(),
-            logs: logs
-        };
-
-        basicInitializer.makeServerRequest(this.serverEndpoint, data, 
-            this.lamdaOnSaveLogsRequestSuccess, this.lamdaOnSaveLogsRequestFailure);
-    }
-
-    lamdaOnSaveLogsRequestSuccess = (data) => {
-    }
-
-    lamdaOnSaveLogsRequestFailure = (msg) => {
-        if ( msg ) {
-            this.showError(2045, msg);
-        }
     }
 
     loadErrorsFromFile() {

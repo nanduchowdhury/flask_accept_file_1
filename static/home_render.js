@@ -60,8 +60,6 @@ class HomeRender extends RootRender {
                 this.researchButton.click();
             }
         });
-        this.geoLocInfo = '';
-        this.logGeoLocation();
     }
 
     onResearchButtonClick() {
@@ -107,19 +105,6 @@ class HomeRender extends RootRender {
         datalist.innerHTML = combinedSuggestions.map(item => `<option value="${item}"></option>`).join('');
     }
     
-
-    logGeoLocation() {
-        const geoInfo = new GeolocationInfo();
-        
-        geoInfo.getFormattedInfo().then(info => {
-    
-            this.geoLocInfo = info;
-            window.errorManager.log(1013, info)
-    
-        }).catch(error => {
-            console.error("Failed to retrieve geolocation info :", error);
-        });
-    }
 
     showLinesFading(linesList, container) {
         let lineIndex = 0;

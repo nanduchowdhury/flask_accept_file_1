@@ -130,6 +130,21 @@
         <button id="messageBoxOkButton">OK</button>
     </div>
 
+    <!-- Load Sentry SDK -->
+    <script
+        src="https://js.sentry-cdn.com/423dcf7111b0930c274bbf13cef242ce.min.js"
+        crossorigin="anonymous">
+    </script>
+
+    <!-- Initialize Sentry -->
+    <script>
+    Sentry.init({
+        dsn: "https://423dcf7111b0930c274bbf13cef242ce@o4511743436652544.ingest.us.sentry.io/4511743457820672",
+        environment: "production",
+        tracesSampleRate: 0.05
+    });
+    </script>
+
     <script defer>
         if (window !== window.top) {
             document.body.style.overflow = "auto";
@@ -138,14 +153,6 @@
 
         document.addEventListener("DOMContentLoaded", function () {
             
-            window.errorManager = new ErrorManager();
-            window.basicInitializer = new ContentOrHomeInitializer('homePage');
-
-            const browser = new BrowserStartStop();
-            const render = new HomeRender();
-            render.renderHomeArea_1();
-            render.renderHomeArea_2();
-
             // Load Analytics After Content Loads
             setTimeout(() => {
                 const scriptGA = document.createElement("script");
@@ -165,10 +172,6 @@
     </script>
 
     <!-- Defer JS -->
-    <script defer src="{{ url_for('static', filename='BasicInitializer.js') }}"></script>
-    <script defer src="{{ url_for('static', filename='home_render.js') }}"></script>
-    <script defer src="{{ url_for('static', filename='errorManager.js') }}"></script>
-    <script defer src="{{ url_for('static', filename='geologicalInfo.js') }}"></script>
 
 </body>
 </html>

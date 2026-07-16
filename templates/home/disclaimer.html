@@ -65,10 +65,23 @@
         </aside>
     </main>
 
+    <!-- Load Sentry SDK -->
+    <script
+        src="https://js.sentry-cdn.com/423dcf7111b0930c274bbf13cef242ce.min.js"
+        crossorigin="anonymous">
+    </script>
+
+    <!-- Initialize Sentry -->
+    <script>
+    Sentry.init({
+        dsn: "https://423dcf7111b0930c274bbf13cef242ce@o4511743436652544.ingest.us.sentry.io/4511743457820672",
+        environment: "production",
+        tracesSampleRate: 0.05
+    });
+    </script>
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            window.errorManager = new ErrorManager();
-            window.basicInitializer = new ContentOrHomeInitializer('homePage');
             
             setTimeout(() => {
                 const scriptGA = document.createElement("script");
@@ -78,7 +91,5 @@
             }, 2000);
         });
     </script>
-    <script defer src="/static/BasicInitializer.js"></script>
-    <script defer src="/static/errorManager.js"></script>
 </body>
 </html>

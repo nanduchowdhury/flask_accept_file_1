@@ -219,18 +219,34 @@
 
     <div id="genericPopoutId" class="genericPopout"></div>
 
-    <script>
-        const serverJsonData = {{ json_data | tojson | safe }};
+    <!-- Load Sentry SDK -->
+    <script
+        src="https://js.sentry-cdn.com/423dcf7111b0930c274bbf13cef242ce.min.js"
+        crossorigin="anonymous">
     </script>
 
-    <!-- Defer JS -->
+    <!-- Initialize Sentry -->
+    <script>
+
+    Sentry.init({
+        dsn: "https://423dcf7111b0930c274bbf13cef242ce@o4511743436652544.ingest.us.sentry.io/4511743457820672",
+        environment: "production",
+        tracesSampleRate: 0.05
+    });
+
+    const serverJsonData = {{ json_data | tojson | safe }};
+
+    </script>
+
+    <!-- Your JS -->
     <script defer src="{{ url_for('static', filename='BasicInitializer.js') }}"></script>
     <script defer src="{{ url_for('static', filename='home_render.js') }}"></script>
-    <script defer src="{{ url_for('static', filename='errorManager.js') }}"></script>    
+    <script defer src="{{ url_for('static', filename='errorManager.js') }}"></script>
     <script defer src="{{ url_for('static', filename='geologicalInfo.js') }}"></script>
     <script src="{{ url_for('static', filename='ContainerScrollBarControl.js') }}"></script>
     <script src="{{ url_for('static', filename='popoutManager.js') }}"></script>
     <script src="{{ url_for('static', filename='stock_analysis.js') }}"></script>
+
 
     <script>
         if (window !== window.top) {
