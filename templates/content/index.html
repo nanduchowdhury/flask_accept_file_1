@@ -1,77 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "layout.html" %}
+
+{% block title %}bluepayload-Learning - know and learn{% endblock %}
+
+{% block meta %}
     <meta name="description" content="bluepayload-Learning - A platform to know and learn about various topics.">
     <meta name="keywords" content="bluepayload, learn, knowledge, education, hobby, hindustani classical music, yoga, golf, nobel laureates, IPL, gardening, learning guitar, Tagore, oscars, grammy, cricket, philosophy, photography, painting, nutrition, astronomy, stocks, mutual funds, Trump tariff, crypto, AI, rock music, jazz music, country music">
-    <meta name="robots" content="index, follow">
-
-    <!-- favicon - generated thru site : https://favicon.io/favicon-generator/ -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/static/images/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/static/images/favicon/site.webmanifest">
-
-    <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="bluepayload-Learning - know and learn">
     <meta property="og:description" content="A platform to explore knowledge and learning resources.">
     <meta property="og:image" content="https://cdn.jsdelivr.net/gh/nanduchowdhury/flask_accept_file_1@main/static/images/bluepayload-logo.png">
     <meta property="og:url" content="https://bluepayload.com/">
     <meta property="og:type" content="website">
+{% endblock %}
 
-    <title>bluepayload-Learning - know and learn</title>
+{% block extra_head %}
+    <!-- Preload Fonts are already in layout.html -->
+    <!-- Stylesheets are already in layout.html -->
+{% endblock %}
 
-    <!-- Preload Fonts -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" as="style">
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" as="style">
-
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='header.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='buttonCombination.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='MessageBox.css') }}">
-
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4NLLJX710S"></script>
-
-</head>
-<body>
-
-    <!-- Make sure everything is contained inside viewport horizontally - no scroll -->
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-            max-width: 100vw;
-            box-sizing: border-box;
-        }
-    </style>
-
-    <header class="header-container">
-        <!-- Logo on the left -->
-        <a href="https://bluepayload.com/" target="_blank">
-            <img src="https://cdn.jsdelivr.net/gh/nanduchowdhury/flask_accept_file_1@main/static/images/bluepayload-logo.png"
-                class="logo" alt="bluepayload Logo" title="bluepayload-Learning - Expand Your Knowledge"
-                width="150" height="50" loading="lazy">
-        </a>
-
-        <!-- Center container: Subscription + WhatsApp Button -->
-        <div class="center-container">
-            <a href="https://chat.whatsapp.com/FvVmisOUhLs4paiPPQU5Pc" target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
-                <i class="fab fa-whatsapp"></i> Join WhatsApp Group
-            </a>
-            <p class="subscription-note">[Join our WhatsApp group for updates]</p>
-        </div>
-
-        <!-- Dash menu on the extreme right -->
-        <nav id="TripleDashMenuContainer"></nav>
-    </header>
-
-    <div class="separator"></div> <!-- Custom Separator -->
+{% block main_content %}
+    <!-- Triple dash menu container for ContentRender -->
+    <nav id="TripleDashMenuContainer"></nav>
 
     <h2 class="topics-label" style="text-align: center; font-family: 'Arial', sans-serif; color: #333; margin-top: 2px; margin-bottom: 2px;">Browse Topics</h2>
 
@@ -98,26 +46,6 @@
         </div>
     </div>
 
-    <div id="SocialArea" class="social-area">
-        <div class="left-links">
-            <a href="/home/about">About</a>
-            <a href="/home/contact">Contact</a>
-        </div>
-        <div class="social-links">
-            <a href="https://x.com/nandu_chowdhury" target="_blank" class="social-icon" aria-label="Follow on Twitter"><i class="fab fa-twitter"></i></a>
-            <a href=https://www.linkedin.com/company/bluepayload/?viewAsMember=true" target="_blank" class="social-icon" aria-label="Connect on LinkedIn"><i class="fab fa-linkedin"></i></a>
-            <a href="mailto:contact@bluepayload.com?subject=kupmanduk%20website%20user" class="social-icon" aria-label="Send an Email">
-                <i class="fas fa-envelope"></i>
-            </a>
-            <a href="https://www.facebook.com/profile.php?id=61590854792110" target="_blank" class="social-icon" aria-label="Follow on Facebook">
-                <i class="fab fa-facebook"></i>
-            </a>
-            <a href="https://www.youtube.com/@bluepayload" target="_blank" class="social-icon" aria-label="Subscribe on YouTube">
-                <i class="fab fa-youtube"></i>
-            </a>
-        </div>
-    </div>
-    
     <!-- Drop-down menu -->
     <ul id="dropdown-menu" class="dropdown-menu"></ul>
 
@@ -131,51 +59,21 @@
         <div class="spinner"></div>
     </div>
 
-    <!-- Load Sentry SDK -->
-    <script
-        src="https://js.sentry-cdn.com/423dcf7111b0930c274bbf13cef242ce.min.js"
-        crossorigin="anonymous">
-    </script>
+{% endblock %}
 
-    <!-- Initialize Sentry -->
-    <script>
-    Sentry.init({
-        dsn: "https://423dcf7111b0930c274bbf13cef242ce@o4511743436652544.ingest.us.sentry.io/4511743457820672",
-        environment: "production",
-        tracesSampleRate: 0.05
-    });
-    </script>
-
-    <!-- Scripts -->
-    <script defer src="{{ url_for('static', filename='BasicInitializer.js') }}"></script>
-    <script defer src="{{ url_for('static', filename='content_render.js') }}"></script>
-    <script defer src="{{ url_for('static', filename='errorManager.js') }}"></script>
-    <script defer src="{{ url_for('static', filename='geologicalInfo.js') }}"></script>
-
-    <script>
+{% block dom_ready %}
         const JsonData = {{ json_data | tojson | safe }};
         
         "use strict";
 
+        window.errorManager = new ErrorManager();
+        window.basicInitializer = new ContentOrHomeInitializer(JsonData.section);
+        const cRender = new ContentRender(JsonData);
 
-        document.addEventListener("DOMContentLoaded", () => {
-            window.errorManager = new ErrorManager();
-            window.basicInitializer = new ContentOrHomeInitializer(JsonData.section);
-            const cRender = new ContentRender(JsonData);
+{% endblock %}
 
-        });
+{% block extra_scripts %}
+    <script defer src="{{ url_for('static', filename='content_render.js') }}"></script>
+{% endblock %}
 
-        console.log("bluepayload-Learning content page loaded successfully.");
-    </script>
-
-    <!-- Microsoft Clarity Tracking -->
-    <script type="text/javascript">
-        (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window, document, "clarity", "script", "qqnxtjq93c");
-    </script>
-
-</body>
-</html>
+{% block extra_js %}{% endblock %}

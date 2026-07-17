@@ -112,6 +112,7 @@
     <script src="{{ url_for('static', filename='ContainerScrollBarControl.js') }}"></script>
     <script src="{{ url_for('static', filename='popoutManager.js') }}"></script>
     <script src="{{ url_for('static', filename='stock_analysis.js') }}"></script>
+    {% block extra_scripts %}{% endblock %}
 
     <script>
         if (window !== window.top) { document.body.style.overflow = "auto"; document.documentElement.style.overflow = "auto"; }
