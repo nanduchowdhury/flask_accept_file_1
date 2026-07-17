@@ -1,35 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Terms of Service | bluepayload</title>
-    
-    <link rel="apple-touch-icon" sizes="180x180" href="/static/images/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon/favicon-16x16.png">
+{% extends "layout.html" %}
 
-    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+{% block title %}Terms of Service | bluepayload{% endblock %}
 
-    <link rel="stylesheet" href="/static/home.css">
-    <link rel="stylesheet" href="/static/styles.css">
-    <link rel="stylesheet" href="/static/header.css">
-    <link rel="stylesheet" href="/static/MessageBox.css">
-</head>
-<body>
-    <header class="header-container">
-        <a href="https://bluepayload.com/" target="_blank">
-            <img src="https://cdn.jsdelivr.net/gh/nanduchowdhury/flask_accept_file_1@main/static/images/bluepayload-logo.png" class="logo" alt="bluepayload Logo" width="150" height="50">
-        </a>
-        <div class="center-container">
-            <a href="https://chat.whatsapp.com/FvVmisOUhLs4paiPPQU5Pc" target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
-                <i class="fab fa-whatsapp"></i> Join WhatsApp Group
-            </a>
-        </div>
-    </header>
-
-    <main class="home-area-container">
+{% block main_content %}
         <h1 class="welcome-heading">Terms of Service</h1>
         
         <div class="about-area">
@@ -48,48 +21,4 @@
                 <p>The charts, analytics, and software are the proprietary property of BluePayload and its contributors.</p>
             </section>
         </div>
-
-        <aside id="SocialArea" class="social-area">
-            <div class="left-links">
-                <a href="/home/about">About</a>
-                <a href="/home/contact">Contact</a>
-                <a href="/home/privacy">Privacy Policy</a>
-                <a href="/home/terms">Terms of Service</a>
-                <a href="/home/disclaimer">Disclaimer</a>
-            </div>
-            <div class="social-links">
-                <a href="https://x.com/nandu_chowdhury" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
-                <a href="https://www.linkedin.com/company/bluepayload/" target="_blank" class="social-icon"><i class="fab fa-linkedin"></i></a>
-                <a href="mailto:contact@bluepayload.com" class="social-icon"><i class="fas fa-envelope"></i></a>
-            </div>
-        </aside>
-    </main>
-
-    <!-- Load Sentry SDK -->
-    <script
-        src="https://js.sentry-cdn.com/423dcf7111b0930c274bbf13cef242ce.min.js"
-        crossorigin="anonymous">
-    </script>
-
-    <!-- Initialize Sentry -->
-    <script>
-    Sentry.init({
-        dsn: "https://423dcf7111b0930c274bbf13cef242ce@o4511743436652544.ingest.us.sentry.io/4511743457820672",
-        environment: "production",
-        tracesSampleRate: 0.05
-    });
-    </script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            
-            setTimeout(() => {
-                const scriptGA = document.createElement("script");
-                scriptGA.src = "https://www.googletagmanager.com/gtag/js?id=G-4NLLJX710S";
-                scriptGA.async = true;
-                document.head.appendChild(scriptGA);
-            }, 2000);
-        });
-    </script>
-</body>
-</html>
+{% endblock %}
