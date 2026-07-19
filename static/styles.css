@@ -229,7 +229,14 @@
         text-decoration: underline; /* optional hover underline */
         }
 
+/* Align icon and heading on the same line for topic cards and reduce heading size */
+.card-container .topic-card i,
+.card-container .topic-card h3 {
+    display: inline-block;
+    vertical-align: middle;
+}
 
-
-
-
+.card-container .topic-card h3 {
+    font-size: 16px;
+    margin: 0 0 5px 8px; /* Space between icon and text, and bottom spacing */
+}

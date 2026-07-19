@@ -20,7 +20,7 @@ class ManageRotatingBanner {
                 const period = (data.header && data.header.period) ? data.header.period : "weekly avg return";
                 const sectorStrings = Object.entries(data.all_sectors).map(([name, info]) => {
                     // Clean "Nifty " prefix for a cleaner look
-                    const displayName = name.replace("Nifty ", "");
+                    const displayName = name;
                     const value = info.weekly_avg_return;
                     const isNegative = value.startsWith('-');
                     const colorClass = isNegative ? 'banner-neg-val' : 'banner-pos-val';

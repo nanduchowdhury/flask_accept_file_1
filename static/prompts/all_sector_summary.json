@@ -6,6 +6,60 @@
   },
 
   "all_sectors": {
+    "Nifty 50": {
+      "weekly_avg_return": "+1.12%",
+      "weekly_trend": "Bullish",
+      "positive_news": [
+        "Resilient earnings from index heavyweights",
+        "Continued FII buying interest",
+        "Positive global cues from US markets"
+      ],
+      "negative_news": [
+        "Persistent inflationary pressures",
+        "Geopolitical uncertainties in the Middle East"
+      ],
+      "weekly_highlights": [
+        "Index crossed key psychological resistance levels",
+        "Heavyweights in IT and Banking supported the climb"
+      ],
+      "next_week_outlook": "Positive"
+    },
+
+    "Nifty 100": {
+      "weekly_avg_return": "+1.05%",
+      "weekly_trend": "Positive",
+      "positive_news": [
+        "Stable performance across large-cap stocks",
+        "Sectoral rotation into defensives provided support"
+      ],
+      "negative_news": [
+        "Valuation concerns in certain high-growth pockets"
+      ],
+      "weekly_highlights": [
+        "Broad-based buying seen in upper-tier large caps",
+        "Low volatility relative to broader indices"
+      ],
+      "next_week_outlook": "Positive"
+    },
+
+    "Nifty 500": {
+      "weekly_avg_return": "+1.34%",
+      "weekly_trend": "Bullish",
+      "positive_news": [
+        "Broad participation across sectors",
+        "Mid-cap and Small-cap indices hit new records",
+        "Favorable domestic macro data"
+      ],
+      "negative_news": [
+        "Profit booking observed in highly-valued small-cap stocks",
+        "Rising bond yields in the global market"
+      ],
+      "weekly_highlights": [
+        "Broader market outperformed large-cap indices",
+        "Strong volume growth in non-index stocks"
+      ],
+      "next_week_outlook": "Positive"
+    },
 
     "Nifty IT": {
       "weekly_avg_return": "+2.14%",

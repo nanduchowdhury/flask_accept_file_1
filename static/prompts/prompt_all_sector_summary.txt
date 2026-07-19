@@ -7,3 +7,5 @@ Give me JSON file which will contain following:
     3. Put any major positive-news under sector-key under key 'positive_news'.
     4. Put any major negative-news under sector-key under key 'negative_news'.
     5. Any other things for that week under sector keys.
+    6. Include Nifty-50, Nifty-100, Nifty-500 under 'all_sectors' keys.
+    

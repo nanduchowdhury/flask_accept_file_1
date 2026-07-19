@@ -17,17 +17,7 @@
 
             <div style="width: 100%; margin-top: 5px; display: flex; align-items: center; gap: 10px; justify-content: center;">
                 <label for="analysis-type-dropdown" style="font-weight: bold; font-size: 14px; color: #333;">Analysis:</label>
-                <select id="analysis-type-dropdown" style="padding: 6px; border-radius: 4px; border: 1px solid #ccc; background-color: white; cursor: pointer;">
-                    <option value="ANALYSIS_CONT_DECLINE_2PCT">continous decline 2%</option>
-                    <option value="ANALYSIS_CONT_DECLINE_5PCT">continous decline 5%</option>
-                    <option value="ANALYSIS_CONT_RISE_2PCT">continous rise 2%</option>
-                    <option value="ANALYSIS_CONT_RISE_5PCT">continous rise 5%</option>
-                    <option value="ANALYSIS_DRAWDOWN_5">drawdown 5% from high</option>
-                    <option value="ANALYSIS_RECOVERY">recovery from low</option>
-                    <option value="ANALYSIS_EVENT_TIMELINE">event timeline</option>
-                    <option value="ANALYSIS_PEER_COMPARISON">peer comparison</option>
-                    <option value="ANALYSIS_WEEKLY_AVG_RETURN">weekly avg return</option>
-                </select>
+                <select id="analysis-type-dropdown" style="padding: 6px; border-radius: 4px; border: 1px solid #ccc; background-color: white; cursor: pointer;"></select>
             </div>
 
             <div id="analysis-description" style="width: 100%; text-align: center; font-size: 11px; color: #888; margin-top: 2px;">
@@ -36,20 +26,7 @@
 
             <div style="width: 100%; margin-top: 5px; display: flex; align-items: center; gap: 10px; justify-content: center;">
                 <label for="analysis-months-dropdown" style="font-weight: bold; font-size: 14px; color: #333;">months:</label>
-                <select id="analysis-months-dropdown" style="padding: 6px; border-radius: 4px; border: 1px solid #ccc; background-color: white; cursor: pointer;">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="9">9</option>
-                    <option value="12" selected>12</option>
-                    <option value="18">18</option>
-                    <option value="24">24</option>
-                    <option value="30">30</option>
-                    <option value="36">36</option>
-                </select>
+                <select id="analysis-months-dropdown" style="padding: 6px; border-radius: 4px; border: 1px solid #ccc; background-color: white; cursor: pointer;"></select>
             </div>
         </div>
 
@@ -61,43 +38,36 @@
             <a href="/home/stocks_sectorwise_analysis" class="topic-card">
                 <i class="fas fa-lightbulb"></i>
                 <h3>Sector wise analysis</h3>
-                <p>Analysis insight sector wise.</p>
             </a>
 
             <a href="#" class="topic-card" data-action="india_economy">
                     <i class="fas fa-lightbulb"></i>
                     <h3>India Economy</h3>
-                    <p>Parameters of India economy.</p>
             </a>
 
             <a href="#" class="topic-card" data-action="DII_FII">
                     <i class="fas fa-lightbulb"></i>
                     <h3>DII FII Analysis</h3>
-                    <p>Analysis of DII & FII.</p>
             </a>
 
             <a href="#" class="topic-card" data-action="semiconductor">
                     <i class="fas fa-lightbulb"></i>
                     <h3>Semiconductor India</h3>
-                    <p>Direct/indirect relation to semi.</p>
             </a>
 
             <a href="#" class="topic-card" data-action="AI">
                     <i class="fas fa-lightbulb"></i>
                     <h3>India AI companies</h3>
-                    <p>Direct/indirect relation to global AI.</p>
             </a>
 
             <a href="#" class="topic-card" data-action="global_cues">
                     <i class="fas fa-lightbulb"></i>
                     <h3>Global cues</h3>
-                    <p>Impact of global cues on sectors.</p>
             </a>
 
             <a href="#" class="topic-card" data-action="sector_weights">
                     <i class="fas fa-lightbulb"></i>
                     <h3>Sector weights</h3>
-                    <p>Major sectors.</p>
             </a>
 
         </div>
@@ -112,7 +82,15 @@
     window.basicInitializer = new BasicInitializer(false);
     window.errorManager = new ErrorManager();
     window.stockAnalysisMain = new StockAnalysisMain();
-    window.stockAnalysisMain.initAnalysisDescription();
+    window.stockAnalysisMain.initAnalysisTypeDropdown();
+    window.stockAnalysisMain.initAnalysisMonthsDropdown();
+
+    window.stockAnalysisMain.doCardScroll('india_economy', "{{ url_for('static', filename='prompts/stocks_india_economy_info.json') }}");
+    window.stockAnalysisMain.doCardScroll('DII_FII', "{{ url_for('static', filename='prompts/stocks_DII_FII_info.json') }}");
+    window.stockAnalysisMain.doCardScroll('semiconductor', "{{ url_for('static', filename='prompts/stocks_semiconductor_info.json') }}");
+    window.stockAnalysisMain.doCardScroll('AI', "{{ url_for('static', filename='prompts/stocks_AI_info.json') }}");
+    window.stockAnalysisMain.doCardScroll('global_cues', "{{ url_for('static', filename='prompts/stocks_global_cues_impact_info.json') }}");
+    window.stockAnalysisMain.doCardScroll('sector_weights', "{{ url_for('static', filename='prompts/stocks_sector_weights_info.json') }}");
 
     // Attach click listeners to cards robustly
     document.querySelectorAll('.topic-card[data-action]').forEach(card => {

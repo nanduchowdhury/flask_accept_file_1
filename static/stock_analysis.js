@@ -9,15 +9,143 @@ class StockAnalysisMain {
         this.STOCK_EVENT_COLORS = ['blue', 'green', 'red', 'yellow', 'orange', 'purple', 'brown', 'teal'];
     }
 
-    initAnalysisDescription() {
+    initAnalysisTypeDropdown() {
         const dropdown = document.getElementById('analysis-type-dropdown');
-        if (dropdown) {
-            dropdown.addEventListener('change', () => this.updateAnalysisDescription());
-            // Synchronize the initial description with the dropdown's current value
-            this.updateAnalysisDescription();
+        if (!dropdown) return;
+
+        const options = [
+            { value: "ANALYSIS_CONT_DECLINE_2PCT", text: "continous decline 2%" },
+            { value: "ANALYSIS_CONT_DECLINE_5PCT", text: "continous decline 5%" },
+            { value: "ANALYSIS_CONT_RISE_2PCT", text: "continous rise 2%" },
+            { value: "ANALYSIS_CONT_RISE_5PCT", text: "continous rise 5%" },
+            { value: "ANALYSIS_DRAWDOWN_5", text: "drawdown 5% from high" },
+            { value: "ANALYSIS_RECOVERY", text: "recovery from low" },
+            { value: "ANALYSIS_EVENT_TIMELINE", text: "event timeline" },
+            { value: "ANALYSIS_PEER_COMPARISON", text: "peer comparison" },
+            { value: "ANALYSIS_WEEKLY_AVG_RETURN", text: "weekly avg return" }
+        ];
+
+        dropdown.innerHTML = '';
+        options.forEach(opt => {
+            const option = document.createElement('option');
+            option.value = opt.value;
+            option.textContent = opt.text;
+            dropdown.appendChild(option);
+        });
+
+        dropdown.addEventListener('change', () => this.updateAnalysisDescription());
+        // Synchronize the initial description with the dropdown's current value
+        this.updateAnalysisDescription();
+    }
+
+    initAnalysisMonthsDropdown() {
+        const dropdown = document.getElementById('analysis-months-dropdown');
+        if (!dropdown) return;
+
+        const months = ["1", "2", "3", "4", "5", "6", "9", "12", "18", "24", "30", "36"];
+        dropdown.innerHTML = '';
+        months.forEach(m => {
+            const option = document.createElement('option');
+            option.value = m;
+            option.textContent = m;
+            if (m === "12") option.selected = true;
+            dropdown.appendChild(option);
+        });
+    }
+
+    /**
+     * Initializes a continuous vertical scroll of data on a specific topic card.
+     * @param {string} cardAction - The data-action attribute value of the card.
+     * @param {string} jsonPath - Path to the JSON file.
+     */
+    doCardScroll(cardAction, jsonPath) {
+        const card = document.querySelector(`.topic-card[data-action="${cardAction}"], .topic-card[data-sector="${cardAction}"]`);
+        if (!card) return;
+
+        // Setup the scrolling container
+        const container = document.createElement('div');
+        container.style.height = '60px';
+        container.style.overflow = 'hidden';
+        container.style.marginTop = '10px';
+        container.style.borderTop = '1px solid #eee';
+        container.style.paddingTop = '5px';
+        container.style.position = 'relative';
+
+        const scroller = document.createElement('div');
+        scroller.style.width = '100%';
+        container.appendChild(scroller);
+
+        // Replace static description with scrolling container
+        const description = card.querySelector('p');
+        if (description) description.remove();
+        card.appendChild(container);
+
+        fetch(jsonPath)
+            .then(res => {
+                if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+                return res.json();
+            })
+            .then(data => {
+                // If the JSON has exactly one root key which is an object, we use its children 
+                // to avoid redundant labels (e.g., showing 'GDP' instead of 'parameters - GDP')
+                const scrollData = (Object.keys(data).length === 1 && typeof Object.values(data)[0] === 'object') 
+                                   ? Object.values(data)[0] : data;
+                const itemsHtml = this._getFormattedScrollItems(scrollData);
+
+                // Double the content for a seamless loop
+                scroller.innerHTML = itemsHtml + itemsHtml;
+
+                // Use CSS animation for vertical scroll
+                const itemCount = (itemsHtml.match(/<div/g) || []).length;
+                const duration = Math.max(10, itemCount * 3);
+                scroller.style.animation = `economyScrollAnim ${duration}s linear infinite`;
+                
+                // Pause scrolling when the user hovers over the card
+                card.onmouseenter = () => scroller.style.animationPlayState = 'paused';
+                card.onmouseleave = () => scroller.style.animationPlayState = 'running';
+            })
+            .catch(err => console.error("Failed to load India Economy scroll data:", err));
+
+        // Add global animation keyframes if not already present
+        if (!document.getElementById('economy-scroll-styles')) {
+            const style = document.createElement('style');
+            style.id = 'economy-scroll-styles';
+            style.innerHTML = `
+                @keyframes economyScrollAnim {
+                    0% { transform: translateY(0); }
+                    100% { transform: translateY(-50%); }
+                }
+            `;
+            document.head.appendChild(style);
         }
     }
 
+    /**
+     * Recursively reads all keys and nested values to produce a formatted HTML string.
+     * This acts as an internal API to flatten and format JSON data for the scroller.
+     * @param {Object} obj - The object to traverse.
+     * @param {string} prefix - Accumulated label context for nesting.
+     * @returns {string} - Formatted HTML string of all parameters.
+     */
+    _getFormattedScrollItems(obj, prefix = '') {
+        let html = '';
+        for (const [key, value] of Object.entries(obj)) {
+            const label = key.replace(/_/g, ' ');
+            const currentLabel = prefix ? `${prefix} - ${label}` : label;
+
+            if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+                // Recurse to read nested values of each key
+                html += this._getFormattedScrollItems(value, currentLabel);
+            } else {
+                // Write the final data-value (formats arrays as comma-separated strings)
+                const displayValue = Array.isArray(value) ? value.join(', ') : value;
+                html += `<div style="font-size: 11px; color: #555; margin-bottom: 4px; border-bottom: 1px dashed #eee; text-align: left; padding: 2px 0;">
+                            <b style="color: #007bff;">${currentLabel}:</b> ${displayValue}
+                          </div>`;
+            }
+        }
+        return html;
+    }
 
     updateAnalysisDescription() {
         const dropdown = document.getElementById('analysis-type-dropdown');

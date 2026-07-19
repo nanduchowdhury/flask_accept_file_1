@@ -10,49 +10,41 @@
             <a href="#" class="topic-card" data-sector="sector_IT">
                     <i class="fas fa-lightbulb"></i>
                     <h3>Nifty IT</h3>
-                    <p>Analysis of tech sector.</p>
             </a>
 
             <a href="#" class="topic-card" data-sector="sector_Bank">
                     <i class="fas fa-lightbulb"></i>
                     <h3>Nifty Bank</h3>
-                    <p>Analysis of banking sector.</p>
             </a>
 
             <a href="#" class="topic-card" data-sector="sector_Auto">
                     <i class="fas fa-lightbulb"></i>
                     <h3>Nifty Auto</h3>
-                    <p>Analysis of auto sector.</p>
             </a>
 
             <a href="#" class="topic-card" data-sector="sector_Pharma">
                     <i class="fas fa-lightbulb"></i>
                     <h3>Nifty Pharma</h3>
-                    <p>Analysis of pharma sector.</p>
             </a>
 
             <a href="#" class="topic-card" data-sector="sector_Energy">
                     <i class="fas fa-lightbulb"></i>
                     <h3>Nifty Energy</h3>
-                    <p>Analysis of energy sector.</p>
             </a>
 
             <a href="#" class="topic-card" data-sector="sector_PSU">
                     <i class="fas fa-lightbulb"></i>
                     <h3>Nifty PSU</h3>
-                    <p>Analysis of PSU sector.</p>
             </a>
 
             <a href="#" class="topic-card" data-sector="sector_Realty">
                     <i class="fas fa-lightbulb"></i>
                     <h3>Nifty Realty</h3>
-                    <p>Analysis of real-estate sector.</p>
             </a>
 
             <a href="#" class="topic-card" data-sector="sector_FMCG">
                     <i class="fas fa-lightbulb"></i>
                     <h3>Nifty FMCG</h3>
-                    <p>Analysis of FMCG sector.</p>
             </a>
         </div>
 {% endblock %}
@@ -61,6 +53,15 @@
     window.basicInitializer = new BasicInitializer(false);
     window.errorManager = new ErrorManager();
     window.stockAnalysisMain = new StockAnalysisMain();
+
+    window.stockAnalysisMain.doCardScroll('sector_IT', "{{ url_for('static', filename='prompts/stocks_sector_IT_info.json') }}");
+    window.stockAnalysisMain.doCardScroll('sector_Bank', "{{ url_for('static', filename='prompts/stocks_sector_Bank_info.json') }}");
+    window.stockAnalysisMain.doCardScroll('sector_Auto', "{{ url_for('static', filename='prompts/stocks_sector_Auto_info.json') }}");
+    window.stockAnalysisMain.doCardScroll('sector_Pharma', "{{ url_for('static', filename='prompts/stocks_sector_Pharma_info.json') }}");
+    window.stockAnalysisMain.doCardScroll('sector_Energy', "{{ url_for('static', filename='prompts/stocks_sector_Energy_info.json') }}");
+    window.stockAnalysisMain.doCardScroll('sector_PSU', "{{ url_for('static', filename='prompts/stocks_sector_PSU_info.json') }}");
+    window.stockAnalysisMain.doCardScroll('sector_Realty', "{{ url_for('static', filename='prompts/stocks_sector_Realty_info.json') }}");
+    window.stockAnalysisMain.doCardScroll('sector_FMCG', "{{ url_for('static', filename='prompts/stocks_sector_FMCG_info.json') }}");
 
     // Attach click listeners to cards robustly
     document.querySelectorAll('.topic-card[data-sector]').forEach(card => {
