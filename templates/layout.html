@@ -64,10 +64,10 @@
                  width="150" height="50" loading="lazy">
         </a>
         <div class="center-container">
-            <a href="https://chat.whatsapp.com/FvVmisOUhLs4paiPPQU5Pc" target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
-                <i class="fab fa-whatsapp"></i> Join WhatsApp Group
+            <a href="https://chat.whatsapp.com/FLB3g8Ma2m9838z9a6imBw" target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                <i class="fab fa-whatsapp"></i> Join WhatsApp Community
             </a>
-            <p class="subscription-note">[Join our WhatsApp group for updates]</p>
+            <p class="subscription-note">[Join our community for updates]</p>
         </div>
     </header>
 
@@ -101,24 +101,35 @@
 
     <script src="https://js.sentry-cdn.com/423dcf7111b0930c274bbf13cef242ce.min.js" crossorigin="anonymous"></script>
     <script>
-    Sentry.init({ dsn: "https://423dcf7111b0930c274bbf13cef242ce@o4511743436652544.ingest.us.sentry.io/4511743457820672", environment: "production", tracesSampleRate: 0.05 });
+    Sentry.init({ 
+        dsn: "https://423dcf7111b0930c274bbf13cef242ce@o4511743436652544.ingest.us.sentry.io/4511743457820672", 
+        environment: "production", 
+        integrations: [
+            
+        ],
+        tracesSampleRate: 1.0 
+    });
     {% block script_init %}{% endblock %}
     </script>
 
-    <script defer src="{{ url_for('static', filename='BasicInitializer.js') }}"></script>
-    <script defer src="{{ url_for('static', filename='home_render.js') }}"></script>
-    <script defer src="{{ url_for('static', filename='errorManager.js') }}"></script>
-    <script defer src="{{ url_for('static', filename='geologicalInfo.js') }}"></script>
-    <script src="{{ url_for('static', filename='ContainerScrollBarControl.js') }}"></script>
-    <script src="{{ url_for('static', filename='popoutManager.js') }}"></script>
-    <script src="{{ url_for('static', filename='stock_analysis.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='BasicInitializer.js') }}" crossorigin="anonymous"></script>
+    <script defer src="{{ url_for('static', filename='home_render.js') }}" crossorigin="anonymous"></script>
+    <script defer src="{{ url_for('static', filename='errorManager.js') }}" crossorigin="anonymous"></script>
+    <script defer src="{{ url_for('static', filename='geologicalInfo.js') }}" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='ContainerScrollBarControl.js') }}" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='popoutManager.js') }}" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='stock_analysis.js') }}" crossorigin="anonymous"></script>
     {% block extra_scripts %}{% endblock %}
 
     <script>
         if (window !== window.top) { document.body.style.overflow = "auto"; document.documentElement.style.overflow = "auto"; }
         document.addEventListener("DOMContentLoaded", function () {
             setTimeout(() => {
-                const scriptGA = document.createElement("script"); scriptGA.src = "https://www.googletagmanager.com/gtag/js?id=G-4NLLJX710S"; scriptGA.async = true; document.head.appendChild(scriptGA);
+                const scriptGA = document.createElement("script"); 
+                scriptGA.src = "https://www.googletagmanager.com/gtag/js?id=G-4NLLJX710S"; 
+                scriptGA.async = true; 
+                scriptGA.crossOrigin = "anonymous";
+                document.head.appendChild(scriptGA);
                 const scriptClarity = document.createElement("script"); scriptClarity.innerHTML = `(function(c,l,a,r,i,t,y){ c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)}; t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i; y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y); })(window, document, "clarity", "script", "qqnxtjq93c");`; document.body.appendChild(scriptClarity);
             }, 2000);
             {% block dom_ready %}{% endblock %}

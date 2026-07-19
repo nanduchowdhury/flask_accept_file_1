@@ -7,65 +7,49 @@
         
         <!-- MAIN TOPICS -->
         <div class="card-container">
-            <a href="#" 
-                class="topic-card"
-                onclick="handleCardClick(event, 'sector_IT')">
+            <a href="#" class="topic-card" data-sector="sector_IT">
                     <i class="fas fa-lightbulb"></i>
                     <h3>Nifty IT</h3>
                     <p>Analysis of tech sector.</p>
             </a>
 
-            <a href="#" 
-                class="topic-card"
-                onclick="handleCardClick(event, 'sector_Bank')">
+            <a href="#" class="topic-card" data-sector="sector_Bank">
                     <i class="fas fa-lightbulb"></i>
                     <h3>Nifty Bank</h3>
                     <p>Analysis of banking sector.</p>
             </a>
 
-            <a href="#" 
-                class="topic-card"
-                onclick="handleCardClick(event, 'sector_Auto')">
+            <a href="#" class="topic-card" data-sector="sector_Auto">
                     <i class="fas fa-lightbulb"></i>
                     <h3>Nifty Auto</h3>
                     <p>Analysis of auto sector.</p>
             </a>
 
-            <a href="#" 
-                class="topic-card"
-                onclick="handleCardClick(event, 'sector_Pharma')">
+            <a href="#" class="topic-card" data-sector="sector_Pharma">
                     <i class="fas fa-lightbulb"></i>
                     <h3>Nifty Pharma</h3>
                     <p>Analysis of pharma sector.</p>
             </a>
 
-            <a href="#" 
-                class="topic-card"
-                onclick="handleCardClick(event, 'sector_Energy')">
+            <a href="#" class="topic-card" data-sector="sector_Energy">
                     <i class="fas fa-lightbulb"></i>
                     <h3>Nifty Energy</h3>
                     <p>Analysis of energy sector.</p>
             </a>
 
-            <a href="#" 
-                class="topic-card"
-                onclick="handleCardClick(event, 'sector_PSU')">
+            <a href="#" class="topic-card" data-sector="sector_PSU">
                     <i class="fas fa-lightbulb"></i>
                     <h3>Nifty PSU</h3>
                     <p>Analysis of PSU sector.</p>
             </a>
 
-            <a href="#" 
-                class="topic-card"
-                onclick="handleCardClick(event, 'sector_Realty')">
+            <a href="#" class="topic-card" data-sector="sector_Realty">
                     <i class="fas fa-lightbulb"></i>
                     <h3>Nifty Realty</h3>
                     <p>Analysis of real-estate sector.</p>
             </a>
 
-            <a href="#" 
-                class="topic-card"
-                onclick="handleCardClick(event, 'sector_FMCG')">
+            <a href="#" class="topic-card" data-sector="sector_FMCG">
                     <i class="fas fa-lightbulb"></i>
                     <h3>Nifty FMCG</h3>
                     <p>Analysis of FMCG sector.</p>
@@ -77,13 +61,15 @@
     window.basicInitializer = new BasicInitializer(false);
     window.errorManager = new ErrorManager();
     window.stockAnalysisMain = new StockAnalysisMain();
-{% endblock %}
 
-{% block extra_js %}
-function handleCardClick(event, sector) {
-    event.preventDefault();
-    if (window.stockAnalysisMain) {
-        window.stockAnalysisMain.openSectorPage(sector);
-    }
-}
+    // Attach click listeners to cards robustly
+    document.querySelectorAll('.topic-card[data-sector]').forEach(card => {
+        card.addEventListener('click', (event) => {
+            event.preventDefault();
+            const sector = card.getAttribute('data-sector');
+            if (window.stockAnalysisMain) {
+                window.stockAnalysisMain.openSectorPage(sector);
+            }
+        });
+    });
 {% endblock %}

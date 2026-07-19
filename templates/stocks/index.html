@@ -64,49 +64,37 @@
                 <p>Analysis insight sector wise.</p>
             </a>
 
-            <a href="#" 
-                class="topic-card"
-                onclick="handleCardClick(event, 'india_economy')">
+            <a href="#" class="topic-card" data-action="india_economy">
                     <i class="fas fa-lightbulb"></i>
                     <h3>India Economy</h3>
                     <p>Parameters of India economy.</p>
             </a>
 
-            <a href="#" 
-                class="topic-card"
-                onclick="handleCardClick(event, 'DII_FII')">
+            <a href="#" class="topic-card" data-action="DII_FII">
                     <i class="fas fa-lightbulb"></i>
                     <h3>DII FII Analysis</h3>
                     <p>Analysis of DII & FII.</p>
             </a>
 
-            <a href="#" 
-                class="topic-card"
-                onclick="handleCardClick(event, 'semiconductor')">
+            <a href="#" class="topic-card" data-action="semiconductor">
                     <i class="fas fa-lightbulb"></i>
                     <h3>Semiconductor India</h3>
                     <p>Direct/indirect relation to semi.</p>
             </a>
 
-            <a href="#" 
-                class="topic-card"
-                onclick="handleCardClick(event, 'AI')">
+            <a href="#" class="topic-card" data-action="AI">
                     <i class="fas fa-lightbulb"></i>
                     <h3>India AI companies</h3>
                     <p>Direct/indirect relation to global AI.</p>
             </a>
 
-            <a href="#" 
-                class="topic-card"
-                onclick="handleCardClick(event, 'global_cues')">
+            <a href="#" class="topic-card" data-action="global_cues">
                     <i class="fas fa-lightbulb"></i>
                     <h3>Global cues</h3>
                     <p>Impact of global cues on sectors.</p>
             </a>
 
-            <a href="#" 
-                class="topic-card"
-                onclick="handleCardClick(event, 'sector_weights')">
+            <a href="#" class="topic-card" data-action="sector_weights">
                     <i class="fas fa-lightbulb"></i>
                     <h3>Sector weights</h3>
                     <p>Major sectors.</p>
@@ -125,6 +113,29 @@
     window.errorManager = new ErrorManager();
     window.stockAnalysisMain = new StockAnalysisMain();
     window.stockAnalysisMain.initAnalysisDescription();
+
+    // Attach click listeners to cards robustly
+    document.querySelectorAll('.topic-card[data-action]').forEach(card => {
+        card.addEventListener('click', (event) => {
+            event.preventDefault();
+            const action = card.getAttribute('data-action');
+            if (!window.stockAnalysisMain) return;
+
+            if (action === 'DII_FII') {
+                window.stockAnalysisMain.openDiiFiiPage();
+            } else if (action === 'global_cues') {
+                window.stockAnalysisMain.openGlobalCuesPage();
+            } else if (action === 'sector_weights') {
+                window.stockAnalysisMain.openSectorWeightsPage();
+            } else if (action === 'india_economy') {
+                window.stockAnalysisMain.openIndiaEconomyPage();
+            } else if (action === 'semiconductor') {
+                window.stockAnalysisMain.openIndiaSemiPage();
+            } else if (action === 'AI') {
+                window.stockAnalysisMain.openIndiaAIPage();
+            }
+        });
+    });
 
     document.getElementById('ResearchButton').addEventListener('click', () => {
         const stockName = document.getElementById('research-input').value.trim();
@@ -150,23 +161,4 @@
 {% endblock %}
 
 {% block extra_js %}
-function handleCardClick(event, card_type) {
-    event.preventDefault();
-    // Safety check to prevent errors if clicked before initialization
-    if (!window.stockAnalysisMain) return;
-
-    if ( card_type == 'DII_FII' ) {
-        window.stockAnalysisMain.openDiiFiiPage();
-    } else if ( card_type == 'global_cues' ) {
-        window.stockAnalysisMain.openGlobalCuesPage();
-    } else if ( card_type == 'sector_weights' ) {
-        window.stockAnalysisMain.openSectorWeightsPage();
-    } else if ( card_type == 'india_economy' ) {
-        window.stockAnalysisMain.openIndiaEconomyPage();
-    } else if ( card_type == 'semiconductor' ) {
-        window.stockAnalysisMain.openIndiaSemiPage();
-    } else if ( card_type == 'AI' ) {
-        window.stockAnalysisMain.openIndiaAIPage();
-    }
-}
 {% endblock %}
