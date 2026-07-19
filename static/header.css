@@ -10,15 +10,19 @@
     position:relative;
 
     display:flex;
+    flex-direction: column;
+    padding: 10px 0;
+}
+
+.header-main-row {
+    display: flex;
 
     justify-content:space-between;
 
     align-items:center;
-
-    padding:10px 30px;
+    padding: 0 30px;
 
     gap:20px;
-
 }
 @media (max-width:768px){
 
@@ -472,4 +476,44 @@
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+/* Rotating Banner Styles */
+.banner-container {
+    width: 100%;
+    overflow: hidden;
+    background: #fdfdfd;
+    padding: 6px 0;
+    flex-basis: 100%;
+}
+
+.banner-content {
+    display: inline-block;
+    white-space: nowrap;
+    padding-left: 100%;
+    font-size: 13px;
+    font-weight: bold;
+    color: #333; /* Default color */
+    animation: banner-scroll 40s linear infinite;
+}
+
+.banner-separator {
+    width: 100%;
+    border: 0;
+    border-top: 1px solid #eaeaea;
+    margin: 0;
+}
+
+/* Color coding for returns */
+.banner-pos-val {
+    color: #28a745 !important; /* Green */
+}
+
+.banner-neg-val {
+    color: #dc3545 !important; /* Red */
+}
+
+@keyframes banner-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
 }

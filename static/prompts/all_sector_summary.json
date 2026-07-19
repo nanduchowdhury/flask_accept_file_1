@@ -1,0 +1,225 @@
+{
+  "header": {
+    "title": "Weekly NSE/BSE Sector Analysis",
+    "period": "week ending 17Jul26",
+    "generated_on": "19Jul26"
+  },
+
+  "all_sectors": {
+
+    "Nifty IT": {
+      "weekly_avg_return": "+2.14%",
+      "weekly_trend": "Bullish",
+      "positive_news": [
+        "Strong US technology sentiment",
+        "AI spending remained healthy",
+        "Large deal pipeline improved"
+      ],
+      "negative_news": [
+        "Rupee appreciation concern",
+        "Profit booking near highs"
+      ],
+      "weekly_highlights": [
+        "Large caps outperformed",
+        "Mid-cap IT remained strong",
+        "Strong foreign buying"
+      ],
+      "top_gainers": [
+        "Persistent Systems",
+        "Coforge",
+        "Infosys"
+      ],
+      "top_losers": [
+        "Tech Mahindra"
+      ],
+      "next_week_outlook": "Positive"
+    },
+
+    "Nifty Bank": {
+      "weekly_avg_return": "+1.26%",
+      "weekly_trend": "Positive",
+      "positive_news": [
+        "Credit growth remained healthy",
+        "Private banks attracted FII buying",
+        "Lower rate expectations supportive"
+      ],
+      "negative_news": [
+        "Margin compression concerns"
+      ],
+      "weekly_highlights": [
+        "Private banks outperformed PSU",
+        "Loan growth remained strong"
+      ],
+      "top_gainers": [
+        "ICICI Bank",
+        "HDFC Bank"
+      ],
+      "top_losers": [
+        "IndusInd Bank"
+      ],
+      "next_week_outlook": "Positive"
+    },
+
+    "Nifty Auto": {
+      "weekly_avg_return": "+0.82%",
+      "weekly_trend": "Positive",
+      "positive_news": [
+        "Strong passenger vehicle demand",
+        "Rural demand improved"
+      ],
+      "negative_news": [
+        "Input cost concerns",
+        "Export uncertainty"
+      ],
+      "weekly_highlights": [
+        "Premium segment strong",
+        "EV demand stable"
+      ],
+      "top_gainers": [
+        "Tata Motors",
+        "Eicher Motors"
+      ],
+      "top_losers": [
+        "Hero MotoCorp"
+      ],
+      "next_week_outlook": "Neutral"
+    },
+
+    "Nifty Pharma": {
+      "weekly_avg_return": "+1.74%",
+      "weekly_trend": "Positive",
+      "positive_news": [
+        "Defensive buying continued",
+        "US demand remained healthy"
+      ],
+      "negative_news": [
+        "USFDA inspection concerns"
+      ],
+      "weekly_highlights": [
+        "Export companies outperformed"
+      ],
+      "top_gainers": [
+        "Sun Pharma",
+        "Lupin"
+      ],
+      "top_losers": [
+        "Biocon"
+      ],
+      "next_week_outlook": "Positive"
+    },
+
+    "Nifty FMCG": {
+      "weekly_avg_return": "+0.61%",
+      "weekly_trend": "Neutral",
+      "positive_news": [
+        "Rural demand improved",
+        "Commodity costs remained stable"
+      ],
+      "negative_news": [
+        "Premium demand slowed"
+      ],
+      "weekly_highlights": [
+        "Defensive buying continued"
+      ],
+      "top_gainers": [
+        "Varun Beverages",
+        "Britannia"
+      ],
+      "top_losers": [
+        "Nestle India"
+      ],
+      "next_week_outlook": "Neutral"
+    },
+
+    "Nifty Realty": {
+      "weekly_avg_return": "-0.82%",
+      "weekly_trend": "Negative",
+      "positive_news": [
+        "Luxury housing demand stable"
+      ],
+      "negative_news": [
+        "Higher financing costs",
+        "Profit booking"
+      ],
+      "weekly_highlights": [
+        "Large developers outperformed"
+      ],
+      "top_gainers": [
+        "DLF"
+      ],
+      "top_losers": [
+        "Godrej Properties"
+      ],
+      "next_week_outlook": "Negative"
+    },
+
+    "Nifty Metal": {
+      "weekly_avg_return": "-1.25%",
+      "weekly_trend": "Weak",
+      "positive_news": [
+        "China stimulus hopes"
+      ],
+      "negative_news": [
+        "Weak steel prices",
+        "Lower metal demand"
+      ],
+      "weekly_highlights": [
+        "Volatile trading"
+      ],
+      "top_gainers": [
+        "Hindustan Zinc"
+      ],
+      "top_losers": [
+        "Tata Steel",
+        "JSW Steel"
+      ],
+      "next_week_outlook": "Neutral"
+    },
+
+    "Nifty Energy": {
+      "weekly_avg_return": "+0.95%",
+      "weekly_trend": "Positive",
+      "positive_news": [
+        "Oil marketing stocks gained",
+        "Gas demand improved"
+      ],
+      "negative_news": [
+        "Crude price volatility"
+      ],
+      "weekly_highlights": [
+        "Refining margins improved"
+      ],
+      "top_gainers": [
+        "Reliance Industries",
+        "ONGC"
+      ],
+      "top_losers": [
+        "BPCL"
+      ],
+      "next_week_outlook": "Positive"
+    },
+
+    "Nifty PSU Bank": {
+      "weekly_avg_return": "+1.53%",
+      "weekly_trend": "Positive",
+      "positive_news": [
+        "Government reforms",
+        "Strong loan growth"
+      ],
+      "negative_news": [
+        "Profit booking after rally"
+      ],
+      "weekly_highlights": [
+        "Retail participation increased"
+      ],
+      "top_gainers": [
+        "SBI",
+        "Bank of Baroda"
+      ],
+      "top_losers": [
+        "Canara Bank"
+      ],
+      "next_week_outlook": "Positive"
+    }
+  }
+}

@@ -58,24 +58,32 @@
 </head>
 <body>
     <header class="header-container">
-        <a href="https://bluepayload.com/" target="_blank">
-            <img src="https://cdn.jsdelivr.net/gh/nanduchowdhury/flask_accept_file_1@main/static/images/bluepayload-logo.png"
-                 class="logo" alt="bluepayload Logo" title="bluepayload - minimalist approach towards many things"
-                 width="150" height="50" loading="lazy">
-        </a>
-        <div class="center-container">
-            <a
-                id="joinWhatsappBtn"
-                href="https://chat.whatsapp.com/FLB3g8Ma2m9838z9a6imBw"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="whatsapp-btn">
-
-                <i class="fab fa-whatsapp"></i>
-                Join WhatsApp Community
-
+        <div class="header-main-row">
+            <a href="https://bluepayload.com/" target="_blank">
+                <img src="https://cdn.jsdelivr.net/gh/nanduchowdhury/flask_accept_file_1@main/static/images/bluepayload-logo.png"
+                     class="logo" alt="bluepayload Logo" title="bluepayload - minimalist approach towards many things"
+                     width="150" height="50" loading="lazy">
             </a>
+            <div class="center-container">
+                <a
+                    id="joinWhatsappBtn"
+                    href="https://chat.whatsapp.com/FLB3g8Ma2m9838z9a6imBw"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="whatsapp-btn">
+    
+                    <i class="fab fa-whatsapp"></i>
+                    Join WhatsApp Community
+    
+                </a>
+            </div>
         </div>
+
+        <hr class="banner-separator">
+        <div id="rotatingBannerContainer" class="banner-container">
+            <div id="rotatingBannerContent" class="banner-content"></div>
+        </div>
+        <hr class="banner-separator">
     </header>
 
     <main class="home-area-container">
@@ -121,6 +129,7 @@
 
     <script defer src="{{ url_for('static', filename='BasicInitializer.js') }}" crossorigin="anonymous"></script>
     <script defer src="{{ url_for('static', filename='whatsappTracker.js') }}" crossorigin="anonymous"></script>
+    <script defer src="{{ url_for('static', filename='ManageRotatingBanner.js') }}" crossorigin="anonymous"></script>
     <script defer src="{{ url_for('static', filename='home_render.js') }}" crossorigin="anonymous"></script>
     <script defer src="{{ url_for('static', filename='errorManager.js') }}" crossorigin="anonymous"></script>
     <script defer src="{{ url_for('static', filename='geologicalInfo.js') }}" crossorigin="anonymous"></script>
@@ -143,6 +152,10 @@
             
             const tracker = new WhatsAppTracker();
             tracker.trackUserInteraction();
+
+            // Initialize and display the rotating banner
+            const banner = new ManageRotatingBanner('rotatingBannerContainer', 'rotatingBannerContent');
+            banner.init("{{ url_for('static', filename='prompts/all_sector_summary.json') }}");
 
             {% block dom_ready %}{% endblock %}
         });
