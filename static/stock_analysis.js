@@ -120,32 +120,121 @@ class StockAnalysisMain {
         }
     }
 
-    /**
-     * Recursively reads all keys and nested values to produce a formatted HTML string.
-     * This acts as an internal API to flatten and format JSON data for the scroller.
-     * @param {Object} obj - The object to traverse.
-     * @param {string} prefix - Accumulated label context for nesting.
-     * @returns {string} - Formatted HTML string of all parameters.
-     */
-    _getFormattedScrollItems(obj, prefix = '') {
-        let html = '';
-        for (const [key, value] of Object.entries(obj)) {
-            const label = key.replace(/_/g, ' ');
-            const currentLabel = prefix ? `${prefix} - ${label}` : label;
+/**
+ * Recursively formats JSON into an indented HTML tree.
+ * Objects are shown as headers.
+ * Arrays are expanded item-by-item.
+ */
+_getFormattedScrollItems(obj, level = 0) {
 
-            if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
-                // Recurse to read nested values of each key
-                html += this._getFormattedScrollItems(value, currentLabel);
-            } else {
-                // Write the final data-value (formats arrays as comma-separated strings)
-                const displayValue = Array.isArray(value) ? value.join(', ') : value;
-                html += `<div style="font-size: 11px; color: #555; margin-bottom: 4px; border-bottom: 1px dashed #eee; text-align: left; padding: 2px 0;">
-                            <b style="color: #007bff;">${currentLabel}:</b> ${displayValue}
-                          </div>`;
-            }
+    let html = "";
+
+    const indent = level * 16;
+
+    for (const [key, value] of Object.entries(obj)) {
+
+        const label = key.replace(/_/g, " ");
+
+        // ---------------------------
+        // Object
+        // ---------------------------
+        if (
+            value !== null &&
+            typeof value === "object" &&
+            !Array.isArray(value)
+        ) {
+
+            html += `
+                <div style="
+                    margin-left:${indent}px;
+                    margin-top:6px;
+                    color:#0066cc;
+                    font-size:11px;
+                ">
+                    ${label}
+                </div>
+            `;
+
+            html += this._getFormattedScrollItems(value, level + 1);
         }
-        return html;
+
+        // ---------------------------
+        // Array
+        // ---------------------------
+        else if (Array.isArray(value)) {
+
+            html += `
+                <div style="
+                    margin-left:${indent}px;
+                    color:#0066cc;
+                        font-size:11px;
+                    margin-top:5px;
+                ">
+                    ${label}
+                </div>
+            `;
+
+            value.forEach(item => {
+
+                //----------------------------------
+                // array contains object
+                //----------------------------------
+                if (
+                    item !== null &&
+                    typeof item === "object"
+                ) {
+
+                    html += this._getFormattedScrollItems(
+                        item,
+                        level + 1
+                    );
+                }
+
+                //----------------------------------
+                // array contains primitive
+                //----------------------------------
+                else {
+
+                    html += `
+                        <div style="
+                            margin-left:${(level+1)*16}px;
+                            font-size:11px;
+                            color:#555;
+                            padding:2px 0;
+                        ">
+                            • ${item}
+                        </div>
+                    `;
+                }
+            });
+        }
+
+        // ---------------------------
+        // Primitive value
+        // ---------------------------
+        else {
+
+            html += `
+                <div style="
+                    margin-left:${indent}px;
+                    font-size:11px;
+                    padding:2px 0;
+                    color:#555;
+                ">
+                    <span style="
+                        color:#007bff;
+                    ">
+                        ${label}
+                    </span>
+
+                    : ${value}
+                </div>
+            `;
+        }
     }
+
+    return html;
+}
 
     updateAnalysisDescription() {
         const dropdown = document.getElementById('analysis-type-dropdown');

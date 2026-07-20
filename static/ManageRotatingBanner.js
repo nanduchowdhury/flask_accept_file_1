@@ -24,12 +24,13 @@ class ManageRotatingBanner {
                     const value = info.weekly_avg_return;
                     const isNegative = value.startsWith('-');
                     const colorClass = isNegative ? 'banner-neg-val' : 'banner-pos-val';
-                    return `${displayName} - ${period} <span class="${colorClass}">${value}</span>`;
+                    return `${displayName} : <span class="${colorClass}">${value}</span>`;
                 });
 
                 // Use non-breaking spaces for a wide separator
                 const separator = "\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0";
-                this.content.innerHTML = sectorStrings.join(separator) + separator;
+                this.content.innerHTML = "[ " + period + " ]    " + 
+                            sectorStrings.join(separator) + separator;
                 this.start();
             }
         } catch (error) {
