@@ -1,279 +1,273 @@
 {
-  "header": {
-    "title": "Weekly NSE/BSE Sector Analysis",
-    "period": "week ending 17Jul26",
-    "generated_on": "19Jul26"
+  "week-ending-date": "17Jul26",
+  "report_period": {
+    "week": "13Jul26 to 17Jul26",
+    "last-2-qtrs": "approx 02Jan26 to 17Jul26 (Q1+Q2 CY2026)",
+    "6-months": "approx mid-Jan26 to 17Jul26",
+    "1-year": "approx 23Jul25 to 17Jul26"
+  },
+  "data_quality_note": "Weekly (13-17 Jul 2026) figures for Nifty 50, Sensex, Nifty IT, Nifty Media, Nifty Pharma and Nifty Healthcare are sourced from market reports and confirmed. Other weekly sector figures are close approximations built from daily sectoral moves reported through the week. Longer-horizon figures (last-2-qtrs, 6-months, 1-year) are reliably anchored for Nifty 50/Sensex using confirmed index closing levels; sector-level longer-horizon figures are directional estimates (marked 'estimated') since verified index-level data for every sector/period was not available via search - treat these as indicative, not exact.",
+
+  "market_overview": {
+    "nifty_50_close": 24334.30,
+    "sensex_close": 78151.45,
+    "india_vix": 13.15,
+    "week_change_nifty50_pct": 0.52,
+    "week_change_sensex_pct": 0.75,
+    "fii_activity": "FIIs were net sellers for the week (13-17 Jul 2026), with cumulative cash-market net outflow of approx Rs -9,118 crore. Selling was heaviest on 16 Jul (Rs -4,205.56 crore) and eased sharply by Friday (Rs -376.41 crore). FIIs stayed net long in index futures/options into the weekend, however, signaling short-term bullish derivative positioning.",
+    "dii_activity": "DIIs were consistent net buyers through the week, with cumulative net inflow of approx Rs +9,807 crore, largely offsetting FII selling and providing a floor under the market. DIIs rotated out of richly-valued mid- and small-caps into large-cap IT and banking names.",
+    "global_triggers": [
+      "Escalating US-Iran tensions; US airstrikes on Iranian targets and threats to Iran's power grid kept crude oil prices elevated and geopolitical risk premium high",
+      "Uncertainty over Strait of Hormuz shipping/transit arrangements following the informal Iran-US truce, with no clear rulebook on passage",
+      "Wall Street profit-booking in AI-linked/semiconductor counters dragged US and Asian tech stocks lower mid-week",
+      "Firm US dollar and elevated crude prices kept FIIs cautious on emerging markets including India",
+      "Rupee under mild pressure (~95.3-96.2/USD) on higher energy import costs"
+    ],
+    "predictions_next_week": [
+      "Nifty 50 likely to stay range-bound between 24,000 support and 24,500-25,000 resistance zone; a decisive move above 24,500 needed to confirm a stronger up-move",
+      "Q1FY27 earnings season to remain the primary domestic driver, with major private banks and Reliance Industries results due, which could set the tone for Financial Services and Energy",
+      "Sector rotation likely to continue; Realty, Pharma, Media and Midcap names sit in the RRG 'leading' quadrant and could keep outperforming the broader Nifty 500",
+      "FII flows are the key swing factor - a shift back to net buying would be a strong bullish signal, while continued selling on oil/geopolitical worries could cap upside",
+      "Watch for continued volatility around any escalation/de-escalation headlines on the Iran-US/Strait of Hormuz situation"
+    ],
+    "risk_level": "Moderate - India VIX near 13 (relatively low), but oil-price and geopolitical risk (Iran-US, Strait of Hormuz) plus continued FII selling are key overhangs",
+    "momentum": "Improving/neutral-to-positive - Nifty registered its tightest weekly range of 2026 and closed higher, but breadth was narrow and concentrated in large-cap IT/banking names while broader mid/small-caps lagged",
+    "sentiment": "Cautiously optimistic - earnings-led optimism (Tech Mahindra, Jio Financial) offset by weak market breadth, oil-driven geopolitical caution, and continued (though moderating) FII selling",
+    "key_stocks": [
+      "Kotak Mahindra Bank - among top Nifty gainers on earnings optimism, though later fell ~4% on slow sequential loan/deposit growth concerns",
+      "Tech Mahindra - rallied on strong Q1 results, led IT sector gains",
+      "Jio Financial Services - rallied on strong Q1 results",
+      "TCS - among top gainers, supported IT rally",
+      "Reliance Industries - gained ~2.4% on promoter stake increase to 50.48% and ahead of Q1 results",
+      "Wipro - fell on cautious quarterly guidance",
+      "Dr Reddy's Laboratories & Sun Pharma - biggest drags on Nifty Pharma after Novo Nordisk's Wegovy approval in India raised competitive concerns",
+      "Cipla - among top Nifty laggards for the week",
+      "Grasim Industries (via Aditya Birla Renewables) - announced Rs 17,200 crore ($1.8bn) acquisition of Shell's Sprng Energy (5 GWp renewable capacity), a major corporate action for the week"
+    ]
   },
 
   "all_sectors": {
-    "Nifty 50": {
-      "weekly_avg_return": "+1.12%",
-      "weekly_trend": "Bullish",
-      "positive_news": [
-        "Resilient earnings from index heavyweights",
-        "Continued FII buying interest",
-        "Positive global cues from US markets"
-      ],
-      "negative_news": [
-        "Persistent inflationary pressures",
-        "Geopolitical uncertainties in the Middle East"
-      ],
-      "weekly_highlights": [
-        "Index crossed key psychological resistance levels",
-        "Heavyweights in IT and Banking supported the climb"
-      ],
-      "next_week_outlook": "Positive"
+    "NIFTY_50": {
+      "last_week_return_pct": 0.52,
+      "last_2_qtrs_return_pct": -7.6,
+      "last_6_month_return_pct": -5.3,
+      "last_1_year_return_pct": -3.5,
+      "close_level": 24334.30,
+      "data_quality": "confirmed (week, 1yr); estimated (2qtrs, 6mo) from anchored closing levels",
+      "drivers": ["Q1FY27 earnings optimism (Tech Mahindra, Jio Financial)", "DII buying offsetting FII selling", "Large-cap IT/banking led rally amid weak breadth"],
+      "positive_news": ["Nifty posted its tightest weekly trading range of 2026, closing at a one-week high on earnings optimism"],
+      "negative_news": ["Broader market underperformed frontline index; Midcap 100 and Smallcap 100 both declined on the week, showing narrow participation"],
+      "other_notes": ["Traded in a narrow 368-point weekly band between 24,000 and 24,368"]
     },
-
-    "Nifty 100": {
-      "weekly_avg_return": "+1.05%",
-      "weekly_trend": "Positive",
-      "positive_news": [
-        "Stable performance across large-cap stocks",
-        "Sectoral rotation into defensives provided support"
-      ],
-      "negative_news": [
-        "Valuation concerns in certain high-growth pockets"
-      ],
-      "weekly_highlights": [
-        "Broad-based buying seen in upper-tier large caps",
-        "Low volatility relative to broader indices"
-      ],
-      "next_week_outlook": "Positive"
+    "SENSEX": {
+      "last_week_return_pct": 0.75,
+      "last_2_qtrs_return_pct": -7.0,
+      "last_6_month_return_pct": -4.9,
+      "last_1_year_return_pct": -5.5,
+      "close_level": 78151.45,
+      "data_quality": "confirmed (week); estimated (others)",
+      "drivers": ["Reliance Industries, banking and IT heavyweights drove the rally"],
+      "positive_news": ["Surged 964.58 points (1.25%) on Friday alone on earnings optimism"],
+      "negative_news": [],
+      "other_notes": []
     },
-
-    "Nifty 500": {
-      "weekly_avg_return": "+1.34%",
-      "weekly_trend": "Bullish",
-      "positive_news": [
-        "Broad participation across sectors",
-        "Mid-cap and Small-cap indices hit new records",
-        "Favorable domestic macro data"
-      ],
-      "negative_news": [
-        "Profit booking observed in highly-valued small-cap stocks",
-        "Rising bond yields in the global market"
-      ],
-      "weekly_highlights": [
-        "Broader market outperformed large-cap indices",
-        "Strong volume growth in non-index stocks"
-      ],
-      "next_week_outlook": "Positive"
+    "NIFTY_100": {
+      "last_week_return_pct": 0.4,
+      "last_2_qtrs_return_pct": -7.4,
+      "last_6_month_return_pct": -5.1,
+      "last_1_year_return_pct": -3.8,
+      "data_quality": "estimated - derived from Nifty 50 with slight broader-market drag",
+      "drivers": ["Large-cap led gains diluted slightly by Next 50 underperformance"],
+      "positive_news": [],
+      "negative_news": [],
+      "other_notes": []
     },
-
-    "Nifty IT": {
-      "weekly_avg_return": "+2.14%",
-      "weekly_trend": "Bullish",
-      "positive_news": [
-        "Strong US technology sentiment",
-        "AI spending remained healthy",
-        "Large deal pipeline improved"
-      ],
-      "negative_news": [
-        "Rupee appreciation concern",
-        "Profit booking near highs"
-      ],
-      "weekly_highlights": [
-        "Large caps outperformed",
-        "Mid-cap IT remained strong",
-        "Strong foreign buying"
-      ],
-      "top_gainers": [
-        "Persistent Systems",
-        "Coforge",
-        "Infosys"
-      ],
-      "top_losers": [
-        "Tech Mahindra"
-      ],
-      "next_week_outlook": "Positive"
+    "NIFTY_500": {
+      "last_week_return_pct": 0.15,
+      "last_2_qtrs_return_pct": -7.9,
+      "last_6_month_return_pct": -5.8,
+      "last_1_year_return_pct": -4.5,
+      "data_quality": "estimated - broader index dragged by mid/small-cap weakness this week",
+      "drivers": ["Mid and small-cap underperformance offset large-cap strength"],
+      "positive_news": [],
+      "negative_news": ["Broader market breadth remained weak - more decliners (2,419) than advancers (1,632) on Friday alone"],
+      "other_notes": []
     },
-
-    "Nifty Bank": {
-      "weekly_avg_return": "+1.26%",
-      "weekly_trend": "Positive",
-      "positive_news": [
-        "Credit growth remained healthy",
-        "Private banks attracted FII buying",
-        "Lower rate expectations supportive"
-      ],
-      "negative_news": [
-        "Margin compression concerns"
-      ],
-      "weekly_highlights": [
-        "Private banks outperformed PSU",
-        "Loan growth remained strong"
-      ],
-      "top_gainers": [
-        "ICICI Bank",
-        "HDFC Bank"
-      ],
-      "top_losers": [
-        "IndusInd Bank"
-      ],
-      "next_week_outlook": "Positive"
+    "NIFTY_IT": {
+      "last_week_return_pct": 4.3,
+      "last_2_qtrs_return_pct": -12.0,
+      "last_6_month_return_pct": -9.0,
+      "last_1_year_return_pct": -15.0,
+      "data_quality": "confirmed (week); estimated (longer horizons, sector known to be one of the weakest over the past year)",
+      "drivers": ["Strong Tech Mahindra and TCS Q1 earnings", "DII rotation into large-cap IT as a value play"],
+      "positive_news": ["Tech Mahindra Q1 results beat expectations, driving a sector-wide rally", "TCS and HCLTech featured among top Nifty gainers"],
+      "negative_news": ["Wipro issued cautious quarterly guidance, capping some upside", "Sector remains well below 52-week highs on a 1-year view amid weak global tech demand"],
+      "other_notes": ["Top-performing sector for the week per weekly sector rotation data; moved from 'Lagging' to 'Improving' quadrant on relative rotation graphs"]
     },
-
-    "Nifty Auto": {
-      "weekly_avg_return": "+0.82%",
-      "weekly_trend": "Positive",
-      "positive_news": [
-        "Strong passenger vehicle demand",
-        "Rural demand improved"
-      ],
-      "negative_news": [
-        "Input cost concerns",
-        "Export uncertainty"
-      ],
-      "weekly_highlights": [
-        "Premium segment strong",
-        "EV demand stable"
-      ],
-      "top_gainers": [
-        "Tata Motors",
-        "Eicher Motors"
-      ],
-      "top_losers": [
-        "Hero MotoCorp"
-      ],
-      "next_week_outlook": "Neutral"
+    "NIFTY_BANK": {
+      "last_week_return_pct": 1.8,
+      "last_2_qtrs_return_pct": -3.0,
+      "last_6_month_return_pct": -1.5,
+      "last_1_year_return_pct": 2.0,
+      "data_quality": "estimated (week directionally confirmed positive; Friday alone +1.6%)",
+      "drivers": ["Anticipation of strong Q1 results from major private banks over the weekend", "Kotak Mahindra Bank and Axis Bank led gains"],
+      "positive_news": ["Nifty Private Bank was the top sectoral gainer on Friday, rising 2%"],
+      "negative_news": ["Kotak Mahindra Bank shares fell about 4% intraweek on concerns over slow sequential loan and deposit growth"],
+      "other_notes": []
     },
-
-    "Nifty Pharma": {
-      "weekly_avg_return": "+1.74%",
-      "weekly_trend": "Positive",
-      "positive_news": [
-        "Defensive buying continued",
-        "US demand remained healthy"
-      ],
-      "negative_news": [
-        "USFDA inspection concerns"
-      ],
-      "weekly_highlights": [
-        "Export companies outperformed"
-      ],
-      "top_gainers": [
-        "Sun Pharma",
-        "Lupin"
-      ],
-      "top_losers": [
-        "Biocon"
-      ],
-      "next_week_outlook": "Positive"
+    "NIFTY_PRIVATE_BANK": {
+      "last_week_return_pct": 2.5,
+      "last_2_qtrs_return_pct": -2.5,
+      "last_6_month_return_pct": -1.0,
+      "last_1_year_return_pct": 3.0,
+      "data_quality": "estimated (Friday +2% confirmed as best single-day sectoral performer)",
+      "drivers": ["Earnings optimism ahead of major private bank Q1 results"],
+      "positive_news": ["Emerged as top sectoral gainer on Friday, rising 2%"],
+      "negative_news": [],
+      "other_notes": []
     },
-
-    "Nifty FMCG": {
-      "weekly_avg_return": "+0.61%",
-      "weekly_trend": "Neutral",
-      "positive_news": [
-        "Rural demand improved",
-        "Commodity costs remained stable"
-      ],
-      "negative_news": [
-        "Premium demand slowed"
-      ],
-      "weekly_highlights": [
-        "Defensive buying continued"
-      ],
-      "top_gainers": [
-        "Varun Beverages",
-        "Britannia"
-      ],
-      "top_losers": [
-        "Nestle India"
-      ],
-      "next_week_outlook": "Neutral"
+    "NIFTY_FINANCIAL_SERVICES": {
+      "last_week_return_pct": 1.5,
+      "last_2_qtrs_return_pct": -3.5,
+      "last_6_month_return_pct": -2.0,
+      "last_1_year_return_pct": 1.0,
+      "data_quality": "estimated",
+      "drivers": ["Jio Financial Services rally on strong Q1 results", "General financials strength alongside banks"],
+      "positive_news": ["Jio Financial Services among top Nifty gainers for the week on earnings beat"],
+      "negative_news": [],
+      "other_notes": []
     },
-
-    "Nifty Realty": {
-      "weekly_avg_return": "-0.82%",
-      "weekly_trend": "Negative",
-      "positive_news": [
-        "Luxury housing demand stable"
-      ],
-      "negative_news": [
-        "Higher financing costs",
-        "Profit booking"
-      ],
-      "weekly_highlights": [
-        "Large developers outperformed"
-      ],
-      "top_gainers": [
-        "DLF"
-      ],
-      "top_losers": [
-        "Godrej Properties"
-      ],
-      "next_week_outlook": "Negative"
+    "NIFTY_AUTO": {
+      "last_week_return_pct": 1.8,
+      "last_2_qtrs_return_pct": -2.0,
+      "last_6_month_return_pct": 0.5,
+      "last_1_year_return_pct": 3.5,
+      "data_quality": "estimated (multiple confirmed daily gains during the week - e.g. +1.47% and +1.3% on separate sessions)",
+      "drivers": ["Hero MotoCorp led rally on upbeat annual report commentary", "Broad-based buying interest through the week"],
+      "positive_news": ["Auto stocks attracted strong buying multiple sessions this week, among the better-performing cyclical sectors"],
+      "negative_news": ["Briefly dipped mid-week (14 Jul) as oil-price surge from Iran tensions hit risk appetite for the auto sector"],
+      "other_notes": []
     },
-
-    "Nifty Metal": {
-      "weekly_avg_return": "-1.25%",
-      "weekly_trend": "Weak",
-      "positive_news": [
-        "China stimulus hopes"
-      ],
-      "negative_news": [
-        "Weak steel prices",
-        "Lower metal demand"
-      ],
-      "weekly_highlights": [
-        "Volatile trading"
-      ],
-      "top_gainers": [
-        "Hindustan Zinc"
-      ],
-      "top_losers": [
-        "Tata Steel",
-        "JSW Steel"
-      ],
-      "next_week_outlook": "Neutral"
+    "NIFTY_PHARMA": {
+      "last_week_return_pct": -1.4,
+      "last_2_qtrs_return_pct": 3.0,
+      "last_6_month_return_pct": 4.0,
+      "last_1_year_return_pct": 6.0,
+      "data_quality": "confirmed (week); estimated (longer horizons - pharma has been a relatively resilient defensive sector)",
+      "drivers": ["Novo Nordisk's India regulatory approval for obesity drug Wegovy triggered a sector sell-off on competitive concerns"],
+      "positive_news": ["Sector remains in the 'Leading' quadrant on relative rotation graphs over a longer horizon, suggesting underlying strength despite this week's dip"],
+      "negative_news": ["Biggest sectoral loser of the week, dragged by Dr Reddy's Laboratories and Sun Pharma after Wegovy's India approval"],
+      "other_notes": []
     },
-
-    "Nifty Energy": {
-      "weekly_avg_return": "+0.95%",
-      "weekly_trend": "Positive",
-      "positive_news": [
-        "Oil marketing stocks gained",
-        "Gas demand improved"
-      ],
-      "negative_news": [
-        "Crude price volatility"
-      ],
-      "weekly_highlights": [
-        "Refining margins improved"
-      ],
-      "top_gainers": [
-        "Reliance Industries",
-        "ONGC"
-      ],
-      "top_losers": [
-        "BPCL"
-      ],
-      "next_week_outlook": "Positive"
+    "NIFTY_HEALTHCARE": {
+      "last_week_return_pct": -1.28,
+      "last_2_qtrs_return_pct": 2.5,
+      "last_6_month_return_pct": 3.5,
+      "last_1_year_return_pct": 5.0,
+      "data_quality": "confirmed (week); estimated (longer horizons)",
+      "drivers": ["Same Wegovy-approval driven sell-off that hit Nifty Pharma"],
+      "positive_news": [],
+      "negative_news": ["Declined 1.28% for the week following Novo Nordisk's obesity-drug approval in India"],
+      "other_notes": []
     },
-
-    "Nifty PSU Bank": {
-      "weekly_avg_return": "+1.53%",
-      "weekly_trend": "Positive",
-      "positive_news": [
-        "Government reforms",
-        "Strong loan growth"
-      ],
-      "negative_news": [
-        "Profit booking after rally"
-      ],
-      "weekly_highlights": [
-        "Retail participation increased"
-      ],
-      "top_gainers": [
-        "SBI",
-        "Bank of Baroda"
-      ],
-      "top_losers": [
-        "Canara Bank"
-      ],
-      "next_week_outlook": "Positive"
+    "NIFTY_FMCG": {
+      "last_week_return_pct": 0.4,
+      "last_2_qtrs_return_pct": -4.0,
+      "last_6_month_return_pct": -2.5,
+      "last_1_year_return_pct": -1.5,
+      "data_quality": "estimated (Friday +0.7% confirmed, mixed sessions during the week)",
+      "drivers": ["Consumption-linked buying interest on Friday's rally"],
+      "positive_news": ["Rose 0.7% on Friday as part of the broad-based rally"],
+      "negative_news": ["Among sectors that led declines mid-week (15 Jul) alongside IT and metal"],
+      "other_notes": []
+    },
+    "NIFTY_METAL": {
+      "last_week_return_pct": -0.3,
+      "last_2_qtrs_return_pct": -1.0,
+      "last_6_month_return_pct": 1.0,
+      "last_1_year_return_pct": 4.0,
+      "data_quality": "estimated (mixed/negative sessions confirmed on 14-15 Jul)",
+      "drivers": ["Global metal price volatility and profit booking after recent gains"],
+      "positive_news": [],
+      "negative_news": ["Among sectors leading declines during the mid-week session (15 Jul) alongside IT and FMCG"],
+      "other_notes": []
+    },
+    "NIFTY_ENERGY": {
+      "last_week_return_pct": 1.2,
+      "last_2_qtrs_return_pct": 2.0,
+      "last_6_month_return_pct": 1.5,
+      "last_1_year_return_pct": 0.5,
+      "data_quality": "estimated (Nifty Oil & Gas +1% on Friday confirmed)",
+      "drivers": ["Elevated crude oil prices amid Iran-US tensions boosted upstream/energy names", "Reliance Industries strength lifted the index"],
+      "positive_news": ["Nifty Oil & Gas added 1% on Friday, aided by gains in Reliance Industries"],
+      "negative_news": ["Oil price surge is a double-edged sword - raises input costs for oil-import-dependent sectors even as it lifts upstream energy names"],
+      "other_notes": []
+    },
+    "NIFTY_PSU_BANK": {
+      "last_week_return_pct": 0.5,
+      "last_2_qtrs_return_pct": -1.5,
+      "last_6_month_return_pct": 1.0,
+      "last_1_year_return_pct": 8.0,
+      "data_quality": "estimated (mixed sessions - positive on 15 Jul at +1%, negative on 14 Jul)",
+      "drivers": ["Continued institutional interest in PSU banking names"],
+      "positive_news": ["Gained about 1% in the 15 Jul session amid broad-based buying"],
+      "negative_news": ["Declined alongside Realty, Autos and IT on 14 Jul as the oil-price surge hit risk appetite"],
+      "other_notes": []
+    },
+    "NIFTY_REALTY": {
+      "last_week_return_pct": 0.3,
+      "last_2_qtrs_return_pct": -5.0,
+      "last_6_month_return_pct": -2.0,
+      "last_1_year_return_pct": -4.0,
+      "data_quality": "estimated (led prior week's rally; eased out of top-5 sectors this week per weekly rotation report)",
+      "drivers": ["Momentum pared after leading the previous week's rally"],
+      "positive_news": ["Remains in the 'Leading' quadrant on relative rotation graphs, alongside Pharma and Media, over a longer horizon"],
+      "negative_news": ["Dropped out of the top-5 weekly sector performers after leading the prior week", "Declined on 14 Jul alongside PSU Banks, Autos and IT as the oil surge hit risk appetite"],
+      "other_notes": []
+    },
+    "NIFTY_MEDIA": {
+      "last_week_return_pct": 2.5,
+      "last_2_qtrs_return_pct": -6.0,
+      "last_6_month_return_pct": -3.0,
+      "last_1_year_return_pct": -8.0,
+      "data_quality": "confirmed (week - second-best sectoral performer)",
+      "drivers": ["Continued sector rotation and momentum from prior weeks"],
+      "positive_news": ["Second-best performing sector this week, up 2.5%"],
+      "negative_news": ["Fell 0.69% in isolated Friday trade even as the weekly trend was positive, and is showing a paring of relative momentum on RRG charts"],
+      "other_notes": ["Sits in the 'Leading' quadrant on relative rotation graphs but showing signs of momentum fading"]
+    },
+    "NIFTY_MIDCAP_100": {
+      "last_week_return_pct": -0.5,
+      "last_2_qtrs_return_pct": -6.0,
+      "last_6_month_return_pct": -4.0,
+      "last_1_year_return_pct": -2.0,
+      "data_quality": "estimated (Friday -0.4% confirmed)",
+      "drivers": ["Institutional buying concentrated in large-caps rather than broader market this week"],
+      "positive_news": [],
+      "negative_news": ["Declined 0.4% on Friday even as headline indices rallied, reflecting narrow market breadth"],
+      "other_notes": ["Sits in the 'Leading' quadrant on relative rotation graphs against Nifty 500 despite this week's dip"]
+    },
+    "NIFTY_SMALLCAP_100": {
+      "last_week_return_pct": -0.3,
+      "last_2_qtrs_return_pct": -8.0,
+      "last_6_month_return_pct": -6.0,
+      "last_1_year_return_pct": -5.0,
+      "data_quality": "estimated (Friday -0.2% confirmed)",
+      "drivers": ["Same large-cap rotation dynamic as Midcap 100"],
+      "positive_news": [],
+      "negative_news": ["Slipped 0.2% on Friday, underperforming the broader rally"],
+      "other_notes": []
+    },
+    "NIFTY_CONSUMER_DURABLES": {
+      "last_week_return_pct": 0.5,
+      "last_2_qtrs_return_pct": -3.0,
+      "last_6_month_return_pct": -1.0,
+      "last_1_year_return_pct": 2.0,
+      "data_quality": "estimated (+0.67% confirmed on 15 Jul session)",
+      "drivers": ["Consumption-linked buying interest"],
+      "positive_news": ["Gained 0.67% in the 15 Jul session, supporting positive domestic consumption sentiment"],
+      "negative_news": [],
+      "other_notes": []
     }
   }
 }

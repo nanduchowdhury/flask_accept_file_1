@@ -17,20 +17,32 @@ class ManageRotatingBanner {
             const data = await response.json();
             
             if (data && data.all_sectors) {
-                const period = (data.header && data.header.period) ? data.header.period : "weekly avg return";
-                const sectorStrings = Object.entries(data.all_sectors).map(([name, info]) => {
-                    // Clean "Nifty " prefix for a cleaner look
-                    const displayName = name;
-                    const value = info.weekly_avg_return;
-                    const isNegative = value.startsWith('-');
-                    const colorClass = isNegative ? 'banner-neg-val' : 'banner-pos-val';
-                    return `${displayName} : <span class="${colorClass}">${value}</span>`;
-                });
+                const sectors = Object.entries(data.all_sectors);
+                const itemSeparator = "\u00A0\u00A0\u00A0\u00A0"; // Space between sectors
+                const groupSeparator = "\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0"; // Space between periods
 
-                // Use non-breaking spaces for a wide separator
-                const separator = "\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0";
-                this.content.innerHTML = "[ " + period + " ]    " + 
-                            sectorStrings.join(separator) + separator;
+                const metrics = [
+                    { label: "last week return", key: "last_week_return_pct" },
+                    { label: "last 2 qtrs return", key: "last_2_qtrs_return_pct" },
+                    { label: "last 6 months return", key: "last_6_month_return_pct" },
+                    { label: "last 1 year return", key: "last_1_year_return_pct" }
+                ];
+
+                const fullContent = metrics.map(m => {
+                    const sectorStrings = sectors.map(([name, info]) => {
+                        const val = info[m.key];
+                        if (val === undefined || val === null) return null;
+                        const isNegative = val < 0;
+                        const colorClass = isNegative ? 'banner-neg-val' : 'banner-pos-val';
+                        const displayName = name.toLowerCase().replace(/_/g, '-');
+                        return `${displayName} : <span class="${colorClass}">${val}%</span>`;
+                    }).filter(s => s !== null).join(itemSeparator);
+
+                    return `<span style="color: blue; text-decoration: underline;">[${m.label}]</span>${itemSeparator}${sectorStrings}`;
+                }).join(groupSeparator);
+
+                this.content.innerHTML = fullContent + groupSeparator;
+                this.setSpeed(180); // Increased duration to reduce rotation speed
                 this.start();
             }
         } catch (error) {

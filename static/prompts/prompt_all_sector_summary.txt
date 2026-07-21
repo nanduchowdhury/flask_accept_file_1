@@ -1,11 +1,30 @@
-Give me JSON file which will contain following: 
+Give me JSON data which will contain following: 
 
     1. Last monday to friday avg return for major sectors.
        Put friday-date in another key called 'week-ending-date'.
        Example week-ending-date : 06Jul26
+       Also put under separate-keys data for 'last-2-qtrs', '6-months', '1-year'
     2. Put all sectors under key 'all_sectors'.
     3. Put any major positive-news under sector-key under key 'positive_news'.
     4. Put any major negative-news under sector-key under key 'negative_news'.
     5. Any other things for that week under sector keys.
     6. Include Nifty-50, Nifty-100, Nifty-500 under 'all_sectors' keys.
+    7. Generate accurate data for the return percent.
     
+    {
+  "last_week_return": "...",
+  "last_2_qtrs_return": "...",
+  "last_6_month_return": "...",
+  "last_1_year_return": "...",
+  "drivers": [],
+  "positive_news": [],
+  "negative_news": [],
+  "fii_activity": "...",
+  "dii_activity": "...",
+  "global_triggers": [],
+  "predictions_next_week": [],
+  "risk_level": "...",
+  "momentum": "...",
+  "sentiment": "...",
+  "key_stocks": []
+}
