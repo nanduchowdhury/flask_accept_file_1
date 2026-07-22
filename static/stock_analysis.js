@@ -891,12 +891,21 @@ _getFormattedScrollItems(obj, level = 0) {
 
     getSectorAnalysisInfo(sector, callback) {
 
-        const data = { sector: sector };
-        basicInitializer.makeServerRequest('/stock_sector_analysis_info', data, (response) => {
-            callback(response.info);
-        }, (error) => {
-            errorManager.showError(2044, error);
-        });
+        const filePath = `/static/prompts/stocks_${sector}_info.json`;
+
+        fetch(filePath)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                callback(JSON.stringify(data));
+            })
+            .catch(error => {
+                errorManager.showError(2044, error.message);
+            });
     }
 
     openSectorPage(sector) {

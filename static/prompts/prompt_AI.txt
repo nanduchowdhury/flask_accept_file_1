@@ -7,4 +7,49 @@ Give me JSON format data for India AI sector as follows:
         US/Europe market they are caterning to, etc.
     3. For each key or company - give expected impact from global data etc.
     4. Keep all companies under key - related_companies.
-    5. Give numbers as much as possible for all data-points.
+    5. Give accurate numbers as much as possible for all data-points.
+    6. Give roughly as per following schema:
+
+
+{
+  "sector": "India Artificial Intelligence Infrastructure & Enablers",
+  "description": "Indian listed companies that benefit directly or indirectly from global AI adoption through data center infrastructure, optical networking, power equipment, cooling systems, electronics manufacturing, semiconductors, and AI hardware supply chains. General IT services companies are intentionally excluded.",
+  "related_companies": {
+    "Dixon Technologies": {
+      "category": "Electronics Manufacturing (EMS)",
+      "ai_link": "Manufactures servers, networking equipment and electronic hardware used in AI infrastructure.",
+      "current_global_impact": [
+        "Global electronics manufacturing shift to India",
+        "AI server manufacturing demand",
+        "Hyperscaler supply-chain diversification",
+        "PLI scheme benefits"
+      ],
+      "markets_served": [
+        "India",
+        "USA OEMs",
+        "Europe OEMs"
+      ],
+      "expected_future_impact": [
+        "AI server assembly growth",
+        "Higher electronics exports",
+        "Expansion into AI hardware manufacturing"
+      ]
+      "last_week_return": "...",
+      "last_2_qtrs_return": "...",
+      "last_6_month_return": "...",
+      "last_1_year_return": "...",
+      "drivers": [],
+      "positive_news": [],
+      "negative_news": [],
+      "fii_activity": "...",
+      "dii_activity": "...",
+      "global_triggers": [],
+      "predictions_next_week": [],
+      "risk_level": "...",
+      "momentum": "...",
+      "sentiment": "...",
+    },
+...
+  }
+}
+

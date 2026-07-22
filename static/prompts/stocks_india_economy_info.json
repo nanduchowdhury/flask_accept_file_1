@@ -1,9 +1,10 @@
 {
   "metadata": {
-    "generated_date": "2026-06-22",
-    "economy_assessment": "Strong Growth with Moderating Inflation",
-    "economy_score": 8.6,
-    "comparison_basis": "Current Quarter vs Previous Quarter",
+    "generated_date": "2026-07-22",
+    "economy_assessment": "Resilient Domestic Growth Clouded by Rising External Risks (Rupee/Forex Stress, FII Outflows, Iran-War-Linked Oil Shock)",
+    "economy_score": 6.8,
+    "comparison_basis": "Q1 FY27 (Apr-Jun 2026) vs Q4 FY26 (Jan-Mar 2026), using latest available monthly/quarterly prints as of 22Jul26",
+    "data_quality_note": "Figures are sourced from RBI MPC releases (Jun 2026), NSO/PLFS, GST Council, HSBC/S&P Global PMI surveys, Ministry of Finance and RBI weekly bulletins through 22Jul26. Where an exact latest-quarter print was not available, the most recent confirmed data point is used and dated explicitly. This is not investment/policy advice.",
     "delta_scale": {
       "+3": "Strong Improvement",
       "+2": "Moderate Improvement",
@@ -17,322 +18,349 @@
 
   "parameters": {
     "GDP": {
-      "status": "Strong",
-      "trend": "Improving",
-      "outlook_next_qtr": "Positive",
+      "status": "Resilient but Outlook Downgraded",
+      "trend": "Decelerating from FY26 highs",
+      "outlook_next_qtr": "Moderate Positive",
+      "value": "FY26 (2025-26) full-year growth ~7.4-7.6% (RBI estimate, upgraded twice during the year); Q2 FY26 (Jul-Sep 2025) GDP grew 8.2% YoY. RBI's June 2026 MPC cut the FY27 (2026-27) real GDP growth forecast to 6.6% from 6.9%, with a quarterly profile of Q1 6.6%, Q2 6.3%, Q3 6.5%, Q4 6.8%",
       "drivers": [
-        "Domestic consumption",
-        "Infrastructure spending",
-        "Manufacturing expansion",
-        "Services exports"
+        "Private consumption remained firm",
+        "Fixed investment maintained momentum",
+        "Government capital expenditure support",
+        "Services exports remained steady",
+        "Headwinds: elevated energy prices, global supply-chain disruptions, drag on merchandise exports from higher freight/insurance costs post Iran-war escalation"
       ],
-      "change_from_last_qtr": "+1",
-      "change_description": "Growth momentum improved due to stronger capex and consumption."
+      "change_from_last_qtr": "-1",
+      "change_description": "RBI downgraded its FY27 growth forecast by 30bps (6.9%->6.6%) in the June 2026 MPC citing energy-price and trade-disruption headwinds, even though FY26 itself closed on a strong note (8.2% in the Sep-25 quarter)."
     },
 
     "Inflation": {
-      "status": "Controlled",
-      "trend": "Improving",
-      "outlook_next_qtr": "Positive",
+      "status": "Low Currently but Forecast to Rise",
+      "trend": "Bottomed out, turning upward",
+      "outlook_next_qtr": "Rising - Watch Q3 FY27 peak",
+      "value": "CPI was 3.4% in March 2026 and 3.5% in April 2026 (core CPI ~3.7%, ex-precious-metals core ~2.1-2.2%). RBI's June 2026 MPC raised its FY27 CPI forecast by 50bps to 5.1% (from 4.6%), with a quarterly profile of Q1 4.2%, Q2 5.1%, Q3 5.9% (near the top of the 2-6% tolerance band), Q4 5.4%; core inflation projected at 4.7% for FY27",
       "drivers": [
-        "Food inflation moderation",
-        "Supply chain normalization",
-        "Stable commodity prices"
+        "Higher crude oil prices post Iran-war escalation",
+        "Elevated input/import costs",
+        "Global supply-chain disruptions",
+        "Food price upticks (April 2026)",
+        "Geopolitical uncertainty and weather-related upside risks flagged by RBI"
       ],
-      "change_from_last_qtr": "+2",
-      "change_description": "Inflation softened further, improving consumer purchasing power."
+      "change_from_last_qtr": "-1",
+      "change_description": "Actual inflation remains comfortably inside the RBI's band, but the RBI's own forward guidance turned materially more hawkish (FY27 CPI forecast raised 50bps), signalling the low-inflation window is expected to close through the rest of FY27."
     },
 
     "Interest_Rates": {
-      "status": "Growth Supportive",
+      "status": "On Hold, Neutral Stance",
       "trend": "Stable",
-      "outlook_next_qtr": "Positive",
+      "outlook_next_qtr": "Stable to Slightly Hawkish Bias",
+      "value": "Repo rate held at 5.25% (unchanged since the February 2026 MPC, after a cumulative 125bps of cuts through FY26); SDF at 5.00%, MSF and Bank Rate at 5.50%",
       "drivers": [
-        "Moderating inflation",
-        "RBI policy flexibility",
-        "Economic growth priorities"
+        "Rising FY27 inflation forecast reduces room for further cuts",
+        "Rupee depreciation and FII debt/equity flow considerations",
+        "RBI joint fiscal-regulatory measures (e.g. LTCG tax waiver for FPIs on G-Secs, effective retroactively from 1 Apr 2026) aimed at stabilising the currency rather than via rate action",
+        "Growth-inflation trade-off has become more delicate post the FY27 GDP downgrade"
       ],
-      "change_from_last_qtr": "+1",
-      "change_description": "Rate outlook became slightly more supportive for growth sectors."
+      "change_from_last_qtr": "0",
+      "change_description": "Repo rate has now been held for a second straight meeting (Apr and Jun 2026) after the rate-cutting cycle paused in Feb 2026; stance remains Neutral rather than turning either dovish or hawkish."
     },
 
     "Fiscal_Position": {
-      "status": "Stable",
-      "trend": "Stable",
-      "outlook_next_qtr": "Positive",
+      "status": "Tax Collections Strong; Precise Deficit Print Not Yet Confirmed for Q1 FY27",
+      "trend": "Supportive so far",
+      "outlook_next_qtr": "Stable",
+      "value": "Net direct tax collections rose 14.64% YoY to Rs 5.21 lakh crore in the current fiscal up to 17 June 2026. GST collections have been consistently strong: April 2026 hit a record Rs 2.43 lakh crore, May 2026 Rs ~1.94 lakh crore, June 2026 Rs 1,94,812 crore (+13.9% YoY, fastest monthly growth in 13 months). Q1 FY27 gross GST closed at Rs 6,31,699 crore (+8.4% YoY over Q1 FY26)",
       "drivers": [
-        "Government capex",
-        "Tax collections",
-        "Fiscal discipline"
+        "Strong direct and indirect tax buoyancy",
+        "Import-linked GST surged 34.6% YoY in June 2026 (partly reflecting higher energy import values)",
+        "Government capex execution continuing",
+        "Domestic GST growth more modest at 6.5% YoY, suggesting underlying consumption growth is steadier than headline collection growth"
       ],
       "change_from_last_qtr": "0",
-      "change_description": "Fiscal stance remains largely unchanged."
+      "change_description": "Revenue collections (direct tax + GST) remain healthy and broadly stable quarter-on-quarter; an official Q1 FY27 fiscal-deficit-as-%-of-budget print was not available as of this report."
     },
 
     "Current_Account": {
-      "status": "Manageable",
-      "trend": "Improving",
-      "outlook_next_qtr": "Positive",
+      "status": "Manageable for Now, Widening Risk Ahead",
+      "trend": "Volatile - swung to surplus in Q4 FY26, deficit widening for full FY26",
+      "outlook_next_qtr": "Deficit likely to widen given oil prices",
+      "value": "Q4 FY26 (Jan-Mar 2026) current account surplus of $7.1 billion (0.7% of GDP), down from $13.7bn (1.4% of GDP) a year earlier; Q3 FY26 was revised to a $15.5bn (1.5% of GDP) deficit. Full-year FY26 CAD widened to $25.2 billion (0.6% of GDP) vs $22.9 billion (0.6% of GDP) in FY25, as the merchandise trade deficit rose to $337.3 billion (from $286.9bn)",
       "drivers": [
-        "Services exports",
-        "Remittances",
-        "Stable imports"
+        "Merchandise trade deficit ballooning (Q4FY26 goods deficit $83.4bn vs $59.3bn YoY)",
+        "Services exports growth (net receipts $60.4bn in Q4FY26, up from $53.3bn) partly offsetting",
+        "Remittances surged (secondary income surplus $41.3bn, +33.9% in workers' remittances)",
+        "West Asia war disrupting the Strait of Hormuz - West Asia accounts for 14-20% of India's trade, raising oil-price and CAD risk going forward",
+        "FPI outflows ($16.4bn for FY26; $12bn in Q4FY26 alone) adding capital-account pressure"
       ],
-      "change_from_last_qtr": "+1",
-      "change_description": "External balances improved marginally."
+      "change_from_last_qtr": "-1",
+      "change_description": "The current account swung from a large surplus in Q4 FY26 to renewed deficit risk as oil prices rose sharply following the Iran-war escalation into mid-2026, and ICRA/RBI flag further CAD widening as a key FY27 risk."
     },
 
     "Rupee_Currency": {
-      "status": "Stable",
-      "trend": "Improving",
-      "outlook_next_qtr": "Stable",
+      "status": "Under Pressure",
+      "trend": "Depreciating",
+      "outlook_next_qtr": "Continued Volatility, RBI Actively Intervening",
+      "value": "The rupee crossed the 95/USD mark in 2026 and weakened further amid Iran-war escalation (moved as much as 2.9% in two weeks to around Rs 93.72-96/USD in various reported ranges); remains one of the weaker major Asian currencies year-to-date",
       "drivers": [
-        "Forex reserves",
-        "FII inflows",
-        "Services exports"
+        "Heavy FII/FPI equity outflows (reported >Rs 2.6 lakh crore cumulative equity selling, ~Rs 1.03 lakh crore in March 2026 alone)",
+        "RBI dollar-selling intervention to curb volatility, directly depleting forex reserves",
+        "Record gold import bill and elevated crude oil prices widening the trade gap",
+        "Government policy response: LTCG tax and interest-income tax waived for FPIs in G-Secs (retroactive from 1 Apr 2026) explicitly to attract capital back and support the currency",
+        "Public appeal from the Prime Minister for citizens to curb non-essential gold purchases, overseas travel and fuel use to ease dollar demand"
       ],
-      "change_from_last_qtr": "+1",
-      "change_description": "Currency volatility reduced compared to previous quarter."
+      "change_from_last_qtr": "-2",
+      "change_description": "Currency stress escalated meaningfully through Q1 FY27 as the Iran conflict, oil prices and heavy FII selling combined to push the rupee to weaker levels, prompting an unusual joint fiscal/regulatory policy response from the government and RBI."
+    },
+
+    "Forex_Reserves": {
+      "status": "Declining from Record Highs",
+      "trend": "Falling",
+      "outlook_next_qtr": "Further Drawdown Likely if Rupee Defence Continues",
+      "value": "Forex reserves peaked near $709.75 billion (13 Mar 2026), fell to ~$690 billion by May 2026, and stood at $666.9 billion for the week ended 26 Jun 2026 (vs $672.6bn the prior week) - a decline of roughly $43 billion in just over 3 months",
+      "drivers": [
+        "RBI dollar sales to defend the rupee",
+        "Declining gold reserves component (fell $5.4bn in a single week to $102.5bn as of late June 2026)",
+        "Elevated crude oil import bill",
+        "Record gold import demand domestically"
+      ],
+      "change_from_last_qtr": "-2",
+      "change_description": "Reserves fell sharply and consistently through Q1 FY27, prompting explicit government concern ('economic austerity' messaging) even though reserve levels (~$667-700bn, covering well over a year of imports) remain comfortable by historical standards."
     },
 
     "Foreign_Investment_FII": {
-      "status": "Improving",
-      "trend": "Bullish",
-      "outlook_next_qtr": "Positive",
+      "status": "Net Sellers - Heavy Outflows",
+      "trend": "Bearish (equities); Net buyers of debt",
+      "outlook_next_qtr": "Policy Measures (LTCG Waiver) Aim to Reverse Trend",
+      "value": "FIIs sold over Rs 2.6 lakh crore of Indian equities in the period cited by RBI/government commentary through mid-2026; FPIs pulled a net $16.4 billion for full FY26 and $12 billion in Q4 FY26 alone, reversing a $3.6bn net inflow in FY25. FIIs remained net buyers of Indian government debt even while selling equities",
       "drivers": [
-        "India growth premium",
-        "Stable macroeconomy",
-        "Global allocation shifts"
+        "Global risk-off sentiment amid the Iran war/Strait of Hormuz disruption",
+        "Rupee depreciation reducing India-asset returns in dollar terms",
+        "Elevated global bond yields drawing capital to developed markets",
+        "Government's new LTCG tax and interest-income tax waiver for FPIs in G-Secs (retroactive 1 Apr 2026) - a direct policy attempt to stem outflows and stabilise the debt market"
       ],
-      "change_from_last_qtr": "+2",
-      "change_description": "Foreign participation improved significantly."
+      "change_from_last_qtr": "-2",
+      "change_description": "FII selling intensified sharply, triggering an emergency-style joint fiscal/regulatory policy response rather than the steady FII-inflow narrative seen in earlier quarters."
     },
 
     "Domestic_Investment_DII": {
-      "status": "Strong",
-      "trend": "Bullish",
-      "outlook_next_qtr": "Strong Positive",
+      "status": "Resilient - Key Offsetting Force",
+      "trend": "Steady Net Buying",
+      "outlook_next_qtr": "Continued Support Expected",
+      "value": "DIIs have remained consistent net buyers through recent weeks/months (e.g. ~+Rs 9,807 crore net for the week of 13-17 Jul 2026), continuing to absorb FII selling and provide a floor under Indian equity markets",
       "drivers": [
-        "SIP inflows",
-        "Retirement funds",
-        "Retail participation"
-      ],
-      "change_from_last_qtr": "+1",
-      "change_description": "Domestic institutional support remains robust."
-    },
-
-    "Urban_Consumption": {
-      "status": "Strong",
-      "trend": "Improving",
-      "outlook_next_qtr": "Positive",
-      "drivers": [
-        "Employment growth",
-        "Premium consumption",
-        "Income growth"
-      ],
-      "change_from_last_qtr": "+1",
-      "change_description": "Urban demand remains healthy."
-    },
-
-    "Rural_Consumption": {
-      "status": "Improving",
-      "trend": "Bullish",
-      "outlook_next_qtr": "Positive",
-      "drivers": [
-        "Monsoon outlook",
-        "Government support",
-        "Agriculture income"
-      ],
-      "change_from_last_qtr": "+2",
-      "change_description": "Rural demand improved materially."
-    },
-
-    "Manufacturing": {
-      "status": "Expanding",
-      "trend": "Strong Bullish",
-      "outlook_next_qtr": "Strong Positive",
-      "drivers": [
-        "China+1 strategy",
-        "PLI schemes",
-        "Electronics manufacturing",
-        "Defense production"
-      ],
-      "change_from_last_qtr": "+2",
-      "change_description": "Manufacturing growth accelerated."
-    },
-
-    "Services_Sector": {
-      "status": "Very Strong",
-      "trend": "Bullish",
-      "outlook_next_qtr": "Positive",
-      "drivers": [
-        "IT exports",
-        "Financial services",
-        "Digital economy"
-      ],
-      "change_from_last_qtr": "+1",
-      "change_description": "Services remain the largest growth contributor."
-    },
-
-    "Goods_Exports": {
-      "status": "Moderate",
-      "trend": "Stable",
-      "outlook_next_qtr": "Neutral",
-      "drivers": [
-        "Global demand",
-        "Trade conditions",
-        "Commodity cycle"
+        "Continued SIP/mutual-fund inflows",
+        "Insurance and pension fund allocations",
+        "Rotation into large-cap names as a relative-safety trade amid FII selling",
+        "Retail participation via systematic investment plans remaining structurally sticky even during volatility"
       ],
       "change_from_last_qtr": "0",
-      "change_description": "Export growth remains mixed."
+      "change_description": "DII buying has been a stable, largely unchanged offsetting force through the recent bout of FII selling and currency stress - it has not accelerated dramatically, but has not faltered either."
     },
 
-    "Services_Exports": {
-      "status": "Very Strong",
-      "trend": "Bullish",
-      "outlook_next_qtr": "Positive",
+    "Manufacturing_PMI": {
+      "status": "Still Expansionary but Slowing",
+      "trend": "Decelerating",
+      "outlook_next_qtr": "Soft - Watch Export Orders and Business Confidence",
+      "value": "HSBC India Manufacturing PMI eased to 54.2 in June 2026 (final, revised down from a 54.5 preliminary read) from 55.0 in May 2026 - the second-weakest improvement in factory activity since mid-2022; still above the 50 no-change mark for the 37th consecutive month",
       "drivers": [
-        "Technology spending",
-        "Global outsourcing",
-        "Consulting demand"
+        "Output and new-order growth slowed to among the weakest rates in four years",
+        "Export orders rose at the softest pace since March 2023 amid subdued European demand",
+        "Business confidence slipped to a five-month low",
+        "Input cost pressures eased (lower input/output price inflation), a modest offsetting positive",
+        "Finished-goods stocks fell at the fastest pace in six months as firms aligned output with softer demand"
+      ],
+      "change_from_last_qtr": "-1",
+      "change_description": "Manufacturing momentum cooled through Q1 FY27, with new orders, exports and business confidence all softening even though the index remains in expansion territory."
+    },
+
+    "Services_PMI": {
+      "status": "Very Strong",
+      "trend": "Accelerating",
+      "outlook_next_qtr": "Positive",
+      "value": "HSBC India Services PMI Business Activity Index rose to 59.8 in May 2026 from 58.8 in April 2026 - the strongest expansion since November 2025",
+      "drivers": [
+        "Resilient domestic demand for services",
+        "IT/business services export momentum",
+        "Continued strength in financial and consulting services demand"
+      ],
+      "change_from_last_qtr": "+2",
+      "change_description": "Services activity accelerated meaningfully and is currently the standout bright spot in India's activity data, contrasting with cooling manufacturing momentum."
+    },
+
+    "Industrial_Production_IIP": {
+      "status": "Improving",
+      "trend": "Accelerating",
+      "outlook_next_qtr": "Positive",
+      "value": "IIP growth accelerated from 4.9% in April 2026 to a five-month high of 5.1% in May 2026, led by 5.5% growth in manufacturing and 9.9% growth in electricity & gas supply; capital goods output grew 12.9% YoY",
+      "drivers": [
+        "Strong capital goods growth signalling sustained investment momentum",
+        "Electricity/gas output growth reflecting rising industrial and data-centre-linked power demand",
+        "Manufacturing output resilience despite the softer PMI survey signal"
       ],
       "change_from_last_qtr": "+1",
-      "change_description": "Export services continue to expand."
+      "change_description": "Hard industrial output data (IIP) improved to a five-month high even as the forward-looking PMI survey softened - a divergence worth monitoring going into Q2 FY27."
+    },
+
+    "GST_Tax_Collections": {
+      "status": "Strong",
+      "trend": "Steady High Growth",
+      "outlook_next_qtr": "Positive",
+      "value": "June 2026 gross GST collection: Rs 1,94,812 crore (+13.9% YoY, fastest monthly growth in 13 months); net collection (post-refunds) Rs 1,62,377 crore (+11.2% YoY); Q1 FY27 gross GST Rs 6,31,699 crore (+8.4% YoY); April 2026 was an all-time record at Rs 2,42,702 crore",
+      "drivers": [
+        "Import-related IGST surged 34.6% YoY in June 2026 (partly oil/gold price-driven)",
+        "Domestic GST revenue grew a steadier 6.5% YoY",
+        "Broad-based state-level growth (Uttar Pradesh +19%, Gujarat +12%, Karnataka +10%, Maharashtra +9%)",
+        "Improved compliance and digital monitoring infrastructure"
+      ],
+      "change_from_last_qtr": "+1",
+      "change_description": "GST collections accelerated to their fastest YoY pace in 13 months by June 2026, though a meaningful share of the growth is import/price-driven rather than pure domestic-volume growth."
     },
 
     "Banking_System": {
-      "status": "Healthy",
-      "trend": "Improving",
-      "outlook_next_qtr": "Positive",
+      "status": "Healthy Asset Quality, Rapid Credit Expansion",
+      "trend": "Improving Asset Quality; Watch Credit-Deposit Gap",
+      "outlook_next_qtr": "Positive but Growth Likely to Moderate",
+      "value": "System-wide bank credit stood at Rs 224.14 lakh crore as of 30 June 2026, up ~18.5% YoY. FY26 non-food credit growth was 15.9% (up from 10.9% in FY25). ICRA projects gross NPAs to stay benign at 2.0-2.1% in FY27. Individual large-bank data points show improving asset quality (e.g. one major private bank's gross NPA ratio fell to 1.38% at 30 Jun 2026 from 1.67% a year earlier)",
       "drivers": [
-        "Credit growth",
-        "Low NPAs",
-        "Strong capitalization"
+        "Strong retail, agriculture and MSME (RAM) lending growth",
+        "Corporate lending re-acceleration into infrastructure, renewables, data centres and commercial real estate",
+        "Rising credit-deposit ratios at several banks (e.g. one PSU bank's C-D ratio rose from ~64% to ~74% YoY), reflecting more efficient capital deployment but also less liquidity buffer",
+        "Well-capitalised system (CRAR well above regulatory minimums at major banks)"
       ],
       "change_from_last_qtr": "+1",
-      "change_description": "Asset quality improved further."
+      "change_description": "Asset quality metrics continued to improve incrementally even as credit growth has been running at a very rapid pace, though rating agencies flag a moderation ahead given geopolitical and rate uncertainty."
     },
 
     "Credit_Growth": {
-      "status": "Strong",
-      "trend": "Bullish",
-      "outlook_next_qtr": "Positive",
+      "status": "Very Strong Currently, Moderation Expected",
+      "trend": "Peaking",
+      "outlook_next_qtr": "Slowing from Current Highs",
+      "value": "FY26 non-food bank credit grew 15.9% YoY (aggregate outstanding credit Rs 212.9 lakh crore, +Rs 29.2 lakh crore YoY); most recent weekly RBI data (30 Jun 2026) shows credit growth even higher at ~18.5% YoY. ICRA forecasts FY27 credit growth to moderate to 11.0-11.7%, with incremental credit of Rs 23.5-25.0 lakh crore",
       "drivers": [
-        "Retail lending",
-        "Corporate capex",
-        "Infrastructure financing"
+        "Services-sector credit growth led all segments at 19% YoY in FY26 (up from 12%), driven by NBFC, trade and commercial real-estate lending",
+        "Personal loans grew 16.2% (housing, vehicle, gold loans all contributing)",
+        "Micro/small industry credit grew a strong 33.1%",
+        "Expected FY27 moderation driven by 'heightened geopolitical uncertainties and evolving interest rate dynamics' per ICRA, including the West Asia conflict's impact on trade and energy costs"
       ],
-      "change_from_last_qtr": "+1",
-      "change_description": "Loan growth remains healthy."
+      "change_from_last_qtr": "0",
+      "change_description": "Credit growth remains at multi-year highs in the latest print, but forward guidance from rating agencies has turned more cautious for the coming quarters given external risks - so momentum is judged stable-to-peaking rather than still accelerating."
     },
 
     "Real_Estate": {
-      "status": "Bullish",
-      "trend": "Bullish",
+      "status": "Robust with Data-Centre/Commercial Diversification",
+      "trend": "Positive",
       "outlook_next_qtr": "Positive",
+      "value": "Bank lending data shows commercial real estate as one of the fastest-growing corporate credit categories (cited explicitly alongside renewable energy, data centres and highways in bank earnings commentary for Q1 FY27)",
       "drivers": [
-        "Housing demand",
-        "Urbanization",
-        "Premium housing sales"
+        "Continued urban housing demand and premium housing sales",
+        "Commercial real estate benefiting from data-centre and warehousing capex boom",
+        "Housing loan growth remaining steady within the broader personal-loan credit expansion",
+        "Bank corporate lending pivoting toward infrastructure-linked real estate (highways, metro, data centres)"
       ],
       "change_from_last_qtr": "+1",
-      "change_description": "Residential demand remains robust."
+      "change_description": "Real estate credit demand, particularly commercial/data-centre-linked, continued to strengthen as a share of overall bank corporate lending."
     },
 
     "Employment": {
-      "status": "Improving",
-      "trend": "Positive",
-      "outlook_next_qtr": "Positive",
+      "status": "Mixed - Headline Rate Ticking Up After Multi-Year Lows",
+      "trend": "Deteriorating Slightly (CWS monthly series); Improving on Quarterly PLFS Series",
+      "outlook_next_qtr": "Uncertain - Divergent Signals",
+      "value": "PLFS quarterly data (CWS basis) showed unemployment easing to a three-quarter low of 4.8% in Q3 FY26 (Oct-Dec 2025), with LFPR rising to 55.8%. However, a separate monthly CWS-based series shows the annual FY26 unemployment rate ticking up to 5.3% (first YoY increase since the pandemic peak, from 4.9% in FY24), reaching 5.1% in March 2026 and holding around 5.5% by June 2026 per Trading Economics/NSO monthly data",
       "drivers": [
-        "Manufacturing hiring",
-        "Infrastructure projects",
-        "Digital economy jobs"
+        "Manufacturing hiring slowed alongside the softening Manufacturing PMI (growth at a 45-month low per one report)",
+        "Services hiring turned more cautious amid global uncertainty",
+        "Urban employers, who drove 2023-24 improvement, are now in 'wait-and-watch' mode",
+        "Structural improvement from 2018-20 levels (8.7-8.8%) remains intact even as the recent cyclical tailwind has faded"
       ],
-      "change_from_last_qtr": "+1",
-      "change_description": "Employment trends improved moderately."
+      "change_from_last_qtr": "-1",
+      "change_description": "The employment picture has softened at the margin in 2026, with the monthly unemployment series drifting up from its late-2025 lows even though it remains well below pre-2023 structural levels - a genuine area of caution rather than continued improvement."
     },
 
     "Infrastructure": {
       "status": "Very Strong",
       "trend": "Strong Bullish",
       "outlook_next_qtr": "Strong Positive",
+      "value": "Capital goods IIP output grew 12.9% YoY (May 2026); bank corporate lending to infrastructure, highways and metro projects accelerating sharply (one PSU bank's corporate book grew 46.52% YoY with infrastructure a key driver)",
       "drivers": [
-        "Roads",
-        "Railways",
-        "Ports",
-        "Power infrastructure"
+        "Roads, railways, ports and power infrastructure capex execution",
+        "Government capital expenditure push continuing into FY27",
+        "Bank lending pivot toward infrastructure-linked corporate credit",
+        "Data-centre-linked power and grid infrastructure investment (see AI-infrastructure theme)"
       ],
-      "change_from_last_qtr": "+2",
-      "change_description": "Capex execution accelerated significantly."
+      "change_from_last_qtr": "+1",
+      "change_description": "Capital goods output and infrastructure-linked bank lending both point to continued strong capex execution momentum."
     },
 
     "Energy_Transition": {
-      "status": "Strategic Growth Area",
-      "trend": "Strong Bullish",
-      "outlook_next_qtr": "Strong Positive",
+      "status": "Strategic Growth Area, Complicated by Near-Term Oil Shock",
+      "trend": "Mixed - Renewables Investment Continues, but Oil-Import Dependence (89% of crude) Remains a Structural Vulnerability",
+      "outlook_next_qtr": "Positive for Renewables; Oil-Price Risk Remains Elevated",
+      "value": "India imports nearly 89% of its crude oil requirement, per government/analyst commentary amid the West Asia conflict; renewable energy lending is cited as one of the fastest-growing bank corporate credit categories alongside data centres",
       "drivers": [
-        "Solar capacity",
-        "Wind projects",
-        "Green hydrogen",
-        "Battery storage"
+        "Continued bank/corporate capital allocation toward renewable energy projects",
+        "West Asia war and Strait of Hormuz disruption directly raising crude oil price and supply risk",
+        "India's partial pivot away from discounted Russian crude (due to US tariff pressure) adding to near-term import costs",
+        "Green hydrogen, solar and battery-storage investment continuing as a longer-term structural theme"
       ],
-      "change_from_last_qtr": "+2",
-      "change_description": "Investment momentum increased substantially."
+      "change_from_last_qtr": "-1",
+      "change_description": "While renewables investment momentum continues, the near-term energy picture deteriorated due to the oil-price and supply-security shock from the West Asia conflict, which is weighing on the current account and inflation outlook."
     },
 
     "Government_Capex": {
-      "status": "Very Strong",
-      "trend": "Bullish",
+      "status": "Strong Tax-Revenue-Backed Execution",
+      "trend": "Positive",
       "outlook_next_qtr": "Positive",
+      "value": "Net direct tax collections +14.64% YoY to Rs 5.21 lakh crore (up to 17 Jun 2026); record GST collections (Apr 2026 all-time high of Rs 2.43 lakh crore) providing fiscal headroom for continued capex",
       "drivers": [
-        "Infrastructure push",
-        "Defense spending",
-        "Manufacturing incentives"
+        "Strong direct and indirect tax buoyancy supporting the capex budget",
+        "Infrastructure, defence and manufacturing-incentive spending priorities",
+        "Government's LTCG/tax-waiver policy response on the capital-account side shows active fiscal-policy engagement with the currency/FII stress"
       ],
-      "change_from_last_qtr": "+2",
-      "change_description": "Government spending execution improved."
+      "change_from_last_qtr": "0",
+      "change_description": "Revenue buoyancy continues to support planned capex execution at a broadly similar pace to the prior quarter; no signal of either a fiscal expansion or a pullback."
     },
 
     "Consumer_Confidence": {
-      "status": "Positive",
-      "trend": "Improving",
-      "outlook_next_qtr": "Positive",
+      "status": "Cautiously Positive",
+      "trend": "Mixed - Services Demand Strong, Manufacturing Business Confidence Softening",
+      "outlook_next_qtr": "Neutral to Positive",
+      "value": "Services PMI at 59.8 (May 2026, strongest since Nov 2025) signals healthy consumer/business services demand, while Manufacturing PMI business confidence slipped to a five-month low in June 2026",
       "drivers": [
-        "Income visibility",
-        "Lower inflation",
-        "Job creation"
+        "Low current CPI inflation (3.5% in April 2026) supporting real purchasing power",
+        "Strong personal-loan and housing-loan credit growth (16.2% YoY) suggesting continued consumer borrowing confidence",
+        "Offsetting concern: rising unemployment signal in the monthly labour series and softer manufacturing new orders"
       ],
-      "change_from_last_qtr": "+1",
-      "change_description": "Consumer sentiment strengthened."
+      "change_from_last_qtr": "0",
+      "change_description": "Consumer-facing indicators are mixed - strong services demand and credit growth are balanced against softer manufacturing confidence and a modest uptick in unemployment, netting out to broadly stable sentiment."
     },
 
     "Major_Risks": {
-      "status": "Moderate",
-      "trend": "Improving",
-      "outlook_next_qtr": "Manageable",
+      "status": "Elevated",
+      "trend": "Worsening Near-Term, With Active Policy Response",
+      "outlook_next_qtr": "Key Watch Items: Oil Prices, Rupee, FII Flows",
+      "value": "West Asia war/Strait of Hormuz disruption (West Asia = 14-20% of India's trade); rupee weakness; forex reserves down ~$43bn from March 2026 peak; heavy FII equity selling (>Rs 2.6 lakh crore); rising crude oil prices; record gold import bill",
       "drivers": [
-        "Crude oil prices",
-        "Geopolitical tensions",
-        "Global slowdown risk",
-        "US dollar strength"
+        "Geopolitical conflict directly affecting India's energy import costs and trade routes",
+        "Global risk-off sentiment driving capital away from emerging markets including India",
+        "US tariff dynamics forcing a partial pivot away from discounted Russian crude, raising import costs further",
+        "Government/RBI have already responded with a coordinated policy package (LTCG waiver for FPIs, public appeals for import austerity), suggesting the risks are being actively managed rather than ignored"
       ],
-      "change_from_last_qtr": "+1",
-      "change_description": "Risk environment eased slightly but remains important."
+      "change_from_last_qtr": "-2",
+      "change_description": "The external risk environment deteriorated materially through Q1 FY27 relative to the relatively calm conditions in late FY26, driven primarily by the West Asia conflict's knock-on effects on oil, the rupee and capital flows."
     },
 
     "Overall_Economy": {
-      "status": "Strong",
-      "trend": "Bullish",
-      "outlook_next_qtr": "Strong Positive",
+      "status": "Resilient Domestically, Under External Strain",
+      "trend": "Two-Speed: Strong Services/Credit/Tax-Revenue vs Softening Manufacturing/Currency/Capital-Flows",
+      "outlook_next_qtr": "Cautiously Positive - Domestic Engines Intact, External Risks Need Monitoring",
+      "value": "FY27 GDP growth forecast (RBI) cut to 6.6% from 6.9%; FY27 CPI forecast raised to 5.1% from 4.6%; repo rate held at 5.25%",
       "drivers": [
-        "Consumption",
-        "Investment",
-        "Infrastructure",
-        "Manufacturing",
-        "Services exports"
+        "Consumption and services momentum remain genuine strengths (Services PMI at 59.8, strong credit growth)",
+        "Manufacturing, currency and capital-flow indicators have all softened concurrently, primarily traceable to the West Asia conflict and its oil/trade/capital-flow spillovers",
+        "Government and RBI have moved quickly with coordinated fiscal/monetary/regulatory responses (LTCG waiver, austerity messaging, rate hold) to contain the external-sector stress",
+        "Domestic fundamentals (tax collections, GST, bank credit, IIP) remain considerably healthier than the currency/FII narrative alone would suggest"
       ],
-      "change_from_last_qtr": "+1",
-      "change_description": "Broad-based economic momentum improved across major sectors."
+      "change_from_last_qtr": "-1",
+      "change_description": "The overall economy has moved from a broadly synchronised-strength narrative in late FY26 to a more two-speed picture in Q1 FY27 - domestic demand/credit/tax engines still running well, but external-sector stress (rupee, forex reserves, FII outflows, oil prices) has emerged as the dominant swing factor for the quarters ahead."
     }
   }
 }

@@ -1,337 +1,231 @@
 {
+  "as_of_date": "22Jul26",
+  "global_cues_snapshot": {
+    "dollar_index_dxy": "~101.20, firm - supported by US 10-year yields above 4.6% and rising odds of a Fed rate HIKE (not cut) in September (~53% priced in, up from 47% a day earlier) as oil-driven inflation risk resurfaces",
+    "crude_oil": "Brent ~$91.2/bbl (highest since 10Jun26, +2.26% on the day), WTI ~$84-89/bbl - both up sharply on US-Iran war escalation (10th consecutive day of US airstrikes), Houthi threats to blockade Saudi shipping in the Red Sea, a tanker strike near the Strait of Hormuz, and a separate attack on the Caspian Pipeline Consortium terminal disrupting Kazakh exports",
+    "us_markets": "S&P 500 ~7,509 (+0.89%, snapped a 3-day slide), Nasdaq +~1.3%, Dow +~0.7% - Tuesday's rebound driven by a semiconductor bounce (Micron +12%, Intel +8%, Marvell +6%) on strong Korean/Taiwanese chip export data, but tone turned cautious again entering Wednesday amid tech-earnings risk and oil/geopolitical concerns. 10-year Treasury yield >4.6%",
+    "europe_markets": "STOXX 600 declined Wednesday as European tech shares (ASML, Infineon, STMicroelectronics, BE Semiconductor) fell in sympathy with prior Asian chip weakness, partially offset by energy-sector gains on higher oil prices",
+    "japan_markets": "Nikkei 225 has been extremely volatile - swung from -2.12% (7Jul26) to +3%+ (21Jul26, ~66,232) as sentiment tracks global semiconductor swings; still up roughly +34% YTD in 2026 despite the volatility. A weaker yen boosts exporters' overseas earnings but raises import costs/inflation, a persistent two-sided driver of Nikkei moves",
+    "china_markets": "Mixed/choppy - CSI 300 has swung between +3% and -1% sessions over the past two weeks; Hang Seng modestly positive recently, lifted at times by strength in domestic EV/consumer names (e.g. BYD)",
+    "asian_markets_broader": "Kospi has been the most volatile major Asian index - fell ~5% in a single session in early July on a chip-sector rout (SK Hynix, Samsung both down sharply) before rebounding +3.56% by 21Jul26; still up roughly +85% YTD in 2026. Overall Asian tech sentiment remains the single biggest swing factor for regional and, by extension, Indian IT-adjacent sentiment",
+    "key_global_theme": "Markets are caught between an AI/semiconductor-led risk-on impulse (periodic sharp rebounds) and a geopolitics/oil-led risk-off impulse (Iran war, Red Sea, Strait of Hormuz, Caspian pipeline disruptions) - both operating simultaneously and driving unusually high day-to-day volatility across global and Indian markets alike"
+  },
+  "data_quality_note": "Index levels, DXY, oil prices and Fed-probability figures are sourced from live market reports as of 21-22Jul26 and are reasonably current at time of writing but will move intraday/daily - treat exact levels as indicative rather than real-time-precise. Scores (0-10 scale per the schema) are our own qualitative synthesis of the underlying news/data, not a published index.",
+
   "sectors": {
     "Banking_Financial_Services": {
       "current_global_impact": {
-        "overall_score": 8.8,
-        "global_trend": "Positive",
+        "overall_score": 4.2,
+        "global_trend": "Negative-to-Neutral",
         "dollar_index_impact": {
-          "impact": "Mild_Negative",
-          "score": 4,
-          "reason": "Higher DXY can slow FII inflows."
+          "impact": "Negative",
+          "score": 3,
+          "reason": "Firm DXY (~101.2) alongside rising Fed rate-hike odds (53% priced for Sep) works against EM currency/equity inflows; this is precisely the dynamic behind the recent heavy FII selling in Indian financials"
         },
         "oil_price_impact": {
-          "impact": "Moderate_Negative",
-          "score": 5,
-          "reason": "Higher crude may increase inflation and delay rate cuts."
+          "impact": "Negative",
+          "score": 3,
+          "reason": "Brent near $91 raises India's import bill and inflation risk, reducing RBI's room to cut rates further - directly negative for rate-sensitive banks/NBFCs"
         },
         "us_market_impact": {
-          "impact": "Positive",
-          "score": 8
+          "impact": "Neutral",
+          "score": 5,
+          "reason": "US market swings are currently semiconductor/tech-driven rather than financials-driven, so the read-through to Indian banks is muted either way"
         },
         "europe_market_impact": {
-          "impact": "Positive",
-          "score": 7
+          "impact": "Neutral",
+          "score": 5
         },
         "japan_market_impact": {
-          "impact": "Positive",
-          "score": 7
+          "impact": "Neutral",
+          "score": 5
         },
         "china_market_impact": {
           "impact": "Neutral",
           "score": 5
         },
         "asian_market_impact": {
-          "impact": "Positive",
-          "score": 7
+          "impact": "Mild_Negative",
+          "score": 4,
+          "reason": "Broader EM/Asian risk sentiment has been volatile on the chip-sector swings, and BFSI as India's most FII-owned, most liquid sector is the first target for any regional risk-off rotation"
         }
       },
       "expected_impact_next_2_quarters": {
-        "overall_outlook": "Strong_Positive",
-        "expected_score": 9,
+        "overall_outlook": "Cautiously Improving if Oil/Fed Risk Eases",
+        "expected_score": 6,
         "key_drivers": [
-          "FII inflows",
-          "Credit growth",
-          "Stable rates",
-          "Economic expansion"
+          "Resolution path of the Fed's Sep decision (hike vs hold) is the single biggest swing factor for FII flows into Indian financials",
+          "Any de-escalation in the Iran war / Strait of Hormuz situation would quickly ease oil-driven inflation fears and revive RBI rate-cut hopes",
+          "Government's LTCG tax waiver for FPIs on G-Secs is a direct, if narrow, attempt to stabilise capital flows relevant to the sector",
+          "Continued strong DII/SIP buying is expected to keep providing a floor regardless of the global backdrop"
         ]
       }
     },
 
     "Information_Technology": {
       "current_global_impact": {
-        "overall_score": 9.2,
-        "global_trend": "Strong_Positive",
+        "overall_score": 5.0,
+        "global_trend": "Highly Volatile / Mixed",
         "dollar_index_impact": {
-          "impact": "Positive",
-          "score": 9,
-          "reason": "Dollar strength supports export revenues."
+          "impact": "Mixed",
+          "score": 5,
+          "reason": "A firm dollar is a modest revenue-translation tailwind for IT services exporters, but is currently overshadowed by broader AI/semiconductor sentiment swings"
         },
         "oil_price_impact": {
           "impact": "Neutral",
-          "score": 5
+          "score": 5,
+          "reason": "IT services have minimal direct oil-input exposure, though a sustained oil shock denting global (especially US corporate) growth could indirectly soften IT spending"
         },
         "us_market_impact": {
-          "impact": "Very_Positive",
-          "score": 10
+          "impact": "Volatile_Positive",
+          "score": 6,
+          "reason": "Tuesday's US semiconductor rebound (Micron +12%, Intel +8%) is a positive signal for tech sentiment broadly, but follows repeated sharp AI-valuation-driven selloffs in the prior two weeks, keeping the read-through unstable"
         },
         "europe_market_impact": {
-          "impact": "Positive",
-          "score": 8
+          "impact": "Negative",
+          "score": 4,
+          "reason": "European tech shares (ASML, Infineon, STMicro) fell on Wednesday in sympathy with Asian chip weakness, an incremental negative cross-current for global tech sentiment"
         },
         "japan_market_impact": {
-          "impact": "Moderate_Positive",
-          "score": 7
+          "impact": "Volatile",
+          "score": 5,
+          "reason": "Nikkei's huge day-to-day swings (-2.1% to +3%+) are almost entirely semiconductor-sentiment-driven, directly mirroring the same AI-capex-anxiety cycle that swings Indian IT sentiment"
         },
         "china_market_impact": {
           "impact": "Neutral",
-          "score": 4
+          "score": 5
         },
         "asian_market_impact": {
-          "impact": "Positive",
-          "score": 7
+          "impact": "Volatile_Positive_Recently",
+          "score": 6,
+          "reason": "Kospi's rebound (+3.56% on 21Jul26) after an earlier ~5% chip-driven rout shows the same whipsaw pattern; strong Korean/Taiwanese export data was the direct trigger for Tuesday's global tech bounce that also lifted Nifty IT +4.3% for the week"
         }
       },
       "expected_impact_next_2_quarters": {
-        "overall_outlook": "Strong_Positive",
-        "expected_score": 9,
+        "overall_outlook": "Volatile but Constructive if AI-Capex Holds",
+        "expected_score": 6,
         "key_drivers": [
-          "AI spending",
-          "Cloud demand",
-          "US technology budgets",
-          "Digital transformation"
+          "Global hyperscaler AI capex guidance (~$750bn 2026, guided toward $1tn+ in 2027) remains a structural positive for enterprise tech spending if it doesn't correct sharply",
+          "Repeated AI-valuation-driven selloffs (seen multiple times in Jul26 alone) mean sentiment could swing either way quickly - this is the key volatility risk for the sector over the next two quarters",
+          "US Q2/Q3 corporate earnings and tech capex guidance will be the most direct read-through for Indian IT services demand",
+          "A sustained oil shock denting global growth is a secondary, indirect risk to watch"
         ]
       }
     },
 
-    "Capital_Goods_Engineering": {
+    "Oil_Gas_Energy": {
       "current_global_impact": {
-        "overall_score": 9.5,
-        "global_trend": "Very_Strong_Positive",
+        "overall_score": 5.8,
+        "global_trend": "Mixed - Bullish for Upstream, Bearish for OMCs",
         "dollar_index_impact": {
+          "impact": "Mild_Negative",
+          "score": 4,
+          "reason": "Oil is dollar-denominated; a firm DXY makes crude marginally more expensive for India as a rupee-based importer, compounding the price-driven cost pressure"
+        },
+        "oil_price_impact": {
+          "impact": "Positive_for_Upstream_Negative_for_OMCs",
+          "score": 6,
+          "reason": "Brent near $91 (highest since 10Jun26) directly boosts upstream/E&P realizations (e.g. ONGC-type names) but squeezes refiner/OMC marketing margins and raises India's import bill and CAD risk"
+        },
+        "us_market_impact": {
           "impact": "Neutral",
           "score": 5
         },
-        "oil_price_impact": {
-          "impact": "Mild_Negative",
-          "score": 4
-        },
-        "us_market_impact": {
-          "impact": "Positive",
-          "score": 8
-        },
         "europe_market_impact": {
           "impact": "Positive",
-          "score": 8
+          "score": 6,
+          "reason": "European energy-sector gains (partially offsetting the STOXX 600's tech-led decline) mirror the same oil-price tailwind for the sector globally"
         },
         "japan_market_impact": {
-          "impact": "Very_Positive",
-          "score": 10
+          "impact": "Neutral",
+          "score": 5
         },
         "china_market_impact": {
-          "impact": "Positive",
-          "score": 7
+          "impact": "Neutral",
+          "score": 5
         },
         "asian_market_impact": {
-          "impact": "Positive",
-          "score": 8
+          "impact": "Neutral",
+          "score": 5
         }
       },
       "expected_impact_next_2_quarters": {
-        "overall_outlook": "Very_Strong_Positive",
-        "expected_score": 10,
+        "overall_outlook": "Elevated Volatility, Structurally Bullish for Upstream Near-Term",
+        "expected_score": 6,
         "key_drivers": [
-          "Manufacturing shift to India",
-          "Infrastructure capex",
-          "Japan investment",
-          "Defense spending"
+          "Strait of Hormuz and Red Sea shipping-route risk (Houthi threats) are direct, ongoing threats to global oil supply and freight costs",
+          "Any Iran-US ceasefire/de-escalation would quickly reverse the current oil-price premium, a key downside risk to monitor for upstream names",
+          "Reliance Industries' Q1FY27 results and continued capex direction are the most important single stock-level catalyst for the sector",
+          "OMC margin pressure from high crude is a persistent headwind unless government fuel-pricing policy offers relief"
         ]
       }
     },
 
     "Automobile": {
       "current_global_impact": {
-        "overall_score": 8.5,
-        "global_trend": "Positive",
+        "overall_score": 4.3,
+        "global_trend": "Negative",
         "dollar_index_impact": {
-          "impact": "Neutral",
-          "score": 5
+          "impact": "Mild_Negative",
+          "score": 4,
+          "reason": "Firm dollar raises imported-component costs for auto manufacturers reliant on global supply chains (semiconductors, specialty materials)"
         },
         "oil_price_impact": {
           "impact": "Negative",
-          "score": 4
+          "score": 3,
+          "reason": "Elevated crude directly raises fuel costs for consumers and input/logistics costs for manufacturers, a clear near-term demand headwind"
         },
         "us_market_impact": {
-          "impact": "Positive",
-          "score": 7
+          "impact": "Neutral",
+          "score": 5
         },
         "europe_market_impact": {
-          "impact": "Positive",
-          "score": 7
+          "impact": "Neutral",
+          "score": 5
         },
         "japan_market_impact": {
-          "impact": "Very_Positive",
-          "score": 9
+          "impact": "Neutral",
+          "score": 5
         },
         "china_market_impact": {
-          "impact": "Moderate_Positive",
-          "score": 6
+          "impact": "Mild_Negative",
+          "score": 4,
+          "reason": "China EV competitiveness (e.g. BYD's continued sales strength) remains a structural competitive pressure on global and Indian auto/EV players"
         },
         "asian_market_impact": {
-          "impact": "Positive",
-          "score": 7
+          "impact": "Neutral",
+          "score": 5
         }
       },
       "expected_impact_next_2_quarters": {
-        "overall_outlook": "Strong_Positive",
-        "expected_score": 9,
+        "overall_outlook": "Cautious - Oil Price the Key Swing Factor",
+        "expected_score": 5,
         "key_drivers": [
-          "Rural demand",
-          "Exports",
-          "EV adoption",
-          "Lower financing costs"
+          "Any easing in crude oil prices (contingent on Iran-war de-escalation) would be the single biggest positive catalyst for auto demand and margins",
+          "Festive-season (Oct-Dec) demand and monsoon-driven rural income recovery remain the main domestic offsetting positives",
+          "Global semiconductor supply/pricing volatility remains a secondary watch item for auto-component costs"
         ]
       }
     },
 
-    "Healthcare_Pharma": {
+    "Pharma_Healthcare": {
       "current_global_impact": {
-        "overall_score": 8.2,
-        "global_trend": "Positive",
+        "overall_score": 5.5,
+        "global_trend": "Neutral-to-Mixed",
         "dollar_index_impact": {
           "impact": "Positive",
-          "score": 8
+          "score": 6,
+          "reason": "A firm dollar is a direct revenue-translation tailwind for pharma companies with large US export/generics businesses"
         },
         "oil_price_impact": {
-          "impact": "Low",
-          "score": 3
-        },
-        "us_market_impact": {
-          "impact": "Positive",
-          "score": 9
-        },
-        "europe_market_impact": {
-          "impact": "Positive",
-          "score": 8
-        },
-        "japan_market_impact": {
-          "impact": "Neutral",
-          "score": 5
-        },
-        "china_market_impact": {
-          "impact": "Neutral",
-          "score": 4
-        },
-        "asian_market_impact": {
-          "impact": "Positive",
-          "score": 6
-        }
-      },
-      "expected_impact_next_2_quarters": {
-        "overall_outlook": "Positive",
-        "expected_score": 8,
-        "key_drivers": [
-          "USFDA approvals",
-          "Export growth",
-          "Specialty drugs",
-          "Healthcare demand"
-        ]
-      }
-    },
-
-    "Power_Utilities": {
-      "current_global_impact": {
-        "overall_score": 8.8,
-        "global_trend": "Positive",
-        "dollar_index_impact": {
-          "impact": "Low",
-          "score": 3
-        },
-        "oil_price_impact": {
-          "impact": "Moderate_Negative",
-          "score": 5
-        },
-        "us_market_impact": {
-          "impact": "Positive",
-          "score": 7
-        },
-        "europe_market_impact": {
-          "impact": "Positive",
-          "score": 7
-        },
-        "japan_market_impact": {
-          "impact": "Positive",
-          "score": 8
-        },
-        "china_market_impact": {
-          "impact": "Positive",
-          "score": 7
-        },
-        "asian_market_impact": {
-          "impact": "Positive",
-          "score": 8
-        }
-      },
-      "expected_impact_next_2_quarters": {
-        "overall_outlook": "Strong_Positive",
-        "expected_score": 9,
-        "key_drivers": [
-          "Electricity demand",
-          "Renewables",
-          "Grid expansion",
-          "Industrial growth"
-        ]
-      }
-    },
-
-    "Telecom": {
-      "current_global_impact": {
-        "overall_score": 8.4,
-        "global_trend": "Positive",
-        "dollar_index_impact": {
-          "impact": "Low",
-          "score": 3
-        },
-        "oil_price_impact": {
-          "impact": "Low",
-          "score": 2
-        },
-        "us_market_impact": {
-          "impact": "Positive",
-          "score": 7
-        },
-        "europe_market_impact": {
-          "impact": "Positive",
-          "score": 6
-        },
-        "japan_market_impact": {
-          "impact": "Positive",
-          "score": 7
-        },
-        "china_market_impact": {
-          "impact": "Neutral",
-          "score": 4
-        },
-        "asian_market_impact": {
-          "impact": "Positive",
-          "score": 7
-        }
-      },
-      "expected_impact_next_2_quarters": {
-        "overall_outlook": "Strong_Positive",
-        "expected_score": 9,
-        "key_drivers": [
-          "5G monetization",
-          "Data consumption",
-          "Enterprise cloud connectivity"
-        ]
-      }
-    },
-
-    "Energy": {
-      "current_global_impact": {
-        "overall_score": 7.5,
-        "global_trend": "Mixed",
-        "dollar_index_impact": {
-          "impact": "Negative",
-          "score": 4
-        },
-        "oil_price_impact": {
-          "impact": "Very_High",
-          "score": 10
+          "impact": "Mild_Negative",
+          "score": 4,
+          "reason": "Higher crude raises input costs for active pharmaceutical ingredient (API) manufacturing and logistics, a modest but real cost headwind"
         },
         "us_market_impact": {
           "impact": "Neutral",
-          "score": 5
+          "score": 5,
+          "reason": "US market moves are currently tech/semiconductor-driven rather than healthcare-driven, limiting direct read-through"
         },
         "europe_market_impact": {
           "impact": "Neutral",
@@ -342,197 +236,343 @@
           "score": 5
         },
         "china_market_impact": {
-          "impact": "Positive",
-          "score": 7
+          "impact": "Neutral",
+          "score": 5
         },
         "asian_market_impact": {
-          "impact": "Positive",
-          "score": 6
+          "impact": "Neutral",
+          "score": 5
         }
       },
       "expected_impact_next_2_quarters": {
-        "overall_outlook": "Moderately_Positive",
-        "expected_score": 7,
+        "overall_outlook": "Stable to Mildly Positive, Overhung by Wegovy-Competition Narrative",
+        "expected_score": 5,
         "key_drivers": [
-          "Crude stability",
-          "Refining margins",
-          "Gas demand"
+          "Novo Nordisk's India regulatory approval for Wegovy (obesity drug) remains a sector-specific overhang on domestic pharma/generics competitiveness sentiment",
+          "US FDA approval/inspection newsflow and US generic-pricing trends remain the most direct global driver for Indian pharma exporters",
+          "A firm dollar continues to support export economics even as sector sentiment stays cautious near-term"
         ]
       }
     },
 
     "FMCG": {
       "current_global_impact": {
-        "overall_score": 6.8,
-        "global_trend": "Neutral",
+        "overall_score": 4.5,
+        "global_trend": "Mild Negative",
         "dollar_index_impact": {
-          "impact": "Negative",
-          "score": 4
-        },
-        "oil_price_impact": {
-          "impact": "Moderate_Negative",
+          "impact": "Neutral",
           "score": 5
         },
+        "oil_price_impact": {
+          "impact": "Negative",
+          "score": 3,
+          "reason": "Higher crude raises packaging, logistics and input costs (crude derivatives) across the FMCG value chain, and higher fuel/energy prices for consumers can compress discretionary spend"
+        },
         "us_market_impact": {
-          "impact": "Low",
-          "score": 3
+          "impact": "Neutral",
+          "score": 5
         },
         "europe_market_impact": {
-          "impact": "Low",
-          "score": 3
+          "impact": "Neutral",
+          "score": 5
         },
         "japan_market_impact": {
-          "impact": "Low",
-          "score": 3
+          "impact": "Neutral",
+          "score": 5
         },
         "china_market_impact": {
-          "impact": "Low",
-          "score": 3
+          "impact": "Neutral",
+          "score": 5
         },
         "asian_market_impact": {
-          "impact": "Low",
-          "score": 3
+          "impact": "Neutral",
+          "score": 5
         }
       },
       "expected_impact_next_2_quarters": {
-        "overall_outlook": "Positive",
-        "expected_score": 7,
+        "overall_outlook": "Stable, Watching Input Costs and Rural Demand",
+        "expected_score": 5,
         "key_drivers": [
-          "Rural consumption",
-          "Monsoon",
-          "Input-cost moderation"
+          "Crude/energy price trajectory is the key global-cues factor for input costs and consumer purchasing power",
+          "Monsoon performance and rural income trends are the dominant domestic driver, largely independent of global market swings",
+          "Festive-season demand into Q4 is the key seasonal catalyst to watch"
         ]
       }
     },
 
     "Metals_Mining": {
       "current_global_impact": {
-        "overall_score": 7.8,
-        "global_trend": "Cyclical_Positive",
+        "overall_score": 5.7,
+        "global_trend": "Mixed - China Demand and Dollar Sensitive",
         "dollar_index_impact": {
           "impact": "Negative",
-          "score": 4
+          "score": 4,
+          "reason": "Metals are dollar-denominated commodities; a firm DXY is typically a headwind for metal prices and mining-company realizations"
         },
         "oil_price_impact": {
-          "impact": "Negative",
-          "score": 4
+          "impact": "Mild_Negative",
+          "score": 4,
+          "reason": "Higher crude raises energy/input costs for metals production and smelting"
         },
         "us_market_impact": {
-          "impact": "Positive",
-          "score": 6
+          "impact": "Neutral",
+          "score": 5
         },
         "europe_market_impact": {
-          "impact": "Positive",
-          "score": 6
-        },
-        "japan_market_impact": {
-          "impact": "Positive",
-          "score": 7
-        },
-        "china_market_impact": {
-          "impact": "Very_Positive",
-          "score": 10
-        },
-        "asian_market_impact": {
-          "impact": "Positive",
-          "score": 7
-        }
-      },
-      "expected_impact_next_2_quarters": {
-        "overall_outlook": "Positive",
-        "expected_score": 8,
-        "key_drivers": [
-          "China stimulus",
-          "Infrastructure spending",
-          "Commodity cycle"
-        ]
-      }
-    },
-
-    "Chemicals": {
-      "current_global_impact": {
-        "overall_score": 7.2,
-        "global_trend": "Recovering",
-        "dollar_index_impact": {
-          "impact": "Positive",
-          "score": 7
-        },
-        "oil_price_impact": {
-          "impact": "Negative",
-          "score": 4
-        },
-        "us_market_impact": {
-          "impact": "Positive",
-          "score": 6
-        },
-        "europe_market_impact": {
-          "impact": "Positive",
-          "score": 6
+          "impact": "Neutral",
+          "score": 5
         },
         "japan_market_impact": {
           "impact": "Neutral",
           "score": 5
         },
         "china_market_impact": {
-          "impact": "Positive",
-          "score": 7
+          "impact": "Mixed",
+          "score": 5,
+          "reason": "China's choppy equity performance (CSI 300 swinging between +3% and -1% sessions) reflects broader uncertainty about Chinese demand, the single biggest external swing factor for metals"
         },
         "asian_market_impact": {
-          "impact": "Positive",
-          "score": 6
+          "impact": "Neutral",
+          "score": 5
         }
       },
       "expected_impact_next_2_quarters": {
-        "overall_outlook": "Positive",
-        "expected_score": 8,
+        "overall_outlook": "Constructive on Domestic Capex, Global Demand Uncertain",
+        "expected_score": 6,
         "key_drivers": [
-          "China recovery",
-          "Inventory normalization",
-          "Export demand"
+          "Chinese demand/stimulus signals remain the dominant global swing factor for metal prices",
+          "Domestic infrastructure capex execution continues to provide an offsetting structural tailwind regardless of global price direction",
+          "A firmer-for-longer dollar (on Fed hike risk) would be a modest headwind to global metal price realizations"
         ]
       }
     },
 
-    "Real_Estate": {
+    "Capital_Goods_Infrastructure": {
       "current_global_impact": {
-        "overall_score": 8.0,
-        "global_trend": "Positive",
+        "overall_score": 6.3,
+        "global_trend": "Mildly Positive - Domestically Anchored",
+        "dollar_index_impact": {
+          "impact": "Neutral",
+          "score": 5,
+          "reason": "Sector is predominantly domestic-demand-driven, limiting direct currency sensitivity, though imported-component costs for some capital goods makers rise modestly with a firm dollar"
+        },
+        "oil_price_impact": {
+          "impact": "Mild_Negative",
+          "score": 4,
+          "reason": "Higher crude raises input/logistics costs for construction and equipment manufacturing"
+        },
+        "us_market_impact": {
+          "impact": "Positive",
+          "score": 6,
+          "reason": "Global hyperscaler AI/data-centre capex strength (the same theme driving CG Power's and ABB's order wins) is directly linked to robust US tech-infrastructure investment"
+        },
+        "europe_market_impact": {
+          "impact": "Neutral",
+          "score": 5
+        },
+        "japan_market_impact": {
+          "impact": "Neutral",
+          "score": 5
+        },
+        "china_market_impact": {
+          "impact": "Neutral",
+          "score": 5
+        },
+        "asian_market_impact": {
+          "impact": "Neutral",
+          "score": 5
+        }
+      },
+      "expected_impact_next_2_quarters": {
+        "overall_outlook": "Positive - Domestic Capex Plus Global Data-Centre Demand",
+        "expected_score": 7,
+        "key_drivers": [
+          "Continued global hyperscaler data-centre capex (power, automation, cooling equipment orders) is a genuine incremental export opportunity for Indian capital goods makers, largely insulated from near-term FX/oil volatility",
+          "Domestic government infrastructure capex execution remains the dominant driver",
+          "Oil-price-driven input cost inflation is a modest, manageable headwind rather than a major risk"
+        ]
+      }
+    },
+
+    "Power_Utilities": {
+      "current_global_impact": {
+        "overall_score": 5.9,
+        "global_trend": "Mildly Positive",
+        "dollar_index_impact": {
+          "impact": "Neutral",
+          "score": 5
+        },
+        "oil_price_impact": {
+          "impact": "Mixed",
+          "score": 5,
+          "reason": "Higher crude/gas prices raise costs for gas-based power generation but make domestic coal/renewable generation relatively more cost-competitive"
+        },
+        "us_market_impact": {
+          "impact": "Positive",
+          "score": 6,
+          "reason": "Global data-centre power-demand growth (explicitly flagged by ABB India management as a key order driver) directly benefits Indian power/electrification equipment names"
+        },
+        "europe_market_impact": {
+          "impact": "Neutral",
+          "score": 5
+        },
+        "japan_market_impact": {
+          "impact": "Neutral",
+          "score": 5
+        },
+        "china_market_impact": {
+          "impact": "Neutral",
+          "score": 5
+        },
+        "asian_market_impact": {
+          "impact": "Neutral",
+          "score": 5
+        }
+      },
+      "expected_impact_next_2_quarters": {
+        "overall_outlook": "Positive",
+        "expected_score": 7,
+        "key_drivers": [
+          "Data-centre and AI-infrastructure-linked power demand is a structural, largely global-macro-independent tailwind",
+          "Grid-modernization and renewable capacity addition programs continue regardless of near-term FX/oil swings"
+        ]
+      }
+    },
+
+    "Telecom": {
+      "current_global_impact": {
+        "overall_score": 5.2,
+        "global_trend": "Neutral",
         "dollar_index_impact": {
           "impact": "Mild_Negative",
-          "score": 4
+          "score": 4,
+          "reason": "Telecom equipment makers with import-linked components face modestly higher costs from a firm dollar"
         },
         "oil_price_impact": {
-          "impact": "Negative",
+          "impact": "Neutral",
           "score": 5
         },
         "us_market_impact": {
-          "impact": "Positive",
-          "score": 6
+          "impact": "Neutral",
+          "score": 5
         },
         "europe_market_impact": {
-          "impact": "Positive",
-          "score": 6
+          "impact": "Neutral",
+          "score": 5,
+          "reason": "Tejas Networks' NEC 5G MIMO partnership and export relationships give the sector some Asia/Europe demand linkage, though not a dominant global-market driver currently"
         },
         "japan_market_impact": {
-          "impact": "Positive",
-          "score": 7
+          "impact": "Neutral",
+          "score": 5
         },
         "china_market_impact": {
           "impact": "Neutral",
           "score": 5
         },
         "asian_market_impact": {
-          "impact": "Positive",
-          "score": 6
+          "impact": "Neutral",
+          "score": 5
         }
       },
       "expected_impact_next_2_quarters": {
-        "overall_outlook": "Positive",
-        "expected_score": 8,
+        "overall_outlook": "Stable",
+        "expected_score": 5,
         "key_drivers": [
-          "Lower rates",
-          "Housing demand",
-          "Urbanization"
+          "Domestic ARPU growth and 5G/fibre rollout remain the dominant sector drivers, largely independent of the current global oil/dollar/tech-sentiment cross-currents",
+          "Continued export order wins (e.g. NEC partnership) are a modest incremental positive"
+        ]
+      }
+    },
+
+    "Realty_Construction": {
+      "current_global_impact": {
+        "overall_score": 4.6,
+        "global_trend": "Mild Negative",
+        "dollar_index_impact": {
+          "impact": "Negative",
+          "score": 4,
+          "reason": "Firm dollar and rising Fed rate-hike odds work against the same FII-flow and rate-cut dynamics that support real estate financing costs"
+        },
+        "oil_price_impact": {
+          "impact": "Negative",
+          "score": 4,
+          "reason": "Higher crude raises construction material and logistics costs"
+        },
+        "us_market_impact": {
+          "impact": "Neutral",
+          "score": 5
+        },
+        "europe_market_impact": {
+          "impact": "Neutral",
+          "score": 5
+        },
+        "japan_market_impact": {
+          "impact": "Neutral",
+          "score": 5
+        },
+        "china_market_impact": {
+          "impact": "Neutral",
+          "score": 5
+        },
+        "asian_market_impact": {
+          "impact": "Neutral",
+          "score": 5
+        }
+      },
+      "expected_impact_next_2_quarters": {
+        "overall_outlook": "Stable to Mildly Positive",
+        "expected_score": 6,
+        "key_drivers": [
+          "Data-centre and commercial real estate demand (linked to global hyperscaler capex) is an emerging structural positive largely insulated from near-term FX/oil swings",
+          "Rate-cut timing (contingent on the Fed and RBI paths) remains the key macro swing factor for housing finance costs and demand"
+        ]
+      }
+    },
+
+    "Consumer_Durables": {
+      "current_global_impact": {
+        "overall_score": 4.4,
+        "global_trend": "Mild Negative",
+        "dollar_index_impact": {
+          "impact": "Negative",
+          "score": 4,
+          "reason": "Many consumer durables (electronics components, compressors, chips) are import-linked, so a firm dollar raises input costs"
+        },
+        "oil_price_impact": {
+          "impact": "Negative",
+          "score": 4,
+          "reason": "Higher crude raises logistics/input costs and can pressure discretionary consumer spending"
+        },
+        "us_market_impact": {
+          "impact": "Mixed",
+          "score": 5,
+          "reason": "Semiconductor price/supply volatility (evident in the sharp recent swings in chip stocks) is a direct cost input for electronics-heavy consumer durables"
+        },
+        "europe_market_impact": {
+          "impact": "Neutral",
+          "score": 5
+        },
+        "japan_market_impact": {
+          "impact": "Neutral",
+          "score": 5
+        },
+        "china_market_impact": {
+          "impact": "Mild_Negative",
+          "score": 4,
+          "reason": "China remains a key source of components/inputs for electronics-heavy consumer durables manufacturing"
+        },
+        "asian_market_impact": {
+          "impact": "Neutral",
+          "score": 5
+        }
+      },
+      "expected_impact_next_2_quarters": {
+        "overall_outlook": "Stable, Watching Input Costs and Festive Demand",
+        "expected_score": 5,
+        "key_drivers": [
+          "Festive-season demand (Oct-Dec) is the dominant seasonal driver",
+          "Semiconductor and component price volatility remains a global input-cost risk to monitor",
+          "A stabilising rupee (if oil/Fed risk eases) would help ease imported-component cost pressure"
         ]
       }
     }

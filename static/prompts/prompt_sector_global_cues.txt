@@ -1,4 +1,67 @@
-Give me JSON format data for current NIFTY sector as follows: 
+Give me JSON format data for current NIFTY sector for global cues as follows: 
     1. Keep all sectors under top-level-key 'sectors'.
-    2. For each key or sector - give current impact from global trends, dollar-index-impact, oil-prices, asian/european/japanese markets etc.
-    3. For each key or sector - give expected impact from global data etc.
+    2. For each key or sector - give current impact from 
+        global trends, dollar-index-impact, oil-prices, 
+        asian/european/japanese markets etc.
+    3. For each key or sector - give expected impact from 
+        global data etc.
+    4. Put any other necessary fields.
+    5. Use following schema.
+
+
+
+{
+  "sectors": {
+    "Banking_Financial_Services": {
+      "current_global_impact": {
+        "overall_score": 8.8,
+        "global_trend": "Positive",
+        "dollar_index_impact": {
+          "impact": "Mild_Negative",
+          "score": 4,
+          "reason": "Higher DXY can slow FII inflows."
+        },
+        "oil_price_impact": {
+          "impact": "Moderate_Negative",
+          "score": 5,
+          "reason": "Higher crude may increase inflation and delay rate cuts."
+        },
+        "us_market_impact": {
+          "impact": "Positive",
+          "score": 8
+        },
+        "europe_market_impact": {
+          "impact": "Positive",
+          "score": 7
+        },
+        "japan_market_impact": {
+          "impact": "Positive",
+          "score": 7
+        },
+        "china_market_impact": {
+          "impact": "Neutral",
+          "score": 5
+        },
+        "asian_market_impact": {
+          "impact": "Positive",
+          "score": 7
+        }
+      },
+      "expected_impact_next_2_quarters": {
+        "overall_outlook": "Strong_Positive",
+        "expected_score": 9,
+        "key_drivers": [
+          "FII inflows",
+          "Credit growth",
+          "Stable rates",
+          "Economic expansion"
+        ]
+      }
+    },
+
+    "Information_Technology": {
+...
+    }
+  }
+}
+

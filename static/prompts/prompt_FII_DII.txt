@@ -1,8 +1,91 @@
-Give me JSON format data for sectors in NIFTY as follows:
+Give me JSON format data for sectors as follows:
     1. Create all sectors as keys.
     2. For each key or sector - give detail FII/DII 
         activity every qtr for last 1 years.
     3. For each key or sector - give prediction 
         of FII/DII for coming qtrs.
     4. Keep all sectors under top-level-key 'DII_FII_sector_keys'.
-    5. Give numbers as much as possible for all data-points.
+    5. Give approx accurate numbers as much as possible for all data-points.
+    6. Use the below schema.
+
+
+
+{
+  "DII_FII_sector_keys": {
+    "Banking_Financial_Services": {
+      "last_4_quarters": {
+        "2025Q3": {
+          "FII": sell 120 crores,
+          "DII": ...,
+          "net_flow_score": 8,
+          "drivers": [
+            "Credit growth",
+            "Private bank valuation comfort",
+            "Rate-cycle expectations"
+          ]
+        },
+        "2025Q4": {
+          "FII": ...,
+          "DII": ...,
+          "net_flow_score": 8
+        },
+        "2026Q1": {
+          "FII": ...,
+          "DII": ...,
+          "net_flow_score": 9
+        },
+        "2026Q2": {
+          "FII": ...,
+          "DII": ...,
+          "net_flow_score": 9
+        }
+      },
+      "prediction": {
+        "2026Q3": {
+          "FII": ...,
+          "DII": ...,
+        },
+        "2026Q4": {
+          "FII": ...,
+          "DII": ...
+        }
+      }
+    },
+
+    "Information_Technology": {
+      "last_4_quarters": {
+        "2025Q3": {
+          "FII": ...,
+          "DII": ...,
+          "net_flow_score": 8
+        },
+        "2025Q4": {
+          "FII": ...,
+          "DII": ...,
+          "net_flow_score": 7
+        },
+        "2026Q1": {
+          "FII": ...,
+          "DII": ...,
+          "net_flow_score": 8
+        },
+        "2026Q2": {
+          "FII": ...,
+          "DII": ...,
+          "net_flow_score": 7
+        }
+      },
+      "prediction": {
+        "2026Q3": {
+          "FII": ...,
+          "DII": ...
+        },
+        "2026Q4": {
+          "FII": ...,
+          "DII": ...
+        }
+      }
+    },
+...
+  }
+}

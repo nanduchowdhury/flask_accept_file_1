@@ -1,41 +1,58 @@
 {
+  "metadata": {
+    "generated_date": "2026-07-22",
+    "quarters_covered_historical": ["2025Q3 (Jul-Sep 2025)", "2025Q4 (Oct-Dec 2025)", "2026Q1 (Jan-Mar 2026)", "2026Q2 (Apr-Jun 2026)"],
+    "quarters_covered_prediction": ["2026Q3 (Jul-Sep 2026)", "2026Q4 (Oct-Dec 2026)"],
+    "units": "FII/DII values in Rs crore, net flow (positive = net buying/inflow, negative = net selling/outflow)",
+    "net_flow_score_scale": {
+      "9_to_10": "Very strong net institutional buying / high conviction",
+      "7_to_8": "Moderate net buying / positive institutional bias",
+      "5_to_6": "Roughly balanced / mild positive-to-neutral",
+      "3_to_4": "Net institutional selling pressure",
+      "1_to_2": "Heavy, broad-based institutional selling"
+    },
+    "data_quality_note": "FII/FPI sector-wise figures are built up from confirmed NSDL/depository and primeinfobase.com monthly and fortnightly sectoral flow reports for the relevant months (e.g. Dec25 H1, Feb26 full month, Mar26 H1, Apr26 H1, May26 full month) and summed/estimated into quarters; months or sectors without a directly reported figure are marked 'estimated' and built from the aggregate monthly FII total plus the sector's known relative share/direction that period. DII sector-wise splits are NOT separately published with the same granularity as FII/FPI data anywhere we could verify - DII figures here are directional estimates based on DII's well-documented role as a counter-cyclical offsetting buyer (typically absorbing 50-90% of FII selling in stress quarters, concentrated in BFSI/large-caps via SIP, insurance and pension inflows). Treat DII figures and all 'estimated' FII figures as approximate, not exact reported numbers. net_flow_score is our own qualitative 1-10 synthesis, not an official published metric."
+  },
+
   "DII_FII_sector_keys": {
+
     "Banking_Financial_Services": {
       "last_4_quarters": {
         "2025Q3": {
-          "FII": "Strong Buying",
-          "DII": "Moderate Buying",
-          "net_flow_score": 8,
-          "drivers": [
-            "Credit growth",
-            "Private bank valuation comfort",
-            "Rate-cycle expectations"
-          ]
+          "FII": -32000,
+          "DII": 24000,
+          "net_flow_score": 4,
+          "drivers": ["Broad FII risk-off across EMs (Jul-Sep25 saw -Rs76,575cr aggregate FII selling)", "BFSI's large index weight makes it the default sell-first sector for FIIs reducing India exposure", "DII/mutual fund SIP buying partially offset the selling"]
         },
         "2025Q4": {
-          "FII": "Moderate Buying",
-          "DII": "Strong Buying",
-          "net_flow_score": 8
+          "FII": -6500,
+          "DII": 9500,
+          "net_flow_score": 6,
+          "drivers": ["FPIs pulled out ₹6,516 crore from financial services in H1 December 2025 alone, the largest sectoral outflow that fortnight", "Brief Oct 2025 FII inflow (+₹14,610cr aggregate) gave BFSI a short reprieve before Nov-Dec selling resumed", "DII buying (SIP, insurance, pension flows) continued to provide steady support"]
         },
         "2026Q1": {
-          "FII": "Strong Buying",
-          "DII": "Strong Buying",
-          "net_flow_score": 9
+          "FII": -71000,
+          "DII": 52000,
+          "net_flow_score": 2,
+          "drivers": ["Financial services bore the brunt of the record March 2026 FPI outflow, with ₹31,831 crore sold in the first fortnight of March alone amid Iran-war/rupee stress", "BFSI's high FPI ownership and index liquidity made it the preferred exit route for de-risking foreign funds", "DII buying scaled up materially to cushion the fall, but could not fully offset the historic FII selling"]
         },
         "2026Q2": {
-          "FII": "Moderate Buying",
-          "DII": "Strong Buying",
-          "net_flow_score": 9
+          "FII": -52000,
+          "DII": 41000,
+          "net_flow_score": 3,
+          "drivers": ["BFSI absorbed ₹19,152 crore of the ₹48,141 crore total FPI outflow in H1 April 2026 (~40% of all selling) and ~70% (~$2,415mn) of May 2026's total FPI outflow", "MSCI India EM weight decline (from ~20% in Sep24 to ~11.94% by Apr26) is mechanically forcing passive fund outflows concentrated in BFSI's large, liquid constituents", "DII buying remained the key offsetting force keeping bank Nifty resilient despite heavy FII selling"]
         }
       },
       "prediction": {
         "2026Q3": {
-          "FII": "Strong Buying",
-          "DII": "Strong Buying"
+          "FII": -15000,
+          "DII": 30000,
+          "drivers_expected": ["Government's LTCG tax waiver for FPIs on G-Secs (retroactive 1Apr26) aimed at stabilising flows, though this targets debt not equity directly", "Q1FY27 private bank earnings (strong per recent commentary) could slow the pace of FII selling", "MSCI EM passive-outflow pressure likely to persist but at a decelerating pace as rebalancing completes"]
         },
         "2026Q4": {
-          "FII": "Moderate Buying",
-          "DII": "Strong Buying"
+          "FII": 5000,
+          "DII": 28000,
+          "drivers_expected": ["If rupee/oil stress eases as the Iran-war situation stabilises, BFSI is typically the first sector where FII buying returns given its liquidity and index weight", "Continued strong DII/SIP inflows expected to keep the sector well-supported regardless of FII direction"]
         }
       }
     },
@@ -43,69 +60,40 @@
     "Information_Technology": {
       "last_4_quarters": {
         "2025Q3": {
-          "FII": "Strong Buying",
-          "DII": "Moderate Buying",
-          "net_flow_score": 8
+          "FII": -9000,
+          "DII": 6000,
+          "net_flow_score": 4,
+          "drivers": ["Ongoing tariff risk and global trade uncertainty kept FIIs cautious on US-revenue-dependent IT", "'Long Asia - Short India' positioning by global funds awaiting Indo-US trade clarity"]
         },
         "2025Q4": {
-          "FII": "Moderate Buying",
-          "DII": "Moderate Buying",
-          "net_flow_score": 7
+          "FII": -8500,
+          "DII": 5500,
+          "net_flow_score": 4,
+          "drivers": ["IT posted one of the largest sectoral outflows through Nov-Dec 2025 (₹3,331 crore sold in H1 December alone)", "FPIs continued avoiding US-revenue-heavy sectors on tariff/policy uncertainty"]
         },
         "2026Q1": {
-          "FII": "Strong Buying",
-          "DII": "Moderate Buying",
-          "net_flow_score": 8
+          "FII": -14000,
+          "DII": 9000,
+          "net_flow_score": 3,
+          "drivers": ["IT remained the biggest laggard even during the Feb 2026 FII inflow rebound, with sectoral outflows of about $1.87 billion that month", "Continued underweight positioning by global funds on India IT amid weak US corporate tech spending signals"]
         },
         "2026Q2": {
-          "FII": "Moderate Buying",
-          "DII": "Moderate Buying",
-          "net_flow_score": 7
+          "FII": -3500,
+          "DII": 4000,
+          "net_flow_score": 5,
+          "drivers": ["IT selling moderated sharply to just -$142 million in H1 April 2026, far smaller than BFSI/Healthcare outflows that period", "Global funds reallocating toward AI/semiconductor hardware plays in Taiwan/Korea/China rather than India IT services, per H1-April 2026 flow commentary", "Sharp late-Q2 rally (Nifty IT +4.3% in the week of 13-17Jul26) suggests DII and some FII short-covering/rotation back into large-cap IT began in June"]
         }
       },
       "prediction": {
         "2026Q3": {
-          "FII": "Strong Buying",
-          "DII": "Moderate Buying"
+          "FII": 4000,
+          "DII": 8000,
+          "drivers_expected": ["Strong Q1FY27 earnings from Tech Mahindra, TCS and others (per recent weekly market data) could draw renewed FII interest after a prolonged underweight", "Global AI capex acceleration ($750bn-plus hyperscaler spend guided for 2026) is an indirect long-term positive even for services-led Indian IT if it lifts enterprise tech budgets"]
         },
         "2026Q4": {
-          "FII": "Strong Buying",
-          "DII": "Moderate Buying"
-        }
-      }
-    },
-
-    "Capital_Goods_Engineering": {
-      "last_4_quarters": {
-        "2025Q3": {
-          "FII": "Moderate Buying",
-          "DII": "Strong Buying",
-          "net_flow_score": 8
-        },
-        "2025Q4": {
-          "FII": "Strong Buying",
-          "DII": "Strong Buying",
-          "net_flow_score": 9
-        },
-        "2026Q1": {
-          "FII": "Strong Buying",
-          "DII": "Strong Buying",
-          "net_flow_score": 10
-        },
-        "2026Q2": {
-          "FII": "Strong Buying",
-          "DII": "Strong Buying",
-          "net_flow_score": 10
-        }
-      },
-      "prediction": {
-        "2026Q3": {
-          "FII": "Strong Buying",
-          "DII": "Strong Buying"
-        },
-        "2026Q4": {
-          "FII": "Strong Buying",
-          "DII": "Strong Buying"
+          "FII": 6000,
+          "DII": 7000,
+          "drivers_expected": ["Seasonally, Q3 (Oct-Dec) US client budget-flush quarters have historically supported IT sector sentiment", "Continued monitoring of US recession/AI-disruption risk to IT services demand remains the key swing factor"]
         }
       }
     },
@@ -113,174 +101,81 @@
     "Automobile": {
       "last_4_quarters": {
         "2025Q3": {
-          "FII": "Moderate Buying",
-          "DII": "Moderate Buying",
-          "net_flow_score": 7
+          "FII": -4500,
+          "DII": 3500,
+          "net_flow_score": 5,
+          "drivers": ["Broad FII risk-off period weighed on cyclicals including autos", "Domestic demand resilience provided some DII support"]
         },
         "2025Q4": {
-          "FII": "Strong Buying",
-          "DII": "Strong Buying",
-          "net_flow_score": 8
+          "FII": -1500,
+          "DII": 2000,
+          "net_flow_score": 6,
+          "drivers": ["Auto was among sectors that saw a partial inflow return alongside the brief Oct26 FII buying spell before broader Nov-Dec selling resumed"]
         },
         "2026Q1": {
-          "FII": "Strong Buying",
-          "DII": "Strong Buying",
-          "net_flow_score": 9
+          "FII": -3000,
+          "DII": 5000,
+          "net_flow_score": 5,
+          "drivers": ["Auto attracted selective FII buying interest in Feb 2026 (capital goods, auto, construction, metals led the ₹22,615cr inflow month)", "But saw renewed selling of ₹4,807 crore during the record March 2026 outflow episode amid oil-price/input-cost concerns"]
         },
         "2026Q2": {
-          "FII": "Moderate Buying",
-          "DII": "Strong Buying",
-          "net_flow_score": 8
+          "FII": -3800,
+          "DII": 4200,
+          "net_flow_score": 5,
+          "drivers": ["Auto/auto-components sold off ₹3,704 crore in H1 April 2026 and further in May amid oil-driven input cost and demand concerns", "Domestic demand (Hero MotoCorp-led rally, multiple positive sessions per weekly market data) kept DII buying steady"]
         }
       },
       "prediction": {
         "2026Q3": {
-          "FII": "Strong Buying",
-          "DII": "Strong Buying"
+          "FII": 1000,
+          "DII": 5000,
+          "drivers_expected": ["Festive-season demand expectations typically draw both FII and DII interest into auto ahead of Q3", "Monsoon performance and rural income recovery are key swing factors for two-wheeler/tractor demand"]
         },
         "2026Q4": {
-          "FII": "Moderate Buying",
-          "DII": "Strong Buying"
+          "FII": 3000,
+          "DII": 5500,
+          "drivers_expected": ["Festive season (Oct-Dec) sales momentum historically the strongest seasonal driver for the sector", "Oil-price normalisation (if Iran-war tensions ease) would be a meaningful tailwind for auto input costs and consumer sentiment"]
         }
       }
     },
 
-    "Power_Utilities": {
+    "Pharma_Healthcare": {
       "last_4_quarters": {
         "2025Q3": {
-          "FII": "Moderate Buying",
-          "DII": "Strong Buying",
-          "net_flow_score": 7
+          "FII": -3000,
+          "DII": 2500,
+          "net_flow_score": 5,
+          "drivers": ["IT, healthcare and chemicals faced FPI selling on ongoing tariff risk through this period"]
         },
         "2025Q4": {
-          "FII": "Moderate Buying",
-          "DII": "Strong Buying",
-          "net_flow_score": 8
+          "FII": -3500,
+          "DII": 3000,
+          "net_flow_score": 5,
+          "drivers": ["Healthcare recorded ₹2,351 crore of outflows in H1 December 2025 amid continued US-tariff-related caution on export-heavy pharma names"]
         },
         "2026Q1": {
-          "FII": "Strong Buying",
-          "DII": "Strong Buying",
-          "net_flow_score": 9
+          "FII": -3500,
+          "DII": 4000,
+          "net_flow_score": 5,
+          "drivers": ["Healthcare saw ₹2,436 crore of outflows during the March 2026 selloff, though smaller in magnitude than BFSI/auto", "Defensive character of the sector limited the scale of selling relative to cyclicals"]
         },
         "2026Q2": {
-          "FII": "Strong Buying",
-          "DII": "Strong Buying",
-          "net_flow_score": 9
+          "FII": -6500,
+          "DII": 7000,
+          "net_flow_score": 4,
+          "drivers": ["Healthcare was one of the larger sectoral outflows in H1 April 2026 (₹4,481 crore) - the second-largest after BFSI that fortnight", "Novo Nordisk's India regulatory approval for its Wegovy obesity drug (reported mid-Jul26) triggered a sharp sector-wide selloff in Nifty Pharma/Healthcare (-1.4%/-1.28% for the week) on competitive-threat concerns, dragging Dr Reddy's and Sun Pharma"]
         }
       },
       "prediction": {
         "2026Q3": {
-          "FII": "Strong Buying",
-          "DII": "Strong Buying"
+          "FII": -2000,
+          "DII": 5000,
+          "drivers_expected": ["Continued overhang from the Wegovy-competition narrative likely to keep FIIs cautious near-term", "Sector remains in the 'Leading' quadrant on longer-horizon relative rotation graphs, suggesting DII conviction buying on dips"]
         },
         "2026Q4": {
-          "FII": "Moderate Buying",
-          "DII": "Strong Buying"
-        }
-      }
-    },
-
-    "Telecom": {
-      "last_4_quarters": {
-        "2025Q3": {
-          "FII": "Moderate Buying",
-          "DII": "Moderate Buying",
-          "net_flow_score": 7
-        },
-        "2025Q4": {
-          "FII": "Strong Buying",
-          "DII": "Moderate Buying",
-          "net_flow_score": 8
-        },
-        "2026Q1": {
-          "FII": "Strong Buying",
-          "DII": "Strong Buying",
-          "net_flow_score": 9
-        },
-        "2026Q2": {
-          "FII": "Strong Buying",
-          "DII": "Strong Buying",
-          "net_flow_score": 9
-        }
-      },
-      "prediction": {
-        "2026Q3": {
-          "FII": "Strong Buying",
-          "DII": "Strong Buying"
-        },
-        "2026Q4": {
-          "FII": "Strong Buying",
-          "DII": "Moderate Buying"
-        }
-      }
-    },
-
-    "Healthcare_Pharma": {
-      "last_4_quarters": {
-        "2025Q3": {
-          "FII": "Moderate Buying",
-          "DII": "Moderate Buying",
-          "net_flow_score": 7
-        },
-        "2025Q4": {
-          "FII": "Moderate Buying",
-          "DII": "Strong Buying",
-          "net_flow_score": 7
-        },
-        "2026Q1": {
-          "FII": "Strong Buying",
-          "DII": "Strong Buying",
-          "net_flow_score": 8
-        },
-        "2026Q2": {
-          "FII": "Moderate Buying",
-          "DII": "Strong Buying",
-          "net_flow_score": 8
-        }
-      },
-      "prediction": {
-        "2026Q3": {
-          "FII": "Moderate Buying",
-          "DII": "Strong Buying"
-        },
-        "2026Q4": {
-          "FII": "Strong Buying",
-          "DII": "Strong Buying"
-        }
-      }
-    },
-
-    "Energy": {
-      "last_4_quarters": {
-        "2025Q3": {
-          "FII": "Moderate Buying",
-          "DII": "Moderate Buying",
-          "net_flow_score": 7
-        },
-        "2025Q4": {
-          "FII": "Moderate Buying",
-          "DII": "Strong Buying",
-          "net_flow_score": 7
-        },
-        "2026Q1": {
-          "FII": "Strong Buying",
-          "DII": "Strong Buying",
-          "net_flow_score": 8
-        },
-        "2026Q2": {
-          "FII": "Moderate Buying",
-          "DII": "Strong Buying",
-          "net_flow_score": 8
-        }
-      },
-      "prediction": {
-        "2026Q3": {
-          "FII": "Moderate Buying",
-          "DII": "Strong Buying"
-        },
-        "2026Q4": {
-          "FII": "Moderate Buying",
-          "DII": "Strong Buying"
+          "FII": 2000,
+          "DII": 5500,
+          "drivers_expected": ["Defensive rotation typically favours pharma/healthcare if broader market volatility (oil/geopolitics) persists into Q4", "US generic-pricing and FDA-approval newsflow remain the key sector-specific swing factors"]
         }
       }
     },
@@ -288,34 +183,81 @@
     "FMCG": {
       "last_4_quarters": {
         "2025Q3": {
-          "FII": "Selling",
-          "DII": "Strong Buying",
-          "net_flow_score": 5
+          "FII": -2500,
+          "DII": 2000,
+          "net_flow_score": 5,
+          "drivers": ["General EM risk-off weighed on richly-valued consumer staples"]
         },
         "2025Q4": {
-          "FII": "Selling",
-          "DII": "Strong Buying",
-          "net_flow_score": 5
+          "FII": -1400,
+          "DII": 1800,
+          "net_flow_score": 6,
+          "drivers": ["FMCG saw ₹1,419 crore of outflows in H1 December 2025, smaller than financials/IT/services that fortnight"]
         },
         "2026Q1": {
-          "FII": "Moderate Buying",
-          "DII": "Strong Buying",
-          "net_flow_score": 6
+          "FII": -2400,
+          "DII": 3000,
+          "net_flow_score": 5,
+          "drivers": ["FMCG recorded ₹2,403 crore of outflows during the March 2026 selloff as even defensive segments were not spared"]
         },
         "2026Q2": {
-          "FII": "Neutral",
-          "DII": "Strong Buying",
-          "net_flow_score": 6
+          "FII": -3300,
+          "DII": 4500,
+          "net_flow_score": 5,
+          "drivers": ["FMCG saw ₹2,976 crore of outflows in H1 April 2026 and further selling in May, reflecting demand-compression risk from energy-price pass-through to consumers", "Rural demand recovery hopes (linked to monsoon outlook) kept DII interest steady"]
         }
       },
       "prediction": {
         "2026Q3": {
-          "FII": "Neutral",
-          "DII": "Strong Buying"
+          "FII": -500,
+          "DII": 4000,
+          "drivers_expected": ["Monsoon progress and rural income trends are the key swing factor for FMCG volume growth expectations", "Input cost relief if crude/edible oil prices ease would support margin narratives"]
         },
         "2026Q4": {
-          "FII": "Moderate Buying",
-          "DII": "Strong Buying"
+          "FII": 1500,
+          "DII": 4500,
+          "drivers_expected": ["Festive-season consumption demand typically supports FMCG sentiment into Q4", "Continued monitoring of urban discretionary demand recovery"]
+        }
+      }
+    },
+
+    "Oil_Gas_Energy": {
+      "last_4_quarters": {
+        "2025Q3": {
+          "FII": -2000,
+          "DII": 1500,
+          "net_flow_score": 5,
+          "drivers": ["General FII de-risking period affected energy alongside most sectors"]
+        },
+        "2025Q4": {
+          "FII": 1200,
+          "DII": 1000,
+          "net_flow_score": 6,
+          "drivers": ["Oil & gas saw selective FII buying interest during the brief Oct 2025 inflow spell"]
+        },
+        "2026Q1": {
+          "FII": -2900,
+          "DII": 3500,
+          "net_flow_score": 5,
+          "drivers": ["Oil & gas recorded ₹2,932 crore of outflows in the March 2026 selloff even as global crude prices rose sharply, reflecting concern over margin compression at refiners/OMCs from higher input costs", "Sector also drew some inflows in Feb 2026 as part of the capex/cyclical rotation basket"]
+        },
+        "2026Q2": {
+          "FII": -3300,
+          "DII": 4000,
+          "net_flow_score": 5,
+          "drivers": ["Oil & gas saw ₹3,352 crore of outflows in H1 April 2026 amid the West Asia conflict escalation", "Reliance Industries' promoter stake increase to 50.48% and ~2.4% weekly gain (per recent market data) reflects selective stock-specific DII/domestic buying even as sector-wide FII sentiment stayed cautious", "Rising crude prices are a double-edged sword: positive for upstream E&P names, negative for import-dependent refiners/OMCs"]
+        }
+      },
+      "prediction": {
+        "2026Q3": {
+          "FII": 1000,
+          "DII": 4500,
+          "drivers_expected": ["Continued elevated crude prices (Iran-war linked) likely to keep upstream/E&P sentiment constructive even as OMC margins stay under pressure", "Reliance Q1FY27 results are a key stock-specific catalyst for the sector"]
+        },
+        "2026Q4": {
+          "FII": 2000,
+          "DII": 4500,
+          "drivers_expected": ["Any de-escalation in the Strait of Hormuz situation and oil-price normalisation would be a meaningful positive re-rating trigger for OMCs specifically"]
         }
       }
     },
@@ -323,104 +265,245 @@
     "Metals_Mining": {
       "last_4_quarters": {
         "2025Q3": {
-          "FII": "Strong Buying",
-          "DII": "Moderate Buying",
-          "net_flow_score": 8
+          "FII": -1500,
+          "DII": 1200,
+          "net_flow_score": 5,
+          "drivers": ["General FII selling period; global metals price softness added pressure"]
         },
         "2025Q4": {
-          "FII": "Strong Buying",
-          "DII": "Moderate Buying",
-          "net_flow_score": 8
+          "FII": 500,
+          "DII": 800,
+          "net_flow_score": 6,
+          "drivers": ["Selective buying interest during the brief Oct26 inflow window"]
         },
         "2026Q1": {
-          "FII": "Selling",
-          "DII": "Moderate Buying",
-          "net_flow_score": 4
+          "FII": 2500,
+          "DII": 2000,
+          "net_flow_score": 7,
+          "drivers": ["Metals was one of the sectors, alongside capital goods and autos, that led the Feb 2026 FII inflow rebound (₹22,615cr month) on the domestic capex/cyclical rotation theme"]
         },
         "2026Q2": {
-          "FII": "Neutral",
-          "DII": "Moderate Buying",
-          "net_flow_score": 5
+          "FII": 2000,
+          "DII": 2500,
+          "net_flow_score": 6,
+          "drivers": ["Metals and Mining was one of only three sectors (with Services and Capital Goods) to attract net FPI inflows in May 2026, together pulling in about $1.75 billion", "Mixed/negative weekly sessions in mid-July per recent market data suggest some profit-booking after the run-up"]
         }
       },
       "prediction": {
         "2026Q3": {
-          "FII": "Moderate Buying",
-          "DII": "Moderate Buying"
+          "FII": 1000,
+          "DII": 2000,
+          "drivers_expected": ["Global metal price trends and China demand signals remain the key swing factor", "Continued domestic capex/infrastructure theme supportive of steel/metals demand"]
         },
         "2026Q4": {
-          "FII": "Strong Buying",
-          "DII": "Moderate Buying"
+          "FII": 1500,
+          "DII": 2200,
+          "drivers_expected": ["Infrastructure capex execution (Union Budget-linked spend) typically supports metals demand into H2 of the fiscal year"]
         }
       }
     },
 
-    "Chemicals": {
+    "Capital_Goods_Infrastructure": {
       "last_4_quarters": {
         "2025Q3": {
-          "FII": "Selling",
-          "DII": "Moderate Buying",
-          "net_flow_score": 4
+          "FII": -2000,
+          "DII": 2000,
+          "net_flow_score": 5,
+          "drivers": ["General risk-off period; domestic capex story provided some DII cushioning"]
         },
         "2025Q4": {
-          "FII": "Neutral",
-          "DII": "Moderate Buying",
-          "net_flow_score": 5
+          "FII": -1000,
+          "DII": 1500,
+          "net_flow_score": 5,
+          "drivers": ["Heavy selling in capital goods (alongside power, cement, realty, telecom) by Dec 2025 pointed to rising FII concern about a slowing capex cycle"]
         },
         "2026Q1": {
-          "FII": "Moderate Buying",
-          "DII": "Moderate Buying",
-          "net_flow_score": 6
+          "FII": 3000,
+          "DII": 3000,
+          "net_flow_score": 7,
+          "drivers": ["Capital Goods emerged as the single biggest beneficiary of the Feb 2026 FII inflow rebound, reflecting investor confidence in India's infrastructure/manufacturing expansion story"]
         },
         "2026Q2": {
-          "FII": "Moderate Buying",
-          "DII": "Moderate Buying",
-          "net_flow_score": 6
+          "FII": 1800,
+          "DII": 3200,
+          "net_flow_score": 6,
+          "drivers": ["Capital Goods was one of the three sectors attracting net FPI inflows in May 2026 (with Services and Metals, ~$1.75bn combined)", "Capital goods IIP output grew 12.9% YoY in May 2026, an unusually strong real-economy confirmation of the sector's momentum", "CG Power's Rs900cr US data-centre transformer order and ABB India's record order backlog reflect genuine order-book strength underpinning sentiment"]
         }
       },
       "prediction": {
         "2026Q3": {
-          "FII": "Moderate Buying",
-          "DII": "Moderate Buying"
+          "FII": 2500,
+          "DII": 3500,
+          "drivers_expected": ["Continued government infra capex execution (Rs11.21 lakh crore Budget 2026-27 allocation) supports the sector's medium-term order pipeline", "Data-centre-linked power/automation capex (ABB, CG Power, Voltamp) is an emerging structural tailwind"]
         },
         "2026Q4": {
-          "FII": "Strong Buying",
-          "DII": "Moderate Buying"
+          "FII": 3000,
+          "DII": 3800,
+          "drivers_expected": ["H2-fiscal-year capex execution typically accelerates as government spending picks up into year-end"]
         }
       }
     },
 
-    "Real_Estate": {
+    "Power_Utilities": {
       "last_4_quarters": {
         "2025Q3": {
-          "FII": "Moderate Buying",
-          "DII": "Moderate Buying",
-          "net_flow_score": 6
+          "FII": -800,
+          "DII": 700,
+          "net_flow_score": 5,
+          "drivers": ["General risk-off period affected utilities alongside most sectors"]
         },
         "2025Q4": {
-          "FII": "Strong Buying",
-          "DII": "Moderate Buying",
-          "net_flow_score": 7
+          "FII": -2100,
+          "DII": 1800,
+          "net_flow_score": 4,
+          "drivers": ["Power saw ₹2,118 crore of outflows in H1 December 2025, among the larger sectoral outflows that fortnight, pointing to capex-cycle concerns"]
         },
         "2026Q1": {
-          "FII": "Strong Buying",
-          "DII": "Strong Buying",
-          "net_flow_score": 8
+          "FII": 1200,
+          "DII": 1500,
+          "net_flow_score": 6,
+          "drivers": ["Power was among sectors leading the Feb 2026 FII inflow rebound alongside capital goods/metals/autos"]
         },
         "2026Q2": {
-          "FII": "Moderate Buying",
-          "DII": "Strong Buying",
-          "net_flow_score": 8
+          "FII": 600,
+          "DII": 1200,
+          "net_flow_score": 6,
+          "drivers": ["Power was one of the only sectors with net FPI inflows in H1 April 2026 (+₹601 crore) even as most other sectors sold off", "Electricity & gas supply output grew 9.9% YoY in May 2026 IIP data, reflecting genuine rising demand including data-centre-linked power consumption"]
         }
       },
       "prediction": {
         "2026Q3": {
-          "FII": "Moderate Buying",
-          "DII": "Strong Buying"
+          "FII": 1500,
+          "DII": 2000,
+          "drivers_expected": ["Data-centre power demand (flagged explicitly by ABB India management) and grid-modernisation capex are structural medium-term tailwinds", "Renewable energy capacity additions continuing to draw both FII and DII interest"]
         },
         "2026Q4": {
-          "FII": "Strong Buying",
-          "DII": "Strong Buying"
+          "FII": 1800,
+          "DII": 2200,
+          "drivers_expected": ["Continued grid-strengthening and data-centre-linked power infrastructure investment expected to sustain sector interest"]
+        }
+      }
+    },
+
+    "Telecom": {
+      "last_4_quarters": {
+        "2025Q3": {
+          "FII": 2000,
+          "DII": 1000,
+          "net_flow_score": 7,
+          "drivers": ["Telecom was a relative safe-haven/inflow sector even during the broader Jul-Sep25 FII selling period, supported by 5G rollout and ARPU growth themes"]
+        },
+        "2025Q4": {
+          "FII": -1800,
+          "DII": 1500,
+          "net_flow_score": 5,
+          "drivers": ["Telecom saw notable selling by Dec 2025 (grouped with power, capital goods, cement, realty as capex-cycle-concern sectors)"]
+        },
+        "2026Q1": {
+          "FII": -3900,
+          "DII": 3000,
+          "net_flow_score": 4,
+          "drivers": ["Telecom recorded ₹3,856 crore of outflows during the record March 2026 FPI selloff"]
+        },
+        "2026Q2": {
+          "FII": -2700,
+          "DII": 2500,
+          "net_flow_score": 5,
+          "drivers": ["Telecom (combined with IT) saw a relatively modest -$267 million outflow in H1 April 2026, smaller than BFSI/Healthcare/Consumer Services that period", "Tejas Networks' TJ1600-D3 launch and NEC 5G MIMO agreement provided stock-specific positive catalysts even as sector flows stayed negative overall"]
+        }
+      },
+      "prediction": {
+        "2026Q3": {
+          "FII": 500,
+          "DII": 2000,
+          "drivers_expected": ["ARPU growth and continued 5G/fibre rollout remain structural positives", "Tejas Networks' rising losses despite revenue growth is a stock-specific risk to watch within the sector"]
+        },
+        "2026Q4": {
+          "FII": 1500,
+          "DII": 2200,
+          "drivers_expected": ["Continued data-consumption growth and potential further ARPU hikes are the key sector tailwinds heading into year-end"]
+        }
+      }
+    },
+
+    "Realty_Construction": {
+      "last_4_quarters": {
+        "2025Q3": {
+          "FII": -1000,
+          "DII": 1200,
+          "net_flow_score": 5,
+          "drivers": ["General risk-off period; housing demand fundamentals remained resilient domestically"]
+        },
+        "2025Q4": {
+          "FII": -1500,
+          "DII": 1800,
+          "net_flow_score": 5,
+          "drivers": ["Realty was grouped among sectors (with power, capital goods, cement, telecom) flagged for capex-cycle-slowdown concerns by Dec 2025"]
+        },
+        "2026Q1": {
+          "FII": -3000,
+          "DII": 3500,
+          "net_flow_score": 5,
+          "drivers": ["Construction saw ₹2,975 crore of outflows during the March 2026 selloff", "Sector still drew some Feb 2026 inflow interest as part of the capex/cyclical rotation basket"]
+        },
+        "2026Q2": {
+          "FII": -1200,
+          "DII": 2000,
+          "net_flow_score": 5,
+          "drivers": ["Realty led the prior week's rally before easing out of the weekly top-5 sector performers by mid-July per recent market data, suggesting momentum paring rather than a sharp reversal", "Sector remains in the 'Leading' quadrant on longer-horizon relative rotation graphs"]
+        }
+      },
+      "prediction": {
+        "2026Q3": {
+          "FII": 500,
+          "DII": 2200,
+          "drivers_expected": ["Continued urban housing demand and premium housing sales support the medium-term thesis", "Commercial real estate benefiting from data-centre/warehousing capex is an emerging structural driver"]
+        },
+        "2026Q4": {
+          "FII": 1000,
+          "DII": 2500,
+          "drivers_expected": ["Festive/year-end season historically supportive of housing sales momentum"]
+        }
+      }
+    },
+
+    "Consumer_Services": {
+      "last_4_quarters": {
+        "2025Q3": {
+          "FII": -1500,
+          "DII": 1200,
+          "net_flow_score": 5,
+          "drivers": ["General risk-off period affected consumer discretionary/services names"]
+        },
+        "2025Q4": {
+          "FII": -3200,
+          "DII": 2500,
+          "net_flow_score": 4,
+          "drivers": ["Services sector saw ₹3,237 crore of outflows in H1 December 2025, among the larger sectoral outflows that fortnight"]
+        },
+        "2026Q1": {
+          "FII": -1000,
+          "DII": 2000,
+          "net_flow_score": 6,
+          "drivers": ["Consumer Services and Realty were among sectors that returned to inflows in Feb 2026 after heavy Jan26 selling, part of the broader rotation-driven rebound"]
+        },
+        "2026Q2": {
+          "FII": -5900,
+          "DII": 5500,
+          "net_flow_score": 4,
+          "drivers": ["Consumer Services recorded ₹5,338 crore of outflows in H1 April 2026, the second-largest sectoral outflow that fortnight after BFSI", "Demand-compression risk from energy-price pass-through flagged as the key driver of the selling", "Services (a related but distinct category) was actually one of the three sectors with net inflows in May 2026, showing a split between consumer-discretionary services (weak) and broader business/IT-adjacent services (strong)"]
+        }
+      },
+      "prediction": {
+        "2026Q3": {
+          "FII": -1000,
+          "DII": 5000,
+          "drivers_expected": ["Energy-price pass-through to consumers remains the key near-term headwind if oil prices stay elevated", "Festive-season discretionary spending recovery hopes into Q3/Q4"]
+        },
+        "2026Q4": {
+          "FII": 1000,
+          "DII": 5200,
+          "drivers_expected": ["Festive and wedding-season consumption typically the strongest seasonal tailwind for consumer/discretionary services"]
         }
       }
     }
