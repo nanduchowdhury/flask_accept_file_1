@@ -213,17 +213,17 @@ class ScholarKM(Flask):
         
         cfolder = f'{self.client_folder}/{client_ip}_{uuid}'
 
-        upload_folder = f'{cfolder}/uploads'
-        self.sess.save_client_data(uuid, 'basic_init.upload_folder', upload_folder)
+        # upload_folder = f'{cfolder}/uploads'
+        # self.sess.save_client_data(uuid, 'basic_init.upload_folder', upload_folder)
         
-        log_folder = f'{cfolder}/client_logs'
-        self.sess.save_client_data(uuid, 'basic_init.log_folder', log_folder)
+        # log_folder = f'{cfolder}/client_logs'
+        # self.sess.save_client_data(uuid, 'basic_init.log_folder', log_folder)
 
-        report_to_user_folder = f'{self.client_folder}/report_by_user'
-        self.sess.save_client_data(uuid, 'basic_init.report_to_user_folder', report_to_user_folder)
+        # report_to_user_folder = f'{self.client_folder}/report_by_user'
+        # self.sess.save_client_data(uuid, 'basic_init.report_to_user_folder', report_to_user_folder)
         
-        log_file_path = f'{log_folder}/client_log.txt'
-        self.sess.save_client_data(uuid, 'basic_init.log_file_path', log_file_path)
+        # log_file_path = f'{log_folder}/client_log.txt'
+        # self.sess.save_client_data(uuid, 'basic_init.log_file_path', log_file_path)
 
     def extract_file(self, uuid, data):
 
@@ -1098,11 +1098,11 @@ class ScholarKM(Flask):
 
             cfolder = f'{self.client_folder}/{client_ip}_{client_uuid}'
             
-            log_folder = f'{cfolder}/client_logs'
-            self.sess.save_client_data(client_uuid, 'basic_init.log_folder', log_folder)
+            # log_folder = f'{cfolder}/client_logs'
+            # self.sess.save_client_data(client_uuid, 'basic_init.log_folder', log_folder)
             
-            log_file_path = f'{log_folder}/client_log.txt'
-            self.sess.save_client_data(client_uuid, 'basic_init.log_file_path', log_file_path)
+            # log_file_path = f'{log_folder}/client_log.txt'
+            # self.sess.save_client_data(client_uuid, 'basic_init.log_file_path', log_file_path)
 
             self.sess.force_save_session(client_uuid)
             self.error_manager.show_message(2065, home_or_content_page)
@@ -1132,20 +1132,28 @@ class ScholarKM(Flask):
 
             self.sess.force_save_session(client_uuid)
 
-            upload_folder = self.sess.get_client_data(client_uuid, 'basic_init.upload_folder')
-            gcs_main_content_file = f"{upload_folder}/{constants.GCS_UPLOAD_MAIN_CONTENT_FILE_NAME}"
-            self.gcs_manager.cors_configuration()
-            signed_url = self.gcs_manager.get_signed_url(gcs_main_content_file)
-
-            self.sess.save_client_data(client_uuid, 'upload_file.main_content_file', gcs_main_content_file)
-
-            self.sess.force_save_session(client_uuid)
+            signed_url = ''
+            # signed_url = self.get_signed_url(client_uuid)
 
             return jsonify({"client_uuid": client_uuid,
                             "signed_main_content_url": signed_url}), 200
 
         except Exception as e:
             self.error_manager.show_any_message(f"Exception during route basic_init : {str(e)}")
+
+    def get_signed_url(self, client_uuid):
+        
+        upload_folder = self.sess.get_client_data(client_uuid, 'basic_init.upload_folder')
+        gcs_main_content_file = f"{upload_folder}/{constants.GCS_UPLOAD_MAIN_CONTENT_FILE_NAME}"
+        self.gcs_manager.cors_configuration()
+        signed_url = self.gcs_manager.get_signed_url(gcs_main_content_file)
+
+        self.sess.save_client_data(client_uuid, 'upload_file.main_content_file', gcs_main_content_file)
+
+        self.sess.force_save_session(client_uuid)
+
+        return signed_url
+
 
     def subscribe(self):
         try:

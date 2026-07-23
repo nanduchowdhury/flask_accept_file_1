@@ -79,11 +79,13 @@
             </div>
         </div>
 
+        {% block rotating_banner %}
         <hr class="banner-separator">
         <div id="rotatingBannerContainer" class="banner-container">
             <div id="rotatingBannerContent" class="banner-content"></div>
         </div>
         <hr class="banner-separator">
+        {% endblock %}
     </header>
 
     <main class="home-area-container">
@@ -153,9 +155,11 @@
             const tracker = new WhatsAppTracker();
             tracker.trackUserInteraction();
 
+            {% block rotating_banner_js %}
             // Initialize and display the rotating banner
             const banner = new ManageRotatingBanner('rotatingBannerContainer', 'rotatingBannerContent');
             banner.init("{{ url_for('static', filename='prompts/all_sector_summary.json') }}");
+            {% endblock %}
 
             {% block dom_ready %}{% endblock %}
         });
