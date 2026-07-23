@@ -233,7 +233,7 @@ class StockDataRetriever:
             if isinstance(df.columns, pd.MultiIndex):
                 df.columns = df.columns.get_level_values(0)
 
-            df = df[['Close']].reset_index()
+            df = df[['Close', 'Volume']].reset_index()
             df['Date'] = df['Date'].dt.strftime('%d%b%y')
 
             return df.to_json(orient='records')

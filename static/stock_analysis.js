@@ -416,7 +416,8 @@ _getFormattedScrollItems(obj, level = 0) {
         if (Array.isArray(data) && data.length > 0 && data[0].Date && data[0].Close) {
             data = data.map(item => ({
                 date_time: item.Date,
-                stock_price: item.Close
+                stock_price: item.Close,
+                volume: item.Volume
             }));
         }
 
@@ -621,6 +622,24 @@ _getFormattedScrollItems(obj, level = 0) {
             // Chart area background
             ctx.fillStyle = '#fcfcfc';
             ctx.fillRect(padding.left, padding.top, chartWidth, chartHeight);
+
+            // Draw Volume Bars in the background
+            const maxVol = Math.max(...data.map(d => parseFloat(d.volume || 0)));
+            if (maxVol > 0) {
+                const volAlpha = 0.4;
+                const barWidth = Math.max(1, (chartWidth / data.length) * 0.8);
+                for (let i = 0; i < data.length; i++) {
+                    const vol = parseFloat(data[i].volume || 0);
+                    const vHeight = (vol / maxVol) * (chartHeight * 0.35); // Limit height to 35% of chart
+                    const x = data.length > 1 ? padding.left + (i / (data.length - 1)) * chartWidth : padding.left + chartWidth / 2;
+                    
+                    const price = parseFloat(data[i].stock_price);
+                    const prevPrice = i > 0 ? parseFloat(data[i - 1].stock_price) : price;
+                    
+                    ctx.fillStyle = price >= prevPrice ? `rgba(40, 167, 69, ${volAlpha})` : `rgba(220, 53, 69, ${volAlpha})`;
+                    ctx.fillRect(x - barWidth / 2, padding.top + chartHeight - vHeight, barWidth, vHeight);
+                }
+            }
 
             // Y-axis grid & labels
             ctx.strokeStyle = '#e0e0e0';
