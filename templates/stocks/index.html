@@ -30,7 +30,11 @@
             </div>
         </div>
 
-
+        <div id="main-page-plot-container" style="text-align: center; margin: 20px 0;">
+            <h3 class="main-page-plot-label" style="font-family: Arial; color: #333;">Market Overview</h3>
+            <!-- Set initial opacity to 0 to support the fade-in effect -->
+            <div id="default-stock-plot-container" style="opacity: 0;"></div>
+        </div>
 
 
         <!-- MAIN TOPICS -->
@@ -84,6 +88,10 @@
     window.stockAnalysisMain = new StockAnalysisMain();
     window.stockAnalysisMain.initAnalysisTypeDropdown();
     window.stockAnalysisMain.initAnalysisMonthsDropdown();
+
+    // Trigger the carousel animation on page load
+    window.stockAnalysisMain.animateMainPagePlot();
+
 
     window.stockAnalysisMain.doCardScroll('india_economy', "{{ url_for('static', filename='prompts/stocks_india_economy_info.json') }}");
     window.stockAnalysisMain.doCardScroll('DII_FII', "{{ url_for('static', filename='prompts/stocks_DII_FII_info.json') }}");

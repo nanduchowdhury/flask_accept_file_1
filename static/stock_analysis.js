@@ -1160,6 +1160,83 @@ _getFormattedScrollItems(obj, level = 0) {
         });
     }
 
+    /**
+     * Starts a continuous carousel animation of major stock indices.
+     * Fades the plot in, waits, fades out, and switches to the next stock.
+     */
+    async animateMainPagePlot() {
+        const container = document.getElementById('default-stock-plot-container');
+        if (!container) return;
+
+        const stocks = ['INFY', 'WIPRO'];
+        let index = 0;
+
+        const runCycle = async () => {
+            const stockName = stocks[index];
+            
+            // Update label text to reflect the current stock being analyzed
+            const label = document.querySelector('.main-page-plot-label');
+            if (label) label.textContent = `Market Pulse: ${stockName}`;
+
+            // Render the plot and wait for data to load
+            await this.renderDefaultStockPlot(container, stockName);
+
+            // Fade In
+            container.style.transition = 'opacity 1.5s ease-in-out';
+            container.style.opacity = '1';
+
+            // Keep it visible for 6 seconds
+            await new Promise(resolve => setTimeout(resolve, 6000));
+
+            // Fade Out
+            container.style.opacity = '0';
+
+            // Wait for transition to finish (1.5s) before starting next
+            await new Promise(resolve => setTimeout(resolve, 1500));
+
+            index = (index + 1) % stocks.length;
+            runCycle();
+        };
+
+        runCycle();
+    }
+
+    renderDefaultStockPlot(container, stockName = 'INFY') {
+        return new Promise((resolve) => {
+            if (!container) return resolve();
+            container.innerHTML = ''; // Clear previous contents
+
+        const period = '12';
+        const analysisType = 'ANALYSIS_CONT_DECLINE_2PCT';
+        const requestTypes = ['STOCK_BASICS'];
+        const data = { type: requestTypes, name: stockName, period: period, analysis_type: analysisType };
+        basicInitializer.makeServerRequest('/general_stock_analysis_info', data, (response) => {
+            let info = response.STOCK_BASICS;
+            const error = response.error;
+            if (error && typeof error === 'string' && error.trim() !== "") {
+                errorManager.showError(1045, error);
+                resolve();
+                return;
+            }
+
+            const result1 = info || "No analysis data available.";
+            let priceData;
+            try {
+                priceData = JSON.parse(result1);
+            } catch (e) {
+                priceData = result1;
+            }
+            const analysisResult = this.computeAnalysisSegments(priceData);
+            const plotDiv = this.createStockPricePlot(analysisResult.data, 'tabContent active', analysisResult.segments, analysisResult.highlightPoints);
+            
+            container.appendChild(plotDiv);
+            resolve();
+        }, (error) => {
+            console.error("Failed to load default stock plot:", error);
+            resolve();
+        });
+        });
+    }
 
     openStockAnalysisPage(stockName) {
 
