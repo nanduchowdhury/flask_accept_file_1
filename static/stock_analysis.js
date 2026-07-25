@@ -7,6 +7,8 @@ class StockAnalysisMain {
         this.gaTracker = new GoogleAnalytics();
 
         this.STOCK_EVENT_COLORS = ['blue', 'green', 'red', 'yellow', 'orange', 'purple', 'brown', 'teal'];
+
+        this.stockDataCache = new Map();
     }
 
     initAnalysisTypeDropdown() {
@@ -51,6 +53,27 @@ class StockAnalysisMain {
             if (m === "12") option.selected = true;
             dropdown.appendChild(option);
         });
+    }
+
+    getStockDataFromServer(stockName, period, analysisType, requestTypes, successCallback, failureCallback) {
+        const cacheKey = JSON.stringify({ stockName, period, analysisType, requestTypes });
+
+        if (this.stockDataCache.has(cacheKey)) {
+            successCallback(this.stockDataCache.get(cacheKey));
+            return;
+        }
+
+        const data = { 
+            type: requestTypes, 
+            name: stockName, 
+            period: period, 
+            analysis_type: analysisType 
+        };
+
+        basicInitializer.makeServerRequest('/general_stock_analysis_info', data, (response) => {
+            this.stockDataCache.set(cacheKey, response);
+            successCallback(response);
+        }, failureCallback);
     }
 
     /**
@@ -302,10 +325,10 @@ _getFormattedScrollItems(obj, level = 0) {
         if (typeof item === 'object' && item !== null) {
             return Object.values(item).some(checkNegative);
         }
-        return checkNegative(item);
+    return checkNegative(item);
     }
 
-    computeDrawdownSegments(data, threshold_pct) {
+    computeDrawdownSegments(data, threshold_pct, posColor = '#00c805', negColor = '#ff3b30') {
         const segments = [];
         if (!data || data.length < 2) return segments;
 
@@ -325,9 +348,9 @@ _getFormattedScrollItems(obj, level = 0) {
             
             let currentColor = null; // Middle part (uncolored)
             if (drawdownPct >= GREEN_LIMIT) {
-                currentColor = '#28a745'; // 1st Part: Green
+                currentColor = posColor; // 1st Part: Green
             } else if (drawdownPct <= RED_LIMIT) {
-                currentColor = 'red';     // 3rd Part: Red
+                currentColor = negColor;     // 3rd Part: Red
             }
 
             if (i === 0) {
@@ -350,7 +373,7 @@ _getFormattedScrollItems(obj, level = 0) {
         return segments;
     }
 
-    computeRecoverySegments(data) {
+    computeRecoverySegments(data, posColor = '#00c805', negColor = '#ff3b30') {
         const segments = [];
         if (!data || data.length < 2) return { 
             segments, 
@@ -386,7 +409,7 @@ _getFormattedScrollItems(obj, level = 0) {
         const few = Math.max(1, Math.min(2, Math.floor(countAfterLow / 2))); 
 
         const redEnd = minIdx + few;
-        segments.push({ start: minIdx, end: redEnd, color: 'red' });
+        segments.push({ start: minIdx, end: redEnd, color: negColor });
 
         // Ensure green zone is at least one index after red zone to provide distinct cutoffs
         let greenStart = Math.max(redEnd + 1, data.length - 1 - (few - 1));
@@ -399,7 +422,7 @@ _getFormattedScrollItems(obj, level = 0) {
 
         let greenCutoffText = "N/A";
         if (greenStart < data.length - 1) {
-            segments.push({ start: greenStart, end: data.length - 1, color: '#28a745' });
+            segments.push({ start: greenStart, end: data.length - 1, color: posColor });
             greenCutoffText = getPct(greenStart);
         }
 
@@ -412,7 +435,7 @@ _getFormattedScrollItems(obj, level = 0) {
         };
     }
 
-    computeAnalysisSegments(data, events = null) {
+    computeAnalysisSegments(data, events = null, posSegmentColor = '#00c805', negSegmentColor = '#ff3b30') {
         if (Array.isArray(data) && data.length > 0 && data[0].Date && data[0].Close) {
             data = data.map(item => ({
                 date_time: item.Date,
@@ -444,7 +467,7 @@ _getFormattedScrollItems(obj, level = 0) {
             };
             return { segments, infoJson: JSON.stringify(info), data, highlightPoints };
         } else if (selection === "ANALYSIS_RECOVERY") {
-            const result = this.computeRecoverySegments(data);
+            const result = this.computeRecoverySegments(data, posSegmentColor, negSegmentColor);
             segments = result.segments;
             info = {
                 "Red_Zone_Cutoff": result.redCutoff,
@@ -455,9 +478,9 @@ _getFormattedScrollItems(obj, level = 0) {
             };
         } else if (selection == "ANALYSIS_DRAWDOWN") {
             const threshold = parseFloat(selection.split('_')[2]) || 5.0;
-            segments = this.computeDrawdownSegments(data, threshold);
+            segments = this.computeDrawdownSegments(data, threshold, posSegmentColor, negSegmentColor);
             info = {
-                "Green_Zone": "Drawdown >= -2.0% (Near Highs)",
+                "Green_Zone": `Drawdown >= -2.0% (Near Highs)`,
                 "Middle_Part": `Drawdown between -2.0% and -${threshold}% (Ignored)`,
                 "Red_Zone": `Drawdown <= -${threshold}% (Correction)`,
                 "Segments_Found": segments.length
@@ -481,7 +504,7 @@ _getFormattedScrollItems(obj, level = 0) {
             };
             const target_pct = valueMap[selection] !== undefined ? valueMap[selection] : (parseFloat(selection) || -2.0);
             const rawSegments = Array.isArray(data) ? this.computeRiseOrDecline(data, target_pct) : [];
-            const segmentColor = target_pct > 0 ? '#28a745' : 'red';
+            const segmentColor = target_pct > 0 ? posSegmentColor : negSegmentColor;
             segments = rawSegments.map(seg => ({ ...seg, color: segmentColor }));
             info = {
                 "Analysis_Segments_Found": segments.length,
@@ -581,7 +604,9 @@ _getFormattedScrollItems(obj, level = 0) {
         this.popoutMgr.appendItem(disclaimer);
     }
 
-    createStockPricePlot(data, className, analysisSegments, highlightPointsOnPlot = []) {
+    createStockPricePlot(data, className, analysisSegments, highlightPointsOnPlot = [], 
+                         negFillColor = 'rgba(231, 63, 181, 0.91)', 
+                         posFillColor = 'rgba(74, 138, 248, 0.8)') {
         let tabContentDiv = document.createElement('div');
         tabContentDiv.className = className;
         tabContentDiv.style.padding = '20px';
@@ -659,7 +684,7 @@ _getFormattedScrollItems(obj, level = 0) {
                 }
 
                 // Area fill under the curve
-                this._drawAreaFill(ctx, data, padding, chartWidth, chartHeight, minPrice, priceRange, analysisSegments);
+                this._drawAreaFill(ctx, data, padding, chartWidth, chartHeight, minPrice, priceRange, analysisSegments, negFillColor, posFillColor);
 
                 // Plot line
                 const baseLineWidth = 2;
@@ -778,13 +803,13 @@ _getFormattedScrollItems(obj, level = 0) {
         return tabContentDiv;
     }
 
-    _drawAreaFill(ctx, data, padding, chartWidth, chartHeight, minPrice, priceRange, analysisSegments) {
+    _drawAreaFill(ctx, data, padding, chartWidth, chartHeight, minPrice, priceRange, analysisSegments, negFillColor, posFillColor) {
         if (data.length < 2) return;
 
         // Requirement 3: Determine base gradient color based on total return
         const firstPrice = parseFloat(data[0].stock_price);
         const lastPrice = parseFloat(data[data.length - 1].stock_price);
-        const baseFillColor = (lastPrice >= firstPrice) ? 'rgba(74, 138, 248, 0.8)' : 'rgba(231, 63, 181, 0.91)';
+        const baseFillColor = (lastPrice >= firstPrice) ? posFillColor : negFillColor;
         const bottomY = padding.top + chartHeight;
 
         // Draw area fill in slices to handle segment-specific colors
@@ -1169,6 +1194,10 @@ _getFormattedScrollItems(obj, level = 0) {
         if (!container) return;
 
         const stocks = ['INFY', 'WIPRO'];
+        // Reserve space to prevent layout shifts before the first plot loads.
+        // We use a more conservative value for the initial load.
+        container.style.minHeight = '300px';
+
         let index = 0;
 
         const runCycle = async () => {
@@ -1204,13 +1233,15 @@ _getFormattedScrollItems(obj, level = 0) {
     renderDefaultStockPlot(container, stockName = 'INFY') {
         return new Promise((resolve) => {
             if (!container) return resolve();
-            container.innerHTML = ''; // Clear previous contents
 
         const period = '12';
         const analysisType = 'ANALYSIS_CONT_DECLINE_2PCT';
         const requestTypes = ['STOCK_BASICS'];
-        const data = { type: requestTypes, name: stockName, period: period, analysis_type: analysisType };
-        basicInitializer.makeServerRequest('/general_stock_analysis_info', data, (response) => {
+        this.getStockDataFromServer(stockName, period, analysisType, requestTypes, (response) => {
+            // Reset min-height before rendering to calculate the actual content height correctly
+            container.style.minHeight = '0px';
+
+            container.innerHTML = ''; // Clear previous plot only when the new one is ready
             let info = response.STOCK_BASICS;
             const error = response.error;
             if (error && typeof error === 'string' && error.trim() !== "") {
@@ -1230,8 +1261,16 @@ _getFormattedScrollItems(obj, level = 0) {
             const plotDiv = this.createStockPricePlot(analysisResult.data, 'tabContent active', analysisResult.segments, analysisResult.highlightPoints);
             
             container.appendChild(plotDiv);
+
+            // Maintain a constant area based on the actual rendered height to ensure no layout shift during next fetch
+            const actualHeight = container.offsetHeight;
+            if (actualHeight > 0) {
+                container.style.minHeight = actualHeight + 'px';
+            }
+
             resolve();
         }, (error) => {
+            container.innerHTML = '';
             console.error("Failed to load default stock plot:", error);
             resolve();
         });
@@ -1261,8 +1300,7 @@ _getFormattedScrollItems(obj, level = 0) {
             requestTypes.push('STOCK_PEER_COMPARISON');
         }
 
-        const data = { type: requestTypes, name: stockName, period: period, analysis_type: analysisType };
-        basicInitializer.makeServerRequest('/general_stock_analysis_info', data, (response) => {
+        this.getStockDataFromServer(stockName, period, analysisType, requestTypes, (response) => {
             const ticker = response['stock-ticker'];
             let info = response.STOCK_BASICS;
             let events = response.STOCK_EVENTS;
