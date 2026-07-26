@@ -49,6 +49,7 @@ from flask_session import Session
 # from reportlab.pdfgen import canvas
 # from reportlab.lib.pagesizes import letter
 
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 import time
 
@@ -458,8 +459,13 @@ class ScholarKM(Flask):
         require_saving_str = data['require_saving']
         require_saving = False if require_saving_str.lower() == 'false' else True
 
-        youtube_response_list = self.content_creator_obj.generate_youtube_response(section, topic)
-        content_response = self.content_creator_obj.get_content_for_topic(section, topic, require_saving)
+        # Parallelize independent network-bound tasks
+        with ThreadPoolExecutor(max_workers=2) as executor:
+            future_youtube = executor.submit(self.content_creator_obj.generate_youtube_response, section, topic)
+            future_content = executor.submit(self.content_creator_obj.get_content_for_topic, section, topic, require_saving)
+            
+            youtube_response_list = future_youtube.result()
+            content_response = future_content.result()
 
         if require_saving:
             self.content_creator_obj.write_topic_json(section)

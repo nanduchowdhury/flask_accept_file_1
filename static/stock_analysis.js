@@ -16,6 +16,7 @@ class StockAnalysisMain {
         if (!dropdown) return;
 
         const options = [
+            { value: "ANALYSIS_REGULAR", text: "regular analysis" },
             { value: "ANALYSIS_CONT_DECLINE_2PCT", text: "continous decline 2%" },
             { value: "ANALYSIS_CONT_DECLINE_5PCT", text: "continous decline 5%" },
             { value: "ANALYSIS_CONT_RISE_2PCT", text: "continous rise 2%" },
@@ -265,6 +266,7 @@ _getFormattedScrollItems(obj, level = 0) {
         if (!dropdown || !descriptionArea) return;
 
         const descriptions = {
+            "ANALYSIS_REGULAR": "Displays a standard price and volume chart without specific trend highlighting.",
             "ANALYSIS_CONT_DECLINE_2PCT": "Identifies periods where the stock price has fallen by at least 2% without any intermediate rise.",
             "ANALYSIS_CONT_DECLINE_5PCT": "Identifies periods where the stock price has fallen by at least 5% without any intermediate rise.",
             "ANALYSIS_CONT_RISE_2PCT": "Identifies periods where the stock price has risen by at least 2% without any intermediate fall.",
@@ -450,6 +452,10 @@ _getFormattedScrollItems(obj, level = 0) {
         let segments = [];
         let info = {};
         let highlightPoints = [];
+
+        if (selection === "ANALYSIS_REGULAR") {
+            return { segments, infoJson: JSON.stringify(info), data, highlightPoints };
+        }
 
         if (selection === "ANALYSIS_EVENT_TIMELINE") {
             if (Array.isArray(events)) {

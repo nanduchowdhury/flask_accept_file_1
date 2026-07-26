@@ -48,11 +48,11 @@ class FirestoreSemaphore:
                     logger.info("✅ Firestore semaphore-lock Acquired!")
                     return True
                 else:
-                    logger.info("⏳ Firestore semaphore-lock busy, retrying in 5s...")
+                    logger.info("⏳ Firestore semaphore-lock busy, retrying in 1s...")
             except Exception as e:
                 logger.error(f"❌ Firestore semaphore-lock Error: {repr(e)}")
 
-            time.sleep(5)
+            time.sleep(1)
 
     def unlock(self):
         try:
