@@ -269,8 +269,15 @@ class StockDataRetriever:
             if isinstance(df.columns, pd.MultiIndex):
                 df.columns = df.columns.get_level_values(0)
 
+            # Ensure unique columns before to_json(orient='records')
+            # Selection might result in duplicate 'Close' or 'Volume' columns if MultiIndex was flattened.
+            df = df.loc[:, ~df.columns.duplicated()]
+
             df = df[['Close', 'Volume']].reset_index()
             df['Date'] = df['Date'].dt.strftime('%d%b%y')
+
+            # Final safety check: Ensure unique columns before to_json
+            df = df.loc[:, ~df.columns.duplicated()]
 
             # Once data is downloaded and processed, put it in cache
             result = df.to_json(orient='records')

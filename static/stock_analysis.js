@@ -9,6 +9,15 @@ class StockAnalysisMain {
         this.STOCK_EVENT_COLORS = ['blue', 'green', 'red', 'yellow', 'orange', 'purple', 'brown', 'teal'];
 
         this.stockDataCache = new Map();
+
+        this.SELECTED_INDEX_STOCKS = [
+            'nifty 50', 'nifty 100', 'nifty bank', 
+            'nifty auto', 'nifty pharma', 'nifty metal', 'nifty it', 
+            'nifty fmcg', 'nifty realty', 'nifty energy', 'nifty psu bank',
+            'india vix'
+        ];
+
+        this.initMainPagePlotClick();
     }
 
     initAnalysisTypeDropdown() {
@@ -1191,6 +1200,59 @@ _getFormattedScrollItems(obj, level = 0) {
         });
     }
 
+    initMainPagePlotClick() {
+        const container = document.getElementById('main-page-plot-container');
+        if (container) {
+            container.style.cursor = 'pointer';
+            container.addEventListener('click', () => this.handleMainPagePlotClick());
+        }
+    }
+
+    handleMainPagePlotClick() {
+        const period = '80';
+        const analysisType = 'ANALYSIS_CONT_DECLINE_2PCT';
+        const requestTypes = ['STOCK_BASICS'];
+
+        const promises = this.SELECTED_INDEX_STOCKS.map(stockName => 
+            new Promise(resolve => 
+                this.getStockDataFromServer(stockName, period, analysisType, requestTypes, 
+                    res => resolve({ stockName, res }), 
+                    () => resolve(null)
+                )
+            )
+        );
+
+        Promise.all(promises).then(results => {
+            this.popoutMgr.clear();
+            results.forEach(item => {
+                if (item && item.res && item.res.STOCK_BASICS && !item.res.error) {
+                    const { stockName, res } = item;
+                    const info = res.STOCK_BASICS;
+
+                    const title = document.createElement('h3');
+                    title.innerText = stockName.toUpperCase();
+                    title.style.marginLeft = '20px';
+                    title.style.marginTop = '25px';
+                    title.style.color = '#007bff';
+                    title.style.fontFamily = 'Arial';
+                    this.popoutMgr.appendItem(title);
+
+                    const priceData = JSON.parse(info);
+                    const analysisResult = this.computeAnalysisSegments(priceData);
+                    const plotDiv = this.createStockPricePlot(analysisResult.data, 'tabContent active', analysisResult.segments, analysisResult.highlightPoints);
+                    this.popoutMgr.appendItem(plotDiv);
+
+                    const variousReturns = this.getVariousReturn(info);
+                    const returnsTab = this.createTabContent(variousReturns, 'tabContent active', true, []);
+                    returnsTab.style.marginLeft = '20px';
+                    this.popoutMgr.appendItem(returnsTab);
+                }
+            });
+            this.appendDisclaimer();
+            this.popoutMgr.showPopout();
+        });
+    }
+
     /**
      * Starts a continuous carousel animation of major stock indices.
      * Fades the plot in, waits, fades out, and switches to the next stock.
@@ -1198,13 +1260,6 @@ _getFormattedScrollItems(obj, level = 0) {
     async animateMainPagePlot() {
         const container = document.getElementById('default-stock-plot-container');
         if (!container) return;
-
-        const stocks = [
-            'nifty 50', 'nifty 100', 'nifty bank', 
-            'nifty auto', 'nifty pharma', 'nifty metal', 'nifty it', 
-            'nifty fmcg', 'nifty realty', 'nifty energy', 'nifty psu bank',
-            'india vix'
-        ];
         // Reserve space to prevent layout shifts before the first plot loads.
         // We use a more conservative value for the initial load.
         container.style.minHeight = '300px';
@@ -1212,7 +1267,7 @@ _getFormattedScrollItems(obj, level = 0) {
         let index = 0;
 
         const runCycle = async () => {
-            const stockName = stocks[index];
+            const stockName = this.SELECTED_INDEX_STOCKS[index];
             
             // Render the plot and wait for data to load
             await this.renderDefaultStockPlot(container, stockName);
@@ -1230,7 +1285,7 @@ _getFormattedScrollItems(obj, level = 0) {
             // Wait for transition to finish (1.5s) before starting next
             await new Promise(resolve => setTimeout(resolve, 1500));
 
-            index = (index + 1) % stocks.length;
+            index = (index + 1) % this.SELECTED_INDEX_STOCKS.length;
             runCycle();
         };
 
