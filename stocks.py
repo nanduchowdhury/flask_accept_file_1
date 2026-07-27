@@ -33,6 +33,9 @@ class StockDataRetriever:
     industry_index = defaultdict(list)
     sector_index = defaultdict(list)
     
+    # Class-level cache for downloaded stock data
+    stock_data_cache = {}
+
     # Create ctor
     def __init__(self):
         
@@ -180,11 +183,39 @@ class StockDataRetriever:
 
     def getTicker(self, name):
         """
-        Searches for Indian stock ticker symbols based on the provided name.
+        Searches for a ticker. First checks the local master database for an exact 
+        match on name or symbol. If not found, falls back to Yahoo Finance search.
+        """
+        search_query = name.strip().lower()
+        if " - " in name:
+            search_query = name.split(" - ")[-1].strip().lower()
+
+        # Check local database first
+        db_tickers = []
+        for ticker, company in self.stock_db.items():
+            # Check key (ticker)
+            if ticker.lower() == search_query:
+                db_tickers.append(ticker)
+                continue
+            
+            # Check company names
+            if (company.get("company_name") or "").strip().lower() == search_query:
+                db_tickers.append(ticker)
+            elif (company.get("short_name") or "").strip().lower() == search_query:
+                db_tickers.append(ticker)
+
+        if db_tickers:
+            return list(set(db_tickers))
+
+        # Fallback to Yahoo Finance
+        return self._getTickerYf(name)
+
+    def _getTickerYf(self, name):
+        """
+        Searches for Indian stock ticker symbols based on the provided name using Yahoo Finance.
         Filters results to include only National Stock Exchange (.NS) 
         and Bombay Stock Exchange (.BO) tickers.
         """
-        # Extract the ticker symbol if the name is provided in "Company - SYMBOL" format
         search_query = name
         if " - " in name:
             search_query = name.split(" - ")[-1].strip()
@@ -216,6 +247,11 @@ class StockDataRetriever:
 
     def getData(self, ticker, months="12"):
         try:
+            # Check first if data already in cache
+            cache_key = f"{ticker}_{months}"
+            if cache_key in self.stock_data_cache:
+                return self.stock_data_cache[cache_key]
+
             period = f"{months}mo"
 
             df = yf.download(
@@ -236,7 +272,10 @@ class StockDataRetriever:
             df = df[['Close', 'Volume']].reset_index()
             df['Date'] = df['Date'].dt.strftime('%d%b%y')
 
-            return df.to_json(orient='records')
+            # Once data is downloaded and processed, put it in cache
+            result = df.to_json(orient='records')
+            self.stock_data_cache[cache_key] = result
+            return result
 
         except Exception as e:
             return json.dumps({"error": str(e)})

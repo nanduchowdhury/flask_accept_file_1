@@ -895,7 +895,7 @@ _getFormattedScrollItems(obj, level = 0) {
                     continue;
                 }
                 let key_temp = this._remove_underscore(key);
-                html += `<div>${tab}<strong style="color: blue;">${key_temp}</strong>: `;
+            html += `<div>${tab}<span style="display: inline-block; min-width: 150px;"><strong style="color: blue;">${key_temp}</strong></span>&nbsp;&nbsp;:&nbsp;&nbsp;`;
 
                 if (Array.isArray(value)) {
                     if (value.length === 0) {
@@ -1199,7 +1199,12 @@ _getFormattedScrollItems(obj, level = 0) {
         const container = document.getElementById('default-stock-plot-container');
         if (!container) return;
 
-        const stocks = ['INFY', 'WIPRO'];
+        const stocks = [
+            'nifty 50', 'nifty 100', 'nifty bank', 
+            'nifty auto', 'nifty pharma', 'nifty metal', 'nifty it', 
+            'nifty fmcg', 'nifty realty', 'nifty energy', 'nifty psu bank',
+            'india vix'
+        ];
         // Reserve space to prevent layout shifts before the first plot loads.
         // We use a more conservative value for the initial load.
         container.style.minHeight = '300px';
@@ -1209,10 +1214,6 @@ _getFormattedScrollItems(obj, level = 0) {
         const runCycle = async () => {
             const stockName = stocks[index];
             
-            // Update label text to reflect the current stock being analyzed
-            const label = document.querySelector('.main-page-plot-label');
-            if (label) label.textContent = `Market Pulse: ${stockName}`;
-
             // Render the plot and wait for data to load
             await this.renderDefaultStockPlot(container, stockName);
 
@@ -1240,7 +1241,7 @@ _getFormattedScrollItems(obj, level = 0) {
         return new Promise((resolve) => {
             if (!container) return resolve();
 
-        const period = '12';
+        const period = '80'; // 80 months.
         const analysisType = 'ANALYSIS_CONT_DECLINE_2PCT';
         const requestTypes = ['STOCK_BASICS'];
         this.getStockDataFromServer(stockName, period, analysisType, requestTypes, (response) => {
@@ -1267,6 +1268,30 @@ _getFormattedScrollItems(obj, level = 0) {
             const plotDiv = this.createStockPricePlot(analysisResult.data, 'tabContent active', analysisResult.segments, analysisResult.highlightPoints);
             
             container.appendChild(plotDiv);
+
+            // Update the main page plot label with stock name and returns
+            const label = document.querySelector('.main-page-plot-label');
+            if (label) {
+                const variousReturnsJson = this.getVariousReturn(result1);
+                const variousReturnsObj = JSON.parse(variousReturnsJson);
+                let returnsStr = "";
+                if (variousReturnsObj.various_returns) {
+                    const formattedReturns = variousReturnsObj.various_returns.map(ret => {
+                        // Highlight negative returns in red and non-negative in green
+                        const color = this.hasNegativeValue(ret) ? 'red' : 'green';
+                        return `<span style="color: ${color};">${ret}</span>`;
+                    });
+
+                    // Determine chunk size based on screen width (mobile: 2, desktop: 4)
+                    const chunkSize = window.innerWidth <= 768 ? 2 : 4;
+                    let chunks = [];
+                    for (let i = 0; i < formattedReturns.length; i += chunkSize) {
+                        chunks.push(formattedReturns.slice(i, i + chunkSize).join(' | '));
+                    }
+                    returnsStr = chunks.join('<br>');
+                }
+                label.innerHTML = `Market Pulse : ${stockName}<br><span style="font-size: 11px; font-weight: normal; margin-left: 10px;">[${returnsStr}]</span>`;
+            }
 
             // Maintain a constant area based on the actual rendered height to ensure no layout shift during next fetch
             const actualHeight = container.offsetHeight;
@@ -1356,7 +1381,18 @@ _getFormattedScrollItems(obj, level = 0) {
             let tabContentDiv_2 = this.createTabContent(insights_xml, 'tabContent active', true, []);
             this.popoutMgr.appendItem(tabContentDiv_2);
 
-            if (analysisType === 'ANALYSIS_WEEKLY_AVG_RETURN') {
+            if (analysisType === 'ANALYSIS_REGULAR') {
+                const returnsHeader = document.createElement('h3');
+                returnsHeader.innerText = "Performance Returns";
+                returnsHeader.style.marginLeft = '20px';
+                returnsHeader.style.fontFamily = 'Arial';
+                this.popoutMgr.appendItem(returnsHeader);
+
+                let variousReturns = this.getVariousReturn(result1);
+                let returnsTab = this.createTabContent(variousReturns, 'tabContent active', true, []);
+                this.popoutMgr.appendItem(returnsTab);
+
+            } else if (analysisType === 'ANALYSIS_WEEKLY_AVG_RETURN') {
                 const insightsHeader = document.createElement('h3');
                 insightsHeader.innerText = "Stock Advance Insights";
                 insightsHeader.style.marginLeft = '20px';
@@ -1545,6 +1581,68 @@ _getFormattedScrollItems(obj, level = 0) {
             avg_return_every_week: avg_every_week
         };
         return JSON.stringify(insights);
+    }
+
+    getVariousReturn(result1) {
+        let data;
+        try {
+            data = JSON.parse(result1);
+        } catch (e) {
+            return JSON.stringify({ error: "Invalid data format" });
+        }
+
+        if (!Array.isArray(data) || data.length === 0) return JSON.stringify({ info: "No data available" });
+
+        // Normalize data and filter out invalid entries
+        const items = data.map(d => ({
+            price: parseFloat(d.Close || d.stock_price || 0),
+            date: d.Date || d.date_time || ""
+        })).filter(d => !isNaN(d.price) && d.date !== "");
+
+        if (items.length === 0) return JSON.stringify({ info: "Insufficient data" });
+
+        const latestPrice = items[items.length - 1].price;
+        const latestDateObj = this._parseStockDate(items[items.length - 1].date);
+        const latestTime = latestDateObj.getTime();
+
+        const intervals = [
+            { label: "1 week return", days: 7 },
+            { label: "2 week return", days: 14 },
+            { label: "3 week return", days: 21 },
+            { label: "1 month return", days: 30 },
+            { label: "2 months return", days: 60 },
+            { label: "1 qtr return", days: 91 },
+            { label: "2 qtr return", days: 182 },
+            { label: "3 qtr return", days: 273 },
+            { label: "1 year return", days: 365 },
+            { label: "2 years return", days: 730 },
+            { label: "3 years return", days: 1095 },
+            { label: "4 years return", days: 1460 },
+            { label: "5 years return", days: 1825 },
+            { label: "6 years return", days: 2190 }
+        ];
+
+        const returns = [];
+        intervals.forEach(interval => {
+            const targetTime = latestTime - (interval.days * 24 * 60 * 60 * 1000);
+            let match = null;
+
+            // Search backwards from the end for the data point closest to targetTime
+            for (let i = items.length - 2; i >= 0; i--) {
+                const itemDateObj = this._parseStockDate(items[i].date);
+                if (itemDateObj.getTime() <= targetTime) {
+                    match = items[i];
+                    break;
+                }
+            }
+
+            if (match) {
+                const pct = ((latestPrice - match.price) / match.price) * 100;
+                returns.push(`${interval.label}     ${pct.toFixed(2)}%`);
+            }
+        });
+
+        return JSON.stringify({ various_returns: returns });
     }
 
     _parseStockDate(dateStr) {
