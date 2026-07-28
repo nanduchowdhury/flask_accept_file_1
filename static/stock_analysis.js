@@ -17,6 +17,8 @@ class StockAnalysisMain {
             'india vix'
         ];
 
+        this.MAIN_PAGE_STOCK_DEFAULT_TIME_PERIOD = '36';
+
         this.initMainPagePlotClick();
     }
 
@@ -992,6 +994,16 @@ _getFormattedScrollItems(obj, level = 0) {
 
     _generateTableHtml(value, level, negativeValuesInRed, colors) {
         let html = `<table style="border-collapse: collapse; width: auto; margin-left: ${level * 20}px; border: 1px solid blue;">`;
+        
+        // Add header if the array contains objects
+        if (value.length > 0 && typeof value[0] === 'object' && value[0] !== null) {
+            html += `<tr style="background-color: #eee; font-weight: bold; border-bottom: 2px solid blue;">`;
+            Object.keys(value[0]).forEach(key => {
+                html += `<td style="padding: 8px; border-right: 1px solid blue;">${this._remove_underscore(key)}</td>`;
+            });
+            html += `</tr>`;
+        }
+
         value.forEach((item, index) => {
             const bgColor = index % 2 === 0 ? 'white' : 'lightblue';
             const isNegative = this.hasNegativeValue(item);
@@ -1003,12 +1015,12 @@ _getFormattedScrollItems(obj, level = 0) {
             
             html += `<tr style="border-bottom: 1px solid blue; background-color: ${bgColor}; color: ${textColor};">`;
             if (typeof item === 'object' && item !== null) {
-                html += `<td style="padding: 8px; border-right: 1px solid blue;">`;
                 for (const [subKey, subVal] of Object.entries(item)) {
-                    let subKey_temp = this._remove_underscore(subKey);
-                    html += `<strong>${subKey_temp}</strong>: ${subVal} `;
+                    // Right align if it's a number or percentage string
+                    const isNumeric = /^-?[\d,.]+%?$/.test(subVal.toString());
+                    const align = isNumeric ? 'text-align: right;' : 'text-align: left;';
+                    html += `<td style="padding: 8px; border-right: 1px solid blue; ${align}">${subVal}</td>`;
                 }
-                html += `</td>`;
             } else {
                 html += `<td style="padding: 8px; border-right: 1px solid blue;">${item}</td>`;
             }
@@ -1209,7 +1221,7 @@ _getFormattedScrollItems(obj, level = 0) {
     }
 
     handleMainPagePlotClick() {
-        const period = '80';
+        const period = this.MAIN_PAGE_STOCK_DEFAULT_TIME_PERIOD;
         const analysisType = 'ANALYSIS_CONT_DECLINE_2PCT';
         const requestTypes = ['STOCK_BASICS'];
 
@@ -1296,7 +1308,7 @@ _getFormattedScrollItems(obj, level = 0) {
         return new Promise((resolve) => {
             if (!container) return resolve();
 
-        const period = '80'; // 80 months.
+        const period = this.MAIN_PAGE_STOCK_DEFAULT_TIME_PERIOD;
         const analysisType = 'ANALYSIS_CONT_DECLINE_2PCT';
         const requestTypes = ['STOCK_BASICS'];
         this.getStockDataFromServer(stockName, period, analysisType, requestTypes, (response) => {
@@ -1334,7 +1346,11 @@ _getFormattedScrollItems(obj, level = 0) {
                     const formattedReturns = variousReturnsObj.various_returns.map(ret => {
                         // Highlight negative returns in red and non-negative in green
                         const color = this.hasNegativeValue(ret) ? 'red' : 'green';
-                        return `<span style="color: ${color};">${ret}</span>`;
+                        let displayVal = ret;
+                        if (typeof ret === 'object' && ret !== null) {
+                            displayVal = Object.values(ret).join(': ');
+                        }
+                        return `<span style="color: ${color};">${displayVal}</span>`;
                     });
 
                     // Determine chunk size based on screen width (mobile: 2, desktop: 4)
@@ -1574,16 +1590,16 @@ _getFormattedScrollItems(obj, level = 0) {
             distance_from_200dma: getDMA(200),
             
             continuous_fall_counts: [
-                `2%     ${countSegments(-2)}`,
-                `5%     ${countSegments(-5)}`,
-                `7%     ${countSegments(-7)}`,
-                `10%    ${countSegments(-10)}`
+                { "Threshold": "2%", "Count": countSegments(-2) },
+                { "Threshold": "5%", "Count": countSegments(-5) },
+                { "Threshold": "7%", "Count": countSegments(-7) },
+                { "Threshold": "10%", "Count": countSegments(-10) }
             ],
             continuous_rise_counts: [
-                `2%     ${countSegments(2)}`,
-                `5%     ${countSegments(5)}`,
-                `7%     ${countSegments(7)}`,
-                `10%    ${countSegments(10)}`
+                { "Threshold": "2%", "Count": countSegments(2) },
+                { "Threshold": "5%", "Count": countSegments(5) },
+                { "Threshold": "7%", "Count": countSegments(7) },
+                { "Threshold": "10%", "Count": countSegments(10) }
             ]
         };
 
@@ -1630,7 +1646,7 @@ _getFormattedScrollItems(obj, level = 0) {
             // Convert YYYY-MM-DD back to Date object for formatting
             const [y, m, dayPart] = sortedWeeks[i].split('-').map(Number);
             const formattedDate = this._formatStockDate(new Date(y, m - 1, dayPart));
-            avg_every_week.push(`${formattedDate}     ${pct.toFixed(2)}%`);
+            avg_every_week.push({ "Week": formattedDate, "Return": pct.toFixed(2) + '%' });
         }
         const insights = {
             avg_return_every_week: avg_every_week
@@ -1693,7 +1709,7 @@ _getFormattedScrollItems(obj, level = 0) {
 
             if (match) {
                 const pct = ((latestPrice - match.price) / match.price) * 100;
-                returns.push(`${interval.label}     ${pct.toFixed(2)}%`);
+                returns.push({ "Interval": interval.label, "Return": pct.toFixed(2) + '%' });
             }
         });
 
