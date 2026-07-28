@@ -302,7 +302,24 @@
 }
 
 
+#main-page-plot-container {
+    text-align: center;
+    margin: 20px;
+    padding: 10px;
+    border: 1px groove gray;
+    border-radius: 10px;
+    background-color: #fff;
+    box-sizing: border-box;
+}
 
+/* Desktop constraints to prevent excessive width */
+@media (min-width: 768px) {
+    #main-page-plot-container {
+        max-width: 850px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
 
 
 /* Desktop layout */
@@ -502,6 +519,48 @@
     font-weight: bold;
     color: #333; /* Default color */
     animation: banner-scroll 40s linear infinite;
+}
+
+/* Assistant Pointer Tooltip/Label */
+.assistant-pointer {
+    background-color: #28a745;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin-left: 10px;
+    transform: translateY(-50%);
+    z-index: 100;
+    white-space: nowrap;
+    pointer-events: none; /* Ensure it doesn't block clicks to the dropdown */
+    animation: assistantPress 1s infinite alternate ease-in-out;
+    animation-delay: 1s;
+}
+
+.assistant-pointer::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -6px; /* Position on the left edge of the label */
+    transform: translateY(-50%);
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-right: 6px solid #28a745; /* Triangle pointing left */
+}
+
+@keyframes assistantPress {
+    0% { /* Pressed state */
+        transform: translate(-2px, -50%); /* Subtle pulse towards the dropdown */
+        box-shadow: none;
+    }
+    100% { /* Unpressed state */
+        transform: translate(0, -50%);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
 }
 
 .banner-separator {

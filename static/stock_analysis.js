@@ -13,13 +13,24 @@ class StockAnalysisMain {
         this.SELECTED_INDEX_STOCKS = [
             'nifty 50', 'nifty 100', 'nifty bank', 
             'nifty auto', 'nifty pharma', 'nifty metal', 'nifty it', 
-            'nifty fmcg', 'nifty realty', 'nifty energy', 'nifty psu bank',
+            'nifty fmcg', 'nifty realty', 'nifty energy',
             'india vix'
         ];
 
         this.MAIN_PAGE_STOCK_DEFAULT_TIME_PERIOD = '36';
 
         this.initMainPagePlotClick();
+        this.hideAssistantPointer();
+    }
+
+    /**
+     * Makes the assistant-pointer disappear after 2 minutes.
+     */
+    hideAssistantPointer() {
+        setTimeout(() => {
+            const pointer = document.querySelector('.assistant-pointer');
+            if (pointer) pointer.style.display = 'none';
+        }, 120000);
     }
 
     initAnalysisTypeDropdown() {
@@ -667,149 +678,16 @@ _getFormattedScrollItems(obj, level = 0) {
                 ctx.fillStyle = '#fcfcfc';
                 ctx.fillRect(padding.left, padding.top, chartWidth, chartHeight);
 
-                // Draw Volume Bars in the background
-                const maxVol = Math.max(...data.map(d => parseFloat(d.volume || 0)));
-                if (maxVol > 0) {
-                    const volAlpha = 0.4;
-                    const barWidth = Math.max(1, (chartWidth / data.length) * 0.8);
-                    for (let i = 0; i < data.length; i++) {
-                        const vol = parseFloat(data[i].volume || 0);
-                        const vHeight = (vol / maxVol) * (chartHeight * 0.35); // Limit height to 35% of chart
-                        const x = data.length > 1 ? padding.left + (i / (data.length - 1)) * chartWidth : padding.left + chartWidth / 2;
-                        const price = parseFloat(data[i].stock_price);
-                        const prevPrice = i > 0 ? parseFloat(data[i - 1].stock_price) : price;
-                        ctx.fillStyle = price >= prevPrice ? `rgba(40, 167, 69, ${volAlpha})` : `rgba(220, 53, 69, ${volAlpha})`;
-                        ctx.fillRect(x - barWidth / 2, padding.top + chartHeight - vHeight, barWidth, vHeight);
-                    }
-                }
-
-                // Y-axis grid & labels
-                ctx.strokeStyle = '#e0e0e0';
-                ctx.lineWidth = 1;
-                ctx.fillStyle = '#333';
-                ctx.font = 'bold 12px Arial';
-                ctx.textAlign = 'right';
-                const yTicks = 6;
-                for (let i = 0; i < yTicks; i++) {
-                    const y = padding.top + chartHeight - (i / (yTicks - 1)) * chartHeight;
-                    const price = minPrice + (i / (yTicks - 1)) * priceRange;
-                    ctx.beginPath();
-                    ctx.moveTo(padding.left, y);
-                    ctx.lineTo(padding.left + chartWidth, y);
-                    ctx.stroke();
-                    ctx.fillText(price.toFixed(2), padding.left - 10, y + 4);
-                }
-
+                this._drawVolumeBars(ctx, data, padding, chartWidth, chartHeight);
+                this._drawYAxis(ctx, padding, chartWidth, chartHeight, minPrice, priceRange);
                 // Area fill under the curve
                 this._drawAreaFill(ctx, data, padding, chartWidth, chartHeight, minPrice, priceRange, analysisSegments, negFillColor, posFillColor);
-
-                // Plot line
-                const baseLineWidth = 2;
-                ctx.lineWidth = baseLineWidth;
-                ctx.lineJoin = 'round';
-                for (let i = 1; i < data.length; i++) {
-                    const prev = data[i - 1];
-                    const curr = data[i];
-                    const x1 = data.length > 1 ? padding.left + ((i - 1) / (data.length - 1)) * chartWidth : padding.left + chartWidth / 2;
-                    const y1 = padding.top + chartHeight - ((parseFloat(prev.stock_price) - minPrice) / priceRange) * chartHeight;
-                    const x2 = data.length > 1 ? padding.left + (i / (data.length - 1)) * chartWidth : padding.left + chartWidth / 2;
-                    const y2 = padding.top + chartHeight - ((parseFloat(curr.stock_price) - minPrice) / priceRange) * chartHeight;
-                    const segmentMatch = (analysisSegments || []).find(seg => i > seg.start && i <= seg.end);
-                    ctx.beginPath();
-                    ctx.moveTo(x1, y1);
-                    ctx.lineTo(x2, y2);
-                    ctx.lineWidth = segmentMatch ? baseLineWidth + 1 : baseLineWidth;
-                    ctx.strokeStyle = segmentMatch ? segmentMatch.color : 'black';
-                    ctx.stroke();
-                }
-
-                // X-axis labels (Dates)
-                ctx.fillStyle = '#333';
-                ctx.textAlign = 'left';
-                const xLabelsCount = Math.min(dates.length, 5);
-                for (let i = 0; i < xLabelsCount; i++) {
-                    const idx = xLabelsCount > 1 ? Math.floor(i * (dates.length - 1) / (xLabelsCount - 1)) : 0;
-                    const x = dates.length > 1 ? padding.left + (idx / (dates.length - 1)) * chartWidth : padding.left + chartWidth / 2;
-                    ctx.save();
-                    ctx.translate(x, padding.top + chartHeight + 15);
-                    ctx.rotate(Math.PI / 6);
-                    ctx.fillText(dates[idx] || '', 0, 0);
-                    ctx.restore();
-                }
-
+                this._drawPlotLine(ctx, data, padding, chartWidth, chartHeight, minPrice, priceRange, analysisSegments);
+                this._drawXAxis(ctx, dates, padding, chartWidth, chartHeight);
                 this._highlightPointsOnPlot(ctx, data, padding, chartWidth, chartHeight, minPrice, priceRange, highlightPointsOnPlot);
-
-                // Dotted crosshairs and Tooltip
-                if (hoverIdx >= 0 && hoverIdx < data.length) {
-                    const item = data[hoverIdx];
-                    const x = data.length > 1 ? padding.left + (hoverIdx / (data.length - 1)) * chartWidth : padding.left + chartWidth / 2;
-                    const y = padding.top + chartHeight - ((parseFloat(item.stock_price) - minPrice) / priceRange) * chartHeight;
-
-                    // Dotted lines
-                    ctx.setLineDash([5, 5]);
-                    ctx.strokeStyle = '#999';
-                    ctx.lineWidth = 1;
-                    ctx.beginPath();
-                    ctx.moveTo(x, padding.top);
-                    ctx.lineTo(x, padding.top + chartHeight);
-                    ctx.stroke();
-                    ctx.beginPath();
-                    ctx.moveTo(padding.left, y);
-                    ctx.lineTo(padding.left + chartWidth, y);
-                    ctx.stroke();
-                    ctx.setLineDash([]);
-
-                    // Tooltip
-                    const tipLines = [
-                        `Date: ${item.date_time}`,
-                        `Price: ${parseFloat(item.stock_price).toFixed(2)}`,
-                        `Vol: ${item.volume || '0'}`
-                    ];
-                    ctx.font = 'bold 11px Arial';
-                    let maxLineW = 0;
-                    tipLines.forEach(l => maxLineW = Math.max(maxLineW, ctx.measureText(l).width));
-                    
-                    const tipW = maxLineW + 10;
-                    const tipH = 45;
-                    let tipX = x + 10;
-                    if (tipX + tipW > canvas.width) tipX = x - tipW - 10;
-                    let tipY = y - tipH - 10;
-                    if (tipY < 0) tipY = y + 10;
-
-                    ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-                    ctx.fillRect(tipX, tipY, tipW, tipH);
-                    ctx.fillStyle = '#fff';
-                    ctx.textAlign = 'left';
-                    tipLines.forEach((l, i) => {
-                        ctx.fillText(l, tipX + 5, tipY + 12 + (i * 13));
-                    });
-                }
+                this._drawCrosshairsAndTooltip(ctx, data, hoverIdx, padding, chartWidth, chartHeight, minPrice, priceRange, canvas.width);
             };
-
-            const handleInteraction = (e) => {
-                const rect = canvas.getBoundingClientRect();
-                let clientX;
-                if (e.type.startsWith('touch')) {
-                    if (e.touches.length === 0) return;
-                    clientX = e.touches[0].clientX;
-                } else {
-                    clientX = e.clientX;
-                }
-                const x = (clientX - rect.left) * (canvas.width / rect.width);
-                
-                if (x >= padding.left && x <= padding.left + chartWidth) {
-                    const idx = Math.round(((x - padding.left) / chartWidth) * (data.length - 1));
-                    render(idx);
-                } else {
-                    render(-1);
-                }
-            };
-
-            canvas.addEventListener('mousemove', handleInteraction);
-            canvas.addEventListener('mouseleave', () => render(-1));
-            canvas.addEventListener('touchstart', handleInteraction, { passive: true });
-            canvas.addEventListener('touchmove', handleInteraction, { passive: true });
-            canvas.addEventListener('touchend', () => render(-1));
+            this._setupPlotInteractions(canvas, data, padding, chartWidth, render);
 
             render(); // Initial draw
 
@@ -818,6 +696,151 @@ _getFormattedScrollItems(obj, level = 0) {
         }
 
         return tabContentDiv;
+    }
+
+    _drawVolumeBars(ctx, data, padding, chartWidth, chartHeight) {
+        const maxVol = Math.max(...data.map(d => parseFloat(d.volume || 0)));
+        if (maxVol > 0) {
+            const volAlpha = 0.4;
+            const barWidth = Math.max(1, (chartWidth / data.length) * 0.8);
+            for (let i = 0; i < data.length; i++) {
+                const vol = parseFloat(data[i].volume || 0);
+                const vHeight = (vol / maxVol) * (chartHeight * 0.35); // Limit height to 35% of chart
+                const x = data.length > 1 ? padding.left + (i / (data.length - 1)) * chartWidth : padding.left + chartWidth / 2;
+                const price = parseFloat(data[i].stock_price);
+                const prevPrice = i > 0 ? parseFloat(data[i - 1].stock_price) : price;
+                ctx.fillStyle = price >= prevPrice ? `rgba(40, 167, 69, ${volAlpha})` : `rgba(220, 53, 69, ${volAlpha})`;
+                ctx.fillRect(x - barWidth / 2, padding.top + chartHeight - vHeight, barWidth, vHeight);
+            }
+        }
+    }
+
+    _drawYAxis(ctx, padding, chartWidth, chartHeight, minPrice, priceRange) {
+        ctx.strokeStyle = '#e0e0e0';
+        ctx.lineWidth = 1;
+        ctx.fillStyle = '#333';
+        ctx.font = 'bold 12px Arial';
+        ctx.textAlign = 'right';
+        const yTicks = 6;
+        for (let i = 0; i < yTicks; i++) {
+            const y = padding.top + chartHeight - (i / (yTicks - 1)) * chartHeight;
+            const price = minPrice + (i / (yTicks - 1)) * priceRange;
+            ctx.beginPath();
+            ctx.moveTo(padding.left, y);
+            ctx.lineTo(padding.left + chartWidth, y);
+            ctx.stroke();
+            ctx.fillText(price.toFixed(2), padding.left - 10, y + 4);
+        }
+    }
+
+    _drawXAxis(ctx, dates, padding, chartWidth, chartHeight) {
+        ctx.fillStyle = '#333';
+        ctx.textAlign = 'left';
+        const xLabelsCount = Math.min(dates.length, 5);
+        for (let i = 0; i < xLabelsCount; i++) {
+            const idx = xLabelsCount > 1 ? Math.floor(i * (dates.length - 1) / (xLabelsCount - 1)) : 0;
+            const x = dates.length > 1 ? padding.left + (idx / (dates.length - 1)) * chartWidth : padding.left + chartWidth / 2;
+            ctx.save();
+            ctx.translate(x, padding.top + chartHeight + 15);
+            ctx.rotate(Math.PI / 6);
+            ctx.fillText(dates[idx] || '', 0, 0);
+            ctx.restore();
+        }
+    }
+
+    _drawPlotLine(ctx, data, padding, chartWidth, chartHeight, minPrice, priceRange, analysisSegments) {
+        const baseLineWidth = 2;
+        ctx.lineWidth = baseLineWidth;
+        ctx.lineJoin = 'round';
+        for (let i = 1; i < data.length; i++) {
+            const prev = data[i - 1];
+            const curr = data[i];
+            const x1 = data.length > 1 ? padding.left + ((i - 1) / (data.length - 1)) * chartWidth : padding.left + chartWidth / 2;
+            const y1 = padding.top + chartHeight - ((parseFloat(prev.stock_price) - minPrice) / priceRange) * chartHeight;
+            const x2 = data.length > 1 ? padding.left + (i / (data.length - 1)) * chartWidth : padding.left + chartWidth / 2;
+            const y2 = padding.top + chartHeight - ((parseFloat(curr.stock_price) - minPrice) / priceRange) * chartHeight;
+            const segmentMatch = (analysisSegments || []).find(seg => i > seg.start && i <= seg.end);
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.lineWidth = segmentMatch ? baseLineWidth + 1 : baseLineWidth;
+            ctx.strokeStyle = segmentMatch ? segmentMatch.color : 'black';
+            ctx.stroke();
+        }
+    }
+
+    _drawCrosshairsAndTooltip(ctx, data, hoverIdx, padding, chartWidth, chartHeight, minPrice, priceRange, canvasWidth) {
+        if (hoverIdx >= 0 && hoverIdx < data.length) {
+            const item = data[hoverIdx];
+            const x = data.length > 1 ? padding.left + (hoverIdx / (data.length - 1)) * chartWidth : padding.left + chartWidth / 2;
+            const y = padding.top + chartHeight - ((parseFloat(item.stock_price) - minPrice) / priceRange) * chartHeight;
+
+            // Dotted lines
+            ctx.setLineDash([5, 5]);
+            ctx.strokeStyle = '#999';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(x, padding.top);
+            ctx.lineTo(x, padding.top + chartHeight);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(padding.left, y);
+            ctx.lineTo(padding.left + chartWidth, y);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Tooltip
+            const tipLines = [
+                `Date: ${item.date_time}`,
+                `Price: ${parseFloat(item.stock_price).toFixed(2)}`,
+                `Vol: ${item.volume || '0'}`
+            ];
+            ctx.font = 'bold 11px Arial';
+            let maxLineW = 0;
+            tipLines.forEach(l => maxLineW = Math.max(maxLineW, ctx.measureText(l).width));
+            
+            const tipW = maxLineW + 10;
+            const tipH = 45;
+            let tipX = x + 10;
+            if (tipX + tipW > canvasWidth) tipX = x - tipW - 10;
+            let tipY = y - tipH - 10;
+            if (tipY < 0) tipY = y + 10;
+
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+            ctx.fillRect(tipX, tipY, tipW, tipH);
+            ctx.fillStyle = '#fff';
+            ctx.textAlign = 'left';
+            tipLines.forEach((l, i) => {
+                ctx.fillText(l, tipX + 5, tipY + 12 + (i * 13));
+            });
+        }
+    }
+
+    _setupPlotInteractions(canvas, data, padding, chartWidth, render) {
+        const handleInteraction = (e) => {
+            const rect = canvas.getBoundingClientRect();
+            let clientX;
+            if (e.type.startsWith('touch')) {
+                if (e.touches.length === 0) return;
+                clientX = e.touches[0].clientX;
+            } else {
+                clientX = e.clientX;
+            }
+            const x = (clientX - rect.left) * (canvas.width / rect.width);
+            
+            if (x >= padding.left && x <= padding.left + chartWidth) {
+                const idx = Math.round(((x - padding.left) / chartWidth) * (data.length - 1));
+                render(idx);
+            } else {
+                render(-1);
+            }
+        };
+
+        canvas.addEventListener('mousemove', handleInteraction);
+        canvas.addEventListener('mouseleave', () => render(-1));
+        canvas.addEventListener('touchstart', handleInteraction, { passive: true });
+        canvas.addEventListener('touchmove', handleInteraction, { passive: true });
+        canvas.addEventListener('touchend', () => render(-1));
     }
 
     _drawAreaFill(ctx, data, padding, chartWidth, chartHeight, minPrice, priceRange, analysisSegments, negFillColor, posFillColor) {
@@ -1309,7 +1332,7 @@ _getFormattedScrollItems(obj, level = 0) {
             if (!container) return resolve();
 
         const period = this.MAIN_PAGE_STOCK_DEFAULT_TIME_PERIOD;
-        const analysisType = 'ANALYSIS_CONT_DECLINE_2PCT';
+        const analysisType = 'ANALYSIS_REGULAR';
         const requestTypes = ['STOCK_BASICS'];
         this.getStockDataFromServer(stockName, period, analysisType, requestTypes, (response) => {
             // Reset min-height before rendering to calculate the actual content height correctly
