@@ -388,6 +388,8 @@ class ScholarKM(Flask):
             
             expanded_ticker_name = ""
             stock_basics_info = ""
+            stock_summary_info = {}
+            stock_financials_info = {}
             stock_events_info = []
             stock_peers_info = {}
             error = ""
@@ -409,6 +411,13 @@ class ScholarKM(Flask):
                         except Exception:
                             pass
                     
+                    if a_type == 'STOCK_SUMMARY':
+                        stock_summary_info = self.retriever.getSummaryStats(stock_ticker)
+                    
+                    if a_type == 'STOCK_FINANCIALS':
+                        stock_financials_info = self.retriever.getFinancials(stock_ticker)
+                    
+
                     if a_type == 'STOCK_EVENTS':
                         events = self.retriever.getEvents(stock_ticker, months)
                         if isinstance(events, dict) and "error" in events:
@@ -436,6 +445,8 @@ class ScholarKM(Flask):
             return jsonify({
                 "stock-ticker": expanded_ticker_name,
                 "STOCK_BASICS": stock_basics_info,
+                "STOCK_SUMMARY": stock_summary_info,
+                "STOCK_FINANCIALS": stock_financials_info,
                 "STOCK_EVENTS": stock_events_info,
                 "STOCK_PEER_COMPARISON": stock_peers_info,
                 "error": error

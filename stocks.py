@@ -42,6 +42,42 @@ class StockDataRetriever:
         self.stock_db = self.load_json("stock_db_builder/output/stocks_master.json")
         self.buildPeerDatabase()
 
+    def _format_number(self, num):
+        """
+        Formats large numbers into K, L, Cr units and rounds floats to 2 decimal places.
+        """
+        if not isinstance(num, (int, float)) or pd.isna(num):
+            return num
+
+        abs_num = abs(num)
+        if abs_num >= 10_000_000:  # 1 Crore (10 Million)
+            return f"{num / 10_000_000:.2f} Cr"
+        elif abs_num >= 100_000:   # 1 Lakh (100 Thousand)
+            return f"{num / 100_000:.2f} L"
+        elif abs_num >= 1_000:     # 1 Thousand
+            return f"{num / 1_000:.2f} K"
+
+        if isinstance(num, float):
+            return round(num, 2)
+
+        return num
+
+    def clean_nan(self, obj, format_numbers=False):
+        """
+        Recursively replaces NaN values with None in dictionaries and lists.
+        If format_numbers is True, it also applies _format_number to numeric values.
+        """
+        if isinstance(obj, dict):
+            return {k: self.clean_nan(v, format_numbers) for k, v in obj.items()}
+        elif isinstance(obj, (list, tuple)):
+            return [self.clean_nan(x, format_numbers) for x in obj]
+        elif pd.isna(obj):
+            return None
+        
+        if format_numbers:
+            return self._format_number(obj)
+        return obj
+
 
     def load_json(self, filename):
 
@@ -280,7 +316,9 @@ class StockDataRetriever:
             df = df.loc[:, ~df.columns.duplicated()]
 
             # Once data is downloaded and processed, put it in cache
-            result = df.to_json(orient='records')
+            data_list = df.to_dict(orient='records')
+            cleaned_data = self.clean_nan(data_list)
+            result = json.dumps(cleaned_data)
             self.stock_data_cache[cache_key] = result
             return result
 
@@ -318,10 +356,10 @@ class StockDataRetriever:
                 actions_df['Date'] = actions_df['Date'].dt.strftime('%Y-%m-%d')
                 actions_data = actions_df.to_dict(orient='records')
 
-            return {
+            return self.clean_nan({
                 "news": t.news,
                 "actions": actions_data
-            }
+            })
         except Exception as e:
             return {"error": str(e)}
 
@@ -339,3 +377,70 @@ class StockDataRetriever:
             logging.exception("getPeers()")
 
             return []
+
+    def getSummaryStats(self, ticker):
+        """
+        Returns key fundamental statistics and company profile information using yfinance info.
+        """
+        try:
+            t = yf.Ticker(ticker)
+            info = t.info
+            return self.clean_nan({
+                "sector": info.get("sector"),
+                "industry": info.get("industry"),
+                "website": info.get("website"),
+                "business_summary": info.get("longBusinessSummary"),
+                "market_cap": info.get("marketCap"),
+                "pe_ratio": info.get("trailingPE"),
+                "forward_pe": info.get("forwardPE"),
+                "dividend_yield": info.get("dividendYield"),
+                "trailing_eps": info.get("trailingEps"),
+                "52_week_high": info.get("fiftyTwoWeekHigh"),
+                "52_week_low": info.get("fiftyTwoWeekLow")
+            }, format_numbers=True)
+        except Exception:
+            logging.exception("getSummaryStats()")
+            return {"error": "Failed to retrieve summary stats"}
+
+    def getFinancials(self, ticker, get_details=False):
+        """
+        Returns annual income statement, balance sheet, and cash flow data.
+        """
+        try:
+            t = yf.Ticker(ticker)
+            def df_to_dict(df, filter_keys=None):
+                if df is None or df.empty: return {}
+
+                if filter_keys:
+                    available_keys = [k for k in filter_keys if k in df.index]
+                    if not available_keys:
+                        return {}
+                    df = df.loc[available_keys]
+
+                # Convert Timestamps to strings for JSON serialization
+                df.columns = [str(c.date()) if hasattr(c, 'date') else str(c) for c in df.columns]
+                return df.to_dict()
+
+            income_stmt_keys = None
+            if not get_details:
+                income_stmt_keys = ['Basic EPS', 'Diluted EPS', 'EBIT', 'EBITDA', 'Gross Profit', 'Net Income']
+
+            res = {
+                "income_statement": df_to_dict(t.income_stmt, filter_keys=income_stmt_keys),
+                "balance_sheet": df_to_dict(t.balance_sheet) if get_details else {},
+                "cash_flow": df_to_dict(t.cashflow) if get_details else {}
+            }
+
+            info = t.info
+            res.update({
+                "market_cap": info.get("marketCap"),
+                "volume": info.get("volume"),
+                "dividend_rate": info.get("dividendRate"),
+                "dividend_yield": info.get("dividendYield"),
+                "payout_ratio": info.get("payoutRatio")
+            })
+
+            return self.clean_nan(res, format_numbers=True)
+        except Exception:
+            logging.exception("getFinancials()")
+            return {"error": "Failed to retrieve financials"}

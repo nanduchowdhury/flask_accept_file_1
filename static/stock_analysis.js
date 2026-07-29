@@ -1243,6 +1243,17 @@ _getFormattedScrollItems(obj, level = 0) {
         }
     }
 
+    _safeParsePriceData(info) {
+        if (!info || info === "NONE" || info === "N/A") return [];
+        if (typeof info === 'object') return info.price_data || [];
+        try {
+            return JSON.parse(info);
+        } catch (e) {
+            console.warn("Failed to parse stock price data:", e);
+            return [];
+        }
+    }
+
     handleMainPagePlotClick() {
         const period = this.MAIN_PAGE_STOCK_DEFAULT_TIME_PERIOD;
         const analysisType = 'ANALYSIS_CONT_DECLINE_2PCT';
@@ -1272,12 +1283,12 @@ _getFormattedScrollItems(obj, level = 0) {
                     title.style.fontFamily = 'Arial';
                     this.popoutMgr.appendItem(title);
 
-                    const priceData = JSON.parse(info);
+                    const priceData = this._safeParsePriceData(info);
                     const analysisResult = this.computeAnalysisSegments(priceData);
                     const plotDiv = this.createStockPricePlot(analysisResult.data, 'tabContent active', analysisResult.segments, analysisResult.highlightPoints);
                     this.popoutMgr.appendItem(plotDiv);
 
-                    const variousReturns = this.getVariousReturn(info);
+                    const variousReturns = this.getVariousReturn(JSON.stringify(priceData));
                     const returnsTab = this.createTabContent(variousReturns, 'tabContent active', true, []);
                     returnsTab.style.marginLeft = '20px';
                     this.popoutMgr.appendItem(returnsTab);
@@ -1347,13 +1358,8 @@ _getFormattedScrollItems(obj, level = 0) {
                 return;
             }
 
-            const result1 = info || "No analysis data available.";
-            let priceData;
-            try {
-                priceData = JSON.parse(result1);
-            } catch (e) {
-                priceData = result1;
-            }
+            let priceData = this._safeParsePriceData(info);
+            
             const analysisResult = this.computeAnalysisSegments(priceData);
             const plotDiv = this.createStockPricePlot(analysisResult.data, 'tabContent active', analysisResult.segments, analysisResult.highlightPoints);
             
@@ -1362,7 +1368,7 @@ _getFormattedScrollItems(obj, level = 0) {
             // Update the main page plot label with stock name and returns
             const label = document.querySelector('.main-page-plot-label');
             if (label) {
-                const variousReturnsJson = this.getVariousReturn(result1);
+                const variousReturnsJson = this.getVariousReturn(JSON.stringify(priceData));
                 const variousReturnsObj = JSON.parse(variousReturnsJson);
                 let returnsStr = "";
                 if (variousReturnsObj.various_returns) {
@@ -1417,7 +1423,7 @@ _getFormattedScrollItems(obj, level = 0) {
         const analysisDropdown = document.getElementById("analysis-type-dropdown");
         const analysisType = analysisDropdown ? analysisDropdown.value : "ANALYSIS_CONT_DECLINE_2PCT";
 
-        const requestTypes = ['STOCK_BASICS'];
+        const requestTypes = ['STOCK_BASICS', 'STOCK_SUMMARY', 'STOCK_FINANCIALS'];
         if (analysisType === 'ANALYSIS_EVENT_TIMELINE') {
             requestTypes.push('STOCK_EVENTS');
         }
@@ -1430,6 +1436,9 @@ _getFormattedScrollItems(obj, level = 0) {
             let info = response.STOCK_BASICS;
             let events = response.STOCK_EVENTS;
             let peersData = response.STOCK_PEER_COMPARISON || {};
+            let summary = response.STOCK_SUMMARY || {};
+            let financials = response.STOCK_FINANCIALS || {};
+            
             const error = response.error;
 
             if (error && typeof error === 'string' && error.trim() !== "") {
@@ -1437,13 +1446,7 @@ _getFormattedScrollItems(obj, level = 0) {
                 return;
             }
 
-            const result1 = info || "No analysis data available.";
-            let priceData;
-            try {
-                priceData = JSON.parse(result1);
-            } catch (e) {
-                priceData = result1;
-            }
+            let priceData = this._safeParsePriceData(info);
             
             events = this._massageRawStockEvents(events, period);
 
@@ -1471,9 +1474,38 @@ _getFormattedScrollItems(obj, level = 0) {
             insightsHeader.style.marginLeft = '20px';
             insightsHeader.style.fontFamily = 'Arial';
             this.popoutMgr.appendItem(insightsHeader);
-            let insights_xml = this.getStockPriceInsights(result1);
+            let insights_xml = this.getStockPriceInsights(JSON.stringify(priceData));
             let tabContentDiv_2 = this.createTabContent(insights_xml, 'tabContent active', true, []);
             this.popoutMgr.appendItem(tabContentDiv_2);
+
+            if (Object.keys(summary).length > 0 && !summary.error) {
+                const summaryHeader = document.createElement('h3');
+                summaryHeader.innerText = "Company Profile";
+                summaryHeader.style.marginLeft = '20px';
+                summaryHeader.style.marginTop = '25px';
+                summaryHeader.style.color = '#007bff';
+                summaryHeader.style.fontFamily = 'Arial';
+                this.popoutMgr.appendItem(summaryHeader);
+
+                let summaryTab = this.createTabContent(JSON.stringify(summary), 'tabContent active', false, []);
+                summaryTab.style.marginLeft = '20px';
+                this.popoutMgr.appendItem(summaryTab);
+            }
+
+            if (Object.keys(financials).length > 0 && !financials.error) {
+                const finHeader = document.createElement('h3');
+                finHeader.innerText = "Financial Statements";
+                finHeader.style.marginLeft = '20px';
+                finHeader.style.marginTop = '25px';
+                finHeader.style.color = '#007bff';
+                finHeader.style.fontFamily = 'Arial';
+                this.popoutMgr.appendItem(finHeader);
+
+                let finTab = this.createTabContent(JSON.stringify(financials), 'tabContent active', true, 
+                                            ['income_statement', 'balance_sheet', 'cash_flow']);
+                finTab.style.marginLeft = '20px';
+                this.popoutMgr.appendItem(finTab);
+            }
 
             if (analysisType === 'ANALYSIS_REGULAR') {
                 const returnsHeader = document.createElement('h3');
@@ -1482,7 +1514,7 @@ _getFormattedScrollItems(obj, level = 0) {
                 returnsHeader.style.fontFamily = 'Arial';
                 this.popoutMgr.appendItem(returnsHeader);
 
-                let variousReturns = this.getVariousReturn(result1);
+                let variousReturns = this.getVariousReturn(JSON.stringify(priceData));
                 let returnsTab = this.createTabContent(variousReturns, 'tabContent active', true, []);
                 this.popoutMgr.appendItem(returnsTab);
 
@@ -1492,7 +1524,7 @@ _getFormattedScrollItems(obj, level = 0) {
                 insightsHeader.style.marginLeft = '20px';
                 insightsHeader.style.fontFamily = 'Arial';
                 this.popoutMgr.appendItem(insightsHeader);
-                let insights_xml = this.getAvgWeeklyReturn(result1);
+                let insights_xml = this.getAvgWeeklyReturn(JSON.stringify(priceData));
                 let tabContentDiv_2 = this.createTabContent(insights_xml, 'tabContent active', true, []);
                 this.popoutMgr.appendItem(tabContentDiv_2);
 
