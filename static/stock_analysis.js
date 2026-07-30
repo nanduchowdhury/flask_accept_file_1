@@ -603,7 +603,7 @@ _getFormattedScrollItems(obj, level = 0) {
     }
 
     createTabContent(tabContent, className, negativeValuesInRed, 
-                                    listOfKeysToBeShownInTab, arrayKeyWithColors) {
+                                    listOfKeysToBeShownInTab, arrayKeyWithColors, listOfKeysToBreakAtFullstop = [], listOfKeysToTreatAsUrl = []) {
                                         
         let tabContentDiv = document.createElement('div');
         tabContentDiv.className = className;
@@ -611,7 +611,7 @@ _getFormattedScrollItems(obj, level = 0) {
         
         try {
             const data = JSON.parse(tabContent);
-            tabContentDiv.innerHTML = this._generateHtml(data, 1, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors);
+            tabContentDiv.innerHTML = this._generateHtml(data, 1, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors, listOfKeysToBreakAtFullstop, listOfKeysToTreatAsUrl);
         } catch (e) {
             tabContentDiv.innerHTML = tabContent;
         }
@@ -666,6 +666,8 @@ _getFormattedScrollItems(obj, level = 0) {
             const render = (hoverIdx = -1) => {
                 const prices = data.map(d => parseFloat(d.stock_price)).filter(p => !isNaN(p));
                 const dates = data.map(d => d.date_time);
+
+                if (prices.length < 2) return;
 
                 const minP = Math.min(...prices);
                 const maxP = Math.max(...prices);
@@ -868,6 +870,10 @@ _getFormattedScrollItems(obj, level = 0) {
 
             // Start gradient at the top of the current slice to ensure even intensity along the curve
             const yTop = Math.min(y1, y2);
+
+            // Ensure coordinates are finite before calling createLinearGradient to prevent crashes
+            if (!Number.isFinite(yTop) || !Number.isFinite(bottomY)) continue;
+
             const gradient = ctx.createLinearGradient(0, yTop, 0, bottomY);
             
             // If using a segment color string directly, we wrap it in a save/restore with globalAlpha
@@ -918,14 +924,14 @@ _getFormattedScrollItems(obj, level = 0) {
         });
     }
 
-    _generateHtml(obj, level = 1, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors) {
+    _generateHtml(obj, level = 1, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors, listOfKeysToBreakAtFullstop = [], listOfKeysToTreatAsUrl = []) {
         let html = '';
         const tab = '&nbsp;&nbsp;&nbsp;&nbsp;'.repeat(level);
 
         if (typeof obj === 'object' && obj !== null && !Array.isArray(obj)) {
             for (const [key, value] of Object.entries(obj)) {
                 if (listOfKeysToBeShownInTab.includes(key) && typeof value === 'object' && value !== null && !Array.isArray(value)) {
-                    html += this._generateTabbedHtml(key, value, level, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors);
+                    html += this._generateTabbedHtml(key, value, level, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors, listOfKeysToBreakAtFullstop, listOfKeysToTreatAsUrl);
                     continue;
                 }
                 let key_temp = this._remove_underscore(key);
@@ -939,11 +945,19 @@ _getFormattedScrollItems(obj, level = 0) {
                         html += `<br>` + this._generateTableHtml(value, level, negativeValuesInRed, colors);
                     }
                 } else if (typeof value === 'object' && value !== null) {
-                    html += `<br>${this._generateHtml(value, level + 1, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors)}`;
+                    html += `<br>${this._generateHtml(value, level + 1, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors, listOfKeysToBreakAtFullstop, listOfKeysToTreatAsUrl)}`;
                 } else {
                     const isNegative = negativeValuesInRed && this.hasNegativeValue(value);
                     const colorStyle = isNegative ? 'style="color: red;"' : '';
-                    html += `<span ${colorStyle}>${value}</span>`;
+                    
+                    if (listOfKeysToBreakAtFullstop.includes(key) && typeof value === 'string') {
+                        const bullets = value.split('.').filter(s => s.trim().length > 0).map(s => `<li>${s.trim()}.</li>`).join('');
+                        html += `<ul style="margin-top: 5px; padding-left: 20px;">${bullets}</ul>`;
+                    } else if (listOfKeysToTreatAsUrl.includes(key) && typeof value === 'string') {
+                        html += `<a href="${value}" target="_blank" style="color: blue; text-decoration: underline;">${value}</a>`;
+                    } else {
+                        html += `<span ${colorStyle}>${value}</span>`;
+                    }
                 }
                 html += `</div><br>`;
             }
@@ -952,7 +966,7 @@ _getFormattedScrollItems(obj, level = 0) {
                 html += `<div>${tab}NONE</div>`;
             } else {
                 obj.forEach((item, index) => {
-                    html += `<div>${tab}${index + 1}. ${this._generateHtml(item, level + 1, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors)}</div>`;
+                    html += `<div>${tab}${index + 1}. ${this._generateHtml(item, level + 1, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors, listOfKeysToBreakAtFullstop, listOfKeysToTreatAsUrl)}</div>`;
                 });
             }
         } else {
@@ -968,7 +982,7 @@ _getFormattedScrollItems(obj, level = 0) {
         return d1;
     }
 
-    _generateTabbedHtml(key, value, level, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors) {
+    _generateTabbedHtml(key, value, level, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors, listOfKeysToBreakAtFullstop = [], listOfKeysToTreatAsUrl = []) {
         const tab = '&nbsp;&nbsp;&nbsp;&nbsp;'.repeat(level);
 
         let key_temp = this._remove_underscore(key);
@@ -1008,7 +1022,7 @@ _getFormattedScrollItems(obj, level = 0) {
         stockEntries.forEach(([stockName, stockData], index) => {
             const display = index === 0 ? 'block' : 'none';
             html += `<div id="content-${uniqueId}-${index}" class="content-${uniqueId}" style="display: ${display}; border: 1px solid #dee2e6; padding: 15px; border-radius: 4px; background-color: #fff;">`;
-            html += this._generateHtml(stockData, level + 1, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors);
+            html += this._generateHtml(stockData, level + 1, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors, listOfKeysToBreakAtFullstop, listOfKeysToTreatAsUrl);
             html += `</div>`;
         });
         html += `</div>`;
@@ -1487,7 +1501,7 @@ _getFormattedScrollItems(obj, level = 0) {
                 summaryHeader.style.fontFamily = 'Arial';
                 this.popoutMgr.appendItem(summaryHeader);
 
-                let summaryTab = this.createTabContent(JSON.stringify(summary), 'tabContent active', false, []);
+                let summaryTab = this.createTabContent(JSON.stringify(summary), 'tabContent active', false, [], null, ['business_summary'], ['website']);
                 summaryTab.style.marginLeft = '20px';
                 this.popoutMgr.appendItem(summaryTab);
             }
@@ -1501,7 +1515,7 @@ _getFormattedScrollItems(obj, level = 0) {
                 finHeader.style.fontFamily = 'Arial';
                 this.popoutMgr.appendItem(finHeader);
 
-                let finTab = this.createTabContent(JSON.stringify(financials), 'tabContent active', true, 
+                let finTab = this.createTabContent(JSON.stringify(financials), 'tabContent active', true,
                                             ['income_statement', 'balance_sheet', 'cash_flow']);
                 finTab.style.marginLeft = '20px';
                 this.popoutMgr.appendItem(finTab);
