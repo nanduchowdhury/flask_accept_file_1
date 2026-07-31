@@ -45,7 +45,7 @@ class StockAnalysisMain {
             { value: "ANALYSIS_CONT_RISE_5PCT", text: "continous rise 5%" },
             { value: "ANALYSIS_DRAWDOWN_5", text: "drawdown 5% from high" },
             { value: "ANALYSIS_RECOVERY", text: "recovery from low" },
-            { value: "ANALYSIS_EVENT_TIMELINE", text: "event timeline" },
+            { value: "ANALYSIS_EVENT_TIMELINE", text: "events & news timeline" },
             { value: "ANALYSIS_PEER_COMPARISON", text: "peer comparison" },
             { value: "ANALYSIS_WEEKLY_AVG_RETURN", text: "weekly avg return" }
         ];
@@ -555,7 +555,7 @@ _getFormattedScrollItems(obj, level = 0) {
         // Process News: extract title, source link, and format date for the timeline
         news.forEach(item => {
             const data = item.content || item;
-            const ts = data.providerPublishTime || data.publishTime || data.pubDate || data.displayTime;
+            const ts = data.providerPublishTime || data.publishTime || data.published || data.pubDate || data.displayTime;
             if (!ts) return;
 
             // Standardize Date object creation: handles Unix timestamps (numbers) 
@@ -1032,8 +1032,27 @@ _getFormattedScrollItems(obj, level = 0) {
     _generateTableHtml(value, level, negativeValuesInRed, colors) {
         let html = `<table style="border-collapse: collapse; width: auto; margin-left: ${level * 20}px; border: 1px solid blue;">`;
         
-        // Add header if the array contains objects
+        // Detect if this is a list of Key-Value pairs (where keys vary and represent labels)
+        // rather than a structured table (where keys are fixed column headers).
+        let isKeyValueList = false;
         if (value.length > 0 && typeof value[0] === 'object' && value[0] !== null) {
+            const schemaKeys = Object.keys(value[0]);
+            if (schemaKeys.length === 1) {
+                for (let i = 1; i < value.length; i++) {
+                    if (typeof value[i] !== 'object' || value[i] === null || Object.keys(value[i])[0] !== schemaKeys[0]) {
+                        isKeyValueList = true;
+                        break;
+                    }
+                }
+                // For single items, check if the key looks like data (e.g., has dates or spaces)
+                if (value.length === 1 && (schemaKeys[0].includes('-') || schemaKeys[0].includes(' ') || !isNaN(schemaKeys[0][0]))) {
+                    isKeyValueList = true;
+                }
+            }
+        }
+
+        // Add header if the array contains objects and is not a KV list
+        if (!isKeyValueList && value.length > 0 && typeof value[0] === 'object' && value[0] !== null) {
             html += `<tr style="background-color: #eee; font-weight: bold; border-bottom: 2px solid blue;">`;
             Object.keys(value[0]).forEach(key => {
                 html += `<td style="padding: 8px; border-right: 1px solid blue;">${this._remove_underscore(key)}</td>`;
@@ -1052,11 +1071,21 @@ _getFormattedScrollItems(obj, level = 0) {
             
             html += `<tr style="border-bottom: 1px solid blue; background-color: ${bgColor}; color: ${textColor};">`;
             if (typeof item === 'object' && item !== null) {
-                for (const [subKey, subVal] of Object.entries(item)) {
-                    // Right align if it's a number or percentage string
-                    const isNumeric = /^-?[\d,.]+%?$/.test(subVal.toString());
-                    const align = isNumeric ? 'text-align: right;' : 'text-align: left;';
-                    html += `<td style="padding: 8px; border-right: 1px solid blue; ${align}">${subVal}</td>`;
+                if (isKeyValueList) {
+                    // For KV lists, we display the key as a label in the first cell
+                    for (const [subKey, subVal] of Object.entries(item)) {
+                        html += `<td style="padding: 8px; border-right: 1px solid blue; font-weight: bold;">${this._remove_underscore(subKey)}</td>`;
+                        const isNumeric = /^-?[\d,.]+%?$/.test(subVal.toString());
+                        const align = isNumeric ? 'text-align: right;' : 'text-align: left;';
+                        html += `<td style="padding: 8px; border-right: 1px solid blue; ${align}">${subVal}</td>`;
+                    }
+                } else {
+                    for (const [subKey, subVal] of Object.entries(item)) {
+                        // Right align if it's a number or percentage string
+                        const isNumeric = /^-?[\d,.]+%?$/.test(subVal.toString());
+                        const align = isNumeric ? 'text-align: right;' : 'text-align: left;';
+                        html += `<td style="padding: 8px; border-right: 1px solid blue; ${align}">${subVal}</td>`;
+                    }
                 }
             } else {
                 html += `<td style="padding: 8px; border-right: 1px solid blue;">${item}</td>`;

@@ -8,6 +8,11 @@ import yfinance as yf
 from gcs_manager import GCSManager
 import constants
 
+import feedparser
+from dateutil.relativedelta import relativedelta
+from urllib.parse import quote
+
+
 import os
 import logging
 
@@ -341,26 +346,90 @@ class StockDataRetriever:
         self.ticker_list.sort()
         return self.ticker_list
 
-    def getEvents(self, ticker, months="12"):
-        """
-        Retrieves corporate actions (dividends, splits) and raw news events 
-        for a given ticker. Processing is offloaded to the client.
-        """
+    def getGoogleNews(self, company_name, months=12, max_results=100):
+
+        cutoff = datetime.now() - relativedelta(months=months)
+
+        # Adding financial context keywords to narrow down search results
+        query = quote(f'"{company_name}" (stock OR business OR finance OR earnings)')
+
+        url = (
+            f"https://news.google.com/rss/search?"
+            f"q={query}&hl=en-IN&gl=IN&ceid=IN:en"
+        )
+
+        feed = feedparser.parse(url)
+
+        news = []
+
+        for entry in feed.entries:
+
+            try:
+                published = datetime(*entry.published_parsed[:6])
+            except:
+                published = None
+
+            if published and published < cutoff:
+                continue
+
+            news.append({
+                "title": entry.title,
+                "publisher": entry.source.title if hasattr(entry, "source") else "",
+                "published": published.strftime("%Y-%m-%d %H:%M:%S")
+                            if published else "",
+                "link": entry.link,
+                "summary": entry.summary if "summary" in entry else ""
+            })
+
+            if len(news) >= max_results:
+                break
+
+        return news
+
+
+    def getEvents(self, ticker, company_name, months="12"):
+
         try:
+
+            months = int(months)
+
+            ####################################
+            # Google News
+            ####################################
+
+            google_news = self.getGoogleNews(company_name, months)
+
+            logging.info(f"Google news : {google_news}")
+
+            ####################################
+            # Yahoo Actions
+            ####################################
+
             t = yf.Ticker(ticker)
 
-            # Extract actions and convert to a serializable format
-            actions_data = []
+            cutoff = datetime.now() - relativedelta(months=months)
+
+            actions = []
+
             if not t.actions.empty:
-                actions_df = t.actions.reset_index()
-                actions_df['Date'] = actions_df['Date'].dt.strftime('%Y-%m-%d')
-                actions_data = actions_df.to_dict(orient='records')
+
+                df = t.actions[
+                    t.actions.index.tz_localize(None) >= cutoff
+                ]
+
+                df = df.reset_index()
+
+                df["Date"] = df["Date"].dt.strftime("%Y-%m-%d")
+
+                actions = df.to_dict("records")
 
             return self.clean_nan({
-                "news": t.news,
-                "actions": actions_data
+                "news": google_news,
+                "actions": actions
             })
+
         except Exception as e:
+
             return {"error": str(e)}
 
     def getPeers(self, ticker, max_peers=10):

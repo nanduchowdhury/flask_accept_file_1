@@ -191,6 +191,8 @@ wrapt==1.16.0
 wsproto==1.2.0
 yfinance
 yfinance==0.2.65
+feedparser==6.0.11
+python-dateutil==2.9.0.post0
 yapf==0.40.2
 zipp==3.20.2
 zope.event==5.0

@@ -165,6 +165,14 @@
             // Initialize and display the rotating banner
             const banner = new ManageRotatingBanner('rotatingBannerContainer', 'rotatingBannerContent');
             banner.init("{{ url_for('static', filename='prompts/all_sector_summary.json') }}");
+
+            const bannerContainer = document.getElementById('rotatingBannerContainer');
+            bannerContainer.style.cursor = 'pointer';
+            bannerContainer.addEventListener('click', () => {
+                if (window.stockAnalysisMain && typeof window.stockAnalysisMain.handleMainPagePlotClick === 'function') {
+                    window.stockAnalysisMain.handleMainPagePlotClick();
+                }
+            });
             {% endblock %}
 
             {% block dom_ready %}{% endblock %}
