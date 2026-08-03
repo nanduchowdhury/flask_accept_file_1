@@ -11,6 +11,14 @@ class StockUIBuilder {
     }
 
     /**
+     * Virtual method called when a tab is clicked or generated.
+     * Returns HTML content to be prepended to the tab content area.
+     */
+    onTabClicked(tabName) {
+        return `<div style="background-color: #fff3cd; color: #856404; padding: 10px; border: 1px solid #ffeeba; margin-bottom: 15px; border-radius: 4px; font-size: 12px;"><strong>[DEBUG]</strong> onTabClicked hook triggered for: <b>${tabName}</b></div>`;
+    }
+
+    /**
      * Recursively formats JSON into an indented HTML tree.
      */
     _getFormattedScrollItems(obj, level = 0) {
@@ -47,11 +55,46 @@ class StockUIBuilder {
         try {
             const data = JSON.parse(tabContent);
             tabContentDiv.innerHTML = this._generateHtml(data, 1, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors, listOfKeysToBreakAtFullstop, listOfKeysToTreatAsUrl);
+
+            // Initialize lazy loading for initially active tabs (the first button in each group)
+            tabContentDiv.querySelectorAll('button[data-tab-name]:first-child').forEach(btn => {
+                this._loadDynamicTabContent(btn);
+            });
+
+            // Hook to call the virtual method when a tab button is clicked
+            tabContentDiv.addEventListener('click', (event) => {
+                const button = event.target.closest('button[data-tab-name]');
+                if (button) {
+                    this._loadDynamicTabContent(button);
+                }
+            });
         } catch (e) {
             tabContentDiv.innerHTML = tabContent;
         }
         tabContentDiv.style.fontFamily = 'Arial';
         return tabContentDiv;
+    }
+
+    /**
+     * Internal helper to lazy-load onTabClicked content into the corresponding tab div.
+     */
+    _loadDynamicTabContent(button) {
+        const tabName = button.getAttribute('data-tab-name');
+        const btnClass = Array.from(button.classList).find(c => c.startsWith('btn-'));
+        if (!btnClass) return;
+
+        // Extract the uniqueId to find the associated content div
+        const uniqueId = btnClass.replace('btn-', '');
+        const groupButtons = Array.from(button.parentElement.querySelectorAll(`.btn-${uniqueId}`));
+        const index = groupButtons.indexOf(button);
+        const contentDiv = document.getElementById(`content-${uniqueId}-${index}`);
+
+        // Prepend content only if it hasn't been loaded for this tab yet
+        if (contentDiv && !contentDiv.dataset.dynamicLoaded) {
+            const extraHtml = this.onTabClicked(tabName);
+            if (extraHtml) contentDiv.insertAdjacentHTML('afterbegin', extraHtml);
+            contentDiv.dataset.dynamicLoaded = "true";
+        }
     }
 
     appendDisclaimer() {
@@ -360,11 +403,13 @@ class StockUIBuilder {
         html += `<div style="margin-left: ${level * 20}px; margin-bottom: 20px;"><div style="display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px;">`;
         stockEntries.forEach(([stockName], index) => {
             const activeStyle = index === 0 ? 'background-color: #007bff; color: white; font-weight: bold;' : 'background-color: #f8f9fa; color: #007bff;';
-            html += `<button class="btn-${uniqueId}" onclick="(function(btn){ const container = btn.parentElement.parentElement; container.querySelectorAll('.content-${uniqueId}').forEach(c => c.style.display = 'none'); container.querySelectorAll('.btn-${uniqueId}').forEach(b => { b.style.backgroundColor = '#f8f9fa'; b.style.color = '#007bff'; b.style.fontWeight = 'normal'; }); document.getElementById('content-${uniqueId}-${index}').style.display = 'block'; btn.style.backgroundColor = '#007bff'; btn.style.color = 'white'; btn.style.fontWeight = 'bold'; })(this)" style="padding: 2px 6px; font-size: 10px; cursor: pointer; border: 1px solid #007bff; border-radius: 4px; transition: all 0.2s; flex: 0 0 auto; width: auto; white-space: nowrap; ${activeStyle}">${this._remove_underscore(stockName)}</button>`;
+            html += `<button class="btn-${uniqueId}" data-tab-name="${stockName}" onclick="(function(btn){ const container = btn.parentElement.parentElement; container.querySelectorAll('.content-${uniqueId}').forEach(c => c.style.display = 'none'); container.querySelectorAll('.btn-${uniqueId}').forEach(b => { b.style.backgroundColor = '#f8f9fa'; b.style.color = '#007bff'; b.style.fontWeight = 'normal'; }); document.getElementById('content-${uniqueId}-${index}').style.display = 'block'; btn.style.backgroundColor = '#007bff'; btn.style.color = 'white'; btn.style.fontWeight = 'bold'; })(this)" style="padding: 2px 6px; font-size: 10px; cursor: pointer; border: 1px solid #007bff; border-radius: 4px; transition: all 0.2s; flex: 0 0 auto; width: auto; white-space: nowrap; ${activeStyle}">${this._remove_underscore(stockName)}</button>`;
         });
         html += `</div>`;
         stockEntries.forEach(([stockName, stockData], index) => {
-            html += `<div id="content-${uniqueId}-${index}" class="content-${uniqueId}" style="display: ${index === 0 ? 'block' : 'none'}; border: 1px solid #dee2e6; padding: 15px; border-radius: 4px; background-color: #fff;">${this._generateHtml(stockData, level + 1, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors, listOfKeysToBreakAtFullstop, listOfKeysToTreatAsUrl)}</div>`;
+            const mainContentHtml = this._generateHtml(stockData, level + 1, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors, listOfKeysToBreakAtFullstop, listOfKeysToTreatAsUrl);
+            
+            html += `<div id="content-${uniqueId}-${index}" class="content-${uniqueId}" style="display: ${index === 0 ? 'block' : 'none'}; border: 1px solid #dee2e6; padding: 15px; border-radius: 4px; background-color: #fff;">${mainContentHtml}</div>`;
         });
         html += `</div>`; return html;
     }
@@ -1039,7 +1084,7 @@ class StockAnalysisMain {
             this.popoutMgr.clear();
 
             let negativeValuesInRed = true;
-            let listOfKeysToBeShownInTab = ['related_companies']
+            let listOfKeysToBeShownInTab = ['related_stocks']
 
             let tabContentDiv = this.uiBuilder.createTabContent(result1, 'tabContent active',
                                         negativeValuesInRed, listOfKeysToBeShownInTab);
@@ -1062,7 +1107,7 @@ class StockAnalysisMain {
             this.popoutMgr.clear();
 
             let negativeValuesInRed = true;
-            let listOfKeysToBeShownInTab = ['related_companies']
+            let listOfKeysToBeShownInTab = ['related_stocks']
 
             let tabContentDiv = this.uiBuilder.createTabContent(result1, 'tabContent active',
                                         negativeValuesInRed, listOfKeysToBeShownInTab);
