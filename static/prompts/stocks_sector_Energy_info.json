@@ -1,303 +1,533 @@
 {
-  "header": "Nifty Energy Analysis (Mid-May 2026 to Early-July 2026)",
+  "header": "Nifty Energy Analysis (1 July 2026 to 31 July 2026)",
   "summary": [
-    "Crude prices easing",
-    "Gas demand improving",
-    "Refining margins stable",
-    "Power demand strong",
-    "Renewables gaining traction",
-    "PSU energy leading",
-    "Institutional buying positive",
-    "Dividend support continues"
+    "Power demand remained strong during July.",
+    "Renewable generation reached important new milestones.",
+    "Heatwaves supported thermal-power demand and utilization.",
+    "AI data centers strengthened long-term electricity demand expectations.",
+    "Crude-market disruptions increased refinery and fuel-market volatility.",
+    "Reliance benefited from stronger diesel export opportunities.",
+    "Adani Power benefited from strong power-demand expectations.",
+    "NTPC delivered strong quarterly operating performance.",
+    "Adani Green crossed an important renewable-capacity milestone.",
+    "Oil marketing companies faced volatile refining economics."
   ],
-  "stocks_in_momentum": {
+  "sector_news": [
+    {
+      "date": "2026-07-01",
+      "headline": "Adani Green Energy crossed an important capacity milestone.",
+      "impact": "positive",
+      "details": "The company reported surpassing 20 GW operational renewable capacity.",
+      "source": "Adani Green Energy"
+    },
+    {
+      "date": "2026-07-13",
+      "headline": "Solar and wind generation crossed a major national milestone.",
+      "impact": "positive",
+      "details": "India's renewable generation briefly exceeded 100 GW.",
+      "source": "Times of India"
+    },
+    {
+      "date": "2026-07-14",
+      "headline": "Global data-center demand highlighted transmission constraints.",
+      "impact": "positive",
+      "details": "Rising AI electricity demand strengthened grid-investment expectations.",
+      "source": "Reuters"
+    },
+    {
+      "date": "2026-07-18",
+      "headline": "Reliance reported strong quarterly operating performance.",
+      "impact": "positive",
+      "details": "Energy and consumer businesses supported overall quarterly performance.",
+      "source": "Reliance Industries"
+    },
+    {
+      "date": "2026-07-20",
+      "headline": "Heatwaves kept Indian electricity demand elevated.",
+      "impact": "positive",
+      "details": "High temperatures supported strong power-generation requirements.",
+      "source": "Adani Power"
+    },
+    {
+      "date": "2026-07-22",
+      "headline": "Adani Green reported strong renewable operating momentum.",
+      "impact": "positive",
+      "details": "Higher operational capacity supported quarterly renewable-energy performance.",
+      "source": "Adani Green Energy"
+    },
+    {
+      "date": "2026-07-22",
+      "headline": "BPCL announced June-quarter financial results.",
+      "impact": "mixed",
+      "details": "Refining and marketing economics remained key investor concerns.",
+      "source": "BPCL"
+    },
+    {
+      "date": "2026-07-24",
+      "headline": "NTPC reported strong first-quarter financial performance.",
+      "impact": "positive",
+      "details": "Operational gains and continuing business growth supported results.",
+      "source": "PIB / Ministry of Power"
+    },
+    {
+      "date": "2026-07-24",
+      "headline": "Power demand remained a major investment theme.",
+      "impact": "positive",
+      "details": "Industrial activity, cooling demand and digital infrastructure supported electricity demand.",
+      "source": "Indian market coverage"
+    },
+    {
+      "date": "2026-07-27",
+      "headline": "Tata Power reported healthy first-quarter performance.",
+      "impact": "positive",
+      "details": "Generation, transmission, distribution and renewable businesses supported earnings.",
+      "source": "Tata Power"
+    },
+    {
+      "date": "2026-07-27",
+      "headline": "Energy stocks benefited from improving sector sentiment.",
+      "impact": "positive",
+      "details": "Power-demand expectations and renewable investment supported buying interest.",
+      "source": "Indian market coverage"
+    },
+    {
+      "date": "2026-07-30",
+      "headline": "Reliance increased diesel exports toward Europe and Brazil.",
+      "impact": "positive",
+      "details": "Global fuel-supply disruptions improved export opportunities for Indian refiners.",
+      "source": "Reuters"
+    },
+    {
+      "date": "2026-07-30",
+      "headline": "Red Sea disruptions complicated Indian crude shipments.",
+      "impact": "mixed",
+      "details": "Indian refiners rerouted cargoes amid heightened shipping-security concerns.",
+      "source": "Reuters"
+    },
+    {
+      "date": "2026-07-31",
+      "headline": "Indian Oil reported June-quarter financial results.",
+      "impact": "negative",
+      "details": "Refining and marketing economics remained challenging.",
+      "source": "Upstox / Indian Oil"
+    },
+    {
+      "date": "2026-07-31",
+      "headline": "GAIL reported quarterly results amid gas-market scrutiny.",
+      "impact": "mixed",
+      "details": "Gas volumes and marketing margins remained important investor focus areas.",
+      "source": "NDTV Profit"
+    },
+    {
+      "date": "2026-07-31",
+      "headline": "Adani Energy Solutions planned additional capital raising.",
+      "impact": "positive",
+      "details": "Potential fundraising supported expectations for continued transmission expansion.",
+      "source": "Reuters"
+    },
+    {
+      "date": "2026-07-31",
+      "headline": "Renewables supplied an increasingly meaningful share of electricity.",
+      "impact": "positive",
+      "details": "Solar and wind generation reached record intraday contribution levels.",
+      "source": "Times of India"
+    },
+    {
+      "date": "2026-07-31",
+      "headline": "Coal remained important despite renewable-generation growth.",
+      "impact": "mixed",
+      "details": "Thermal generation stayed essential during high-demand periods.",
+      "source": "Reuters"
+    }
+  ],
+  "related_stocks": {
     "Reliance Industries": {
-      "reason": "Retail recovery, O2C strength, telecom stability",
-      "last_15_days": "+4.7%",
-      "historical_return": [
-        "May-Jun 2024 : +6.3%",
-        "Jul-Aug 2024 : +3.8%",
-        "Sep-Oct 2024 : -2.4%",
-        "Nov-Dec 2024 : +8.7%",
-        "Jan-Feb 2025 : +4.5%",
-        "Mar-Apr 2025 : -3.9%",
-        "May-Jun 2025 : +5.6%",
-        "Jul-Aug 2025 : +3.1%",
-        "Sep-Oct 2025 : -2.8%",
-        "Nov-Dec 2025 : +7.5%",
-        "Jan-Feb 2026 : +4.1%",
-        "Mar-Apr 2026 : -1.7%"
-      ],
-      "return_percent": [
-        "1-month : +5.2%",
-        "2-month : +7.8%",
-        "3-month : +9.3%",
-        "4-month : +8.0%",
-        "5-month : +5.4%",
-        "6-month : +3.2%"
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Strong energy operations and export opportunities supported sentiment.",
+      "important_news": [
+        "Reported strong first-quarter FY27 results.",
+        "Refining and energy businesses remained important contributors.",
+        "Increased diesel exports toward Europe and Brazil.",
+        "Global fuel disruptions improved export opportunities."
       ]
     },
-    "ONGC": {
-      "reason": "Stable crude outlook, attractive valuation",
-      "last_15_days": "+6.8%",
-      "historical_return": [
-        "May-Jun 2024 : +9.2%",
-        "Jul-Aug 2024 : +5.3%",
-        "Sep-Oct 2024 : -4.1%",
-        "Nov-Dec 2024 : +10.6%",
-        "Jan-Feb 2025 : +6.2%",
-        "Mar-Apr 2025 : -5.2%",
-        "May-Jun 2025 : +8.7%",
-        "Jul-Aug 2025 : +4.9%",
-        "Sep-Oct 2025 : -3.7%",
-        "Nov-Dec 2025 : +9.8%",
-        "Jan-Feb 2026 : +5.1%",
-        "Mar-Apr 2026 : -2.5%"
-      ],
-      "return_percent": [
-        "1-month : +7.6%",
-        "2-month : +11.2%",
-        "3-month : +13.9%",
-        "4-month : +11.6%",
-        "5-month : +8.5%",
-        "6-month : +6.3%"
-      ]
-    },
-    "Indian Oil Corporation": {
-      "reason": "Lower crude costs, refining margin recovery",
-      "last_15_days": "+5.2%",
-      "historical_return": [
-        "May-Jun 2024 : +8.0%",
-        "Jul-Aug 2024 : +3.9%",
-        "Sep-Oct 2024 : -4.2%",
-        "Nov-Dec 2024 : +8.8%",
-        "Jan-Feb 2025 : +5.0%",
-        "Mar-Apr 2025 : -5.6%",
-        "May-Jun 2025 : +7.6%",
-        "Jul-Aug 2025 : +3.7%",
-        "Sep-Oct 2025 : -3.3%",
-        "Nov-Dec 2025 : +8.4%",
-        "Jan-Feb 2026 : +4.8%",
-        "Mar-Apr 2026 : -2.7%"
-      ],
-      "return_percent": [
-        "1-month : +5.9%",
-        "2-month : +8.8%",
-        "3-month : +10.5%",
-        "4-month : +8.1%",
-        "5-month : +5.9%",
-        "6-month : +4.1%"
-      ]
-    },
-    "Bharat Petroleum": {
-      "reason": "Marketing margins improving, valuation support",
-      "last_15_days": "+6.0%",
-      "historical_return": [
-        "May-Jun 2024 : +9.0%",
-        "Jul-Aug 2024 : +4.7%",
-        "Sep-Oct 2024 : -4.8%",
-        "Nov-Dec 2024 : +10.1%",
-        "Jan-Feb 2025 : +5.6%",
-        "Mar-Apr 2025 : -6.2%",
-        "May-Jun 2025 : +8.5%",
-        "Jul-Aug 2025 : +4.4%",
-        "Sep-Oct 2025 : -3.9%",
-        "Nov-Dec 2025 : +9.3%",
-        "Jan-Feb 2026 : +5.2%",
-        "Mar-Apr 2026 : -2.8%"
-      ],
-      "return_percent": [
-        "1-month : +6.8%",
-        "2-month : +10.4%",
-        "3-month : +12.9%",
-        "4-month : +10.7%",
-        "5-month : +8.0%",
-        "6-month : +5.5%"
-      ]
-    },
-    "Hindustan Petroleum": {
-      "reason": "Healthy refining outlook, dividend appeal",
-      "last_15_days": "+5.8%",
-      "historical_return": [
-        "May-Jun 2024 : +8.7%",
-        "Jul-Aug 2024 : +4.5%",
-        "Sep-Oct 2024 : -4.9%",
-        "Nov-Dec 2024 : +9.8%",
-        "Jan-Feb 2025 : +5.4%",
-        "Mar-Apr 2025 : -6.0%",
-        "May-Jun 2025 : +8.2%",
-        "Jul-Aug 2025 : +4.1%",
-        "Sep-Oct 2025 : -3.8%",
-        "Nov-Dec 2025 : +9.0%",
-        "Jan-Feb 2026 : +5.0%",
-        "Mar-Apr 2026 : -2.6%"
-      ],
-      "return_percent": [
-        "1-month : +6.5%",
-        "2-month : +10.0%",
-        "3-month : +12.3%",
-        "4-month : +10.2%",
-        "5-month : +7.7%",
-        "6-month : +5.1%"
-      ]
-    },
-    "GAIL (India)": {
-      "reason": "Gas transmission growth, LNG demand",
-      "last_15_days": "+6.5%",
-      "historical_return": [
-        "May-Jun 2024 : +9.5%",
-        "Jul-Aug 2024 : +4.9%",
-        "Sep-Oct 2024 : -3.8%",
-        "Nov-Dec 2024 : +10.4%",
-        "Jan-Feb 2025 : +6.0%",
-        "Mar-Apr 2025 : -5.0%",
-        "May-Jun 2025 : +8.8%",
-        "Jul-Aug 2025 : +4.6%",
-        "Sep-Oct 2025 : -3.1%",
-        "Nov-Dec 2025 : +9.8%",
-        "Jan-Feb 2026 : +5.4%",
-        "Mar-Apr 2026 : -2.4%"
-      ],
-      "return_percent": [
-        "1-month : +7.4%",
-        "2-month : +11.0%",
-        "3-month : +13.4%",
-        "4-month : +11.1%",
-        "5-month : +8.7%",
-        "6-month : +6.5%"
-      ]
-    },
-    "Oil India": {
-      "reason": "Production growth, exploration optimism",
-      "last_15_days": "+7.9%",
-      "historical_return": [
-        "May-Jun 2024 : +11.6%",
-        "Jul-Aug 2024 : +5.8%",
-        "Sep-Oct 2024 : -4.5%",
-        "Nov-Dec 2024 : +12.5%",
-        "Jan-Feb 2025 : +7.0%",
-        "Mar-Apr 2025 : -5.8%",
-        "May-Jun 2025 : +10.9%",
-        "Jul-Aug 2025 : +5.5%",
-        "Sep-Oct 2025 : -3.8%",
-        "Nov-Dec 2025 : +11.7%",
-        "Jan-Feb 2026 : +6.2%",
-        "Mar-Apr 2026 : -2.2%"
-      ],
-      "return_percent": [
-        "1-month : +8.8%",
-        "2-month : +13.0%",
-        "3-month : +16.4%",
-        "4-month : +13.7%",
-        "5-month : +10.8%",
-        "6-month : +8.4%"
+    "Adani Power": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Strong electricity demand supported thermal-power expectations.",
+      "important_news": [
+        "Reported Q1 FY27 results during July.",
+        "Highlighted strong summer electricity demand.",
+        "Heatwaves supported power-generation requirements.",
+        "Data-center electricity demand strengthened long-term outlook."
       ]
     },
     "NTPC": {
-      "reason": "Peak electricity demand, renewable capacity",
-      "last_15_days": "+5.4%",
-      "historical_return": [
-        "May-Jun 2024 : +7.9%",
-        "Jul-Aug 2024 : +4.0%",
-        "Sep-Oct 2024 : -2.9%",
-        "Nov-Dec 2024 : +9.2%",
-        "Jan-Feb 2025 : +5.5%",
-        "Mar-Apr 2025 : -3.7%",
-        "May-Jun 2025 : +7.4%",
-        "Jul-Aug 2025 : +4.0%",
-        "Sep-Oct 2025 : -2.5%",
-        "Nov-Dec 2025 : +8.5%",
-        "Jan-Feb 2026 : +4.8%",
-        "Mar-Apr 2026 : -2.1%"
-      ],
-      "return_percent": [
-        "1-month : +6.3%",
-        "2-month : +9.6%",
-        "3-month : +12.0%",
-        "4-month : +10.5%",
-        "5-month : +8.4%",
-        "6-month : +6.2%"
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Strong quarterly performance and power-demand outlook supported sentiment.",
+      "important_news": [
+        "Reported robust Q1 FY27 performance on July 24.",
+        "Operational gains supported quarterly results.",
+        "Continuing power-demand growth remained a positive theme."
       ]
     },
-    "Power Grid Corporation": {
-      "reason": "Transmission expansion, defensive demand",
-      "last_15_days": "+4.0%",
-      "historical_return": [
-        "May-Jun 2024 : +6.6%",
-        "Jul-Aug 2024 : +3.3%",
-        "Sep-Oct 2024 : -2.3%",
-        "Nov-Dec 2024 : +7.5%",
-        "Jan-Feb 2025 : +4.0%",
-        "Mar-Apr 2025 : -3.5%",
-        "May-Jun 2025 : +6.0%",
-        "Jul-Aug 2025 : +3.0%",
-        "Sep-Oct 2025 : -2.2%",
-        "Nov-Dec 2025 : +6.8%",
-        "Jan-Feb 2026 : +3.8%",
-        "Mar-Apr 2026 : -1.8%"
-      ],
-      "return_percent": [
-        "1-month : +4.7%",
-        "2-month : +6.9%",
-        "3-month : +8.5%",
-        "4-month : +6.8%",
-        "5-month : +5.2%",
-        "6-month : +3.9%"
+    "ONGC": {
+      "exchange": "NSE/BSE",
+      "direction": "mixed",
+      "reason": "Energy-sector support offset concerns around upstream economics.",
+      "important_news": [
+        "Exchange filings prepared the market for quarterly results.",
+        "Crude-price volatility remained a major operating factor.",
+        "Investors continued monitoring domestic production trends."
+      ]
+    },
+    "Power Grid Corporation of India": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Renewable integration and rising electricity demand supported grid investment.",
+      "important_news": [
+        "Grid expansion remained a major energy-sector theme.",
+        "Renewable penetration increased transmission requirements.",
+        "AI data-center demand strengthened long-term grid expectations."
+      ]
+    },
+    "Coal India": {
+      "exchange": "NSE/BSE",
+      "direction": "mixed",
+      "reason": "Thermal demand remained strong while renewable growth created uncertainty.",
+      "important_news": [
+        "Reported Q1 FY27 results during July.",
+        "Announced an interim dividend.",
+        "Raised capital spending during the quarter.",
+        "Continued expansion and land-acquisition activity."
       ]
     },
     "Adani Green Energy": {
-      "reason": "Renewable expansion, strong project pipeline",
-      "last_15_days": "+9.8%",
-      "historical_return": [
-        "May-Jun 2024 : +13.5%",
-        "Jul-Aug 2024 : +6.2%",
-        "Sep-Oct 2024 : -5.0%",
-        "Nov-Dec 2024 : +15.2%",
-        "Jan-Feb 2025 : +8.4%",
-        "Mar-Apr 2025 : -6.5%",
-        "May-Jun 2025 : +12.8%",
-        "Jul-Aug 2025 : +6.0%",
-        "Sep-Oct 2025 : -4.2%",
-        "Nov-Dec 2025 : +14.4%",
-        "Jan-Feb 2026 : +7.8%",
-        "Mar-Apr 2026 : -3.0%"
-      ],
-      "return_percent": [
-        "1-month : +11.5%",
-        "2-month : +16.8%",
-        "3-month : +21.7%",
-        "4-month : +19.0%",
-        "5-month : +15.8%",
-        "6-month : +12.6%"
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Renewable capacity expansion and strong operating growth supported momentum.",
+      "important_news": [
+        "Surpassed 20 GW operational capacity on July 1.",
+        "Reported strong quarterly renewable-energy performance.",
+        "Capacity growth remained a major investor catalyst."
+      ]
+    },
+    "Adani Energy Solutions": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Transmission expansion benefited from renewable and data-center demand.",
+      "important_news": [
+        "Planned another capital raise for expansion.",
+        "Transmission infrastructure remained a major growth theme.",
+        "AI-related electricity demand strengthened grid expectations."
+      ]
+    },
+    "Indian Oil Corporation": {
+      "exchange": "NSE/BSE",
+      "direction": "downside",
+      "reason": "Refining economics and quarterly losses pressured sentiment.",
+      "important_news": [
+        "Reported June-quarter results on July 31.",
+        "Refining margins remained closely watched.",
+        "Red Sea disruptions affected crude logistics.",
+        "Fuel-demand trends remained a key investor focus."
+      ]
+    },
+    "ABB India": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Grid modernization and industrial electrification supported demand expectations.",
+      "important_news": [
+        "Energy-transition investment remained a sector-wide catalyst.",
+        "Grid automation and electrification stayed important themes.",
+        "No major company-specific July catalyst identified."
+      ]
+    },
+    "Bharat Heavy Electricals": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Thermal-power investment and grid demand supported sentiment.",
+      "important_news": [
+        "Power-generation capacity additions remained supportive.",
+        "Thermal and infrastructure orders stayed important catalysts.",
+        "No major company-specific July catalyst identified."
+      ]
+    },
+    "ABB Power Products & Systems India": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Transmission expansion and renewable integration supported demand.",
+      "important_news": [
+        "Grid modernization remained a major sector theme.",
+        "Renewable integration increased demand for power equipment.",
+        "No major company-specific July catalyst identified."
+      ]
+    },
+    "CG Power and Industrial Solutions": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Power equipment demand benefited from electrification investment.",
+      "important_news": [
+        "Grid and industrial electrification remained supportive themes.",
+        "No major company-specific July catalyst identified."
+      ]
+    },
+    "Bharat Petroleum Corporation": {
+      "exchange": "NSE/BSE",
+      "direction": "mixed",
+      "reason": "Quarterly results balanced strong demand against refining pressure.",
+      "important_news": [
+        "Reported Q1 FY27 results on July 22.",
+        "Refining and marketing economics remained important concerns.",
+        "Dividend distribution remained part of investor focus."
+      ]
+    },
+    "Siemens": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Grid modernization and industrial automation supported expectations.",
+      "important_news": [
+        "Power infrastructure investment remained a supportive theme.",
+        "Industrial electrification benefited from energy-transition spending.",
+        "No major company-specific July catalyst identified."
+      ]
+    },
+    "Tata Power": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Integrated power and renewable businesses supported sentiment.",
+      "important_news": [
+        "Reported Q1 FY27 results during July.",
+        "Generation and transmission businesses performed strongly.",
+        "Renewable-energy operations remained a key growth driver."
+      ]
+    },
+    "GAIL (India)": {
+      "exchange": "NSE/BSE",
+      "direction": "mixed",
+      "reason": "Gas-demand prospects improved while margins remained closely watched.",
+      "important_news": [
+        "Reported Q1 FY27 results on July 31.",
+        "Gas transmission volumes remained a key focus.",
+        "Marketing margins attracted investor attention."
+      ]
+    },
+    "GE Vernova T&D India": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Grid expansion and renewable integration supported demand.",
+      "important_news": [
+        "Transmission infrastructure remained a major investment theme.",
+        "Renewable integration supported power-equipment demand.",
+        "No major company-specific July catalyst identified."
+      ]
+    },
+    "JSW Energy": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Renewable expansion and power-sector optimism supported sentiment.",
+      "important_news": [
+        "Reported quarterly results during July.",
+        "Results conference call was held on July 22.",
+        "Monitoring-agency report was released during July."
+      ]
+    },
+    "Hindustan Petroleum Corporation": {
+      "exchange": "NSE/BSE",
+      "direction": "mixed",
+      "reason": "Fuel demand supported operations while refining volatility remained.",
+      "important_news": [
+        "Quarterly-result expectations were monitored during July.",
+        "Recruitment process continued during July.",
+        "Global crude and shipping disruptions remained relevant."
+      ]
+    },
+    "NHPC": {
+      "exchange": "NSE/BSE",
+      "direction": "downside",
+      "reason": "Hydropower operating risks increased after a major project incident.",
+      "important_news": [
+        "A tunnel explosion occurred at Teesta Stage-VI project.",
+        "Workers were killed and rescue operations followed.",
+        "A high-level inquiry was initiated."
+      ]
+    },
+    "NTPC Green Energy": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Renewable investment and clean-power demand supported sentiment.",
+      "important_news": [
+        "Reported quarterly results during July.",
+        "Renewable-energy expansion remained the key investor theme."
+      ]
+    },
+    "Suzlon Energy": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Strong renewable-energy momentum supported wind-sector sentiment.",
+      "important_news": [
+        "Wind-energy expansion remained a major sector theme.",
+        "Renewable generation milestones supported investor interest.",
+        "No major company-specific July catalyst identified."
+      ]
+    },
+    "Adani Total Gas": {
+      "exchange": "NSE/BSE",
+      "direction": "mixed",
+      "reason": "Gas-demand potential offset broader energy-market uncertainty.",
+      "important_news": [
+        "City-gas demand remained an important energy theme.",
+        "Gas infrastructure expansion remained relevant.",
+        "No major company-specific July catalyst identified."
+      ]
+    },
+    "Torrent Power": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Power-demand strength supported utility-sector sentiment.",
+      "important_news": [
+        "Power-sector strength supported investor interest.",
+        "Utility demand remained strong during summer conditions.",
+        "No major company-specific July catalyst identified."
+      ]
+    },
+    "Oil India": {
+      "exchange": "NSE/BSE",
+      "direction": "mixed",
+      "reason": "Upstream exposure benefited from energy demand but crude volatility remained.",
+      "important_news": [
+        "Crude-price movements remained the key operating factor.",
+        "Domestic exploration and production remained important themes.",
+        "No major company-specific July catalyst identified."
+      ]
+    },
+    "Thermax": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Industrial energy-efficiency and electrification themes supported sentiment.",
+      "important_news": [
+        "Industrial decarbonization remained a supportive theme.",
+        "Energy-efficiency demand stayed relevant.",
+        "No major company-specific July catalyst identified."
+      ]
+    },
+    "Aegis Logistics": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Energy logistics demand benefited from fuel-market activity.",
+      "important_news": [
+        "Fuel logistics remained supported by energy-market activity.",
+        "No major company-specific July catalyst identified."
+      ]
+    },
+    "NLC India": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Thermal generation demand and renewable expansion supported sentiment.",
+      "important_news": [
+        "Power-sector demand remained supportive.",
+        "Coal and renewable operations remained important business themes.",
+        "No major company-specific July catalyst identified."
+      ]
+    },
+    "Petronet LNG": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Gas-demand expectations supported LNG infrastructure sentiment.",
+      "important_news": [
+        "LNG demand remained an important Indian energy theme.",
+        "Gas infrastructure supported long-term energy diversification."
+      ]
+    },
+    "SJVN": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Renewable and hydro development supported long-term sentiment.",
+      "important_news": [
+        "Hydro and renewable development remained strategic priorities.",
+        "No major company-specific July catalyst identified."
+      ]
+    },
+    "CESC": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Strong electricity demand supported distribution-utility sentiment.",
+      "important_news": [
+        "Summer power demand remained supportive.",
+        "Utility-sector sentiment improved during July.",
+        "No major company-specific July catalyst identified."
+      ]
+    },
+    "Indraprastha Gas": {
+      "exchange": "NSE/BSE",
+      "direction": "mixed",
+      "reason": "Gas demand remained supportive while margin sensitivity persisted.",
+      "important_news": [
+        "City-gas demand remained an important sector theme.",
+        "Natural-gas pricing remained relevant to margins.",
+        "No major company-specific July catalyst identified."
+      ]
+    },
+    "Castrol India": {
+      "exchange": "NSE/BSE",
+      "direction": "mixed",
+      "reason": "Automotive energy demand supported volumes amid lubricant-market competition.",
+      "important_news": [
+        "Mobility and lubricant demand remained relevant.",
+        "No major company-specific July catalyst identified."
+      ]
+    },
+    "Nava": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Power and mining exposure benefited from energy-sector strength.",
+      "important_news": [
+        "Thermal-power demand remained supportive.",
+        "Mining and power remained key operating themes.",
+        "No major company-specific July catalyst identified."
+      ]
+    },
+    "Inox Wind": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Renewable-generation milestones supported wind-energy sentiment.",
+      "important_news": [
+        "Wind-energy capacity additions remained supportive.",
+        "Renewable integration remained a major sector theme.",
+        "No major company-specific July catalyst identified."
+      ]
+    },
+    "Jaiprakash Power Ventures": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Power-demand strength supported thermal-generation sentiment.",
+      "important_news": [
+        "Power-demand growth remained a supportive sector driver.",
+        "No major company-specific July catalyst identified."
+      ]
+    },
+    "Mahanagar Gas": {
+      "exchange": "NSE/BSE",
+      "direction": "mixed",
+      "reason": "City-gas demand remained supportive but margin sensitivity persisted.",
+      "important_news": [
+        "Natural-gas demand remained a key sector theme.",
+        "Gas pricing remained important for margins.",
+        "No major company-specific July catalyst identified."
+      ]
+    },
+    "Reliance Power": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Thermal-power demand and broader power-sector optimism supported sentiment.",
+      "important_news": [
+        "Power-demand strength supported thermal-generation expectations.",
+        "Broader energy-sector momentum supported investor interest.",
+        "No major company-specific July catalyst identified."
       ]
     }
   },
-  "expectation_next_5_trading_days": {
-    "sector_view": "Moderately Bullish",
-    "probability": {
-      "Bullish": "65%",
-      "Sideways": "25%",
-      "Bearish": "10%"
-    },
-    "positive_triggers": [
-      "Stable crude prices",
-      "Strong power consumption",
-      "Healthy refining margins",
-      "Renewable investment",
-      "Institutional inflows"
-    ],
-    "risks": [
-      "Oil price volatility",
-      "Global geopolitical events",
-      "Profit booking",
-      "Weak quarterly guidance"
-    ],
-    "best_positioned_stocks": [
-      "Oil India",
-      "GAIL (India)",
-      "ONGC",
-      "Adani Green Energy",
-      "Reliance Industries"
-    ]
-  }
+  "research_note": "Nifty Energy covers petroleum, gas and power companies. The current index contains 40 constituents. News is consolidated to remove duplicate reports; no stock-performance figures are included. Qualitative direction reflects July news and sector catalysts, not a price-return calculation."
 }

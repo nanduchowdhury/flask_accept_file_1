@@ -1,303 +1,69 @@
 {
-  "header": "Nifty Realty Analysis (Mid-May 2026 to Early-July 2026)",
-  "summary": [
-    "Premium housing strong",
-    "Commercial leasing steady",
-    "Rate-cut optimism persists",
-    "Institutional inflows positive",
-    "Luxury demand resilient",
-    "Bookings remain healthy",
-    "Profit booking selective",
-    "Momentum still bullish"
+  "header": "Nifty Realty Sector Analysis: 01Jul26 to 31Jul26",
+  "concise_summary": [
+    "Nifty Realty saw a highly volatile July",
+    "Early July rally lifted the sector sharply",
+    "A brokerage named Macrotech, DLF as top picks",
+    "Oberoi Realty's Q1 results dragged the sector",
+    "US-Iran conflict triggered a mid-month pullback",
+    "Realty declined for three straight sessions late-July",
+    "NAV premiums compressed on demand-sustainability concerns",
+    "Aditya Birla Real Estate emerged as a preferred pick",
+    "Anant Raj traded volatile, often a relative laggard",
+    "Sector still ended the month net positive"
   ],
-  "stocks_in_momentum": {
+  "sector_news_last_month": [
+    "Nifty Realty opened July with a strong rally, leading sectoral gainers on the NSE in the first full trading week",
+    "A major domestic brokerage refreshed its sector picks during this period, naming preferred large-cap developers and a preferred smaller-cap play, while flagging valuation caution on one name trading at a premium to its net asset value",
+    "The sector extended its rally further into the second week of July with a sharp, broad-based single-day surge, before sentiment turned considerably more volatile",
+    "Sentiment soured around mid-month as escalating US-Iran tensions and rising crude oil prices triggered a broader market risk-off move, dragging real estate stocks lower alongside PSU bank and auto names over consecutive sessions",
+    "Disappointing quarterly results from a major listed developer weighed on sector sentiment, dragging several peers lower in sympathy even as underlying luxury-housing demand commentary remained upbeat",
+    "Q1 FY27 (April-June 2026) earnings season ran through the month for several realty names, contributing to stock-specific volatility around individual results dates",
+    "The sector fell for three consecutive sessions in the second half of July amid a broader equity-market selloff, with market-wide volatility (India VIX) rising sharply over the same stretch",
+    "Analysts flagged growing compression in NAV premiums across the sector, with most developers trading at a meaningful discount to their estimated net asset values amid demand-sustainability concerns",
+    "Despite a further pullback in the final week of July, the sector still closed the month with a solidly positive one-month gain overall, reflecting the strength of its early-month rally",
+    "Brokerage and institutional commentary through the month continued to favour well-capitalised, well-funded developers as the likely gainers of market share within the broader real estate sector"
+  ],
+  "related_stocks": {
     "DLF": {
-      "reason": "Strong bookings, premium launches, FII buying",
-      "last_15_days": "+8.7%",
-      "historical_return": [
-        "May-Jun 2024 : +12.6%",
-        "Jul-Aug 2024 : +7.5%",
-        "Sep-Oct 2024 : -5.2%",
-        "Nov-Dec 2024 : +14.8%",
-        "Jan-Feb 2025 : +8.4%",
-        "Mar-Apr 2025 : -6.3%",
-        "May-Jun 2025 : +11.7%",
-        "Jul-Aug 2025 : +6.9%",
-        "Sep-Oct 2025 : -4.4%",
-        "Nov-Dec 2025 : +13.2%",
-        "Jan-Feb 2026 : +7.5%",
-        "Mar-Apr 2026 : -3.1%"
-      ],
-      "return_percent": [
-        "1-month : +10.2%",
-        "2-month : +15.6%",
-        "3-month : +19.8%",
-        "4-month : +17.5%",
-        "5-month : +14.2%",
-        "6-month : +10.8%"
-      ]
+      "reason_for_movement": "One of the more resilient large-caps, participating in both the rally and correction phases without extreme single-day swings",
+      "key_news": "Named among a brokerage's preferred large-cap picks in the sector during the month"
     },
-    "Macrotech Developers": {
-      "reason": "Luxury demand, project pipeline, sales growth",
-      "last_15_days": "+10.1%",
-      "historical_return": [
-        "May-Jun 2024 : +14.2%",
-        "Jul-Aug 2024 : +8.3%",
-        "Sep-Oct 2024 : -6.0%",
-        "Nov-Dec 2024 : +16.5%",
-        "Jan-Feb 2025 : +9.8%",
-        "Mar-Apr 2025 : -6.7%",
-        "May-Jun 2025 : +13.5%",
-        "Jul-Aug 2025 : +7.8%",
-        "Sep-Oct 2025 : -4.8%",
-        "Nov-Dec 2025 : +15.3%",
-        "Jan-Feb 2026 : +8.7%",
-        "Mar-Apr 2026 : -3.5%"
-      ],
-      "return_percent": [
-        "1-month : +12.4%",
-        "2-month : +18.1%",
-        "3-month : +23.6%",
-        "4-month : +20.5%",
-        "5-month : +16.8%",
-        "6-month : +13.7%"
-      ]
+    "Macrotech Developers (Lodha)": {
+      "reason_for_movement": "The most volatile large-cap name, leading early-month gains before becoming the sector's sharpest single-day decliner mid-month",
+      "key_news": "Named a brokerage's top preferred large-cap pick, even as it posted the steepest one-day fall in the sector during the mid-month selloff"
     },
     "Godrej Properties": {
-      "reason": "Record pre-sales, premium launches",
-      "last_15_days": "+9.4%",
-      "historical_return": [
-        "May-Jun 2024 : +13.8%",
-        "Jul-Aug 2024 : +7.9%",
-        "Sep-Oct 2024 : -5.6%",
-        "Nov-Dec 2024 : +15.4%",
-        "Jan-Feb 2025 : +9.0%",
-        "Mar-Apr 2025 : -6.2%",
-        "May-Jun 2025 : +12.9%",
-        "Jul-Aug 2025 : +7.3%",
-        "Sep-Oct 2025 : -4.5%",
-        "Nov-Dec 2025 : +14.6%",
-        "Jan-Feb 2026 : +8.2%",
-        "Mar-Apr 2026 : -3.2%"
-      ],
-      "return_percent": [
-        "1-month : +11.3%",
-        "2-month : +16.5%",
-        "3-month : +21.2%",
-        "4-month : +18.6%",
-        "5-month : +15.3%",
-        "6-month : +11.9%"
-      ]
+      "reason_for_movement": "Among the sector's stronger and more consistent gainers through most of the month's rally sessions",
+      "key_news": "Featured among the top gainers on multiple rally days during the month"
     },
     "Oberoi Realty": {
-      "reason": "Luxury sales, rental income growth",
-      "last_15_days": "+6.9%",
-      "historical_return": [
-        "May-Jun 2024 : +10.5%",
-        "Jul-Aug 2024 : +5.8%",
-        "Sep-Oct 2024 : -4.2%",
-        "Nov-Dec 2024 : +12.3%",
-        "Jan-Feb 2025 : +6.8%",
-        "Mar-Apr 2025 : -5.1%",
-        "May-Jun 2025 : +10.0%",
-        "Jul-Aug 2025 : +5.5%",
-        "Sep-Oct 2025 : -3.9%",
-        "Nov-Dec 2025 : +11.4%",
-        "Jan-Feb 2026 : +6.2%",
-        "Mar-Apr 2026 : -2.7%"
-      ],
-      "return_percent": [
-        "1-month : +8.1%",
-        "2-month : +12.0%",
-        "3-month : +15.7%",
-        "4-month : +13.5%",
-        "5-month : +10.8%",
-        "6-month : +8.2%"
-      ]
+      "reason_for_movement": "Weighed down after its own quarterly results disappointed investors, an event that also dragged sentiment across the wider sector",
+      "key_news": "Reported quarterly results reflecting a slowdown in operational performance, triggering a sector-wide sympathy decline; separately flagged by a brokerage as trading at a premium valuation to peers"
     },
     "Prestige Estates Projects": {
-      "reason": "Commercial pipeline, residential launches",
-      "last_15_days": "+8.2%",
-      "historical_return": [
-        "May-Jun 2024 : +12.0%",
-        "Jul-Aug 2024 : +6.7%",
-        "Sep-Oct 2024 : -5.0%",
-        "Nov-Dec 2024 : +13.6%",
-        "Jan-Feb 2025 : +7.8%",
-        "Mar-Apr 2025 : -5.9%",
-        "May-Jun 2025 : +11.2%",
-        "Jul-Aug 2025 : +6.3%",
-        "Sep-Oct 2025 : -4.3%",
-        "Nov-Dec 2025 : +12.8%",
-        "Jan-Feb 2026 : +7.0%",
-        "Mar-Apr 2026 : -3.0%"
-      ],
-      "return_percent": [
-        "1-month : +9.6%",
-        "2-month : +14.1%",
-        "3-month : +18.4%",
-        "4-month : +16.0%",
-        "5-month : +13.2%",
-        "6-month : +10.0%"
-      ]
+      "reason_for_movement": "Highly volatile, swinging between being one of the sector's stronger gainers and one of its sharpest single-day decliners at different points",
+      "key_news": "Recorded some of the largest single-session moves in the sector, in both directions, during the month"
     },
     "Brigade Enterprises": {
-      "reason": "South India demand, office leasing",
-      "last_15_days": "+7.5%",
-      "historical_return": [
-        "May-Jun 2024 : +11.3%",
-        "Jul-Aug 2024 : +6.2%",
-        "Sep-Oct 2024 : -4.6%",
-        "Nov-Dec 2024 : +12.7%",
-        "Jan-Feb 2025 : +7.4%",
-        "Mar-Apr 2025 : -5.5%",
-        "May-Jun 2025 : +10.7%",
-        "Jul-Aug 2025 : +6.0%",
-        "Sep-Oct 2025 : -4.0%",
-        "Nov-Dec 2025 : +11.9%",
-        "Jan-Feb 2026 : +6.6%",
-        "Mar-Apr 2026 : -2.8%"
-      ],
-      "return_percent": [
-        "1-month : +8.9%",
-        "2-month : +13.0%",
-        "3-month : +16.8%",
-        "4-month : +14.5%",
-        "5-month : +11.9%",
-        "6-month : +9.2%"
-      ]
+      "reason_for_movement": "A standout single-day gainer during the sector's strongest rally session mid-month",
+      "key_news": "Recorded one of the sector's largest single-day gains during the mid-month surge"
     },
     "Phoenix Mills": {
-      "reason": "Mall footfall, retail leasing",
-      "last_15_days": "+6.3%",
-      "historical_return": [
-        "May-Jun 2024 : +9.8%",
-        "Jul-Aug 2024 : +5.4%",
-        "Sep-Oct 2024 : -3.8%",
-        "Nov-Dec 2024 : +11.2%",
-        "Jan-Feb 2025 : +6.3%",
-        "Mar-Apr 2025 : -4.9%",
-        "May-Jun 2025 : +9.4%",
-        "Jul-Aug 2025 : +5.1%",
-        "Sep-Oct 2025 : -3.6%",
-        "Nov-Dec 2025 : +10.6%",
-        "Jan-Feb 2026 : +5.9%",
-        "Mar-Apr 2026 : -2.5%"
-      ],
-      "return_percent": [
-        "1-month : +7.2%",
-        "2-month : +10.8%",
-        "3-month : +14.2%",
-        "4-month : +12.4%",
-        "5-month : +10.0%",
-        "6-month : +7.5%"
-      ]
+      "reason_for_movement": "Declined in sympathy after a peer's disappointing results, and again during the broader late-month selloff",
+      "key_news": "Featured among notable decliners following a peer's weak quarterly results and again during the three-day late-month slide"
     },
     "Sobha": {
-      "reason": "Premium projects, improving margins",
-      "last_15_days": "+9.1%",
-      "historical_return": [
-        "May-Jun 2024 : +13.1%",
-        "Jul-Aug 2024 : +7.2%",
-        "Sep-Oct 2024 : -5.8%",
-        "Nov-Dec 2024 : +14.9%",
-        "Jan-Feb 2025 : +8.6%",
-        "Mar-Apr 2025 : -6.3%",
-        "May-Jun 2025 : +12.3%",
-        "Jul-Aug 2025 : +6.8%",
-        "Sep-Oct 2025 : -4.7%",
-        "Nov-Dec 2025 : +13.8%",
-        "Jan-Feb 2026 : +7.9%",
-        "Mar-Apr 2026 : -3.4%"
-      ],
-      "return_percent": [
-        "1-month : +10.7%",
-        "2-month : +15.8%",
-        "3-month : +20.2%",
-        "4-month : +17.8%",
-        "5-month : +14.7%",
-        "6-month : +11.5%"
-      ]
+      "reason_for_movement": "Among the sharper decliners during the late-month selloff despite having participated in the earlier rally",
+      "key_news": "Featured among the sector's weaker performers during the three-day late-month decline"
     },
     "Anant Raj": {
-      "reason": "Data center expansion, residential demand",
-      "last_15_days": "+12.4%",
-      "historical_return": [
-        "May-Jun 2024 : +16.7%",
-        "Jul-Aug 2024 : +9.6%",
-        "Sep-Oct 2024 : -6.3%",
-        "Nov-Dec 2024 : +18.2%",
-        "Jan-Feb 2025 : +10.5%",
-        "Mar-Apr 2025 : -7.1%",
-        "May-Jun 2025 : +15.9%",
-        "Jul-Aug 2025 : +9.0%",
-        "Sep-Oct 2025 : -5.2%",
-        "Nov-Dec 2025 : +17.0%",
-        "Jan-Feb 2026 : +9.6%",
-        "Mar-Apr 2026 : -3.8%"
-      ],
-      "return_percent": [
-        "1-month : +14.6%",
-        "2-month : +21.5%",
-        "3-month : +27.4%",
-        "4-month : +24.1%",
-        "5-month : +19.9%",
-        "6-month : +16.4%"
-      ]
+      "reason_for_movement": "Traded as a relative laggard on some rally days even as the broader sector advanced, then also declined during the correction phase",
+      "key_news": "Bucked the trend on at least one strong sector-wide rally day, moving opposite most peers"
     },
-    "Signatureglobal India": {
-      "reason": "Affordable housing, strong launch pipeline",
-      "last_15_days": "+10.8%",
-      "historical_return": [
-        "May-Jun 2024 : +15.0%",
-        "Jul-Aug 2024 : +8.5%",
-        "Sep-Oct 2024 : -5.7%",
-        "Nov-Dec 2024 : +16.8%",
-        "Jan-Feb 2025 : +9.9%",
-        "Mar-Apr 2025 : -6.8%",
-        "May-Jun 2025 : +14.2%",
-        "Jul-Aug 2025 : +8.1%",
-        "Sep-Oct 2025 : -4.9%",
-        "Nov-Dec 2025 : +15.9%",
-        "Jan-Feb 2026 : +8.9%",
-        "Mar-Apr 2026 : -3.6%"
-      ],
-      "return_percent": [
-        "1-month : +12.8%",
-        "2-month : +18.9%",
-        "3-month : +24.6%",
-        "4-month : +21.7%",
-        "5-month : +17.8%",
-        "6-month : +14.1%"
-      ]
+    "Aditya Birla Real Estate": {
+      "reason_for_movement": "Gained favour with brokerages as a preferred smaller-cap pick within the sector, supporting relative strength",
+      "key_news": "Named a brokerage's preferred SMID (small and mid-cap) pick within real estate during the month"
     }
-  },
-  "expectation_next_5_trading_days": {
-    "sector_view": "Bullish",
-    "probability": {
-      "Bullish": "68%",
-      "Sideways": "22%",
-      "Bearish": "10%"
-    },
-    "positive_triggers": [
-      "Interest-rate optimism",
-      "Strong housing demand",
-      "Healthy pre-sales",
-      "Institutional buying",
-      "Commercial leasing recovery"
-    ],
-    "risks": [
-      "Profit booking",
-      "Rising construction costs",
-      "Weak global sentiment",
-      "Premium valuation concerns"
-    ],
-    "best_positioned_stocks": [
-      "Anant Raj",
-      "Macrotech Developers",
-      "Godrej Properties",
-      "Signatureglobal India",
-      "DLF"
-    ]
   }
 }

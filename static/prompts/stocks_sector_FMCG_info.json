@@ -1,225 +1,91 @@
 {
-  "header": "Nifty FMCG Analysis (Mid-May 2026 to Early-July 2026)",
-  "summary": [
-    "Defensive sector rotation",
-    "Oil prices supportive",
-    "Rural demand improving",
-    "Institutional buying visible",
-    "Margin outlook stable",
-    "Monsoon remains key",
-    "Large-caps outperforming",
-    "Valuations still expensive"
+  "header": "Nifty FMCG Sector Analysis: 01Jul26 to 31Jul26",
+  "concise_summary": [
+    "Nifty FMCG was top sectoral gainer in early July",
+    "Easing crude oil prices boosted consumption outlook",
+    "Sector outperformed Nifty 50 over past three months",
+    "Q1 FY27 earnings season began through July",
+    "ITC faces sharp profit hit from cigarette taxes",
+    "HUL flagged fresh price hikes for margin protection",
+    "Raw material inflation pressured most FMCG companies",
+    "Marico stood out on softening copra costs",
+    "Brokerages turned constructive after 2026 sector correction",
+    "Below-normal monsoon flagged as rural demand risk"
   ],
-  "stocks_in_momentum": {
-    "Nestle India": {
-      "reason": "Defensive buying, premium demand, earnings stability",
-      "last_15_days": "+4.8%",
-      "historical_return": [
-        "May-Jun 2024 : +6.4%",
-        "Jul-Aug 2024 : +2.3%",
-        "Sep-Oct 2024 : -1.8%",
-        "Nov-Dec 2024 : +8.2%",
-        "Jan-Feb 2025 : +2.7%",
-        "Mar-Apr 2025 : -3.6%",
-        "May-Jun 2025 : +4.2%",
-        "Jul-Aug 2025 : +3.1%",
-        "Sep-Oct 2025 : -2.2%",
-        "Nov-Dec 2025 : +5.4%",
-        "Jan-Feb 2026 : -1.6%",
-        "Mar-Apr 2026 : -5.8%"
-      ],
-      "return_percent": [
-        "1-month : +5.1%",
-        "2-month : +7.3%",
-        "3-month : +3.9%",
-        "4-month : +2.2%",
-        "5-month : -1.4%",
-        "6-month : -4.6%"
-      ]
-    },
-    "Hindustan Unilever": {
-      "reason": "FII accumulation, margin recovery",
-      "last_15_days": "+5.5%",
-      "historical_return": [
-        "May-Jun 2024 : +4.8%",
-        "Jul-Aug 2024 : +1.7%",
-        "Sep-Oct 2024 : -2.4%",
-        "Nov-Dec 2024 : +7.0%",
-        "Jan-Feb 2025 : +1.9%",
-        "Mar-Apr 2025 : -2.8%",
-        "May-Jun 2025 : +3.5%",
-        "Jul-Aug 2025 : +2.9%",
-        "Sep-Oct 2025 : -3.1%",
-        "Nov-Dec 2025 : +4.8%",
-        "Jan-Feb 2026 : -2.5%",
-        "Mar-Apr 2026 : -6.0%"
-      ],
-      "return_percent": [
-        "1-month : +5.6%",
-        "2-month : +7.5%",
-        "3-month : +4.4%",
-        "4-month : +1.8%",
-        "5-month : -2.1%",
-        "6-month : -6.3%"
-      ]
-    },
-    "Varun Beverages": {
-      "reason": "Summer demand, volume growth",
-      "last_15_days": "+8.6%",
-      "historical_return": [
-        "May-Jun 2024 : +14.1%",
-        "Jul-Aug 2024 : +5.3%",
-        "Sep-Oct 2024 : -3.4%",
-        "Nov-Dec 2024 : +10.7%",
-        "Jan-Feb 2025 : +8.5%",
-        "Mar-Apr 2025 : +6.1%",
-        "May-Jun 2025 : +12.4%",
-        "Jul-Aug 2025 : +4.8%",
-        "Sep-Oct 2025 : -1.5%",
-        "Nov-Dec 2025 : +9.2%",
-        "Jan-Feb 2026 : +5.0%",
-        "Mar-Apr 2026 : +3.8%"
-      ],
-      "return_percent": [
-        "1-month : +11.8%",
-        "2-month : +14.7%",
-        "3-month : +18.3%",
-        "4-month : +15.2%",
-        "5-month : +10.5%",
-        "6-month : +8.9%"
-      ]
-    },
-    "Britannia": {
-      "reason": "Consumption recovery, defensive flows",
-      "last_15_days": "+3.2%",
-      "historical_return": [
-        "May-Jun 2024 : +5.0%",
-        "Jul-Aug 2024 : +2.0%",
-        "Sep-Oct 2024 : -2.1%",
-        "Nov-Dec 2024 : +7.6%",
-        "Jan-Feb 2025 : +2.4%",
-        "Mar-Apr 2025 : -3.9%",
-        "May-Jun 2025 : +3.9%",
-        "Jul-Aug 2025 : +2.5%",
-        "Sep-Oct 2025 : -2.8%",
-        "Nov-Dec 2025 : +5.3%",
-        "Jan-Feb 2026 : -1.7%",
-        "Mar-Apr 2026 : -4.5%"
-      ],
-      "return_percent": [
-        "1-month : +3.8%",
-        "2-month : +5.4%",
-        "3-month : +2.5%",
-        "4-month : -0.8%",
-        "5-month : -3.4%",
-        "6-month : -8.5%"
-      ]
-    },
-    "Tata Consumer Products": {
-      "reason": "Tea portfolio strength, institutional buying",
-      "last_15_days": "+5.0%",
-      "historical_return": [
-        "May-Jun 2024 : +7.2%",
-        "Jul-Aug 2024 : +3.4%",
-        "Sep-Oct 2024 : -1.5%",
-        "Nov-Dec 2024 : +8.8%",
-        "Jan-Feb 2025 : +3.6%",
-        "Mar-Apr 2025 : -2.9%",
-        "May-Jun 2025 : +4.9%",
-        "Jul-Aug 2025 : +2.7%",
-        "Sep-Oct 2025 : -2.0%",
-        "Nov-Dec 2025 : +6.3%",
-        "Jan-Feb 2026 : -1.9%",
-        "Mar-Apr 2026 : -5.0%"
-      ],
-      "return_percent": [
-        "1-month : +5.2%",
-        "2-month : +7.1%",
-        "3-month : +4.6%",
-        "4-month : +2.0%",
-        "5-month : -1.7%",
-        "6-month : -6.1%"
-      ]
-    },
-    "Colgate-Palmolive India": {
-      "reason": "Oral care demand, defensive allocation",
-      "last_15_days": "+4.1%",
-      "historical_return": [
-        "May-Jun 2024 : +5.8%",
-        "Jul-Aug 2024 : +2.8%",
-        "Sep-Oct 2024 : -1.7%",
-        "Nov-Dec 2024 : +6.5%",
-        "Jan-Feb 2025 : +2.2%",
-        "Mar-Apr 2025 : -3.2%",
-        "May-Jun 2025 : +3.6%",
-        "Jul-Aug 2025 : +2.1%",
-        "Sep-Oct 2025 : -2.5%",
-        "Nov-Dec 2025 : +4.6%",
-        "Jan-Feb 2026 : -1.2%",
-        "Mar-Apr 2026 : -4.2%"
-      ],
-      "return_percent": [
-        "1-month : +4.0%",
-        "2-month : +6.5%",
-        "3-month : +4.3%",
-        "4-month : +1.5%",
-        "5-month : -1.8%",
-        "6-month : -5.4%"
-      ]
+  "related_stocks": {
+    "Hindustan Unilever (HUL)": {
+      "reason_for_movement": "Rallied as a sector bellwether on cooling input-cost outlook, though later tempered by its own margin-protection commentary",
+      "key_news": "Flagged plans for calibrated price hikes across categories from the next quarter, citing persistent input-cost pressure"
     },
     "ITC": {
-      "reason": "Value buying, FMCG resilience",
-      "last_15_days": "+2.4%",
-      "historical_return": [
-        "May-Jun 2024 : +4.2%",
-        "Jul-Aug 2024 : +1.5%",
-        "Sep-Oct 2024 : -2.0%",
-        "Nov-Dec 2024 : +6.8%",
-        "Jan-Feb 2025 : +1.7%",
-        "Mar-Apr 2025 : -3.4%",
-        "May-Jun 2025 : +3.2%",
-        "Jul-Aug 2025 : +2.0%",
-        "Sep-Oct 2025 : -2.7%",
-        "Nov-Dec 2025 : +5.0%",
-        "Jan-Feb 2026 : -2.3%",
-        "Mar-Apr 2026 : -6.5%"
-      ],
-      "return_percent": [
-        "1-month : +1.5%",
-        "2-month : +2.4%",
-        "3-month : -1.6%",
-        "4-month : -5.2%",
-        "5-month : -8.3%",
-        "6-month : -12.1%"
-      ]
+      "reason_for_movement": "Lagged the broader sector rally on worries over a sharp hit to cigarette profitability",
+      "key_news": "Cigarette volumes and profit were widely expected to take a steep hit from a recent excise-duty increase"
+    },
+    "Nestle India": {
+      "reason_for_movement": "Among the sector's top gainers on strong seasonal food-and-beverage demand expectations",
+      "key_news": "Expected to post strong volume growth this quarter aided by a favourable summer season"
+    },
+    "Britannia Industries": {
+      "reason_for_movement": "Gained as brokerages flagged it as a preferred pick after the sector's recent correction",
+      "key_news": "Named among brokerages' top picks heading into results season on improving margin visibility"
+    },
+    "Dabur India": {
+      "reason_for_movement": "Led the sector's early-month rally as the single biggest contributor to the index's gain",
+      "key_news": "Emerged as the top-contributing stock on a day of broad-based sector strength"
+    },
+    "Marico": {
+      "reason_for_movement": "Stood out positively as one of the few FMCG names expected to see cost tailwinds rather than pressure",
+      "key_news": "Flagged as a likely exception on cost trends, with softening key raw-material prices seen aiding margins"
+    },
+    "Godrej Consumer Products (GCPL)": {
+      "reason_for_movement": "Rallied strongly as brokerages named it a preferred pick ahead of results",
+      "key_news": "Cited by multiple brokerages as a top pick on expectations of strong revenue growth this quarter"
+    },
+    "Varun Beverages": {
+      "reason_for_movement": "Gained on expectations of a strong seasonal volume boost in beverages",
+      "key_news": "Expected to lead beverage-segment volume growth this quarter on a strong summer season"
+    },
+    "Tata Consumer Products": {
+      "reason_for_movement": "Advanced on expectations of strong profitability growth this quarter",
+      "key_news": "Flagged by a global brokerage among the expected leaders in earnings growth this quarter"
+    },
+    "United Spirits": {
+      "reason_for_movement": "Relatively muted move as brokerages flagged a weaker results outlook for the stock",
+      "key_news": "Expected to report comparatively weak quarterly results versus FMCG peers"
+    },
+    "United Breweries": {
+      "reason_for_movement": "Moved broadly in line with overall sector sentiment through the month",
+      "key_news": "No major standalone company-specific trigger reported during the period"
+    },
+    "Colgate-Palmolive India": {
+      "reason_for_movement": "Gained meaningfully as part of the broad early-month sector rally",
+      "key_news": "Among the stronger gainers during the sector's outperformance versus the broader market"
+    },
+    "Emami": {
+      "reason_for_movement": "Participated meaningfully in the sector-wide rally alongside personal-care peers",
+      "key_news": "Featured among the sector's stronger gainers during the month"
+    },
+    "Radico Khaitan": {
+      "reason_for_movement": "Relatively muted movement, tracking broader spirits-segment sentiment",
+      "key_news": "No major standalone company-specific trigger reported during the period"
+    },
+    "Patanjali Foods": {
+      "reason_for_movement": "Relatively muted movement, largely tracking the broader sector",
+      "key_news": "No major standalone company-specific trigger reported during the period"
     }
   },
-  "expectation_next_5_trading_days": {
-    "sector_view": "Moderately Bullish",
-    "probability": {
-      "Bullish": "60%",
-      "Sideways": "30%",
-      "Bearish": "10%"
-    },
-    "positive_triggers": [
-      "Lower crude prices",
-      "Continued FII buying",
-      "Good monsoon progress",
-      "Defensive sector rotation",
-      "Stable Q1 earnings expectations"
-    ],
-    "risks": [
-      "High valuations",
-      "Profit booking",
-      "Weak rural consumption",
-      "Disappointing earnings guidance"
-    ],
-    "best_positioned_stocks": [
-      "Varun Beverages",
-      "Nestle India",
-      "Hindustan Unilever",
-      "Tata Consumer Products",
-      "Colgate-Palmolive India"
-    ]
-  }
+  "sector_news_last_month": [
+    "Nifty FMCG opened the month as the top-performing sectoral index on the NSE, aided by a sharp retreat in crude oil prices",
+    "Lower crude was seen easing pressure on packaging and petroleum-linked input costs, while also supporting India's broader inflation and household-consumption outlook",
+    "The sector had already outperformed the benchmark Nifty 50 over the preceding three months heading into July, a trend that continued into the new month",
+    "Q1 FY27 (April-June 2026) earnings season ran through the month, with most major FMCG companies scheduled to report results",
+    "Analyst previews pointed to a mixed quarter: home-and-personal-care companies were expected to see stronger revenue acceleration, while cigarette-linked profitability at ITC was expected to take a steep hit from a recent excise-duty increase",
+    "Brokerages flagged raw-material cost inflation as a broad headwind across the sector this quarter, with one proprietary FMCG input-cost index reported sharply higher year-on-year and quarter-on-quarter",
+    "Marico was repeatedly flagged as a rare exception, expected to benefit from softening prices in a key raw material even as most peers faced cost pressure",
+    "Food-and-beverage names such as Nestle India and Varun Beverages were expected to see a strong seasonal volume boost from favourable summer demand",
+    "Hindustan Unilever signalled plans for calibrated price hikes across categories from the following quarter, seen by analysts as a move to protect margins rather than boost profits, and viewed as a possible bellwether for similar action across the sector",
+    "Brokerages turned more constructive on FMCG valuations overall following the sector's earlier correction in the year, citing improving volume trends, expansion in quick-commerce channels and deeper rural distribution as supportive medium-term factors",
+    "A below-normal monsoon outlook was flagged as a risk to rural-linked demand across FMCG, alongside similarly rural-exposed sectors",
+    "GST-related tailwinds from the prior year's rate rationalisation continued to be cited as a supportive medium-term backdrop for volume growth across staples companies"
+  ]
 }

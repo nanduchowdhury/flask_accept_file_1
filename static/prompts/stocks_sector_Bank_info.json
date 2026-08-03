@@ -1,273 +1,274 @@
 {
-  "period": "Mid-May 2026 to Early-June 2026",
-
-  "sector_summary": [
-    "Rate-cut optimism",
-    "Credit growth steady",
-    "Private banks lead",
-    "PSU banks resilient",
-    "FII inflows positive",
-    "Asset quality stable",
-    "Profit booking limited",
-    "Banking leadership intact"
+  "header": "Nifty Bank Analysis (1 July 2026 to 31 July 2026)",
+  "summary": [
+    "Banking sentiment strengthened around quarterly earnings.",
+    "Loan growth remained strong across major lenders.",
+    "Deposit growth continued lagging credit expansion.",
+    "Private banks faced margin pressure from funding costs.",
+    "ICICI Bank delivered comparatively strong earnings momentum.",
+    "HDFC Bank faced margin-related investor concerns.",
+    "PSU banks benefited from strong credit demand.",
+    "RBI liquidity measures supported banking-system funding conditions.",
+    "Foreign-currency funding became more attractive for major banks.",
+    "Global oil and geopolitical risks affected sentiment."
   ],
-
-  "nifty_bank_timeline": {
-    "mid_may_2026": [
-      "Strong loan growth",
-      "Stable NPA trends",
-      "Private bank buying",
-      "Market leadership returns"
-    ],
-    "jun_01_2026": [
-      "Broad sector rally",
-      "FII participation rises",
-      "Large-cap banks lead",
-      "Momentum accelerates"
-    ],
-    "jun_02_2026": [
-      "Follow-through buying",
-      "Credit demand optimism",
-      "Positive breadth seen",
-      "New highs approached"
-    ],
-    "jun_03_to_jun_10_2026": [
-      "Healthy consolidation",
-      "Profit booking absorbed",
-      "Sector remains strong",
-      "Leadership maintained"
-    ]
-  },
-
-  "stocks_in_momentum": {
+  "sector_news": [
+    {
+      "date": "2026-07-03",
+      "headline": "ICICI Bank prepared dollar bond fundraising under RBI swap window.",
+      "impact": "positive",
+      "details": "The RBI swap facility reduced hedging costs for eligible foreign-currency borrowing.",
+      "source": "Reuters"
+    },
+    {
+      "date": "2026-07-15",
+      "headline": "Banking stocks rallied ahead of major Q1 earnings.",
+      "impact": "positive",
+      "details": "Investors anticipated healthy loan growth and resilient asset quality.",
+      "source": "Economic Times"
+    },
+    {
+      "date": "2026-07-17",
+      "headline": "Nifty Bank strengthened ahead of private-bank earnings.",
+      "impact": "positive",
+      "details": "HDFC Bank, ICICI Bank, Axis Bank and Kotak gained.",
+      "source": "Economic Times / Moneycontrol"
+    },
+    {
+      "date": "2026-07-18",
+      "headline": "Major private banks released June-quarter results.",
+      "impact": "mixed",
+      "details": "Loan growth remained healthy while margins became the key concern.",
+      "source": "Business Today / Mint"
+    },
+    {
+      "date": "2026-07-20",
+      "headline": "Private banks sold off after margin concerns intensified.",
+      "impact": "negative",
+      "details": "HDFC Bank led declines after weaker-than-expected lending margins.",
+      "source": "Reuters"
+    },
+    {
+      "date": "2026-07-20",
+      "headline": "ICICI Bank outperformed peers after stronger earnings.",
+      "impact": "positive",
+      "details": "Better-than-expected earnings and stable asset quality supported sentiment.",
+      "source": "Reuters"
+    },
+    {
+      "date": "2026-07-20",
+      "headline": "Bank credit growth remained strong despite deposit constraints.",
+      "impact": "positive",
+      "details": "SBI Research highlighted sustained credit expansion and deposit-growth mismatch.",
+      "source": "DD India / SBI Research"
+    },
+    {
+      "date": "2026-07-23",
+      "headline": "ICICI Bank launched dollar-bond process.",
+      "impact": "positive",
+      "details": "The bank moved toward overseas funding using cheaper RBI-linked hedging.",
+      "source": "Reuters"
+    },
+    {
+      "date": "2026-07-24",
+      "headline": "ICICI Bank completed major dollar bond issuance.",
+      "impact": "positive",
+      "details": "Strong investor demand supported confidence in the bank's funding access.",
+      "source": "Reuters"
+    },
+    {
+      "date": "2026-07-27",
+      "headline": "RBI reported strong foreign-currency inflows through banking channels.",
+      "impact": "positive",
+      "details": "Dollar-inflow schemes strengthened banks' foreign-currency funding environment.",
+      "source": "Reuters"
+    },
+    {
+      "date": "2026-07-27",
+      "headline": "Financial stocks rebounded as oil prices eased.",
+      "impact": "positive",
+      "details": "Lower crude prices improved macroeconomic sentiment and banking expectations.",
+      "source": "Reuters"
+    },
+    {
+      "date": "2026-07-29",
+      "headline": "Banking-sector reform needs remained a major discussion.",
+      "impact": "mixed",
+      "details": "Policy focus centered on credit access, lending frameworks and digital banking.",
+      "source": "Economic Times"
+    },
+    {
+      "date": "2026-07-31",
+      "headline": "SBI's perpetual-bond demand highlighted strong institutional confidence.",
+      "impact": "positive",
+      "details": "Strong demand encouraged expectations of additional bank capital issuance.",
+      "source": "Reuters"
+    },
+    {
+      "date": "2026-07-31",
+      "headline": "Industrial credit growth accelerated sharply during June.",
+      "impact": "positive",
+      "details": "Broad-based lending growth strengthened expectations for banking-sector credit demand.",
+      "source": "Business Standard"
+    }
+  ],
+  "related_stocks": {
     "HDFC Bank": {
-      "reason": "Deposit growth improvement, stable margins, institutional accumulation",
-      "last_15_days_upside_downside": "+5%",
-
-      "historical_return_2month_blocks": [
-        { "May-Jun 2024": "+5%" },
-        { "Jul-Aug 2024": "+7%" },
-        { "Sep-Oct 2024": "+3%" },
-        { "Nov-Dec 2024": "+6%" },
-        { "Jan-Feb 2025": "+4%" },
-        { "Mar-Apr 2025": "-2%" },
-        { "May-Jun 2025": "+5%" },
-        { "Jul-Aug 2025": "+6%" },
-        { "Sep-Oct 2025": "+2%" },
-        { "Nov-Dec 2025": "+5%" },
-        { "Jan-Feb 2026": "-4%" },
-        { "Mar-Apr 2026": "+3%" }
-      ],
-
-      "return_percent": [
-        { "1_month": "+4%" },
-        { "2_months": "+5%" },
-        { "3_months": "+6%" },
-        { "4_months": "+5%" },
-        { "5_months": "+3%" },
-        { "6_months": "+8%" }
+      "exchange": "NSE/BSE",
+      "direction": "downside",
+      "reason": "Margin pressure overshadowed strong loan growth and earnings.",
+      "important_news": [
+        "Reported Q1 FY27 results in July.",
+        "Net interest margin became the main investor concern.",
+        "Stock faced heavy selling after quarterly results.",
+        "Analysts continued debating the bank's corporate-loan strategy."
       ]
     },
-
     "ICICI Bank": {
-      "reason": "Best-in-class ROE, strong retail growth, asset quality leadership",
-      "last_15_days_upside_downside": "+7%",
-
-      "historical_return_2month_blocks": [
-        { "May-Jun 2024": "+8%" },
-        { "Jul-Aug 2024": "+10%" },
-        { "Sep-Oct 2024": "+4%" },
-        { "Nov-Dec 2024": "+8%" },
-        { "Jan-Feb 2025": "+6%" },
-        { "Mar-Apr 2025": "-2%" },
-        { "May-Jun 2025": "+7%" },
-        { "Jul-Aug 2025": "+9%" },
-        { "Sep-Oct 2025": "+4%" },
-        { "Nov-Dec 2025": "+8%" },
-        { "Jan-Feb 2026": "-3%" },
-        { "Mar-Apr 2026": "+5%" }
-      ],
-
-      "return_percent": [
-        { "1_month": "+6%" },
-        { "2_months": "+8%" },
-        { "3_months": "+10%" },
-        { "4_months": "+9%" },
-        { "5_months": "+7%" },
-        { "6_months": "+12%" }
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Strong earnings and stable asset quality improved investor confidence.",
+      "important_news": [
+        "Reported Q1 FY27 results in July.",
+        "Earnings exceeded market expectations.",
+        "Announced plans for overseas dollar funding.",
+        "Completed a major dollar bond issuance.",
+        "Strong investor demand supported funding confidence."
       ]
     },
-
-    "Axis Bank": {
-      "reason": "Valuation re-rating, improving retail franchise",
-      "last_15_days_upside_downside": "+6%",
-
-      "historical_return_2month_blocks": [
-        { "May-Jun 2024": "+7%" },
-        { "Jul-Aug 2024": "+8%" },
-        { "Sep-Oct 2024": "+2%" },
-        { "Nov-Dec 2024": "+6%" },
-        { "Jan-Feb 2025": "+5%" },
-        { "Mar-Apr 2025": "-3%" },
-        { "May-Jun 2025": "+6%" },
-        { "Jul-Aug 2025": "+7%" },
-        { "Sep-Oct 2025": "+2%" },
-        { "Nov-Dec 2025": "+6%" },
-        { "Jan-Feb 2026": "-5%" },
-        { "Mar-Apr 2026": "+4%" }
-      ],
-
-      "return_percent": [
-        { "1_month": "+5%" },
-        { "2_months": "+6%" },
-        { "3_months": "+7%" },
-        { "4_months": "+6%" },
-        { "5_months": "+5%" },
-        { "6_months": "+9%" }
-      ]
-    },
-
     "State Bank of India": {
-      "reason": "Strong PSU banking theme, treasury gains, credit growth",
-      "last_15_days_upside_downside": "+8%",
-
-      "historical_return_2month_blocks": [
-        { "May-Jun 2024": "+12%" },
-        { "Jul-Aug 2024": "+14%" },
-        { "Sep-Oct 2024": "+5%" },
-        { "Nov-Dec 2024": "+10%" },
-        { "Jan-Feb 2025": "+8%" },
-        { "Mar-Apr 2025": "-4%" },
-        { "May-Jun 2025": "+11%" },
-        { "Jul-Aug 2025": "+12%" },
-        { "Sep-Oct 2025": "+4%" },
-        { "Nov-Dec 2025": "+9%" },
-        { "Jan-Feb 2026": "-6%" },
-        { "Mar-Apr 2026": "+6%" }
-      ],
-
-      "return_percent": [
-        { "1_month": "+7%" },
-        { "2_months": "+9%" },
-        { "3_months": "+11%" },
-        { "4_months": "+10%" },
-        { "5_months": "+8%" },
-        { "6_months": "+14%" }
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Strong credit demand and PSU-bank sentiment supported buying interest.",
+      "important_news": [
+        "Banking stocks rallied ahead of quarterly results.",
+        "SBI Research highlighted strong credit growth.",
+        "Successfully issued Basel III perpetual bonds.",
+        "Strong institutional demand supported capital-market confidence."
       ]
     },
-
+    "Axis Bank": {
+      "exchange": "NSE/BSE",
+      "direction": "mixed",
+      "reason": "Strong business momentum was offset by margin pressure.",
+      "important_news": [
+        "Reported Q1 FY27 results during July.",
+        "Loan growth remained healthy.",
+        "Margin pressure weighed on investor sentiment.",
+        "Participated in overseas funding through RBI swap support."
+      ]
+    },
     "Kotak Mahindra Bank": {
-      "reason": "Technology restrictions easing, premium valuation support",
-      "last_15_days_upside_downside": "+4%",
-
-      "historical_return_2month_blocks": [
-        { "May-Jun 2024": "+4%" },
-        { "Jul-Aug 2024": "+6%" },
-        { "Sep-Oct 2024": "+2%" },
-        { "Nov-Dec 2024": "+5%" },
-        { "Jan-Feb 2025": "+3%" },
-        { "Mar-Apr 2025": "-2%" },
-        { "May-Jun 2025": "+4%" },
-        { "Jul-Aug 2025": "+5%" },
-        { "Sep-Oct 2025": "+1%" },
-        { "Nov-Dec 2025": "+4%" },
-        { "Jan-Feb 2026": "-4%" },
-        { "Mar-Apr 2026": "+3%" }
-      ],
-
-      "return_percent": [
-        { "1_month": "+3%" },
-        { "2_months": "+4%" },
-        { "3_months": "+5%" },
-        { "4_months": "+4%" },
-        { "5_months": "+3%" },
-        { "6_months": "+6%" }
+      "exchange": "NSE/BSE",
+      "direction": "mixed",
+      "reason": "Earnings remained resilient but margin pressure affected sentiment.",
+      "important_news": [
+        "Reported Q1 FY27 results in July.",
+        "Loan growth remained supportive.",
+        "Margin compression became a key concern.",
+        "Stock recovered later as banking sentiment improved."
       ]
     },
-
+    "Federal Bank": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Healthy quarterly performance and improving investor confidence supported momentum.",
+      "important_news": [
+        "Reported Q1 FY27 results during July.",
+        "Results were received positively by investors.",
+        "Banking-sector recovery supported further interest."
+      ]
+    },
+    "IndusInd Bank": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Recovery buying strengthened after earlier concerns around the bank.",
+      "important_news": [
+        "Bank remained actively traded during July.",
+        "Broader private-bank recovery supported sentiment.",
+        "Investors continued monitoring asset-quality normalization."
+      ]
+    },
+    "AU Small Finance Bank": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Strong quarterly performance triggered renewed investor interest.",
+      "important_news": [
+        "Reported strong quarterly results during July.",
+        "Financial stocks rallied after its earnings.",
+        "Improved profitability supported renewed confidence."
+      ]
+    },
+    "IDFC First Bank": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Strong quarterly results drove renewed buying interest.",
+      "important_news": [
+        "Reported quarterly results during July.",
+        "Financial stocks rallied following its results.",
+        "Improving operating trends supported sentiment."
+      ]
+    },
     "Bank of Baroda": {
-      "reason": "PSU rerating, strong profitability, improving asset quality",
-      "last_15_days_upside_downside": "+9%",
-
-      "historical_return_2month_blocks": [
-        { "May-Jun 2024": "+13%" },
-        { "Jul-Aug 2024": "+15%" },
-        { "Sep-Oct 2024": "+6%" },
-        { "Nov-Dec 2024": "+11%" },
-        { "Jan-Feb 2025": "+8%" },
-        { "Mar-Apr 2025": "-5%" },
-        { "May-Jun 2025": "+12%" },
-        { "Jul-Aug 2025": "+13%" },
-        { "Sep-Oct 2025": "+5%" },
-        { "Nov-Dec 2025": "+10%" },
-        { "Jan-Feb 2026": "-7%" },
-        { "Mar-Apr 2026": "+7%" }
-      ],
-
-      "return_percent": [
-        { "1_month": "+8%" },
-        { "2_months": "+10%" },
-        { "3_months": "+12%" },
-        { "4_months": "+11%" },
-        { "5_months": "+9%" },
-        { "6_months": "+15%" }
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "PSU-bank strength and healthy credit demand supported sentiment.",
+      "important_news": [
+        "Bank shares rallied ahead of earnings.",
+        "Bank of Baroda participated in the PSU-bank recovery.",
+        "Credit-growth expectations remained supportive."
+      ]
+    },
+    "Punjab National Bank": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "PSU-bank sentiment and improving credit conditions supported momentum.",
+      "important_news": [
+        "Reported strong quarterly earnings during July.",
+        "Banking stocks gained ahead of and after results.",
+        "Improving asset-quality expectations supported sentiment."
+      ]
+    },
+    "Canara Bank": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "PSU-bank rotation and stronger credit expectations supported buying.",
+      "important_news": [
+        "Bank participated in July's PSU-bank recovery.",
+        "Credit growth remained a supportive sector theme.",
+        "Capital-market funding remained an important banking theme."
+      ]
+    },
+    "Union Bank of India": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "PSU-bank rotation and strong credit growth improved sentiment.",
+      "important_news": [
+        "Bank shares rallied during the July banking recovery.",
+        "Union Bank was among PSU banks showing strength.",
+        "Sector credit growth remained supportive."
+      ]
+    },
+    "Yes Bank": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Private-bank recovery and improving banking sentiment supported interest.",
+      "important_news": [
+        "Bank shares gained during the July sector recovery.",
+        "Investors continued monitoring profitability improvement.",
+        "Private-bank sentiment improved after strong peer earnings."
+      ]
+    },
+    "Bandhan Bank": {
+      "exchange": "NSE/BSE",
+      "direction": "mixed",
+      "reason": "Sector recovery helped, while microfinance risks remained relevant.",
+      "important_news": [
+        "Bank remained part of the broader banking-sector recovery.",
+        "Investors continued monitoring asset-quality trends.",
+        "Microfinance lending conditions remained important."
       ]
     }
   },
-
-  "sector_drivers": [
-    "Rate-cut expectations",
-    "Healthy credit growth",
-    "Stable NPAs",
-    "Strong CASA franchises",
-    "Treasury gain prospects",
-    "FII buying support"
-  ],
-
-  "next_5_trading_days_expectation": {
-    "sector_view": "Bullish",
-
-    "expected_nifty_bank_move": "+1.0% to +3.5%",
-
-    "probability": {
-      "bullish": "68%",
-      "sideways": "22%",
-      "bearish": "10%"
-    },
-
-    "likely_outperformers": [
-      "State Bank of India",
-      "ICICI Bank",
-      "Bank of Baroda",
-      "Axis Bank"
-    ],
-
-    "likely_defensive_choices": [
-      "HDFC Bank",
-      "Kotak Mahindra Bank"
-    ],
-
-    "supporting_factors": [
-      "Credit growth momentum",
-      "Rate-cut optimism",
-      "Strong earnings visibility",
-      "FII inflows continuing"
-    ],
-
-    "risk_factors": [
-      "Margin compression",
-      "Global market volatility",
-      "Unexpected RBI stance",
-      "Profit booking pressure"
-    ]
-  },
-
-  "summary": [
-    "ICICI private leader",
-    "SBI PSU leader",
-    "BoB strong momentum",
-    "HDFC steadily improving",
-    "Banking remains strong",
-    "Bullish near-term outlook"
-  ]
+  "research_note": "News is consolidated to avoid duplicate reports; stock performance numbers are intentionally excluded."
 }

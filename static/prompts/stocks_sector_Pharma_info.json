@@ -1,273 +1,104 @@
 {
-  "period": "Mid-May 2026 to Early-June 2026",
-
-  "sector_summary": [
-    "Defensive buying returns",
-    "US generics stable",
-    "Specialty pharma strong",
-    "API demand improving",
-    "Export outlook positive",
-    "Rupee weakness benefits",
-    "Institutional accumulation",
-    "Sector outperforms market"
+  "header": "Nifty Pharma Sector Analysis: 01Jul26 to 31Jul26",
+  "concise_summary": [
+    "Nifty Pharma hit a record high in mid-July",
+    "Novo Nordisk's India Wegovy approval hit sentiment",
+    "Trump announced a phased tariff plan on generics",
+    "Sector fell sharply on the tariff-plan announcement",
+    "Tariffs start only 2028, giving a transition window",
+    "Dr Reddy's flagged a semaglutide manufacturing issue",
+    "Q1 FY27 earnings season ran through July",
+    "Sun Pharma profit rose but missed estimates",
+    "US revenue exposure varied sharply across companies",
+    "Sector partly recovered into month-end"
   ],
-
-  "nifty_pharma_timeline": {
-    "mid_may_2026": [
-      "Defensive rotation starts",
-      "Healthcare demand steady",
-      "Export optimism rises",
-      "Large-cap buying"
-    ],
-    "jun_01_2026": [
-      "Broad pharma rally",
-      "FII participation improves",
-      "US market support",
-      "Positive sector breadth"
-    ],
-    "jun_02_2026": [
-      "Follow-through strength",
-      "Midcaps outperform",
-      "Momentum expands",
-      "Fresh breakouts emerge"
-    ],
-    "jun_03_to_jun_10_2026": [
-      "Healthy consolidation",
-      "Profit booking limited",
-      "Stock-specific movement",
-      "Trend remains positive"
-    ]
-  },
-
-  "stocks_in_momentum": {
-    "Sun Pharmaceutical": {
-      "reason": "Specialty portfolio growth, strong earnings visibility",
-      "last_15_days_upside_downside": "+7%",
-
-      "historical_return_2month_blocks": [
-        { "May-Jun 2024": "+8%" },
-        { "Jul-Aug 2024": "+6%" },
-        { "Sep-Oct 2024": "+4%" },
-        { "Nov-Dec 2024": "+7%" },
-        { "Jan-Feb 2025": "+5%" },
-        { "Mar-Apr 2025": "-2%" },
-        { "May-Jun 2025": "+8%" },
-        { "Jul-Aug 2025": "+7%" },
-        { "Sep-Oct 2025": "+3%" },
-        { "Nov-Dec 2025": "+6%" },
-        { "Jan-Feb 2026": "-3%" },
-        { "Mar-Apr 2026": "+5%" }
-      ],
-
-      "return_percent": [
-        { "1_month": "+6%" },
-        { "2_months": "+8%" },
-        { "3_months": "+9%" },
-        { "4_months": "+8%" },
-        { "5_months": "+7%" },
-        { "6_months": "+11%" }
-      ]
+  "sector_news_last_month": [
+    "Nifty Pharma touched a fresh record high around mid-July, extending a rally of roughly 17% over the preceding six months",
+    "Sentiment turned cautious around the same period after a global pharma major received Indian regulatory approval for its obesity drug, raising competitive-threat concerns for some domestic players",
+    "The sector staged a sharp rebound rally shortly after, led by several mid-cap and large-cap names, comfortably outperforming the broader market on that session",
+    "Later in the month, US President Donald Trump announced a phased tariff plan for imported generic medicines: zero tariff continuing for two years from 1 August 2026, followed by a steep escalation in subsequent years",
+    "The announcement triggered a broad sector-wide selloff, with most index constituents trading lower and pharma among the weakest-performing sectors on the day",
+    "A leading domestic brokerage said the tariff plan was unlikely to have an immediate earnings impact, since the structure only begins in 2028, giving companies roughly a two-year window to diversify export markets and adjust strategy",
+    "Analyst research highlighted wide variation in individual companies' US revenue exposure, with some names having sharply reduced their US dependence in recent years while others remain far more exposed",
+    "Q1 FY27 (April-June 2026) earnings season ran through the month for most major pharma companies, with a heavy cluster of results announced in the back half of July",
+    "Results were broadly mixed: strong profit growth was reported by some large-caps, though revenue and profit came in below Street estimates for at least one major player, largely due to continued weakness in its US generics business",
+    "One major company disclosed a product-quality issue affecting a key metabolic-disease drug, delaying commercial supply while the root cause is investigated, though the company said there was no patient-safety impact",
+    "A mid-cap CDMO-focused player continued an exceptionally strong multi-month rally through the period, briefly surpassing a much larger peer's market value on accelerating contract-manufacturing demand",
+    "Pipeline and regulatory newsflow continued alongside the earnings and tariff headlines, including a new late-stage clinical trial approval for a rare-disease therapy at one company",
+    "By the final week of the month, the sector showed signs of stabilising and partially recovering some of the tariff-driven losses, though trading remained more volatile than earlier in July"
+  ],
+  "related_stocks": {
+    "Sun Pharmaceutical Industries": {
+      "reason_for_movement": "Posted strong profit growth but missed Street revenue and profit estimates, with continued weakness in its US generics business overshadowing the result",
+      "key_news": "Reported Q1 results showing strong India and innovative-medicines growth but disappointing US sales; its large overseas acquisition remains on track for later-year completion"
     },
-
-    "Dr. Reddy's Laboratories": {
-      "reason": "US generics strength, regulatory stability",
-      "last_15_days_upside_downside": "+6%",
-
-      "historical_return_2month_blocks": [
-        { "May-Jun 2024": "+7%" },
-        { "Jul-Aug 2024": "+5%" },
-        { "Sep-Oct 2024": "+2%" },
-        { "Nov-Dec 2024": "+6%" },
-        { "Jan-Feb 2025": "+4%" },
-        { "Mar-Apr 2025": "-3%" },
-        { "May-Jun 2025": "+7%" },
-        { "Jul-Aug 2025": "+6%" },
-        { "Sep-Oct 2025": "+2%" },
-        { "Nov-Dec 2025": "+5%" },
-        { "Jan-Feb 2026": "-4%" },
-        { "Mar-Apr 2026": "+4%" }
-      ],
-
-      "return_percent": [
-        { "1_month": "+5%" },
-        { "2_months": "+6%" },
-        { "3_months": "+7%" },
-        { "4_months": "+6%" },
-        { "5_months": "+5%" },
-        { "6_months": "+8%" }
-      ]
+    "Dr Reddy's Laboratories": {
+      "reason_for_movement": "Weighed down by a company-specific manufacturing setback layered on top of broader tariff-related sector caution",
+      "key_news": "Disclosed a quality issue delaying commercial supply of its metabolic (GLP-1-class) drug; also reported quarterly results during the period"
     },
-
     "Cipla": {
-      "reason": "Respiratory franchise growth, export momentum",
-      "last_15_days_upside_downside": "+5%",
-
-      "historical_return_2month_blocks": [
-        { "May-Jun 2024": "+6%" },
-        { "Jul-Aug 2024": "+5%" },
-        { "Sep-Oct 2024": "+2%" },
-        { "Nov-Dec 2024": "+5%" },
-        { "Jan-Feb 2025": "+4%" },
-        { "Mar-Apr 2025": "-2%" },
-        { "May-Jun 2025": "+6%" },
-        { "Jul-Aug 2025": "+5%" },
-        { "Sep-Oct 2025": "+2%" },
-        { "Nov-Dec 2025": "+5%" },
-        { "Jan-Feb 2026": "-3%" },
-        { "Mar-Apr 2026": "+4%" }
-      ],
-
-      "return_percent": [
-        { "1_month": "+4%" },
-        { "2_months": "+5%" },
-        { "3_months": "+6%" },
-        { "4_months": "+5%" },
-        { "5_months": "+5%" },
-        { "6_months": "+7%" }
-      ]
+      "reason_for_movement": "Outperformed several peers, gaining even on sessions when the broader sector declined",
+      "key_news": "Featured among the sector's stronger gainers across multiple sessions despite the tariff-driven selloff affecting most peers"
     },
-
+    "Divi's Laboratories": {
+      "reason_for_movement": "Rallied strongly on continued contract-manufacturing and API demand momentum",
+      "key_news": "Among the sector's top gainers late in the month; remains one of the index's largest constituents by market value"
+    },
+    "Torrent Pharmaceuticals": {
+      "reason_for_movement": "Relatively resilient given its largely India-focused revenue base, seen as less exposed to the US tariff risk",
+      "key_news": "Flagged by analysts as having sharply reduced its US revenue dependence over recent years, cushioning tariff-related concerns"
+    },
     "Lupin": {
-      "reason": "US launch pipeline, margin expansion",
-      "last_15_days_upside_downside": "+8%",
-
-      "historical_return_2month_blocks": [
-        { "May-Jun 2024": "+10%" },
-        { "Jul-Aug 2024": "+8%" },
-        { "Sep-Oct 2024": "+3%" },
-        { "Nov-Dec 2024": "+9%" },
-        { "Jan-Feb 2025": "+6%" },
-        { "Mar-Apr 2025": "-4%" },
-        { "May-Jun 2025": "+9%" },
-        { "Jul-Aug 2025": "+8%" },
-        { "Sep-Oct 2025": "+3%" },
-        { "Nov-Dec 2025": "+8%" },
-        { "Jan-Feb 2026": "-5%" },
-        { "Mar-Apr 2026": "+6%" }
-      ],
-
-      "return_percent": [
-        { "1_month": "+7%" },
-        { "2_months": "+9%" },
-        { "3_months": "+10%" },
-        { "4_months": "+9%" },
-        { "5_months": "+8%" },
-        { "6_months": "+13%" }
-      ]
+      "reason_for_movement": "Participated in both the mid-month record-high rally and the later tariff-driven volatility",
+      "key_news": "Featured among the top gainers during the sector's record-high rally, then among the decliners after the tariff announcement"
     },
-
+    "Zydus Lifesciences": {
+      "reason_for_movement": "Gained support from positive pipeline news even amid broader sector caution",
+      "key_news": "Received approval to begin a late-stage clinical trial for a sickle-cell-disease therapy in partnership with a government research body"
+    },
     "Aurobindo Pharma": {
-      "reason": "US business recovery, manufacturing leverage",
-      "last_15_days_upside_downside": "+7%",
-
-      "historical_return_2month_blocks": [
-        { "May-Jun 2024": "+8%" },
-        { "Jul-Aug 2024": "+7%" },
-        { "Sep-Oct 2024": "+2%" },
-        { "Nov-Dec 2024": "+7%" },
-        { "Jan-Feb 2025": "+5%" },
-        { "Mar-Apr 2025": "-3%" },
-        { "May-Jun 2025": "+8%" },
-        { "Jul-Aug 2025": "+7%" },
-        { "Sep-Oct 2025": "+2%" },
-        { "Nov-Dec 2025": "+6%" },
-        { "Jan-Feb 2026": "-4%" },
-        { "Mar-Apr 2026": "+5%" }
-      ],
-
-      "return_percent": [
-        { "1_month": "+6%" },
-        { "2_months": "+7%" },
-        { "3_months": "+8%" },
-        { "4_months": "+7%" },
-        { "5_months": "+6%" },
-        { "6_months": "+10%" }
-      ]
+      "reason_for_movement": "Volatile through the month, swinging between sector-leading gains and tariff-driven declines",
+      "key_news": "Flagged among companies with meaningful US generics exposure that could be affected by the proposed tariff plan"
     },
-
     "Biocon": {
-      "reason": "Biosimilar growth, regulatory milestones, valuation rerating",
-      "last_15_days_upside_downside": "+11%",
-
-      "historical_return_2month_blocks": [
-        { "May-Jun 2024": "+12%" },
-        { "Jul-Aug 2024": "+10%" },
-        { "Sep-Oct 2024": "+4%" },
-        { "Nov-Dec 2024": "+11%" },
-        { "Jan-Feb 2025": "+7%" },
-        { "Mar-Apr 2025": "-5%" },
-        { "May-Jun 2025": "+10%" },
-        { "Jul-Aug 2025": "+9%" },
-        { "Sep-Oct 2025": "+4%" },
-        { "Nov-Dec 2025": "+9%" },
-        { "Jan-Feb 2026": "-6%" },
-        { "Mar-Apr 2026": "+8%" }
-      ],
-
-      "return_percent": [
-        { "1_month": "+9%" },
-        { "2_months": "+11%" },
-        { "3_months": "+12%" },
-        { "4_months": "+10%" },
-        { "5_months": "+8%" },
-        { "6_months": "+15%" }
-      ]
-    }
-  },
-
-  "sector_drivers": [
-    "Defensive sector allocation",
-    "US generic pricing stability",
-    "Specialty pharma growth",
-    "Weak rupee support",
-    "Strong export demand",
-    "Improving regulatory outlook"
-  ],
-
-  "next_5_trading_days_expectation": {
-    "sector_view": "Bullish",
-
-    "expected_nifty_pharma_move": "+1.5% to +4.0%",
-
-    "probability": {
-      "bullish": "67%",
-      "sideways": "23%",
-      "bearish": "10%"
+      "reason_for_movement": "Declined on tariff-related concerns given its export-oriented biosimilars business",
+      "key_news": "Named among the notable decliners following the US generic-tariff announcement"
     },
-
-    "likely_outperformers": [
-      "Biocon",
-      "Lupin",
-      "Sun Pharmaceutical",
-      "Aurobindo Pharma"
-    ],
-
-    "likely_defensive_choices": [
-      "Dr. Reddy's Laboratories",
-      "Cipla"
-    ],
-
-    "supporting_factors": [
-      "Defensive fund flows",
-      "Export revenue growth",
-      "Specialty product launches",
-      "Stable US market conditions"
-    ],
-
-    "risk_factors": [
-      "USFDA observations",
-      "Pricing pressure",
-      "Currency volatility",
-      "Global risk-off sentiment"
-    ]
-  },
-
-  "summary": [
-    "Biocon strongest momentum",
-    "Lupin gaining traction",
-    "Sun Pharma leader",
-    "Exports remain supportive",
-    "Sector trend positive",
-    "Bullish near-term outlook"
-  ]
+    "Mankind Pharma": {
+      "reason_for_movement": "Gained strongly during the mid-month rally, helped by its largely domestic-market focus",
+      "key_news": "Featured among the sector's leading gainers during the mid-month record-high rally"
+    },
+    "Laurus Labs": {
+      "reason_for_movement": "One of the sector's standout performers, extending a strong multi-month rally",
+      "key_news": "Continued a sharp rally driven by accelerating contract-development-and-manufacturing (CDMO) segment growth, briefly overtaking a larger peer's market value"
+    },
+    "Glenmark Pharmaceuticals": {
+      "reason_for_movement": "Gained during a broad late-month recovery in pharma sentiment",
+      "key_news": "Featured among the stronger sector gainers in late-month trading sessions"
+    },
+    "J.B. Chemicals & Pharmaceuticals": {
+      "reason_for_movement": "One of the sector's sharper decliners during the tariff-driven selloff",
+      "key_news": "Recorded one of the steeper single-day declines among pharma names during the tariff selloff"
+    },
+    "Gland Pharma": {
+      "reason_for_movement": "Among the more exposed names given its comparatively high reliance on US revenue",
+      "key_news": "Flagged by analysts as carrying the highest US-revenue exposure among major peers, a key tariff-risk factor"
+    },
+    "Wockhardt": {
+      "reason_for_movement": "Declined alongside peers on tariff-related concerns despite recent strength",
+      "key_news": "Named among notable decliners following the US generic-tariff announcement"
+    },
+    "IPCA Laboratories": {
+      "reason_for_movement": "Declined on broad tariff-related sector caution",
+      "key_news": "Named among notable decliners following the US generic-tariff announcement"
+    },
+    "Alkem Laboratories": {
+      "reason_for_movement": "Gained during the mid-month sector rally, aided by its domestic-market strength",
+      "key_news": "Featured among the stronger gainers during the sector's record-high rally"
+    },
+    "Ajanta Pharma": {
+      "reason_for_movement": "Declined modestly alongside peers during the tariff-driven selloff",
+      "key_news": "Named among notable decliners following the US generic-tariff announcement"
+    }
+  }
 }

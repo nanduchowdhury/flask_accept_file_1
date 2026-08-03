@@ -1,277 +1,65 @@
 {
-  "period": "Mid-May 2026 to Early-June 2026",
-
-  "sector_summary": [
-    "AI fears dominate",
-    "Global tech selloff",
-    "Sharp profit booking",
-    "US software optimism",
-    "Strong short covering",
-    "Valuation re-rating",
-    "High sector volatility",
-    "Selective stock leadership"
+  "header": "Nifty IT Sector Analysis: 01Jul26 to 31Jul26",
+  "concise_summary": [
+    "Nifty IT hit 52-week low on 1 July",
+    "Sharp recovery through July on earnings, rotation",
+    "Global funds shifted from AI chips to IT",
+    "Nasdaq chip selloff pushed money into Indian IT",
+    "Q1 FY27 earnings season drove sector gains",
+    "HCLTech guidance hold surprised the Street positively",
+    "Infosys guidance trim triggered brief profit booking",
+    "Sector sharply outperformed Nifty 50 in July",
+    "Coforge, Persistent led mid-cap IT rally",
+    "Still down sharply on a 2026 year-to-date basis"
   ],
-
-  "nifty_it_timeline": {
-    "mid_may_2026": [
-      "AI disruption concerns",
-      "Weak investor sentiment",
-      "Heavy FII selling",
-      "Sector under pressure"
-    ],
-    "jun_01_2026": [
-      "Broad-based rally",
-      "US earnings support",
-      "Strong buying interest",
-      "Momentum reversal"
-    ],
-    "jun_02_2026": [
-      "Follow-through buying",
-      "Multi-week highs",
-      "Institutional accumulation",
-      "Positive breadth"
-    ],
-    "jun_03_to_jun_10_2026": [
-      "Profit booking returns",
-      "Global weakness impact",
-      "Volatile consolidation",
-      "Stock-specific moves"
-    ]
-  },
-
-  "stocks_in_momentum": {
-    "Persistent Systems": {
-      "reason": "Strong order book, AI spending theme, sector leadership",
-      "last_15_days_upside_downside": "+8%",
-
-      "historical_return_2month_blocks": [
-        { "May-Jun 2024": "+14%" },
-        { "Jul-Aug 2024": "+9%" },
-        { "Sep-Oct 2024": "-5%" },
-        { "Nov-Dec 2024": "+12%" },
-        { "Jan-Feb 2025": "+16%" },
-        { "Mar-Apr 2025": "-4%" },
-        { "May-Jun 2025": "+11%" },
-        { "Jul-Aug 2025": "+7%" },
-        { "Sep-Oct 2025": "-6%" },
-        { "Nov-Dec 2025": "+13%" },
-        { "Jan-Feb 2026": "-18%" },
-        { "Mar-Apr 2026": "-9%" }
-      ],
-
-      "return_percent": [
-        { "1_month": "+7%" },
-        { "2_months": "+4%" },
-        { "3_months": "-5%" },
-        { "4_months": "-11%" },
-        { "5_months": "-15%" },
-        { "6_months": "-12%" }
-      ]
-    },
-
-    "Infosys": {
-      "reason": "Large-cap accumulation, dividend support, valuation recovery",
-      "last_15_days_upside_downside": "+4%",
-
-      "historical_return_2month_blocks": [
-        { "May-Jun 2024": "+6%" },
-        { "Jul-Aug 2024": "+4%" },
-        { "Sep-Oct 2024": "-3%" },
-        { "Nov-Dec 2024": "+5%" },
-        { "Jan-Feb 2025": "+7%" },
-        { "Mar-Apr 2025": "-4%" },
-        { "May-Jun 2025": "+4%" },
-        { "Jul-Aug 2025": "+2%" },
-        { "Sep-Oct 2025": "-3%" },
-        { "Nov-Dec 2025": "+5%" },
-        { "Jan-Feb 2026": "-22%" },
-        { "Mar-Apr 2026": "-8%" }
-      ],
-
-      "return_percent": [
-        { "1_month": "+2%" },
-        { "2_months": "-1%" },
-        { "3_months": "-7%" },
-        { "4_months": "-16%" },
-        { "5_months": "-24%" },
-        { "6_months": "-20%" }
-      ]
-    },
-
+  "related_stocks": {
     "TCS": {
-      "reason": "Defensive IT allocation, stable earnings outlook",
-      "last_15_days_upside_downside": "+3%",
-
-      "historical_return_2month_blocks": [
-        { "May-Jun 2024": "+5%" },
-        { "Jul-Aug 2024": "+3%" },
-        { "Sep-Oct 2024": "-2%" },
-        { "Nov-Dec 2024": "+4%" },
-        { "Jan-Feb 2025": "+5%" },
-        { "Mar-Apr 2025": "-3%" },
-        { "May-Jun 2025": "+4%" },
-        { "Jul-Aug 2025": "+2%" },
-        { "Sep-Oct 2025": "-2%" },
-        { "Nov-Dec 2025": "+4%" },
-        { "Jan-Feb 2026": "-20%" },
-        { "Mar-Apr 2026": "-7%" }
-      ],
-
-      "return_percent": [
-        { "1_month": "+1%" },
-        { "2_months": "-2%" },
-        { "3_months": "-8%" },
-        { "4_months": "-14%" },
-        { "5_months": "-19%" },
-        { "6_months": "-17%" }
-      ]
+      "reason_for_movement": "Muted, largely-as-expected Q1 print; wage-hike margin pressure weighed",
+      "key_news": "Results and an interim dividend consideration were announced together; seen as sector bellwether"
     },
-
+    "Infosys": {
+      "reason_for_movement": "Strong AI-linked deal wins offset by a narrowed revenue growth guidance range, causing a brief post-result dip before recovering with the broader sector",
+      "key_news": "Management highlighted rising AI-driven revenue share and resilient margins; guidance range for the year was trimmed"
+    },
+    "Wipro": {
+      "reason_for_movement": "Flagged by analysts as the weakest Tier-1 IT stock this quarter",
+      "key_news": "Lagged peers even on days when the broader sector rallied strongly"
+    },
+    "HCL Technologies": {
+      "reason_for_movement": "Rallied after maintaining full-year guidance when the Street expected a cut",
+      "key_news": "Reported strong revenue growth and margin improvement despite one-off restructuring costs"
+    },
     "Tech Mahindra": {
-      "reason": "Telecom transformation deals, AI adoption theme",
-      "last_15_days_upside_downside": "+5%",
-
-      "historical_return_2month_blocks": [
-        { "May-Jun 2024": "+9%" },
-        { "Jul-Aug 2024": "+6%" },
-        { "Sep-Oct 2024": "-7%" },
-        { "Nov-Dec 2024": "+8%" },
-        { "Jan-Feb 2025": "+12%" },
-        { "Mar-Apr 2025": "-6%" },
-        { "May-Jun 2025": "+8%" },
-        { "Jul-Aug 2025": "+4%" },
-        { "Sep-Oct 2025": "-5%" },
-        { "Nov-Dec 2025": "+10%" },
-        { "Jan-Feb 2026": "-18%" },
-        { "Mar-Apr 2026": "-8%" }
-      ],
-
-      "return_percent": [
-        { "1_month": "+4%" },
-        { "2_months": "+1%" },
-        { "3_months": "-5%" },
-        { "4_months": "-12%" },
-        { "5_months": "-17%" },
-        { "6_months": "-14%" }
-      ]
+      "reason_for_movement": "Best quarterly growth since its multi-year turnaround program began, plus rising deal wins",
+      "key_news": "Reported a straight quarter of margin expansion; profit rose but missed some street estimates"
     },
-
     "LTIMindtree": {
-      "reason": "Valuation recovery, strong June rebound",
-      "last_15_days_upside_downside": "+4%",
-
-      "historical_return_2month_blocks": [
-        { "May-Jun 2024": "+8%" },
-        { "Jul-Aug 2024": "+5%" },
-        { "Sep-Oct 2024": "-8%" },
-        { "Nov-Dec 2024": "+7%" },
-        { "Jan-Feb 2025": "+10%" },
-        { "Mar-Apr 2025": "-5%" },
-        { "May-Jun 2025": "+7%" },
-        { "Jul-Aug 2025": "+4%" },
-        { "Sep-Oct 2025": "-5%" },
-        { "Nov-Dec 2025": "+8%" },
-        { "Jan-Feb 2026": "-21%" },
-        { "Mar-Apr 2026": "-9%" }
-      ],
-
-      "return_percent": [
-        { "1_month": "+3%" },
-        { "2_months": "-1%" },
-        { "3_months": "-7%" },
-        { "4_months": "-15%" },
-        { "5_months": "-22%" },
-        { "6_months": "-18%" }
-      ]
+      "reason_for_movement": "Rode the broad sector-wide rotation rally alongside large-cap peers",
+      "key_news": "No major standalone trigger; moved largely in line with the sector"
     },
-
     "Coforge": {
-      "reason": "Deal wins, mid-cap IT leadership",
-      "last_15_days_upside_downside": "+6%",
-
-      "historical_return_2month_blocks": [
-        { "May-Jun 2024": "+12%" },
-        { "Jul-Aug 2024": "+8%" },
-        { "Sep-Oct 2024": "-4%" },
-        { "Nov-Dec 2024": "+11%" },
-        { "Jan-Feb 2025": "+15%" },
-        { "Mar-Apr 2025": "-3%" },
-        { "May-Jun 2025": "+10%" },
-        { "Jul-Aug 2025": "+7%" },
-        { "Sep-Oct 2025": "-4%" },
-        { "Nov-Dec 2025": "+12%" },
-        { "Jan-Feb 2026": "-16%" },
-        { "Mar-Apr 2026": "-7%" }
-      ],
-
-      "return_percent": [
-        { "1_month": "+5%" },
-        { "2_months": "+2%" },
-        { "3_months": "-4%" },
-        { "4_months": "-10%" },
-        { "5_months": "-15%" },
-        { "6_months": "-11%" }
-      ]
+      "reason_for_movement": "Blow-out quarterly results and a sharply stronger order book drove a single-day breakout",
+      "key_news": "Results were boosted by a recent acquisition; company declared an interim dividend and reported a much larger deal pipeline"
+    },
+    "Persistent Systems": {
+      "reason_for_movement": "Among the sharpest reversals off 52-week lows alongside HCLTech",
+      "key_news": "Rallied strongly as investors rotated back into mid-cap IT names"
+    },
+    "Mphasis": {
+      "reason_for_movement": "Mixed month - recovered early with the sector, then lagged on some sessions",
+      "key_news": "Flagged as a notable laggard on at least one trading day despite sector strength"
     }
   },
-
-  "key_drivers": [
-    "Strong US software earnings",
-    "AI spending optimism",
-    "Short-covering rally",
-    "Global tech volatility",
-    "Rupee depreciation support",
-    "Improved valuation comfort"
-  ],
-
-  "next_5_trading_days_expectation": {
-    "sector_view": "Mild Bullish",
-    "expected_nifty_it_move": "+1% to +3%",
-    "probability": {
-      "bullish": "60%",
-      "sideways": "25%",
-      "bearish": "15%"
-    },
-
-    "likely_outperformers": [
-      "Persistent Systems",
-      "Coforge",
-      "Tech Mahindra",
-      "Infosys"
-    ],
-
-    "likely_underperformers": [
-      "Wipro",
-      "HCLTech"
-    ],
-
-    "supporting_factors": [
-      "US software strength",
-      "AI investment demand",
-      "Short covering continuation",
-      "Attractive valuations"
-    ],
-
-    "risk_factors": [
-      "Global tech correction",
-      "US recession concerns",
-      "AI disruption narrative",
-      "Profit booking pressure"
-    ]
-  },
-
-  "summary": [
-    "Persistent strongest momentum",
-    "Coforge remains leader",
-    "Infosys recovering steadily",
-    "TCS defensive choice",
-    "TechM gaining traction",
-    "Near-term bias positive"
-  ],
-
-  "references": {
-    "nifty_it_june_rally": "Nifty IT gained ~2.7% on Jun-01 after strong US software earnings optimism",
-    "persistent_leadership": "Persistent Systems led June rebound with ~4% single-day gains",
-    "recent_correction": "Nifty IT corrected ~8% over four sessions after AI-related global tech selloff"
-  }
+  "sector_news_last_month": [
+    "Nifty IT touched a fresh 52-week low on 1 July, marking the trough of a painful multi-month correction",
+    "From that low, the index staged a sharp recovery through July, becoming one of the best-performing NSE sectoral indices for the month",
+    "A major driver was global capital rotating out of AI-linked semiconductor stocks in South Korea, Japan and Taiwan and into IT services names, seen as safer since they earn revenue from services rather than AI hardware",
+    "A sharp Nasdaq selloff in semiconductor stocks on AI-valuation jitters reinforced this rotation into Indian IT",
+    "Q1 FY27 earnings season ran through the month, with nearly every major IT company reporting results and setting stock-specific direction within the broader rally",
+    "Results were broadly mixed to positive: several companies showed resilient or improving margins and strong deal-win momentum, even as revenue growth stayed generally muted amid ongoing global macro uncertainty",
+    "Guidance commentary was a key swing factor - names that held or reaffirmed full-year guidance were rewarded, while any guidance trims triggered short-lived profit booking",
+    "Despite the strong monthly bounce, the sector remained deeply negative on a year-to-date basis for 2026, having underperformed the broader market by a wide margin over the year as a whole",
+    "Markets also stayed watchful of the US Federal Reserve's interest-rate decision through the month, an important cross-current for global risk sentiment and FII flows into Indian IT",
+    "AI itself was a double-edged theme for the sector - a source of new deal wins and revenue for IT services companies, but also the trigger for the semiconductor-linked volatility that shaped flows into and out of the sector"
+  ]
 }

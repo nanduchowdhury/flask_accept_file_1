@@ -1,273 +1,561 @@
 {
-  "week-ending-date": "17Jul26",
-  "report_period": {
-    "week": "13Jul26 to 17Jul26",
-    "last-2-qtrs": "approx 02Jan26 to 17Jul26 (Q1+Q2 CY2026)",
-    "6-months": "approx mid-Jan26 to 17Jul26",
-    "1-year": "approx 23Jul25 to 17Jul26"
+  "header": "India NSE/BSE Sector Analysis (1 July 2026 to 31 July 2026)",
+  "period": {
+    "start": "2026-07-01",
+    "end": "2026-07-31",
+    "description": "Major sector developments and market-moving news during July 2026."
   },
-  "data_quality_note": "Weekly (13-17 Jul 2026) figures for Nifty 50, Sensex, Nifty IT, Nifty Media, Nifty Pharma and Nifty Healthcare are sourced from market reports and confirmed. Other weekly sector figures are close approximations built from daily sectoral moves reported through the week. Longer-horizon figures (last-2-qtrs, 6-months, 1-year) are reliably anchored for Nifty 50/Sensex using confirmed index closing levels; sector-level longer-horizon figures are directional estimates (marked 'estimated') since verified index-level data for every sector/period was not available via search - treat these as indicative, not exact.",
-
-  "market_overview": {
-    "nifty_50_close": 24334.30,
-    "sensex_close": 78151.45,
-    "india_vix": 13.15,
-    "week_change_nifty50_pct": 0.52,
-    "week_change_sensex_pct": 0.75,
-    "fii_activity": "FIIs were net sellers for the week (13-17 Jul 2026), with cumulative cash-market net outflow of approx Rs -9,118 crore. Selling was heaviest on 16 Jul (Rs -4,205.56 crore) and eased sharply by Friday (Rs -376.41 crore). FIIs stayed net long in index futures/options into the weekend, however, signaling short-term bullish derivative positioning.",
-    "dii_activity": "DIIs were consistent net buyers through the week, with cumulative net inflow of approx Rs +9,807 crore, largely offsetting FII selling and providing a floor under the market. DIIs rotated out of richly-valued mid- and small-caps into large-cap IT and banking names.",
-    "global_triggers": [
-      "Escalating US-Iran tensions; US airstrikes on Iranian targets and threats to Iran's power grid kept crude oil prices elevated and geopolitical risk premium high",
-      "Uncertainty over Strait of Hormuz shipping/transit arrangements following the informal Iran-US truce, with no clear rulebook on passage",
-      "Wall Street profit-booking in AI-linked/semiconductor counters dragged US and Asian tech stocks lower mid-week",
-      "Firm US dollar and elevated crude prices kept FIIs cautious on emerging markets including India",
-      "Rupee under mild pressure (~95.3-96.2/USD) on higher energy import costs"
-    ],
-    "predictions_next_week": [
-      "Nifty 50 likely to stay range-bound between 24,000 support and 24,500-25,000 resistance zone; a decisive move above 24,500 needed to confirm a stronger up-move",
-      "Q1FY27 earnings season to remain the primary domestic driver, with major private banks and Reliance Industries results due, which could set the tone for Financial Services and Energy",
-      "Sector rotation likely to continue; Realty, Pharma, Media and Midcap names sit in the RRG 'leading' quadrant and could keep outperforming the broader Nifty 500",
-      "FII flows are the key swing factor - a shift back to net buying would be a strong bullish signal, while continued selling on oil/geopolitical worries could cap upside",
-      "Watch for continued volatility around any escalation/de-escalation headlines on the Iran-US/Strait of Hormuz situation"
-    ],
-    "risk_level": "Moderate - India VIX near 13 (relatively low), but oil-price and geopolitical risk (Iran-US, Strait of Hormuz) plus continued FII selling are key overhangs",
-    "momentum": "Improving/neutral-to-positive - Nifty registered its tightest weekly range of 2026 and closed higher, but breadth was narrow and concentrated in large-cap IT/banking names while broader mid/small-caps lagged",
-    "sentiment": "Cautiously optimistic - earnings-led optimism (Tech Mahindra, Jio Financial) offset by weak market breadth, oil-driven geopolitical caution, and continued (though moderating) FII selling",
-    "key_stocks": [
-      "Kotak Mahindra Bank - among top Nifty gainers on earnings optimism, though later fell ~4% on slow sequential loan/deposit growth concerns",
-      "Tech Mahindra - rallied on strong Q1 results, led IT sector gains",
-      "Jio Financial Services - rallied on strong Q1 results",
-      "TCS - among top gainers, supported IT rally",
-      "Reliance Industries - gained ~2.4% on promoter stake increase to 50.48% and ahead of Q1 results",
-      "Wipro - fell on cautious quarterly guidance",
-      "Dr Reddy's Laboratories & Sun Pharma - biggest drags on Nifty Pharma after Novo Nordisk's Wegovy approval in India raised competitive concerns",
-      "Cipla - among top Nifty laggards for the week",
-      "Grasim Industries (via Aditya Birla Renewables) - announced Rs 17,200 crore ($1.8bn) acquisition of Shell's Sprng Energy (5 GWp renewable capacity), a major corporate action for the week"
-    ]
-  },
-
   "all_sectors": {
-    "NIFTY_50": {
-      "last_week_return_pct": 0.52,
-      "last_2_qtrs_return_pct": -7.6,
-      "last_6_month_return_pct": -5.3,
-      "last_1_year_return_pct": -3.5,
-      "close_level": 24334.30,
-      "data_quality": "confirmed (week, 1yr); estimated (2qtrs, 6mo) from anchored closing levels",
-      "drivers": ["Q1FY27 earnings optimism (Tech Mahindra, Jio Financial)", "DII buying offsetting FII selling", "Large-cap IT/banking led rally amid weak breadth"],
-      "positive_news": ["Nifty posted its tightest weekly trading range of 2026, closing at a one-week high on earnings optimism"],
-      "negative_news": ["Broader market underperformed frontline index; Midcap 100 and Smallcap 100 both declined on the week, showing narrow participation"],
-      "other_notes": ["Traded in a narrow 368-point weekly band between 24,000 and 24,368"]
+    "Nifty-50": {
+      "positive_news": [
+        "Corporate earnings remained broadly resilient.",
+        "FPI buying improved during July.",
+        "Banking, realty and selected consumer stocks supported sentiment.",
+        "Domestic institutional support remained constructive."
+      ],
+      "negative_news": [
+        "High crude prices remained a macro risk.",
+        "Geopolitical uncertainty kept volatility elevated.",
+        "IT weakness periodically pressured the benchmark."
+      ],
+      "other": [
+        "Market remained earnings-driven throughout July.",
+        "Global risk appetite influenced daily moves.",
+        "Stock-specific earnings caused significant sector rotation."
+      ]
     },
-    "SENSEX": {
-      "last_week_return_pct": 0.75,
-      "last_2_qtrs_return_pct": -7.0,
-      "last_6_month_return_pct": -4.9,
-      "last_1_year_return_pct": -5.5,
-      "close_level": 78151.45,
-      "data_quality": "confirmed (week); estimated (others)",
-      "drivers": ["Reliance Industries, banking and IT heavyweights drove the rally"],
-      "positive_news": ["Surged 964.58 points (1.25%) on Friday alone on earnings optimism"],
-      "negative_news": [],
-      "other_notes": []
+    "Nifty-100": {
+      "positive_news": [
+        "Large-cap earnings supported broader market resilience.",
+        "FPI interest returned to selected sectors.",
+        "Financials and consumer-facing companies attracted buying."
+      ],
+      "negative_news": [
+        "IT weakness remained an overhang.",
+        "Global technology volatility affected sentiment.",
+        "Crude-price risks remained relevant."
+      ],
+      "other": [
+        "Sector rotation remained stronger than broad index trends.",
+        "Mid-cap participation remained selective."
+      ]
     },
-    "NIFTY_100": {
-      "last_week_return_pct": 0.4,
-      "last_2_qtrs_return_pct": -7.4,
-      "last_6_month_return_pct": -5.1,
-      "last_1_year_return_pct": -3.8,
-      "data_quality": "estimated - derived from Nifty 50 with slight broader-market drag",
-      "drivers": ["Large-cap led gains diluted slightly by Next 50 underperformance"],
-      "positive_news": [],
-      "negative_news": [],
-      "other_notes": []
+    "Nifty-500": {
+      "positive_news": [
+        "Broader earnings momentum supported investor confidence.",
+        "Consumer services attracted strong foreign buying.",
+        "Metals and healthcare received meaningful FPI interest.",
+        "Infrastructure themes remained active."
+      ],
+      "negative_news": [
+        "Valuations remained elevated across several growth segments.",
+        "Global risk factors affected smaller companies more sharply.",
+        "Commodity volatility created earnings uncertainty."
+      ],
+      "other": [
+        "Breadth remained highly sector-specific.",
+        "FPI flows favored selected cyclical and consumer themes."
+      ]
     },
-    "NIFTY_500": {
-      "last_week_return_pct": 0.15,
-      "last_2_qtrs_return_pct": -7.9,
-      "last_6_month_return_pct": -5.8,
-      "last_1_year_return_pct": -4.5,
-      "data_quality": "estimated - broader index dragged by mid/small-cap weakness this week",
-      "drivers": ["Mid and small-cap underperformance offset large-cap strength"],
-      "positive_news": [],
-      "negative_news": ["Broader market breadth remained weak - more decliners (2,419) than advancers (1,632) on Friday alone"],
-      "other_notes": []
+    "Banking": {
+      "positive_news": [
+        "Private-bank earnings supported sector confidence.",
+        "Credit growth remained healthy.",
+        "ICICI Bank delivered comparatively strong results.",
+        "RBI funding measures supported liquidity conditions."
+      ],
+      "negative_news": [
+        "Deposit growth continued trailing credit growth.",
+        "Margin pressure affected several private banks.",
+        "HDFC Bank faced investor concerns after results."
+      ],
+      "other": [
+        "Banking remained among July's key market drivers.",
+        "Asset quality stayed broadly resilient."
+      ]
     },
-    "NIFTY_IT": {
-      "last_week_return_pct": 4.3,
-      "last_2_qtrs_return_pct": -12.0,
-      "last_6_month_return_pct": -9.0,
-      "last_1_year_return_pct": -15.0,
-      "data_quality": "confirmed (week); estimated (longer horizons, sector known to be one of the weakest over the past year)",
-      "drivers": ["Strong Tech Mahindra and TCS Q1 earnings", "DII rotation into large-cap IT as a value play"],
-      "positive_news": ["Tech Mahindra Q1 results beat expectations, driving a sector-wide rally", "TCS and HCLTech featured among top Nifty gainers"],
-      "negative_news": ["Wipro issued cautious quarterly guidance, capping some upside", "Sector remains well below 52-week highs on a 1-year view amid weak global tech demand"],
-      "other_notes": ["Top-performing sector for the week per weekly sector rotation data; moved from 'Lagging' to 'Improving' quadrant on relative rotation graphs"]
+    "Financial Services": {
+      "positive_news": [
+        "NBFC demand remained supported by credit expansion.",
+        "Insurance and lending businesses attracted investor interest.",
+        "Financial-sector earnings remained broadly constructive."
+      ],
+      "negative_news": [
+        "Funding costs remained important for lenders.",
+        "Asset-quality concerns persisted in selected segments."
+      ],
+      "other": [
+        "Rate-sensitive financial stocks remained actively traded.",
+        "Credit-cycle expectations remained a major theme."
+      ]
     },
-    "NIFTY_BANK": {
-      "last_week_return_pct": 1.8,
-      "last_2_qtrs_return_pct": -3.0,
-      "last_6_month_return_pct": -1.5,
-      "last_1_year_return_pct": 2.0,
-      "data_quality": "estimated (week directionally confirmed positive; Friday alone +1.6%)",
-      "drivers": ["Anticipation of strong Q1 results from major private banks over the weekend", "Kotak Mahindra Bank and Axis Bank led gains"],
-      "positive_news": ["Nifty Private Bank was the top sectoral gainer on Friday, rising 2%"],
-      "negative_news": ["Kotak Mahindra Bank shares fell about 4% intraweek on concerns over slow sequential loan and deposit growth"],
-      "other_notes": []
+    "PSU Banks": {
+      "positive_news": [
+        "PSU-bank earnings remained supportive.",
+        "Strong credit demand improved sentiment.",
+        "Capital-market funding conditions remained favorable.",
+        "SBI attracted institutional confidence."
+      ],
+      "negative_news": [
+        "Deposit competition remained a concern.",
+        "Government ownership continued influencing valuations."
+      ],
+      "other": [
+        "PSU-bank rotation remained active during July."
+      ]
     },
-    "NIFTY_PRIVATE_BANK": {
-      "last_week_return_pct": 2.5,
-      "last_2_qtrs_return_pct": -2.5,
-      "last_6_month_return_pct": -1.0,
-      "last_1_year_return_pct": 3.0,
-      "data_quality": "estimated (Friday +2% confirmed as best single-day sectoral performer)",
-      "drivers": ["Earnings optimism ahead of major private bank Q1 results"],
-      "positive_news": ["Emerged as top sectoral gainer on Friday, rising 2%"],
-      "negative_news": [],
-      "other_notes": []
+    "Private Banks": {
+      "positive_news": [
+        "ICICI Bank delivered strong earnings momentum.",
+        "Loan growth remained supportive.",
+        "Private banks benefited from improving risk appetite."
+      ],
+      "negative_news": [
+        "HDFC Bank faced margin concerns.",
+        "Funding costs remained closely watched.",
+        "Deposit competition constrained margins."
+      ],
+      "other": [
+        "Investor preference became increasingly stock-specific."
+      ]
     },
-    "NIFTY_FINANCIAL_SERVICES": {
-      "last_week_return_pct": 1.5,
-      "last_2_qtrs_return_pct": -3.5,
-      "last_6_month_return_pct": -2.0,
-      "last_1_year_return_pct": 1.0,
-      "data_quality": "estimated",
-      "drivers": ["Jio Financial Services rally on strong Q1 results", "General financials strength alongside banks"],
-      "positive_news": ["Jio Financial Services among top Nifty gainers for the week on earnings beat"],
-      "negative_news": [],
-      "other_notes": []
+    "IT": {
+      "positive_news": [
+        "AI transformation demand supported selected companies.",
+        "HCLTech delivered strong deal momentum.",
+        "Coforge reported strong quarterly growth.",
+        "Tech Mahindra showed operating improvement."
+      ],
+      "negative_news": [
+        "AI disruption fears pressured sentiment.",
+        "Global technology spending remained uncertain.",
+        "Wipro's outlook raised demand concerns."
+      ],
+      "other": [
+        "Sector sentiment improved toward month-end.",
+        "AI infrastructure remained more attractive than generic services."
+      ]
     },
-    "NIFTY_AUTO": {
-      "last_week_return_pct": 1.8,
-      "last_2_qtrs_return_pct": -2.0,
-      "last_6_month_return_pct": 0.5,
-      "last_1_year_return_pct": 3.5,
-      "data_quality": "estimated (multiple confirmed daily gains during the week - e.g. +1.47% and +1.3% on separate sessions)",
-      "drivers": ["Hero MotoCorp led rally on upbeat annual report commentary", "Broad-based buying interest through the week"],
-      "positive_news": ["Auto stocks attracted strong buying multiple sessions this week, among the better-performing cyclical sectors"],
-      "negative_news": ["Briefly dipped mid-week (14 Jul) as oil-price surge from Iran tensions hit risk appetite for the auto sector"],
-      "other_notes": []
+    "Auto": {
+      "positive_news": [
+        "Passenger-vehicle demand remained resilient.",
+        "Premium and SUV demand supported sentiment.",
+        "Auto earnings remained a major market focus.",
+        "EV adoption continued attracting investment."
+      ],
+      "negative_news": [
+        "Commodity costs remained an earnings risk.",
+        "Global auto demand remained uneven.",
+        "Export-market uncertainty persisted."
+      ],
+      "other": [
+        "Two-wheelers and passenger vehicles showed differentiated trends.",
+        "EV competition remained intense."
+      ]
     },
-    "NIFTY_PHARMA": {
-      "last_week_return_pct": -1.4,
-      "last_2_qtrs_return_pct": 3.0,
-      "last_6_month_return_pct": 4.0,
-      "last_1_year_return_pct": 6.0,
-      "data_quality": "confirmed (week); estimated (longer horizons - pharma has been a relatively resilient defensive sector)",
-      "drivers": ["Novo Nordisk's India regulatory approval for obesity drug Wegovy triggered a sector sell-off on competitive concerns"],
-      "positive_news": ["Sector remains in the 'Leading' quadrant on relative rotation graphs over a longer horizon, suggesting underlying strength despite this week's dip"],
-      "negative_news": ["Biggest sectoral loser of the week, dragged by Dr Reddy's Laboratories and Sun Pharma after Wegovy's India approval"],
-      "other_notes": []
+    "Auto Components": {
+      "positive_news": [
+        "Vehicle-electrification demand supported component suppliers.",
+        "Export opportunities remained constructive.",
+        "Advanced automotive electronics attracted investor attention."
+      ],
+      "negative_news": [
+        "Global vehicle-production uncertainty remained.",
+        "Raw-material costs affected selected suppliers."
+      ],
+      "other": [
+        "Semiconductor availability remained relevant to advanced components."
+      ]
     },
-    "NIFTY_HEALTHCARE": {
-      "last_week_return_pct": -1.28,
-      "last_2_qtrs_return_pct": 2.5,
-      "last_6_month_return_pct": 3.5,
-      "last_1_year_return_pct": 5.0,
-      "data_quality": "confirmed (week); estimated (longer horizons)",
-      "drivers": ["Same Wegovy-approval driven sell-off that hit Nifty Pharma"],
-      "positive_news": [],
-      "negative_news": ["Declined 1.28% for the week following Novo Nordisk's obesity-drug approval in India"],
-      "other_notes": []
+    "Pharma": {
+      "positive_news": [
+        "Healthcare attracted meaningful FPI buying.",
+        "Domestic pharmaceutical demand remained resilient.",
+        "Specialty and chronic therapies remained attractive."
+      ],
+      "negative_news": [
+        "US regulatory scrutiny remained a risk.",
+        "Pricing pressure affected selected export businesses.",
+        "Currency movements affected overseas earnings."
+      ],
+      "other": [
+        "Investor preference favored companies with differentiated pipelines."
+      ]
     },
-    "NIFTY_FMCG": {
-      "last_week_return_pct": 0.4,
-      "last_2_qtrs_return_pct": -4.0,
-      "last_6_month_return_pct": -2.5,
-      "last_1_year_return_pct": -1.5,
-      "data_quality": "estimated (Friday +0.7% confirmed, mixed sessions during the week)",
-      "drivers": ["Consumption-linked buying interest on Friday's rally"],
-      "positive_news": ["Rose 0.7% on Friday as part of the broad-based rally"],
-      "negative_news": ["Among sectors that led declines mid-week (15 Jul) alongside IT and metal"],
-      "other_notes": []
+    "Healthcare": {
+      "positive_news": [
+        "Healthcare remained among major FPI buying sectors.",
+        "Hospital and diagnostic demand stayed resilient.",
+        "Domestic healthcare expansion remained constructive."
+      ],
+      "negative_news": [
+        "Valuations remained demanding in selected healthcare stocks.",
+        "Regulatory risks affected pharmaceutical-linked businesses."
+      ],
+      "other": [
+        "Hospitals remained a preferred defensive growth theme."
+      ]
     },
-    "NIFTY_METAL": {
-      "last_week_return_pct": -0.3,
-      "last_2_qtrs_return_pct": -1.0,
-      "last_6_month_return_pct": 1.0,
-      "last_1_year_return_pct": 4.0,
-      "data_quality": "estimated (mixed/negative sessions confirmed on 14-15 Jul)",
-      "drivers": ["Global metal price volatility and profit booking after recent gains"],
-      "positive_news": [],
-      "negative_news": ["Among sectors leading declines during the mid-week session (15 Jul) alongside IT and FMCG"],
-      "other_notes": []
+    "FMCG": {
+      "positive_news": [
+        "FMCG stocks supported benchmark gains at multiple points.",
+        "Rural-demand expectations improved.",
+        "Selected consumer names attracted defensive buying."
+      ],
+      "negative_news": [
+        "Delayed monsoon concerns affected sentiment.",
+        "Input-cost inflation remained a risk.",
+        "Premium valuations limited upside for some names."
+      ],
+      "other": [
+        "Sector remained defensive rather than growth-led."
+      ]
     },
-    "NIFTY_ENERGY": {
-      "last_week_return_pct": 1.2,
-      "last_2_qtrs_return_pct": 2.0,
-      "last_6_month_return_pct": 1.5,
-      "last_1_year_return_pct": 0.5,
-      "data_quality": "estimated (Nifty Oil & Gas +1% on Friday confirmed)",
-      "drivers": ["Elevated crude oil prices amid Iran-US tensions boosted upstream/energy names", "Reliance Industries strength lifted the index"],
-      "positive_news": ["Nifty Oil & Gas added 1% on Friday, aided by gains in Reliance Industries"],
-      "negative_news": ["Oil price surge is a double-edged sword - raises input costs for oil-import-dependent sectors even as it lifts upstream energy names"],
-      "other_notes": []
+    "Consumer Durables": {
+      "positive_news": [
+        "Cooling demand supported appliance companies.",
+        "Urban consumption remained resilient.",
+        "Premiumization supported selected brands."
+      ],
+      "negative_news": [
+        "Commodity costs remained a margin risk.",
+        "Monsoon timing affected some seasonal categories."
+      ],
+      "other": [
+        "AI data-center cooling created an indirect infrastructure opportunity."
+      ]
     },
-    "NIFTY_PSU_BANK": {
-      "last_week_return_pct": 0.5,
-      "last_2_qtrs_return_pct": -1.5,
-      "last_6_month_return_pct": 1.0,
-      "last_1_year_return_pct": 8.0,
-      "data_quality": "estimated (mixed sessions - positive on 15 Jul at +1%, negative on 14 Jul)",
-      "drivers": ["Continued institutional interest in PSU banking names"],
-      "positive_news": ["Gained about 1% in the 15 Jul session amid broad-based buying"],
-      "negative_news": ["Declined alongside Realty, Autos and IT on 14 Jul as the oil-price surge hit risk appetite"],
-      "other_notes": []
+    "Metals": {
+      "positive_news": [
+        "Metals attracted strong FPI buying.",
+        "Domestic infrastructure demand remained supportive.",
+        "Steel demand expectations improved sentiment."
+      ],
+      "negative_news": [
+        "Global metal-price volatility remained high.",
+        "Chinese supply conditions remained a concern.",
+        "Export-market uncertainty persisted."
+      ],
+      "other": [
+        "Commodity stocks remained sensitive to global macro signals."
+      ]
     },
-    "NIFTY_REALTY": {
-      "last_week_return_pct": 0.3,
-      "last_2_qtrs_return_pct": -5.0,
-      "last_6_month_return_pct": -2.0,
-      "last_1_year_return_pct": -4.0,
-      "data_quality": "estimated (led prior week's rally; eased out of top-5 sectors this week per weekly rotation report)",
-      "drivers": ["Momentum pared after leading the previous week's rally"],
-      "positive_news": ["Remains in the 'Leading' quadrant on relative rotation graphs, alongside Pharma and Media, over a longer horizon"],
-      "negative_news": ["Dropped out of the top-5 weekly sector performers after leading the prior week", "Declined on 14 Jul alongside PSU Banks, Autos and IT as the oil surge hit risk appetite"],
-      "other_notes": []
+    "Mining": {
+      "positive_news": [
+        "Commodity demand supported selected mining stocks.",
+        "Domestic infrastructure activity remained supportive.",
+        "Coal demand remained strong."
+      ],
+      "negative_news": [
+        "Commodity-price volatility remained elevated.",
+        "Environmental and regulatory risks persisted."
+      ],
+      "other": [
+        "Energy-transition demand increasingly influenced mining narratives."
+      ]
     },
-    "NIFTY_MEDIA": {
-      "last_week_return_pct": 2.5,
-      "last_2_qtrs_return_pct": -6.0,
-      "last_6_month_return_pct": -3.0,
-      "last_1_year_return_pct": -8.0,
-      "data_quality": "confirmed (week - second-best sectoral performer)",
-      "drivers": ["Continued sector rotation and momentum from prior weeks"],
-      "positive_news": ["Second-best performing sector this week, up 2.5%"],
-      "negative_news": ["Fell 0.69% in isolated Friday trade even as the weekly trend was positive, and is showing a paring of relative momentum on RRG charts"],
-      "other_notes": ["Sits in the 'Leading' quadrant on relative rotation graphs but showing signs of momentum fading"]
+    "Energy": {
+      "positive_news": [
+        "Power demand remained strong.",
+        "Renewable generation reached important milestones.",
+        "AI data centers strengthened electricity-demand expectations.",
+        "Adani Green expanded renewable operations."
+      ],
+      "negative_news": [
+        "Crude-price volatility affected oil companies.",
+        "Shipping disruptions complicated crude logistics.",
+        "Refining economics pressured selected oil marketers."
+      ],
+      "other": [
+        "Power infrastructure became increasingly important to AI expansion.",
+        "Thermal generation remained essential during high-demand periods."
+      ]
     },
-    "NIFTY_MIDCAP_100": {
-      "last_week_return_pct": -0.5,
-      "last_2_qtrs_return_pct": -6.0,
-      "last_6_month_return_pct": -4.0,
-      "last_1_year_return_pct": -2.0,
-      "data_quality": "estimated (Friday -0.4% confirmed)",
-      "drivers": ["Institutional buying concentrated in large-caps rather than broader market this week"],
-      "positive_news": [],
-      "negative_news": ["Declined 0.4% on Friday even as headline indices rallied, reflecting narrow market breadth"],
-      "other_notes": ["Sits in the 'Leading' quadrant on relative rotation graphs against Nifty 500 despite this week's dip"]
+    "Oil & Gas": {
+      "positive_news": [
+        "Indian refiners gained export opportunities from global disruptions.",
+        "Domestic fuel demand remained resilient.",
+        "Gas infrastructure remained strategically important."
+      ],
+      "negative_news": [
+        "Crude-price volatility remained high.",
+        "Red Sea disruptions increased shipping complexity.",
+        "Refining margins pressured selected companies."
+      ],
+      "other": [
+        "Energy security remained a major policy theme."
+      ]
     },
-    "NIFTY_SMALLCAP_100": {
-      "last_week_return_pct": -0.3,
-      "last_2_qtrs_return_pct": -8.0,
-      "last_6_month_return_pct": -6.0,
-      "last_1_year_return_pct": -5.0,
-      "data_quality": "estimated (Friday -0.2% confirmed)",
-      "drivers": ["Same large-cap rotation dynamic as Midcap 100"],
-      "positive_news": [],
-      "negative_news": ["Slipped 0.2% on Friday, underperforming the broader rally"],
-      "other_notes": []
+    "Power": {
+      "positive_news": [
+        "Electricity demand remained elevated.",
+        "Renewable integration increased grid investment needs.",
+        "AI data centers strengthened long-term demand expectations.",
+        "NTPC and Tata Power benefited from sector optimism."
+      ],
+      "negative_news": [
+        "Fuel availability remained relevant for thermal generators.",
+        "Transmission constraints could limit new capacity."
+      ],
+      "other": [
+        "Power availability became critical for AI infrastructure.",
+        "Grid modernization remained a long-term investment theme."
+      ]
     },
-    "NIFTY_CONSUMER_DURABLES": {
-      "last_week_return_pct": 0.5,
-      "last_2_qtrs_return_pct": -3.0,
-      "last_6_month_return_pct": -1.0,
-      "last_1_year_return_pct": 2.0,
-      "data_quality": "estimated (+0.67% confirmed on 15 Jul session)",
-      "drivers": ["Consumption-linked buying interest"],
-      "positive_news": ["Gained 0.67% in the 15 Jul session, supporting positive domestic consumption sentiment"],
-      "negative_news": [],
-      "other_notes": []
+    "Renewable Energy": {
+      "positive_news": [
+        "Solar and wind generation reached new milestones.",
+        "Adani Green expanded operational renewable capacity.",
+        "AI electricity demand supported renewable investment."
+      ],
+      "negative_news": [
+        "Grid integration remained challenging.",
+        "Project execution and financing remained important risks."
+      ],
+      "other": [
+        "Green power increasingly featured in data-center planning."
+      ]
+    },
+    "Realty": {
+      "positive_news": [
+        "Premium housing demand remained strong.",
+        "Luxury housing continued attracting buyers.",
+        "Commercial leasing remained resilient.",
+        "Realty stocks supported July benchmark gains."
+      ],
+      "negative_news": [
+        "Profit-taking appeared after strong rallies.",
+        "High valuations affected selected developers."
+      ],
+      "other": [
+        "Mumbai and Bengaluru remained important premium markets.",
+        "Data-center and industrial real estate gained attention."
+      ]
+    },
+    "Infrastructure": {
+      "positive_news": [
+        "Government infrastructure spending remained supportive.",
+        "Power and transmission projects strengthened order visibility.",
+        "Data-center infrastructure created new opportunities."
+      ],
+      "negative_news": [
+        "Execution delays remained a project risk.",
+        "Commodity costs affected construction margins."
+      ],
+      "other": [
+        "AI infrastructure became an emerging growth theme."
+      ]
+    },
+    "Construction": {
+      "positive_news": [
+        "Public infrastructure spending remained supportive.",
+        "Industrial construction demand improved.",
+        "Data-center construction created incremental opportunities."
+      ],
+      "negative_news": [
+        "Input costs remained a margin concern.",
+        "Project execution remained closely monitored."
+      ],
+      "other": [
+        "Semiconductor fabs created specialized construction opportunities."
+      ]
+    },
+    "Telecom": {
+      "positive_news": [
+        "Data consumption remained structurally strong.",
+        "5G monetization continued progressing.",
+        "AI data-center connectivity supported network demand."
+      ],
+      "negative_news": [
+        "Capital expenditure remained elevated.",
+        "Spectrum and infrastructure costs remained important."
+      ],
+      "other": [
+        "Fibre connectivity became increasingly important for AI workloads."
+      ]
+    },
+    "Media & Entertainment": {
+      "positive_news": [
+        "Digital advertising remained supportive.",
+        "Streaming and sports content attracted audiences.",
+        "Consumer engagement remained strong."
+      ],
+      "negative_news": [
+        "Advertising competition remained intense.",
+        "Traditional media continued facing structural pressure."
+      ],
+      "other": [
+        "AI-generated content remained a developing industry theme."
+      ]
+    },
+    "Chemicals": {
+      "positive_news": [
+        "Specialty chemicals remained more resilient than commodity chemicals.",
+        "Domestic manufacturing localization supported selected companies.",
+        "Semiconductor materials created new opportunities."
+      ],
+      "negative_news": [
+        "Global chemical oversupply remained a concern.",
+        "China-linked pricing pressure persisted."
+      ],
+      "other": [
+        "Semiconductor and electronics localization broadened demand opportunities."
+      ]
+    },
+    "Consumer Services": {
+      "positive_news": [
+        "Consumer services attracted strong FPI buying.",
+        "Travel and hospitality demand remained resilient.",
+        "Digital consumer platforms remained active."
+      ],
+      "negative_news": [
+        "High valuations remained a concern.",
+        "Discretionary spending remained sensitive to macro conditions."
+      ],
+      "other": [
+        "This was among July's preferred foreign-investor sectors."
+      ]
+    },
+    "Capital Goods": {
+      "positive_news": [
+        "Infrastructure investment supported equipment demand.",
+        "Power equipment orders remained strong.",
+        "Manufacturing localization supported industrial companies."
+      ],
+      "negative_news": [
+        "Order execution remained an important risk.",
+        "Commodity costs affected selected manufacturers."
+      ],
+      "other": [
+        "AI, semiconductor and grid projects created new demand."
+      ]
+    },
+    "Consumer Electronics": {
+      "positive_news": [
+        "Electronics manufacturing localization gained policy support.",
+        "Semiconductor policy strengthened domestic hardware ambitions.",
+        "EMS companies attracted investor interest."
+      ],
+      "negative_news": [
+        "Imported component dependence remained.",
+        "Global electronics demand remained cyclical."
+      ],
+      "other": [
+        "Semiconductor Mission 2.0 strengthened the ecosystem."
+      ]
+    },
+    "Semiconductors": {
+      "positive_news": [
+        "Semicon 2.0 received Cabinet approval.",
+        "Fab and OSAT projects advanced.",
+        "Equipment and materials localization gained attention.",
+        "EMS stocks benefited from policy optimism."
+      ],
+      "negative_news": [
+        "Project execution remains a major long-term risk.",
+        "Advanced equipment remains heavily import-dependent.",
+        "Semiconductor valuations became increasingly selective."
+      ],
+      "other": [
+        "Packaging and testing remain India's near-term strength.",
+        "Power, cooling and cleanrooms are critical ecosystem suppliers."
+      ]
+    },
+    "Financial Technology": {
+      "positive_news": [
+        "Digital payments remained structurally strong.",
+        "Financial digitization supported technology adoption.",
+        "AI-enabled financial products gained attention."
+      ],
+      "negative_news": [
+        "Regulatory scrutiny remained important.",
+        "Competition remained intense across digital platforms."
+      ],
+      "other": [
+        "AI increasingly became embedded in financial products."
+      ]
+    },
+    "Defence": {
+      "positive_news": [
+        "Domestic defence procurement remained supportive.",
+        "Electronics localization benefited defence manufacturers.",
+        "Long-term order visibility remained constructive."
+      ],
+      "negative_news": [
+        "Project execution remained an important risk.",
+        "Export opportunities remained dependent on geopolitics."
+      ],
+      "other": [
+        "Semiconductor and electronics localization supported defence technology."
+      ]
+    },
+    "Textiles": {
+      "positive_news": [
+        "Export opportunities improved selectively.",
+        "Domestic consumption remained supportive.",
+        "Technical textiles gained strategic attention."
+      ],
+      "negative_news": [
+        "Global apparel demand remained uneven.",
+        "Input-cost volatility pressured selected producers."
+      ],
+      "other": [
+        "Currency movements remained important for exporters."
+      ]
+    },
+    "Logistics": {
+      "positive_news": [
+        "Industrial and consumer demand supported freight activity.",
+        "Data-center and electronics supply chains created new demand.",
+        "Port activity remained important."
+      ],
+      "negative_news": [
+        "Fuel costs remained a risk.",
+        "Global shipping disruptions affected selected routes."
+      ],
+      "other": [
+        "Supply-chain localization remained a long-term opportunity."
+      ]
+    },
+    "Cement": {
+      "positive_news": [
+        "Infrastructure construction supported demand.",
+        "Realty activity remained constructive.",
+        "Urban construction supported volumes."
+      ],
+      "negative_news": [
+        "Fuel costs remained a margin risk.",
+        "Regional oversupply affected pricing in some markets."
+      ],
+      "other": [
+        "Infrastructure and housing remained the main demand drivers."
+      ]
+    },
+    "Agriculture": {
+      "positive_news": [
+        "Food demand remained structurally resilient.",
+        "Rural consumption expectations improved selectively.",
+        "Government support remained important."
+      ],
+      "negative_news": [
+        "Monsoon timing created uncertainty.",
+        "Commodity-price volatility affected agri-input companies."
+      ],
+      "other": [
+        "Rural demand remained closely linked to rainfall."
+      ]
     }
-  }
+  },
+  "market_wide_observations": [
+    "July was primarily driven by corporate earnings.",
+    "FPI buying returned selectively during the month.",
+    "Consumer services, metals and healthcare attracted notable FPI interest.",
+    "Banking, realty and auto remained important market drivers.",
+    "IT remained the weakest major sectoral theme.",
+    "AI infrastructure became a cross-sector investment theme.",
+    "Semiconductor localization created opportunities beyond chip manufacturers.",
+    "High crude prices remained the largest macro risk.",
+    "Geopolitical developments continued influencing global risk appetite."
+  ],
+  "research_note": "This file consolidates major July 2026 sector developments rather than attempting to reproduce every article. Sector names combine major NSE/BSE sector classifications and practical investment themes. Nifty-50, Nifty-100 and Nifty-500 are included as requested."
 }

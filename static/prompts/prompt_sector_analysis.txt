@@ -1,18 +1,10 @@
-Give me analysis of Nifty IT in NSE/BSE mid-May to early-July with following: 
+Give me JSON file for analysis of Nifty IT in NSE/BSE for last month with following: 
 0. header as the time-period
-1. concise pointwise - 3 or 4 words in a line. 
-2. stocks in momentum - stock-names as key.
-    a. And 2 value-fields as : reason & last 15 days +/- stock upside/downside.
-    b. Add one section of historical-return for each stock as array - indicating
-        month-to-month-period-of-2-months stock-return with +/- for a period of last 2 years.
-        Example : [may-june 2026 : 4%, july-august 2026 : 5%, ...]
-    c. Add one section of return-percent as an array : last 1month, 2months, 
-        3months, 4months, 5months, 6months.
-        Example : [1-month : 2%, 2months : 1%, ...]
-3. expectation next 5 trading days
-4. JSON format
-
-
-
-
+1. concise pointwise - max 10 words in a line. 
+2. Give all the news for this sector in the same period.
+3. stocks in momentum - 'related_stocks' as key - keep as many 
+                    stocks as possible with stock-name as key
+    a. Add fields for reason for stock upside or downside during this period.
+    b. Do not put any data or numbers for the stock performance.
+    c. Point out important news in the same period for the stock.
 

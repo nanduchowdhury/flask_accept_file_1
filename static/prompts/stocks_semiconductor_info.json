@@ -1,386 +1,466 @@
 {
-  "sector": "India Semiconductor Ecosystem",
-  "description": "Indian listed companies directly or indirectly participating in the semiconductor value chain, including chip design, OSAT (Assembly, Testing, Marking & Packaging), semiconductor manufacturing, fab construction, specialty chemicals, gases, precision engineering, clean-room infrastructure, power systems and semiconductor equipment.",
-  "related_companies": {
-    "Kaynes Technology": {
-      "category": "Electronics Manufacturing & Semiconductor",
-      "role": "OSAT, embedded electronics, semiconductor manufacturing partner",
-      "current_global_impact": [
-        "India semiconductor mission",
-        "Chip packaging demand",
-        "Industrial electronics growth",
-        "Supply-chain diversification from China"
-      ],
-      "markets_served": [
-        "India",
-        "USA",
-        "Europe",
-        "Japan"
-      ],
-      "expected_future_impact": [
-        "OSAT expansion",
-        "Automotive semiconductor growth",
-        "Higher semiconductor exports",
-        "Government incentives"
+  "header": "India Semiconductor Sector Analysis (1 July 2026 to 31 July 2026)",
+  "scope": {
+    "focus": "Indian listed companies directly or indirectly exposed to semiconductor manufacturing.",
+    "excluded": [
+      "General IT-services companies",
+      "Companies with only generic digital-transformation exposure"
+    ],
+    "included_themes": [
+      "Semiconductor fabs",
+      "OSAT and ATMP",
+      "Chip packaging and testing",
+      "Semiconductor equipment",
+      "Semiconductor materials",
+      "Electronics manufacturing",
+      "Chip design and embedded hardware",
+      "Fab engineering and cleanrooms",
+      "Industrial gases and specialty chemicals",
+      "Power infrastructure",
+      "Cooling and HVAC",
+      "Cables and electrical systems",
+      "Industrial utilities"
+    ]
+  },
+  "sector_summary": [
+    "Semicon 2.0 became July's biggest semiconductor catalyst.",
+    "Government support expanded India's semiconductor ambitions.",
+    "Fab construction remained India's central semiconductor priority.",
+    "Packaging and testing gained near-term importance.",
+    "EMS companies benefited from localization expectations.",
+    "Equipment supply-chain localization gained attention.",
+    "Power reliability remained critical for semiconductor fabs.",
+    "Cleanroom infrastructure created indirect opportunities.",
+    "Specialty materials remained a strategic bottleneck.",
+    "Execution risk remained significant across new projects."
+  ],
+  "sector_news": [
+    {
+      "date": "2026-07-01",
+      "headline": "India continued accelerating semiconductor manufacturing projects.",
+      "impact": "positive",
+      "details": "Fab, packaging and testing projects progressed toward construction and production readiness.",
+      "source": "India Semiconductor Mission / PIB"
+    },
+    {
+      "date": "2026-07-09",
+      "headline": "Tata Electronics and ASML explored equipment-component manufacturing.",
+      "impact": "positive",
+      "details": "The discussions could deepen India's participation in advanced semiconductor equipment supply chains.",
+      "source": "Economic Times"
+    },
+    {
+      "date": "2026-07-15",
+      "headline": "Union Cabinet approved India Semiconductor Mission 2.0.",
+      "impact": "strongly_positive",
+      "details": "The policy expanded support across fabrication, packaging, equipment, materials, design and talent.",
+      "source": "PIB"
+    },
+    {
+      "date": "2026-07-15",
+      "headline": "Mobile manufacturing policy complemented semiconductor expansion.",
+      "impact": "positive",
+      "details": "Domestic electronics production was positioned as a complementary demand base.",
+      "source": "PIB"
+    },
+    {
+      "date": "2026-07-16",
+      "headline": "Semiconductor and EMS stocks rallied after policy approval.",
+      "impact": "positive",
+      "details": "Dixon, Kaynes, Cyient DLM, Syrma SGS and PG Electroplast benefited.",
+      "source": "Business Standard"
+    },
+    {
+      "date": "2026-07-17",
+      "headline": "Chip packaging emerged as India's near-term strength.",
+      "impact": "positive",
+      "details": "OSAT and ATMP projects offered a faster route into semiconductor manufacturing.",
+      "source": "Indian semiconductor industry coverage"
+    },
+    {
+      "date": "2026-07-20",
+      "headline": "India's semiconductor project pipeline remained active.",
+      "impact": "positive",
+      "details": "Approved projects covered fabs, ATMP, OSAT, specialty chips and display-driver technologies.",
+      "source": "PIB"
+    },
+    {
+      "date": "2026-07-22",
+      "headline": "Equipment and materials became strategic priorities.",
+      "impact": "positive",
+      "details": "Industry focused increasingly on reducing imported semiconductor manufacturing inputs.",
+      "source": "Industry coverage"
+    },
+    {
+      "date": "2026-07-24",
+      "headline": "Semiconductor ecosystem development expanded beyond chip manufacturing.",
+      "impact": "positive",
+      "details": "Engineering, cleanrooms, utilities, power and electronics suppliers gained opportunities.",
+      "source": "Industry coverage"
+    },
+    {
+      "date": "2026-07-27",
+      "headline": "Semiconductor project timelines showed continued construction activity.",
+      "impact": "positive",
+      "details": "Multiple approved semiconductor facilities remained under construction or development.",
+      "source": "India Semiconductor Manufacturing Tracker"
+    },
+    {
+      "date": "2026-07-29",
+      "headline": "Domestic chip-design capability remained a policy priority.",
+      "impact": "positive",
+      "details": "Government strategy continued emphasizing design, research and semiconductor talent.",
+      "source": "India Semiconductor Mission"
+    },
+    {
+      "date": "2026-07-30",
+      "headline": "Supply-chain localization remained a central semiconductor theme.",
+      "impact": "positive",
+      "details": "India sought broader participation across equipment, materials, packaging and electronics.",
+      "source": "Industry coverage"
+    },
+    {
+      "date": "2026-07-31",
+      "headline": "Investors increasingly differentiated direct semiconductor exposure.",
+      "impact": "mixed",
+      "details": "Companies with actual semiconductor facilities attracted more attention than generic proxies.",
+      "source": "Indian market coverage"
+    }
+  ],
+  "related_stocks": {
+    "Kaynes Technology India": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Direct semiconductor packaging exposure strengthened after policy support.",
+      "important_news": [
+        "Semicon 2.0 strengthened India's semiconductor manufacturing outlook.",
+        "Kaynes Semiconductor remained a major approved packaging project."
       ]
     },
-
-    "CG Power & Industrial Solutions": {
-      "category": "Semiconductor Manufacturing",
-      "role": "Renesas-CG Power semiconductor fabrication venture",
-      "current_global_impact": [
-        "Government-backed semiconductor fabrication",
-        "Power semiconductor demand",
-        "Industrial electronics expansion"
-      ],
-      "markets_served": [
-        "India",
-        "Japan",
-        "Global OEMs"
-      ],
-      "expected_future_impact": [
-        "Domestic chip manufacturing",
-        "Power semiconductor production",
-        "Import substitution"
+    "CG Power and Industrial Solutions": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Direct OSAT exposure benefited from India's semiconductor push.",
+      "important_news": [
+        "CG Semiconductor remained a major approved semiconductor project.",
+        "Renesas and Stars Microelectronics remained technology partners."
       ]
     },
-
-    "Tata Electronics (Future Listed)": {
-      "category": "Semiconductor Fab",
-      "role": "Semiconductor fabrication and OSAT",
-      "current_global_impact": [
-        "Micron ecosystem",
-        "Global fab investments",
-        "Government semiconductor mission"
-      ],
-      "markets_served": [
-        "USA",
-        "Europe",
-        "India"
-      ],
-      "expected_future_impact": [
-        "Large-scale wafer fabrication",
-        "Advanced packaging",
-        "AI chip manufacturing"
-      ]
-    },
-
-    "Netweb Technologies": {
-      "category": "High Performance Computing",
-      "role": "AI servers using NVIDIA, AMD and Intel processors",
-      "current_global_impact": [
-        "GPU server demand",
-        "AI infrastructure expansion",
-        "Research supercomputing"
-      ],
-      "markets_served": [
-        "India",
-        "Government",
-        "Research Institutes"
-      ],
-      "expected_future_impact": [
-        "Domestic AI cloud growth",
-        "High-performance computing demand",
-        "Semiconductor ecosystem expansion"
-      ]
-    },
-
     "Dixon Technologies": {
-      "category": "Electronics Manufacturing",
-      "role": "Semiconductor-enabled electronics manufacturing",
-      "current_global_impact": [
-        "PLI benefits",
-        "Electronics exports",
-        "Consumer electronics demand"
-      ],
-      "markets_served": [
-        "USA OEMs",
-        "Europe OEMs",
-        "India"
-      ],
-      "expected_future_impact": [
-        "Advanced electronics manufacturing",
-        "Semiconductor assembly opportunities"
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Electronics localization increased semiconductor ecosystem exposure.",
+      "important_news": [
+        "Semicon 2.0 and mobile manufacturing policy supported sentiment.",
+        "EMS stocks rallied after Cabinet approvals."
       ]
     },
-
     "Syrma SGS Technology": {
-      "category": "Electronics Manufacturing",
-      "role": "PCB assemblies and semiconductor-based products",
-      "current_global_impact": [
-        "Industrial electronics growth",
-        "Automotive electronics",
-        "Networking equipment"
-      ],
-      "markets_served": [
-        "USA",
-        "Europe",
-        "India"
-      ],
-      "expected_future_impact": [
-        "Higher semiconductor content",
-        "Medical electronics",
-        "Industrial AI devices"
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "EMS manufacturing benefited from semiconductor localization policy.",
+      "important_news": [
+        "Semicon 2.0 triggered renewed interest in EMS companies.",
+        "Domestic electronics manufacturing remained a policy priority."
       ]
     },
-
+    "Cyient DLM": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "High-reliability electronics manufacturing gained from semiconductor localization.",
+      "important_news": [
+        "EMS stocks rallied after Semicon 2.0 approval.",
+        "Semiconductor localization remained a major catalyst."
+      ]
+    },
+    "PG Electroplast": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Domestic electronics manufacturing expansion supported investor interest.",
+      "important_news": [
+        "EMS stocks gained following semiconductor policy announcements.",
+        "Mobile manufacturing expansion strengthened electronics expectations."
+      ]
+    },
     "MosChip Technologies": {
-      "category": "Chip Design",
-      "role": "ASIC, FPGA and semiconductor IP design",
-      "current_global_impact": [
-        "Growing fabless semiconductor market",
-        "AI accelerator demand",
-        "Automotive chip design"
-      ],
-      "markets_served": [
-        "USA",
-        "Europe",
-        "Japan"
-      ],
-      "expected_future_impact": [
-        "Custom AI chips",
-        "Automotive semiconductors",
-        "Higher design outsourcing"
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Chip design and engineering provide direct semiconductor exposure.",
+      "important_news": [
+        "Chip design remained a core Semicon 2.0 priority.",
+        "Domestic semiconductor design gained policy support."
       ]
     },
-
     "RIR Power Electronics": {
-      "category": "Power Semiconductor",
-      "role": "Power semiconductor devices",
-      "current_global_impact": [
-        "EV demand",
-        "Power electronics",
-        "Industrial automation"
-      ],
-      "markets_served": [
-        "India",
-        "Asia"
-      ],
-      "expected_future_impact": [
-        "SiC devices",
-        "Power management ICs",
-        "Renewable energy"
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Power-semiconductor manufacturing provides direct niche exposure.",
+      "important_news": [
+        "Power semiconductor localization remained strategically important.",
+        "Semicon 2.0 strengthened domestic manufacturing expectations."
       ]
     },
-
+    "SPEL Semiconductor": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Semiconductor assembly and testing provide direct ecosystem exposure.",
+      "important_news": [
+        "Domestic OSAT development remained a major July theme.",
+        "Semiconductor policy strengthened the long-term opportunity."
+      ]
+    },
+    "Avalon Technologies": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "High-value electronics manufacturing benefits from semiconductor localization.",
+      "important_news": [
+        "Domestic electronics manufacturing remained a major policy theme.",
+        "Semiconductor supply-chain localization supported long-term demand."
+      ]
+    },
+    "Amber Enterprises India": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Electronics manufacturing creates indirect semiconductor ecosystem exposure.",
+      "important_news": [
+        "Electronics localization remained a major July policy theme.",
+        "Component manufacturing opportunities supported investor interest."
+      ]
+    },
+    "Sahasra Electronics Solutions": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Electronics and semiconductor manufacturing create ecosystem exposure.",
+      "important_news": [
+        "Semiconductor localization remained supportive.",
+        "Domestic electronics manufacturing gained policy momentum."
+      ]
+    },
     "ASM Technologies": {
-      "category": "Semiconductor Engineering",
-      "role": "Engineering services for semiconductor companies",
-      "current_global_impact": [
-        "Chip design outsourcing",
-        "EDA engineering",
-        "Semiconductor R&D"
-      ],
-      "markets_served": [
-        "USA",
-        "Germany",
-        "Japan"
-      ],
-      "expected_future_impact": [
-        "Growing semiconductor engineering",
-        "EDA services",
-        "Design verification"
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Engineering capabilities support semiconductor equipment ecosystems.",
+      "important_news": [
+        "Semiconductor engineering localization remained an important theme.",
+        "Equipment capability gained policy attention."
       ]
     },
-
-    "Himadri Speciality Chemical": {
-      "category": "Semiconductor Materials",
-      "role": "Advanced carbon materials and specialty chemicals",
-      "current_global_impact": [
-        "Battery materials",
-        "Electronic materials",
-        "Advanced carbon demand"
-      ],
-      "markets_served": [
-        "USA",
-        "Europe",
-        "South Korea"
-      ],
-      "expected_future_impact": [
-        "Semiconductor materials",
-        "High-purity specialty chemicals",
-        "Electronic-grade products"
+    "Larsen & Toubro": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Engineering and industrial infrastructure support semiconductor fab development.",
+      "important_news": [
+        "Semiconductor fab construction created infrastructure opportunities.",
+        "Industrial engineering remained critical for manufacturing expansion."
       ]
     },
-
-    "Linde India": {
-      "category": "Industrial Gases",
-      "role": "Ultra-high purity gases for semiconductor fabs",
-      "current_global_impact": [
-        "Fab construction globally",
-        "Industrial gas demand",
-        "Chip manufacturing expansion"
-      ],
-      "markets_served": [
-        "India",
-        "Global manufacturing ecosystem"
-      ],
-      "expected_future_impact": [
-        "Semiconductor gas demand",
-        "Fab expansion",
-        "Domestic chip manufacturing"
+    "Thermax": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Utility systems and industrial infrastructure support semiconductor fabs.",
+      "important_news": [
+        "Fab infrastructure requires specialized utilities and environmental systems.",
+        "Semiconductor expansion strengthened the long-term opportunity."
       ]
     },
-
-    "Gujarat Fluorochemicals": {
-      "category": "Specialty Chemicals",
-      "role": "Fluorochemicals used in semiconductor manufacturing",
-      "current_global_impact": [
-        "Electronic chemicals",
-        "Battery materials",
-        "Specialty gas demand"
-      ],
-      "markets_served": [
-        "USA",
-        "Europe",
-        "Japan",
-        "South Korea"
-      ],
-      "expected_future_impact": [
-        "Electronic-grade fluorochemicals",
-        "Semiconductor process chemicals"
-      ]
-    },
-
-    "Deepak Nitrite": {
-      "category": "Electronic Chemicals",
-      "role": "Specialty chemicals used in electronics manufacturing",
-      "current_global_impact": [
-        "Chemical supply-chain diversification",
-        "Industrial chemicals"
-      ],
-      "markets_served": [
-        "India",
-        "Europe",
-        "USA"
-      ],
-      "expected_future_impact": [
-        "Electronic chemicals",
-        "Semiconductor process chemicals"
-      ]
-    },
-
     "Blue Star": {
-      "category": "Clean Room & HVAC",
-      "role": "Precision cooling and clean-room HVAC for semiconductor fabs",
-      "current_global_impact": [
-        "Fab construction",
-        "Data-center cooling",
-        "Precision HVAC demand"
-      ],
-      "markets_served": [
-        "India",
-        "Middle East"
-      ],
-      "expected_future_impact": [
-        "Semiconductor fab HVAC",
-        "Ultra-clean manufacturing facilities"
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Precision cooling and HVAC support semiconductor cleanrooms.",
+      "important_news": [
+        "Fab construction strengthened demand expectations for controlled environments.",
+        "Semiconductor facilities require specialized HVAC infrastructure."
       ]
     },
-
     "Voltas": {
-      "category": "Industrial HVAC",
-      "role": "Large industrial cooling systems for electronics manufacturing",
-      "current_global_impact": [
-        "Manufacturing expansion",
-        "Industrial cooling demand"
-      ],
-      "markets_served": [
-        "India",
-        "Middle East"
-      ],
-      "expected_future_impact": [
-        "Fab cooling",
-        "Industrial clean rooms"
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Industrial cooling can indirectly benefit semiconductor facility construction.",
+      "important_news": [
+        "Semiconductor manufacturing expansion created potential HVAC opportunities.",
+        "No major company-specific July semiconductor announcement was identified."
       ]
     },
-
+    "Hitachi Energy India": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Reliable power equipment is essential for semiconductor fabs.",
+      "important_news": [
+        "Fab expansion increased demand expectations for power infrastructure.",
+        "Grid reliability remained a critical semiconductor requirement."
+      ]
+    },
+    "GE Vernova T&D India": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Transmission equipment supports power-intensive semiconductor manufacturing.",
+      "important_news": [
+        "Semiconductor fabs increased long-term power infrastructure requirements.",
+        "Grid modernization remained supportive."
+      ]
+    },
+    "Siemens": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Industrial automation and electrification support fab infrastructure.",
+      "important_news": [
+        "Semiconductor manufacturing expansion strengthened automation demand expectations.",
+        "No major company-specific July semiconductor announcement was identified."
+      ]
+    },
     "ABB India": {
-      "category": "Industrial Automation",
-      "role": "Power distribution and factory automation for semiconductor fabs",
-      "current_global_impact": [
-        "Factory automation",
-        "Precision manufacturing",
-        "Power quality systems"
-      ],
-      "markets_served": [
-        "India",
-        "Europe",
-        "USA"
-      ],
-      "expected_future_impact": [
-        "Smart fabs",
-        "Automated semiconductor manufacturing"
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Automation, electrification and power systems support fabs.",
+      "important_news": [
+        "Semiconductor manufacturing remained an industrial-infrastructure catalyst.",
+        "No major company-specific July semiconductor announcement was identified."
       ]
     },
-
-    "Schneider Electric Infrastructure": {
-      "category": "Power Infrastructure",
-      "role": "Electrical distribution systems for semiconductor fabs",
-      "current_global_impact": [
-        "High-reliability power demand",
-        "Industrial expansion"
-      ],
-      "markets_served": [
-        "India",
-        "Global OEM ecosystem"
-      ],
-      "expected_future_impact": [
-        "Fab electrical infrastructure",
-        "Energy-efficient semiconductor plants"
-      ]
-    },
-
-    "KEI Industries": {
-      "category": "Power Infrastructure",
-      "role": "High-capacity power cables for semiconductor facilities",
-      "current_global_impact": [
-        "Industrial construction",
-        "Manufacturing plants"
-      ],
-      "markets_served": [
-        "India",
-        "Middle East",
-        "Europe"
-      ],
-      "expected_future_impact": [
-        "Semiconductor fab wiring",
-        "Industrial expansion"
-      ]
-    },
-
     "Polycab India": {
-      "category": "Electrical Infrastructure",
-      "role": "Electrical cabling and wiring for semiconductor manufacturing plants",
-      "current_global_impact": [
-        "Large industrial projects",
-        "Electronics manufacturing"
-      ],
-      "markets_served": [
-        "India",
-        "Middle East",
-        "Africa"
-      ],
-      "expected_future_impact": [
-        "New fab construction",
-        "Industrial electrification"
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Fabs require extensive electrical cabling and power distribution.",
+      "important_news": [
+        "Semiconductor infrastructure expansion supported long-term cable demand.",
+        "No major company-specific July semiconductor announcement was identified."
       ]
     },
-
-    "Voltamp Transformers": {
-      "category": "Power Equipment",
-      "role": "Transformers supplying uninterrupted power to fabs",
-      "current_global_impact": [
-        "Grid upgrades",
-        "Industrial power demand"
-      ],
-      "markets_served": [
-        "India"
-      ],
-      "expected_future_impact": [
-        "Semiconductor fab power systems",
-        "High-reliability electrical infrastructure"
+    "KEI Industries": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Electrical cables support semiconductor plant construction.",
+      "important_news": [
+        "Manufacturing infrastructure expansion remained supportive.",
+        "No major company-specific July semiconductor announcement was identified."
+      ]
+    },
+    "RR Kabel": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Electrical wiring provides indirect fab-infrastructure exposure.",
+      "important_news": [
+        "Semiconductor infrastructure remained a long-term cable opportunity.",
+        "No major company-specific July semiconductor announcement was identified."
+      ]
+    },
+    "APAR Industries": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Conductors and cables support power infrastructure for fabs.",
+      "important_news": [
+        "Industrial power infrastructure remained supportive.",
+        "No major company-specific July semiconductor announcement was identified."
+      ]
+    },
+    "Inox India": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Cryogenic and industrial equipment can support semiconductor facilities.",
+      "important_news": [
+        "Specialized industrial infrastructure remained important to semiconductor expansion.",
+        "No major company-specific July semiconductor announcement was identified."
+      ]
+    },
+    "Linde India": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Industrial gases are essential inputs for semiconductor manufacturing.",
+      "important_news": [
+        "Semiconductor fabs strengthened long-term specialty-gas demand expectations.",
+        "No major company-specific July semiconductor announcement was identified."
+      ]
+    },
+    "Gujarat Alkalies and Chemicals": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Specialty chemicals can support semiconductor manufacturing ecosystems.",
+      "important_news": [
+        "Chemical localization remained relevant to semiconductor supply chains.",
+        "No major company-specific July semiconductor announcement was identified."
+      ]
+    },
+    "Anupam Rasayan India": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Specialty chemicals offer indirect semiconductor-material exposure.",
+      "important_news": [
+        "Advanced-material localization remained a semiconductor opportunity.",
+        "No major company-specific July semiconductor announcement was identified."
+      ]
+    },
+    "Navin Fluorine International": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Specialty fluorochemicals support high-technology manufacturing supply chains.",
+      "important_news": [
+        "High-purity specialty chemicals remained strategically important.",
+        "No major company-specific July semiconductor announcement was identified."
+      ]
+    },
+    "Gujarat Fluorochemicals": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Advanced fluorochemical capabilities offer indirect semiconductor exposure.",
+      "important_news": [
+        "Specialty-material localization remained a strategic semiconductor theme.",
+        "No major company-specific July semiconductor announcement was identified."
+      ]
+    },
+    "Bharat Electronics": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Defence electronics and localization create indirect semiconductor exposure.",
+      "important_news": [
+        "Domestic electronics and semiconductor localization remained supportive.",
+        "Defence electronics strengthened the strategic semiconductor ecosystem."
+      ]
+    },
+    "Motherson": {
+      "exchange": "NSE/BSE",
+      "direction": "mixed",
+      "reason": "Automotive electronics provide indirect semiconductor demand exposure.",
+      "important_news": [
+        "Automotive electronics remained an important semiconductor demand segment.",
+        "No major company-specific July semiconductor announcement was identified."
+      ]
+    },
+    "Tata Technologies": {
+      "exchange": "NSE/BSE",
+      "direction": "mixed",
+      "reason": "Advanced manufacturing engineering provides limited semiconductor linkage.",
+      "important_news": [
+        "Semiconductor ecosystem expansion created potential engineering opportunities.",
+        "Advanced manufacturing remained a strategic growth theme."
+      ]
+    },
+    "Tata Power": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Reliable electricity infrastructure supports semiconductor fab development.",
+      "important_news": [
+        "Power infrastructure remained critical for new fabs.",
+        "Manufacturing expansion strengthened long-term electricity demand expectations."
+      ]
+    },
+    "Power Grid Corporation of India": {
+      "exchange": "NSE/BSE",
+      "direction": "upside",
+      "reason": "Grid reliability supports power-intensive semiconductor manufacturing.",
+      "important_news": [
+        "Semiconductor fabs strengthened long-term grid requirements.",
+        "Transmission expansion remained an indirect sector beneficiary."
       ]
     }
-  }
+  },
+  "important_caveat": [
+    "Direct exposure is strongest among fab and OSAT companies.",
+    "EMS companies remain indirect semiconductor beneficiaries.",
+    "Infrastructure suppliers depend on actual fab construction.",
+    "Chemical and gas exposure requires customer qualification.",
+    "Power and cooling exposure is project-dependent.",
+    "Policy support does not guarantee project execution.",
+    "Valuation can move faster than semiconductor fundamentals."
+  ],
+  "research_note": "July news is consolidated to remove duplicate reports. General IT companies are excluded. Related stocks include direct semiconductor companies plus listed Indian companies supplying manufacturing, infrastructure, utilities, materials, electronics or equipment. Stock-performance figures are intentionally excluded."
 }

@@ -1,5 +1,421 @@
 "use strict";
 
+/**
+ * StockUIBuilder handles all HTML generation, tab-content, 
+ * table creation, and canvas-based plotting logic.
+ */
+class StockUIBuilder {
+    constructor(popoutMgr, stockEventColors) {
+        this.popoutMgr = popoutMgr;
+        this.STOCK_EVENT_COLORS = stockEventColors;
+    }
+
+    /**
+     * Recursively formats JSON into an indented HTML tree.
+     */
+    _getFormattedScrollItems(obj, level = 0) {
+        let html = "";
+        const indent = level * 16;
+
+        for (const [key, value] of Object.entries(obj)) {
+            const label = key.replace(/_/g, " ");
+            if (value !== null && typeof value === "object" && !Array.isArray(value)) {
+                html += `<div style="margin-left:${indent}px; margin-top:6px; color:#0066cc; font-size:11px;">${label}</div>`;
+                html += this._getFormattedScrollItems(value, level + 1);
+            } else if (Array.isArray(value)) {
+                html += `<div style="margin-left:${indent}px; color:#0066cc; font-size:11px; margin-top:5px;">${label}</div>`;
+                value.forEach(item => {
+                    if (item !== null && typeof item === "object") {
+                        html += this._getFormattedScrollItems(item, level + 1);
+                    } else {
+                        html += `<div style="margin-left:${(level + 1) * 16}px; font-size:11px; color:#555; padding:2px 0;">• ${item}</div>`;
+                    }
+                });
+            } else {
+                html += `<div style="margin-left:${indent}px; font-size:11px; padding:2px 0; color:#555;">
+                            <span style="color:#007bff;">${label}</span>: ${value}
+                        </div>`;
+            }
+        }
+        return html;
+    }
+
+    createTabContent(tabContent, className, negativeValuesInRed, 
+                      listOfKeysToBeShownInTab, arrayKeyWithColors, listOfKeysToBreakAtFullstop = [], listOfKeysToTreatAsUrl = []) {
+        let tabContentDiv = document.createElement('div');
+        tabContentDiv.className = className;
+        try {
+            const data = JSON.parse(tabContent);
+            tabContentDiv.innerHTML = this._generateHtml(data, 1, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors, listOfKeysToBreakAtFullstop, listOfKeysToTreatAsUrl);
+        } catch (e) {
+            tabContentDiv.innerHTML = tabContent;
+        }
+        tabContentDiv.style.fontFamily = 'Arial';
+        return tabContentDiv;
+    }
+
+    appendDisclaimer() {
+        const disclaimer = document.createElement('div');
+        disclaimer.style.fontSize = '11px';
+        disclaimer.style.color = 'gray';
+        disclaimer.style.marginTop = '20px';
+        disclaimer.style.padding = '0 20px 20px 20px';
+        disclaimer.style.lineHeight = '1.5';
+        disclaimer.innerHTML = `<hr>Disclaimer: BluePayload provides market data, analytics, and educational information only. Nothing on this website constitutes investment advice, a recommendation to buy or sell securities, or financial, legal, or tax advice. Users should perform their own research and consult a qualified financial professional before making investment decisions.`;
+        this.popoutMgr.appendItem(disclaimer);
+    }
+
+    createStockPricePlot(data, className, analysisSegments, highlightPointsOnPlot = [], 
+                         negFillColor = 'rgba(231, 63, 181, 0.91)', 
+                         posFillColor = 'rgba(74, 138, 248, 0.8)') {
+        let tabContentDiv = document.createElement('div');
+        tabContentDiv.className = className;
+        tabContentDiv.style.padding = '20px';
+        tabContentDiv.style.backgroundColor = '#fff';
+
+        try {
+            if (!Array.isArray(data) || data.length === 0 || data[0].stock_price === undefined) {
+                tabContentDiv.innerHTML = this._generateHtml(data, 1, true, []);
+                this.appendDisclaimer(); // This appends to popoutMgr, which might be intended
+                return tabContentDiv;
+            }
+
+            const canvas = document.createElement('canvas');
+            canvas.width = 800;
+            canvas.height = 400;
+            canvas.style.width = '100%';
+            canvas.style.height = 'auto';
+            canvas.style.border = '1px solid #ddd';
+            canvas.style.marginTop = '10px';
+            tabContentDiv.appendChild(canvas);
+
+            const ctx = canvas.getContext('2d');
+            const padding = { top: 50, right: 30, bottom: 80, left: 80 };
+            const chartWidth = canvas.width - padding.left - padding.right;
+            const chartHeight = canvas.height - padding.top - padding.bottom;
+
+            const render = (hoverIdx = -1) => {
+                const prices = data.map(d => parseFloat(d.stock_price)).filter(p => !isNaN(p));
+                const dates = data.map(d => d.date_time);
+                if (prices.length < 2) return;
+                const minP = Math.min(...prices);
+                const maxP = Math.max(...prices);
+                const minPrice = minP * 0.99;
+                const maxPrice = maxP === minP ? maxP + 1 : maxP * 1.01;
+                const priceRange = maxPrice - minPrice;
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#fcfcfc';
+                ctx.fillRect(padding.left, padding.top, chartWidth, chartHeight);
+
+                this._drawVolumeBars(ctx, data, padding, chartWidth, chartHeight);
+                this._drawYAxis(ctx, padding, chartWidth, chartHeight, minPrice, priceRange);
+                this._drawAreaFill(ctx, data, padding, chartWidth, chartHeight, minPrice, priceRange, analysisSegments, negFillColor, posFillColor);
+                this._drawPlotLine(ctx, data, padding, chartWidth, chartHeight, minPrice, priceRange, analysisSegments);
+                this._drawXAxis(ctx, dates, padding, chartWidth, chartHeight);
+                this._highlightPointsOnPlot(ctx, data, padding, chartWidth, chartHeight, minPrice, priceRange, highlightPointsOnPlot);
+                this._drawCrosshairsAndTooltip(ctx, data, hoverIdx, padding, chartWidth, chartHeight, minPrice, priceRange, canvas.width);
+            };
+            this._setupPlotInteractions(canvas, data, padding, chartWidth, render);
+            render();
+        } catch (e) {
+            tabContentDiv.innerHTML = "Plot Generation Error: " + e.message;
+        }
+        return tabContentDiv;
+    }
+
+    _drawVolumeBars(ctx, data, padding, chartWidth, chartHeight) {
+        const maxVol = Math.max(...data.map(d => parseFloat(d.volume || 0)));
+        if (maxVol > 0) {
+            const volAlpha = 0.4;
+            const barWidth = Math.max(1, (chartWidth / data.length) * 0.8);
+            for (let i = 0; i < data.length; i++) {
+                const vol = parseFloat(data[i].volume || 0);
+                const vHeight = (vol / maxVol) * (chartHeight * 0.35);
+                const x = data.length > 1 ? padding.left + (i / (data.length - 1)) * chartWidth : padding.left + chartWidth / 2;
+                const price = parseFloat(data[i].stock_price);
+                const prevPrice = i > 0 ? parseFloat(data[i - 1].stock_price) : price;
+                ctx.fillStyle = price >= prevPrice ? `rgba(40, 167, 69, ${volAlpha})` : `rgba(220, 53, 69, ${volAlpha})`;
+                ctx.fillRect(x - barWidth / 2, padding.top + chartHeight - vHeight, barWidth, vHeight);
+            }
+        }
+    }
+
+    _drawYAxis(ctx, padding, chartWidth, chartHeight, minPrice, priceRange) {
+        ctx.strokeStyle = '#e0e0e0';
+        ctx.lineWidth = 1;
+        ctx.fillStyle = '#333';
+        ctx.font = 'bold 12px Arial';
+        ctx.textAlign = 'right';
+        const yTicks = 6;
+        for (let i = 0; i < yTicks; i++) {
+            const y = padding.top + chartHeight - (i / (yTicks - 1)) * chartHeight;
+            const price = minPrice + (i / (yTicks - 1)) * priceRange;
+            ctx.beginPath();
+            ctx.moveTo(padding.left, y);
+            ctx.lineTo(padding.left + chartWidth, y);
+            ctx.stroke();
+            ctx.fillText(price.toFixed(2), padding.left - 10, y + 4);
+        }
+    }
+
+    _drawXAxis(ctx, dates, padding, chartWidth, chartHeight) {
+        ctx.fillStyle = '#333';
+        ctx.textAlign = 'left';
+        const xLabelsCount = Math.min(dates.length, 5);
+        for (let i = 0; i < xLabelsCount; i++) {
+            const idx = xLabelsCount > 1 ? Math.floor(i * (dates.length - 1) / (xLabelsCount - 1)) : 0;
+            const x = dates.length > 1 ? padding.left + (idx / (dates.length - 1)) * chartWidth : padding.left + chartWidth / 2;
+            ctx.save();
+            ctx.translate(x, padding.top + chartHeight + 15);
+            ctx.rotate(Math.PI / 6);
+            ctx.fillText(dates[idx] || '', 0, 0);
+            ctx.restore();
+        }
+    }
+
+    _drawPlotLine(ctx, data, padding, chartWidth, chartHeight, minPrice, priceRange, analysisSegments) {
+        const baseLineWidth = 2;
+        ctx.lineWidth = baseLineWidth;
+        ctx.lineJoin = 'round';
+        for (let i = 1; i < data.length; i++) {
+            const prev = data[i - 1];
+            const curr = data[i];
+            const x1 = data.length > 1 ? padding.left + ((i - 1) / (data.length - 1)) * chartWidth : padding.left + chartWidth / 2;
+            const y1 = padding.top + chartHeight - ((parseFloat(prev.stock_price) - minPrice) / priceRange) * chartHeight;
+            const x2 = data.length > 1 ? padding.left + (i / (data.length - 1)) * chartWidth : padding.left + chartWidth / 2;
+            const y2 = padding.top + chartHeight - ((parseFloat(curr.stock_price) - minPrice) / priceRange) * chartHeight;
+            const segmentMatch = (analysisSegments || []).find(seg => i > seg.start && i <= seg.end);
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.lineWidth = segmentMatch ? baseLineWidth + 1 : baseLineWidth;
+            ctx.strokeStyle = segmentMatch ? segmentMatch.color : 'black';
+            ctx.stroke();
+        }
+    }
+
+    _drawCrosshairsAndTooltip(ctx, data, hoverIdx, padding, chartWidth, chartHeight, minPrice, priceRange, canvasWidth) {
+        if (hoverIdx >= 0 && hoverIdx < data.length) {
+            const item = data[hoverIdx];
+            const x = data.length > 1 ? padding.left + (hoverIdx / (data.length - 1)) * chartWidth : padding.left + chartWidth / 2;
+            const y = padding.top + chartHeight - ((parseFloat(item.stock_price) - minPrice) / priceRange) * chartHeight;
+            ctx.setLineDash([5, 5]);
+            ctx.strokeStyle = '#999';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(x, padding.top);
+            ctx.lineTo(x, padding.top + chartHeight);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(padding.left, y);
+            ctx.lineTo(padding.left + chartWidth, y);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            const tipLines = [`Date: ${item.date_time}`, `Price: ${parseFloat(item.stock_price).toFixed(2)}`, `Vol: ${item.volume || '0'}`];
+            ctx.font = 'bold 11px Arial';
+            let maxLineW = 0;
+            tipLines.forEach(l => maxLineW = Math.max(maxLineW, ctx.measureText(l).width));
+            const tipW = maxLineW + 10;
+            const tipH = 45;
+            let tipX = x + 10;
+            if (tipX + tipW > canvasWidth) tipX = x - tipW - 10;
+            let tipY = y - tipH - 10;
+            if (tipY < 0) tipY = y + 10;
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+            ctx.fillRect(tipX, tipY, tipW, tipH);
+            ctx.fillStyle = '#fff';
+            ctx.textAlign = 'left';
+            tipLines.forEach((l, i) => { ctx.fillText(l, tipX + 5, tipY + 12 + (i * 13)); });
+        }
+    }
+
+    _setupPlotInteractions(canvas, data, padding, chartWidth, render) {
+        const handleInteraction = (e) => {
+            const rect = canvas.getBoundingClientRect();
+            let clientX;
+            if (e.type.startsWith('touch')) {
+                if (e.touches.length === 0) return;
+                clientX = e.touches[0].clientX;
+            } else {
+                clientX = e.clientX;
+            }
+            const x = (clientX - rect.left) * (canvas.width / rect.width);
+            if (x >= padding.left && x <= padding.left + chartWidth) {
+                const idx = Math.round(((x - padding.left) / chartWidth) * (data.length - 1));
+                render(idx);
+            } else { render(-1); }
+        };
+        canvas.addEventListener('mousemove', handleInteraction);
+        canvas.addEventListener('mouseleave', () => render(-1));
+        canvas.addEventListener('touchstart', handleInteraction, { passive: true });
+        canvas.addEventListener('touchmove', handleInteraction, { passive: true });
+        canvas.addEventListener('touchend', () => render(-1));
+    }
+
+    _drawAreaFill(ctx, data, padding, chartWidth, chartHeight, minPrice, priceRange, analysisSegments, negFillColor, posFillColor) {
+        if (data.length < 2) return;
+        const firstPrice = parseFloat(data[0].stock_price);
+        const lastPrice = parseFloat(data[data.length - 1].stock_price);
+        const baseFillColor = (lastPrice >= firstPrice) ? posFillColor : negFillColor;
+        const bottomY = padding.top + chartHeight;
+        for (let i = 1; i < data.length; i++) {
+            const prev = data[i - 1];
+            const curr = data[i];
+            const x1 = padding.left + ((i - 1) / (data.length - 1)) * chartWidth;
+            const x2 = padding.left + (i / (data.length - 1)) * chartWidth;
+            const y1 = padding.top + chartHeight - ((parseFloat(prev.stock_price) - minPrice) / priceRange) * chartHeight;
+            const y2 = padding.top + chartHeight - ((parseFloat(curr.stock_price) - minPrice) / priceRange) * chartHeight;
+            const segmentMatch = (analysisSegments || []).find(seg => i > seg.start && i <= seg.end);
+            let sliceColor = segmentMatch ? segmentMatch.color : baseFillColor;
+            const yTop = Math.min(y1, y2);
+            if (!Number.isFinite(yTop) || !Number.isFinite(bottomY)) continue;
+            const gradient = ctx.createLinearGradient(0, yTop, 0, bottomY);
+            ctx.save();
+            if (segmentMatch) ctx.globalAlpha = 0.7;
+            gradient.addColorStop(0, sliceColor);
+            gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+            ctx.beginPath();
+            ctx.moveTo(x1, bottomY); ctx.lineTo(x1, y1); ctx.lineTo(x2, y2); ctx.lineTo(x2, bottomY);
+            ctx.closePath(); ctx.fillStyle = gradient; ctx.fill(); ctx.restore();
+        }
+    }
+
+    _highlightPointsOnPlot(ctx, data, padding, chartWidth, chartHeight, minPrice, priceRange, highlightPoints) {
+        if (!highlightPoints || !Array.isArray(highlightPoints)) return;
+        highlightPoints.forEach(item => {
+            const idx = data.findIndex(d => d.date_time === item.date);
+            if (idx === -1) return;
+            const x = data.length > 1 ? padding.left + (idx / (data.length - 1)) * chartWidth : padding.left + chartWidth / 2;
+            const y = padding.top + chartHeight - ((parseFloat(data[idx].stock_price) - minPrice) / priceRange) * chartHeight;
+            ctx.save();
+            ctx.strokeStyle = item.color || 'red';
+            ctx.lineWidth = 5; ctx.globalAlpha = 0.2;
+            ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x, padding.top + chartHeight); ctx.stroke(); ctx.restore();
+            const radius = 5; ctx.fillStyle = item.color || 'red';
+            ctx.beginPath(); ctx.arc(x, y, radius, 0, Math.PI * 2); ctx.fill();
+        });
+    }
+
+    hasNegativeValue(item) {
+        const checkNegative = (val) => {
+            if (typeof val === 'number' && val < 0) return true;
+            if (typeof val === 'string' && /-\d/.test(val)) return true;
+            return false;
+        };
+        if (typeof item === 'object' && item !== null) { return Object.values(item).some(checkNegative); }
+        return checkNegative(item);
+    }
+
+    _generateHtml(obj, level = 1, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors, listOfKeysToBreakAtFullstop = [], listOfKeysToTreatAsUrl = []) {
+        let html = '';
+        const tab = '&nbsp;&nbsp;&nbsp;&nbsp;'.repeat(level);
+        if (typeof obj === 'object' && obj !== null && !Array.isArray(obj)) {
+            for (const [key, value] of Object.entries(obj)) {
+                if (listOfKeysToBeShownInTab.includes(key) && typeof value === 'object' && value !== null && !Array.isArray(value)) {
+                    html += this._generateTabbedHtml(key, value, level, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors, listOfKeysToBreakAtFullstop, listOfKeysToTreatAsUrl);
+                    continue;
+                }
+                let key_temp = this._remove_underscore(key);
+                html += `<div>${tab}<span style="display: inline-block; min-width: 150px;"><strong style="color: blue;">${key_temp}</strong></span>&nbsp;&nbsp;:&nbsp;&nbsp;`;
+                if (Array.isArray(value)) {
+                    if (value.length === 0) { html += `NONE`; } else {
+                        const colors = (arrayKeyWithColors && arrayKeyWithColors.key === key) ? arrayKeyWithColors.colors : null;
+                        html += `<br>` + this._generateTableHtml(value, level, negativeValuesInRed, colors);
+                    }
+                } else if (typeof value === 'object' && value !== null) {
+                    html += `<br>${this._generateHtml(value, level + 1, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors, listOfKeysToBreakAtFullstop, listOfKeysToTreatAsUrl)}`;
+                } else {
+                    const isNegative = negativeValuesInRed && this.hasNegativeValue(value);
+                    const colorStyle = isNegative ? 'style="color: red;"' : '';
+                    if (listOfKeysToBreakAtFullstop.includes(key) && typeof value === 'string') {
+                        const bullets = value.split('.').filter(s => s.trim().length > 0).map(s => `<li>${s.trim()}.</li>`).join('');
+                        html += `<ul style="margin-top: 5px; padding-left: 20px;">${bullets}</ul>`;
+                    } else if (listOfKeysToTreatAsUrl.includes(key) && typeof value === 'string') {
+                        html += `<a href="${value}" target="_blank" style="color: blue; text-decoration: underline;">${value}</a>`;
+                    } else { html += `<span ${colorStyle}>${value}</span>`; }
+                }
+                html += `</div><br>`;
+            }
+        } else if (Array.isArray(obj)) {
+            if (obj.length === 0) { html += `<div>${tab}NONE</div>`; } else {
+                obj.forEach((item, index) => {
+                    html += `<div>${tab}${index + 1}. ${this._generateHtml(item, level + 1, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors, listOfKeysToBreakAtFullstop, listOfKeysToTreatAsUrl)}</div>`;
+                });
+            }
+        } else {
+            const isNegative = negativeValuesInRed && this.hasNegativeValue(obj);
+            const colorStyle = isNegative ? 'style="color: red;"' : '';
+            html += `<span ${colorStyle}>${obj}</span>`;
+        }
+        return html;
+    }
+
+    _remove_underscore(d) { return d.replace(/_/g, ' '); }
+
+    _generateTabbedHtml(key, value, level, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors, listOfKeysToBreakAtFullstop = [], listOfKeysToTreatAsUrl = []) {
+        const stockEntries = Object.entries(value);
+        const uniqueId = 'tabs_' + Math.random().toString(36).substr(2, 9);
+        let html = `<div>${'&nbsp;&nbsp;&nbsp;&nbsp;'.repeat(level)}<strong style="color: blue;">${this._remove_underscore(key)}</strong>: </div>`;
+        html += `<div style="margin-left: ${level * 20}px; margin-bottom: 20px;"><div style="display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px;">`;
+        stockEntries.forEach(([stockName], index) => {
+            const activeStyle = index === 0 ? 'background-color: #007bff; color: white; font-weight: bold;' : 'background-color: #f8f9fa; color: #007bff;';
+            html += `<button class="btn-${uniqueId}" onclick="(function(btn){ const container = btn.parentElement.parentElement; container.querySelectorAll('.content-${uniqueId}').forEach(c => c.style.display = 'none'); container.querySelectorAll('.btn-${uniqueId}').forEach(b => { b.style.backgroundColor = '#f8f9fa'; b.style.color = '#007bff'; b.style.fontWeight = 'normal'; }); document.getElementById('content-${uniqueId}-${index}').style.display = 'block'; btn.style.backgroundColor = '#007bff'; btn.style.color = 'white'; btn.style.fontWeight = 'bold'; })(this)" style="padding: 2px 6px; font-size: 10px; cursor: pointer; border: 1px solid #007bff; border-radius: 4px; transition: all 0.2s; flex: 0 0 auto; width: auto; white-space: nowrap; ${activeStyle}">${this._remove_underscore(stockName)}</button>`;
+        });
+        html += `</div>`;
+        stockEntries.forEach(([stockName, stockData], index) => {
+            html += `<div id="content-${uniqueId}-${index}" class="content-${uniqueId}" style="display: ${index === 0 ? 'block' : 'none'}; border: 1px solid #dee2e6; padding: 15px; border-radius: 4px; background-color: #fff;">${this._generateHtml(stockData, level + 1, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors, listOfKeysToBreakAtFullstop, listOfKeysToTreatAsUrl)}</div>`;
+        });
+        html += `</div>`; return html;
+    }
+
+    _generateTableHtml(value, level, negativeValuesInRed, colors) {
+        let html = `<table style="border-collapse: collapse; width: auto; margin-left: ${level * 20}px; border: 1px solid blue;">`;
+        let isKeyValueList = false;
+        if (value.length > 0 && typeof value[0] === 'object' && value[0] !== null) {
+            const schemaKeys = Object.keys(value[0]);
+            if (schemaKeys.length === 1) {
+                for (let i = 1; i < value.length; i++) {
+                    if (typeof value[i] !== 'object' || value[i] === null || Object.keys(value[i])[0] !== schemaKeys[0]) { isKeyValueList = true; break; }
+                }
+                if (value.length === 1 && (schemaKeys[0].includes('-') || schemaKeys[0].includes(' ') || !isNaN(schemaKeys[0][0]))) { isKeyValueList = true; }
+            }
+        }
+        if (!isKeyValueList && value.length > 0 && typeof value[0] === 'object' && value[0] !== null) {
+            html += `<tr style="background-color: #eee; font-weight: bold; border-bottom: 2px solid blue;">`;
+            Object.keys(value[0]).forEach(key => { html += `<td style="padding: 8px; border-right: 1px solid blue;">${this._remove_underscore(key)}</td>`; });
+            html += `</tr>`;
+        }
+        value.forEach((item, index) => {
+            const bgColor = index % 2 === 0 ? 'white' : 'lightblue';
+            const isNegative = this.hasNegativeValue(item);
+            let textColor = (negativeValuesInRed && isNegative) ? 'red' : 'black';
+            if (colors && colors.length > 0) { textColor = colors[index % colors.length]; }
+            html += `<tr style="border-bottom: 1px solid blue; background-color: ${bgColor}; color: ${textColor};">`;
+            if (typeof item === 'object' && item !== null) {
+                if (isKeyValueList) {
+                    for (const [subKey, subVal] of Object.entries(item)) {
+                        html += `<td style="padding: 8px; border-right: 1px solid blue; font-weight: bold;">${this._remove_underscore(subKey)}</td>`;
+                        html += `<td style="padding: 8px; border-right: 1px solid blue; ${/^-?[\d,.]+%?$/.test(subVal.toString()) ? 'text-align: right;' : 'text-align: left;'}">${subVal}</td>`;
+                    }
+                } else {
+                    for (const [subKey, subVal] of Object.entries(item)) {
+                        html += `<td style="padding: 8px; border-right: 1px solid blue; ${/^-?[\d,.]+%?$/.test(subVal.toString()) ? 'text-align: right;' : 'text-align: left;'}">${subVal}</td>`;
+                    }
+                }
+            } else { html += `<td style="padding: 8px; border-right: 1px solid blue;">${item}</td>`; }
+            html += `</tr>`;
+        });
+        html += `</table>`; return html;
+    }
+
+    _generatePlotHeaderInfoJson(stockName, period) {
+        const analysisTypeDropdown = document.getElementById("analysis-type-dropdown");
+        const analysisTypeText = analysisTypeDropdown ? analysisTypeDropdown.options[analysisTypeDropdown.selectedIndex].text : "N/A";
+        return JSON.stringify({ "Stock": stockName, "Months": period, "Analysis_type": analysisTypeText });
+    }
+}
+
 class StockAnalysisMain {
     constructor() {
         this.popoutMgr = new PopoutManager('genericPopoutId');
@@ -7,6 +423,8 @@ class StockAnalysisMain {
         this.gaTracker = new GoogleAnalytics();
 
         this.STOCK_EVENT_COLORS = ['blue', 'green', 'red', 'yellow', 'orange', 'purple', 'brown', 'teal'];
+
+        this.uiBuilder = new StockUIBuilder(this.popoutMgr, this.STOCK_EVENT_COLORS);
 
         this.stockDataCache = new Map();
 
@@ -136,7 +554,7 @@ class StockAnalysisMain {
                 // to avoid redundant labels (e.g., showing 'GDP' instead of 'parameters - GDP')
                 const scrollData = (Object.keys(data).length === 1 && typeof Object.values(data)[0] === 'object') 
                                    ? Object.values(data)[0] : data;
-                const itemsHtml = this._getFormattedScrollItems(scrollData);
+                const itemsHtml = this.uiBuilder._getFormattedScrollItems(scrollData);
 
                 // Double the content for a seamless loop
                 scroller.innerHTML = itemsHtml + itemsHtml;
@@ -165,122 +583,6 @@ class StockAnalysisMain {
             document.head.appendChild(style);
         }
     }
-
-/**
- * Recursively formats JSON into an indented HTML tree.
- * Objects are shown as headers.
- * Arrays are expanded item-by-item.
- */
-_getFormattedScrollItems(obj, level = 0) {
-
-    let html = "";
-
-    const indent = level * 16;
-
-    for (const [key, value] of Object.entries(obj)) {
-
-        const label = key.replace(/_/g, " ");
-
-        // ---------------------------
-        // Object
-        // ---------------------------
-        if (
-            value !== null &&
-            typeof value === "object" &&
-            !Array.isArray(value)
-        ) {
-
-            html += `
-                <div style="
-                    margin-left:${indent}px;
-                    margin-top:6px;
-                    color:#0066cc;
-                    font-size:11px;
-                ">
-                    ${label}
-                </div>
-            `;
-
-            html += this._getFormattedScrollItems(value, level + 1);
-        }
-
-        // ---------------------------
-        // Array
-        // ---------------------------
-        else if (Array.isArray(value)) {
-
-            html += `
-                <div style="
-                    margin-left:${indent}px;
-                    color:#0066cc;
-                        font-size:11px;
-                    margin-top:5px;
-                ">
-                    ${label}
-                </div>
-            `;
-
-            value.forEach(item => {
-
-                //----------------------------------
-                // array contains object
-                //----------------------------------
-                if (
-                    item !== null &&
-                    typeof item === "object"
-                ) {
-
-                    html += this._getFormattedScrollItems(
-                        item,
-                        level + 1
-                    );
-                }
-
-                //----------------------------------
-                // array contains primitive
-                //----------------------------------
-                else {
-
-                    html += `
-                        <div style="
-                            margin-left:${(level+1)*16}px;
-                            font-size:11px;
-                            color:#555;
-                            padding:2px 0;
-                        ">
-                            • ${item}
-                        </div>
-                    `;
-                }
-            });
-        }
-
-        // ---------------------------
-        // Primitive value
-        // ---------------------------
-        else {
-
-            html += `
-                <div style="
-                    margin-left:${indent}px;
-                    font-size:11px;
-                    padding:2px 0;
-                    color:#555;
-                ">
-                    <span style="
-                        color:#007bff;
-                    ">
-                        ${label}
-                    </span>
-
-                    : ${value}
-                </div>
-            `;
-        }
-    }
-
-    return html;
-}
 
     updateAnalysisDescription() {
         const dropdown = document.getElementById('analysis-type-dropdown');
@@ -337,19 +639,6 @@ _getFormattedScrollItems(obj, level = 0) {
             }
         }
         return segments;
-    }
-
-    hasNegativeValue(item) {
-        const checkNegative = (val) => {
-            if (typeof val === 'number' && val < 0) return true;
-            if (typeof val === 'string' && /-\d/.test(val)) return true;
-            return false;
-        };
-
-        if (typeof item === 'object' && item !== null) {
-            return Object.values(item).some(checkNegative);
-        }
-    return checkNegative(item);
     }
 
     computeDrawdownSegments(data, threshold_pct, posColor = '#00c805', negColor = '#ff3b30') {
@@ -602,500 +891,6 @@ _getFormattedScrollItems(obj, level = 0) {
         }));
     }
 
-    createTabContent(tabContent, className, negativeValuesInRed, 
-                                    listOfKeysToBeShownInTab, arrayKeyWithColors, listOfKeysToBreakAtFullstop = [], listOfKeysToTreatAsUrl = []) {
-                                        
-        let tabContentDiv = document.createElement('div');
-        tabContentDiv.className = className;
-
-        
-        try {
-            const data = JSON.parse(tabContent);
-            tabContentDiv.innerHTML = this._generateHtml(data, 1, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors, listOfKeysToBreakAtFullstop, listOfKeysToTreatAsUrl);
-        } catch (e) {
-            tabContentDiv.innerHTML = tabContent;
-        }
-
-        tabContentDiv.style.fontFamily = 'Arial';
-
-        return tabContentDiv;
-    }
-
-    appendDisclaimer() {
-        const disclaimer = document.createElement('div');
-        disclaimer.style.fontSize = '11px';
-        disclaimer.style.color = 'gray';
-        disclaimer.style.marginTop = '20px';
-        disclaimer.style.padding = '0 20px 20px 20px';
-        disclaimer.style.lineHeight = '1.5';
-        disclaimer.innerHTML = `<hr>Disclaimer: BluePayload provides market data, analytics, and educational information only. Nothing on this website constitutes investment advice, a recommendation to buy or sell securities, or financial, legal, or tax advice. Users should perform their own research and consult a qualified financial professional before making investment decisions.`;
-        this.popoutMgr.appendItem(disclaimer);
-    }
-
-    createStockPricePlot(data, className, analysisSegments, highlightPointsOnPlot = [], 
-                         negFillColor = 'rgba(231, 63, 181, 0.91)', 
-                         posFillColor = 'rgba(74, 138, 248, 0.8)') {
-        let tabContentDiv = document.createElement('div');
-        tabContentDiv.className = className;
-        tabContentDiv.style.padding = '20px';
-        tabContentDiv.style.backgroundColor = '#fff';
-
-        try {
-            // Check for valid data for plotting
-            if (!Array.isArray(data) || data.length === 0 || data[0].stock_price === undefined) {
-                tabContentDiv.innerHTML = this._generateHtml(data, 1, true, []);
-
-                tabContentDiv = this.appendDisclaimer(tabContentDiv);
-                return tabContentDiv;
-            }
-
-            const canvas = document.createElement('canvas');
-            canvas.width = 800;
-            canvas.height = 400;
-            canvas.style.width = '100%';
-            canvas.style.height = 'auto';
-            canvas.style.border = '1px solid #ddd';
-            canvas.style.marginTop = '10px';
-            tabContentDiv.appendChild(canvas);
-
-            const ctx = canvas.getContext('2d');
-            const padding = { top: 50, right: 30, bottom: 80, left: 80 };
-            const chartWidth = canvas.width - padding.left - padding.right;
-            const chartHeight = canvas.height - padding.top - padding.bottom;
-
-            const render = (hoverIdx = -1) => {
-                const prices = data.map(d => parseFloat(d.stock_price)).filter(p => !isNaN(p));
-                const dates = data.map(d => d.date_time);
-
-                if (prices.length < 2) return;
-
-                const minP = Math.min(...prices);
-                const maxP = Math.max(...prices);
-                const minPrice = minP * 0.99;
-                const maxPrice = maxP === minP ? maxP + 1 : maxP * 1.01;
-                const priceRange = maxPrice - minPrice;
-
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                // Chart area background
-                ctx.fillStyle = '#fcfcfc';
-                ctx.fillRect(padding.left, padding.top, chartWidth, chartHeight);
-
-                this._drawVolumeBars(ctx, data, padding, chartWidth, chartHeight);
-                this._drawYAxis(ctx, padding, chartWidth, chartHeight, minPrice, priceRange);
-                // Area fill under the curve
-                this._drawAreaFill(ctx, data, padding, chartWidth, chartHeight, minPrice, priceRange, analysisSegments, negFillColor, posFillColor);
-                this._drawPlotLine(ctx, data, padding, chartWidth, chartHeight, minPrice, priceRange, analysisSegments);
-                this._drawXAxis(ctx, dates, padding, chartWidth, chartHeight);
-                this._highlightPointsOnPlot(ctx, data, padding, chartWidth, chartHeight, minPrice, priceRange, highlightPointsOnPlot);
-                this._drawCrosshairsAndTooltip(ctx, data, hoverIdx, padding, chartWidth, chartHeight, minPrice, priceRange, canvas.width);
-            };
-            this._setupPlotInteractions(canvas, data, padding, chartWidth, render);
-
-            render(); // Initial draw
-
-        } catch (e) {
-            tabContentDiv.innerHTML = "Plot Generation Error: " + e.message;
-        }
-
-        return tabContentDiv;
-    }
-
-    _drawVolumeBars(ctx, data, padding, chartWidth, chartHeight) {
-        const maxVol = Math.max(...data.map(d => parseFloat(d.volume || 0)));
-        if (maxVol > 0) {
-            const volAlpha = 0.4;
-            const barWidth = Math.max(1, (chartWidth / data.length) * 0.8);
-            for (let i = 0; i < data.length; i++) {
-                const vol = parseFloat(data[i].volume || 0);
-                const vHeight = (vol / maxVol) * (chartHeight * 0.35); // Limit height to 35% of chart
-                const x = data.length > 1 ? padding.left + (i / (data.length - 1)) * chartWidth : padding.left + chartWidth / 2;
-                const price = parseFloat(data[i].stock_price);
-                const prevPrice = i > 0 ? parseFloat(data[i - 1].stock_price) : price;
-                ctx.fillStyle = price >= prevPrice ? `rgba(40, 167, 69, ${volAlpha})` : `rgba(220, 53, 69, ${volAlpha})`;
-                ctx.fillRect(x - barWidth / 2, padding.top + chartHeight - vHeight, barWidth, vHeight);
-            }
-        }
-    }
-
-    _drawYAxis(ctx, padding, chartWidth, chartHeight, minPrice, priceRange) {
-        ctx.strokeStyle = '#e0e0e0';
-        ctx.lineWidth = 1;
-        ctx.fillStyle = '#333';
-        ctx.font = 'bold 12px Arial';
-        ctx.textAlign = 'right';
-        const yTicks = 6;
-        for (let i = 0; i < yTicks; i++) {
-            const y = padding.top + chartHeight - (i / (yTicks - 1)) * chartHeight;
-            const price = minPrice + (i / (yTicks - 1)) * priceRange;
-            ctx.beginPath();
-            ctx.moveTo(padding.left, y);
-            ctx.lineTo(padding.left + chartWidth, y);
-            ctx.stroke();
-            ctx.fillText(price.toFixed(2), padding.left - 10, y + 4);
-        }
-    }
-
-    _drawXAxis(ctx, dates, padding, chartWidth, chartHeight) {
-        ctx.fillStyle = '#333';
-        ctx.textAlign = 'left';
-        const xLabelsCount = Math.min(dates.length, 5);
-        for (let i = 0; i < xLabelsCount; i++) {
-            const idx = xLabelsCount > 1 ? Math.floor(i * (dates.length - 1) / (xLabelsCount - 1)) : 0;
-            const x = dates.length > 1 ? padding.left + (idx / (dates.length - 1)) * chartWidth : padding.left + chartWidth / 2;
-            ctx.save();
-            ctx.translate(x, padding.top + chartHeight + 15);
-            ctx.rotate(Math.PI / 6);
-            ctx.fillText(dates[idx] || '', 0, 0);
-            ctx.restore();
-        }
-    }
-
-    _drawPlotLine(ctx, data, padding, chartWidth, chartHeight, minPrice, priceRange, analysisSegments) {
-        const baseLineWidth = 2;
-        ctx.lineWidth = baseLineWidth;
-        ctx.lineJoin = 'round';
-        for (let i = 1; i < data.length; i++) {
-            const prev = data[i - 1];
-            const curr = data[i];
-            const x1 = data.length > 1 ? padding.left + ((i - 1) / (data.length - 1)) * chartWidth : padding.left + chartWidth / 2;
-            const y1 = padding.top + chartHeight - ((parseFloat(prev.stock_price) - minPrice) / priceRange) * chartHeight;
-            const x2 = data.length > 1 ? padding.left + (i / (data.length - 1)) * chartWidth : padding.left + chartWidth / 2;
-            const y2 = padding.top + chartHeight - ((parseFloat(curr.stock_price) - minPrice) / priceRange) * chartHeight;
-            const segmentMatch = (analysisSegments || []).find(seg => i > seg.start && i <= seg.end);
-            ctx.beginPath();
-            ctx.moveTo(x1, y1);
-            ctx.lineTo(x2, y2);
-            ctx.lineWidth = segmentMatch ? baseLineWidth + 1 : baseLineWidth;
-            ctx.strokeStyle = segmentMatch ? segmentMatch.color : 'black';
-            ctx.stroke();
-        }
-    }
-
-    _drawCrosshairsAndTooltip(ctx, data, hoverIdx, padding, chartWidth, chartHeight, minPrice, priceRange, canvasWidth) {
-        if (hoverIdx >= 0 && hoverIdx < data.length) {
-            const item = data[hoverIdx];
-            const x = data.length > 1 ? padding.left + (hoverIdx / (data.length - 1)) * chartWidth : padding.left + chartWidth / 2;
-            const y = padding.top + chartHeight - ((parseFloat(item.stock_price) - minPrice) / priceRange) * chartHeight;
-
-            // Dotted lines
-            ctx.setLineDash([5, 5]);
-            ctx.strokeStyle = '#999';
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.moveTo(x, padding.top);
-            ctx.lineTo(x, padding.top + chartHeight);
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.moveTo(padding.left, y);
-            ctx.lineTo(padding.left + chartWidth, y);
-            ctx.stroke();
-            ctx.setLineDash([]);
-
-            // Tooltip
-            const tipLines = [
-                `Date: ${item.date_time}`,
-                `Price: ${parseFloat(item.stock_price).toFixed(2)}`,
-                `Vol: ${item.volume || '0'}`
-            ];
-            ctx.font = 'bold 11px Arial';
-            let maxLineW = 0;
-            tipLines.forEach(l => maxLineW = Math.max(maxLineW, ctx.measureText(l).width));
-            
-            const tipW = maxLineW + 10;
-            const tipH = 45;
-            let tipX = x + 10;
-            if (tipX + tipW > canvasWidth) tipX = x - tipW - 10;
-            let tipY = y - tipH - 10;
-            if (tipY < 0) tipY = y + 10;
-
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-            ctx.fillRect(tipX, tipY, tipW, tipH);
-            ctx.fillStyle = '#fff';
-            ctx.textAlign = 'left';
-            tipLines.forEach((l, i) => {
-                ctx.fillText(l, tipX + 5, tipY + 12 + (i * 13));
-            });
-        }
-    }
-
-    _setupPlotInteractions(canvas, data, padding, chartWidth, render) {
-        const handleInteraction = (e) => {
-            const rect = canvas.getBoundingClientRect();
-            let clientX;
-            if (e.type.startsWith('touch')) {
-                if (e.touches.length === 0) return;
-                clientX = e.touches[0].clientX;
-            } else {
-                clientX = e.clientX;
-            }
-            const x = (clientX - rect.left) * (canvas.width / rect.width);
-            
-            if (x >= padding.left && x <= padding.left + chartWidth) {
-                const idx = Math.round(((x - padding.left) / chartWidth) * (data.length - 1));
-                render(idx);
-            } else {
-                render(-1);
-            }
-        };
-
-        canvas.addEventListener('mousemove', handleInteraction);
-        canvas.addEventListener('mouseleave', () => render(-1));
-        canvas.addEventListener('touchstart', handleInteraction, { passive: true });
-        canvas.addEventListener('touchmove', handleInteraction, { passive: true });
-        canvas.addEventListener('touchend', () => render(-1));
-    }
-
-    _drawAreaFill(ctx, data, padding, chartWidth, chartHeight, minPrice, priceRange, analysisSegments, negFillColor, posFillColor) {
-        if (data.length < 2) return;
-
-        // Requirement 3: Determine base gradient color based on total return
-        const firstPrice = parseFloat(data[0].stock_price);
-        const lastPrice = parseFloat(data[data.length - 1].stock_price);
-        const baseFillColor = (lastPrice >= firstPrice) ? posFillColor : negFillColor;
-        const bottomY = padding.top + chartHeight;
-
-        // Draw area fill in slices to handle segment-specific colors
-        for (let i = 1; i < data.length; i++) {
-            const prev = data[i - 1];
-            const curr = data[i];
-
-            const x1 = padding.left + ((i - 1) / (data.length - 1)) * chartWidth;
-            const x2 = padding.left + (i / (data.length - 1)) * chartWidth;
-            const y1 = padding.top + chartHeight - ((parseFloat(prev.stock_price) - minPrice) / priceRange) * chartHeight;
-            const y2 = padding.top + chartHeight - ((parseFloat(curr.stock_price) - minPrice) / priceRange) * chartHeight;
-
-            // Requirement 4: Fill color gradient for segments
-            const segmentMatch = (analysisSegments || []).find(seg => i > seg.start && i <= seg.end);
-            let sliceColor = segmentMatch ? segmentMatch.color : baseFillColor;
-
-            // Start gradient at the top of the current slice to ensure even intensity along the curve
-            const yTop = Math.min(y1, y2);
-
-            // Ensure coordinates are finite before calling createLinearGradient to prevent crashes
-            if (!Number.isFinite(yTop) || !Number.isFinite(bottomY)) continue;
-
-            const gradient = ctx.createLinearGradient(0, yTop, 0, bottomY);
-            
-            // If using a segment color string directly, we wrap it in a save/restore with globalAlpha
-            // to ensure it is "light" as requested.
-            ctx.save();
-            if (segmentMatch) ctx.globalAlpha = 0.7; 
-            gradient.addColorStop(0, sliceColor);
-            gradient.addColorStop(1, 'rgba(255, 255, 255, 0)'); // Fade to transparent towards x-axis
-
-            ctx.beginPath();
-            ctx.moveTo(x1, bottomY);
-            ctx.lineTo(x1, y1);
-            ctx.lineTo(x2, y2);
-            ctx.lineTo(x2, bottomY);
-            ctx.closePath();
-            ctx.fillStyle = gradient;
-            ctx.fill();
-            ctx.restore();
-        }
-    }
-
-    _highlightPointsOnPlot(ctx, data, padding, chartWidth, chartHeight, minPrice, priceRange, highlightPoints) {
-        if (!highlightPoints || !Array.isArray(highlightPoints)) return;
-
-        highlightPoints.forEach(item => {
-            const idx = data.findIndex(d => d.date_time === item.date);
-            if (idx === -1) return;
-
-            const x = data.length > 1 ? padding.left + (idx / (data.length - 1)) * chartWidth : padding.left + chartWidth / 2;
-            const y = padding.top + chartHeight - ((parseFloat(data[idx].stock_price) - minPrice) / priceRange) * chartHeight;
-
-            // Requirement 5: Mark a vertical-line of 5px width from point-on-curve to x-axis
-            ctx.save();
-            ctx.strokeStyle = item.color || 'red';
-            ctx.lineWidth = 5;
-            ctx.globalAlpha = 0.2; // Keep it semi-transparent so it doesn't obscure the curve
-            ctx.beginPath();
-            ctx.moveTo(x, y);
-            ctx.lineTo(x, padding.top + chartHeight);
-            ctx.stroke();
-            ctx.restore();
-
-            const radius = 5;
-            ctx.fillStyle = item.color || 'red';
-            ctx.beginPath();
-            ctx.arc(x, y, radius, 0, Math.PI * 2);
-            ctx.fill();
-        });
-    }
-
-    _generateHtml(obj, level = 1, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors, listOfKeysToBreakAtFullstop = [], listOfKeysToTreatAsUrl = []) {
-        let html = '';
-        const tab = '&nbsp;&nbsp;&nbsp;&nbsp;'.repeat(level);
-
-        if (typeof obj === 'object' && obj !== null && !Array.isArray(obj)) {
-            for (const [key, value] of Object.entries(obj)) {
-                if (listOfKeysToBeShownInTab.includes(key) && typeof value === 'object' && value !== null && !Array.isArray(value)) {
-                    html += this._generateTabbedHtml(key, value, level, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors, listOfKeysToBreakAtFullstop, listOfKeysToTreatAsUrl);
-                    continue;
-                }
-                let key_temp = this._remove_underscore(key);
-            html += `<div>${tab}<span style="display: inline-block; min-width: 150px;"><strong style="color: blue;">${key_temp}</strong></span>&nbsp;&nbsp;:&nbsp;&nbsp;`;
-
-                if (Array.isArray(value)) {
-                    if (value.length === 0) {
-                        html += `NONE`;
-                    } else {
-                        const colors = (arrayKeyWithColors && arrayKeyWithColors.key === key) ? arrayKeyWithColors.colors : null;
-                        html += `<br>` + this._generateTableHtml(value, level, negativeValuesInRed, colors);
-                    }
-                } else if (typeof value === 'object' && value !== null) {
-                    html += `<br>${this._generateHtml(value, level + 1, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors, listOfKeysToBreakAtFullstop, listOfKeysToTreatAsUrl)}`;
-                } else {
-                    const isNegative = negativeValuesInRed && this.hasNegativeValue(value);
-                    const colorStyle = isNegative ? 'style="color: red;"' : '';
-                    
-                    if (listOfKeysToBreakAtFullstop.includes(key) && typeof value === 'string') {
-                        const bullets = value.split('.').filter(s => s.trim().length > 0).map(s => `<li>${s.trim()}.</li>`).join('');
-                        html += `<ul style="margin-top: 5px; padding-left: 20px;">${bullets}</ul>`;
-                    } else if (listOfKeysToTreatAsUrl.includes(key) && typeof value === 'string') {
-                        html += `<a href="${value}" target="_blank" style="color: blue; text-decoration: underline;">${value}</a>`;
-                    } else {
-                        html += `<span ${colorStyle}>${value}</span>`;
-                    }
-                }
-                html += `</div><br>`;
-            }
-        } else if (Array.isArray(obj)) {
-            if (obj.length === 0) {
-                html += `<div>${tab}NONE</div>`;
-            } else {
-                obj.forEach((item, index) => {
-                    html += `<div>${tab}${index + 1}. ${this._generateHtml(item, level + 1, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors, listOfKeysToBreakAtFullstop, listOfKeysToTreatAsUrl)}</div>`;
-                });
-            }
-        } else {
-            const isNegative = negativeValuesInRed && this.hasNegativeValue(obj);
-            const colorStyle = isNegative ? 'style="color: red;"' : '';
-            html += `<span ${colorStyle}>${obj}</span>`;
-        }
-        return html;
-    }
-
-    _remove_underscore(d) {
-        let d1 = d.replace(/_/g, ' ');
-        return d1;
-    }
-
-    _generateTabbedHtml(key, value, level, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors, listOfKeysToBreakAtFullstop = [], listOfKeysToTreatAsUrl = []) {
-        const tab = '&nbsp;&nbsp;&nbsp;&nbsp;'.repeat(level);
-
-        let key_temp = this._remove_underscore(key);
-        let html = `<div>${tab}<strong style="color: blue;">${key_temp}</strong>: </div>`;
-
-        const stockEntries = Object.entries(value);
-        const uniqueId = 'tabs_' + Math.random().toString(36).substr(2, 9);
-
-        html += `<div style="margin-left: ${level * 20}px; margin-bottom: 20px;">`;
-        // Tab buttons
-        html += `<div style="display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px;">`;
-        stockEntries.forEach(([stockName], index) => {
-            let stockName_temp = this._remove_underscore(stockName);
-            const activeStyle = index === 0 ? 'background-color: #007bff; color: white; font-weight: bold;' : 'background-color: #f8f9fa; color: #007bff;';
-            html += `<button class="btn-${uniqueId}" 
-                        onclick="
-                            (function(btn){
-                                const container = btn.parentElement.parentElement;
-                                container.querySelectorAll('.content-${uniqueId}').forEach(c => c.style.display = 'none');
-                                container.querySelectorAll('.btn-${uniqueId}').forEach(b => {
-                                    b.style.backgroundColor = '#f8f9fa';
-                                    b.style.color = '#007bff';
-                                    b.style.fontWeight = 'normal';
-                                });
-                                document.getElementById('content-${uniqueId}-${index}').style.display = 'block';
-                                btn.style.backgroundColor = '#007bff';
-                                btn.style.color = 'white';
-                                btn.style.fontWeight = 'bold';
-                            })(this)"
-                        style="padding: 2px 6px; font-size: 10px; cursor: pointer; border: 1px solid #007bff; border-radius: 4px; transition: all 0.2s; flex: 0 0 auto; width: auto; white-space: nowrap; ${activeStyle}">
-                        ${stockName_temp}
-                     </button>`;
-        });
-        html += `</div>`;
-
-        // Tab contents
-        stockEntries.forEach(([stockName, stockData], index) => {
-            const display = index === 0 ? 'block' : 'none';
-            html += `<div id="content-${uniqueId}-${index}" class="content-${uniqueId}" style="display: ${display}; border: 1px solid #dee2e6; padding: 15px; border-radius: 4px; background-color: #fff;">`;
-            html += this._generateHtml(stockData, level + 1, negativeValuesInRed, listOfKeysToBeShownInTab, arrayKeyWithColors, listOfKeysToBreakAtFullstop, listOfKeysToTreatAsUrl);
-            html += `</div>`;
-        });
-        html += `</div>`;
-        return html;
-    }
-
-    _generateTableHtml(value, level, negativeValuesInRed, colors) {
-        let html = `<table style="border-collapse: collapse; width: auto; margin-left: ${level * 20}px; border: 1px solid blue;">`;
-        
-        // Detect if this is a list of Key-Value pairs (where keys vary and represent labels)
-        // rather than a structured table (where keys are fixed column headers).
-        let isKeyValueList = false;
-        if (value.length > 0 && typeof value[0] === 'object' && value[0] !== null) {
-            const schemaKeys = Object.keys(value[0]);
-            if (schemaKeys.length === 1) {
-                for (let i = 1; i < value.length; i++) {
-                    if (typeof value[i] !== 'object' || value[i] === null || Object.keys(value[i])[0] !== schemaKeys[0]) {
-                        isKeyValueList = true;
-                        break;
-                    }
-                }
-                // For single items, check if the key looks like data (e.g., has dates or spaces)
-                if (value.length === 1 && (schemaKeys[0].includes('-') || schemaKeys[0].includes(' ') || !isNaN(schemaKeys[0][0]))) {
-                    isKeyValueList = true;
-                }
-            }
-        }
-
-        // Add header if the array contains objects and is not a KV list
-        if (!isKeyValueList && value.length > 0 && typeof value[0] === 'object' && value[0] !== null) {
-            html += `<tr style="background-color: #eee; font-weight: bold; border-bottom: 2px solid blue;">`;
-            Object.keys(value[0]).forEach(key => {
-                html += `<td style="padding: 8px; border-right: 1px solid blue;">${this._remove_underscore(key)}</td>`;
-            });
-            html += `</tr>`;
-        }
-
-        value.forEach((item, index) => {
-            const bgColor = index % 2 === 0 ? 'white' : 'lightblue';
-            const isNegative = this.hasNegativeValue(item);
-            
-            let textColor = (negativeValuesInRed && isNegative) ? 'red' : 'black';
-            if (colors && colors.length > 0) {
-                textColor = colors[index % colors.length];
-            }
-            
-            html += `<tr style="border-bottom: 1px solid blue; background-color: ${bgColor}; color: ${textColor};">`;
-            if (typeof item === 'object' && item !== null) {
-                if (isKeyValueList) {
-                    // For KV lists, we display the key as a label in the first cell
-                    for (const [subKey, subVal] of Object.entries(item)) {
-                        html += `<td style="padding: 8px; border-right: 1px solid blue; font-weight: bold;">${this._remove_underscore(subKey)}</td>`;
-                        const isNumeric = /^-?[\d,.]+%?$/.test(subVal.toString());
-                        const align = isNumeric ? 'text-align: right;' : 'text-align: left;';
-                        html += `<td style="padding: 8px; border-right: 1px solid blue; ${align}">${subVal}</td>`;
-                    }
-                } else {
-                    for (const [subKey, subVal] of Object.entries(item)) {
-                        // Right align if it's a number or percentage string
-                        const isNumeric = /^-?[\d,.]+%?$/.test(subVal.toString());
-                        const align = isNumeric ? 'text-align: right;' : 'text-align: left;';
-                        html += `<td style="padding: 8px; border-right: 1px solid blue; ${align}">${subVal}</td>`;
-                    }
-                }
-            } else {
-                html += `<td style="padding: 8px; border-right: 1px solid blue;">${item}</td>`;
-            }
-            html += `</tr>`;
-        });
-        html += `</table>`;
-        return html;
-    }
-
     getSectorAnalysisInfo(sector, callback) {
 
         const filePath = `/static/prompts/stocks_${sector}_info.json`;
@@ -1131,11 +926,11 @@ _getFormattedScrollItems(obj, level = 0) {
             tmp = tmp.toLowerCase();
             listOfKeysToBeShownInTab.push(tmp);
 
-            let tabContentDiv = this.createTabContent(result1, 'tabContent active',
+            let tabContentDiv = this.uiBuilder.createTabContent(result1, 'tabContent active',
                                         negativeValuesInRed, listOfKeysToBeShownInTab);
 
             this.popoutMgr.appendItem(tabContentDiv);
-            this.appendDisclaimer();
+            this.uiBuilder.appendDisclaimer();
             this.popoutMgr.showPopout();
         });
     }
@@ -1154,11 +949,11 @@ _getFormattedScrollItems(obj, level = 0) {
             let negativeValuesInRed = true;
             let listOfKeysToBeShownInTab = ['DII_FII_sector_keys']
 
-            let tabContentDiv = this.createTabContent(result1, 'tabContent active',
+            let tabContentDiv = this.uiBuilder.createTabContent(result1, 'tabContent active',
                                         negativeValuesInRed, listOfKeysToBeShownInTab);
 
             this.popoutMgr.appendItem(tabContentDiv);
-            this.appendDisclaimer();
+            this.uiBuilder.appendDisclaimer();
             this.popoutMgr.showPopout();
         });
     }
@@ -1177,11 +972,11 @@ _getFormattedScrollItems(obj, level = 0) {
             let negativeValuesInRed = true;
             let listOfKeysToBeShownInTab = ['sectors']
 
-            let tabContentDiv = this.createTabContent(result1, 'tabContent active',
+            let tabContentDiv = this.uiBuilder.createTabContent(result1, 'tabContent active',
                                         negativeValuesInRed, listOfKeysToBeShownInTab);
 
             this.popoutMgr.appendItem(tabContentDiv);
-            this.appendDisclaimer();
+            this.uiBuilder.appendDisclaimer();
             this.popoutMgr.showPopout();
         });
     }
@@ -1200,11 +995,11 @@ _getFormattedScrollItems(obj, level = 0) {
             let negativeValuesInRed = true;
             let listOfKeysToBeShownInTab = ['sectors']
 
-            let tabContentDiv = this.createTabContent(result1, 'tabContent active',
+            let tabContentDiv = this.uiBuilder.createTabContent(result1, 'tabContent active',
                                         negativeValuesInRed, listOfKeysToBeShownInTab);
 
             this.popoutMgr.appendItem(tabContentDiv);
-            this.appendDisclaimer();
+            this.uiBuilder.appendDisclaimer();
             this.popoutMgr.showPopout();
         });
     }
@@ -1223,11 +1018,11 @@ _getFormattedScrollItems(obj, level = 0) {
             let negativeValuesInRed = true;
             let listOfKeysToBeShownInTab = ['parameters']
 
-            let tabContentDiv = this.createTabContent(result1, 'tabContent active',
+            let tabContentDiv = this.uiBuilder.createTabContent(result1, 'tabContent active',
                                         negativeValuesInRed, listOfKeysToBeShownInTab);
 
             this.popoutMgr.appendItem(tabContentDiv);
-            this.appendDisclaimer();
+            this.uiBuilder.appendDisclaimer();
             this.popoutMgr.showPopout();
         });
     }
@@ -1246,11 +1041,11 @@ _getFormattedScrollItems(obj, level = 0) {
             let negativeValuesInRed = true;
             let listOfKeysToBeShownInTab = ['related_companies']
 
-            let tabContentDiv = this.createTabContent(result1, 'tabContent active',
+            let tabContentDiv = this.uiBuilder.createTabContent(result1, 'tabContent active',
                                         negativeValuesInRed, listOfKeysToBeShownInTab);
 
             this.popoutMgr.appendItem(tabContentDiv);
-            this.appendDisclaimer();
+            this.uiBuilder.appendDisclaimer();
             this.popoutMgr.showPopout();
         });
     }
@@ -1269,11 +1064,11 @@ _getFormattedScrollItems(obj, level = 0) {
             let negativeValuesInRed = true;
             let listOfKeysToBeShownInTab = ['related_companies']
 
-            let tabContentDiv = this.createTabContent(result1, 'tabContent active',
+            let tabContentDiv = this.uiBuilder.createTabContent(result1, 'tabContent active',
                                         negativeValuesInRed, listOfKeysToBeShownInTab);
 
             this.popoutMgr.appendItem(tabContentDiv);
-            this.appendDisclaimer();
+            this.uiBuilder.appendDisclaimer();
             this.popoutMgr.showPopout();
         });
     }
@@ -1328,16 +1123,16 @@ _getFormattedScrollItems(obj, level = 0) {
 
                     const priceData = this._safeParsePriceData(info);
                     const analysisResult = this.computeAnalysisSegments(priceData);
-                    const plotDiv = this.createStockPricePlot(analysisResult.data, 'tabContent active', analysisResult.segments, analysisResult.highlightPoints);
+                    const plotDiv = this.uiBuilder.createStockPricePlot(analysisResult.data, 'tabContent active', analysisResult.segments, analysisResult.highlightPoints);
                     this.popoutMgr.appendItem(plotDiv);
 
                     const variousReturns = this.getVariousReturn(JSON.stringify(priceData));
-                    const returnsTab = this.createTabContent(variousReturns, 'tabContent active', true, []);
+                    const returnsTab = this.uiBuilder.createTabContent(variousReturns, 'tabContent active', true, []);
                     returnsTab.style.marginLeft = '20px';
                     this.popoutMgr.appendItem(returnsTab);
                 }
             });
-            this.appendDisclaimer();
+            this.uiBuilder.appendDisclaimer();
             this.popoutMgr.showPopout();
         });
     }
@@ -1404,7 +1199,7 @@ _getFormattedScrollItems(obj, level = 0) {
             let priceData = this._safeParsePriceData(info);
             
             const analysisResult = this.computeAnalysisSegments(priceData);
-            const plotDiv = this.createStockPricePlot(analysisResult.data, 'tabContent active', analysisResult.segments, analysisResult.highlightPoints);
+            const plotDiv = this.uiBuilder.createStockPricePlot(analysisResult.data, 'tabContent active', analysisResult.segments, analysisResult.highlightPoints);
             
             container.appendChild(plotDiv);
 
@@ -1417,7 +1212,7 @@ _getFormattedScrollItems(obj, level = 0) {
                 if (variousReturnsObj.various_returns) {
                     const formattedReturns = variousReturnsObj.various_returns.map(ret => {
                         // Highlight negative returns in red and non-negative in green
-                        const color = this.hasNegativeValue(ret) ? 'red' : 'green';
+                        const color = this.uiBuilder.hasNegativeValue(ret) ? 'red' : 'green';
                         let displayVal = ret;
                         if (typeof ret === 'object' && ret !== null) {
                             displayVal = Object.values(ret).join(': ');
@@ -1495,22 +1290,21 @@ _getFormattedScrollItems(obj, level = 0) {
 
             this.popoutMgr.clear();
 
-            const headerJson = this._generatePlotHeaderInfoJson(ticker, period);
-            let headerTab = this.createTabContent(headerJson, 'tabContent active', false, []);
+            const headerJson = this.uiBuilder._generatePlotHeaderInfoJson(ticker, period);
+            let headerTab = this.uiBuilder.createTabContent(headerJson, 'tabContent active', false, []);
             headerTab.style.marginLeft = '20px';
             headerTab.style.marginTop = '15px';
             this.popoutMgr.appendItem(headerTab);
 
             const analysisResult = this.computeAnalysisSegments(priceData, events);
 
-            let analysisInfoTab = this.createTabContent(analysisResult.infoJson, 'tabContent active', false, [], 
+            let analysisInfoTab = this.uiBuilder.createTabContent(analysisResult.infoJson, 'tabContent active', false, [], 
                                         { key: 'Events', colors: this.STOCK_EVENT_COLORS });
             analysisInfoTab.style.marginLeft = '20px';
             this.popoutMgr.appendItem(analysisInfoTab);
 
-            let tabContentDiv_1 = this.createStockPricePlot(analysisResult.data, 'tabContent active', analysisResult.segments, analysisResult.highlightPoints);
+            let tabContentDiv_1 = this.uiBuilder.createStockPricePlot(analysisResult.data, 'tabContent active', analysisResult.segments, analysisResult.highlightPoints);
             this.popoutMgr.appendItem(tabContentDiv_1);
-
 
             const insightsHeader = document.createElement('h3');
             insightsHeader.innerText = "Stock Insights";
@@ -1518,7 +1312,7 @@ _getFormattedScrollItems(obj, level = 0) {
             insightsHeader.style.fontFamily = 'Arial';
             this.popoutMgr.appendItem(insightsHeader);
             let insights_xml = this.getStockPriceInsights(JSON.stringify(priceData));
-            let tabContentDiv_2 = this.createTabContent(insights_xml, 'tabContent active', true, []);
+            let tabContentDiv_2 = this.uiBuilder.createTabContent(insights_xml, 'tabContent active', true, []);
             this.popoutMgr.appendItem(tabContentDiv_2);
 
             if (Object.keys(summary).length > 0 && !summary.error) {
@@ -1529,8 +1323,7 @@ _getFormattedScrollItems(obj, level = 0) {
                 summaryHeader.style.color = '#007bff';
                 summaryHeader.style.fontFamily = 'Arial';
                 this.popoutMgr.appendItem(summaryHeader);
-
-                let summaryTab = this.createTabContent(JSON.stringify(summary), 'tabContent active', false, [], null, ['business_summary'], ['website']);
+                let summaryTab = this.uiBuilder.createTabContent(JSON.stringify(summary), 'tabContent active', false, [], null, ['business_summary'], ['website']);
                 summaryTab.style.marginLeft = '20px';
                 this.popoutMgr.appendItem(summaryTab);
             }
@@ -1543,8 +1336,7 @@ _getFormattedScrollItems(obj, level = 0) {
                 finHeader.style.color = '#007bff';
                 finHeader.style.fontFamily = 'Arial';
                 this.popoutMgr.appendItem(finHeader);
-
-                let finTab = this.createTabContent(JSON.stringify(financials), 'tabContent active', true,
+                let finTab = this.uiBuilder.createTabContent(JSON.stringify(financials), 'tabContent active', true,
                                             ['income_statement', 'balance_sheet', 'cash_flow']);
                 finTab.style.marginLeft = '20px';
                 this.popoutMgr.appendItem(finTab);
@@ -1558,7 +1350,7 @@ _getFormattedScrollItems(obj, level = 0) {
                 this.popoutMgr.appendItem(returnsHeader);
 
                 let variousReturns = this.getVariousReturn(JSON.stringify(priceData));
-                let returnsTab = this.createTabContent(variousReturns, 'tabContent active', true, []);
+                let returnsTab = this.uiBuilder.createTabContent(variousReturns, 'tabContent active', true, []);
                 this.popoutMgr.appendItem(returnsTab);
 
             } else if (analysisType === 'ANALYSIS_WEEKLY_AVG_RETURN') {
@@ -1568,7 +1360,7 @@ _getFormattedScrollItems(obj, level = 0) {
                 insightsHeader.style.fontFamily = 'Arial';
                 this.popoutMgr.appendItem(insightsHeader);
                 let insights_xml = this.getAvgWeeklyReturn(JSON.stringify(priceData));
-                let tabContentDiv_2 = this.createTabContent(insights_xml, 'tabContent active', true, []);
+                let tabContentDiv_2 = this.uiBuilder.createTabContent(insights_xml, 'tabContent active', true, []);
                 this.popoutMgr.appendItem(tabContentDiv_2);
 
             } else if (analysisType == 'ANALYSIS_PEER_COMPARISON') {
@@ -1583,26 +1375,15 @@ _getFormattedScrollItems(obj, level = 0) {
                     this.popoutMgr.appendItem(peerHeader);
 
                     const peerAnalysis = this.computeAnalysisSegments(peerPriceData);
-                    this.popoutMgr.appendItem(this.createTabContent(peerAnalysis.infoJson, 'tabContent active', false, []));
-                    this.popoutMgr.appendItem(this.createStockPricePlot(peerAnalysis.data, 'tabContent active', peerAnalysis.segments));
+                    this.popoutMgr.appendItem(this.uiBuilder.createTabContent(peerAnalysis.infoJson, 'tabContent active', false, []));
+                    this.popoutMgr.appendItem(this.uiBuilder.createStockPricePlot(peerAnalysis.data, 'tabContent active', peerAnalysis.segments));
                 }
             }
 
-            this.appendDisclaimer();
+            this.uiBuilder.appendDisclaimer();
             this.popoutMgr.showPopout();
         }, (error) => {
             errorManager.showError(2044, error);
-        });
-    }
-
-    _generatePlotHeaderInfoJson(stockName, period) {
-        const analysisTypeDropdown = document.getElementById("analysis-type-dropdown");
-        const analysisTypeText = analysisTypeDropdown ? analysisTypeDropdown.options[analysisTypeDropdown.selectedIndex].text : "N/A";
-
-        return JSON.stringify({
-            "Stock": stockName,
-            "Months": period,
-            "Analysis_type": analysisTypeText
         });
     }
 

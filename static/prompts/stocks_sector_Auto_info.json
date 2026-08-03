@@ -1,273 +1,94 @@
 {
-  "period": "Mid-May 2026 to Early-June 2026",
-
-  "sector_summary": [
-    "Strong domestic demand",
-    "SUV sales momentum",
-    "Rural recovery visible",
-    "Monsoon optimism builds",
-    "EV adoption continues",
-    "Premium segment strong",
-    "Selective profit booking",
-    "Auto index outperforming"
+  "header": "Nifty Auto Sector Analysis: 01Jul26 to 31Jul26",
+  "concise_summary": [
+    "Nifty Auto traded near 52-week highs through July",
+    "Record June vehicle sales data lifted the sector",
+    "EV registrations crossed 30,000 units, up sharply",
+    "High crude oil pushed buyers toward EV, CNG",
+    "Q1 FY27 earnings season began through July",
+    "Input costs squeezed margins despite strong volumes",
+    "Bajaj Auto buyback supported stock sentiment",
+    "Festive season optimism a key forward driver",
+    "Tata Motors lagged the sector's broader strength",
+    "US-Iran crude volatility repeatedly swung sector sentiment"
   ],
-
-  "nifty_auto_timeline": {
-    "mid_may_2026": [
-      "Sales data positive",
-      "Rural sentiment improves",
-      "Tractor demand stable",
-      "Broad sector buying"
-    ],
-    "jun_01_2026": [
-      "Strong breakout attempt",
-      "FII participation rises",
-      "OEMs outperforming",
-      "Positive market breadth"
-    ],
-    "jun_02_2026": [
-      "Follow-through buying",
-      "SUV demand optimism",
-      "Volume expansion seen",
-      "Momentum strengthens"
-    ],
-    "jun_03_to_jun_10_2026": [
-      "Selective consolidation",
-      "Profit booking emerges",
-      "Large caps stable",
-      "Momentum remains intact"
-    ]
-  },
-
-  "stocks_in_momentum": {
+  "related_stocks": {
+    "Maruti Suzuki India": {
+      "reason_for_movement": "Traded near record highs on strong volume momentum, though tempered by looming cost concerns",
+      "key_news": "Quarterly results due at month-end were expected to show strong revenue growth but a profit decline on higher input costs; company also approved new biogas manufacturing projects"
+    },
     "Mahindra & Mahindra": {
-      "reason": "SUV leadership, tractor recovery, strong order backlog",
-      "last_15_days_upside_downside": "+9%",
-
-      "historical_return_2month_blocks": [
-        { "May-Jun 2024": "+12%" },
-        { "Jul-Aug 2024": "+15%" },
-        { "Sep-Oct 2024": "+6%" },
-        { "Nov-Dec 2024": "+10%" },
-        { "Jan-Feb 2025": "+8%" },
-        { "Mar-Apr 2025": "-3%" },
-        { "May-Jun 2025": "+11%" },
-        { "Jul-Aug 2025": "+13%" },
-        { "Sep-Oct 2025": "+5%" },
-        { "Nov-Dec 2025": "+9%" },
-        { "Jan-Feb 2026": "-4%" },
-        { "Mar-Apr 2026": "+6%" }
-      ],
-
-      "return_percent": [
-        { "1_month": "+8%" },
-        { "2_months": "+11%" },
-        { "3_months": "+15%" },
-        { "4_months": "+13%" },
-        { "5_months": "+10%" },
-        { "6_months": "+18%" }
-      ]
+      "reason_for_movement": "Among the sector's biggest gainers on very strong monthly sales and festive-demand optimism",
+      "key_news": "Reported particularly strong monthly sales growth across its SUV and overall vehicle portfolio"
     },
-
-    "Maruti Suzuki": {
-      "reason": "SUV portfolio growth, export recovery, premiumization",
-      "last_15_days_upside_downside": "+6%",
-
-      "historical_return_2month_blocks": [
-        { "May-Jun 2024": "+7%" },
-        { "Jul-Aug 2024": "+9%" },
-        { "Sep-Oct 2024": "+4%" },
-        { "Nov-Dec 2024": "+6%" },
-        { "Jan-Feb 2025": "+5%" },
-        { "Mar-Apr 2025": "-2%" },
-        { "May-Jun 2025": "+8%" },
-        { "Jul-Aug 2025": "+7%" },
-        { "Sep-Oct 2025": "+3%" },
-        { "Nov-Dec 2025": "+5%" },
-        { "Jan-Feb 2026": "-3%" },
-        { "Mar-Apr 2026": "+4%" }
-      ],
-
-      "return_percent": [
-        { "1_month": "+5%" },
-        { "2_months": "+7%" },
-        { "3_months": "+8%" },
-        { "4_months": "+9%" },
-        { "5_months": "+7%" },
-        { "6_months": "+11%" }
-      ]
-    },
-
-    "Eicher Motors": {
-      "reason": "Royal Enfield growth, export demand improvement",
-      "last_15_days_upside_downside": "+7%",
-
-      "historical_return_2month_blocks": [
-        { "May-Jun 2024": "+9%" },
-        { "Jul-Aug 2024": "+11%" },
-        { "Sep-Oct 2024": "+2%" },
-        { "Nov-Dec 2024": "+7%" },
-        { "Jan-Feb 2025": "+6%" },
-        { "Mar-Apr 2025": "-4%" },
-        { "May-Jun 2025": "+10%" },
-        { "Jul-Aug 2025": "+8%" },
-        { "Sep-Oct 2025": "+2%" },
-        { "Nov-Dec 2025": "+6%" },
-        { "Jan-Feb 2026": "-5%" },
-        { "Mar-Apr 2026": "+5%" }
-      ],
-
-      "return_percent": [
-        { "1_month": "+6%" },
-        { "2_months": "+8%" },
-        { "3_months": "+9%" },
-        { "4_months": "+7%" },
-        { "5_months": "+5%" },
-        { "6_months": "+10%" }
-      ]
-    },
-
     "Bajaj Auto": {
-      "reason": "Export recovery, premium motorcycles, EV traction",
-      "last_15_days_upside_downside": "+5%",
-
-      "historical_return_2month_blocks": [
-        { "May-Jun 2024": "+8%" },
-        { "Jul-Aug 2024": "+10%" },
-        { "Sep-Oct 2024": "+1%" },
-        { "Nov-Dec 2024": "+7%" },
-        { "Jan-Feb 2025": "+5%" },
-        { "Mar-Apr 2025": "-3%" },
-        { "May-Jun 2025": "+8%" },
-        { "Jul-Aug 2025": "+7%" },
-        { "Sep-Oct 2025": "+1%" },
-        { "Nov-Dec 2025": "+5%" },
-        { "Jan-Feb 2026": "-4%" },
-        { "Mar-Apr 2026": "+4%" }
-      ],
-
-      "return_percent": [
-        { "1_month": "+4%" },
-        { "2_months": "+6%" },
-        { "3_months": "+7%" },
-        { "4_months": "+6%" },
-        { "5_months": "+4%" },
-        { "6_months": "+8%" }
-      ]
+      "reason_for_movement": "Supported by an ongoing share buyback and a positive reaction to quarterly results",
+      "key_news": "Company's share buyback opened and closed during the period; shares gained after results were announced"
     },
-
-    "TVS Motor": {
-      "reason": "EV growth, scooter demand, market-share gains",
-      "last_15_days_upside_downside": "+8%",
-
-      "historical_return_2month_blocks": [
-        { "May-Jun 2024": "+11%" },
-        { "Jul-Aug 2024": "+13%" },
-        { "Sep-Oct 2024": "+5%" },
-        { "Nov-Dec 2024": "+9%" },
-        { "Jan-Feb 2025": "+7%" },
-        { "Mar-Apr 2025": "-2%" },
-        { "May-Jun 2025": "+10%" },
-        { "Jul-Aug 2025": "+12%" },
-        { "Sep-Oct 2025": "+4%" },
-        { "Nov-Dec 2025": "+8%" },
-        { "Jan-Feb 2026": "-3%" },
-        { "Mar-Apr 2026": "+6%" }
-      ],
-
-      "return_percent": [
-        { "1_month": "+7%" },
-        { "2_months": "+10%" },
-        { "3_months": "+12%" },
-        { "4_months": "+11%" },
-        { "5_months": "+9%" },
-        { "6_months": "+15%" }
-      ]
+    "Eicher Motors": {
+      "reason_for_movement": "Consistently among the top sector gainers on strong festive-season demand optimism",
+      "key_news": "Featured repeatedly among the sector's leading single-session gainers through the month"
     },
-
+    "TVS Motor Company": {
+      "reason_for_movement": "Led the sector higher after record industry-wide monthly vehicle sales data",
+      "key_news": "Emerged as the single biggest gainer in the sector following the record sales report"
+    },
+    "Tata Motors Passenger Vehicles": {
+      "reason_for_movement": "Gained on stable dealer order-book commentary and a market-share recovery",
+      "key_news": "Reclaimed a top position in the passenger-vehicle market during the quarter"
+    },
+    "Tata Motors": {
+      "reason_for_movement": "Broadly lagged the sector's strength through the month amid margin and cost concerns",
+      "key_news": "Quarterly results were pushed to a board meeting scheduled just after the period; separately secured a large batch of new electric commercial-vehicle orders"
+    },
+    "Hero MotoCorp": {
+      "reason_for_movement": "Moved largely in line with the broader two-wheeler segment's positive demand narrative",
+      "key_news": "Expanded its electric scooter lineup with a new model variant during the period"
+    },
     "Ashok Leyland": {
-      "reason": "Commercial vehicle cycle, infrastructure demand",
-      "last_15_days_upside_downside": "+6%",
-
-      "historical_return_2month_blocks": [
-        { "May-Jun 2024": "+10%" },
-        { "Jul-Aug 2024": "+12%" },
-        { "Sep-Oct 2024": "+3%" },
-        { "Nov-Dec 2024": "+8%" },
-        { "Jan-Feb 2025": "+7%" },
-        { "Mar-Apr 2025": "-4%" },
-        { "May-Jun 2025": "+9%" },
-        { "Jul-Aug 2025": "+11%" },
-        { "Sep-Oct 2025": "+2%" },
-        { "Nov-Dec 2025": "+7%" },
-        { "Jan-Feb 2026": "-5%" },
-        { "Mar-Apr 2026": "+5%" }
-      ],
-
-      "return_percent": [
-        { "1_month": "+5%" },
-        { "2_months": "+8%" },
-        { "3_months": "+10%" },
-        { "4_months": "+9%" },
-        { "5_months": "+7%" },
-        { "6_months": "+12%" }
-      ]
+      "reason_for_movement": "Gained as part of the broad-based rally across commercial-vehicle names",
+      "key_news": "No major standalone company-specific trigger reported during the period"
+    },
+    "Samvardhana Motherson International": {
+      "reason_for_movement": "Mixed performance, alternating between gains and declines across sessions",
+      "key_news": "No major standalone company-specific trigger reported during the period"
+    },
+    "Bharat Forge": {
+      "reason_for_movement": "Highly volatile, swinging between being the sector's top gainer and a laggard on different sessions",
+      "key_news": "No single major standalone trigger identified; moves appeared tied to broader auto-ancillary sentiment shifts"
+    },
+    "Exide Industries": {
+      "reason_for_movement": "Rallied strongly on certain sessions alongside the wider auto-ancillary pack",
+      "key_news": "Featured among the day's stronger gainers during at least one session of broad sector strength"
+    },
+    "Sona BLW Precision Forgings": {
+      "reason_for_movement": "Gained strongly on certain sessions in line with the broader ancillary-stock rally",
+      "key_news": "Featured among the stronger gainers during a session of broad-based ancillary strength"
+    },
+    "Tube Investments of India": {
+      "reason_for_movement": "Mixed month, declining on some sessions and rallying sharply on others",
+      "key_news": "No major standalone company-specific trigger reported during the period"
+    },
+    "Bosch": {
+      "reason_for_movement": "A modest laggard on at least one session even as the broader sector advanced",
+      "key_news": "No major standalone company-specific trigger reported during the period"
+    },
+    "UNO Minda": {
+      "reason_for_movement": "Gained modestly, moving largely in line with the broader ancillary segment",
+      "key_news": "No major standalone company-specific trigger reported during the period"
     }
   },
-
-  "sector_drivers": [
-    "Healthy monthly sales",
-    "Rural income recovery",
-    "Normal monsoon outlook",
-    "SUV demand growth",
-    "Commercial vehicle demand",
-    "EV adoption momentum"
-  ],
-
-  "next_5_trading_days_expectation": {
-    "sector_view": "Bullish",
-
-    "expected_nifty_auto_move": "+1.5% to +4%",
-
-    "probability": {
-      "bullish": "65%",
-      "sideways": "25%",
-      "bearish": "10%"
-    },
-
-    "likely_outperformers": [
-      "Mahindra & Mahindra",
-      "TVS Motor",
-      "Eicher Motors",
-      "Ashok Leyland"
-    ],
-
-    "likely_defensive_choices": [
-      "Maruti Suzuki",
-      "Bajaj Auto"
-    ],
-
-    "supporting_factors": [
-      "Strong monthly sales",
-      "Monsoon expectations",
-      "Rural demand recovery",
-      "Positive earnings outlook"
-    ],
-
-    "risk_factors": [
-      "Commodity inflation",
-      "Fuel price volatility",
-      "Global growth concerns",
-      "Profit booking pressure"
-    ]
-  },
-
-  "summary": [
-    "M&M sector leader",
-    "TVS strong momentum",
-    "Eicher gaining strength",
-    "Maruti remains stable",
-    "Auto trend positive",
-    "Bullish near-term setup"
+  "sector_news_last_month": [
+    "Nifty Auto traded close to its 52-week highs through much of July, ranking among the stronger-performing NSE sectoral indices for the month",
+    "Monthly retail sales data from the industry dealers' body showed a record month for overall vehicle sales, with passenger-vehicle sales also posting strong year-on-year growth",
+    "Electric passenger-vehicle registrations crossed a fresh volume milestone for the first time, more than doubling year-on-year, with several manufacturers reporting their highest-ever monthly EV retail sales",
+    "Industry participants linked accelerating demand for electric, hybrid and CNG vehicles partly to fuel-price increases stemming from the escalating West Asia conflict",
+    "Q1 FY27 earnings season ran through the month for several auto names, though a number of major results - including for two large manufacturers - were scheduled just after the period closed",
+    "A recurring theme across earnings previews was margin pressure from higher steel, aluminium and copper costs, even as revenue and volume growth remained strong across the sector",
+    "Festive-season demand optimism was repeatedly cited by market participants as a key driver of buying interest, particularly in two-wheeler and SUV-focused names",
+    "One major two-wheeler and three-wheeler manufacturer's share buyback opened and closed during the month, supporting sentiment in that stock",
+    "Broader market volatility tied to the US-Iran conflict and swings in crude oil prices repeatedly spilled over into auto-sector sentiment, with easing tensions later in the month improving risk appetite and lifting auto shares",
+    "Passenger-vehicle market-share rankings shifted during the quarter, with one major manufacturer's passenger-vehicle arm reclaiming a top market position from a rival",
+    "Auto-ancillary and component names showed some of the sharpest single-session moves in the sector, reflecting more stock-specific and news-driven trading than the broader passenger-vehicle and two-wheeler names"
   ]
 }
