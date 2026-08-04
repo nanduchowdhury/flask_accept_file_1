@@ -14,8 +14,9 @@ class StockUIBuilder {
      * Virtual method called when a tab is clicked or generated.
      * Returns HTML content to be prepended to the tab content area.
      */
-    onTabClicked(tabName) {
-        return `<div style="background-color: #fff3cd; color: #856404; padding: 10px; border: 1px solid #ffeeba; margin-bottom: 15px; border-radius: 4px; font-size: 12px;"><strong>[DEBUG]</strong> onTabClicked hook triggered for: <b>${tabName}</b></div>`;
+    onTabClicked(tabName, parentKey) {
+        if (parentKey !== 'related_stocks') return null;
+        return `<div style="background-color: #fff3cd; color: #856404; padding: 10px; border: 1px solid #ffeeba; margin-bottom: 15px; border-radius: 4px; font-size: 12px;"><strong>[DEBUG]</strong> onTabClicked hook triggered for: <b>${tabName}</b> (parent: <b>${parentKey}</b>)</div>`;
     }
 
     /**
@@ -91,6 +92,7 @@ class StockUIBuilder {
      */
     _loadDynamicTabContent(button) {
         const tabName = button.getAttribute('data-tab-name');
+        const parentKey = button.getAttribute('data-parent-key');
         const btnClass = Array.from(button.classList).find(c => c.startsWith('btn-'));
         if (!btnClass) return;
 
@@ -102,7 +104,7 @@ class StockUIBuilder {
 
         // Prepend content only if it hasn't been loaded for this tab yet
         if (contentDiv && !contentDiv.dataset.dynamicLoaded) {
-            const extraHtml = this.onTabClicked(tabName);
+            const extraHtml = this.onTabClicked(tabName, parentKey);
             if (extraHtml) contentDiv.insertAdjacentHTML('afterbegin', extraHtml);
             contentDiv.dataset.dynamicLoaded = "true";
         }
@@ -414,7 +416,7 @@ class StockUIBuilder {
         html += `<div style="margin-left: ${level * 20}px; margin-bottom: 20px;"><div style="display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px;">`;
         stockEntries.forEach(([stockName], index) => {
             const activeStyle = index === 0 ? 'background-color: #007bff; color: white; font-weight: bold;' : 'background-color: #f8f9fa; color: #007bff;';
-            html += `<button class="btn-${uniqueId}" data-tab-name="${stockName}" onclick="(function(btn){ const container = btn.parentElement.parentElement; container.querySelectorAll('.content-${uniqueId}').forEach(c => c.style.display = 'none'); container.querySelectorAll('.btn-${uniqueId}').forEach(b => { b.style.backgroundColor = '#f8f9fa'; b.style.color = '#007bff'; b.style.fontWeight = 'normal'; }); document.getElementById('content-${uniqueId}-${index}').style.display = 'block'; btn.style.backgroundColor = '#007bff'; btn.style.color = 'white'; btn.style.fontWeight = 'bold'; })(this)" style="padding: 2px 6px; font-size: 10px; cursor: pointer; border: 1px solid #007bff; border-radius: 4px; transition: all 0.2s; flex: 0 0 auto; width: auto; white-space: nowrap; ${activeStyle}">${this._remove_underscore(stockName)}</button>`;
+            html += `<button class="btn-${uniqueId}" data-tab-name="${stockName}" data-parent-key="${key}" onclick="(function(btn){ const container = btn.parentElement.parentElement; container.querySelectorAll('.content-${uniqueId}').forEach(c => c.style.display = 'none'); container.querySelectorAll('.btn-${uniqueId}').forEach(b => { b.style.backgroundColor = '#f8f9fa'; b.style.color = '#007bff'; b.style.fontWeight = 'normal'; }); document.getElementById('content-${uniqueId}-${index}').style.display = 'block'; btn.style.backgroundColor = '#007bff'; btn.style.color = 'white'; btn.style.fontWeight = 'bold'; })(this)" style="padding: 2px 6px; font-size: 10px; cursor: pointer; border: 1px solid #007bff; border-radius: 4px; transition: all 0.2s; flex: 0 0 auto; width: auto; white-space: nowrap; ${activeStyle}">${this._remove_underscore(stockName)}</button>`;
         });
         html += `</div>`;
         stockEntries.forEach(([stockName, stockData], index) => {
@@ -489,7 +491,9 @@ class StockAnalysisUIBuilder extends StockUIBuilder {
      * Implements the virtual method to fetch data and render a plot
      * and summary for the selected stock tab.
      */
-    onTabClicked(tabName) {
+    onTabClicked(tabName, parentKey) {
+        if (parentKey !== 'related_stocks') return null;
+
         const uniqueId = `dynamic-stock-${Math.random().toString(36).substr(2, 9)}`;
         
         // The method expects a string return for synchronous insertion.
