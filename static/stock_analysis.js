@@ -48,6 +48,17 @@ class StockUIBuilder {
         return html;
     }
 
+    _safeParsePriceData(info) {
+        if (!info || info === "NONE" || info === "N/A") return [];
+        if (typeof info === 'object') return info.price_data || [];
+        try {
+            return JSON.parse(info);
+        } catch (e) {
+            console.warn("Failed to parse stock price data:", e);
+            return [];
+        }
+    }
+
     createTabContent(tabContent, className, negativeValuesInRed, 
                       listOfKeysToBeShownInTab, arrayKeyWithColors, listOfKeysToBreakAtFullstop = [], listOfKeysToTreatAsUrl = []) {
         let tabContentDiv = document.createElement('div');
@@ -461,6 +472,85 @@ class StockUIBuilder {
     }
 }
 
+/**
+ * StockAnalysisUIBuilder extends the base UI builder to fetch
+ * and render live stock data when a tab is clicked.
+ */ 
+class StockAnalysisUIBuilder extends StockUIBuilder {
+    constructor(popoutMgr, stockEventColors, dataFetcher, analysisComputer, getStockPriceInsightsFn, getAvgWeeklyReturnFn) {
+        super(popoutMgr, stockEventColors);
+        this.dataFetcher = dataFetcher; // Function to get data from server
+        this.analysisComputer = analysisComputer; // Function to compute segments
+        this.getStockPriceInsightsFn = getStockPriceInsightsFn;
+        this.getAvgWeeklyReturnFn = getAvgWeeklyReturnFn;
+    }
+
+    /**
+     * Implements the virtual method to fetch data and render a plot
+     * and summary for the selected stock tab.
+     */
+    onTabClicked(tabName) {
+        const uniqueId = `dynamic-stock-${Math.random().toString(36).substr(2, 9)}`;
+        
+        // The method expects a string return for synchronous insertion.
+        // We return a placeholder and populate it asynchronously.
+        setTimeout(() => {
+            const container = document.getElementById(uniqueId);
+            if (!container) return;
+
+            const period = "12";
+            const analysisType = "ANALYSIS_REGULAR";
+            const requestTypes = ['STOCK_BASICS', 'STOCK_SUMMARY'];
+
+            this.dataFetcher(tabName, period, analysisType, requestTypes, (response) => {
+                container.innerHTML = '';
+                
+                if (response.error) {
+                    container.innerHTML = `<div style="color:red; font-size:12px;">Error loading ${tabName}: ${response.error}</div>`;
+                    return;
+                }
+
+                const priceData = this._safeParsePriceData(response.STOCK_BASICS);
+                const analysisResult = this.analysisComputer(priceData);
+
+                // 1. Create stock price plot
+                const plotDiv = this.createStockPricePlot(analysisResult.data, 'tabContent active', analysisResult.segments, analysisResult.highlightPoints);
+                container.appendChild(plotDiv);
+
+                // 2. Put stock summary
+                if (response.STOCK_SUMMARY && !response.STOCK_SUMMARY.error) {
+                    const summaryTab = this.createTabContent(JSON.stringify(response.STOCK_SUMMARY), 'tabContent active', false, [], null, ['business_summary'], ['website']);
+                    container.appendChild(summaryTab);
+                }
+
+                // Append stock-price-insights.
+                const insightsHeader = document.createElement('h3');
+                insightsHeader.innerText = "Stock Insights";
+                insightsHeader.style.marginLeft = '20px';
+                insightsHeader.style.fontFamily = 'Arial';
+                container.appendChild(insightsHeader);
+                let insights_xml = this.getStockPriceInsightsFn(JSON.stringify(priceData));
+                let insightsTab = this.createTabContent(insights_xml, 'tabContent active', true, []);
+                container.appendChild(insightsTab);
+
+                // Append weekly avg return.
+                const weeklyReturnHeader = document.createElement('h3');
+                weeklyReturnHeader.innerText = "Weekly Average Return";
+                weeklyReturnHeader.style.marginLeft = '20px';
+                weeklyReturnHeader.style.fontFamily = 'Arial';
+                container.appendChild(weeklyReturnHeader);
+                let weeklyReturn_xml = this.getAvgWeeklyReturnFn(JSON.stringify(priceData));
+                let weeklyReturnTab = this.createTabContent(weeklyReturn_xml, 'tabContent active', true, []);
+                container.appendChild(weeklyReturnTab);
+            }, (err) => {
+                container.innerHTML = `<div style="color:red; font-size:12px;">Failed to fetch data for ${tabName}.</div>`;
+            });
+        }, 0);
+
+        return `<div id="${uniqueId}" style="padding:10px; font-size:12px; color:#666; font-style:italic;">Loading live performance for ${tabName}...</div>`;
+    }
+}
+
 class StockAnalysisMain {
     constructor() {
         this.popoutMgr = new PopoutManager('genericPopoutId');
@@ -469,7 +559,14 @@ class StockAnalysisMain {
 
         this.STOCK_EVENT_COLORS = ['blue', 'green', 'red', 'yellow', 'orange', 'purple', 'brown', 'teal'];
 
-        this.uiBuilder = new StockUIBuilder(this.popoutMgr, this.STOCK_EVENT_COLORS);
+        this.uiBuilder = new StockAnalysisUIBuilder(
+            this.popoutMgr, 
+            this.STOCK_EVENT_COLORS, 
+            this.getStockDataFromServer.bind(this),
+            this.computeAnalysisSegments.bind(this),
+            this.getStockPriceInsights.bind(this), // Pass getStockPriceInsights
+            this.getAvgWeeklyReturn.bind(this)     // Pass getAvgWeeklyReturn
+        );
 
         this.stockDataCache = new Map();
 
@@ -965,7 +1062,7 @@ class StockAnalysisMain {
             this.popoutMgr.clear();
 
             let negativeValuesInRed = true;
-            let listOfKeysToBeShownInTab = ['stocks_in_momentum']
+            let listOfKeysToBeShownInTab = ['related_stocks']
             let tmp = "nifty_" + sector + "_timeline"
             tmp = tmp.replace('_sector', '');
             tmp = tmp.toLowerCase();
@@ -992,7 +1089,7 @@ class StockAnalysisMain {
             this.popoutMgr.clear();
 
             let negativeValuesInRed = true;
-            let listOfKeysToBeShownInTab = ['DII_FII_sector_keys']
+            let listOfKeysToBeShownInTab = ['DII_FII_sector_keys', 'related_stocks']
 
             let tabContentDiv = this.uiBuilder.createTabContent(result1, 'tabContent active',
                                         negativeValuesInRed, listOfKeysToBeShownInTab);
@@ -1166,7 +1263,7 @@ class StockAnalysisMain {
                     title.style.fontFamily = 'Arial';
                     this.popoutMgr.appendItem(title);
 
-                    const priceData = this._safeParsePriceData(info);
+                    const priceData = this.uiBuilder._safeParsePriceData(info);
                     const analysisResult = this.computeAnalysisSegments(priceData);
                     const plotDiv = this.uiBuilder.createStockPricePlot(analysisResult.data, 'tabContent active', analysisResult.segments, analysisResult.highlightPoints);
                     this.popoutMgr.appendItem(plotDiv);
@@ -1241,7 +1338,7 @@ class StockAnalysisMain {
                 return;
             }
 
-            let priceData = this._safeParsePriceData(info);
+            let priceData = this.uiBuilder._safeParsePriceData(info);
             
             const analysisResult = this.computeAnalysisSegments(priceData);
             const plotDiv = this.uiBuilder.createStockPricePlot(analysisResult.data, 'tabContent active', analysisResult.segments, analysisResult.highlightPoints);
@@ -1329,7 +1426,7 @@ class StockAnalysisMain {
                 return;
             }
 
-            let priceData = this._safeParsePriceData(info);
+            let priceData = this.uiBuilder._safeParsePriceData(info);
             
             events = this._massageRawStockEvents(events, period);
 
