@@ -1139,7 +1139,7 @@ class StockAnalysisMain {
             this.popoutMgr.clear();
 
             let negativeValuesInRed = true;
-            let listOfKeysToBeShownInTab = ['sectors']
+            let listOfKeysToBeShownInTab = ['sectors', 'related_stocks']
 
             let tabContentDiv = this.uiBuilder.createTabContent(result1, 'tabContent active',
                                         negativeValuesInRed, listOfKeysToBeShownInTab);

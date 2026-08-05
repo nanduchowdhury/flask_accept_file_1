@@ -1,378 +1,1001 @@
 {
+  "header": "Current Nifty Sector Leaders Driving NIFTY (05-Aug-2026)",
+  "as_of_date": "05Aug26",
+  "index_context": {
+    "index": "NIFTY 50",
+    "methodology": "Free-float market-cap weighted",
+    "sector_weight_source": "Latest official Nifty 50 factsheet/composition retrieved.",
+    "important_note": "Weights are not live intraday weights and can change daily."
+  },
   "sectors": {
-    "Banking_Financial_Services": {
-      "sector_weight_percent": 36.5,
-      "top_contributor": "HDFCBANK",
-      "important_15_stocks": [
-        "HDFCBANK",
-        "ICICIBANK",
-        "SBIN",
-        "KOTAKBANK",
-        "AXISBANK",
-        "INDUSINDBK",
-        "BAJFINANCE",
-        "BAJAJFINSV",
-        "SBICARD",
-        "PFC",
-        "RECLTD",
-        "CHOLAFIN",
-        "SHRIRAMFIN",
-        "LICHSGFIN",
-        "MUTHOOTFIN"
-      ],
-      "current_trend": "Strong Bullish",
-      "expected_trend_next_5_days": "Bullish",
-      "nifty_impact_score": 10,
+    "Financial Services": {
+      "sector_weight_percent": 35.27,
+      "top_contributor": "HDFC Bank Ltd.",
+      "current_trend": "bullish",
+      "expected_trend_next_5_days": "positive_to_neutral",
       "drivers": [
-        "FII inflows",
+        "Strong bank earnings",
         "Credit growth",
-        "Stable RBI policy",
-        "Private bank rerating",
-        "Improving asset quality"
-      ]
-    },
-
-    "Information_Technology": {
-      "sector_weight_percent": 12.8,
-      "top_contributor": "TCS",
-      "important_15_stocks": [
-        "TCS",
-        "INFY",
-        "HCLTECH",
-        "WIPRO",
-        "TECHM",
-        "LTIM",
-        "PERSISTENT",
-        "COFORGE",
-        "MPHASIS",
-        "LTTS",
-        "KPITTECH",
-        "OFSS",
-        "TATAELXSI",
-        "SONATSOFTW",
-        "BIRLASOFT"
+        "Domestic liquidity",
+        "Largest Nifty sector weight"
       ],
-      "current_trend": "Bullish",
-      "expected_trend_next_5_days": "Bullish",
-      "nifty_impact_score": 8,
+      "key_risks": [
+        "Crude-driven inflation",
+        "Global yields",
+        "Margin pressure"
+      ],
+      "related_stocks": {
+        "HDFC Bank": {
+          "expanded_company_name": "HDFC Bank Limited"
+        },
+        "ICICI Bank": {
+          "expanded_company_name": "ICICI Bank Limited"
+        },
+        "State Bank of India": {
+          "expanded_company_name": "State Bank of India"
+        },
+        "Axis Bank": {
+          "expanded_company_name": "Axis Bank Limited"
+        },
+        "Kotak Mahindra Bank": {
+          "expanded_company_name": "Kotak Mahindra Bank Limited"
+        },
+        "Bajaj Finance": {
+          "expanded_company_name": "Bajaj Finance Limited"
+        },
+        "Bajaj Finserv": {
+          "expanded_company_name": "Bajaj Finserv Limited"
+        },
+        "Shriram Finance": {
+          "expanded_company_name": "Shriram Finance Ltd."
+        },
+        "Jio Financial Services": {
+          "expanded_company_name": "Jio Financial Services Limited"
+        },
+        "SBI Life Insurance": {
+          "expanded_company_name": "SBI Life Insurance Ltd."
+        },
+        "HDFC Life Insurance": {
+          "expanded_company_name": "HDFC Life Insurance Ltd."
+        },
+        "Max Financial Services": {
+          "expanded_company_name": "Max Financial Services Ltd."
+        },
+        "Cholamandalam Investment and Finance Company": {
+          "expanded_company_name": "Cholamandalam Investment and Finance Company Ltd."
+        },
+        "HDFC Asset Management Company": {
+          "expanded_company_name": "HDFC Asset Management Company Ltd."
+        },
+        "Power Finance Corporation": {
+          "expanded_company_name": "Power Finance Corporation Ltd."
+        },
+        "REC Limited": {
+          "expanded_company_name": "REC Limited"
+        },
+        "Canara Bank": {
+          "expanded_company_name": "Canara Bank Ltd."
+        },
+        "Bank of Baroda": {
+          "expanded_company_name": "Bank of Baroda Ltd."
+        },
+        "Punjab National Bank": {
+          "expanded_company_name": "Punjab National Bank Ltd."
+        },
+        "Union Bank of India": {
+          "expanded_company_name": "Union Bank of India Ltd."
+        },
+        "Indian Bank": {
+          "expanded_company_name": "Indian Bank Ltd."
+        },
+        "Bank of Maharashtra": {
+          "expanded_company_name": "Bank of Maharashtra Ltd."
+        },
+        "Muthoot Finance": {
+          "expanded_company_name": "Muthoot Finance Ltd."
+        },
+        "Manappuram Finance Ltd.": {
+          "expanded_company_name": "Manappuram Finance Ltd."
+        }
+      }
+    },
+    "Information Technology": {
+      "sector_weight_percent": 8.58,
+      "top_contributor": "Tata Consultancy Services Ltd.",
+      "current_trend": "strong_bullish",
+      "expected_trend_next_5_days": "bullish_with_volatility",
       "drivers": [
         "AI spending",
-        "US technology demand",
-        "Cloud migration",
-        "Digital transformation",
-        "Stable USD"
-      ]
-    },
-
-    "Automobile": {
-      "sector_weight_percent": 8.5,
-      "top_contributor": "MARUTI",
-      "important_15_stocks": [
-        "MARUTI",
-        "M&M",
-        "TATAMOTORS",
-        "EICHERMOT",
-        "BAJAJ_AUTO",
-        "HEROMOTOCO",
-        "TVSMOTOR",
-        "ASHOKLEY",
-        "BALKRISIND",
-        "SONACOMS",
-        "EXIDEIND",
-        "MOTHERSON",
-        "BHARATFORG",
-        "UNO_MINDA",
-        "BOSCHLTD"
+        "Global technology rebound",
+        "Strong July performance",
+        "Foreign reallocation"
       ],
-      "current_trend": "Strong Bullish",
-      "expected_trend_next_5_days": "Bullish",
-      "nifty_impact_score": 8,
-      "drivers": [
-        "Strong rural demand",
-        "Monsoon outlook",
-        "SUV demand",
-        "Export growth",
-        "EV adoption"
-      ]
-    },
-
-    "Capital_Goods_Engineering": {
-      "sector_weight_percent": 7.2,
-      "top_contributor": "LT",
-      "important_15_stocks": [
-        "LT",
-        "SIEMENS",
-        "ABB",
-        "CGPOWER",
-        "POLYCAB",
-        "KEI",
-        "CUMMINSIND",
-        "APLAPOLLO",
-        "KAYNES",
-        "SKFINDIA",
-        "AIAENG",
-        "THERMAX",
-        "BHEL",
-        "HAVELLS",
-        "SCHAEFFLER"
+      "key_risks": [
+        "AI disruption",
+        "US technology valuations",
+        "Dollar movement"
       ],
-      "current_trend": "Very Strong Bullish",
-      "expected_trend_next_5_days": "Strong Bullish",
-      "nifty_impact_score": 9,
-      "drivers": [
-        "Manufacturing shift",
-        "Data center buildout",
-        "Infrastructure capex",
-        "Defense orders",
-        "Power investments"
-      ]
+      "related_stocks": {
+        "Tata Consultancy Services": {
+          "expanded_company_name": "Tata Consultancy Services Limited"
+        },
+        "Infosys": {
+          "expanded_company_name": "Infosys Limited"
+        },
+        "HCL Technologies": {
+          "expanded_company_name": "HCL Technologies Limited"
+        },
+        "Wipro": {
+          "expanded_company_name": "Wipro Limited"
+        },
+        "Tech Mahindra": {
+          "expanded_company_name": "Tech Mahindra Limited"
+        },
+        "LTIMindtree": {
+          "expanded_company_name": "LTIMindtree Limited"
+        },
+        "Persistent Systems": {
+          "expanded_company_name": "Persistent Systems Limited"
+        },
+        "Mphasis": {
+          "expanded_company_name": "Mphasis Limited"
+        },
+        "Coforge": {
+          "expanded_company_name": "Coforge Limited"
+        },
+        "Oracle Financial Services Software": {
+          "expanded_company_name": "Oracle Financial Services Software Ltd."
+        },
+        "L&T Technology Services": {
+          "expanded_company_name": "L&T Technology Services Ltd."
+        },
+        "Tata Elxsi": {
+          "expanded_company_name": "Tata Elxsi Ltd."
+        },
+        "KPIT Technologies": {
+          "expanded_company_name": "KPIT Technologies Ltd."
+        },
+        "Hexaware Technologies": {
+          "expanded_company_name": "Hexaware Technologies Ltd."
+        },
+        "Birlasoft": {
+          "expanded_company_name": "Birlasoft Ltd."
+        },
+        "Mastek": {
+          "expanded_company_name": "Mastek Ltd."
+        },
+        "Cyient": {
+          "expanded_company_name": "Cyient Ltd."
+        },
+        "Happiest Minds Technologies": {
+          "expanded_company_name": "Happiest Minds Technologies Ltd."
+        },
+        "Sonata Software": {
+          "expanded_company_name": "Sonata Software Ltd."
+        },
+        "Newgen Software": {
+          "expanded_company_name": "Newgen Software Ltd."
+        },
+        "Zensar Technologies": {
+          "expanded_company_name": "Zensar Technologies Ltd."
+        }
+      }
     },
-
-    "Healthcare_Pharma": {
-      "sector_weight_percent": 5.8,
-      "top_contributor": "SUNPHARMA",
-      "important_15_stocks": [
-        "SUNPHARMA",
-        "CIPLA",
-        "DRREDDY",
-        "LUPIN",
-        "TORNTPHARM",
-        "AUROPHARMA",
-        "ZYDUSLIFE",
-        "ALKEM",
-        "MANKIND",
-        "BIOCON",
-        "GLAND",
-        "DIVISLAB",
-        "ABBOTINDIA",
-        "AJANTPHARM",
-        "NATCOPHARM"
-      ],
-      "current_trend": "Bullish",
-      "expected_trend_next_5_days": "Bullish",
-      "nifty_impact_score": 7,
+    "Oil, Gas & Consumable Fuels": {
+      "sector_weight_percent": 10.83,
+      "top_contributor": "Reliance Industries Ltd.",
+      "current_trend": "mixed",
+      "expected_trend_next_5_days": "volatile",
       "drivers": [
-        "USFDA approvals",
-        "Export growth",
-        "Defensive sector buying",
-        "Specialty medicines"
-      ]
-    },
-
-    "Power_Utilities": {
-      "sector_weight_percent": 5.1,
-      "top_contributor": "NTPC",
-      "important_15_stocks": [
-        "NTPC",
-        "POWERGRID",
-        "TATAPOWER",
-        "ADANIGREEN",
-        "ADANIPOWER",
-        "JSWENERGY",
-        "NHPC",
-        "SJVN",
-        "TORNTPOWER",
-        "NLCINDIA",
-        "CESC",
-        "RELINFRA",
-        "INOXWIND",
-        "SUZLON",
-        "WAAREE"
-      ],
-      "current_trend": "Strong Bullish",
-      "expected_trend_next_5_days": "Strong Bullish",
-      "nifty_impact_score": 8,
-      "drivers": [
-        "Electricity demand",
-        "Renewable investments",
-        "Grid modernization",
-        "Data center demand"
-      ]
-    },
-
-    "Telecom": {
-      "sector_weight_percent": 4.2,
-      "top_contributor": "BHARTIARTL",
-      "important_15_stocks": [
-        "BHARTIARTL",
-        "INDUSTOWER",
-        "TATACOMM",
-        "TEJASNET",
-        "HFCL",
-        "ROUTE",
-        "RAILTEL",
-        "ITI",
-        "MTNL",
-        "BSNL_BONDS",
-        "STERLITECH",
-        "VINDHYATEL",
-        "TANLA",
-        "MOSCHIP",
-        "NETWEB"
-      ],
-      "current_trend": "Bullish",
-      "expected_trend_next_5_days": "Bullish",
-      "nifty_impact_score": 7,
-      "drivers": [
-        "5G monetization",
-        "Data traffic growth",
-        "AI infrastructure",
-        "Enterprise cloud adoption"
-      ]
-    },
-
-    "Energy_Oil_Gas": {
-      "sector_weight_percent": 13.5,
-      "top_contributor": "RELIANCE",
-      "important_15_stocks": [
-        "RELIANCE",
-        "ONGC",
-        "IOC",
-        "BPCL",
-        "HINDPETRO",
-        "GAIL",
-        "OIL",
-        "PETRONET",
-        "IGL",
-        "MGL",
-        "GSPL",
-        "ATGL",
-        "AEGISLOG",
-        "GUJGASLTD",
-        "CASTROLIND"
-      ],
-      "current_trend": "Neutral to Bullish",
-      "expected_trend_next_5_days": "Volatile Bullish",
-      "nifty_impact_score": 9,
-      "drivers": [
-        "Crude oil movement",
-        "Middle East news",
+        "Crude prices",
+        "Middle-East tensions",
         "Refining margins",
-        "Gas consumption"
-      ]
-    },
-
-    "FMCG": {
-      "sector_weight_percent": 9.1,
-      "top_contributor": "HINDUNILVR",
-      "important_15_stocks": [
-        "HINDUNILVR",
-        "ITC",
-        "NESTLEIND",
-        "BRITANNIA",
-        "DABUR",
-        "GODREJCP",
-        "MARICO",
-        "COLPAL",
-        "TATACONSUM",
-        "EMAMILTD",
-        "VBL",
-        "UBL",
-        "RADICO",
-        "PATANJALI",
-        "JYOTHYLAB"
+        "Large index influence"
       ],
-      "current_trend": "Neutral",
-      "expected_trend_next_5_days": "Mild Bullish",
-      "nifty_impact_score": 6,
+      "key_risks": [
+        "Oil spike",
+        "Shipping disruption",
+        "Imported inflation"
+      ],
+      "related_stocks": {
+        "Reliance Industries": {
+          "expanded_company_name": "Reliance Industries Limited"
+        },
+        "Oil and Natural Gas Corporation": {
+          "expanded_company_name": "Oil and Natural Gas Corporation Ltd."
+        },
+        "Indian Oil Corporation": {
+          "expanded_company_name": "Indian Oil Corporation Ltd."
+        },
+        "Bharat Petroleum Corporation": {
+          "expanded_company_name": "Bharat Petroleum Corporation Ltd."
+        },
+        "Hindustan Petroleum Corporation": {
+          "expanded_company_name": "Hindustan Petroleum Corporation Ltd."
+        },
+        "GAIL (India)": {
+          "expanded_company_name": "GAIL (India) Ltd."
+        },
+        "Oil India": {
+          "expanded_company_name": "Oil India Ltd."
+        },
+        "Petronet LNG": {
+          "expanded_company_name": "Petronet LNG Ltd."
+        },
+        "Gujarat Gas": {
+          "expanded_company_name": "Gujarat Gas Ltd."
+        },
+        "Mahanagar Gas": {
+          "expanded_company_name": "Mahanagar Gas Ltd."
+        },
+        "Indraprastha Gas": {
+          "expanded_company_name": "Indraprastha Gas Ltd."
+        },
+        "Mangalore Refinery and Petrochemicals": {
+          "expanded_company_name": "Mangalore Refinery and Petrochemicals Ltd."
+        },
+        "Chennai Petroleum Corporation": {
+          "expanded_company_name": "Chennai Petroleum Corporation Ltd."
+        },
+        "Adani Total Gas": {
+          "expanded_company_name": "Adani Total Gas Ltd."
+        },
+        "Aegis Logistics": {
+          "expanded_company_name": "Aegis Logistics Ltd."
+        }
+      }
+    },
+    "Automobile and Auto Components": {
+      "sector_weight_percent": 6.65,
+      "top_contributor": "Mahindra & Mahindra Ltd.",
+      "current_trend": "strong_bullish",
+      "expected_trend_next_5_days": "bullish",
       "drivers": [
-        "Monsoon",
-        "Rural consumption",
+        "Strong earnings",
+        "Domestic demand",
         "Lower commodity costs",
-        "Defensive buying"
-      ]
-    },
-
-    "Metals_Mining": {
-      "sector_weight_percent": 4.8,
-      "top_contributor": "TATASTEEL",
-      "important_15_stocks": [
-        "TATASTEEL",
-        "JSWSTEEL",
-        "HINDALCO",
-        "VEDL",
-        "NMDC",
-        "SAIL",
-        "JINDALSTEL",
-        "NALCO",
-        "HINDZINC",
-        "MOIL",
-        "RATNAMANI",
-        "APLAPOLLO",
-        "WELCORP",
-        "WELSPUNCORP",
-        "GRAVITA"
+        "Auto-sector momentum"
       ],
-      "current_trend": "Bullish",
-      "expected_trend_next_5_days": "Bullish",
-      "nifty_impact_score": 6,
-      "drivers": [
-        "China stimulus",
-        "Infrastructure spending",
-        "Commodity cycle",
-        "Global steel demand"
-      ]
-    },
-
-    "Chemicals": {
-      "sector_weight_percent": 2.3,
-      "top_contributor": "PIDILITIND",
-      "important_15_stocks": [
-        "PIDILITIND",
-        "SRF",
-        "UPL",
-        "DEEPAKNTR",
-        "AARTIIND",
-        "PIIND",
-        "NAVINFLUOR",
-        "VINATIORGA",
-        "BALAMINES",
-        "FINEORG",
-        "CLEAN",
-        "GALAXYSURF",
-        "TATACHEM",
-        "GUJFLUORO",
-        "ALKYLAMINE"
+      "key_risks": [
+        "Global demand",
+        "Commodity inflation",
+        "EV competition"
       ],
-      "current_trend": "Recovery Bullish",
-      "expected_trend_next_5_days": "Bullish",
-      "nifty_impact_score": 5,
-      "drivers": [
-        "China recovery",
-        "Export demand",
-        "Inventory normalization"
-      ]
+      "related_stocks": {
+        "Mahindra & Mahindra": {
+          "expanded_company_name": "Mahindra & Mahindra Limited"
+        },
+        "Maruti Suzuki India": {
+          "expanded_company_name": "Maruti Suzuki India Limited"
+        },
+        "Tata Motors": {
+          "expanded_company_name": "Tata Motors Limited"
+        },
+        "Eicher Motors": {
+          "expanded_company_name": "Eicher Motors Limited"
+        },
+        "Bajaj Auto": {
+          "expanded_company_name": "Bajaj Auto Limited"
+        },
+        "Hero MotoCorp": {
+          "expanded_company_name": "Hero MotoCorp Limited"
+        },
+        "TVS Motor Company": {
+          "expanded_company_name": "TVS Motor Company Limited"
+        },
+        "Hyundai Motor India": {
+          "expanded_company_name": "Hyundai Motor India Ltd."
+        },
+        "Samvardhana Motherson International": {
+          "expanded_company_name": "Samvardhana Motherson International Ltd."
+        },
+        "Bharat Forge": {
+          "expanded_company_name": "Bharat Forge Ltd."
+        },
+        "Bosch": {
+          "expanded_company_name": "Bosch Ltd."
+        },
+        "MRF": {
+          "expanded_company_name": "MRF Ltd."
+        },
+        "Apollo Tyres": {
+          "expanded_company_name": "Apollo Tyres Ltd."
+        },
+        "CEAT": {
+          "expanded_company_name": "CEAT Ltd."
+        },
+        "Exide Industries": {
+          "expanded_company_name": "Exide Industries Ltd."
+        },
+        "Amara Raja Energy & Mobility": {
+          "expanded_company_name": "Amara Raja Energy & Mobility Ltd."
+        },
+        "Sona BLW Precision Forgings": {
+          "expanded_company_name": "Sona BLW Precision Forgings Ltd."
+        },
+        "UNO Minda": {
+          "expanded_company_name": "UNO Minda Ltd."
+        },
+        "Ashok Leyland": {
+          "expanded_company_name": "Ashok Leyland Ltd."
+        },
+        "Tube Investments of India": {
+          "expanded_company_name": "Tube Investments of India Ltd."
+        },
+        "Endurance Technologies": {
+          "expanded_company_name": "Endurance Technologies Ltd."
+        },
+        "Schaeffler India": {
+          "expanded_company_name": "Schaeffler India Ltd."
+        }
+      }
     },
-
-    "Real_Estate": {
-      "sector_weight_percent": 2.0,
-      "top_contributor": "DLF",
-      "important_15_stocks": [
-        "DLF",
-        "LODHA",
-        "GODREJPROP",
-        "PRESTIGE",
-        "OBEROIRLTY",
-        "BRIGADE",
-        "PHOENIXLTD",
-        "SOBHA",
-        "SUNTECK",
-        "MAHLIFE",
-        "ANANTRAJ",
-        "SIGNATURE",
-        "ARKADE",
-        "ASHIANA",
-        "NCC"
-      ],
-      "current_trend": "Bullish",
-      "expected_trend_next_5_days": "Bullish",
-      "nifty_impact_score": 5,
+    "Fast Moving Consumer Goods": {
+      "sector_weight_percent": 6.2,
+      "top_contributor": "ITC Ltd.",
+      "current_trend": "weak",
+      "expected_trend_next_5_days": "neutral_to_weak",
       "drivers": [
-        "Housing demand",
-        "Lower rates",
-        "Commercial leasing",
+        "Consumer demand",
+        "Input costs",
+        "Rural recovery",
+        "Defensive allocation"
+      ],
+      "key_risks": [
+        "Commodity inflation",
+        "Weak urban demand",
+        "Margin pressure"
+      ],
+      "related_stocks": {
+        "Hindustan Unilever": {
+          "expanded_company_name": "Hindustan Unilever Limited"
+        },
+        "ITC": {
+          "expanded_company_name": "ITC Limited"
+        },
+        "Nestle India": {
+          "expanded_company_name": "Nestlé India Limited"
+        },
+        "Tata Consumer Products": {
+          "expanded_company_name": "Tata Consumer Products Limited"
+        },
+        "Britannia Industries": {
+          "expanded_company_name": "Britannia Industries Ltd."
+        },
+        "Varun Beverages": {
+          "expanded_company_name": "Varun Beverages Ltd."
+        },
+        "Godrej Consumer Products": {
+          "expanded_company_name": "Godrej Consumer Products Ltd."
+        },
+        "Marico": {
+          "expanded_company_name": "Marico Ltd."
+        },
+        "Dabur India": {
+          "expanded_company_name": "Dabur India Ltd."
+        },
+        "Colgate-Palmolive India": {
+          "expanded_company_name": "Colgate-Palmolive India Ltd."
+        },
+        "United Spirits": {
+          "expanded_company_name": "United Spirits Ltd."
+        },
+        "United Breweries": {
+          "expanded_company_name": "United Breweries Ltd."
+        },
+        "Emami": {
+          "expanded_company_name": "Emami Ltd."
+        },
+        "Patanjali Foods": {
+          "expanded_company_name": "Patanjali Foods Ltd."
+        },
+        "Jubilant FoodWorks": {
+          "expanded_company_name": "Jubilant FoodWorks Ltd."
+        },
+        "Radico Khaitan": {
+          "expanded_company_name": "Radico Khaitan Ltd."
+        }
+      }
+    },
+    "Telecommunication": {
+      "sector_weight_percent": 5.26,
+      "top_contributor": "Bharti Airtel Ltd.",
+      "current_trend": "bullish",
+      "expected_trend_next_5_days": "positive",
+      "drivers": [
+        "Data growth",
+        "Tariff expectations",
+        "5G monetization",
+        "Large index influence"
+      ],
+      "key_risks": [
+        "Capex intensity",
+        "Competition",
+        "Regulation"
+      ],
+      "related_stocks": {
+        "Bharti Airtel": {
+          "expanded_company_name": "Bharti Airtel Limited"
+        },
+        "Vodafone Idea": {
+          "expanded_company_name": "Vodafone Idea Ltd."
+        },
+        "Indus Towers": {
+          "expanded_company_name": "Indus Towers Ltd."
+        },
+        "Tata Communications": {
+          "expanded_company_name": "Tata Communications Ltd."
+        },
+        "Bharti Hexacom": {
+          "expanded_company_name": "Bharti Hexacom Ltd."
+        }
+      }
+    },
+    "Metals & Mining": {
+      "sector_weight_percent": 4.66,
+      "top_contributor": "Tata Steel Ltd.",
+      "current_trend": "mixed_positive",
+      "expected_trend_next_5_days": "mixed",
+      "drivers": [
+        "Global metals demand",
+        "China policy",
+        "Commodity prices",
+        "Infrastructure demand"
+      ],
+      "key_risks": [
+        "China slowdown",
+        "Dollar strength",
+        "Global oversupply"
+      ],
+      "related_stocks": {
+        "Tata Steel": {
+          "expanded_company_name": "Tata Steel Limited"
+        },
+        "Hindalco Industries": {
+          "expanded_company_name": "Hindalco Industries Limited"
+        },
+        "JSW Steel": {
+          "expanded_company_name": "JSW Steel Limited"
+        },
+        "Vedanta": {
+          "expanded_company_name": "Vedanta Ltd."
+        },
+        "Jindal Steel & Power": {
+          "expanded_company_name": "Jindal Steel & Power Ltd."
+        },
+        "NMDC": {
+          "expanded_company_name": "NMDC Ltd."
+        },
+        "Coal India": {
+          "expanded_company_name": "Coal India Ltd."
+        },
+        "Hindustan Zinc": {
+          "expanded_company_name": "Hindustan Zinc Ltd."
+        },
+        "Steel Authority of India": {
+          "expanded_company_name": "Steel Authority of India Ltd."
+        },
+        "Jindal Stainless": {
+          "expanded_company_name": "Jindal Stainless Ltd."
+        },
+        "APL Apollo Tubes": {
+          "expanded_company_name": "APL Apollo Tubes Ltd."
+        },
+        "National Aluminium Company": {
+          "expanded_company_name": "National Aluminium Company Ltd."
+        },
+        "MOIL": {
+          "expanded_company_name": "MOIL Ltd."
+        },
+        "Hindustan Copper": {
+          "expanded_company_name": "Hindustan Copper Ltd."
+        },
+        "Jindal Saw": {
+          "expanded_company_name": "Jindal Saw Ltd."
+        }
+      }
+    },
+    "Healthcare": {
+      "sector_weight_percent": 4.53,
+      "top_contributor": "Sun Pharmaceutical Industries Ltd.",
+      "current_trend": "bullish",
+      "expected_trend_next_5_days": "positive",
+      "drivers": [
+        "Defensive demand",
+        "US healthcare demand",
+        "Domestic healthcare growth",
+        "Pharma earnings"
+      ],
+      "key_risks": [
+        "USFDA actions",
+        "Pricing pressure",
+        "Supply disruptions"
+      ],
+      "related_stocks": {
+        "Sun Pharmaceutical Industries": {
+          "expanded_company_name": "Sun Pharmaceutical Industries Limited"
+        },
+        "Dr. Reddy's Laboratories": {
+          "expanded_company_name": "Dr. Reddy's Laboratories Ltd."
+        },
+        "Cipla": {
+          "expanded_company_name": "Cipla Limited"
+        },
+        "Lupin": {
+          "expanded_company_name": "Lupin Limited"
+        },
+        "Aurobindo Pharma": {
+          "expanded_company_name": "Aurobindo Pharma Ltd."
+        },
+        "Divi's Laboratories": {
+          "expanded_company_name": "Divi's Laboratories Ltd."
+        },
+        "Torrent Pharmaceuticals": {
+          "expanded_company_name": "Torrent Pharmaceuticals Ltd."
+        },
+        "Zydus Lifesciences": {
+          "expanded_company_name": "Zydus Lifesciences Ltd."
+        },
+        "Mankind Pharma": {
+          "expanded_company_name": "Mankind Pharma Ltd."
+        },
+        "Max Healthcare Institute": {
+          "expanded_company_name": "Max Healthcare Institute Ltd."
+        },
+        "Apollo Hospitals Enterprise": {
+          "expanded_company_name": "Apollo Hospitals Enterprise Ltd."
+        },
+        "Fortis Healthcare": {
+          "expanded_company_name": "Fortis Healthcare Ltd."
+        },
+        "Narayana Hrudayalaya": {
+          "expanded_company_name": "Narayana Hrudayalaya Ltd."
+        },
+        "Global Health": {
+          "expanded_company_name": "Global Health Ltd."
+        },
+        "Aster DM Healthcare": {
+          "expanded_company_name": "Aster DM Healthcare Ltd."
+        },
+        "Laurus Labs": {
+          "expanded_company_name": "Laurus Labs Ltd."
+        },
+        "Alkem Laboratories": {
+          "expanded_company_name": "Alkem Laboratories Ltd."
+        },
+        "Glenmark Pharmaceuticals": {
+          "expanded_company_name": "Glenmark Pharmaceuticals Ltd."
+        },
+        "Biocon": {
+          "expanded_company_name": "Biocon Ltd."
+        },
+        "Syngene International": {
+          "expanded_company_name": "Syngene International Ltd."
+        }
+      }
+    },
+    "Construction": {
+      "sector_weight_percent": 4.28,
+      "top_contributor": "Larsen & Toubro Ltd.",
+      "current_trend": "bullish",
+      "expected_trend_next_5_days": "positive",
+      "drivers": [
+        "Government capex",
+        "Infrastructure pipeline",
+        "Manufacturing investment",
         "Urbanization"
-      ]
+      ],
+      "key_risks": [
+        "Commodity costs",
+        "Execution delays",
+        "Interest rates"
+      ],
+      "related_stocks": {
+        "Larsen & Toubro": {
+          "expanded_company_name": "Larsen & Toubro Limited"
+        },
+        "Adani Enterprises": {
+          "expanded_company_name": "Adani Enterprises Ltd."
+        },
+        "Adani Ports and Special Economic Zone": {
+          "expanded_company_name": "Adani Ports and Special Economic Zone Ltd."
+        },
+        "NBCC (India)": {
+          "expanded_company_name": "NBCC (India) Ltd."
+        },
+        "IRB Infrastructure Developers": {
+          "expanded_company_name": "IRB Infrastructure Developers Ltd."
+        },
+        "NCC": {
+          "expanded_company_name": "NCC Ltd."
+        },
+        "KEC International": {
+          "expanded_company_name": "KEC International Ltd."
+        },
+        "Kalpataru Projects International": {
+          "expanded_company_name": "Kalpataru Projects International Ltd."
+        },
+        "Rail Vikas Nigam": {
+          "expanded_company_name": "Rail Vikas Nigam Ltd."
+        },
+        "IRCON International": {
+          "expanded_company_name": "IRCON International Ltd."
+        },
+        "Engineers India": {
+          "expanded_company_name": "Engineers India Ltd."
+        },
+        "H.G. Infra Engineering": {
+          "expanded_company_name": "H.G. Infra Engineering Ltd."
+        },
+        "Ashoka Buildcon": {
+          "expanded_company_name": "Ashoka Buildcon Ltd."
+        },
+        "PNC Infratech": {
+          "expanded_company_name": "PNC Infratech Ltd."
+        },
+        "J Kumar Infraprojects": {
+          "expanded_company_name": "J Kumar Infraprojects Ltd."
+        },
+        "Dilip Buildcon": {
+          "expanded_company_name": "Dilip Buildcon Ltd."
+        },
+        "Afcons Infrastructure": {
+          "expanded_company_name": "Afcons Infrastructure Ltd."
+        },
+        "G R Infraprojects": {
+          "expanded_company_name": "G R Infraprojects Ltd."
+        }
+      }
+    },
+    "Power": {
+      "sector_weight_percent": 3.03,
+      "top_contributor": "NTPC Ltd.",
+      "current_trend": "positive",
+      "expected_trend_next_5_days": "positive",
+      "drivers": [
+        "Power demand",
+        "Data-center demand",
+        "Grid investment",
+        "Energy transition"
+      ],
+      "key_risks": [
+        "Fuel costs",
+        "Regulation",
+        "Interest rates"
+      ],
+      "related_stocks": {
+        "NTPC": {
+          "expanded_company_name": "NTPC Limited"
+        },
+        "Power Grid Corporation of India": {
+          "expanded_company_name": "Power Grid Corporation of India Limited"
+        },
+        "Tata Power": {
+          "expanded_company_name": "Tata Power Ltd."
+        },
+        "Adani Power": {
+          "expanded_company_name": "Adani Power Ltd."
+        },
+        "Adani Green Energy": {
+          "expanded_company_name": "Adani Green Energy Ltd."
+        },
+        "Adani Energy Solutions": {
+          "expanded_company_name": "Adani Energy Solutions Ltd."
+        },
+        "NHPC": {
+          "expanded_company_name": "NHPC Ltd."
+        },
+        "SJVN": {
+          "expanded_company_name": "SJVN Ltd."
+        },
+        "Torrent Power": {
+          "expanded_company_name": "Torrent Power Ltd."
+        },
+        "CESC": {
+          "expanded_company_name": "CESC Ltd."
+        },
+        "JSW Energy": {
+          "expanded_company_name": "JSW Energy Ltd."
+        },
+        "NLC India": {
+          "expanded_company_name": "NLC India Ltd."
+        }
+      }
+    },
+    "Consumer Durables": {
+      "sector_weight_percent": 2.65,
+      "top_contributor": "Titan Company Ltd.",
+      "current_trend": "positive",
+      "expected_trend_next_5_days": "positive_to_neutral",
+      "drivers": [
+        "Premiumization",
+        "Urban demand",
+        "Jewellery demand",
+        "Consumer confidence"
+      ],
+      "key_risks": [
+        "Gold prices",
+        "Urban slowdown",
+        "Commodity costs"
+      ],
+      "related_stocks": {
+        "Titan Company": {
+          "expanded_company_name": "Titan Company Limited"
+        },
+        "Havells India": {
+          "expanded_company_name": "Havells India Ltd."
+        },
+        "Voltas": {
+          "expanded_company_name": "Voltas Ltd."
+        },
+        "Blue Star": {
+          "expanded_company_name": "Blue Star Ltd."
+        },
+        "Dixon Technologies (India)": {
+          "expanded_company_name": "Dixon Technologies (India) Ltd."
+        },
+        "Trent": {
+          "expanded_company_name": "Trent Ltd."
+        },
+        "Kalyan Jewellers India": {
+          "expanded_company_name": "Kalyan Jewellers India Ltd."
+        },
+        "Metro Brands": {
+          "expanded_company_name": "Metro Brands Ltd."
+        },
+        "Kajaria Ceramics": {
+          "expanded_company_name": "Kajaria Ceramics Ltd."
+        },
+        "Crompton Greaves Consumer Electricals": {
+          "expanded_company_name": "Crompton Greaves Consumer Electricals Ltd."
+        },
+        "V-Guard Industries": {
+          "expanded_company_name": "V-Guard Industries Ltd."
+        },
+        "Whirlpool of India": {
+          "expanded_company_name": "Whirlpool of India Ltd."
+        },
+        "Amber Enterprises India": {
+          "expanded_company_name": "Amber Enterprises India Ltd."
+        },
+        "Bata India": {
+          "expanded_company_name": "Bata India Ltd."
+        },
+        "Page Industries": {
+          "expanded_company_name": "Page Industries Ltd."
+        }
+      }
+    },
+    "Consumer Services": {
+      "sector_weight_percent": 2.45,
+      "top_contributor": "Eternal Ltd.",
+      "current_trend": "positive",
+      "expected_trend_next_5_days": "positive",
+      "drivers": [
+        "Digital consumption",
+        "Travel demand",
+        "Urban spending",
+        "Premiumization"
+      ],
+      "key_risks": [
+        "Valuations",
+        "Consumer slowdown",
+        "Competition"
+      ],
+      "related_stocks": {
+        "Eternal": {
+          "expanded_company_name": "Eternal Limited"
+        },
+        "InterGlobe Aviation": {
+          "expanded_company_name": "InterGlobe Aviation Ltd."
+        },
+        "Indian Hotels Company": {
+          "expanded_company_name": "Indian Hotels Company Ltd."
+        },
+        "Jubilant FoodWorks": {
+          "expanded_company_name": "Jubilant FoodWorks Ltd."
+        },
+        "Info Edge (India)": {
+          "expanded_company_name": "Info Edge (India) Ltd."
+        },
+        "Delhivery": {
+          "expanded_company_name": "Delhivery Ltd."
+        },
+        "Avenue Supermarts": {
+          "expanded_company_name": "Avenue Supermarts Ltd."
+        },
+        "FSN E-Commerce Ventures": {
+          "expanded_company_name": "FSN E-Commerce Ventures Ltd."
+        },
+        "Indian Railway Catering and Tourism Corporation": {
+          "expanded_company_name": "Indian Railway Catering and Tourism Corporation Ltd."
+        },
+        "EIH": {
+          "expanded_company_name": "EIH Ltd."
+        },
+        "Devyani International": {
+          "expanded_company_name": "Devyani International Ltd."
+        },
+        "Restaurant Brands Asia": {
+          "expanded_company_name": "Restaurant Brands Asia Ltd."
+        },
+        "Westlife Foodworld": {
+          "expanded_company_name": "Westlife Foodworld Ltd."
+        }
+      }
+    },
+    "Construction Materials": {
+      "sector_weight_percent": 2.21,
+      "top_contributor": "UltraTech Cement Ltd.",
+      "current_trend": "positive",
+      "expected_trend_next_5_days": "positive",
+      "drivers": [
+        "Infrastructure spending",
+        "Housing demand",
+        "Urbanization",
+        "Capacity expansion"
+      ],
+      "key_risks": [
+        "Coal costs",
+        "Freight",
+        "Regional oversupply"
+      ],
+      "related_stocks": {
+        "UltraTech Cement": {
+          "expanded_company_name": "UltraTech Cement Limited"
+        },
+        "Shree Cement": {
+          "expanded_company_name": "Shree Cement Ltd."
+        },
+        "Ambuja Cements": {
+          "expanded_company_name": "Ambuja Cements Ltd."
+        },
+        "ACC": {
+          "expanded_company_name": "ACC Ltd."
+        },
+        "Dalmia Bharat": {
+          "expanded_company_name": "Dalmia Bharat Ltd."
+        },
+        "JK Cement": {
+          "expanded_company_name": "JK Cement Ltd."
+        },
+        "The Ramco Cements": {
+          "expanded_company_name": "The Ramco Cements Ltd."
+        },
+        "Birla Corporation": {
+          "expanded_company_name": "Birla Corporation Ltd."
+        },
+        "JK Lakshmi Cement": {
+          "expanded_company_name": "JK Lakshmi Cement Ltd."
+        },
+        "India Cements": {
+          "expanded_company_name": "India Cements Ltd."
+        },
+        "Heidelberg Materials India": {
+          "expanded_company_name": "Heidelberg Materials India Ltd."
+        },
+        "Nuvoco Vistas": {
+          "expanded_company_name": "Nuvoco Vistas Ltd."
+        },
+        "Prism Johnson": {
+          "expanded_company_name": "Prism Johnson Ltd."
+        }
+      }
+    },
+    "Capital Goods": {
+      "sector_weight_percent": 1.4,
+      "top_contributor": "Bharat Electronics Ltd.",
+      "current_trend": "positive",
+      "expected_trend_next_5_days": "positive",
+      "drivers": [
+        "Public capex",
+        "Defence orders",
+        "Industrial capex",
+        "Manufacturing localization"
+      ],
+      "key_risks": [
+        "Execution",
+        "Commodity costs",
+        "Order timing"
+      ],
+      "related_stocks": {
+        "Bharat Electronics": {
+          "expanded_company_name": "Bharat Electronics Limited"
+        },
+        "Siemens": {
+          "expanded_company_name": "Siemens Ltd."
+        },
+        "ABB India": {
+          "expanded_company_name": "ABB India Ltd."
+        },
+        "Cummins India": {
+          "expanded_company_name": "Cummins India Ltd."
+        },
+        "CG Power and Industrial Solutions": {
+          "expanded_company_name": "CG Power and Industrial Solutions Ltd."
+        },
+        "Bharat Heavy Electricals": {
+          "expanded_company_name": "Bharat Heavy Electricals Ltd."
+        },
+        "Hindustan Aeronautics": {
+          "expanded_company_name": "Hindustan Aeronautics Ltd."
+        },
+        "Bharat Dynamics": {
+          "expanded_company_name": "Bharat Dynamics Ltd."
+        },
+        "Mazagon Dock Shipbuilders": {
+          "expanded_company_name": "Mazagon Dock Shipbuilders Ltd."
+        },
+        "Solar Industries India": {
+          "expanded_company_name": "Solar Industries India Ltd."
+        },
+        "Polycab India": {
+          "expanded_company_name": "Polycab India Ltd."
+        },
+        "KEI Industries": {
+          "expanded_company_name": "KEI Industries Ltd."
+        },
+        "Thermax": {
+          "expanded_company_name": "Thermax Ltd."
+        },
+        "AIA Engineering": {
+          "expanded_company_name": "AIA Engineering Ltd."
+        },
+        "Apar Industries": {
+          "expanded_company_name": "Apar Industries Ltd."
+        },
+        "Suzlon Energy": {
+          "expanded_company_name": "Suzlon Energy Ltd."
+        },
+        "Kaynes Technology India": {
+          "expanded_company_name": "Kaynes Technology India Ltd."
+        },
+        "Data Patterns (India)": {
+          "expanded_company_name": "Data Patterns (India) Ltd."
+        },
+        "Elecon Engineering": {
+          "expanded_company_name": "Elecon Engineering Ltd."
+        }
+      }
     }
-  }
+  },
+  "leadership_summary": {
+    "highest_index_weight_sectors": [
+      "Financial Services",
+      "Oil, Gas & Consumable Fuels",
+      "Information Technology",
+      "Automobile and Auto Components",
+      "Fast Moving Consumer Goods"
+    ],
+    "current_leadership_groups": [
+      "Financial Services",
+      "Information Technology",
+      "Automobile and Auto Components",
+      "Healthcare",
+      "Construction"
+    ],
+    "most_important_nifty_direction_stocks": [
+      "HDFC Bank Limited",
+      "Reliance Industries Limited",
+      "ICICI Bank Limited",
+      "Bharti Airtel Limited",
+      "Larsen & Toubro Limited",
+      "State Bank of India",
+      "Infosys Limited",
+      "Mahindra & Mahindra Limited"
+    ],
+    "next_5_days_watchlist": [
+      "Financial-sector earnings",
+      "Global technology cues",
+      "Crude oil",
+      "Foreign flows",
+      "Auto-sector momentum"
+    ]
+  },
+  "methodology_notes": [
+    "Sector weights are official-factsheet values where available.",
+    "Top contributor identifies a major index-weight or influence stock.",
+    "Related stocks are expanded beyond Nifty 50 to represent sector leadership.",
+    "Five-day trend is directional analysis, not a guaranteed forecast."
+  ]
 }
