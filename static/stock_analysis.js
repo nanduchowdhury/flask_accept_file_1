@@ -543,7 +543,7 @@ class StockAnalysisUIBuilder extends StockUIBuilder {
                 weeklyReturnHeader.style.marginLeft = '20px';
                 weeklyReturnHeader.style.fontFamily = 'Arial';
                 container.appendChild(weeklyReturnHeader);
-                let weeklyReturn_xml = this.getAvgWeeklyReturnFn(JSON.stringify(priceData));
+                let weeklyReturn_xml = this.getAvgWeeklyReturnFn(JSON.stringify(priceData), 12);
                 let weeklyReturnTab = this.createTabContent(weeklyReturn_xml, 'tabContent active', true, []);
                 container.appendChild(weeklyReturnTab);
             }, (err) => {
@@ -1631,7 +1631,7 @@ class StockAnalysisMain {
         return JSON.stringify(insights);
     }
 
-    getAvgWeeklyReturn(result1) {
+    getAvgWeeklyReturn(result1, numWeeks = 8) {
         let data;
         try {
             data = JSON.parse(result1);
@@ -1661,7 +1661,8 @@ class StockAnalysisMain {
         const avg_every_week = [];
         const sortedWeeks = Object.keys(weeklyGroups).sort();
 
-        for (let i = 0; i < sortedWeeks.length; i++) {
+        const startIndex = Math.max(0, sortedWeeks.length - numWeeks);
+        for (let i = startIndex; i < sortedWeeks.length; i++) {
             const currentWeekPrices = weeklyGroups[sortedWeeks[i]];
             const lastOfCurrent = currentWeekPrices[currentWeekPrices.length - 1];
             const prevClose = i === 0 ? currentWeekPrices[0] : weeklyGroups[sortedWeeks[i - 1]].slice(-1)[0];
