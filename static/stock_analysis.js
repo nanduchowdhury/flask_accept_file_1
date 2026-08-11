@@ -1196,9 +1196,9 @@ class StockAnalysisMain {
         });
     }
 
-    open2MPositiveReturnPage() {
+    openPositiveReturnPage(period = '2M') {
 
-        this.gaTracker.trackPageView(`2M-positive-return-page`);
+        this.gaTracker.trackPageView(`${period}-positive-return-page`);
 
         fetch('/static/prompts/stocks_buckets.json')
             .then(response => {
@@ -1208,13 +1208,25 @@ class StockAnalysisMain {
                 return response.json();
             })
             .then(data => {
-                // Read field 'return' -> '2M' -> 'top50' which contains ticker objects
-                const tickersData = (data['return'] && data['return']['2M'] && data['return']['2M']['top50']) 
-                                    ? data['return']['2M']['top50'] : [];
+                // Read field 'return' -> period -> 'top50' which contains ticker objects
+                const tickersData = (data['return'] && data['return'][period] && data['return'][period]['top50']) 
+                                    ? data['return'][period]['top50'] : [];
                 
+                const labelMap = {
+                    '1W': '1 Week',
+                    '2W': '2 Weeks',
+                    '3W': '3 Weeks',
+                    '1M': '1 Month',
+                    '2M': '2 Months',
+                    '3M': '3 Months',
+                    '6M': '6 Months',
+                    '1Y': '1 Year'
+                };
+                const label = labelMap[period] || period;
+
                 const resultObj = {
-                    "Analysis_Title": "2 Months Positive Return Stocks",
-                    "Description": "This list includes stocks that have shown consistent positive momentum over the last 2 months.",
+                    "Analysis_Title": `${label} Positive Return Stocks`,
+                    "Description": `This list includes stocks that have shown consistent positive momentum over the last ${label.toLowerCase()}.`,
                     "related_stocks": {}
                 };
 

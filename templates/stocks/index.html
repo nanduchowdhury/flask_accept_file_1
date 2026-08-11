@@ -47,6 +47,31 @@
                 <h3>Sector wise analysis</h3>
             </a>
 
+            <a href="#" class="topic-card" data-action="3W_Positive">
+                <i class="fas fa-lightbulb"></i>
+                <h3>3 Weeks Positive</h3>
+            </a>
+            <a href="#" class="topic-card" data-action="1M_Positive">
+                <i class="fas fa-lightbulb"></i>
+                <h3>1 Month Positive</h3>
+            </a>
+            <a href="#" class="topic-card" data-action="2M_Positive">
+                <i class="fas fa-lightbulb"></i>
+                <h3>2 Months Positive</h3>
+            </a>
+            <a href="#" class="topic-card" data-action="3M_Positive">
+                <i class="fas fa-lightbulb"></i>
+                <h3>3 Months Positive</h3>
+            </a>
+            <a href="#" class="topic-card" data-action="6M_Positive">
+                <i class="fas fa-lightbulb"></i>
+                <h3>6 Months Positive</h3>
+            </a>
+            <a href="#" class="topic-card" data-action="1Y_Positive">
+                <i class="fas fa-lightbulb"></i>
+                <h3>1 Year Positive</h3>
+            </a>
+
             <a href="#" class="topic-card" data-action="india_economy">
                     <i class="fas fa-lightbulb"></i>
                     <h3>India Economy</h3>
@@ -77,10 +102,6 @@
                     <h3>Sector weights</h3>
             </a>
 
-            <a href="#" class="topic-card" data-action="2M_Positive">
-                    <i class="fas fa-lightbulb"></i>
-                    <h3>2 months positive return</h3>
-            </a>
 
         </div>
 {% endblock %}
@@ -126,8 +147,9 @@
                 window.stockAnalysisMain.openIndiaSemiPage();
             } else if (action === 'AI') {
                 window.stockAnalysisMain.openIndiaAIPage();
-            } else if (action === '2M_Positive') {
-                window.stockAnalysisMain.open2MPositiveReturnPage();
+            } else if (action.endsWith('_Positive')) {
+                const period = action.split('_')[0];
+                window.stockAnalysisMain.openPositiveReturnPage(period);
             }
         });
     });

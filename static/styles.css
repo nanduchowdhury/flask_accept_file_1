@@ -240,3 +240,9 @@
     font-size: 16px;
     margin: 0 0 5px 8px; /* Space between icon and text, and bottom spacing */
 }
+
+/* Styling for positive return analysis cards with a light green gradient */
+.topic-card[data-action$="_Positive"] {
+    background: linear-gradient(to top right, #f9fff9, #e2f3e2);
+    border: 1px solid #d0ebd0;
+}
