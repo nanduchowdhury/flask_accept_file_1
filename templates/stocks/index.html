@@ -77,6 +77,11 @@
                     <h3>Sector weights</h3>
             </a>
 
+            <a href="#" class="topic-card" data-action="2M_Positive">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>2 months positive return</h3>
+            </a>
+
         </div>
 {% endblock %}
 
@@ -121,6 +126,8 @@
                 window.stockAnalysisMain.openIndiaSemiPage();
             } else if (action === 'AI') {
                 window.stockAnalysisMain.openIndiaAIPage();
+            } else if (action === '2M_Positive') {
+                window.stockAnalysisMain.open2MPositiveReturnPage();
             }
         });
     });

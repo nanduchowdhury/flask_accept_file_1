@@ -1196,6 +1196,45 @@ class StockAnalysisMain {
         });
     }
 
+    open2MPositiveReturnPage() {
+
+        this.gaTracker.trackPageView(`2M-positive-return-page`);
+
+        fetch('/static/prompts/stocks_buckets.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Read field 'return' -> '2M' -> 'top50' which contains ticker objects
+                const tickersData = (data['return'] && data['return']['2M'] && data['return']['2M']['top50']) 
+                                    ? data['return']['2M']['top50'] : [];
+                
+                const resultObj = {
+                    "Analysis_Title": "2 Months Positive Return Stocks",
+                    "Description": "This list includes stocks that have shown consistent positive momentum over the last 2 months.",
+                    "related_stocks": {}
+                };
+
+                tickersData.forEach(item => {
+                    resultObj.related_stocks[item.ticker] = {}; // UI builder fetches plot/summary details on tab click
+                });
+
+                this.popoutMgr.clear();
+                let tabContentDiv = this.uiBuilder.createTabContent(JSON.stringify(resultObj), 'tabContent active',
+                                            true, ['related_stocks']);
+
+                this.popoutMgr.appendItem(tabContentDiv);
+                this.uiBuilder.appendDisclaimer();
+                this.popoutMgr.showPopout();
+            })
+            .catch(error => {
+                errorManager.showError(2044, error.message);
+            });
+    }
+
     openIndiaAIPage() {
 
         this.gaTracker.trackPageView(`indian-AI-page`);

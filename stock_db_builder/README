@@ -32,6 +32,18 @@ cd stock_db_builder/
 
    This will modify master-JSON with indices for each company.
 
+5. Now build the buckets of stocks - 1W, 2W, 1M etc 
+        winners and lossers.
+
+    python build_buckets.py
+
+    And move output/stocks_buckets.json to static/prompts/
+
+6. 
+
+
+
+
 
 
 
