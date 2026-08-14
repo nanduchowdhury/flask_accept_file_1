@@ -1247,6 +1247,71 @@ class StockAnalysisMain {
             });
     }
 
+
+    openBucketAnalysisPage(bucketName) {
+
+        this.gaTracker.trackPageView(`${bucketName}-analysis-page`);
+
+        fetch('/static/prompts/stocks_buckets.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Check if the bucket is at top level or nested under 'technical'
+                let bucketData = data[bucketName];
+                let isSubBucket = false;
+
+                if (!bucketData && data.technical && data.technical[bucketName]) {
+                    bucketData = data.technical[bucketName];
+                    isSubBucket = true;
+                }
+
+                if (!bucketData) {
+                    console.error("Bucket not found:", bucketName);
+                    return;
+                }
+
+                const label = this.uiBuilder._remove_underscore(bucketName);
+                const resultObj = {
+                    "Analysis_Title": label.toUpperCase() + " Stocks",
+                    "Description": `This list includes stocks categorized under ${label} based on recent market trends and performance metrics.`,
+                    "related_stocks": {}
+                };
+
+                if (isSubBucket) {
+                    // If sub-bucket (like 'strong_trend'), it's already an array of stock objects
+                    bucketData.forEach(item => {
+                        if (item.ticker) resultObj.related_stocks[item.ticker] = {};
+                    });
+                } else {
+                    // Top-level bucket (like 'technical' or 'momentum'), collect from all its child arrays
+                    Object.values(bucketData).forEach(val => {
+                        if (Array.isArray(val)) {
+                            val.forEach(item => {
+                                if (item.ticker) {
+                                    resultObj.related_stocks[item.ticker] = {}; // Trigger lazy load on tab click
+                                }
+                            });
+                        }
+                    });
+                }
+
+                this.popoutMgr.clear();
+                let tabContentDiv = this.uiBuilder.createTabContent(JSON.stringify(resultObj), 'tabContent active',
+                                            true, ['related_stocks']);
+
+                this.popoutMgr.appendItem(tabContentDiv);
+                this.uiBuilder.appendDisclaimer();
+                this.popoutMgr.showPopout();
+            })
+            .catch(error => {
+                errorManager.showError(2044, error.message);
+            });
+    }
+
     openIndiaAIPage() {
 
         this.gaTracker.trackPageView(`indian-AI-page`);
