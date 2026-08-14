@@ -308,7 +308,7 @@
     padding: 10px;
     border: 1px groove gray;
     border-radius: 10px;
-    background-color: #fff;
+    background: linear-gradient(to bottom, #d5e1f2, #abcaf9);
     box-sizing: border-box;
 }
 
