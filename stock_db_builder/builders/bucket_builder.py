@@ -1,7 +1,6 @@
 import json
 import yfinance as yf
 import pandas as pd
-import numpy as np
 
 
 class BucketBuilder:
@@ -21,19 +20,11 @@ class BucketBuilder:
 
         self.top_n = 50
 
-    # ---------------------------------------------------------
+    # =========================================================
     # Utility
-    # ---------------------------------------------------------
+    # =========================================================
 
     def _get_series(self, df, column):
-
-        """
-        Handles yfinance's different column structures.
-
-        Depending on yfinance version/settings, df[column]
-        can sometimes return a Series and sometimes a
-        one-column DataFrame.
-        """
 
         try:
 
@@ -52,9 +43,9 @@ class BucketBuilder:
 
             return None
 
-    # ---------------------------------------------------------
+    # =========================================================
     # Return
-    # ---------------------------------------------------------
+    # =========================================================
 
     def _calculate_return(self, close, days):
 
@@ -78,9 +69,9 @@ class BucketBuilder:
 
             return None
 
-    # ---------------------------------------------------------
+    # =========================================================
     # Consecutive days
-    # ---------------------------------------------------------
+    # =========================================================
 
     def _consecutive_gainers(self, close):
 
@@ -118,9 +109,9 @@ class BucketBuilder:
 
         return count
 
-    # ---------------------------------------------------------
+    # =========================================================
     # RSI
-    # ---------------------------------------------------------
+    # =========================================================
 
     def _calculate_rsi(self, close, period=14):
 
@@ -149,9 +140,9 @@ class BucketBuilder:
 
             return None
 
-    # ---------------------------------------------------------
-    # Analyse one stock
-    # ---------------------------------------------------------
+    # =========================================================
+    # Analyse stock
+    # =========================================================
 
     def _analyse_stock(self, ticker):
 
@@ -189,11 +180,9 @@ class BucketBuilder:
 
             current_price = float(close.iloc[-1])
 
-            # -------------------------------------------------
-            # Returns
-            # -------------------------------------------------
-
-            returns = {}
+            # =================================================
+            # RETURNS
+            # =================================================
 
             day_map = {
                 "1W": 5,
@@ -206,6 +195,8 @@ class BucketBuilder:
                 "1Y": 252
             }
 
+            returns = {}
+
             for period, days in day_map.items():
 
                 returns[period] = self._calculate_return(
@@ -213,21 +204,29 @@ class BucketBuilder:
                     days
                 )
 
-            # -------------------------------------------------
-            # Moving averages
-            # -------------------------------------------------
+            # =================================================
+            # MOVING AVERAGES
+            # =================================================
 
-            dma20 = close.rolling(20).mean().iloc[-1]
-            dma50 = close.rolling(50).mean().iloc[-1]
-            dma200 = close.rolling(200).mean().iloc[-1]
+            dma20 = float(
+                close.rolling(20).mean().iloc[-1]
+            )
 
-            dma20 = float(dma20)
-            dma50 = float(dma50)
-            dma200 = float(dma200)
+            dma50 = float(
+                close.rolling(50).mean().iloc[-1]
+            )
 
-            # -------------------------------------------------
-            # 20D / 50D / 52W highs and lows
-            # -------------------------------------------------
+            dma200 = float(
+                close.rolling(200).mean().iloc[-1]
+            )
+
+            above_20dma = current_price > dma20
+            above_50dma = current_price > dma50
+            above_200dma = current_price > dma200
+
+            # =================================================
+            # HIGH / LOW
+            # =================================================
 
             high_20 = float(close.tail(20).max())
             high_50 = float(close.tail(50).max())
@@ -245,9 +244,9 @@ class BucketBuilder:
                 2
             )
 
-            # -------------------------------------------------
-            # Volume / RVOL
-            # -------------------------------------------------
+            # =================================================
+            # VOLUME
+            # =================================================
 
             current_volume = float(volume.iloc[-1])
 
@@ -269,10 +268,6 @@ class BucketBuilder:
             else:
 
                 rvol = None
-
-            # -------------------------------------------------
-            # Volume trend
-            # -------------------------------------------------
 
             volume_5 = float(
                 volume.tail(5).mean()
@@ -303,27 +298,27 @@ class BucketBuilder:
                     2
                 )
 
-            # -------------------------------------------------
-            # Consecutive days
-            # -------------------------------------------------
+            # =================================================
+            # CONSECUTIVE MOVES
+            # =================================================
 
-            consecutive_gainers = self._consecutive_gainers(
-                close
+            consecutive_gainers = (
+                self._consecutive_gainers(close)
             )
 
-            consecutive_losers = self._consecutive_losers(
-                close
+            consecutive_losers = (
+                self._consecutive_losers(close)
             )
 
-            # -------------------------------------------------
+            # =================================================
             # RSI
-            # -------------------------------------------------
+            # =================================================
 
             rsi = self._calculate_rsi(close)
 
-            # -------------------------------------------------
-            # Breakout
-            # -------------------------------------------------
+            # =================================================
+            # BREAKOUT
+            # =================================================
 
             previous_20_high = float(
                 close.iloc[-21:-1].max()
@@ -333,20 +328,17 @@ class BucketBuilder:
                 close.iloc[-51:-1].max()
             )
 
-            breakout_20d = current_price > previous_20_high
-            breakout_50d = current_price > previous_50_high
+            breakout_20d = (
+                current_price > previous_20_high
+            )
 
-            # -------------------------------------------------
-            # Trend
-            # -------------------------------------------------
+            breakout_50d = (
+                current_price > previous_50_high
+            )
 
-            above_20dma = current_price > dma20
-            above_50dma = current_price > dma50
-            above_200dma = current_price > dma200
-
-            # -------------------------------------------------
-            # Momentum score
-            # -------------------------------------------------
+            # =================================================
+            # MOMENTUM SCORE
+            # =================================================
 
             momentum_score = 0
 
@@ -368,9 +360,9 @@ class BucketBuilder:
             if above_200dma:
                 momentum_score += 1
 
-            # -------------------------------------------------
-            # Short-term score
-            # -------------------------------------------------
+            # =================================================
+            # SHORT TERM SCORE
+            # =================================================
 
             short_term_score = 0
 
@@ -389,9 +381,9 @@ class BucketBuilder:
             if rvol is not None and rvol >= 1.5:
                 short_term_score += 2
 
-            # -------------------------------------------------
-            # Accumulation score
-            # -------------------------------------------------
+            # =================================================
+            # ACCUMULATION SCORE
+            # =================================================
 
             accumulation_score = 0
 
@@ -401,15 +393,17 @@ class BucketBuilder:
             if returns["3M"] is not None and returns["3M"] > 0:
                 accumulation_score += 1
 
-            if volume_trend_5_vs_20 is not None:
+            if (
+                volume_trend_5_vs_20 is not None
+                and volume_trend_5_vs_20 > 10
+            ):
+                accumulation_score += 2
 
-                if volume_trend_5_vs_20 > 10:
-                    accumulation_score += 2
-
-            if volume_trend_20_vs_50 is not None:
-
-                if volume_trend_20_vs_50 > 5:
-                    accumulation_score += 1
+            if (
+                volume_trend_20_vs_50 is not None
+                and volume_trend_20_vs_50 > 5
+            ):
+                accumulation_score += 1
 
             if above_50dma:
                 accumulation_score += 1
@@ -417,9 +411,9 @@ class BucketBuilder:
             if rvol is not None and rvol >= 1.2:
                 accumulation_score += 2
 
-            # -------------------------------------------------
-            # Recovery score
-            # -------------------------------------------------
+            # =================================================
+            # RECOVERY SCORE
+            # =================================================
 
             recovery_score = 0
 
@@ -444,15 +438,18 @@ class BucketBuilder:
             if above_50dma:
                 recovery_score += 1
 
-            # -------------------------------------------------
-            # Return everything
-            # -------------------------------------------------
+            # =================================================
+            # RESULT
+            # =================================================
 
             return {
 
                 "ticker": ticker,
 
-                "price": round(current_price, 2),
+                "price": round(
+                    current_price,
+                    2
+                ),
 
                 "returns": returns,
 
@@ -470,23 +467,31 @@ class BucketBuilder:
                     "high_50d": round(high_50, 2),
                     "high_52w": round(high_52w, 2),
                     "low_52w": round(low_52w, 2),
-                    "distance_from_52w_high": distance_from_52w_high,
-                    "recovery_from_52w_low": recovery_from_52w_low
+                    "distance_from_52w_high":
+                        distance_from_52w_high,
+                    "recovery_from_52w_low":
+                        recovery_from_52w_low
                 },
 
                 "volume": {
                     "rvol": rvol,
-                    "avg_volume_20": round(avg_volume_20, 0),
-                    "avg_volume_50": round(avg_volume_50, 0),
-                    "volume_trend_5_vs_20": volume_trend_5_vs_20,
-                    "volume_trend_20_vs_50": volume_trend_20_vs_50
+                    "avg_volume_20":
+                        round(avg_volume_20, 0),
+                    "avg_volume_50":
+                        round(avg_volume_50, 0),
+                    "volume_trend_5_vs_20":
+                        volume_trend_5_vs_20,
+                    "volume_trend_20_vs_50":
+                        volume_trend_20_vs_50
                 },
 
                 "price_action": {
                     "breakout_20d": breakout_20d,
                     "breakout_50d": breakout_50d,
-                    "consecutive_gainers": consecutive_gainers,
-                    "consecutive_losers": consecutive_losers
+                    "consecutive_gainers":
+                        consecutive_gainers,
+                    "consecutive_losers":
+                        consecutive_losers
                 },
 
                 "indicators": {
@@ -494,45 +499,386 @@ class BucketBuilder:
                 },
 
                 "scores": {
-                    "momentum": momentum_score,
-                    "short_term": short_term_score,
-                    "accumulation": accumulation_score,
-                    "recovery": recovery_score
+                    "momentum":
+                        momentum_score,
+                    "short_term":
+                        short_term_score,
+                    "accumulation":
+                        accumulation_score,
+                    "recovery":
+                        recovery_score
                 }
             }
 
         except Exception as e:
 
-            print(f"Error analysing {ticker}: {e}")
+            print(
+                f"Error analysing {ticker}: {e}"
+            )
 
             return None
 
-    # ---------------------------------------------------------
-    # Ranking helper
-    # ---------------------------------------------------------
+    # =========================================================
+    # REASON HELPERS
+    # =========================================================
 
-    def _top_items(self, data, key, n=None):
+    def _return_reason(self, period, value):
 
-        if n is None:
-            n = self.top_n
+        if value is None:
+            return None
 
-        data = [
-            item
-            for item in data
-            if item.get(key) is not None
+        if value > 0:
+
+            return (
+                f"{period} return is "
+                f"+{value:.2f}%"
+            )
+
+        return (
+            f"{period} return is "
+            f"{value:.2f}%"
+        )
+
+    def _add_return_reason(
+        self,
+        reasons,
+        period,
+        value,
+        positive_only=False
+    ):
+
+        if value is None:
+            return
+
+        if positive_only and value <= 0:
+            return
+
+        reason = self._return_reason(
+            period,
+            value
+        )
+
+        if reason:
+            reasons.append(reason)
+
+    # =========================================================
+    # MOMENTUM REASONS
+    # =========================================================
+
+    def _momentum_reasons(self, stock):
+
+        reasons = []
+
+        returns = stock["returns"]
+        ma = stock["moving_average"]
+
+        if returns["1W"] is not None and returns["1W"] > 0:
+
+            reasons.append(
+                f"1W return is +{returns['1W']:.2f}%"
+            )
+
+        if returns["1M"] is not None and returns["1M"] > 0:
+
+            reasons.append(
+                f"1M return is +{returns['1M']:.2f}%"
+            )
+
+        if returns["3M"] is not None and returns["3M"] > 0:
+
+            reasons.append(
+                f"3M return is +{returns['3M']:.2f}%"
+            )
+
+        if ma["above_20dma"]:
+
+            reasons.append(
+                "Price is above 20 DMA"
+            )
+
+        if ma["above_50dma"]:
+
+            reasons.append(
+                "Price is above 50 DMA"
+            )
+
+        if ma["above_200dma"]:
+
+            reasons.append(
+                "Price is above 200 DMA"
+            )
+
+        return reasons
+
+    # =========================================================
+    # SHORT TERM REASONS
+    # =========================================================
+
+    def _short_term_reasons(self, stock):
+
+        reasons = []
+
+        returns = stock["returns"]
+        ma = stock["moving_average"]
+        volume = stock["volume"]
+
+        if returns["1W"] is not None and returns["1W"] > 0:
+
+            reasons.append(
+                f"1W return is +{returns['1W']:.2f}%"
+            )
+
+        if returns["2W"] is not None and returns["2W"] > 0:
+
+            reasons.append(
+                f"2W return is +{returns['2W']:.2f}%"
+            )
+
+        if returns["1M"] is not None and returns["1M"] > 0:
+
+            reasons.append(
+                f"1M return is +{returns['1M']:.2f}%"
+            )
+
+        if ma["above_20dma"]:
+
+            reasons.append(
+                "Price is above 20 DMA"
+            )
+
+        if (
+            volume["rvol"] is not None
+            and volume["rvol"] >= 1.5
+        ):
+
+            reasons.append(
+                f"RVOL is {volume['rvol']:.2f}x"
+            )
+
+        return reasons
+
+    # =========================================================
+    # ACCUMULATION REASONS
+    # =========================================================
+
+    def _accumulation_reasons(self, stock):
+
+        reasons = []
+
+        returns = stock["returns"]
+        ma = stock["moving_average"]
+        volume = stock["volume"]
+
+        if returns["1M"] is not None and returns["1M"] > 0:
+
+            reasons.append(
+                f"1M return is +{returns['1M']:.2f}%"
+            )
+
+        if returns["3M"] is not None and returns["3M"] > 0:
+
+            reasons.append(
+                f"3M return is +{returns['3M']:.2f}%"
+            )
+
+        if (
+            volume["volume_trend_5_vs_20"]
+            is not None
+            and volume["volume_trend_5_vs_20"] > 10
+        ):
+
+            reasons.append(
+                "5-day average volume is "
+                f"{volume['volume_trend_5_vs_20']:.1f}% "
+                "above 20-day average"
+            )
+
+        if (
+            volume["volume_trend_20_vs_50"]
+            is not None
+            and volume["volume_trend_20_vs_50"] > 5
+        ):
+
+            reasons.append(
+                "20-day average volume is "
+                f"{volume['volume_trend_20_vs_50']:.1f}% "
+                "above 50-day average"
+            )
+
+        if ma["above_50dma"]:
+
+            reasons.append(
+                "Price is above 50 DMA"
+            )
+
+        if (
+            volume["rvol"] is not None
+            and volume["rvol"] >= 1.2
+        ):
+
+            reasons.append(
+                f"RVOL is {volume['rvol']:.2f}x"
+            )
+
+        return reasons
+
+    # =========================================================
+    # BREAKOUT REASONS
+    # =========================================================
+
+    def _breakout_reasons(self, stock):
+
+        reasons = []
+
+        price_action = stock["price_action"]
+        volume = stock["volume"]
+        ma = stock["moving_average"]
+        returns = stock["returns"]
+
+        if price_action["breakout_20d"]:
+
+            reasons.append(
+                "Price has broken above the "
+                "previous 20-day high"
+            )
+
+        if price_action["breakout_50d"]:
+
+            reasons.append(
+                "Price has broken above the "
+                "previous 50-day high"
+            )
+
+        if (
+            volume["rvol"] is not None
+            and volume["rvol"] >= 1.5
+        ):
+
+            reasons.append(
+                f"Breakout is accompanied by "
+                f"RVOL of {volume['rvol']:.2f}x"
+            )
+
+        if ma["above_50dma"]:
+
+            reasons.append(
+                "Price is above 50 DMA"
+            )
+
+        if (
+            returns["1M"] is not None
+            and returns["1M"] > 0
+        ):
+
+            reasons.append(
+                f"1M return is +{returns['1M']:.2f}%"
+            )
+
+        return reasons
+
+    # =========================================================
+    # RECOVERY REASONS
+    # =========================================================
+
+    def _recovery_reasons(self, stock):
+
+        reasons = []
+
+        high_low = stock["high_low"]
+        returns = stock["returns"]
+        ma = stock["moving_average"]
+
+        recovery = high_low[
+            "recovery_from_52w_low"
         ]
 
-        return sorted(
-            data,
-            key=lambda x: x[key],
-            reverse=True
-        )[:n]
+        if recovery >= 20:
 
-    # ---------------------------------------------------------
-    # Build database
-    # ---------------------------------------------------------
+            reasons.append(
+                f"Price is {recovery:.2f}% "
+                "above its 52-week low"
+            )
 
-    def build(self, master_json_path, output_path):
+        if recovery >= 30:
+
+            reasons.append(
+                "Price has recovered more than "
+                "30% from its 52-week low"
+            )
+
+        if recovery >= 50:
+
+            reasons.append(
+                "Price has recovered more than "
+                "50% from its 52-week low"
+            )
+
+        if (
+            returns["1M"] is not None
+            and returns["1M"] > 0
+        ):
+
+            reasons.append(
+                f"1M return is +{returns['1M']:.2f}%"
+            )
+
+        if (
+            returns["3M"] is not None
+            and returns["3M"] > 0
+        ):
+
+            reasons.append(
+                f"3M return is +{returns['3M']:.2f}%"
+            )
+
+        if ma["above_20dma"]:
+
+            reasons.append(
+                "Price is above 20 DMA"
+            )
+
+        if ma["above_50dma"]:
+
+            reasons.append(
+                "Price is above 50 DMA"
+            )
+
+        return reasons
+
+    # =========================================================
+    # RETURN BUCKET REASONS
+    # =========================================================
+
+    def _return_bucket_entry(
+        self,
+        item,
+        rank,
+        period
+    ):
+
+        value = item["return"]
+
+        reason = self._return_reason(
+            period,
+            value
+        )
+
+        return {
+            "rank": rank,
+            "ticker": item["ticker"],
+            "return": value,
+            "reason": reason
+        }
+
+    # =========================================================
+    # BUILD
+    # =========================================================
+
+    def build(
+        self,
+        master_json_path,
+        output_path
+    ):
 
         with open(
             master_json_path,
@@ -555,9 +901,12 @@ class BucketBuilder:
                 f"[{count}/{total}] {ticker}"
             )
 
-            result = self._analyse_stock(ticker)
+            result = self._analyse_stock(
+                ticker
+            )
 
             if result is not None:
+
                 analysed.append(result)
 
         print(
@@ -577,7 +926,9 @@ class BucketBuilder:
 
             for stock in analysed:
 
-                value = stock["returns"].get(period)
+                value = stock["returns"].get(
+                    period
+                )
 
                 if value is None:
                     continue
@@ -593,17 +944,49 @@ class BucketBuilder:
                 reverse=True
             )
 
-            return_buckets[period] = {
+            top50 = []
 
-                "top50": data[:50],
+            for rank, item in enumerate(
+                data[:self.top_n],
+                start=1
+            ):
 
-                "bottom50": list(
-                    reversed(data[-50:])
+                top50.append(
+                    self._return_bucket_entry(
+                        item,
+                        rank,
+                        period
+                    )
                 )
+
+            bottom_data = list(
+                reversed(data[-self.top_n:])
+            )
+
+            bottom50 = []
+
+            for rank, item in enumerate(
+                bottom_data,
+                start=1
+            ):
+
+                bottom50.append({
+                    "rank": rank,
+                    "ticker": item["ticker"],
+                    "return": item["return"],
+                    "reason": self._return_reason(
+                        period,
+                        item["return"]
+                    )
+                })
+
+            return_buckets[period] = {
+                "top50": top50,
+                "bottom50": bottom50
             }
 
         # =====================================================
-        # TOP MOMENTUM STOCKS
+        # MOMENTUM
         # =====================================================
 
         momentum_data = []
@@ -616,9 +999,14 @@ class BucketBuilder:
                 "return_1w": stock["returns"]["1W"],
                 "return_1m": stock["returns"]["1M"],
                 "return_3m": stock["returns"]["3M"],
-                "above_20dma": stock["moving_average"]["above_20dma"],
-                "above_50dma": stock["moving_average"]["above_50dma"],
-                "above_200dma": stock["moving_average"]["above_200dma"]
+                "above_20dma":
+                    stock["moving_average"]["above_20dma"],
+                "above_50dma":
+                    stock["moving_average"]["above_50dma"],
+                "above_200dma":
+                    stock["moving_average"]["above_200dma"],
+                "reasons":
+                    self._momentum_reasons(stock)
             })
 
         momentum_data = sorted(
@@ -631,8 +1019,18 @@ class BucketBuilder:
             reverse=True
         )
 
+        momentum_top50 = []
+
+        for rank, item in enumerate(
+            momentum_data[:self.top_n],
+            start=1
+        ):
+
+            item["rank"] = rank
+            momentum_top50.append(item)
+
         # =====================================================
-        # BEST SHORT TERM STOCKS
+        # SHORT TERM
         # =====================================================
 
         short_term_data = []
@@ -641,12 +1039,20 @@ class BucketBuilder:
 
             short_term_data.append({
                 "ticker": stock["ticker"],
-                "score": stock["scores"]["short_term"],
-                "return_1w": stock["returns"]["1W"],
-                "return_2w": stock["returns"]["2W"],
-                "return_1m": stock["returns"]["1M"],
-                "rvol": stock["volume"]["rvol"],
-                "above_20dma": stock["moving_average"]["above_20dma"]
+                "score":
+                    stock["scores"]["short_term"],
+                "return_1w":
+                    stock["returns"]["1W"],
+                "return_2w":
+                    stock["returns"]["2W"],
+                "return_1m":
+                    stock["returns"]["1M"],
+                "rvol":
+                    stock["volume"]["rvol"],
+                "above_20dma":
+                    stock["moving_average"]["above_20dma"],
+                "reasons":
+                    self._short_term_reasons(stock)
             })
 
         short_term_data = sorted(
@@ -659,6 +1065,16 @@ class BucketBuilder:
             reverse=True
         )
 
+        short_term_top50 = []
+
+        for rank, item in enumerate(
+            short_term_data[:self.top_n],
+            start=1
+        ):
+
+            item["rank"] = rank
+            short_term_top50.append(item)
+
         # =====================================================
         # ACCUMULATION
         # =====================================================
@@ -669,14 +1085,24 @@ class BucketBuilder:
 
             accumulation_data.append({
                 "ticker": stock["ticker"],
-                "score": stock["scores"]["accumulation"],
-                "return_1m": stock["returns"]["1M"],
-                "return_3m": stock["returns"]["3M"],
-                "rvol": stock["volume"]["rvol"],
+                "score":
+                    stock["scores"]["accumulation"],
+                "return_1m":
+                    stock["returns"]["1M"],
+                "return_3m":
+                    stock["returns"]["3M"],
+                "rvol":
+                    stock["volume"]["rvol"],
                 "volume_trend_5_vs_20":
-                    stock["volume"]["volume_trend_5_vs_20"],
+                    stock["volume"][
+                        "volume_trend_5_vs_20"
+                    ],
                 "volume_trend_20_vs_50":
-                    stock["volume"]["volume_trend_20_vs_50"]
+                    stock["volume"][
+                        "volume_trend_20_vs_50"
+                    ],
+                "reasons":
+                    self._accumulation_reasons(stock)
             })
 
         accumulation_data = sorted(
@@ -689,8 +1115,18 @@ class BucketBuilder:
             reverse=True
         )
 
+        accumulation_top50 = []
+
+        for rank, item in enumerate(
+            accumulation_data[:self.top_n],
+            start=1
+        ):
+
+            item["rank"] = rank
+            accumulation_top50.append(item)
+
         # =====================================================
-        # BREAKOUTS
+        # BREAKOUT
         # =====================================================
 
         breakout_data = []
@@ -721,7 +1157,10 @@ class BucketBuilder:
                 "breakout_50d":
                     stock["price_action"]["breakout_50d"],
                 "rvol": rvol,
-                "return_1m": stock["returns"]["1M"]
+                "return_1m":
+                    stock["returns"]["1M"],
+                "reasons":
+                    self._breakout_reasons(stock)
             })
 
         breakout_data = sorted(
@@ -734,8 +1173,18 @@ class BucketBuilder:
             reverse=True
         )
 
+        breakout_top50 = []
+
+        for rank, item in enumerate(
+            breakout_data[:self.top_n],
+            start=1
+        ):
+
+            item["rank"] = rank
+            breakout_top50.append(item)
+
         # =====================================================
-        # RECOVERING FROM LOWS
+        # RECOVERY
         # =====================================================
 
         recovery_data = []
@@ -744,9 +1193,12 @@ class BucketBuilder:
 
             recovery_data.append({
                 "ticker": stock["ticker"],
-                "score": stock["scores"]["recovery"],
+                "score":
+                    stock["scores"]["recovery"],
                 "recovery_from_52w_low":
-                    stock["high_low"]["recovery_from_52w_low"],
+                    stock["high_low"][
+                        "recovery_from_52w_low"
+                    ],
                 "return_1m":
                     stock["returns"]["1M"],
                 "return_3m":
@@ -754,7 +1206,9 @@ class BucketBuilder:
                 "above_20dma":
                     stock["moving_average"]["above_20dma"],
                 "above_50dma":
-                    stock["moving_average"]["above_50dma"]
+                    stock["moving_average"]["above_50dma"],
+                "reasons":
+                    self._recovery_reasons(stock)
             })
 
         recovery_data = sorted(
@@ -766,6 +1220,16 @@ class BucketBuilder:
             ),
             reverse=True
         )
+
+        recovery_top50 = []
+
+        for rank, item in enumerate(
+            recovery_data[:self.top_n],
+            start=1
+        ):
+
+            item["rank"] = rank
+            recovery_top50.append(item)
 
         # =====================================================
         # HIGH RVOL
@@ -783,10 +1247,13 @@ class BucketBuilder:
             high_rvol.append({
                 "ticker": stock["ticker"],
                 "rvol": rvol,
-                "return_1d":
+                "return_1w":
                     stock["returns"]["1W"],
                 "return_1m":
-                    stock["returns"]["1M"]
+                    stock["returns"]["1M"],
+                "reasons": [
+                    f"RVOL is {rvol:.2f}x"
+                ]
             })
 
         high_rvol = sorted(
@@ -794,6 +1261,27 @@ class BucketBuilder:
             key=lambda x: x["rvol"],
             reverse=True
         )
+
+        high_rvol_top50 = []
+
+        for rank, item in enumerate(
+            high_rvol[:self.top_n],
+            start=1
+        ):
+
+            item["rank"] = rank
+
+            if (
+                item["return_1w"] is not None
+                and item["return_1w"] > 0
+            ):
+
+                item["reasons"].append(
+                    f"1W return is "
+                    f"+{item['return_1w']:.2f}%"
+                )
+
+            high_rvol_top50.append(item)
 
         # =====================================================
         # STRONG TREND
@@ -804,27 +1292,46 @@ class BucketBuilder:
         for stock in analysed:
 
             score = 0
+            reasons = []
 
-            if stock["moving_average"]["above_20dma"]:
+            ma = stock["moving_average"]
+
+            if ma["above_20dma"]:
+
                 score += 1
 
-            if stock["moving_average"]["above_50dma"]:
+                reasons.append(
+                    "Price is above 20 DMA"
+                )
+
+            if ma["above_50dma"]:
+
                 score += 1
 
-            if stock["moving_average"]["above_200dma"]:
+                reasons.append(
+                    "Price is above 50 DMA"
+                )
+
+            if ma["above_200dma"]:
+
                 score += 1
+
+                reasons.append(
+                    "Price is above 200 DMA"
+                )
 
             strong_trend.append({
                 "ticker": stock["ticker"],
                 "score": score,
                 "above_20dma":
-                    stock["moving_average"]["above_20dma"],
+                    ma["above_20dma"],
                 "above_50dma":
-                    stock["moving_average"]["above_50dma"],
+                    ma["above_50dma"],
                 "above_200dma":
-                    stock["moving_average"]["above_200dma"],
+                    ma["above_200dma"],
                 "return_3m":
-                    stock["returns"]["3M"]
+                    stock["returns"]["3M"],
+                "reasons": reasons
             })
 
         strong_trend = sorted(
@@ -835,6 +1342,16 @@ class BucketBuilder:
             ),
             reverse=True
         )
+
+        strong_trend_top50 = []
+
+        for rank, item in enumerate(
+            strong_trend[:self.top_n],
+            start=1
+        ):
+
+            item["rank"] = rank
+            strong_trend_top50.append(item)
 
         # =====================================================
         # CONSECUTIVE GAINERS
@@ -850,11 +1367,28 @@ class BucketBuilder:
 
             if count > 0:
 
+                reasons = [
+                    f"{count} consecutive "
+                    "gaining sessions"
+                ]
+
+                return_1w = stock["returns"]["1W"]
+
+                if (
+                    return_1w is not None
+                    and return_1w > 0
+                ):
+
+                    reasons.append(
+                        f"1W return is "
+                        f"+{return_1w:.2f}%"
+                    )
+
                 consecutive_gainers.append({
                     "ticker": stock["ticker"],
                     "consecutive_gainers": count,
-                    "return_1w":
-                        stock["returns"]["1W"]
+                    "return_1w": return_1w,
+                    "reasons": reasons
                 })
 
         consecutive_gainers = sorted(
@@ -865,6 +1399,16 @@ class BucketBuilder:
             ),
             reverse=True
         )
+
+        consecutive_gainers_top50 = []
+
+        for rank, item in enumerate(
+            consecutive_gainers[:self.top_n],
+            start=1
+        ):
+
+            item["rank"] = rank
+            consecutive_gainers_top50.append(item)
 
         # =====================================================
         # CONSECUTIVE LOSERS
@@ -880,11 +1424,28 @@ class BucketBuilder:
 
             if count > 0:
 
+                reasons = [
+                    f"{count} consecutive "
+                    "losing sessions"
+                ]
+
+                return_1w = stock["returns"]["1W"]
+
+                if (
+                    return_1w is not None
+                    and return_1w < 0
+                ):
+
+                    reasons.append(
+                        f"1W return is "
+                        f"{return_1w:.2f}%"
+                    )
+
                 consecutive_losers.append({
                     "ticker": stock["ticker"],
                     "consecutive_losers": count,
-                    "return_1w":
-                        stock["returns"]["1W"]
+                    "return_1w": return_1w,
+                    "reasons": reasons
                 })
 
         consecutive_losers = sorted(
@@ -896,6 +1457,16 @@ class BucketBuilder:
             reverse=True
         )
 
+        consecutive_losers_top50 = []
+
+        for rank, item in enumerate(
+            consecutive_losers[:self.top_n],
+            start=1
+        ):
+
+            item["rank"] = rank
+            consecutive_losers_top50.append(item)
+
         # =====================================================
         # FINAL DATABASE
         # =====================================================
@@ -905,37 +1476,44 @@ class BucketBuilder:
             "return": return_buckets,
 
             "momentum": {
-                "top50": momentum_data[:50]
+                "top50": momentum_top50
             },
 
             "short_term": {
-                "top50": short_term_data[:50]
+                "top50": short_term_top50
             },
 
             "accumulation": {
-                "top50": accumulation_data[:50]
+                "top50": accumulation_top50
             },
 
             "breakout": {
-                "top50": breakout_data[:50]
+                "top50": breakout_top50
             },
 
             "recovery": {
-                "top50": recovery_data[:50]
+                "top50": recovery_top50
             },
 
             "volume": {
-                "high_rvol": high_rvol[:50]
+                "high_rvol": high_rvol_top50
             },
 
             "technical": {
-                "strong_trend": strong_trend[:50],
+                "strong_trend":
+                    strong_trend_top50,
+
                 "consecutive_gainers":
-                    consecutive_gainers[:50],
+                    consecutive_gainers_top50,
+
                 "consecutive_losers":
-                    consecutive_losers[:50]
+                    consecutive_losers_top50
             }
         }
+
+        # =====================================================
+        # SAVE
+        # =====================================================
 
         with open(
             output_path,
@@ -950,6 +1528,7 @@ class BucketBuilder:
             )
 
         print(
-            f"Saved bucket database: {output_path}"
+            f"Saved bucket database: "
+            f"{output_path}"
         )
-        
+

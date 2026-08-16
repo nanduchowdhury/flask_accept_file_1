@@ -1231,12 +1231,12 @@ class StockAnalysisMain {
                 };
 
                 tickersData.forEach(item => {
-                    resultObj.related_stocks[item.ticker] = {}; // UI builder fetches plot/summary details on tab click
+                    resultObj.related_stocks[item.ticker] = { "selection_reason": item.reason || "N/A" };
                 });
 
                 this.popoutMgr.clear();
                 let tabContentDiv = this.uiBuilder.createTabContent(JSON.stringify(resultObj), 'tabContent active',
-                                            true, ['related_stocks']);
+                                            true, ['related_stocks'], null, ['selection_reason']);
 
                 this.popoutMgr.appendItem(tabContentDiv);
                 this.uiBuilder.appendDisclaimer();
@@ -1275,16 +1275,72 @@ class StockAnalysisMain {
                 }
 
                 const label = this.uiBuilder._remove_underscore(bucketName);
+
+                const bucketMeta = {
+                    "momentum": {
+                        "name": "Top Momentum Stocks",
+                        "description": "Stocks showing relatively strong and consistent price momentum across multiple timeframes, supported by their position relative to key moving averages.",
+                        "methodology": "Stocks are ranked using a momentum score based on positive 1W, 1M and 3M returns and whether the price is above the 20, 50 and 200 day moving averages."
+                    },
+                    "short_term": {
+                        "name": "Best Short-Term Stocks",
+                        "description": "Stocks showing strong recent price performance with additional confirmation from short-term trend and trading volume.",
+                        "methodology": "Stocks are ranked using 1W, 2W and 1M returns, position above the 20 DMA and RVOL."
+                    },
+                    "accumulation": {
+                        "name": "Stocks Showing Accumulation",
+                        "description": "Stocks showing a combination of positive price performance and increasing trading activity.",
+                        "methodology": "Stocks are ranked using recent returns, volume trends, RVOL and position relative to the 50 DMA."
+                    },
+                    "breakout": {
+                        "name": "Stocks Breaking Out",
+                        "description": "Stocks whose price has moved above recent resistance levels such as the previous 20-day or 50-day highs.",
+                        "methodology": "Stocks are ranked using 20-day and 50-day breakout signals, RVOL and position above the 50 DMA."
+                    },
+                    "recovery": {
+                        "name": "Stocks Recovering From Lows",
+                        "description": "Stocks that have moved substantially higher from their 52-week lows and are showing improving price momentum.",
+                        "methodology": "Stocks are ranked using percentage recovery from the 52-week low, recent returns and position relative to the 20 and 50 DMA."
+                    },
+                    "volume": {
+                        "name": "High RVOL Stocks",
+                        "description": "Stocks experiencing unusually high trading volume compared with their recent normal activity.",
+                        "methodology": "Stocks are ranked by relative volume, calculated as current volume divided by the 20-day average volume."
+                    },
+                    "strong_trend": {
+                        "name": "Strong Trend Stocks",
+                        "description": "Stocks trading above multiple important moving averages.",
+                        "methodology": "Stocks receive points for trading above the 20, 50 and 200 day moving averages."
+                    },
+                    "consecutive_gainers": {
+                        "name": "Consecutive Gainers",
+                        "description": "Stocks that have increased in price for multiple consecutive trading sessions.",
+                        "methodology": "The current consecutive sequence of positive daily closing-price changes is counted and stocks are ranked by the length of the winning streak."
+                    },
+                    "consecutive_losers": {
+                        "name": "Consecutive Losers",
+                        "description": "Stocks that have declined in price for multiple consecutive trading sessions.",
+                        "methodology": "The current consecutive sequence of negative daily closing-price changes is counted and stocks are ranked by the length of the losing streak."
+                    }
+                };
+
+                const meta = bucketMeta[bucketName] || {
+                    name: label.toUpperCase() + " Stocks",
+                    description: `This list includes stocks categorized under ${label} based on recent market trends and performance metrics.`,
+                    methodology: "N/A"
+                };
+
                 const resultObj = {
-                    "Analysis_Title": label.toUpperCase() + " Stocks",
-                    "Description": `This list includes stocks categorized under ${label} based on recent market trends and performance metrics.`,
+                    "Analysis_Title": meta.name,
+                    "Description": meta.description,
+                    "Methodology": meta.methodology,
                     "related_stocks": {}
                 };
 
                 if (isSubBucket) {
                     // If sub-bucket (like 'strong_trend'), it's already an array of stock objects
                     bucketData.forEach(item => {
-                        if (item.ticker) resultObj.related_stocks[item.ticker] = {};
+                        if (item.ticker) resultObj.related_stocks[item.ticker] = { "selection_reason": item.reasons || "N/A" };
                     });
                 } else {
                     // Top-level bucket (like 'technical' or 'momentum'), collect from all its child arrays
@@ -1292,7 +1348,7 @@ class StockAnalysisMain {
                         if (Array.isArray(val)) {
                             val.forEach(item => {
                                 if (item.ticker) {
-                                    resultObj.related_stocks[item.ticker] = {}; // Trigger lazy load on tab click
+                                    resultObj.related_stocks[item.ticker] = { "selection_reason": item.reasons || "N/A" };
                                 }
                             });
                         }
@@ -1301,7 +1357,7 @@ class StockAnalysisMain {
 
                 this.popoutMgr.clear();
                 let tabContentDiv = this.uiBuilder.createTabContent(JSON.stringify(resultObj), 'tabContent active',
-                                            true, ['related_stocks']);
+                                            true, ['related_stocks'], null, ['selection_reason']);
 
                 this.popoutMgr.appendItem(tabContentDiv);
                 this.uiBuilder.appendDisclaimer();
