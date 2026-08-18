@@ -587,6 +587,22 @@ class StockAnalysisMain {
         this.hideAssistantPointer();
     }
 
+    showSpinner() {
+        const overlay = document.getElementById('spinner-overlay');
+        if (overlay) {
+            overlay.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    hideSpinner() {
+        const overlay = document.getElementById('spinner-overlay');
+        if (overlay) {
+            overlay.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+    }
+
     /**
      * Makes the assistant-pointer disappear after 2 minutes.
      */
@@ -1038,9 +1054,9 @@ class StockAnalysisMain {
     }
 
     getSectorAnalysisInfo(sector, callback) {
-
         const filePath = `/static/prompts/stocks_${sector}_info.json`;
 
+        this.showSpinner();
         fetch(filePath)
             .then(response => {
                 if (!response.ok) {
@@ -1049,9 +1065,11 @@ class StockAnalysisMain {
                 return response.json();
             })
             .then(data => {
+                this.hideSpinner();
                 callback(JSON.stringify(data));
             })
             .catch(error => {
+                this.hideSpinner();
                 errorManager.showError(2044, error.message);
             });
     }
@@ -1197,9 +1215,9 @@ class StockAnalysisMain {
     }
 
     openPositiveReturnPage(period = '2M') {
-
         this.gaTracker.trackPageView(`${period}-positive-return-page`);
 
+        this.showSpinner();
         fetch('/static/prompts/stocks_buckets.json')
             .then(response => {
                 if (!response.ok) {
@@ -1240,18 +1258,20 @@ class StockAnalysisMain {
 
                 this.popoutMgr.appendItem(tabContentDiv);
                 this.uiBuilder.appendDisclaimer();
+                this.hideSpinner();
                 this.popoutMgr.showPopout();
             })
             .catch(error => {
+                this.hideSpinner();
                 errorManager.showError(2044, error.message);
             });
     }
 
 
     openBucketAnalysisPage(bucketName) {
-
         this.gaTracker.trackPageView(`${bucketName}-analysis-page`);
 
+        this.showSpinner();
         fetch('/static/prompts/stocks_buckets.json')
             .then(response => {
                 if (!response.ok) {
@@ -1361,9 +1381,11 @@ class StockAnalysisMain {
 
                 this.popoutMgr.appendItem(tabContentDiv);
                 this.uiBuilder.appendDisclaimer();
+                this.hideSpinner();
                 this.popoutMgr.showPopout();
             })
             .catch(error => {
+                this.hideSpinner();
                 errorManager.showError(2044, error.message);
             });
     }
@@ -1411,6 +1433,7 @@ class StockAnalysisMain {
     }
 
     handleMainPagePlotClick() {
+        this.showSpinner();
         const period = this.MAIN_PAGE_STOCK_DEFAULT_TIME_PERIOD;
         const analysisType = 'ANALYSIS_CONT_DECLINE_2PCT';
         const requestTypes = ['STOCK_BASICS'];
@@ -1451,6 +1474,7 @@ class StockAnalysisMain {
                 }
             });
             this.uiBuilder.appendDisclaimer();
+            this.hideSpinner();
             this.popoutMgr.showPopout();
         });
     }
@@ -1587,6 +1611,7 @@ class StockAnalysisMain {
             requestTypes.push('STOCK_PEER_COMPARISON');
         }
 
+        this.showSpinner();
         this.getStockDataFromServer(stockName, period, analysisType, requestTypes, (response) => {
             const ticker = response['stock-ticker'];
             let info = response.STOCK_BASICS;
@@ -1598,6 +1623,7 @@ class StockAnalysisMain {
             const error = response.error;
 
             if (error && typeof error === 'string' && error.trim() !== "") {
+                this.hideSpinner();
                 errorManager.showError(1045, error);
                 return;
             }
@@ -1699,8 +1725,10 @@ class StockAnalysisMain {
             }
 
             this.uiBuilder.appendDisclaimer();
+            this.hideSpinner();
             this.popoutMgr.showPopout();
         }, (error) => {
+            this.hideSpinner();
             errorManager.showError(2044, error);
         });
     }
