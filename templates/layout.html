@@ -64,19 +64,6 @@
                      class="logo" alt="bluepayload Logo" title="bluepayload - minimalist approach towards many things"
                      width="150" height="50" loading="lazy">
             </a>
-            <div class="center-container">
-                <a
-                    id="joinWhatsappBtn"
-                    href="https://chat.whatsapp.com/FLB3g8Ma2m9838z9a6imBw"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="whatsapp-btn">
-    
-                    <i class="fab fa-whatsapp"></i>
-                    Join WhatsApp Community
-    
-                </a>
-            </div>
         </div>
 
         {% block rotating_banner %}
@@ -136,7 +123,6 @@
     </script>
 
     <script defer src="{{ url_for('static', filename='BasicInitializer.js') }}" crossorigin="anonymous"></script>
-    <script defer src="{{ url_for('static', filename='whatsappTracker.js') }}" crossorigin="anonymous"></script>
     <script defer src="{{ url_for('static', filename='ManageRotatingBanner.js') }}" crossorigin="anonymous"></script>
     <script defer src="{{ url_for('static', filename='home_render.js') }}" crossorigin="anonymous"></script>
     <script defer src="{{ url_for('static', filename='errorManager.js') }}" crossorigin="anonymous"></script>
@@ -158,9 +144,6 @@
                 const scriptClarity = document.createElement("script"); scriptClarity.innerHTML = `(function(c,l,a,r,i,t,y){ c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)}; t=l.createElement(r);t.async=1;t.crossOrigin="anonymous";t.src="https://www.clarity.ms/tag/"+i; y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y); })(window, document, "clarity", "script", "qqnxtjq93c");`; document.body.appendChild(scriptClarity);
             }, 2000);
             
-            const tracker = new WhatsAppTracker();
-            tracker.trackUserInteraction();
-
             {% block rotating_banner_js %}
             // Initialize and display the rotating banner
             const banner = new ManageRotatingBanner('rotatingBannerContainer', 'rotatingBannerContent');

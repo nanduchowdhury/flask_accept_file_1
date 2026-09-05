@@ -1,6 +1,6 @@
 .welcome-heading {
     font-family: 'Patrick Hand';
-    font-size: 18px;
+    font-size: 12px;
     font-weight: bold;
     color: rgba(2, 19, 2, 0.993); /* Green color */
 }
@@ -194,53 +194,13 @@
 .social-icon:nth-child(1):hover {
     color: #1DA1F2;
 }
-
-
-.whatsapp-btn {
-    background-color: #0a9b3f;
-    color: white;
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    gap: 8px;
-
-    padding: 8px 14px;
-
-    min-height: 20px;
-
-    border-radius: 20px;
-
-    font-family: 'Patrick Hand';
-    font-weight: bold;
-    font-size: 12px;
-
-    text-decoration: none;
-
-    white-space: nowrap;
-
-    box-shadow: 0 2px 4px rgba(0,0,0,0.12);
-
-    transition: background-color .2s, transform .2s;
-}
 @media (max-width:768px) {
 
     .header-container {
         padding: 8px 12px;
     }
-
-    .whatsapp-btn {
-        font-size: 11px;
-        padding: 7px 12px;
-    }
 }
 
-.whatsapp-btn:hover {
-    background-color:#128C7E;
-    color:white;
-    transform:translateY(-2px);
-}
 
 .research-container {
     display: flex;
