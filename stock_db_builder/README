@@ -16,7 +16,7 @@ cd stock_db_builder/
     python build_database.py
 
     This will create output/stocks_master.json
-    It currently contains approx 2384 companies.
+    It currently contains approx 2606 companies.
 
 3. Create template knowledge/themes.json
 
