@@ -140,10 +140,7 @@
         "employees": null,
         "enterprise_value": 393809821696,
         "exchange": "NSI",
-        "indices": [
-            "Nifty500",
-            "Nifty Midcap 150"
-        ],
+        "indices": [],
         "industry": "Conglomerates",
         "isin": "INE470A01017",
         "market_cap": 398445510656,
@@ -783,6 +780,31 @@
         "ticker": "ABCAPITAL.NS",
         "website": "https://www.adityabirlacapital.com"
     },
+    "ABCIND.NS": {
+        "city": "Faridkot",
+        "company_name": "ABC Industries India Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 370,
+        "enterprise_value": 5102712832,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Textile Manufacturing",
+        "isin": "INE08PH01015",
+        "market_cap": 3643105536,
+        "sector": "Consumer Cyclical",
+        "series": "EQ",
+        "shares_outstanding": 21963620,
+        "short_name": "ABC INDUSTRIES INDIA LTD",
+        "state": null,
+        "summary": "ABC Industries India Limited engages in the manufacturing and sale of cotton yarns and knitted fabrics in India. It also offers cotton seed oil, mustard oil, and oil cakes. ABC Industries India Limited was formerly known as A B Cotspin India Limited and changed its name to ABC Industries India Limited in October 2026. ABC Industries India Limited was incorporated in 1997 and is based in Faridkot, India.",
+        "symbol": "ABCIND",
+        "themes": [
+            "Semiconductor"
+        ],
+        "ticker": "ABCIND.NS",
+        "website": "https://abcotspin.co.in"
+    },
     "ABCOTS.NS": {
         "city": "Bathinda",
         "company_name": null,
@@ -845,10 +867,7 @@
         "employees": null,
         "enterprise_value": 123682635776,
         "exchange": "NSI",
-        "indices": [
-            "Nifty500",
-            "Nifty Smallcap 250"
-        ],
+        "indices": [],
         "industry": "Apparel Manufacturing",
         "isin": "INE647O01011",
         "market_cap": 73030967296,
@@ -901,10 +920,7 @@
         "employees": null,
         "enterprise_value": 144866639872,
         "exchange": "NSI",
-        "indices": [
-            "Nifty500",
-            "Nifty Smallcap 250"
-        ],
+        "indices": [],
         "industry": "Apparel Retail",
         "isin": "INE14LE01019",
         "market_cap": 116058685440,
@@ -1038,7 +1054,7 @@
         "exchange": "NSI",
         "indices": [
             "Nifty500",
-            "Nifty Midcap 150"
+            "Nifty Smallcap 250"
         ],
         "industry": "Building Materials",
         "isin": "INE012A01025",
@@ -1164,6 +1180,32 @@
         ],
         "ticker": "ACEINTEG.NS",
         "website": "https://aceintegrated.com"
+    },
+    "ACEVECTOR.NS": {
+        "city": "Gurugram",
+        "company_name": "AceVector Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 332,
+        "enterprise_value": 12650018816,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Internet Retail",
+        "isin": "INE580P01029",
+        "market_cap": 10823874560,
+        "sector": "Consumer Cyclical",
+        "series": "EQ",
+        "shares_outstanding": 544186770,
+        "short_name": "ACEVECTOR LIMITED",
+        "state": null,
+        "summary": "AceVector Limited establishes, develops, designs, and conceptualizes direct marketing and sales promotion solutions through web and non-web based platforms. It offers warehousing solutions, trading via e-commerce, and providing e-commerce platform for consumer goods. In addition, it is also involved in snapdeal, unicommerce, and stellaro brands businesses. AceVector Limited was formerly known as Snapdeal Limited and changed its name to AceVector Limited on January 06, 2023. The company was incorporated in 2007 and is based in Gurugram, India.",
+        "symbol": "ACEVECTOR",
+        "themes": [
+            "AI",
+            "EV"
+        ],
+        "ticker": "ACEVECTOR.NS",
+        "website": "https://www.acevector.com"
     },
     "ACGL.NS": {
         "city": null,
@@ -1588,6 +1630,32 @@
         ],
         "ticker": "ADOR.NS",
         "website": "https://www.adorwelding.com"
+    },
+    "ADROITIND.NS": {
+        "city": "Pithampur",
+        "company_name": "Adroit Industries (India) Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 112,
+        "enterprise_value": 7288019456,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Auto Parts",
+        "isin": "INE505M01015",
+        "market_cap": 7802476544,
+        "sector": "Consumer Cyclical",
+        "series": "EQ",
+        "shares_outstanding": 44808340,
+        "short_name": "ADROIT INDUSTRIES (I) LTD",
+        "state": null,
+        "summary": "Adroit Industries (India) Limited, together with its subsidiaries, manufactures and markets auto parts and components in India. The company offers propeller shafts, driveshaft assemblies, and precision-machined torque-transmission components for automotive and non-automotive applications. It also provides cardan shafts, universal joints, sleeve and slip yokes, tube and weld yokes, flange and end yokes, companion flanges, yoke shafts, splined stub shafts, stub shafts, centre bearings, centre support bearings, short-coupled shafts, tubular shafts, mid-ship shafts, mechanics-style cardan parts and accessories, CV double cardan driveshaft assemblies, and forged products, as well as clutch plates, rubber parts, and spares. In addition, the company repairs a range of automotive components and parts. It sells its products through a network of distributors and Tier-1 driveline component suppliers, as well as through direct sales to original equipment manufacturers. The company exports its products to approximately 32 countries, including the United States, Colombia, Canada, Australia, Mexico, Turkey, the United Kingdom, Peru, and internationally. Adroit Industries (India) Limited was founded in 1966 and is based in Pithampur, India.",
+        "symbol": "ADROITIND",
+        "themes": [
+            "AI",
+            "EV"
+        ],
+        "ticker": "ADROITIND.NS",
+        "website": "https://www.adroitindustries.com"
     },
     "ADROITINFO.NS": {
         "city": "Hyderabad",
@@ -2019,7 +2087,10 @@
         "employees": null,
         "enterprise_value": 203648876544,
         "exchange": "NSI",
-        "indices": [],
+        "indices": [
+            "Nifty500",
+            "Nifty Smallcap 250"
+        ],
         "industry": "Specialty Chemicals",
         "isin": "INE0BWX01014",
         "market_cap": 199175045120,
@@ -2219,6 +2290,33 @@
         "ticker": "AGARWALEYE.NS",
         "website": "https://www.dragarwals.co.in"
     },
+    "AGASTYAEN.NS": {
+        "city": "Gandhinagar",
+        "company_name": "Agastya Energy and Infrastructure Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 38,
+        "enterprise_value": 1807010048,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Chemicals",
+        "isin": "INE753W01010",
+        "market_cap": 1362162560,
+        "sector": "Basic Materials",
+        "series": "BE",
+        "shares_outstanding": 25901550,
+        "short_name": "AGASTYA ENE AND INFRA LTD",
+        "state": null,
+        "summary": "Agastya Energy and Infrastructure Limited operates as renewable energy and infrastructure company and is engages in the engineering, procurement, construction (EPC), manufacturing, and operation of integrated clean energy assets. Its services include ingot manufacturing, silicon wafer manufacturing, solar cell manufacturing, and solar panel manufacturing. The company also manufactures and sells cuprous chloride, cupric chloride, and copper sulphate in India and internationally. It also provides cupric chloride anhydrous and dihydrate, and copper phthalocyanine blue. The company's products are used in dyes and pigments, paint, pharmaceuticals, electroplating, metal extraction and ink, carbon paper, and PVC pipe coating industries. Agastya Energy and Infrastructure Limited was formerly known as Sanginita Chemicals Limited and changed its name to Agastya Energy and Infrastructure Limited in August 2026. The company was founded in 2002 and is based in Gandhinagar, India. Agastya Energy and Infrastructure Limited operates as a subsidiary of B N G Investment LLC.",
+        "symbol": "AGASTYAEN",
+        "themes": [
+            "AI",
+            "Renewable Energy",
+            "Semiconductor"
+        ],
+        "ticker": "AGASTYAEN.NS",
+        "website": "https://agastyaenergy.in"
+    },
     "AGI.NS": {
         "city": "Gurugram",
         "company_name": "AGI Greenpac Limited",
@@ -2295,6 +2393,29 @@
         ],
         "ticker": "AGL.NS",
         "website": "https://www.allcargo.global"
+    },
+    "AGOL.NS": {
+        "city": "Ahmedabad",
+        "company_name": "Ashapuri Gold Ornament Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 82,
+        "enterprise_value": 1871859840,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Luxury Goods",
+        "isin": "INE05FR01029",
+        "market_cap": 2053218176,
+        "sector": "Consumer Cyclical",
+        "series": "BE",
+        "shares_outstanding": 333314666,
+        "short_name": "ASHAPURI GOLD ORNAMENT L",
+        "state": null,
+        "summary": "Ashapuri Gold Ornament Limited engages in the manufacture, wholesale, and sale of gold jewelry in India. It offers various jewelry products, such as antique, traditional, and bridal jewelry products, as well as customized jewelry products, including chokers, bangles, necklaces, bracelets, and bespoke designs. The company sells its products under the Kaavis, Arzish, and Maayin brand names. The company was founded in 1997 and is based in Ahmedabad, India.",
+        "symbol": "AGOL",
+        "themes": [],
+        "ticker": "AGOL.NS",
+        "website": "https://ashapurigold.com"
     },
     "AGRITECH.NS": {
         "city": "Mumbai",
@@ -3125,7 +3246,6 @@
         "enterprise_value": 653935771648,
         "exchange": "NSI",
         "indices": [
-            "Nifty200",
             "Nifty500",
             "Nifty Midcap 150",
             "Nifty Pharma"
@@ -4019,6 +4139,34 @@
         "ticker": "ANNAPURNA.NS",
         "website": "https://www.annapurnasnacks.in"
     },
+    "ANNU.NS": {
+        "city": "New Delhi",
+        "company_name": null,
+        "country": "India",
+        "currency": "INR",
+        "employees": null,
+        "enterprise_value": 2445465856,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Infrastructure Operations",
+        "isin": "INE103001017",
+        "market_cap": 2668171520,
+        "sector": "Industrials",
+        "series": "EQ",
+        "shares_outstanding": 65492670,
+        "short_name": "ANNU PROJECTS LIMITED",
+        "state": null,
+        "summary": "Annu Projects Limited engages in the design, development, implementation, operations and maintenance of essential overhead and underground utilities infrastructure across telecom infrastructure, sewerage infrastructure vertical, gas pipeline vertical and railway signalling vertical in India. The company provides services, such as surveying, designing, and installing cabling and tower infrastructures for communication, automation, and electronic security systems, as well as undertakes the laying of overhead and underground optical fibre cable network for telecom operators. It also constructs manholes, sewerage treatment plants, pumping stations, structural facilities for sewerage, stormwater drainage systems, and screening chambers for combined or sanitary sewers, as well as pipe laying services. In addition, the company engages in the laying medium-density polyethylene for domestic and commercial gas supply. Annu Projects Limited was incorporated in 2003 and is based in New Delhi, India.",
+        "symbol": "ANNU",
+        "themes": [
+            "5G",
+            "AI",
+            "EV",
+            "Railway"
+        ],
+        "ticker": "ANNU.NS",
+        "website": "https://annuprojects.com"
+    },
     "ANSALAPI.NS": {
         "city": "New Delhi",
         "company_name": "Ansal Properties & Infrastructure Limited",
@@ -4223,6 +4371,29 @@
         "ticker": "ANURAS.NS",
         "website": "https://www.anupamrasayan.com"
     },
+    "AONESTEELS.NS": {
+        "city": "Bengaluru",
+        "company_name": "A-One Steels India Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 1377,
+        "enterprise_value": 40437039104,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Steel",
+        "isin": "INE0OTC01025",
+        "market_cap": 33763637248,
+        "sector": "Basic Materials",
+        "series": "EQ",
+        "shares_outstanding": 77235814,
+        "short_name": "A-ONE STEELS INDIA LTD",
+        "state": null,
+        "summary": "A-One Steels India Limited engages in manufacturing and trading of Iron and steel products in India. The company was founded in 2009 and is based in Bengaluru, India.",
+        "symbol": "AONESTEELS",
+        "themes": [],
+        "ticker": "AONESTEELS.NS",
+        "website": "https://aonesteelgroup.com"
+    },
     "APARINDS.NS": {
         "city": "Mumbai",
         "company_name": "APAR Industries Limited",
@@ -4232,6 +4403,7 @@
         "enterprise_value": 566519726080,
         "exchange": "NSI",
         "indices": [
+            "Nifty200",
             "Nifty500",
             "Nifty Midcap 150"
         ],
@@ -4476,7 +4648,7 @@
         "exchange": "NSI",
         "indices": [
             "Nifty500",
-            "Nifty Midcap 150"
+            "Nifty Smallcap 250"
         ],
         "industry": "Auto Parts",
         "isin": "INE438A01022",
@@ -4674,6 +4846,31 @@
         "ticker": "ARCHIES.NS",
         "website": "https://archiesonline.com"
     },
+    "ARCIL.NS": {
+        "city": "Mumbai",
+        "company_name": null,
+        "country": "India",
+        "currency": "INR",
+        "employees": 206,
+        "enterprise_value": 36465983488,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Asset Management",
+        "isin": "INE148G01016",
+        "market_cap": null,
+        "sector": "Financial Services",
+        "series": "EQ",
+        "shares_outstanding": null,
+        "short_name": "ASSET RECONSTRUC CO (I) L",
+        "state": null,
+        "summary": "Asset Reconstruction Company (India) Limited operates as an asset reconstruction company, acquiring and resolving distressed assets and non-performing loans. The company acquires, manages, and resolves stressed assets across corporate, SME, and retail segments, providing asset reconstruction services that include acquisition of non-performing assets, restructuring, settlement, and sale of assets. It conducts property auctions, manages settlement processes related to distressed assets, and engages in insolvency and bankruptcy resolution processes under the Insolvency and Bankruptcy Code, 2016, in partnership with insolvency professionals and legal firms. The company also undertakes corporate social responsibility initiatives focused on education, vocational skills, livelihood enhancement, and environmental sustainability. The company serves corporate, SME, and retail clients with stressed assets, as well as banks, non-banking financial companies, legal professionals, advocates, and law firms involved in asset recovery and insolvency processes. The company was founded in 2002 and is based in Mumbai, India. Asset Reconstruction Company (India) Limited operates as a subsidiary of Avenue India Resurgence Pte Limited.",
+        "symbol": "ARCIL",
+        "themes": [
+            "AI"
+        ],
+        "ticker": "ARCIL.NS",
+        "website": "https://www.arcil.co.in"
+    },
     "ARCL.NS": {
         "city": null,
         "company_name": null,
@@ -4805,6 +5002,32 @@
         ],
         "ticker": "ARFIN.NS",
         "website": "https://www.arfin.co.in"
+    },
+    "ARHAM.NS": {
+        "city": "Raipur",
+        "company_name": null,
+        "country": "India",
+        "currency": "INR",
+        "employees": 76,
+        "enterprise_value": 5083581440,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Consumer Electronics",
+        "isin": "INE0L2Y01011",
+        "market_cap": null,
+        "sector": "Technology",
+        "series": "EQ",
+        "shares_outstanding": null,
+        "short_name": "ARHAM TECHNOLOGIES LTD",
+        "state": null,
+        "summary": "Arham Technologies Limited manufactures and sells LED smart televisions in India. It also offers ceiling, BLDC, pedestal, table, and exhaust fans; and washing machine, mixer grinder, and air cooler under the STARSHINE brand. The company was incorporated in 2013 and is based in Raipur, India.",
+        "symbol": "ARHAM",
+        "themes": [
+            "AI",
+            "EV"
+        ],
+        "ticker": "ARHAM.NS",
+        "website": "https://www.arhamtechnologies.co.in"
     },
     "ARIES.NS": {
         "city": "Mumbai",
@@ -4984,6 +5207,34 @@
         ],
         "ticker": "ARMANFIN.NS",
         "website": "https://armanindia.com"
+    },
+    "ARMEE.NS": {
+        "city": "Ahmedabad",
+        "company_name": "ArMee Infotech Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 262,
+        "enterprise_value": 8379337216,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Information Technology Services",
+        "isin": "INE0TWE01016",
+        "market_cap": 9651100672,
+        "sector": "Technology",
+        "series": "EQ",
+        "shares_outstanding": 31731386,
+        "short_name": "ARMEE INFOTECH LIMITED",
+        "state": null,
+        "summary": "ArMee Infotech Limited provides IT Infrastructure solutions and IT managed services for Government, PSUs, BFSI, education, and private sectors in India. It offers IT Infrastructure products, such as computers, servers, interactive panels and their peripherals; IT managed services, installation and integration of IT hardware and software products; Renewable Energy Space, such as renewable energy EPC services, renewable energy Power Purchase Agreement (PPA) services, renewable energy Battery Energy Storage System (BESS); and experience zones, engages in selling IT hardware and consumer goods, including computers and computer peripherals, consumer electricals, gaming products, and electronics. It also offers cyber-security solutions, including firewall, antivirus, intrusion detection/prevention systems, and encryption services; technical manpower; skill development training; annual maintenance services onsite and off-site operational support; and IT infrastructure maintenance services. The company was founded in 2003 and is based in Ahmedabad, India.",
+        "symbol": "ARMEE",
+        "themes": [
+            "AI",
+            "Data Center",
+            "EV",
+            "Renewable Energy"
+        ],
+        "ticker": "ARMEE.NS",
+        "website": "https://armeeinfotech.com"
     },
     "AROGRANITE.NS": {
         "city": "Hosur",
@@ -5860,7 +6111,7 @@
         "exchange": "NSI",
         "indices": [
             "Nifty500",
-            "Nifty Smallcap 250"
+            "Nifty Midcap 150"
         ],
         "industry": "Medical Care Facilities",
         "isin": "INE914M01019",
@@ -6287,6 +6538,31 @@
         "ticker": "AUBANK.NS",
         "website": "https://www.au.bank.in"
     },
+    "AUGMONT.NS": {
+        "city": "Mumbai",
+        "company_name": null,
+        "country": "India",
+        "currency": "INR",
+        "employees": 296,
+        "enterprise_value": 79422234624,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Luxury Goods",
+        "isin": "INE16W401027",
+        "market_cap": null,
+        "sector": "Consumer Cyclical",
+        "series": "EQ",
+        "shares_outstanding": null,
+        "short_name": "AUGMONT ENTERPRISES LTD",
+        "state": null,
+        "summary": "Augmont Enterprises Limited operates as an integrated gold and silver platform in India. It engages in procurement and refining, bullion trading, digital gold offerings, jewellery manufacturing, international sales and facilitating gold-backed financial services. The company operates its enterprise sales vertical through its Augmont SPOT' platform, a fully electronic, over-the-counter delivery-based bullion platform that enables such as jewelers, bullion dealers, and manufacturers with valid GST registrations to purchase gold and silver bars online. It is also involved in the sale of gold bullion to asset management companies in exchange for units of gold exchange traded funds (ETF) and trade in gold and silver ETF units. In addition, the company manufactures and sells gold jewelry articles, which include chains to jewelry traders, as well as platinum. Further, it serves consumers through its Augmont Gold For All' platform by offering access to a range of gold and silver related services. The company's platform enables users to buy, sell, and store gold and silver digitally; purchase gold through systematic investment plans; liquidate and sell old gold; purchase coins starting from 1 gm; and avail technology support for gold loans. Augmont Enterprises Limited was founded in 1994 and is based in Mumbai, India.",
+        "symbol": "AUGMONT",
+        "themes": [
+            "AI"
+        ],
+        "ticker": "AUGMONT.NS",
+        "website": "https://www.augmont.com"
+    },
     "AURIONPRO.NS": {
         "city": "Navi Mumbai",
         "company_name": "Aurionpro Solutions Limited",
@@ -6605,7 +6881,10 @@
         "employees": null,
         "enterprise_value": 113343037440,
         "exchange": "NSI",
-        "indices": [],
+        "indices": [
+            "Nifty500",
+            "Nifty Smallcap 250"
+        ],
         "industry": "Packaged Foods",
         "isin": "INE871C01038",
         "market_cap": 125993148416,
@@ -6808,7 +7087,7 @@
         "exchange": "NSI",
         "indices": [
             "Nifty500",
-            "Nifty Midcap 150"
+            "Nifty Smallcap 250"
         ],
         "industry": "Packaged Foods",
         "isin": "INE699H01024",
@@ -6991,7 +7270,10 @@
         "employees": null,
         "enterprise_value": 163022258176,
         "exchange": "NSI",
-        "indices": [],
+        "indices": [
+            "Nifty500",
+            "Nifty Smallcap 250"
+        ],
         "industry": "Specialty Industrial Machinery",
         "isin": "INE02IJ01035",
         "market_cap": 160130433024,
@@ -7084,6 +7366,29 @@
         ],
         "ticker": "BAGFILMS.NS",
         "website": "https://bagnetwork24.in"
+    },
+    "BAHETI.NS": {
+        "city": "Ahmedabad",
+        "company_name": "Baheti Recycling Industries Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 190,
+        "enterprise_value": 11300279296,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Aluminum",
+        "isin": "INE029Q01017",
+        "market_cap": 8204999680,
+        "sector": "Basic Materials",
+        "series": "EQ",
+        "shares_outstanding": 10446905,
+        "short_name": "BAHETI RECYCLING IND LTD",
+        "state": null,
+        "summary": "Baheti Recycling Industries Limited, an aluminum recycling company, primarily engages in processing aluminum-based metal scrap in India. The company offers aluminium alloy ingots; and aluminium de-ox, such as aluminium notch bar, shots, cubes, and ingots. The company serves the automotive, steel manufacturing, electrical transmission, construction, packaging, consumer durables, and industrial manufacturing sectors. The company was formerly known as Baheti Metal And Ferro Alloys Limited and changed its name to Baheti Recycling Industries Limited in January 2022. Baheti Recycling Industries Limited was incorporated in 1994 and is based in Ahmedabad, India.",
+        "symbol": "BAHETI",
+        "themes": [],
+        "ticker": "BAHETI.NS",
+        "website": "https://www.bahetiindustries.com"
     },
     "BAIDFIN.NS": {
         "city": "Jaipur",
@@ -8080,10 +8385,7 @@
         "employees": null,
         "enterprise_value": 171625332736,
         "exchange": "NSI",
-        "indices": [
-            "Nifty500",
-            "Nifty Smallcap 250"
-        ],
+        "indices": [],
         "industry": "Agricultural Inputs",
         "isin": "INE462A01022",
         "market_cap": 185606340608,
@@ -8135,7 +8437,10 @@
         "employees": null,
         "enterprise_value": 169851830272,
         "exchange": "NSI",
-        "indices": [],
+        "indices": [
+            "Nifty500",
+            "Nifty Smallcap 250"
+        ],
         "industry": "Software - Application",
         "isin": "INE676A01027",
         "market_cap": 163817504768,
@@ -8165,10 +8470,7 @@
         "employees": null,
         "enterprise_value": 122786324480,
         "exchange": "NSI",
-        "indices": [
-            "Nifty500",
-            "Nifty Smallcap 250"
-        ],
+        "indices": [],
         "industry": "Packaged Foods",
         "isin": "INE050A01025",
         "market_cap": 106143997952,
@@ -8314,6 +8616,32 @@
         ],
         "ticker": "BCPL.NS",
         "website": "https://www.bcril.com"
+    },
+    "BCSSL.NS": {
+        "city": "Mumbai",
+        "company_name": "Bombay Coated and Special Steels Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 153,
+        "enterprise_value": 6514333696,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Metal Fabrication",
+        "isin": "INE0XFY01011",
+        "market_cap": 5272207872,
+        "sector": "Industrials",
+        "series": "BE",
+        "shares_outstanding": 62824211,
+        "short_name": "BOMBAY COATED N SPECL S L",
+        "state": null,
+        "summary": "Bombay Coated and Special Steels Limited processes and manufactures steel coils into processed steel products in India and Internationally. Its products include hard roll pickled and oiled, cold rolled close annealed, cold rolled full hard steel, half hard temper, galvanised plain skin pass, galvanised plain regular spangle, pre-painted galvanised iron, and PPGI EMBO coil and sheets. Its services include steel processing services including slitting, cut-to-length, shearing, and embossing. It caters to original equipment manufacturers and original design manufacturers in home and commercial appliances and general engineering sectors. Bombay Coated and Special Steels Limited was founded in 1992 and is headquartered in Mumbai, India.",
+        "symbol": "BCSSL",
+        "themes": [
+            "AI",
+            "Semiconductor"
+        ],
+        "ticker": "BCSSL.NS",
+        "website": "https://www.bcsspl.in"
     },
     "BDL.NS": {
         "city": "Hyderabad",
@@ -8484,6 +8812,34 @@
         ],
         "ticker": "BEL.NS",
         "website": "https://www.bel-india.in"
+    },
+    "BELDING.NS": {
+        "city": "Pune",
+        "company_name": "Belding India Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 23,
+        "enterprise_value": 11873628160,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Aluminum",
+        "isin": "INE363L01045",
+        "market_cap": 11503446016,
+        "sector": "Basic Materials",
+        "series": "EQ",
+        "shares_outstanding": 14478849,
+        "short_name": "BELDING INDIA LIMITED",
+        "state": null,
+        "summary": "Belding India Limited engages in engineering, manufacturing, and technology-led infrastructure solutions services in India. It operates through EPC projects, Battery Energy Storage Systems (BESS), Edge Data Centres, Integrated Engineering Solutions, Advanced Manufacturing, and Security Solutions. The company provides end-to-end EPC solutions for data centres, industrial infrastructure and integrated solar farm projects, covering engineering, design, procurement, construction, commissioning and project management; design, engineers, manufactures, installs, tests, commissions and lifecycle management of BESS supported by warranty and maintenance solutions; develops and deliver brick-and-mortar as well as prefabricated and containerised edge data centre solutions; precision engineered equipment, integrated engineering systems and critical industrial components. In addition, it also offers X-ray inspection and security screening systems, including baggage, cargo and vehicle scanners, under-vehicle surveillance systems and other intelligent security screening solutions. The company was formerly known as Synthiko Foils Limited and changed its name to Belding India Limited in February 2026. Belding India Limited was incorporated in 1984 and is based in Pune, India.",
+        "symbol": "BELDING",
+        "themes": [
+            "AI",
+            "EV",
+            "Renewable Energy",
+            "Semiconductor"
+        ],
+        "ticker": "BELDING.NS",
+        "website": "https://www.belding.ltd"
     },
     "BELLACASA.NS": {
         "city": "Jaipur",
@@ -8906,7 +9262,10 @@
         "employees": null,
         "enterprise_value": 183059595264,
         "exchange": "NSI",
-        "indices": [],
+        "indices": [
+            "Nifty500",
+            "Nifty Smallcap 250"
+        ],
         "industry": "Coking Coal",
         "isin": "INE05XR01022",
         "market_cap": null,
@@ -9212,10 +9571,7 @@
         "employees": null,
         "enterprise_value": 160978534400,
         "exchange": "NSI",
-        "indices": [
-            "Nifty500",
-            "Nifty Smallcap 250"
-        ],
+        "indices": [],
         "industry": "Packaged Foods",
         "isin": "INE00E101023",
         "market_cap": 161298726912,
@@ -9597,6 +9953,32 @@
         "ticker": "BLBLIMITED.NS",
         "website": "https://www.blblimited.com"
     },
+    "BLEL.NS": {
+        "city": "Delhi",
+        "company_name": "Behari Lal Engineering Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": null,
+        "enterprise_value": 17452503040,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Steel",
+        "isin": "INE1EEM01017",
+        "market_cap": null,
+        "sector": "Basic Materials",
+        "series": "EQ",
+        "shares_outstanding": null,
+        "short_name": "BEHARI LAL ENGINEERING L",
+        "state": null,
+        "summary": "Behari Lal Engineering Limited engages in the manufacturing and trading of iron and steel products in India. The company manufactures metal rolls for rolling mills across various grades including alloy cast steel rolls, alloy steel base adamite rolls, graphitic steel rolls, S. G. Iron Pearlitic Rolls, S. G. Iron Bainitic/Accicular Rolls, alloyed indefinite chill rolls, and forged rolls used in rolling processes to produce finished steel products such as TMT rebar and structural steel. It also offers engineering castings in various grades for industries including steel, iron, mining and aggregate crushers, power, and sugar; carbon, alloy steel, tool steel, valve steel, and stainless steel bars in various sections such as rounds, round corner square, flats and hex, with different sizes; forging ingots and forged shafts/ blocks for application in industries, such as automotive, aerospace, oil & gas, energy, and heavy engineering. The company caters to industries such as automobile, steel, mining, infrastructure and construction, power, aerospace and defence, and cement. It sells its products in India, Afghanistan, Brazil, Finland, France, Germany, Ireland, Mexico, Nepal, Nigeria, South Africa, Tanzania, Togo, Uganda, UAE, and the USA. Behari Lal Engineering Limited was incorporated in 1995 and is based in Delhi, India.",
+        "symbol": "BLEL",
+        "themes": [
+            "AI",
+            "Defense"
+        ],
+        "ticker": "BLEL.NS",
+        "website": "https://www.beharilalengineering.com"
+    },
     "BLIL.NS": {
         "city": "Kolkata",
         "company_name": "Balmer Lawrie Investments Limited",
@@ -9724,6 +10106,31 @@
         "ticker": "BLSE.NS",
         "website": "https://www.blseservices.com"
     },
+    "BLSPOLY.NS": {
+        "city": "New Delhi",
+        "company_name": "BLS Polymers Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 122,
+        "enterprise_value": 15391369216,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Electrical Equipment & Parts",
+        "isin": "INE0ZCQ01019",
+        "market_cap": 14750548992,
+        "sector": "Industrials",
+        "series": "EQ",
+        "shares_outstanding": 62031834,
+        "short_name": "BLS POLYMERS LIMITED",
+        "state": null,
+        "summary": "BLS Polymers Limited manufactures polymer compounds for the wire and cable and industrial pipeline coating industries. The company operates through two segments: Polymer and Trading. The company manufactures polyethylene compounds, including high-density polyethylene, medium-density polyethylene, low-density polyethylene, and linear low-density polyethylene variants, used for insulation, jacketing, and sheathing of power, telecom, and optical fiber cables. It also manufactures cross-linked polyethylene compounds, silane-grafted, for insulation of low-tension and high-tension power cables, including aerial bunched cables. Additionally, the company manufactures halogen-free flame retardant compounds for insulation and jacketing of cables, as well as polyvinyl chloride compounds for insulation and sheathing of power, data, signaling, automotive, and house wiring cables. It also offers cable filling compounds for moisture resistance and insulation in telecom cables, along with specialty additive, black, and white masterbatches for polymer products. For industrial pipeline coating applications, the company manufactures high-density polyethylene top coat compounds for the outer layer of three-layer polyethylene pipeline coating systems used on oil, gas, and water distribution pipelines, and polypropylene top coat compounds for three-layer polypropylene pipeline coating applications. It also manufactures adhesive compounds, which serve as intermediate layer adhesives for bonding between the fusion bonded epoxy base layer and the top coat layer in three-layer pipeline coating systems. Additionally, the company trades polymers and operates as a stockist and distributor of polymer products. BLS Polymers Limited was incorporated in 1991 and is based in New Delhi, India.",
+        "symbol": "BLSPOLY",
+        "themes": [
+            "5G"
+        ],
+        "ticker": "BLSPOLY.NS",
+        "website": "https://www.blspolymers.com"
+    },
     "BLUECHIP.NS": {
         "city": "Kolkata",
         "company_name": "Blue Chip India Limited",
@@ -9805,10 +10212,7 @@
         "employees": null,
         "enterprise_value": null,
         "exchange": "NSI",
-        "indices": [
-            "Nifty500",
-            "Nifty Smallcap 250"
-        ],
+        "indices": [],
         "industry": "Integrated Freight & Logistics",
         "isin": "INE233B01017",
         "market_cap": 116703469568,
@@ -9833,10 +10237,7 @@
         "employees": null,
         "enterprise_value": 104897626112,
         "exchange": "NSI",
-        "indices": [
-            "Nifty500",
-            "Nifty Smallcap 250"
-        ],
+        "indices": [],
         "industry": "Biotechnology",
         "isin": "INE0KBH01020",
         "market_cap": 108251095040,
@@ -10087,6 +10488,64 @@
         ],
         "ticker": "BOMDYEING.NS",
         "website": "https://bombaydyeing.com"
+    },
+    "BONDADA.NS": {
+        "city": "Hyderabad",
+        "company_name": "Bondada Engineering Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 411,
+        "enterprise_value": 34505142272,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Engineering & Construction",
+        "isin": "INE0Q8P01029",
+        "market_cap": null,
+        "sector": "Industrials",
+        "series": "EQ",
+        "shares_outstanding": null,
+        "short_name": "BONDADA ENGINEERING LTD",
+        "state": null,
+        "summary": "Bondada Engineering Limited provides engineering, procurement, construction, and operations and maintenance services for telecom and solar sectors in India. It also engages in design, procurement, construction, and commissioning of solar project; planning, upgradation, construction, and installation of telecommunications infrastructure, such as monopoles, guyed towers, and lattice towers; railway infrastructure; and data centers maintenance. In addition, the company provides Autoclaved Aerated Concrete blocks under the SmartBrix brand name; uPVC window and door systems under the truVU brand; and aluminium windows and doors under AluRise brand name. Further, it offers tower pole supplies, LED lights, and EV and drone motors; and manufactures and supplies telecom, and transmission and distribution towers. Bondada Engineering Limited was incorporated in 2012 and is headquartered in Hyderabad, India.",
+        "symbol": "BONDADA",
+        "themes": [
+            "5G",
+            "AI",
+            "Data Center",
+            "EV",
+            "Railway",
+            "Renewable Energy"
+        ],
+        "ticker": "BONDADA.NS",
+        "website": "https://www.bondada.net"
+    },
+    "BONFIG.NS": {
+        "city": "Kanchipuram",
+        "company_name": "Bonfiglioli Transmissions Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 627,
+        "enterprise_value": 133211209728,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Specialty Industrial Machinery",
+        "isin": "INE28SO01013",
+        "market_cap": 134605021184,
+        "sector": "Industrials",
+        "series": "EQ",
+        "shares_outstanding": 187995834,
+        "short_name": "BONFIGLIOLI TRANS LIMITED",
+        "state": null,
+        "summary": "Bonfiglioli Transmissions Limited manufactures gearboxes, gear motors, and drive systems. The company operates through three segments: Industry and Automation, Off-Highway Mobility, and Wind. The company's Industry and Automation segment manufactures helical gearboxes, parallel shaft helical gearboxes, helical-bevel gearboxes, worm gearboxes, planetary gearboxes, industrial gear motors, precision planetary gearboxes and gearmotors, inverters, servo drives, and electric motors. The company's Off-Highway Mobility segment manufactures travel drives, slew drives, winch and hoisting drives, transit mixer drives, and high-torque planetary gearboxes for mobile and off-highway equipment. The company's Wind segment manufactures wind drive systems, including yaw and pitch solutions for wind turbine applications. The company also provides aftermarket services, including spares supply, repairs, rebuilds, and retrofits for its products. It serves original equipment manufacturers and end-users across sectors, such as material handling, logistics, intralogistics, food and beverage, packaging, textiles, metalworking, wastewater treatment, recycling, mining, biogas, construction equipment, agriculture and forestry machinery, ports and terminal equipment, road construction machinery, marine and offshore applications, and wind. Bonfiglioli Transmissions Limited was incorporated in 1998 and is based in Kanchipuram, India. Bonfiglioli Transmissions Limited operates as a subsidiary of Bonfiglioli S.P.A.",
+        "symbol": "BONFIG",
+        "themes": [
+            "AI",
+            "EV",
+            "Renewable Energy",
+            "Semiconductor"
+        ],
+        "ticker": "BONFIG.NS",
+        "website": "https://www.bonfiglioli.in"
     },
     "BONLON.NS": {
         "city": "New Delhi",
@@ -10456,6 +10915,29 @@
         "ticker": "BRIGHTBR.NS",
         "website": null
     },
+    "BRIGHTOUTD.NS": {
+        "city": null,
+        "company_name": "Bright Outdoor Media Limited",
+        "country": null,
+        "currency": "INR",
+        "employees": null,
+        "enterprise_value": null,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": null,
+        "isin": "INE0OMI01019",
+        "market_cap": null,
+        "sector": null,
+        "series": "EQ",
+        "shares_outstanding": null,
+        "short_name": "BRIGHT OUTDOOR MEDIA LTD",
+        "state": null,
+        "summary": null,
+        "symbol": "BRIGHTOUTD",
+        "themes": [],
+        "ticker": "BRIGHTOUTD.NS",
+        "website": null
+    },
     "BRITANNIA.NS": {
         "city": "Bengaluru",
         "company_name": "Britannia Industries Limited",
@@ -10550,9 +11032,10 @@
         "enterprise_value": 1485337526272,
         "exchange": "NSI",
         "indices": [
+            "Nifty50",
+            "Nifty100",
             "Nifty200",
-            "Nifty500",
-            "Nifty Midcap 150"
+            "Nifty500"
         ],
         "industry": "Financial Data & Stock Exchanges",
         "isin": "INE118H01025",
@@ -12021,10 +12504,7 @@
         "employees": null,
         "enterprise_value": 204198035456,
         "exchange": "NSI",
-        "indices": [
-            "Nifty500",
-            "Nifty Smallcap 250"
-        ],
+        "indices": [],
         "industry": "Lodging",
         "isin": "INE427F01016",
         "market_cap": 183900323840,
@@ -12556,7 +13036,10 @@
         "employees": null,
         "enterprise_value": 252629090304,
         "exchange": "NSI",
-        "indices": [],
+        "indices": [
+            "Nifty500",
+            "Nifty Smallcap 250"
+        ],
         "industry": "Utilities - Renewable",
         "isin": "INE647U01026",
         "market_cap": 156839264256,
@@ -12659,7 +13142,10 @@
         "employees": null,
         "enterprise_value": 176391077888,
         "exchange": "NSI",
-        "indices": [],
+        "indices": [
+            "Nifty500",
+            "Nifty Smallcap 250"
+        ],
         "industry": "Other Industrial Metals & Mining",
         "isin": "INE05HV01027",
         "market_cap": null,
@@ -13338,7 +13824,6 @@
         "enterprise_value": 606827315200,
         "exchange": "NSI",
         "indices": [
-            "Nifty200",
             "Nifty500",
             "Nifty Midcap 150"
         ],
@@ -13700,6 +14185,33 @@
         "ticker": "CREST.NS",
         "website": "https://www.crest.co.in"
     },
+    "CRESTO.NS": {
+        "city": "Hyderabad",
+        "company_name": "Cresto Techno Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 26,
+        "enterprise_value": 194723632,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Entertainment",
+        "isin": "INE203Y01012",
+        "market_cap": 241158640,
+        "sector": "Communication Services",
+        "series": "EQ",
+        "shares_outstanding": 13835837,
+        "short_name": "CRESTO TECHNO LIMITED",
+        "state": null,
+        "summary": "Cresto Techno Limited designs and develops Ignitium Energy OS, an operating system for energy infrastructure management. The company's platform manages fuel, electricity, solar, storage, electric vehicles, and hydrogen. It serves India's energy infrastructure sector. The company was formerly known as Silly Monks Entertainment Limited and changed its name to Cresto Techno Limited in September 2026. Cresto Techno Limited was incorporated in 2013 and is based in Hyderabad, India.",
+        "symbol": "CRESTO",
+        "themes": [
+            "AI",
+            "EV",
+            "Renewable Energy"
+        ],
+        "ticker": "CRESTO.NS",
+        "website": "https://crestotechno.com"
+    },
     "CRISIL.NS": {
         "city": "Mumbai",
         "company_name": "CRISIL Limited",
@@ -14034,7 +14546,10 @@
         "employees": null,
         "enterprise_value": 283749449728,
         "exchange": "NSI",
-        "indices": [],
+        "indices": [
+            "Nifty500",
+            "Nifty Smallcap 250"
+        ],
         "industry": "Household & Personal Products",
         "isin": "INE509F01029",
         "market_cap": 285390798848,
@@ -14768,10 +15283,7 @@
         "employees": null,
         "enterprise_value": 184853577728,
         "exchange": "NSI",
-        "indices": [
-            "Nifty500",
-            "Nifty Smallcap 250"
-        ],
+        "indices": [],
         "industry": "Conglomerates",
         "isin": "INE499A01024",
         "market_cap": 163347644416,
@@ -15016,6 +15528,31 @@
         "themes": [],
         "ticker": "DEEP.NS",
         "website": null
+    },
+    "DEEPA.NS": {
+        "city": "Hyderabad",
+        "company_name": null,
+        "country": "India",
+        "currency": "INR",
+        "employees": 64,
+        "enterprise_value": 18717194240,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Luxury Goods",
+        "isin": "INE1M2N01020",
+        "market_cap": 21414569984,
+        "sector": "Consumer Cyclical",
+        "series": "EQ",
+        "shares_outstanding": 96124293,
+        "short_name": "DEEPA JEWELLERS LIMITED",
+        "state": null,
+        "summary": "Deepa Jewellers Limited engages in designing, processing, and suppling of hallmarked gold and precious stone studded jewellery in India. The company offers vaddanam (waist belt), CNC machine cut bangles, gents kada, vanky(armlet), dandpatti (bajuband), gundlamala haaram (traditional neck piece), gundlamala necklace, kangan, earring, mangtika (forehead pendant), maatil (ear chain), champasaralu (ear to hair chain), jada (braid ornament), and rings. It also provides job work services by processing customer supplied materials into finished ornaments and trade in silver ornaments, 18 and 20 karat jewellry, and gold bullion. The company distributes its products to jewelry retail chains and standalone stores. Deepa Jewellers Limited was incorporated in 2016 and is based in Hyderabad, India.",
+        "symbol": "DEEPA",
+        "themes": [
+            "AI"
+        ],
+        "ticker": "DEEPA.NS",
+        "website": "https://www.deepajewel.com"
     },
     "DEEPAKFERT.NS": {
         "city": "Pune",
@@ -16246,6 +16783,29 @@
         "ticker": "DOLLAR.NS",
         "website": "https://www.dollarglobal.in"
     },
+    "DOLLEX.NS": {
+        "city": "Datia",
+        "company_name": "Dollex Agrotech Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 48,
+        "enterprise_value": 3062640384,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Confectioners",
+        "isin": "INE0JHH01011",
+        "market_cap": 1401004416,
+        "sector": "Consumer Defensive",
+        "series": "EQ",
+        "shares_outstanding": 39948800,
+        "short_name": "DOLLEX AGROTECH LIMITED",
+        "state": null,
+        "summary": "Dollex Agrotech Limited manufactures and trades in sugar and its by-products in India. It operates through Trading and Manufacturing segments. The company offers jaggery, brown sugar, and Khandsari sugar; and cane seeds to farmers. Dollex Agrotech Limited was incorporated in 2013 and is based in Datia, India.",
+        "symbol": "DOLLEX",
+        "themes": [],
+        "ticker": "DOLLEX.NS",
+        "website": "https://www.dollex.in"
+    },
     "DOLPHIN.NS": {
         "city": "Mumbai",
         "company_name": "Dolphin Offshore Enterprises (India) Limited",
@@ -17026,6 +17586,33 @@
         "ticker": "ECOSMOBLTY.NS",
         "website": "https://www.ecosmobility.com"
     },
+    "EDELALTS.NS": {
+        "city": "Mumbai",
+        "company_name": "EAAA India Alternatives Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": null,
+        "enterprise_value": null,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Asset Management",
+        "isin": "INE528L01027",
+        "market_cap": 112888061952,
+        "sector": "Financial Services",
+        "series": "EQ",
+        "shares_outstanding": 64655246,
+        "short_name": "EAAA INDIA ALTERNATIVES L",
+        "state": null,
+        "summary": "EAAA India Alternatives Limited is an investment firm focused on Private Credit, Infrastructure, Real Estate, and Private Equity, specializing in Private Credit, Special Situation, Distressed Debt, Infrastructure Debt, Real Estate Debt, and Private Equity strategies. The firm primarily targets investments in office properties, mid-income and affordable housing developments, energy assets, renewable energy projects, climate mitigation and adaptation initiatives, operating infrastructure assets, and mid-stage operating companies. It focuses its investments in India. The firm seeks to provide structured credit and financing solutions to corporates, projects, or sponsors across the risk spectrum. It operates a diversified, multi-strategy platform focusing on yielding investments and debt financing. The firm provides credit solutions, special situations funding, real estate credit, investment-grade credit, infrastructure yield investments, commercial real estate yield acquisitions, perpetual capital, and energy transition funding. It looks to acquire, operate, and manage infrastructure assets with low counterparty risk, long residual tenures, and low operating costs. The firm also offers co-investment opportunities to its clients through portfolio management services. It manages alternative investment funds and offers both onshore and offshore investment solutions. EAAA India Alternatives Limited, formerly known as Edelweiss Alternative Asset Advisors Limited, is based in Mumbai, India, with additional offices in New Delhi, India; Gandhinagar, India; and Singapore.EAAA India Alternatives Limited operates as the operating subsidiary of Magnolia Commodities Services Private Limited.",
+        "symbol": "EDELALTS",
+        "themes": [
+            "AI",
+            "EV",
+            "Renewable Energy"
+        ],
+        "ticker": "EDELALTS.NS",
+        "website": "https://www.eaaa.in"
+    },
     "EDELWEISS.NS": {
         "city": "Mumbai",
         "company_name": "Edelweiss Financial Services Limited",
@@ -17478,6 +18065,32 @@
         "ticker": "ELECTHERM.NS",
         "website": "https://www.electrotherm.com"
     },
+    "ELEVATE.NS": {
+        "city": "Mumbai",
+        "company_name": "Elevate Campuses Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 42,
+        "enterprise_value": 45928513536,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Lodging",
+        "isin": "INE147X01013",
+        "market_cap": 51789586432,
+        "sector": "Consumer Cyclical",
+        "series": "EQ",
+        "shares_outstanding": 168531037,
+        "short_name": "ELEVATE CAMPUSES LIMITED",
+        "state": null,
+        "summary": "Elevate Campuses Limited owns, operates, and manages on-campus student accommodations and K-12 schools in India. Its student accommodations include furnished rooms, dining services, on-site laundry, 24/7 security, recreation and activity zones, and collaborative study areas, as well as tech-enabled institutional platform for student communication. The company also leases school properties to school operators. It operates accommodations under the Good Host Spaces and ScholarZ names. The company was formerly known as Good Host Spaces Private Limited and changed its name to Elevate Campuses Limited in September 2025. The company was incorporated in 2005 and is based in Mumbai, India. Elevate Campuses Limited operates as a subsidiary of Genius Bidco Holdings Pte. Ltd.",
+        "symbol": "ELEVATE",
+        "themes": [
+            "AI",
+            "EV"
+        ],
+        "ticker": "ELEVATE.NS",
+        "website": "https://www.goodhostspaces.com"
+    },
     "ELGIEQUIP.NS": {
         "city": "Coimbatore",
         "company_name": "Elgi Equipments Limited",
@@ -17643,8 +18256,7 @@
         "exchange": "NSI",
         "indices": [
             "Nifty500",
-            "Nifty Smallcap 250",
-            "Nifty FMCG"
+            "Nifty Smallcap 250"
         ],
         "industry": "Household & Personal Products",
         "isin": "INE548C01032",
@@ -18111,6 +18723,29 @@
         "ticker": "ENKEIWHEL.NS",
         "website": null
     },
+    "ENNATURE.NS": {
+        "city": "Noida",
+        "company_name": "Ennature Bio Pharma Private Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": null,
+        "enterprise_value": null,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Drug Manufacturers - Specialty & Generic",
+        "isin": "INE2WCT01016",
+        "market_cap": 4353388544,
+        "sector": "Healthcare",
+        "series": "BE",
+        "shares_outstanding": 22342255,
+        "short_name": "ENNATURE BIO PHARMA LTD",
+        "state": null,
+        "summary": "Ennature Bio Pharma Private Limited manufactures active pharmaceutical ingredients, branded nutraceutical ingredients, standardized botanical extracts, and nicotine derivatives. The company is based in Noida, India.",
+        "symbol": "ENNATURE",
+        "themes": [],
+        "ticker": "ENNATURE.NS",
+        "website": null
+    },
     "ENRIN.NS": {
         "city": "Mumbai",
         "company_name": "Siemens Energy India Limited",
@@ -18334,10 +18969,7 @@
         "employees": null,
         "enterprise_value": 218493698048,
         "exchange": "NSI",
-        "indices": [
-            "Nifty500",
-            "Nifty Smallcap 250"
-        ],
+        "indices": [],
         "industry": "Drug Manufacturers - Specialty & Generic",
         "isin": "INE406M01024",
         "market_cap": 198333530112,
@@ -18434,6 +19066,33 @@
         ],
         "ticker": "ESCORTS.NS",
         "website": "https://www.escortskubota.com"
+    },
+    "ESDS.NS": {
+        "city": "Thane",
+        "company_name": null,
+        "country": "India",
+        "currency": "INR",
+        "employees": 995,
+        "enterprise_value": 109000949760,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Information Technology Services",
+        "isin": "INE0DRI01029",
+        "market_cap": 141239222272,
+        "sector": "Technology",
+        "series": "EQ",
+        "shares_outstanding": 117210969,
+        "short_name": "ESDS SOFTWARE SOLUTION L",
+        "state": null,
+        "summary": "ESDS Software Solution Limited operates as a provider of cloud and data center services, offering integrated solutions across cloud infrastructure, managed services, and software platforms. The company provides cloud infrastructure solutions, including Infrastructure as a Service (IaaS), Software as a Service (SaaS), and managed services. It offers government community cloud (GCC) and enterprise community cloud (ECC) platforms, managed security services, advanced IT assistance, and pay-per-use models. Its digital IT solutions include ERP, CRM, mobile applications, digital twins, IoT integration, SAP HANA services, cloud customer portals, and near-line disaster recovery services. The company operates data centers and supports IT operations for clients. The company serves banking and financial services, government and public sector bodies, healthcare providers, commercial, residential, facility management, retail, and manufacturing enterprises, as well as small to mid-sized businesses. The company was founded in 2005 and is based in Thane, India.",
+        "symbol": "ESDS",
+        "themes": [
+            "AI",
+            "Cloud",
+            "Data Center"
+        ],
+        "ticker": "ESDS.NS",
+        "website": "https://www.esds.co.in"
     },
     "ESSARSHPNG.NS": {
         "city": "Mumbai",
@@ -18730,6 +19389,32 @@
         "ticker": "EVERESTIND.NS",
         "website": "https://www.everestind.com"
     },
+    "EVONILE.NS": {
+        "city": "Mumbai",
+        "company_name": "Evonile Pharma Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 57,
+        "enterprise_value": 43645251584,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Drug Manufacturers - Specialty & Generic",
+        "isin": "INE234A01025",
+        "market_cap": 38717636608,
+        "sector": "Healthcare",
+        "series": "EQ",
+        "shares_outstanding": 24690797,
+        "short_name": "EVONILE PHARMA LIMITED",
+        "state": null,
+        "summary": "Evonile Pharma Limited is involved in the pharmaceutical business in India and internationally. It operates Pharma International (Commercial operations), Development (Drug development), Biomedical Research, and Operations. The company offers therapeutic products in the areas of bone and pain under the Voveran brand; transplantation immunology under the Simulect, Certican, Sandimmun, Neoral, and Myfortic brands. It also offers neuroscience products under the Tegrital and Exelon brands. The company was incorporated in 1947 and is based in Mumbai, India. As of July 29, 2026, Evonile Pharma Limited operates as a subsidiary of Waverise Investments Limited.",
+        "symbol": "EVONILE",
+        "themes": [
+            "AI",
+            "EV"
+        ],
+        "ticker": "EVONILE.NS",
+        "website": "https://evonilepharma.com"
+    },
     "EXCELINDUS.NS": {
         "city": "Mumbai",
         "company_name": "Excel Industries Limited",
@@ -18822,8 +19507,7 @@
         "indices": [
             "Nifty200",
             "Nifty500",
-            "Nifty Midcap 150",
-            "Nifty Auto"
+            "Nifty Midcap 150"
         ],
         "industry": "Auto Parts",
         "isin": "INE302A01020",
@@ -18929,7 +19613,7 @@
         "exchange": "NSI",
         "indices": [
             "Nifty500",
-            "Nifty Smallcap 250"
+            "Nifty Midcap 150"
         ],
         "industry": "Agricultural Inputs",
         "isin": "INE188A01015",
@@ -19853,7 +20537,10 @@
         "employees": null,
         "enterprise_value": 124905373696,
         "exchange": "NSI",
-        "indices": [],
+        "indices": [
+            "Nifty500",
+            "Nifty Smallcap 250"
+        ],
         "industry": "Software - Infrastructure",
         "isin": "INE212S01015",
         "market_cap": 145749032960,
@@ -19974,6 +20661,32 @@
         "ticker": "FUSION.NS",
         "website": "https://fusionfin.com"
     },
+    "FUSIONCX.NS": {
+        "city": "Kolkata",
+        "company_name": "Fusion CX Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 13357,
+        "enterprise_value": 39475216384,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Specialty Business Services",
+        "isin": "INE0N2201019",
+        "market_cap": 41518034944,
+        "sector": "Industrials",
+        "series": "EQ",
+        "shares_outstanding": 144360333,
+        "short_name": "FUSION CX LIMITED",
+        "state": null,
+        "summary": "Fusion CX Limited provides integrated customer experience (CX) services in India, the United States, the United Kingdom, Canada, Europe, and internationally. It offers its services across multiple channels, including voice, email, chat, social media, and message. Its services include customer acquisition, inbound and outbound sales, and cross-selling/upselling strategies; multichannel customer service across voice, chat, email, and social media and complaint handling; and efficient order fulfilment, covering order processing, returns, refunds, and billing support. It also assists with payment collections and debt resolution by managing early-stage collections and first-party omnichannel recovery efforts and support customer retention and loyalty through proactive outreach, feedback management, and loyalty programs; technical support, including L1/L2 troubleshooting, lifecycle management, and warranty services; and high-tech support, specializing in seller assistance, content moderation, and platform optimization for digital and technology-driven businesses. It provides Arya, an AI-powered platform that integrates conversational AI, real-time employee assist, AI-led quality monitoring, predictive analytics, and voice of customer into a unified ecosystem; MindVoice, a conversational AI platform that delivers AI-driven conversational voice bot and chatbot solutions; Mind Workplace that automates end-to-end HR processes from hire-to-retire, enhancing employee lifecycle management and MindSpeech, an AI-powered speech optimization tool that enhances voice communication by harmonizing accents, reducing noise, and improving clarity in real time. It serves telecom and utilities, healthcare and life sciences, high tech growth and travel, banking, financial services and insurance, and retail industries. The company was incorporated in 2004 and is headquartered in Kolkata, India.",
+        "symbol": "FUSIONCX",
+        "themes": [
+            "5G",
+            "AI"
+        ],
+        "ticker": "FUSIONCX.NS",
+        "website": "https://www.fusioncx.com"
+    },
     "GABRIEL.NS": {
         "city": "Pune",
         "company_name": "Gabriel India Limited",
@@ -20060,6 +20773,33 @@
         ],
         "ticker": "GAIL.NS",
         "website": "https://www.gailonline.com"
+    },
+    "GAJA.NS": {
+        "city": "Mumbai",
+        "company_name": null,
+        "country": "India",
+        "currency": "INR",
+        "employees": 23,
+        "enterprise_value": 11001951232,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Asset Management",
+        "isin": "INE18UN01038",
+        "market_cap": null,
+        "sector": "Financial Services",
+        "series": "EQ",
+        "shares_outstanding": null,
+        "short_name": "GAJA ALT ASSET MGT LTD",
+        "state": null,
+        "summary": "Gaja Alternative Asset Management Limited is a private equity and venture capital firm specializing in turnaround, series C and investments in smaller end of middle market. The firm prefers to invest through growth capital and buyout. It also invests in acquisitions and shareholder settlement and considers buy-outs, turnarounds, and pre-IPO deals given an underlying growth thesis. It also invests in listed companies. The firm seeks to invest in technology and technology-enabled companies in software, consumer, services, SaaS, broad consumer services, manufacturing, infrastructure services, healthcare, human resource, financial services, education, and retail. It focuses on domestic sectors within India. It investments in mid-market companies and small and medium enterprises (SMEs). The firm invests between $5 million and $18.36 million in its portfolio companies and between $5 million and $30 million per company and enterprise value of maximum $150 million. It seeks minority investments and co-invests with global investor and India's successful entrepreneurs and leading business families. The firm exits its investments between three and seven years through initial public offerings, sale of the entire company, and sale of stake in the company. The firm seeks to take controlling stake. Gaja Alternative Asset Management Limited was founded in 2004 and is based in Mumbai, India with an additional office in Mumbai, India and Delhi India.",
+        "symbol": "GAJA",
+        "themes": [
+            "AI",
+            "Cloud",
+            "EV"
+        ],
+        "ticker": "GAJA.NS",
+        "website": "https://gajacapital.com"
     },
     "GALAPREC.NS": {
         "city": "Thane",
@@ -20861,6 +21601,29 @@
         "ticker": "GEOJITFSL.NS",
         "website": "https://www.geojit.com"
     },
+    "GERMAN.NS": {
+        "city": "Ahmedabad",
+        "company_name": "German Green Steel and Power Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": null,
+        "enterprise_value": 9081348096,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Steel",
+        "isin": "INE0D4501011",
+        "market_cap": 7886047744,
+        "sector": "Basic Materials",
+        "series": "EQ",
+        "shares_outstanding": 75349197,
+        "short_name": "GERMAN GREEN STEEL N PW L",
+        "state": null,
+        "summary": "German Green Steel and Power Limited manufactures and distributes iron and steel products. The company's products include TMT Bars, MS Billets, and Sponge Iron. German Green Steel And Power Limited was formerly known as Haq Steels and Metaliks Limited and changed its name to German Green Steel And Power Limited in May 2018. The company was founded in 1976 and is based in Ahmedabad, India.",
+        "symbol": "GERMAN",
+        "themes": [],
+        "ticker": "GERMAN.NS",
+        "website": "https://www.germansteel.in"
+    },
     "GESHIP.NS": {
         "city": "Mumbai",
         "company_name": "The Great Eastern Shipping Company Limited",
@@ -21272,6 +22035,33 @@
         ],
         "ticker": "GLAND.NS",
         "website": "https://www.glandpharma.com"
+    },
+    "GLASSWALL.NS": {
+        "city": "Mumbai",
+        "company_name": null,
+        "country": "India",
+        "currency": "INR",
+        "employees": 370,
+        "enterprise_value": 19238246400,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Engineering & Construction",
+        "isin": "INE644Q01039",
+        "market_cap": 21519515648,
+        "sector": "Industrials",
+        "series": "EQ",
+        "shares_outstanding": 87935253,
+        "short_name": "GLASS WALL SYSTEM (I) LTD",
+        "state": null,
+        "summary": "GLASS WALL SYSTEMS (INDIA) Limited engages in designing, manufacturing, and installation of building facades. The company offers glazing systems and architectural facade solutions designed for residential, commercial and industrial projects. It also utilizes advanced design and production software, dedicated production lines for unitized systems, doors, and windows, and operates manufacturing plants with in-house powder coating and sheet fabrication units. In addition, the company conducts skill training programs and workshops for designers and engineers. It operates in the United States, Australia, Qatar, Ireland, Sri Lanka, and Israel. The company was founded in 2010 and is based in Mumbai, India.",
+        "symbol": "GLASSWALL",
+        "themes": [
+            "AI",
+            "Renewable Energy",
+            "Semiconductor"
+        ],
+        "ticker": "GLASSWALL.NS",
+        "website": "https://www.glasswallsystems.in"
     },
     "GLAXO.NS": {
         "city": "Mumbai",
@@ -21884,7 +22674,8 @@
         "indices": [
             "Nifty200",
             "Nifty500",
-            "Nifty Midcap 150"
+            "Nifty Midcap 150",
+            "Nifty FMCG"
         ],
         "industry": "Tobacco",
         "isin": "INE260B01028",
@@ -21911,10 +22702,7 @@
         "employees": null,
         "enterprise_value": 289080344576,
         "exchange": "NSI",
-        "indices": [
-            "Nifty500",
-            "Nifty Smallcap 250"
-        ],
+        "indices": [],
         "industry": "Insurance - Property & Casualty",
         "isin": "INE03JT01014",
         "market_cap": 288377602048,
@@ -23044,6 +23832,31 @@
         "themes": [],
         "ticker": "GSPCROP.NS",
         "website": "https://www.gspcrop.in"
+    },
+    "GSPLTRANS.NS": {
+        "city": "Gandhinagar",
+        "company_name": "GSPL Transmission Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": null,
+        "enterprise_value": null,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Oil & Gas Midstream",
+        "isin": "INE1TUG01013",
+        "market_cap": 33410400256,
+        "sector": "Energy",
+        "series": "EQ",
+        "shares_outstanding": 312743617,
+        "short_name": "GSPL TRANSMISSION LIMITED",
+        "state": null,
+        "summary": "GSPL Transmission Limited owns and operates a gas transmission business. The company engages in the business of transportation of natural gas through pipelines connecting various supply and demand centers in India. The company has pipeline network of about 2692 km across the state of Gujarat. It is developing energy transportation infrastructure and connecting natural gas supply sources, including LNG terminals. It serves industries, such as power, fertilizer, steel, chemical plants, glass industries, refineries, textiles, and local gas distribution companies. The company was incorporated in 1998 and is based in Gandhinagar, India.",
+        "symbol": "GSPLTRANS",
+        "themes": [
+            "EV"
+        ],
+        "ticker": "GSPLTRANS.NS",
+        "website": "https://www.gspltrans.com"
     },
     "GSS.NS": {
         "city": "Hyderabad",
@@ -24316,6 +25129,32 @@
         "ticker": "HDFCLIFE.NS",
         "website": "https://www.hdfclife.com"
     },
+    "HDFIRE.NS": {
+        "city": "Thane",
+        "company_name": "HD Fire Protect Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 279,
+        "enterprise_value": 48209899520,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Specialty Industrial Machinery",
+        "isin": "INE18AK01028",
+        "market_cap": 48722698240,
+        "sector": "Industrials",
+        "series": "EQ",
+        "shares_outstanding": 175230000,
+        "short_name": "HD FIRE PROTECT LIMITED",
+        "state": null,
+        "summary": "HD Fire Protect Limited manufactures and supplies fire protection equipment and systems in India. The company offers sprinklers, flexible sprinkler drops, alarm valves, and accessories; deluge valves, deluge skids and pre-action systems; water spray nozzles; monitors and monitor nozzles; foam proportioning systems, foam equipment and devices, foam concentrates, and mobile equipment; systems valves and accessories, and handline nozzles; co2 fire suspension systems and inert gas fire suppression systems; and customized engineered systems, as well as spanning water suppression systems. Its products and solution are used in oil and gas, petrochemical and refining, power plants, commercial and residential buildings, hotels and airports, industrial and heavy engineering, data centres, ports and terminals, aviation, and other project industries. The company also exports. It operates in the Middle East, rest of Asia, South America, Europe, North America, Africa, and Oceania. The company was founded in 1990 and is headquartered in Thane, India.",
+        "symbol": "HDFIRE",
+        "themes": [
+            "AI",
+            "EV"
+        ],
+        "ticker": "HDFIRE.NS",
+        "website": "https://www.hdfire.com"
+    },
     "HDIL.NS": {
         "city": "Mumbai",
         "company_name": "Housing Development and Infrastructure Limited",
@@ -24428,10 +25267,7 @@
         "employees": null,
         "enterprise_value": 106777616384,
         "exchange": "NSI",
-        "indices": [
-            "Nifty500",
-            "Nifty Smallcap 250"
-        ],
+        "indices": [],
         "industry": "Electrical Equipment & Parts",
         "isin": "INE545A01024",
         "market_cap": 105182404608,
@@ -24447,6 +25283,34 @@
         ],
         "ticker": "HEG.NS",
         "website": "https://hegltd.com"
+    },
+    "HEGAM.NS": {
+        "city": "Noida",
+        "company_name": "HEG Advanced Materials Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 1175,
+        "enterprise_value": 88686264320,
+        "exchange": "NSI",
+        "indices": [
+            "Nifty500",
+            "Nifty Smallcap 250"
+        ],
+        "industry": "Electrical Equipment & Parts",
+        "isin": "INE545A01024",
+        "market_cap": 95424012288,
+        "sector": "Industrials",
+        "series": "EQ",
+        "shares_outstanding": 329798912,
+        "short_name": "HEG ADVANCED MATERIAL LTD",
+        "state": null,
+        "summary": "HEG Advanced Materials Limited engages in the research and development of advanced battery materials, battery solutions. It manufactures custom machined components. The company also operates thermal power plants and a hydroelectric power facility. The company was formerly known as HEG Limited and change its name to HEG Advanced Materials Limited in September 2026. HEG Advanced Materials Limited was incorporated in 1972 and is headquartered in Noida, India.",
+        "symbol": "HEGAM",
+        "themes": [
+            "EV"
+        ],
+        "ticker": "HEGAM.NS",
+        "website": "https://www.hegadvancedmaterials.com"
     },
     "HEIDELBERG.NS": {
         "city": "Gurugram",
@@ -24574,6 +25438,32 @@
         "themes": [],
         "ticker": "HEROMOTOCO.NS",
         "website": "https://www.heromotocorp.com"
+    },
+    "HEROMOTORS.NS": {
+        "city": "Noida",
+        "company_name": null,
+        "country": "India",
+        "currency": "INR",
+        "employees": 1062,
+        "enterprise_value": 49697255424,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Auto Parts",
+        "isin": "INE012G01022",
+        "market_cap": 55187193856,
+        "sector": "Consumer Cyclical",
+        "series": "EQ",
+        "shares_outstanding": 454215576,
+        "short_name": "HERO MOTORS LIMITED",
+        "state": null,
+        "summary": "Hero Motors Limited designs, develops, manufactures, and supplies engineered powertrain solutions catering to automotive original equipment manufacturers (OEMs) in United States, Europe, India, and the Association of Southeast Asian Nations region. It operates through Powertrain Solutions and Alloys and Metallics segments. The company offers gears and transmission products comprising ice and EV gearboxes, e-axles, gearset assemblies, and gear and shaft components; bike powertrains products, such as continuous variable transmission products, electric motors, and electric drive units; and alloys and metallic products, including structural components, alloy frames, suspension forks, wheel rims, and BB catridges and seats, as well as design and validation services. The company's products have applications in two-wheelers, performance automotive, e-bikes, off-road vehicles, electric and hybrid cars, heavy duty vehicles, and electric vertical take-off and landing categories. Hero Motors Limited was formerly known as Hero Auto Limited and changed its name to Hero Motors Limited in September 2004. The company was incorporated in 1998 and is based in Noida, India.",
+        "symbol": "HEROMOTORS",
+        "themes": [
+            "AI",
+            "EV"
+        ],
+        "ticker": "HEROMOTORS.NS",
+        "website": "https://www.heromotors.com"
     },
     "HESTERBIO.NS": {
         "city": "Mehsana",
@@ -25041,8 +25931,9 @@
         "enterprise_value": 475660386304,
         "exchange": "NSI",
         "indices": [
+            "Nifty200",
             "Nifty500",
-            "Nifty Smallcap 250",
+            "Nifty Midcap 150",
             "Nifty Metal"
         ],
         "industry": "Copper",
@@ -25550,7 +26441,7 @@
         "exchange": "NSI",
         "indices": [
             "Nifty500",
-            "Nifty Midcap 150"
+            "Nifty Smallcap 250"
         ],
         "industry": "Electrical Equipment & Parts",
         "isin": "INE671A01010",
@@ -25595,6 +26486,32 @@
         ],
         "ticker": "HONDAPOWER.NS",
         "website": "https://www.hondaindiapower.com"
+    },
+    "HORIZONIND.NS": {
+        "city": "Mumbai",
+        "company_name": "Horizon Industrial Parks Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": null,
+        "enterprise_value": 145795448832,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Real Estate - Development",
+        "isin": "INE685T01010",
+        "market_cap": 129759453184,
+        "sector": "Real Estate",
+        "series": "EQ",
+        "shares_outstanding": 2882902834,
+        "short_name": "HORIZON INDUSTRIAL PRKS L",
+        "state": null,
+        "summary": "Horizon Industrial Parks Limited engaged in the business of developing, operating, and maintaining industrial and warehousing parks in India. It offers industrial and logistic parks, fulfillment centers and industrial facilities, and in-city centers. The company also offers turnkey solutions, energy solutions, on-site staff accommodation and skill development centers, cold storage, and hospitality. It caters to the auto, engineering and aerospace, logistics and supply chain, FMCG and retail, packaging, e-commerce, energy, and chemicals industries. The company was incorporated in 2009 and is based in Mumbai, India.",
+        "symbol": "HORIZONIND",
+        "themes": [
+            "AI",
+            "EV"
+        ],
+        "ticker": "HORIZONIND.NS",
+        "website": "https://www.hiparks.com"
     },
     "HPAL.NS": {
         "city": "Mumbai",
@@ -25722,6 +26639,33 @@
         "ticker": "HSCL.NS",
         "website": "https://www.himadri.com"
     },
+    "HTEL.NS": {
+        "city": "Thane",
+        "company_name": null,
+        "country": "India",
+        "currency": "INR",
+        "employees": 468,
+        "enterprise_value": 6897372672,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Specialty Industrial Machinery",
+        "isin": "INE0LEG01024",
+        "market_cap": 7259068928,
+        "sector": "Industrials",
+        "series": "EQ",
+        "shares_outstanding": 94852594,
+        "short_name": "HY-TECH ENGINEERS LIMITED",
+        "state": null,
+        "summary": "Hy-Tech Engineers Limited designs, manufactures, and supplies hydraulic fittings to various industrial applications in India and internationally. The company provides DIN-metric, JIC flared and flareless, O-Ring Face Seal, and conversion fittings, as well as fittings customized to customer specifications. It serves various applications needs in construction machinery, automotive, agricultural machinery injection molding machines, and hydraulic systems, as well as railways and defense industries. The company was incorporated in 1978 and is based in Thane, India.",
+        "symbol": "HTEL",
+        "themes": [
+            "AI",
+            "Defense",
+            "Railway"
+        ],
+        "ticker": "HTEL.NS",
+        "website": "https://www.hy-techengineers.com"
+    },
     "HTMEDIA.NS": {
         "city": "New Delhi",
         "company_name": "HT Media Limited",
@@ -25783,7 +26727,6 @@
         "enterprise_value": 1809504141312,
         "exchange": "NSI",
         "indices": [
-            "Nifty200",
             "Nifty500",
             "Nifty Midcap 150"
         ],
@@ -25867,7 +26810,8 @@
         "indices": [
             "Nifty100",
             "Nifty200",
-            "Nifty500"
+            "Nifty500",
+            "Nifty Auto"
         ],
         "industry": "Auto Manufacturers",
         "isin": "INE0V6F01027",
@@ -26052,6 +26996,34 @@
         "ticker": "ICICIGI.NS",
         "website": "https://www.icicilombard.com"
     },
+    "ICICILIFE.NS": {
+        "city": "Mumbai",
+        "company_name": "ICICI Life Insurance Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 18963,
+        "enterprise_value": 642793406464,
+        "exchange": "NSI",
+        "indices": [
+            "Nifty500",
+            "Nifty Midcap 150"
+        ],
+        "industry": "Insurance - Life",
+        "isin": "INE726G01019",
+        "market_cap": 653053853696,
+        "sector": "Financial Services",
+        "series": "EQ",
+        "shares_outstanding": 1451230779,
+        "short_name": "ICICI LIFE INSURANCE LTD",
+        "state": null,
+        "summary": "ICICI Life Insurance Limited provides life insurance, annuity, pension, and health insurance products to individuals and groups in India. The company offers term, savings, unit linked, guaranteed return, child education, and retirement insurance plans; and pension fund management services. It distributes its products through individual and corporate agents, banks, and brokers, as well as through proprietary sales force (PSF) and online channels. The company was formerly known as ICICI Prudential Life Insurance Company Limited and change its name to ICICI Life Insurance Limited in September 2026. The company was incorporated in 2000 and is based in Mumbai, India. ICICI Life Insurance Limited is a subsidiary of ICICI Bank Limited.",
+        "symbol": "ICICILIFE",
+        "themes": [
+            "AI"
+        ],
+        "ticker": "ICICILIFE.NS",
+        "website": "https://www.iciciprulife.com"
+    },
     "ICICIPRULI.NS": {
         "city": "Mumbai",
         "company_name": "ICICI Prudential Life Insurance Company Limited",
@@ -26060,10 +27032,7 @@
         "employees": 18963,
         "enterprise_value": 730257358848,
         "exchange": "NSI",
-        "indices": [
-            "Nifty500",
-            "Nifty Midcap 150"
-        ],
+        "indices": [],
         "industry": "Insurance - Life",
         "isin": "INE726G01019",
         "market_cap": 739881189376,
@@ -26169,9 +27138,9 @@
         "enterprise_value": 3403263246336,
         "exchange": "NSI",
         "indices": [
+            "Nifty100",
             "Nifty200",
-            "Nifty500",
-            "Nifty Midcap 150"
+            "Nifty500"
         ],
         "industry": "Telecom Services",
         "isin": "INE669E01016",
@@ -26488,6 +27457,32 @@
         "ticker": "IGL.NS",
         "website": "https://www.iglonline.net"
     },
+    "IGLSPIRITS.NS": {
+        "city": "Noida",
+        "company_name": "IGL Spirits Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": null,
+        "enterprise_value": null,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Beverages - Wineries & Distilleries",
+        "isin": "INE2W6901017",
+        "market_cap": 55128170496,
+        "sector": "Consumer Defensive",
+        "series": "BE",
+        "shares_outstanding": 67026765,
+        "short_name": "IGL SPIRITS LIMITED",
+        "state": null,
+        "summary": "IGL Spirits Limited engages in the production and sales of spirits. It offers vodka and whiskey under potable spirits segment; and molasses and grain-based alcohol for distilleries through extra neutral alcohol segment. The company also manufactures bioethanol through biofuels segment. IGL Spirits Limited was incorporated in 2024 and is headquartered in Noida, India.",
+        "symbol": "IGLSPIRITS",
+        "themes": [
+            "AI",
+            "EV"
+        ],
+        "ticker": "IGLSPIRITS.NS",
+        "website": "https://iglspirits.com"
+    },
     "IGPL.NS": {
         "city": "Mumbai",
         "company_name": "I G Petrochemicals Limited",
@@ -26566,6 +27561,32 @@
         ],
         "ticker": "IIFLCAPS.NS",
         "website": "https://www.iiflcapital.com"
+    },
+    "IIRM.NS": {
+        "city": "Hyderabad",
+        "company_name": "IIRM Holdings India Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 500,
+        "enterprise_value": 8002658304,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Insurance Brokers",
+        "isin": "INE670C01026",
+        "market_cap": null,
+        "sector": "Financial Services",
+        "series": "EQ",
+        "shares_outstanding": null,
+        "short_name": "IIRM HOLDINGS INDIA LTD",
+        "state": null,
+        "summary": "IIRM Holdings India Limited engages in the provision of professional and consultancy services in India and internationally. It also offers corporate insurance solutions, including property, energy, engineering, and employee benefits insurance; retail insurance, such as health, motor, and life products for individuals; and reinsurance comprising facultative, treaty, retro, facilities, and risk modelling solutions. It also provides cyber insurance, M&A insurance, bonds insurance, and financial institutions cover products; and wellness programs, self-funded schemes, and claims processing support solutions. The company was formerly known as Sudev Industries Limited and changed its name to IIRM Holdings India Limited in October 2023. IIRM Holdings India Limited was incorporated in 1992 and is based in Hyderabad, India.",
+        "symbol": "IIRM",
+        "themes": [
+            "AI",
+            "EV"
+        ],
+        "ticker": "IIRM.NS",
+        "website": "https://www.iirmholdings.in"
     },
     "IITL.NS": {
         "city": "Mumbai",
@@ -26887,10 +27908,7 @@
         "employees": null,
         "enterprise_value": 108892684288,
         "exchange": "NSI",
-        "indices": [
-            "Nifty500",
-            "Nifty Smallcap 250"
-        ],
+        "indices": [],
         "industry": "Health Information Services",
         "isin": "INE065X01017",
         "market_cap": 122691059712,
@@ -26916,9 +27934,9 @@
         "enterprise_value": 1074773360640,
         "exchange": "NSI",
         "indices": [
-            "Nifty100",
             "Nifty200",
-            "Nifty500"
+            "Nifty500",
+            "Nifty Midcap 150"
         ],
         "industry": "Lodging",
         "isin": "INE053A01029",
@@ -27640,6 +28658,31 @@
         "ticker": "INDTERRAIN.NS",
         "website": "https://www.indianterrain.com"
     },
+    "INDTONER.NS": {
+        "city": "New Delhi",
+        "company_name": "Indian Toners & Developers Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 226,
+        "enterprise_value": 1183431168,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Specialty Chemicals",
+        "isin": "INE826B01026",
+        "market_cap": null,
+        "sector": "Basic Materials",
+        "series": "EQ",
+        "shares_outstanding": null,
+        "short_name": "INDIAN TONERS N DEVELOP L",
+        "state": null,
+        "summary": "Indian Toners & Developers Limited manufactures and sells compatible toners in India and internationally. The company offers laser, copier/digital, and wide format copier and printer toners, as well as packaging products. Its products are primarily used in laser, digital multi-function, and wide format printers, as well as photocopiers, digital machines, and analogue copiers. The company sells its products under the ITDL Color Premium, Supremo, and Formula-L brands through a network of jobbers, re-fillers, distributors, direct dealers, and wholesalers. It exports its products to approximately 10 countries. Indian Toners & Developers Limited was incorporated in 1990 and is headquartered in New Delhi, India.",
+        "symbol": "INDTONER",
+        "themes": [
+            "EV"
+        ],
+        "ticker": "INDTONER.NS",
+        "website": "https://www.indiantoners.com"
+    },
     "INDUSINDBK.NS": {
         "city": "Mumbai",
         "company_name": "IndusInd Bank Limited",
@@ -27930,7 +28973,10 @@
         "employees": 752,
         "enterprise_value": 177211604992,
         "exchange": "NSI",
-        "indices": [],
+        "indices": [
+            "Nifty500",
+            "Nifty Smallcap 250"
+        ],
         "industry": "Specialty Industrial Machinery",
         "isin": "INE616N01034",
         "market_cap": 179530203136,
@@ -28204,7 +29250,7 @@
         "exchange": "NSI",
         "indices": [
             "Nifty500",
-            "Nifty Smallcap 250",
+            "Nifty Midcap 150",
             "Nifty PSU Bank"
         ],
         "industry": "Banks - Regional",
@@ -30149,6 +31195,34 @@
         "ticker": "JOCIL.NS",
         "website": "https://www.jocil.in"
     },
+    "JPL.NS": {
+        "city": "Navi Mumbai",
+        "company_name": "Jio Platforms Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 28163,
+        "enterprise_value": 13770317365248,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Software - Infrastructure",
+        "isin": "INE0BJO01010",
+        "market_cap": 12924874653696,
+        "sector": "Technology",
+        "series": "EQ",
+        "shares_outstanding": 9209030830,
+        "short_name": "JIO PLATFORMS LIMITED",
+        "state": null,
+        "summary": "Jio Platforms Limited provides mobile and fixed broadband connectivity along with digital products, services, platforms, and applications across entertainment, gaming, cloud computing, cloud storage, and artificial intelligence in India. The company offers 4G and 5G mobile broadband connectivity, international roaming, eSIM, Wi-Fi calling, JioTunes, and VIP mobile numbers; and broadband services, including JioFiber, an optic fibre-based service, and JioAirFiber, a fixed wireless access service. The company also offers consumer entertainment services, including JioTV+ and JioTV for live TV, JioSaavn for music streaming, JioGames for cloud gaming, JioNews, and JioCinema, JioAICloud for cloud storage, JioPC for cloud-native virtual desktops, and JioPhotos for photo organization, along with devices such as Jio Bharat feature phones, the Jio Set-top-box, 5G radios, and JioFi hotspots. In addition, it develops JioFrames, an AI-powered wearable smart-glasses product; and Jio Set-top-box; and consumer applications, including MyJio, JioMart, JioFinance, JioGate, JioMeet, JioAirFiber, JioCDN, and JioChat, along with the HelloJio voice assistant and JioAds advertising platform. Further, it develops proprietary operating systems, including JioBharat OS, JioTele OS, and JioBrain. The company develops and provides JioRemote, JioExtender, routers, and USB cameras. Additionally, it offers JioBusiness services, JioPC, JioCloud infrastructure, JioCX communications platform, JioRaksha cybersecurity services, and the JioThings IoT platform, along with JioAttendance, Jio Hospitality solution (JHES), and JioRooms. It also provides satellite-based communication and international connectivity services. The company serves consumers, government, MSMEs, large enterprises, and startups. Jio Platforms Limited was founded in 2016 and is based in Navi Mumbai, India. Jio Platforms Limited operates as a subsidiary of Reliance Industries Limited.",
+        "symbol": "JPL",
+        "themes": [
+            "5G",
+            "AI",
+            "Cloud",
+            "EV"
+        ],
+        "ticker": "JPL.NS",
+        "website": "https://www.jio.com"
+    },
     "JPOLYINVST.NS": {
         "city": "New Delhi",
         "company_name": "Jindal Poly Investment and Finance Company Limited",
@@ -30225,6 +31299,29 @@
         ],
         "ticker": "JSFB.NS",
         "website": "https://www.jana.bank.in"
+    },
+    "JSIPL.NS": {
+        "city": "Hisar",
+        "company_name": null,
+        "country": "India",
+        "currency": "INR",
+        "employees": 242,
+        "enterprise_value": 7528154624,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Steel",
+        "isin": "INE1DLO01028",
+        "market_cap": 8332691456,
+        "sector": "Basic Materials",
+        "series": "BE",
+        "shares_outstanding": 51023769,
+        "short_name": "JINDAL SUPREME (INDIA) L",
+        "state": null,
+        "summary": "Jindal Supreme (India) Limited engages in the manufacturing and supply of steel pipes and tubes for infrastructure and industrial applications in India. The company's products include mild steel (MS) black pipes and tubes, MS galvanized pipes and tubes, metal beam crash barriers, hollow sections, and galvanized iron tubular poles. The company serves various industries, such as water supply and plumbing, infrastructure and construction, road and highways, bridges, oil and gas, chemicals, agriculture, rural electrification, and others. Jindal Supreme (India) Limited was incorporated in 1974 and is headquartered in Hisar, India.",
+        "symbol": "JSIPL",
+        "themes": [],
+        "ticker": "JSIPL.NS",
+        "website": "https://jindalsupreme.com"
     },
     "JSL.NS": {
         "city": "New Delhi",
@@ -30315,10 +31412,7 @@
         "employees": null,
         "enterprise_value": null,
         "exchange": "NSI",
-        "indices": [
-            "Nifty500",
-            "Nifty Smallcap 250"
-        ],
+        "indices": [],
         "industry": null,
         "isin": "INE133A01011",
         "market_cap": 133592506368,
@@ -30589,10 +31683,7 @@
         "employees": null,
         "enterprise_value": 175983083520,
         "exchange": "NSI",
-        "indices": [
-            "Nifty500",
-            "Nifty Smallcap 250"
-        ],
+        "indices": [],
         "industry": "Drug Manufacturers - Specialty & Generic",
         "isin": "INE700A01033",
         "market_cap": 152716902400,
@@ -31207,6 +32298,33 @@
         "ticker": "KANCOTEA.NS",
         "website": null
     },
+    "KANOHAR.NS": {
+        "city": "Meerut",
+        "company_name": null,
+        "country": "India",
+        "currency": "INR",
+        "employees": null,
+        "enterprise_value": 72265678848,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Electrical Equipment & Parts",
+        "isin": "INE877D01025",
+        "market_cap": 80414228480,
+        "sector": "Industrials",
+        "series": "EQ",
+        "shares_outstanding": 79186835,
+        "short_name": "KANOHAR ELECTRICALS LTD",
+        "state": null,
+        "summary": "Kanohar Electricals Limited engages in the transformer manufacturing business for industries including power transmission, railways, renewable energy, and power distribution in India. The company operates through two segments; transformer manufacturing business; and Engineering, Procurement, and Construction Business. It manufactures transformers across various capacities ranging from 132 kV to 400 kV. The company's products include power transformers, traction transformers, Scott transformers, Shunt reactors, and distribution transformers. Its EPC Business services for substations include turnkey installation of air and gas insulated substations and bay augmentation in existing substations, and turnkey installation of transmission lines across 132 kV, 220 kV and 400 kV. Kanohar Electricals Limited was incorporated in 1972 and is headquartered in Meerut, India. Kanohar Electricals Limited operates as a subsidiary of K Sons Family Trust.",
+        "symbol": "KANOHAR",
+        "themes": [
+            "AI",
+            "Railway",
+            "Renewable Energy"
+        ],
+        "ticker": "KANOHAR.NS",
+        "website": "https://www.kanohar.com"
+    },
     "KANORICHEM.NS": {
         "city": "New Delhi",
         "company_name": "Kanoria Chemicals & Industries Limited",
@@ -31312,6 +32430,33 @@
         ],
         "ticker": "KAPSTON.NS",
         "website": "https://kapstonservices.com"
+    },
+    "KARAMTARA.NS": {
+        "city": "Mumbai",
+        "company_name": null,
+        "country": "India",
+        "currency": "INR",
+        "employees": 1015,
+        "enterprise_value": 120540725248,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Solar",
+        "isin": "INE590T01012",
+        "market_cap": null,
+        "sector": "Technology",
+        "series": "EQ",
+        "shares_outstanding": null,
+        "short_name": "KARAMTARA ENGINEERING L",
+        "state": null,
+        "summary": "Karamtara Engineering Limited manufactures and sells solar mounting structures and tracker components for the solar and transmission sectors in India, North America, Latin America, Europe, Asia, Africa, and Australia. The company offers module mounting structures, tracker piles and piers, and torque tubes; lattice towers for transmission lines; wind towers and steel profiles; fasteners such as bolts, nuts, studs, and washers; and overhead transmission line hardware fittings and accessories, including insulator string fittings, jumper tubes, suspension clamps, vibration dampers, optical ground wire fittings, substation fittings and accessories, and fittings for power distribution lines. It serves independent power producers, original equipment manufacturers, and engineering, procurement, and construction companies. Karamtara Engineering Limited was incorporated in 1996 and is based in Mumbai, India with additional offices in New York, New York; Solbiate Arno, Italy; Dammam, Saudi Arabia; and Palghar, Boisar, Butibori, and Kachchh, India.",
+        "symbol": "KARAMTARA",
+        "themes": [
+            "AI",
+            "Data Center",
+            "Renewable Energy"
+        ],
+        "ticker": "KARAMTARA.NS",
+        "website": "https://karamtara.com"
     },
     "KARMAENG.NS": {
         "city": "Mumbai",
@@ -31555,6 +32700,31 @@
         ],
         "ticker": "KDDL.NS",
         "website": "https://www.kddl.com"
+    },
+    "KDGREEN.NS": {
+        "city": "Guwahati",
+        "company_name": "KD Green Industries Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 2,
+        "enterprise_value": 3869376768,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Footwear & Accessories",
+        "isin": "INE348N01042",
+        "market_cap": 4782159360,
+        "sector": "Consumer Cyclical",
+        "series": "EQ",
+        "shares_outstanding": 101510500,
+        "short_name": "KD GREEN INDUSTRIES LTD",
+        "state": null,
+        "summary": "KD Green Industries Limited engages in the manufacture, import, export, and trading of iron and steel products in India. The company offers GFRP rebar and byproducts; and eco-friendly building materials, such as autoclaved aerated concrete blocks, cement, and related products. It also provides AAC blocks under Green AAC Block brand name; and galvanized steel pipes and poles, green construction materials, fabricated infrastructure, structural steel, high masts, electro gratings, vehicle recycling, and infrastructure-related products under XTech brand name. In addition, the company manufactures and supplies galvanized and fabricated products, including crash barriers, cable trays and urban lighting systems, and pre-stressed concrete and fire clay products. The company was formerly known as Manbro Industries Limited and changed its name to KD Green Industries Limited in April 2026. KD Green Industries Limited was incorporated in 1992 and is headquartered in Guwahati, India.",
+        "symbol": "KDGREEN",
+        "themes": [
+            "Semiconductor"
+        ],
+        "ticker": "KDGREEN.NS",
+        "website": "https://www.kdgreen.in"
     },
     "KEC.NS": {
         "city": "Mumbai",
@@ -31940,6 +33110,31 @@
         "ticker": "KHANDSE.NS",
         "website": "https://www.kslindia.com"
     },
+    "KHAZANCHI.NS": {
+        "city": "Chennai",
+        "company_name": "Khazanchi Jewellers Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 86,
+        "enterprise_value": 18651543552,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Luxury Goods",
+        "isin": "INE0OWC01011",
+        "market_cap": null,
+        "sector": "Consumer Cyclical",
+        "series": "EQ",
+        "shares_outstanding": null,
+        "short_name": "KHAZANCHI JEWELLERS LTD",
+        "state": null,
+        "summary": "Khazanchi Jewellers Limited engages in the wholesale and retail of jewelry products in India. The company offers a range of gold, silver, diamond, precious stone, and temple jewelry; bridal, contemporary, and occasion-based collections; and designer pieces, bullion products, and coins. It sells its products through its showroom. Khazanchi Jewellers Limited was founded in 1971 and is based in Chennai, India.",
+        "symbol": "KHAZANCHI",
+        "themes": [
+            "AI"
+        ],
+        "ticker": "KHAZANCHI.NS",
+        "website": "https://www.khazanchi.co.in"
+    },
     "KICL.NS": {
         "city": "Pune",
         "company_name": "Kalyani Investment Company Limited",
@@ -32149,7 +33344,10 @@
         "employees": null,
         "enterprise_value": 146596331520,
         "exchange": "NSI",
-        "indices": [],
+        "indices": [
+            "Nifty500",
+            "Nifty Smallcap 250"
+        ],
         "industry": "Specialty Industrial Machinery",
         "isin": "INE732A01036",
         "market_cap": 152504844288,
@@ -32913,9 +34111,8 @@
         "enterprise_value": 147487342592,
         "exchange": "NSI",
         "indices": [
-            "Nifty200",
             "Nifty500",
-            "Nifty Midcap 150"
+            "Nifty Smallcap 250"
         ],
         "industry": "Software - Infrastructure",
         "isin": "INE04I401011",
@@ -33358,7 +34555,10 @@
         "employees": 2194,
         "enterprise_value": 160869892096,
         "exchange": "NSI",
-        "indices": [],
+        "indices": [
+            "Nifty500",
+            "Nifty Smallcap 250"
+        ],
         "industry": "Specialty Industrial Machinery",
         "isin": "INE999A01023",
         "market_cap": 163640377344,
@@ -33807,6 +35007,31 @@
         "ticker": "LAL.NS",
         "website": "https://www.monteil.in"
     },
+    "LALITHAA.NS": {
+        "city": "Chennai",
+        "company_name": "Lalithaa Jewellery Mart Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 7059,
+        "enterprise_value": 205284425728,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Luxury Goods",
+        "isin": "INE0K9O01026",
+        "market_cap": 207092629504,
+        "sector": "Consumer Cyclical",
+        "series": "EQ",
+        "shares_outstanding": 559709811,
+        "short_name": "LALITHAA JEWELLERY MART L",
+        "state": null,
+        "summary": "Lalithaa Jewellery Mart Limited designs, manufactures, and sells gold, silver, diamond, and other jewellery products in India and internationally. The company offers a range of jewellery options, including chains, rings, bangles, necklaces, haarams, earrings/drops, pendants, bridal jewellery, gemstone jewellery, coins, silverware, divine idols, and customized jewellery products. It also provides products for women, men, kids, and teenagers under the Lalithaa brand name. It serves customers through a network of large format stores and medium format stores in South India. The company was incorporated in 1985 and is based in Chennai, India.",
+        "symbol": "LALITHAA",
+        "themes": [
+            "AI"
+        ],
+        "ticker": "LALITHAA.NS",
+        "website": "https://www.lalithaajewellery.com"
+    },
     "LALPATHLAB.NS": {
         "city": "Gurugram",
         "company_name": "Dr. Lal PathLabs Limited",
@@ -34043,10 +35268,7 @@
         "employees": 1161,
         "enterprise_value": 55736688640,
         "exchange": "NSI",
-        "indices": [
-            "Nifty500",
-            "Nifty Smallcap 250"
-        ],
+        "indices": [],
         "industry": "Consulting Services",
         "isin": "INE0I7C01011",
         "market_cap": 62315454464,
@@ -34219,6 +35441,34 @@
         ],
         "ticker": "LCCINFOTEC.NS",
         "website": "https://www.lccinfotech.in"
+    },
+    "LCCPROJECT.NS": {
+        "city": "Ahmedabad",
+        "company_name": null,
+        "country": "India",
+        "currency": "INR",
+        "employees": 2093,
+        "enterprise_value": 42053357568,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Infrastructure Operations",
+        "isin": "INE1FPN01026",
+        "market_cap": 38346678272,
+        "sector": "Industrials",
+        "series": "EQ",
+        "shares_outstanding": 289671232,
+        "short_name": "LCC PROJECTS LIMITED",
+        "state": null,
+        "summary": "LCC Projects Limited operates as an engineering, procurement, and construction company in India. It engages in the construction of dams, barrages, weirs, hydraulic structures, canals, pipe distribution networks, lift irrigation works, water treatment and supply, metro rails, industrial buildings, road works, building works, mining, and other infrastructure development projects, as well as renewable energy and coal extraction projects. The company is also involved in project execution, such as excavation, backfilling, pipeline laying, pipeline welding and jointing, and the construction of structures, including intake well pump houses, elevated storage reservoirs, and sumps. In addition, it provides project consultancy services, scrap sale services, and tunnel construction services. The company was incorporated in 2004 and is headquartered in Ahmedabad, India.",
+        "symbol": "LCCPROJECT",
+        "themes": [
+            "AI",
+            "EV",
+            "Railway",
+            "Renewable Energy"
+        ],
+        "ticker": "LCCPROJECT.NS",
+        "website": "https://www.lccprojects.com"
     },
     "LCL.NS": {
         "city": "Kanpur",
@@ -34594,6 +35844,7 @@
         "enterprise_value": 5549540769792,
         "exchange": "NSI",
         "indices": [
+            "Nifty200",
             "Nifty500",
             "Nifty Midcap 150"
         ],
@@ -34858,9 +36109,9 @@
         "enterprise_value": 1278645108736,
         "exchange": "NSI",
         "indices": [
-            "Nifty100",
             "Nifty200",
             "Nifty500",
+            "Nifty Midcap 150",
             "Nifty Realty"
         ],
         "industry": "Real Estate - Development",
@@ -35281,6 +36532,34 @@
         ],
         "ticker": "LUMAXTECH.NS",
         "website": "https://www.lumaxworld.in/lumaxautotech"
+    },
+    "LUMINO.NS": {
+        "city": "Kolkata",
+        "company_name": null,
+        "country": "India",
+        "currency": "INR",
+        "employees": 911,
+        "enterprise_value": 23291924480,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Electrical Equipment & Parts",
+        "isin": "INE185Q01025",
+        "market_cap": null,
+        "sector": "Industrials",
+        "series": "EQ",
+        "shares_outstanding": null,
+        "short_name": "LUMINO INDUSTRIES LIMITED",
+        "state": null,
+        "summary": "Lumino Industries Limited manufactures and sells conductors, power cables, electrical wires, and other products and components for power distribution and transmission industries in India and internationally. It offers aluminium conductors; LV XLPE/PVC insulated power, LV XLPE/PVC insulated control, LV aerial bunch, railway signalling, concentric, screened and instrumentation, solar, LV FR/FRLSH/FR-LSZH fire performance, underwriters laboratories, quad, medium voltage cross linked cables, as well as MV overhead covered conductors and electrical wires; and thermoset insulated, single-core service, and house wires. The company also develops power distribution and transmission infrastructure projects; constructs substations; and offers end-to-end solutions for transmission towers. In addition, it engages in the designing, engineering, procurement, testing, inspection, supply, installation, and commissioning of railway electrification projects and solar power plants. Further, the company offers water, sewage, and effluent treatment services; and raises and distributes water pipelines. The company was founded in 1989 and is headquartered in Kolkata, India.",
+        "symbol": "LUMINO",
+        "themes": [
+            "AI",
+            "EV",
+            "Railway",
+            "Renewable Energy"
+        ],
+        "ticker": "LUMINO.NS",
+        "website": "https://www.luminoindustries.com"
     },
     "LUPIN.NS": {
         "city": "Mumbai",
@@ -35713,6 +36992,7 @@
         "enterprise_value": 978542133248,
         "exchange": "NSI",
         "indices": [
+            "Nifty200",
             "Nifty500",
             "Nifty Midcap 150",
             "Nifty PSU Bank"
@@ -36361,6 +37641,34 @@
         "ticker": "MANGLMCEM.NS",
         "website": "https://www.mangalamcement.com"
     },
+    "MANIKA.NS": {
+        "city": "Mumbai",
+        "company_name": null,
+        "country": "India",
+        "currency": "INR",
+        "employees": null,
+        "enterprise_value": 4978345984,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Packaging & Containers",
+        "isin": "INE0KWF01020",
+        "market_cap": null,
+        "sector": "Consumer Cyclical",
+        "series": "EQ",
+        "shares_outstanding": null,
+        "short_name": "MANIKA PLASTECH LIMITED",
+        "state": null,
+        "summary": "Manika Plastech Limited manufactures and sell polymer packaging products in India. The company offers precision battery casings, injection moulded plastic pail buckets, thinwall containers, water bottles, and detergent containers. It also provides painting services for plastic automotive components. The company's products are used in various industries applications, such as automotive, energy storage, railways, telecommunications, power back-up, paints, chemicals, coating, lubricants, agrochemicals, food, and dairy and edible food products. The company was incorporated in 1996 and is based in Mumbai, India. Manika Plastech Limited is a subsidiary of VRIDAA Holding Trust.",
+        "symbol": "MANIKA",
+        "themes": [
+            "5G",
+            "AI",
+            "EV",
+            "Railway"
+        ],
+        "ticker": "MANIKA.NS",
+        "website": "https://manikaplastech.com"
+    },
     "MANINDS.NS": {
         "city": "Mumbai",
         "company_name": "Man Industries (India) Limited",
@@ -36600,10 +37908,7 @@
         "employees": null,
         "enterprise_value": 56017252352,
         "exchange": "NSI",
-        "indices": [
-            "Nifty500",
-            "Nifty Smallcap 250"
-        ],
+        "indices": [],
         "industry": "Software - Infrastructure",
         "isin": "INE0BV301023",
         "market_cap": 59325386752,
@@ -37173,6 +38478,32 @@
         "ticker": "MBAPL.NS",
         "website": "https://www.mbapl.com"
     },
+    "MBECL.NS": {
+        "city": "Kolkata",
+        "company_name": "McNally Bharat Engineering Company Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 323,
+        "enterprise_value": 11349114880,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Engineering & Construction",
+        "isin": "INE748A01024",
+        "market_cap": 10424999936,
+        "sector": "Industrials",
+        "series": "BE",
+        "shares_outstanding": 33333334,
+        "short_name": "MCNALLY BHARAT ENGIN CO L",
+        "state": null,
+        "summary": "McNally Bharat Engineering Company Limited engages in engineering, procurement, and construction businesses in India. The company offers its turnkey solutions in the areas of power, steel, coal and mining, ports, aluminum, material handling, mineral processing, cement, water, mineral benefication, pyroprocessing, pneumatic handling of powdered materials, coal washing, port cranes, civic, industrial water supply, and oil and gas sectors, as well as for infrastructure sectors, includes buildings and townships, high rises, roads, metro, rail etc. It also manufactures a range of products, including crushers and screens, mobile crushing and screening plants, skid mounted coal sizers, mills, pressure vessels, material handling equipment, and steel plant equipment, as well as process equipment, including flotation cells, thickeners, slurry pumps, etc. The company was formerly known as McNally-Bird Engineering Company Limited and changed its name to McNally Bharat Engineering Company Limited in 1972. McNally Bharat Engineering Company Limited was incorporated in 1961 and is based in Kolkata, India.",
+        "symbol": "MBECL",
+        "themes": [
+            "AI",
+            "Railway"
+        ],
+        "ticker": "MBECL.NS",
+        "website": "https://www.mcnallybharat.com"
+    },
     "MBEL.NS": {
         "city": "Ahmedabad",
         "company_name": null,
@@ -37518,8 +38849,9 @@
         "enterprise_value": 869100158976,
         "exchange": "NSI",
         "indices": [
+            "Nifty200",
             "Nifty500",
-            "Nifty Smallcap 250"
+            "Nifty Midcap 150"
         ],
         "industry": "Internet Retail",
         "isin": "INE0VDM01015",
@@ -37586,6 +38918,32 @@
         ],
         "ticker": "MEIL.NS",
         "website": "https://www.mangals.com"
+    },
+    "MELSTAR.NS": {
+        "city": "Mumbai",
+        "company_name": "Melstar Information Technologies Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": null,
+        "enterprise_value": 1350158848,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Shell Companies",
+        "isin": "INE817A01050",
+        "market_cap": 1235418368,
+        "sector": "Financial Services",
+        "series": "BE",
+        "shares_outstanding": 2793737,
+        "short_name": "MELSTAR INFO TEC LTD",
+        "state": null,
+        "summary": "Melstar Information Technologies Limited does not have significant operations. Previously, it was engaged in the business of IT and IT enabled services. It intends to focus on aviation training solutions and digital transformation services. The company was incorporated in 1986 and is based in Mumbai, India.",
+        "symbol": "MELSTAR",
+        "themes": [
+            "AI",
+            "EV"
+        ],
+        "ticker": "MELSTAR.NS",
+        "website": "https://www.melstarrtech.com"
     },
     "MENNPIS.NS": {
         "city": "Kolhapur",
@@ -38258,6 +39616,31 @@
         "ticker": "MKEXIM.NS",
         "website": null
     },
+    "MKJEWELS.NS": {
+        "city": "Mumbai",
+        "company_name": "M. K. Sons Fine Jewels Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 94,
+        "enterprise_value": null,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Luxury Goods",
+        "isin": "INE2IXO01012",
+        "market_cap": 9113474048,
+        "sector": "Consumer Cyclical",
+        "series": "EQ",
+        "shares_outstanding": 56290760,
+        "short_name": "MK SONS FINE JEWELS LTD",
+        "state": null,
+        "summary": "M. K. Sons Fine Jewels Limited manufactures and retails jewelry. The company offers gold, diamond, and cubic zirconia jewelry, such as rings, earrings, necklace, pendant sets, chains, bangles, bracelets, and mangalasutras. It sells its products through multiple retail jewellery stores and online channels. The company markets its branded collections, such as Nayaab, Sitaare, Sunehre, Masoom, and the CZ Collection. The company was formerly known as M. K. Sons Fine Jewels Private Limited and changed its name to M. K. Sons Fine Jewels Limited in January 2025. M. K. Sons Fine Jewels Limited was founded in 1999 and is based in Mumbai, India.",
+        "symbol": "MKJEWELS",
+        "themes": [
+            "AI"
+        ],
+        "ticker": "MKJEWELS.NS",
+        "website": "https://www.mkjewels.in"
+    },
     "MKPL.NS": {
         "city": "Ambala",
         "company_name": "M. K. Proteins Limited",
@@ -38770,6 +40153,32 @@
         "ticker": "MOLDTKPAC.NS",
         "website": "https://moldtekpackaging.com"
     },
+    "MOMSBELIEF.NS": {
+        "city": "Gurugram",
+        "company_name": null,
+        "country": "India",
+        "currency": "INR",
+        "employees": null,
+        "enterprise_value": 4029741056,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Medical Care Facilities",
+        "isin": "INE1FCO01014",
+        "market_cap": 5362744832,
+        "sector": "Healthcare",
+        "series": "EQ",
+        "shares_outstanding": 20901682,
+        "short_name": "RAYS OF BELIEF LIMITED",
+        "state": null,
+        "summary": "Rays of Belief Limited operates as a holistic care provider for children with autism, ADHD, Down syndrome, and other developmental delays and disorders in India. The company provides subscription-based, guided therapy programs designed to empower parents of children with special needs. The company operates through its brand, Mom's Belief, a child development and therapy organization that creates personalized therapeutic programs for children with autism and other developmental delays. The company's services include occupational therapy to enhance motor skills and daily functioning; speech therapy to improve communication and language abilities; special education and individualized learning support for children with diverse needs; Applied Behaviour Analysis (ABA), a behaviour-based intervention for skill development; language and communication therapy to strengthen verbal and social communication; and adult counselling to support parents and caregivers. Rays of Belief Limited was incorporated in 2017 and is headquartered in Gurugram, India. Rays of Belief Limited operates as a subsidiary of Carving Futures Pte. Ltd.",
+        "symbol": "MOMSBELIEF",
+        "themes": [
+            "AI",
+            "EV"
+        ],
+        "ticker": "MOMSBELIEF.NS",
+        "website": "https://www.momsbelief.com"
+    },
     "MONARCH.NS": {
         "city": "Ahmedabad",
         "company_name": "Monarch Networth Capital Limited",
@@ -38820,6 +40229,33 @@
         ],
         "ticker": "MONEYBOXX.NS",
         "website": "https://moneyboxxfinance.com"
+    },
+    "MONEYVIEW.NS": {
+        "city": "Bengaluru",
+        "company_name": "Moneyview Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 798,
+        "enterprise_value": 122999234560,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Software - Application",
+        "isin": "INE0PTN01011",
+        "market_cap": 93327466496,
+        "sector": "Technology",
+        "series": "EQ",
+        "shares_outstanding": 1760231268,
+        "short_name": "MONEYVIEW LIMITED",
+        "state": null,
+        "summary": "Moneyview Limited engages in the design, development, production, and distribution of various financial products in India. The company operates Moneyview, a financial service platform. Its platform offers personal, business, home, transfer home, and transfer property loans, as well as loans against property and credit cards; 24K gold and FD select; vehicle insurance; credit tracker; and UPI payment services. Moneyview Limited was incorporated in 2014 and is based in Bengaluru, India.",
+        "symbol": "MONEYVIEW",
+        "themes": [
+            "AI",
+            "Data Center",
+            "EV"
+        ],
+        "ticker": "MONEYVIEW.NS",
+        "website": "https://moneyview.in"
     },
     "MONTECARLO.NS": {
         "city": "Ludhiana",
@@ -39093,6 +40529,29 @@
         "ticker": "MPHASIS.NS",
         "website": "https://www.mphasis.com"
     },
+    "MPIMANIPAL.NS": {
+        "city": "Manipal",
+        "company_name": null,
+        "country": "India",
+        "currency": "INR",
+        "employees": 1809,
+        "enterprise_value": 68932100096,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Software - Infrastructure",
+        "isin": "INE241U01028",
+        "market_cap": null,
+        "sector": "Technology",
+        "series": "EQ",
+        "shares_outstanding": null,
+        "short_name": "MANIPAL PAYMENT & IDE S L",
+        "state": null,
+        "summary": "Manipal Payment and Identity Solutions Limited operates as a smart card manufacturer in India, the United Kingdom, Europe, the Asia-Pacific, Africa, North America, South America and internationally. The company offers solutions for cards, including banking, identity solutions, and loyalty cards; encompass card manufacturing, card personalization, cheque book printing, the supply of related collaterals, tax stamps, holograms, thermal paper rolls, and RFID products; and handles fulfilment activities, such as dispatch services. It also provides smart tagging and IOT solutions that include tax stamp solutions and IoT and traceability; secure logistics, insurance record management, and hologram and coated products; national ID cards, driving license and registration certificate, and intelligent transit management; and payment cards, smart wearables, cheque solutions, NFC/QR, and digital automation solutions. The company was formerly known as MCT Cards and Technology Private Limited and changed its name to Manipal Payment and Identity Solutions Limited in August 2024. The company was incorporated in 2008 and is based in Manipal, India. Manipal Payment and Identity Solutions Limited operates as a subsidiary of Manipal Technologies Limited.",
+        "symbol": "MPIMANIPAL",
+        "themes": [],
+        "ticker": "MPIMANIPAL.NS",
+        "website": "https://mpimanipal.com"
+    },
     "MPSLTD.NS": {
         "city": "Noida",
         "company_name": "MPS Limited",
@@ -39288,7 +40747,10 @@
         "employees": null,
         "enterprise_value": 219770585088,
         "exchange": "NSI",
-        "indices": [],
+        "indices": [
+            "Nifty500",
+            "Nifty Smallcap 250"
+        ],
         "industry": "Specialty Industrial Machinery",
         "isin": "INE864I01014",
         "market_cap": 218423869440,
@@ -40917,10 +42379,7 @@
         "employees": 3788,
         "enterprise_value": 62256619520,
         "exchange": "NSI",
-        "indices": [
-            "Nifty500",
-            "Nifty Smallcap 250"
-        ],
+        "indices": [],
         "industry": "Software - Infrastructure",
         "isin": "INE619B01017",
         "market_cap": 73007693824,
@@ -41049,7 +42508,7 @@
         "exchange": "NSI",
         "indices": [
             "Nifty500",
-            "Nifty Smallcap 250"
+            "Nifty Midcap 150"
         ],
         "industry": "Medical Care Facilities",
         "isin": "INE410P01011",
@@ -41109,7 +42568,7 @@
         "exchange": "NSI",
         "indices": [
             "Nifty500",
-            "Nifty Midcap 150"
+            "Nifty Smallcap 250"
         ],
         "industry": "Insurance - Diversified",
         "isin": "INE470Y01017",
@@ -41617,6 +43076,31 @@
         "ticker": "NITTAGELA.NS",
         "website": "https://www.gelatin.in"
     },
+    "NITYAS.NS": {
+        "city": "Surat",
+        "company_name": "Nityas Gems and Jewellery Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": null,
+        "enterprise_value": 3262621952,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Luxury Goods",
+        "isin": "INE211501023",
+        "market_cap": 3823615744,
+        "sector": "Consumer Cyclical",
+        "series": "EQ",
+        "shares_outstanding": 57593248,
+        "short_name": "NITYAS GEMS N JEWELLERY L",
+        "state": null,
+        "summary": "Nityas Gems and Jewellery Limited engages in the design, manufacturing, and sale of lab-grown diamond studded gold jewellery in India. The company operates through an integrated business model comprising business-to-business (B2B) manufacturing and distribution to organized retailers, standalone retailers and wholesalers; and direct-to-consumer (D2C) omnichannel retail operations. It engages in procurement and management of raw materials, product design, manufacturing, quality control, distribution, branded retail and direct-to-consumer sales. The company offers a range of lab-grown diamond studded gold jewellery products across categories, such as rings, earrings, pendants, bracelets, mangalsutras, nose pins, necklaces, cufflings and bangles, across daily wear, occasion-based. It also offers men's jewellery and customized segments. The company's B2B segment engages in the design, manufacture and supply of lab-grown diamond studded gold jewellery to a network of jewellery retailers across various states and union territories in India, as well as to overseas customers in United Arab Emirates, Australia, Canada, Taiwan and Kenya. Nityas Gems and Jewellery Limited was incorporated in 2022 and is based in Surat, India.",
+        "symbol": "NITYAS",
+        "themes": [
+            "AI"
+        ],
+        "ticker": "NITYAS.NS",
+        "website": "https://nityas.in"
+    },
     "NIVABUPA.NS": {
         "city": "Gurugram",
         "company_name": "Niva Bupa Health Insurance Company Limited",
@@ -41625,10 +43109,7 @@
         "employees": null,
         "enterprise_value": 161777582080,
         "exchange": "NSI",
-        "indices": [
-            "Nifty500",
-            "Nifty Smallcap 250"
-        ],
+        "indices": [],
         "industry": "Insurance - Life",
         "isin": "INE995S01015",
         "market_cap": 159977209856,
@@ -41679,6 +43160,7 @@
         "enterprise_value": 554407034880,
         "exchange": "NSI",
         "indices": [
+            "Nifty200",
             "Nifty500",
             "Nifty Midcap 150",
             "Nifty Energy"
@@ -43152,6 +44634,33 @@
         "ticker": "ORIENTBELL.NS",
         "website": "https://www.orientbell.com"
     },
+    "ORIENTCABL.NS": {
+        "city": "Gurugram",
+        "company_name": "Orient Cables (India) Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 613,
+        "enterprise_value": 40613343232,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Electrical Equipment & Parts",
+        "isin": "INE0J1N01028",
+        "market_cap": 42532638720,
+        "sector": "Industrials",
+        "series": "EQ",
+        "shares_outstanding": 113799705,
+        "short_name": "ORIENT CABLES (INDIA) LTD",
+        "state": null,
+        "summary": "Orient Cables (India) Limited engages in the manufacturing of networking cables and passive networking equipment in India and internationally. It manufactures networking cables, optical fiber cables, copper terminated assemblies, optical fiber terminated assemblies, coaxial cables, telecommunication cables, solar DC cables, power cables, and other products, including tethered drone system, EV charging cables and gun, power cord, power stripes/extension board, and keystone jack. Orient Cables (India) Limited was incorporated in 2005 and is based in Gurugram, India.",
+        "symbol": "ORIENTCABL",
+        "themes": [
+            "5G",
+            "EV",
+            "Renewable Energy"
+        ],
+        "ticker": "ORIENTCABL.NS",
+        "website": "https://www.orientcables.in"
+    },
     "ORIENTCEM.NS": {
         "city": "Ahmedabad",
         "company_name": "Orient Cement Limited",
@@ -44042,6 +45551,29 @@
         "ticker": "PARAS.NS",
         "website": "https://www.parasdefence.com"
     },
+    "PARASHLTH.NS": {
+        "city": "Gurugram",
+        "company_name": "Paras Healthcare Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": null,
+        "enterprise_value": 93483130880,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Medical Care Facilities",
+        "isin": "INE661T01029",
+        "market_cap": null,
+        "sector": "Healthcare",
+        "series": "EQ",
+        "shares_outstanding": null,
+        "short_name": "PARAS HEALTHCARE LIMITED",
+        "state": null,
+        "summary": "Paras Healthcare Limited provides tertiary and quaternary healthcare services. The company provides cardiac sciences, neurosciences, oncology sciences, gastro sciences, orthopedics and sports injury, and renal sciences services. It offers services, such as cardio thoracic vascular surgery and cardiology; medical, radiation, surgical, and hemato oncology, as well as nuclear medicine and bone marrow transplant; and neuroscience, neuro intervention, neurology, and spine surgery. The company also provides gastrointestinal surgery, gastroenterology, and liver transplant; nephrology, urology, and kidney transplant; general and minimal access surgery, obstetrics, gynecology, paediatrics, internal medicine, pulmonology, plastic and reconstructive surgery, and endocrinology as well as ear, nose, throat, neck and head surgery. Paras Healthcare Limited was incorporated in 1987 and is based in Gurugram, India.",
+        "symbol": "PARASHLTH",
+        "themes": [],
+        "ticker": "PARASHLTH.NS",
+        "website": "https://www.parashospitals.com"
+    },
     "PARASPETRO.NS": {
         "city": "Surat",
         "company_name": "Paras Petrofils Limited",
@@ -44067,6 +45599,31 @@
         ],
         "ticker": "PARASPETRO.NS",
         "website": "https://www.paraspetrofils.in"
+    },
+    "PARIN.NS": {
+        "city": "Rajkot",
+        "company_name": "Parin Enterprises Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": null,
+        "enterprise_value": 8340729856,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Furnishings, Fixtures & Appliances",
+        "isin": "INE00U801010",
+        "market_cap": 7376793088,
+        "sector": "Consumer Cyclical",
+        "series": "EQ",
+        "shares_outstanding": 11118000,
+        "short_name": "PARIN ENTERPRISES LIMITED",
+        "state": null,
+        "summary": "Parin Enterprises Limited engages in the manufacture, supply, and trade of furniture and lifestyle products in India. It offers health care furniture, such as accessories, general ward care and gynaec solutions, over bed/cardiac table, patient examination solution, saline stand, smart patient transfer solutions, stools, wheelchairs, ICU full and semi motorized beds, ICU manual beds, and trolleys; educational furniture, including school benches; and institute furniture, which includes door cabinets, open self-book cabinets, and filling lockers. The company also provides office furniture; public seating furniture; and cafeteria furniture comprising cafe tables and chairs. In addition, it offers household furniture, such as sofa-sets, dining tables with chairs, center tables, motorized and non-motorized recliner chairs, etc. Further, the company engages in the operations of dealing in trading of FMCG products; and dealership operations for motor vehicles, including sale of automobiles, spare parts, accessories, and services. It serves government, retail, and institutional customers. The company was formerly known as Parin Furniture Limited and changed its name to Parin Enterprises Limited in October 2024. The company was founded in 1983 and is based in Rajkot, India.",
+        "symbol": "PARIN",
+        "themes": [
+            "AI"
+        ],
+        "ticker": "PARIN.NS",
+        "website": "https://www.parinfurniture.com"
     },
     "PARKHOSPS.NS": {
         "city": "Gurugram",
@@ -44633,6 +46190,32 @@
         "ticker": "PERMAGN.NS",
         "website": null
     },
+    "PERNIASPOP.NS": {
+        "city": "Mumbai",
+        "company_name": null,
+        "country": "India",
+        "currency": "INR",
+        "employees": 1266,
+        "enterprise_value": 37529452544,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Apparel Retail",
+        "isin": "INE0I1B01016",
+        "market_cap": null,
+        "sector": "Consumer Cyclical",
+        "series": "EQ",
+        "shares_outstanding": null,
+        "short_name": "PURPLE STYLE LABS LIMITED",
+        "state": null,
+        "summary": "Purple Style Labs Limited operates as a fashion house, acquiring and managing designer brands and running an omni-channel platform for premium fashion retail. The company offers luxury fashion and lifestyle products, including premium designer wear, accessories, and jewellery through online and offline channels. It owns and manages multi-brand e-commerce websites such as Pernia's Pop-Up Shop, operates brick-and-mortar stores under the Pernia's Pop-Up Studio brand, and manages designer labels such as Wendell Rodricks and Hemant Trevedi. The company launches collaborations such as Six Yards by Madhuri Dixit, publishes a quarterly magazine focused on fashion and lifestyle, and has expanded into luxury home decor retail. Personal styling services are available both in-store and online. The company serves retail clients in the luxury fashion and home decor sectors, including consumers seeking designer wear, accessories, jewellery, and home products, as well as the global Indian diaspora, tourists, and local consumers interested in Indian design. The company was incorporated in 2015 and is based in Mumbai, India.",
+        "symbol": "PERNIASPOP",
+        "themes": [
+            "AI",
+            "EV"
+        ],
+        "ticker": "PERNIASPOP.NS",
+        "website": "https://www.purplestylelabs.com"
+    },
     "PERSISTENT.NS": {
         "city": "Pune",
         "company_name": "Persistent Systems Limited",
@@ -44732,10 +46315,7 @@
         "employees": 1244,
         "enterprise_value": 186269220864,
         "exchange": "NSI",
-        "indices": [
-            "Nifty500",
-            "Nifty Smallcap 250"
-        ],
+        "indices": [],
         "industry": "Drug Manufacturers - General",
         "isin": "INE182A01018",
         "market_cap": 216450809856,
@@ -45215,7 +46795,7 @@
         "exchange": "NSI",
         "indices": [
             "Nifty500",
-            "Nifty Smallcap 250"
+            "Nifty Midcap 150"
         ],
         "industry": "Credit Services",
         "isin": "INE202B01038",
@@ -45737,9 +47317,9 @@
         "enterprise_value": 1351761657856,
         "exchange": "NSI",
         "indices": [
+            "Nifty100",
             "Nifty200",
-            "Nifty500",
-            "Nifty Midcap 150"
+            "Nifty500"
         ],
         "industry": "Electrical Equipment & Parts",
         "isin": "INE455K01017",
@@ -45960,9 +47540,9 @@
         "enterprise_value": 1407250333696,
         "exchange": "NSI",
         "indices": [
+            "Nifty100",
             "Nifty200",
             "Nifty500",
-            "Nifty Midcap 150",
             "Nifty Energy"
         ],
         "industry": "Electrical Equipment & Parts",
@@ -46248,6 +47828,57 @@
         ],
         "ticker": "PRAKASHSTL.NS",
         "website": "https://www.prakashsteelage.com"
+    },
+    "PRANAV.NS": {
+        "city": "Mumbai",
+        "company_name": null,
+        "country": "India",
+        "currency": "INR",
+        "employees": 198,
+        "enterprise_value": 7332655104,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Real Estate - Development",
+        "isin": "INE0H4201019",
+        "market_cap": null,
+        "sector": "Real Estate",
+        "series": "EQ",
+        "shares_outstanding": null,
+        "short_name": "PRANAV CONSTRUCTIONS LTD",
+        "state": null,
+        "summary": "Pranav Constructions Limited engages in redevelopment of cooperative housing societies in India. It also involved in commerce, art, science, sports, education, research, social welfare activity, and other socio-economic development activities; and real estate development. The company was incorporated in 2003 and is based in Mumbai, India.",
+        "symbol": "PRANAV",
+        "themes": [
+            "AI",
+            "EV"
+        ],
+        "ticker": "PRANAV.NS",
+        "website": "https://www.pranavconstructions.com"
+    },
+    "PRASOLCHEM.NS": {
+        "city": "Thane",
+        "company_name": null,
+        "country": "India",
+        "currency": "INR",
+        "employees": 719,
+        "enterprise_value": 46707544064,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Specialty Chemicals",
+        "isin": "INE455U01024",
+        "market_cap": 46808178688,
+        "sector": "Basic Materials",
+        "series": "EQ",
+        "shares_outstanding": 59183431,
+        "short_name": "PRASOL CHEMICALS LIMITED",
+        "state": null,
+        "summary": "Prasol Chemicals Limited operates as an integrated manufacturer of acetone derivatives and phosphorous derivatives in India and internationally. Its products include acetone and phosphorous based specialty chemicals, and other specialty chemicals, as well as fertilizers and lubricants. The company's products are used in pharmaceuticals, agrochemicals, PICA viz., paints, inks construction, and adhesives, home and personal care, and performance chemicals. Prasol Chemicals Limited was incorporated in 1992 and is based in Thane, India.",
+        "symbol": "PRASOLCHEM",
+        "themes": [
+            "AI"
+        ],
+        "ticker": "PRASOLCHEM.NS",
+        "website": "https://www.prasolchem.com"
     },
     "PRAVEG.NS": {
         "city": "Ahmedabad",
@@ -46647,6 +48278,31 @@
         "ticker": "PRINCEPIPE.NS",
         "website": "https://www.princepipes.com"
     },
+    "PRIORITY.NS": {
+        "city": "Mumbai",
+        "company_name": null,
+        "country": "India",
+        "currency": "INR",
+        "employees": 211,
+        "enterprise_value": 4089836288,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Luxury Goods",
+        "isin": "INE15EH01014",
+        "market_cap": 4705200128,
+        "sector": "Consumer Cyclical",
+        "series": "BE",
+        "shares_outstanding": 18000000,
+        "short_name": "PRIORITY JEWELS LIMITED",
+        "state": null,
+        "summary": "Priority Jewels Limited engages in the designing, manufacturing, and sale of diamond-studded gold and platinum fine jewellery in India. Its portfolio includes daily wear jewellery, such as rings, earrings, pendants, mangalsutras, neckwear, bracelets, and occasion couture jewellery, as well as customized lab-grown diamond jewellery. The company sells its products to jewellery chains, including CaratLane Trading Private Limited, Kalyan Jewellers India Limited, Reliance Retail Limited, Malabar Gold & Diamonds FZCO, Tribhovandas Bhimji Zaveri Limited, and Senco Gold Limited, as well as independent jewellers. It exports its products to Australia, Denmark, Hong Kong, Israel, Norway, the United States, the United Arab Emirates, Singapore, Belgium, Japan, Fiji Island, Nepal, and Sweden. The company was incorporated in 2007 and is Mumbai, India.",
+        "symbol": "PRIORITY",
+        "themes": [
+            "AI"
+        ],
+        "ticker": "PRIORITY.NS",
+        "website": "https://www.priorityjewels.in"
+    },
     "PRISMX.NS": {
         "city": null,
         "company_name": null,
@@ -46728,7 +48384,10 @@
         "employees": null,
         "enterprise_value": 152324194304,
         "exchange": "NSI",
-        "indices": [],
+        "indices": [
+            "Nifty500",
+            "Nifty Smallcap 250"
+        ],
         "industry": "Specialty Chemicals",
         "isin": "INE959A01019",
         "market_cap": 143078866944,
@@ -47378,6 +49037,33 @@
         ],
         "ticker": "QUINT.NS",
         "website": "https://www.quintdigital.in"
+    },
+    "QUINTEGRA.NS": {
+        "city": "Chennai",
+        "company_name": "Quintegra Solutions Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 2,
+        "enterprise_value": null,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Information Technology Services",
+        "isin": "INE033B01011",
+        "market_cap": 98138624,
+        "sector": "Technology",
+        "series": "BE",
+        "shares_outstanding": 26813830,
+        "short_name": "QUINTEGRA SOLUTIONS LTD.",
+        "state": null,
+        "summary": "Quintegra Solutions Limited provides information technology (IT) and consulting services in India. The company offers application management, such as development, maintenance, migration, and reengineering; product engineering; and SAP services, including SAP implementation services, SAP upgrades, SAP functional support, SAP production support, basis and technical consulting, and SAP application innovation. It also provides testing and validation; and technology consulting services. In addition, the company offers education and training, patient care, hospital management, and non-life insurance solutions. It serves banking and financial, healthcare, education and training, engineering, logistics, and telecom industries. The company was incorporated in 1994 and is headquartered in Chennai, India.",
+        "symbol": "QUINTEGRA",
+        "themes": [
+            "5G",
+            "AI",
+            "EV"
+        ],
+        "ticker": "QUINTEGRA.NS",
+        "website": "https://www.quintegrasolutions.com"
     },
     "RACE.NS": {
         "city": "Ghaziabad",
@@ -48462,9 +50148,9 @@
         "enterprise_value": 5887082627072,
         "exchange": "NSI",
         "indices": [
-            "Nifty100",
             "Nifty200",
-            "Nifty500"
+            "Nifty500",
+            "Nifty Midcap 150"
         ],
         "industry": "Credit Services",
         "isin": "INE020B01018",
@@ -48839,6 +50525,29 @@
         ],
         "ticker": "REMSONSIND.NS",
         "website": "https://www.remsons.com"
+    },
+    "RENTOMOJO.NS": {
+        "city": "Bengaluru",
+        "company_name": null,
+        "country": "India",
+        "currency": "INR",
+        "employees": 835,
+        "enterprise_value": 62560567296,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Rental & Leasing Services",
+        "isin": "INE08T701025",
+        "market_cap": null,
+        "sector": "Industrials",
+        "series": "EQ",
+        "shares_outstanding": null,
+        "short_name": "RENTOMOJO LIMITED",
+        "state": null,
+        "summary": "Rentomojo Limited provides online rental service for furniture and appliances. The company provides rental services for various products, including delivery, installation, and pick-up. The company was founded in 2012 and is based in Bengaluru, India.",
+        "symbol": "RENTOMOJO",
+        "themes": [],
+        "ticker": "RENTOMOJO.NS",
+        "website": "https://www.rentomojo.com"
     },
     "RENUKA.NS": {
         "city": "Mumbai",
@@ -50230,7 +51939,10 @@
         "employees": null,
         "enterprise_value": 235508383744,
         "exchange": "NSI",
-        "indices": [],
+        "indices": [
+            "Nifty500",
+            "Nifty Smallcap 250"
+        ],
         "industry": "Drug Manufacturers - General",
         "isin": "INE506V01022",
         "market_cap": 235823595520,
@@ -50351,6 +52063,32 @@
         "themes": [],
         "ticker": "RUDRA.NS",
         "website": "https://www.rudratmx.com"
+    },
+    "RUNWALENTR.NS": {
+        "city": "Mumbai",
+        "company_name": "Runwal Enterprises Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 1181,
+        "enterprise_value": 54369861632,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Real Estate - Development",
+        "isin": "INE804W01029",
+        "market_cap": 32690888704,
+        "sector": "Real Estate",
+        "series": "EQ",
+        "shares_outstanding": 147788829,
+        "short_name": "RUNWAL ENTERPRISES LTD",
+        "state": null,
+        "summary": "Runwal Enterprises Limited engages in residential and commercial real estate development in India. Its portfolio includes residential projects, apartments, retail spaces, offices, schools, hospitals, and town halls. The company also engages in the lease of commercial and shopping complexes. The company was incorporated in 2016 and is based in Mumbai, India.",
+        "symbol": "RUNWALENTR",
+        "themes": [
+            "AI",
+            "EV"
+        ],
+        "ticker": "RUNWALENTR.NS",
+        "website": "https://runwalenterprises.com"
     },
     "RUPA.NS": {
         "city": "Kolkata",
@@ -51551,7 +53289,10 @@
         "employees": null,
         "enterprise_value": 207728214016,
         "exchange": "NSI",
-        "indices": [],
+        "indices": [
+            "Nifty500",
+            "Nifty Smallcap 250"
+        ],
         "industry": "Auto Parts",
         "isin": "INE953O01021",
         "market_cap": 206181384192,
@@ -51628,10 +53369,7 @@
         "employees": 13817,
         "enterprise_value": 71439147008,
         "exchange": "NSI",
-        "indices": [
-            "Nifty500",
-            "Nifty Smallcap 250"
-        ],
+        "indices": [],
         "industry": "Restaurants",
         "isin": "INE806T01020",
         "market_cap": 58769092608,
@@ -51710,10 +53448,7 @@
         "employees": null,
         "enterprise_value": 92173172736,
         "exchange": "NSI",
-        "indices": [
-            "Nifty500",
-            "Nifty Smallcap 250"
-        ],
+        "indices": [],
         "industry": "Entertainment",
         "isin": "INE979A01025",
         "market_cap": 91986984960,
@@ -51993,10 +53728,7 @@
         "employees": 5055,
         "enterprise_value": 168046116864,
         "exchange": "NSI",
-        "indices": [
-            "Nifty500",
-            "Nifty Smallcap 250"
-        ],
+        "indices": [],
         "industry": "Credit Services",
         "isin": "INE423Y01016",
         "market_cap": 101762678784,
@@ -52849,6 +54581,33 @@
         "ticker": "SEYAIND.NS",
         "website": "https://www.seya.in"
     },
+    "SFCTECH.NS": {
+        "city": "Thane",
+        "company_name": "SFC Environmental Technologies Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 264,
+        "enterprise_value": 41444200448,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Pollution & Treatment Controls",
+        "isin": "INE0PKN01028",
+        "market_cap": 41910784000,
+        "sector": "Industrials",
+        "series": "EQ",
+        "shares_outstanding": 97956724,
+        "short_name": "SFC ENVIRONMENTAL TECH L",
+        "state": null,
+        "summary": "SFC Environmental Technologies Limited engages in the design, technology, manufacturing, supply and supervision for installation and commissioning of equipment for the treatment of wastewater and solid waste in India and internationally. The company offers Cyclic activated sludge technology (C-Tech), a technology for treating sewage and effluents. The company's C-Tech technology solutions include decanters, diffusers, air blowers, fiber disc filters, solar sludge drying system along with programmable logic controllers, and supervisory control and data acquisition-based automation solutions; and operations and maintenance services, and related accessories. It also provides OREX multi-stage system to separate biodegradable organics from inorganic materials and lignocellulosic fibers from mixed municipal wastes for solid waste treatment plants. The company was incorporated in 2005 and is based in Thane, India.",
+        "symbol": "SFCTECH",
+        "themes": [
+            "5G",
+            "AI",
+            "Renewable Energy"
+        ],
+        "ticker": "SFCTECH.NS",
+        "website": "https://sfcenvironment.com"
+    },
     "SFL.NS": {
         "city": "Noida",
         "company_name": "Sheela Foam Limited",
@@ -53096,6 +54855,31 @@
         "ticker": "SHAHALLOYS.NS",
         "website": "https://www.shahalloys.com"
     },
+    "SHAHINVEST.NS": {
+        "city": "Ahmedabad",
+        "company_name": "Shah Investor's Home Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": null,
+        "enterprise_value": 1731704960,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Capital Markets",
+        "isin": "INE029N01014",
+        "market_cap": 2929295104,
+        "sector": "Financial Services",
+        "series": "EQ",
+        "shares_outstanding": 21153200,
+        "short_name": "SHAH INVESTORS HOME LTD",
+        "state": null,
+        "summary": "Shah Investor's Home Limited, a retail brokering company, provides equity and derivatives brokerage services in India. It facilitates the buying and selling of financial products, such as equities, initial public offering investing, mutual funds distribution, and other securities. The company also offers secondary market brokering services. Shah Investor's Home Limited was incorporated in 1994 and is based in Ahmedabad, India.",
+        "symbol": "SHAHINVEST",
+        "themes": [
+            "AI"
+        ],
+        "ticker": "SHAHINVEST.NS",
+        "website": "https://www.sihl.in"
+    },
     "SHAILY.NS": {
         "city": "Vadodara",
         "company_name": "Shaily Engineering Plastics Limited",
@@ -53224,6 +55008,31 @@
         ],
         "ticker": "SHANKARA.NS",
         "website": "https://www.shankarabuildpro.com"
+    },
+    "SHANKESH.NS": {
+        "city": "Mumbai",
+        "company_name": "Shankesh Jewellers Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": null,
+        "enterprise_value": 12408609792,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Luxury Goods",
+        "isin": "INE1WFC01025",
+        "market_cap": 13400443904,
+        "sector": "Consumer Cyclical",
+        "series": "EQ",
+        "shares_outstanding": 147031420,
+        "short_name": "SHANKESH JEWELLERS LTD",
+        "state": null,
+        "summary": "Shankesh Jewellers Limited provides handcrafted gold jewelry products and customization services in India. The company provides wholesale trade of 22-karat and 18-karat gold jewellery, including bangles, bridal jewellery, chokers, jhumkas, long and short necklace sets, mangal sutras, rings, and combined jewellery set in categories, such as antique, semi-antique, Calcutta, temple, gheru polish, and yellow/rhodium/rose gold jewellery. The company serves corporate jewellery brands and independent retailers, catering to their needs for weddings, festivals, and daily wear. The company was formerly known as Shankesh Jewellers Private Limited and changed its name to Shankesh Jewellers Limited in April 2025. The company was founded in 1987 and is headquartered in Mumbai, India.",
+        "symbol": "SHANKESH",
+        "themes": [
+            "AI"
+        ],
+        "ticker": "SHANKESH.NS",
+        "website": "https://www.shankeshjewellers.com"
     },
     "SHANTI-RE.NS": {
         "city": null,
@@ -53629,6 +55438,32 @@
         "ticker": "SHINDL.NS",
         "website": "https://www.sharatindustries.com"
     },
+    "SHIPROCKET.NS": {
+        "city": "Gurugram",
+        "company_name": "Shiprocket Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 1470,
+        "enterprise_value": 84983652352,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Software - Application",
+        "isin": "INE0FOO01011",
+        "market_cap": 92904382464,
+        "sector": "Technology",
+        "series": "EQ",
+        "shares_outstanding": 727577587,
+        "short_name": "SHIPROCKET LIMITED",
+        "state": null,
+        "summary": "Shiprocket Limited provides e-commerce enablement platform solutions in India. It offers Shiprocket Shipping, an e-commerce shipping platform that automates workflows across sales channels; ShiprocketX, an end-to-end cross border solution; fastrr, AI native growth suite for commerce brands; Shiprocket Fulfillment, a warehousing, and packaging and shipping solution; Shiprocket Trends; and Shiprocket Capital, a revenue-based financing platform. The company also provides Shiprocket Packaging for packaging solutions; Shiprocket Cargo, a platform that offers end-to-end logistics partner for domestic freight movement; Shiprocket Omuni, an unified commerce platform; Shiprocket Promise for shopping; Shiprocket Amplify, an influencer marketing solution; Shiprocket Quick, a delivery solution; Delivery Boost, a delivery solutions; and Shiprocket Sense for address and risk intelligence to minimise address inaccuracies and delivery failuresa. It serves small businesses, retail brands, direct-to-consumer merchants, and social commerce retailers. Shiprocket Limited was incorporated in 2011 and is based in Gurugram, India.",
+        "symbol": "SHIPROCKET",
+        "themes": [
+            "AI",
+            "EV"
+        ],
+        "ticker": "SHIPROCKET.NS",
+        "website": "https://www.shiprocket.in"
+    },
     "SHIVAAGRO.NS": {
         "city": null,
         "company_name": null,
@@ -53700,6 +55535,29 @@
         ],
         "ticker": "SHIVALIK.NS",
         "website": "https://www.shivalikrasayan.com"
+    },
+    "SHIVAM-RE1.NS": {
+        "city": null,
+        "company_name": null,
+        "country": null,
+        "currency": "INR",
+        "employees": null,
+        "enterprise_value": null,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": null,
+        "isin": "INE637H20024",
+        "market_cap": null,
+        "sector": null,
+        "series": "BE",
+        "shares_outstanding": null,
+        "short_name": "SHIVAM AUTOTECH LTD",
+        "state": null,
+        "summary": null,
+        "symbol": "SHIVAM-RE1",
+        "themes": [],
+        "ticker": "SHIVAM-RE1.NS",
+        "website": null
     },
     "SHIVAMAUTO.NS": {
         "city": "Gurugram",
@@ -53940,9 +55798,8 @@
         "enterprise_value": 935903297536,
         "exchange": "NSI",
         "indices": [
-            "Nifty100",
-            "Nifty200",
-            "Nifty500"
+            "Nifty500",
+            "Nifty Midcap 150"
         ],
         "industry": "Building Materials",
         "isin": "INE070A01015",
@@ -54144,7 +56001,10 @@
         "employees": 3827,
         "enterprise_value": null,
         "exchange": "NSI",
-        "indices": [],
+        "indices": [
+            "Nifty500",
+            "Nifty Smallcap 250"
+        ],
         "industry": "Auto Parts",
         "isin": "INE526E01018",
         "market_cap": 184551145472,
@@ -55107,8 +56967,7 @@
         "exchange": "NSI",
         "indices": [
             "Nifty500",
-            "Nifty Midcap 150",
-            "Nifty Energy"
+            "Nifty Smallcap 250"
         ],
         "industry": "Utilities - Renewable",
         "isin": "INE002L01015",
@@ -55258,6 +57117,31 @@
         ],
         "ticker": "SKYGOLD.NS",
         "website": "https://skygold.co.in"
+    },
+    "SKYWAYS.NS": {
+        "city": "New Delhi",
+        "company_name": null,
+        "country": "India",
+        "currency": "INR",
+        "employees": null,
+        "enterprise_value": 18518405120,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Integrated Freight & Logistics",
+        "isin": "INE0PX301025",
+        "market_cap": 16059009024,
+        "sector": "Industrials",
+        "series": "EQ",
+        "shares_outstanding": 145343544,
+        "short_name": "SKYWAYS AIR SERVICES LTD",
+        "state": null,
+        "summary": "Skyways Air Services Limited operates as a logistics and freight forwarding service provider. The company offers freight forwarding, trucking, warehousing, customs brokerage, technology driven express cargo, and parcel delivery, as well as value-added services domestic and international markets. It also provides live animal transport and dangerous goods logistics services. The company was incorporated in 1984 and is headquartered in New Delhi, India.",
+        "symbol": "SKYWAYS",
+        "themes": [
+            "AI"
+        ],
+        "ticker": "SKYWAYS.NS",
+        "website": "https://www.skyways-air.in"
     },
     "SMARTLINK.NS": {
         "city": "Mumbai",
@@ -55410,6 +57294,31 @@
         ],
         "ticker": "SMSPHARMA.NS",
         "website": "https://smspharma.com"
+    },
+    "SMT.NS": {
+        "city": "Surat",
+        "company_name": "Sahajanand Medical Technologies Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 1605,
+        "enterprise_value": 54267133952,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Medical Devices",
+        "isin": "INE356Y01018",
+        "market_cap": 50620092416,
+        "sector": "Healthcare",
+        "series": "EQ",
+        "shares_outstanding": 101646778,
+        "short_name": "SAHAJANAND MEDICAL TECH L",
+        "state": null,
+        "summary": "Sahajanand Medical Technologies Limited engages in the manufacture and distribution of Class III and Class C/D medical devices in India, Europe, rest of the Asia Pacific, Latin America, and the Middle East and Africa. The company provides vascular intervention products coronary stents and balloons used to diagnose or treat diseases of the blood vessels; structural heart products comprising trans-catheter aortic valves and occluders used to treat defects or abnormalities in the heart's structure; and other products, such as renal stents, peripheral drug-coated balloon catheters, and other trading products. It also trades in and distributes medical devices/medical implants; and surgical, hospital, pharmaceutical, dental, laboratory, and orthopedic and traumatology products, materials, and equipment. The company was founded in 1999 and is headquartered in Surat, India.",
+        "symbol": "SMT",
+        "themes": [
+            "EV"
+        ],
+        "ticker": "SMT.NS",
+        "website": "https://www.smtpl.com"
     },
     "SNOWMAN.NS": {
         "city": "New Delhi",
@@ -55679,6 +57588,31 @@
         "ticker": "SOMICONVEY.NS",
         "website": "https://somiconveyor.com"
     },
+    "SONA.NS": {
+        "city": "Bhilwara",
+        "company_name": "Sonaselection India Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": null,
+        "enterprise_value": 7187411456,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Textile Manufacturing",
+        "isin": "INE0LLZ01011",
+        "market_cap": 6185233408,
+        "sector": "Consumer Cyclical",
+        "series": "EQ",
+        "shares_outstanding": 56828681,
+        "short_name": "SONASELECTION INDIA LTD",
+        "state": null,
+        "summary": "Sonaselection India Limited engages in the manufacturing and processing of textile fabrics in India. It offers cotton fabrics, cotton lycra fabrics, cotton blends, and polyester blends; and specialty finishes, including anti-microbial, Teflon, oil and water repellant, biomagical, enzyme, and bio-polishing. The company was founded in 1987 and is based in Bhilwara, India.",
+        "symbol": "SONA",
+        "themes": [
+            "Semiconductor"
+        ],
+        "ticker": "SONA.NS",
+        "website": "https://www.sonaselection.com"
+    },
     "SONACOMS.NS": {
         "city": "Gurugram",
         "company_name": "Sona BLW Precision Forgings Limited",
@@ -55767,10 +57701,7 @@
         "employees": 5948,
         "enterprise_value": 80420798464,
         "exchange": "NSI",
-        "indices": [
-            "Nifty500",
-            "Nifty Smallcap 250"
-        ],
+        "indices": [],
         "industry": "Information Technology Services",
         "isin": "INE269A01021",
         "market_cap": 78983299072,
@@ -56127,10 +58058,7 @@
         "employees": 444,
         "enterprise_value": 132270276608,
         "exchange": "NSI",
-        "indices": [
-            "Nifty500",
-            "Nifty Smallcap 250"
-        ],
+        "indices": [],
         "industry": "Specialty Chemicals",
         "isin": "INE663A01033",
         "market_cap": 137937731584,
@@ -56356,6 +58284,33 @@
         "ticker": "SRIKPRIND.NS",
         "website": null
     },
+    "SRIT.NS": {
+        "city": "Bengaluru",
+        "company_name": "SRIT India Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 177,
+        "enterprise_value": 6239794176,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Information Technology Services",
+        "isin": "INE307K01028",
+        "market_cap": 7909282304,
+        "sector": "Technology",
+        "series": "EQ",
+        "shares_outstanding": 64271757,
+        "short_name": "SRIT INDIA LIMITED",
+        "state": null,
+        "summary": "SRIT India Limited provides information technology and information technology enabled services in India and Internationally. It offers digital solutions and automations of systems through custom application development and integration services. The company through healthcare vertical, it provides integrated healthcare information technology solutions, such as information systems, revenue cycle management, digital health platforms and related system integration, implementation and maintenance services; through electronic governance vertical, it offers design, development, implementation and maintenance of e-governance platforms, cybersecurity solutions, enterprise software, and integrated digital service delivery systems for government and enterprise clients; and through telecommunications and broadband vertical, it provides networking, connectivity, system integration and managed services for telecommunications, broadband and digital infrastructure projects. The company was incorporated in 1999 and is based in Bengaluru, India.",
+        "symbol": "SRIT",
+        "themes": [
+            "5G",
+            "AI",
+            "EV"
+        ],
+        "ticker": "SRIT.NS",
+        "website": "https://www.sritindia.com"
+    },
     "SRM.NS": {
         "city": "Jammu",
         "company_name": null,
@@ -56430,6 +58385,32 @@
         ],
         "ticker": "SSDL.NS",
         "website": "https://www.saraswatisareedepot.com"
+    },
+    "SSRETAIL.NS": {
+        "city": "Kolhapur",
+        "company_name": null,
+        "country": "India",
+        "currency": "INR",
+        "employees": 689,
+        "enterprise_value": 53251919872,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Specialty Retail",
+        "isin": "INE1EQW01028",
+        "market_cap": 51075649536,
+        "sector": "Consumer Cyclical",
+        "series": "EQ",
+        "shares_outstanding": 74367575,
+        "short_name": "SS RETAIL LIMITED",
+        "state": null,
+        "summary": "SS Retail Limited sales consumer electronics products in India. It offers mobile phones, pre-owned mobile phones; bluetooth speakers, sound bars, and trolley/karaoke speakers; air buds/ear buds, neck bands, and headphones; smart watches; power banks and wireless power banks, power adaptors, chargers, type C cables, lightning cables, micro cables and multi-pin cables and memory cards, pen drives, and on the go pen drives; and televisions, laptops, and tablets, as well as wholesales mobile phones. The company also provides ancillary services, which includes mobile protection plans, anti-theft software, credit / EMI (equated monthly instalment) facilities, and recharge of mobile phones. It operates through stores. The company was incorporated in 2016 and is based in Kolhapur, India.",
+        "symbol": "SSRETAIL",
+        "themes": [
+            "AI",
+            "EV"
+        ],
+        "ticker": "SSRETAIL.NS",
+        "website": "https://www.ssmobile.com"
     },
     "SSWL.NS": {
         "city": "Chandigarh",
@@ -56660,6 +58641,32 @@
         "ticker": "STCINDIA.NS",
         "website": "https://www.stclimited.co.in"
     },
+    "STEAMHOUSE.NS": {
+        "city": "Surat",
+        "company_name": null,
+        "country": "India",
+        "currency": "INR",
+        "employees": null,
+        "enterprise_value": 35501056000,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Utilities - Regulated Gas",
+        "isin": "INE0FRO01022",
+        "market_cap": null,
+        "sector": "Utilities",
+        "series": "EQ",
+        "shares_outstanding": null,
+        "short_name": "STEAMHOUSE INDIA LIMITED",
+        "state": null,
+        "summary": "Steamhouse India Limited develops, owns, operates, and maintains centralized steam generation plants and distributes industrial steam through pipeline networks to industrial customers. The company provides steam generation and distribution services, nitrogen compression and distribution, waste-to-steam solutions, utility plant operation and maintenance, and engineering, procurement, construction, commissioning, and utility management services. It also designs and operates boiler systems, pipelines, water treatment systems, pollution control equipment, and SCADA-based monitoring systems. It serves pharmaceuticals, chemicals, agrochemicals, textiles, tyres, dyes and pigments, polymers, paints, food processing, paper, and other manufacturing sectors. Steamhouse India Limited was formerly known as Ankleshwar Eco Energy Limited and changed its name to Steamhouse India Limited in September 2021. Steamhouse India Limited was founded in 2014 and is based in Surat, India with additional offices in Ankleshwar, Vapi, Sarigam, Nandesari, and Panoli, India.",
+        "symbol": "STEAMHOUSE",
+        "themes": [
+            "AI",
+            "EV"
+        ],
+        "ticker": "STEAMHOUSE.NS",
+        "website": "https://steamhouse.in"
+    },
     "STEELCAS.NS": {
         "city": "Bhavnagar",
         "company_name": "Steelcast Limited",
@@ -56844,7 +58851,10 @@
         "employees": null,
         "enterprise_value": 280942968832,
         "exchange": "NSI",
-        "indices": [],
+        "indices": [
+            "Nifty500",
+            "Nifty Smallcap 250"
+        ],
         "industry": "Communication Equipment",
         "isin": "INE089C01029",
         "market_cap": 279071293440,
@@ -57120,6 +59130,32 @@
         ],
         "ticker": "SUDARSCHEM.NS",
         "website": "https://www.sudarshan.com"
+    },
+    "SUDARSHAN.NS": {
+        "city": "Mumbai",
+        "company_name": "Sudarshan Pharma Industries Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 64,
+        "enterprise_value": 12528087040,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Chemicals",
+        "isin": "INE00TV01023",
+        "market_cap": 8407708672,
+        "sector": "Basic Materials",
+        "series": "EQ",
+        "shares_outstanding": 254470600,
+        "short_name": "SUDARSHAN PHARMA IND LTD",
+        "state": null,
+        "summary": "Sudarshan Pharma Industries Limited manufactures and sells specialty chemicals and intermediates for pharma, paints, food, adhesives, and various other industries in India and United States. The company also focuses on manufactures active pharmaceuticals ingredients and vitamins manufacturing. In addition, it offers fine chemicals, solvents, agro chemicals, finish lubricants, inks, food colors, leather chemicals, oil field chemicals, lubricant specialties, paints and coatings, paper chemicals, personal and community hygiene products, pigments, polymers and additives, press room chemicals, sugar chemicals, textile chemicals, water treatment chemicals, rust preventives, metalworking fluids, PU additives, and other specialty chemicals. Further, the company provides antibiotics, antifungal, anthelmintic medications, antihypertensive, analgesics, anti-diabetic drugs, neurotonics, antihistamines, painkillers, and cough syrups, as well as manufactures and supplies chemicals and solvents. Additionally, it engages in the contract manufacturing and outsourcing and supply of generic pharma formulation and medicines to healthcare institution, government, NGO, and hospitals. The company also exports its products to the United Kingdom, Australia, Uzbekistan, Syria, Oman, Taiwan, the Middle East, and North Africa regions. Sudarshan Pharma Industries Limited was incorporated in 2008 and is headquartered in Mumbai, India.",
+        "symbol": "SUDARSHAN",
+        "themes": [
+            "AI",
+            "EV"
+        ],
+        "ticker": "SUDARSHAN.NS",
+        "website": "https://www.sudarshanpharma.com"
     },
     "SUDEEPPHRM.NS": {
         "city": "Vadodara",
@@ -57633,6 +59669,32 @@
         "themes": [],
         "ticker": "SUNSHIEL.NS",
         "website": null
+    },
+    "SUNSHINE.NS": {
+        "city": "Mumbai",
+        "company_name": "Sunshine Pictures Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 30,
+        "enterprise_value": 11887389696,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Entertainment",
+        "isin": "INE1B3O01011",
+        "market_cap": 13946867712,
+        "sector": "Communication Services",
+        "series": "EQ",
+        "shares_outstanding": 31148784,
+        "short_name": "SUNSHINE PICTURES LIMITED",
+        "state": null,
+        "summary": "Sunshine Pictures Limited engages in the business of film production, content development, media distribution, and allied entertainment services in India. The company offers production of feature films, web series, and television content. It is also involved in music production and distribution. It serves the entertainment industry by creating and distributing diverse media content across various platforms. Sunshine Pictures Limited was incorporated in 2007 and is based in Mumbai, India.",
+        "symbol": "SUNSHINE",
+        "themes": [
+            "AI",
+            "EV"
+        ],
+        "ticker": "SUNSHINE.NS",
+        "website": "https://www.sunshinepictures.in"
     },
     "SUNTECK.NS": {
         "city": "Mumbai",
@@ -58493,6 +60555,32 @@
         "ticker": "SWARNSAR.NS",
         "website": null
     },
+    "SWASTIKAIN.NS": {
+        "city": "Jaipur",
+        "company_name": "Swastika Infra Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": null,
+        "enterprise_value": 5475495936,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Engineering & Construction",
+        "isin": "INE1QJA01015",
+        "market_cap": 6430972928,
+        "sector": "Industrials",
+        "series": "EQ",
+        "shares_outstanding": 34120187,
+        "short_name": "SWASTIKA INFRA LIMITED",
+        "state": null,
+        "summary": "Swastika Infra Limited provides engineering, procurement, and construction services and engages in the execution of power T&D infrastructure projects in India. The company offers solutions on a turnkey basis, including the supply, erection, installation, testing, and commissioning of power infrastructure. It provides underground cabling work, including the laying, installation, and commissioning of high-voltage/low-voltage power cables; construction of substations, such as gas-insulated substations, air-insulated substations, and grid substations; rural and urban electrification projects; installation of street lighting systems; and renewable energy works. It also engages in the trading of electrical products, such as power cables and other electrical items. The company was founded in 1969 and is based in Jaipur, India.",
+        "symbol": "SWASTIKAIN",
+        "themes": [
+            "AI",
+            "Renewable Energy"
+        ],
+        "ticker": "SWASTIKAIN.NS",
+        "website": "https://www.swastikainfra.com"
+    },
     "SWELECTES.NS": {
         "city": "Chennai",
         "company_name": "Swelect Energy Systems Limited",
@@ -58598,6 +60686,31 @@
         ],
         "ticker": "SWSOLAR.NS",
         "website": "https://sterlingandwilsonre.com"
+    },
+    "SYMBIOTEC.NS": {
+        "city": "Indore",
+        "company_name": null,
+        "country": "India",
+        "currency": "INR",
+        "employees": 1915,
+        "enterprise_value": 98762719232,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Drug Manufacturers - General",
+        "isin": "INE899I01028",
+        "market_cap": null,
+        "sector": "Healthcare",
+        "series": "EQ",
+        "shares_outstanding": null,
+        "short_name": "SYMBIOTEC PHARMALAB LTD",
+        "state": null,
+        "summary": "Symbiotec Pharmalab Limited develops, manufactures, and markets active pharmaceutical ingredients (APIs) in India. The company provides cortico-steroid and hormone (Steroid) APIs; nutraceuticals; and other services. The company was founded in 1995 and is based in Indore, India.",
+        "symbol": "SYMBIOTEC",
+        "themes": [
+            "EV"
+        ],
+        "ticker": "SYMBIOTEC.NS",
+        "website": "https://www.symbiotec.com"
     },
     "SYMPHONY.NS": {
         "city": "Ahmedabad",
@@ -59262,9 +61375,8 @@
         "enterprise_value": 215022993408,
         "exchange": "NSI",
         "indices": [
-            "Nifty200",
             "Nifty500",
-            "Nifty Midcap 150"
+            "Nifty Smallcap 250"
         ],
         "industry": "Software - Application",
         "isin": "INE670A01012",
@@ -59296,7 +61408,6 @@
         "enterprise_value": 26472878080,
         "exchange": "NSI",
         "indices": [
-            "Nifty200",
             "Nifty500",
             "Nifty Midcap 150"
         ],
@@ -59658,7 +61769,11 @@
         "employees": null,
         "enterprise_value": 177922867200,
         "exchange": "NSI",
-        "indices": [],
+        "indices": [
+            "Nifty500",
+            "Nifty Smallcap 250",
+            "Nifty Energy"
+        ],
         "industry": "Specialty Industrial Machinery",
         "isin": "INE419M01027",
         "market_cap": 179693928448,
@@ -59953,6 +62068,35 @@
         ],
         "ticker": "TEMBO.NS",
         "website": "https://www.tembo.in"
+    },
+    "TEMPSENS.NS": {
+        "city": "Udaipur",
+        "company_name": null,
+        "country": "India",
+        "currency": "INR",
+        "employees": null,
+        "enterprise_value": 42947862528,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Scientific & Technical Instruments",
+        "isin": "INE1KZI01025",
+        "market_cap": null,
+        "sector": "Technology",
+        "series": "EQ",
+        "shares_outstanding": null,
+        "short_name": "TEMPSENS INST (INDIA) LTD",
+        "state": null,
+        "summary": "Tempsens Instruments (India) Limited operates as a thermal engineering and specialised cable manufacturer in India and internationally. The company operates through verticals, such as Temperature sensing solutions, Electrical heating solutions, and Specialised cables. The Temperature sensing solutions vertical offers thermocouple, resistance temperature detector, infrared pyrometers, online thermal imagers, furnace monitoring camera, temperature gauges, pressure gauges and level gauges, diaphragm seals, thermowells and accessories, temperature transmitters, fiber optic temperature sensors, heat flux sensors, temperature calibrators, and diaphragm seal. The Electrical heating solutions vertical provides immersion, process, skid, cartridge, band, coil, air, printed, tubular, flexible, and furnace heaters; floor heating mats, comfort heating solutions, heating skid systems, and laboratory and process electrical furnaces. The Specialised cables vertical offers low voltage control and power wire/cable, instrumentation cable, thermocouple and RTD cable, nickel alloy conductors (thermocouple heating, pure nickel alloys), heat trace cable, and mineral insulated metal sheath cable. Additionally, it also offers fiber optic temperature sensors, aerospace-grade cables, catalyst bed heaters for space applications, slot resistance temperature detectors, mid-voltage heater, pressurizer heater for nuclear reactors, infrared pyrometers, and online thermal imagers. It serves the power generation, petro chemical, pharmaceutical, metal, defense and nuclear, steel, aluminium, railway, cement, glass, automotive, food processing, aerospace, and plastic industries. The company was incorporated in 1990 and is based in Udaipur, India.",
+        "symbol": "TEMPSENS",
+        "themes": [
+            "5G",
+            "AI",
+            "Defense",
+            "EV",
+            "Railway"
+        ],
+        "ticker": "TEMPSENS.NS",
+        "website": "https://www.tempsens.com"
     },
     "TENNIND.NS": {
         "city": "Gurugram",
@@ -60262,7 +62406,10 @@
         "employees": 3450,
         "enterprise_value": 211182256128,
         "exchange": "NSI",
-        "indices": [],
+        "indices": [
+            "Nifty500",
+            "Nifty Smallcap 250"
+        ],
         "industry": "Luxury Goods",
         "isin": "INE085J01014",
         "market_cap": 203291951104,
@@ -60340,10 +62487,7 @@
         "employees": null,
         "enterprise_value": 181550694400,
         "exchange": "NSI",
-        "indices": [
-            "Nifty500",
-            "Nifty Smallcap 250"
-        ],
+        "indices": [],
         "industry": "Lodging",
         "isin": "INE0AQ201015",
         "market_cap": 167312900096,
@@ -60657,6 +62801,33 @@
         ],
         "ticker": "TIJARIA.NS",
         "website": "https://www.tijaria-pipes.com"
+    },
+    "TIKONA.NS": {
+        "city": "Noida",
+        "company_name": "Tikona Communication Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 2,
+        "enterprise_value": 1095176832,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Telecom Services",
+        "isin": "INE534A01028",
+        "market_cap": 1030968448,
+        "sector": "Communication Services",
+        "series": "BE",
+        "shares_outstanding": 30430000,
+        "short_name": "TIKONA COMMUNICATION LTD",
+        "state": null,
+        "summary": "Tikona Communication Limited provides telecommunications and digital infrastructure services across India. The company offers infrastructure solutions, such as tower infrastructure, FTTH infrastructure, smart systems, and enterprise solutions. It operates fiber optic network infrastructure and provides fiber leasing services, including route monitoring, preventive maintenance, fault restoration, and operations and maintenance. It provides smart systems for residential, commercial, and industrial spaces for managing energy use, enhancing security, and automating homes and offices. Its home and building automation products include smart prepaid meters, video door phones, intercom systems, and smart home automation. Its security and access solutions include CCTV surveillance, fire alarm systems, access control, boom barrier, and parking management systems. The company serves residential users, small and medium businesses, and large enterprises across multiple Indian cities. Tikona Communication Limited was formerly known as Grand Foundry Limited and changed its name to Tikona Communication Limited in September 2026. Tikona Communication Limited was incorporated in 1973 and is based in Noida, India. Tikona Communication Limited operates as a subsidiary of SAR Televenture Limited. As of September 28, 2026, Tikona Communication Limited operates as a subsidiary of SAR Televenture Limited.",
+        "symbol": "TIKONA",
+        "themes": [
+            "5G",
+            "AI",
+            "EV"
+        ],
+        "ticker": "TIKONA.NS",
+        "website": "https://tikonacomm.in"
     },
     "TIL.NS": {
         "city": "Kolkata",
@@ -61174,6 +63345,33 @@
         "ticker": "TOLINS.NS",
         "website": "https://www.tolinstyres.com"
     },
+    "TONBO.NS": {
+        "city": "Bengaluru",
+        "company_name": "Tonbo Imaging India Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 339,
+        "enterprise_value": 86209781760,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Aerospace & Defense",
+        "isin": "INE0LDG01026",
+        "market_cap": 87584333824,
+        "sector": "Industrials",
+        "series": "EQ",
+        "shares_outstanding": 57282100,
+        "short_name": "TONBO IMAGING INDIA LTD",
+        "state": null,
+        "summary": "Tonbo Imaging India Limited designs, develops, and manufactures electro-optical and infrared sensing, processing, communication, and guidance systems for defense, surveillance, and security applications. The company's tactical products include thermal imaging cores, weapon sights, hand-held thermal imaging binoculars, and targeting systems. It also manufactures platform-level products, such as fire control systems, missile seekers, and missile guidance systems. Additionally, the company designs and manufactures embedded vision systems and AI-accelerated image processing subsystems, along with multi-axis gimbal stabilization systems for defense platforms. It serves global militaries, law enforcement agencies, homeland security agencies, and defense original equipment manufacturers. Tonbo Imaging India Limited was incorporated in 2003 and is based in Bengaluru, India.",
+        "symbol": "TONBO",
+        "themes": [
+            "AI",
+            "Defense",
+            "EV"
+        ],
+        "ticker": "TONBO.NS",
+        "website": "https://tonboimaging.com"
+    },
     "TORNTPHARM.NS": {
         "city": "Ahmedabad",
         "company_name": "Torrent Pharmaceuticals Limited",
@@ -61495,10 +63693,7 @@
         "employees": null,
         "enterprise_value": 166924730368,
         "exchange": "NSI",
-        "indices": [
-            "Nifty500",
-            "Nifty Smallcap 250"
-        ],
+        "indices": [],
         "industry": "Restaurants",
         "isin": "INE103V01028",
         "market_cap": 172552798208,
@@ -61782,6 +63977,31 @@
         ],
         "ticker": "TRIVENI.NS",
         "website": "https://www.trivenigroup.com"
+    },
+    "TRIVENIPT.NS": {
+        "city": "Noida",
+        "company_name": "Triveni Power Transmission Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": null,
+        "enterprise_value": null,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Specialty Industrial Machinery",
+        "isin": "INE2WKE01011",
+        "market_cap": 46641868800,
+        "sector": "Industrials",
+        "series": "EQ",
+        "shares_outstanding": 104754338,
+        "short_name": "TRIVENI POWER TRANS LTD",
+        "state": null,
+        "summary": "Triveni Power Transmission Limited provides engineered gear systems and lifecycle solutions for OEMs, EPCs, and industrial operators worldwide. The company offers steam turbine generator, gas turbine generator, integrally geared compressor gear unit, compressor gearbox, pump gearbox, blower gearbox, ID/FD fan gearbox, and auxiliary turbo gear unit; hydel gearbox, reciprocating compressor / pump, extruder, and agitator; and marine, test rig, and planetary gearbox special gear system. It also provides aftermarket, built-to-print, defense, digital ecosystem, and manufacturing excellence solutions. The company serves oil and gas, petrochemical and refinery, sugar and distillery, marine, steel, cement, chemicals and fertilizers, paper, and power generation industries. Triveni Power Transmission Limited was founded in 1976 and is based in Noida, India.",
+        "symbol": "TRIVENIPT",
+        "themes": [
+            "Defense"
+        ],
+        "ticker": "TRIVENIPT.NS",
+        "website": "https://www.trivenipowertransmission.com"
     },
     "TRU.NS": {
         "city": "Mumbai",
@@ -62868,9 +65088,9 @@
         "enterprise_value": 956677029888,
         "exchange": "NSI",
         "indices": [
-            "Nifty100",
             "Nifty200",
             "Nifty500",
+            "Nifty Midcap 150",
             "Nifty FMCG"
         ],
         "industry": "Beverages - Wineries & Distilleries",
@@ -63596,7 +65816,12 @@
         "employees": 6212,
         "enterprise_value": null,
         "exchange": "NSI",
-        "indices": [],
+        "indices": [
+            "Nifty100",
+            "Nifty200",
+            "Nifty500",
+            "Nifty Metal"
+        ],
         "industry": "Aluminum",
         "isin": "INE1CDF01017",
         "market_cap": 1731688136704,
@@ -63660,6 +65885,31 @@
         "themes": [],
         "ticker": "VARDMNPOLY.NS",
         "website": "https://www.oswalgroup.com"
+    },
+    "VARMORA.NS": {
+        "city": "Ahmedabad",
+        "company_name": "Varmora Granito Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 1153,
+        "enterprise_value": 25949212672,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Building Materials",
+        "isin": "INE0M5301040",
+        "market_cap": 30014371840,
+        "sector": "Basic Materials",
+        "series": "EQ",
+        "shares_outstanding": 226011824,
+        "short_name": "VARMORA GRANITO LIMITED",
+        "state": null,
+        "summary": "Varmora Granito Limited manufactures stones, tiles, bathware, sanitaryware, tile adhesives, and other application equipment accessories. Its product portfolio includes stock-keeping units for tiles, such as GVT and technical products, and PVT and ceramic tiles. The company offers its products for applications in residential and commercial spaces. It serves clients through a network of brand outlets, B2C retail channels, B2B channels, direct sales, and distributors in India and internationally. The company was incorporated in 2003 and is based in Ahmedabad, India.",
+        "symbol": "VARMORA",
+        "themes": [
+            "AI"
+        ],
+        "ticker": "VARMORA.NS",
+        "website": "https://varmora.com"
     },
     "VARROC.NS": {
         "city": "Aurangabad",
@@ -63882,7 +66132,10 @@
         "employees": 62,
         "enterprise_value": 204578275328,
         "exchange": "NSI",
-        "indices": [],
+        "indices": [
+            "Nifty500",
+            "Nifty Smallcap 250"
+        ],
         "industry": "Utilities - Independent Power Producers",
         "isin": "INE694L01019",
         "market_cap": 163310845952,
@@ -63925,6 +66178,54 @@
         ],
         "ticker": "VEEDOL.NS",
         "website": "https://www.veedolindia.com"
+    },
+    "VEEFIN.NS": {
+        "city": null,
+        "company_name": "Veefin Solutions Ltd",
+        "country": null,
+        "currency": "INR",
+        "employees": null,
+        "enterprise_value": null,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": null,
+        "isin": "INE0Q0M01015",
+        "market_cap": null,
+        "sector": null,
+        "series": "EQ",
+        "shares_outstanding": null,
+        "short_name": null,
+        "state": null,
+        "summary": null,
+        "symbol": "VEEFIN",
+        "themes": [],
+        "ticker": "VEEFIN.NS",
+        "website": null
+    },
+    "VEEGALAND.NS": {
+        "city": "Ernakulam",
+        "company_name": null,
+        "country": "India",
+        "currency": "INR",
+        "employees": null,
+        "enterprise_value": 5292545024,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Real Estate - Diversified",
+        "isin": "INE1JTV01015",
+        "market_cap": null,
+        "sector": "Real Estate",
+        "series": "EQ",
+        "shares_outstanding": null,
+        "short_name": "VEEGALAND DEVELOPERS LTD",
+        "state": null,
+        "summary": "Veegaland Developers Limited engages in the planning, development, and sale of multi storied residential apartment projects in India. It operates under the Veegaland Homes brand name. The company was incorporated in 2007 and is based in Ernakulam, India.",
+        "symbol": "VEEGALAND",
+        "themes": [
+            "EV"
+        ],
+        "ticker": "VEEGALAND.NS",
+        "website": "https://www.veegaland.com"
     },
     "VELJAN.NS": {
         "city": "Hyderabad",
@@ -64957,7 +67258,10 @@
         "employees": null,
         "enterprise_value": null,
         "exchange": "NSI",
-        "indices": [],
+        "indices": [
+            "Nifty500",
+            "Nifty Smallcap 250"
+        ],
         "industry": "Steel",
         "isin": "INE1CLE01013",
         "market_cap": 135612252160,
@@ -65252,6 +67556,34 @@
         "ticker": "VMSTMT.NS",
         "website": "https://vmstmt.com"
     },
+    "VNL.NS": {
+        "city": "Pune",
+        "company_name": "Vishal Nirmiti Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": null,
+        "enterprise_value": 3292985088,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Building Materials",
+        "isin": "INE1O5L01025",
+        "market_cap": 3170867712,
+        "sector": "Basic Materials",
+        "series": "EQ",
+        "shares_outstanding": 26390909,
+        "short_name": "VISHAL NIRMITI LIMITED",
+        "state": null,
+        "summary": "Vishal Nirmiti Limited, a civil engineering, manufacturing, and construction company, engages in the business of manufacturing and dealing in pre-stressed concrete sleepers for railways. The company operates in two segments, Manufacturing and Services. The company offers fabrication and erection of mild steel pipes (MS Pipes), MS liners, and penstock pipes for pumped storage project. It serves railways, renewable power, and industrial sectors. The company was incorporated in 1994 and is based in Pune, India.",
+        "symbol": "VNL",
+        "themes": [
+            "AI",
+            "Railway",
+            "Renewable Energy",
+            "Semiconductor"
+        ],
+        "ticker": "VNL.NS",
+        "website": "https://www.vishalnirmiti.com"
+    },
     "VOEPL.NS": {
         "city": "Nashik",
         "company_name": "Virtuoso Optoelectronics Limited",
@@ -65285,7 +67617,10 @@
         "employees": null,
         "enterprise_value": null,
         "exchange": "NSI",
-        "indices": [],
+        "indices": [
+            "Nifty500",
+            "Nifty Smallcap 250"
+        ],
         "industry": "Other Industrial Metals & Mining",
         "isin": "INE704J01044",
         "market_cap": 151246995456,
@@ -65975,8 +68310,7 @@
         "exchange": "NSI",
         "indices": [
             "Nifty500",
-            "Nifty Smallcap 250",
-            "Nifty Metal"
+            "Nifty Smallcap 250"
         ],
         "industry": "Steel",
         "isin": "INE191B01025",
@@ -66416,7 +68750,6 @@
         "enterprise_value": 1500391931904,
         "exchange": "NSI",
         "indices": [
-            "Nifty50",
             "Nifty100",
             "Nifty200",
             "Nifty500",
@@ -67108,6 +69441,36 @@
         ],
         "ticker": "ZENTEC.NS",
         "website": "https://www.zentechnologies.com"
+    },
+    "ZETWERK.NS": {
+        "city": "Bengaluru",
+        "company_name": "Zetwerk Manufacturing Businesses Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 3754,
+        "enterprise_value": 332713721856,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Metal Fabrication",
+        "isin": "INE09PO01019",
+        "market_cap": 306710937600,
+        "sector": "Industrials",
+        "series": "EQ",
+        "shares_outstanding": 1694254778,
+        "short_name": "ZETWERK MANUFACTURING B L",
+        "state": null,
+        "summary": "Zetwerk Manufacturing Businesses Limited manufactures custom-made industrial and consumer goods in India and globally. The company operates through two segments: Manufacturing Business and Ecosystem Business. The company's Manufacturing Business segment designs, manufactures, supplies, and installs products across energy, precision, and capital goods verticals. Under energy products, it offers fabricated steel structures, solar modules, solar tracker structure equipment, and transformers. Under precision products, the company manufactures smart ring components, engine parts, multi-layer PCBs, data center components, military grade connectors, high precision turbine blades, antennas, and electrical grounding clamps. Under capital goods, it manufactures LPG storage tanks, horton sphere, marine unloaders, CNG storage tanks, claus reactor, bullet train railway girders, machine components, finished industrial equipment, electro-mechanical assemblies, and products for robotics and automation. The company also manufactures electronics products, defense and aerospace components including parts for aerial vehicles, defense systems, aircraft, and rocket casings; and injection-molded components. Additionally, it offers prototyping and pre-production services, original design manufacturing for transformers, process plant machinery, and metal manufacturing and defense applications, job work on customer-supplied materials, and project engineering services. The company's Ecosystem Business segment sources and supplies industrial raw materials and commodities, including ferrous and non-ferrous metals, along with petrochemicals. It also provides manufacturing support services. It serves the transportation, industrial machinery and equipment, consumer products, electronics and appliances, construction and infrastructure, energy and utilities, and aerospace and defense industries. Zetwerk Manufacturing Businesses Limited was incorporated in 2017 and is based in Bengaluru, India.",
+        "symbol": "ZETWERK",
+        "themes": [
+            "AI",
+            "Data Center",
+            "Defense",
+            "Railway",
+            "Renewable Energy",
+            "Semiconductor"
+        ],
+        "ticker": "ZETWERK.NS",
+        "website": "https://www.zetwerk.com"
     },
     "ZFCVINDIA.NS": {
         "city": "Chennai",

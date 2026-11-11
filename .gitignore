@@ -1,3 +1,13 @@
 kupmanduk_GCS_signed_URL_key.json
 venv/
 try_firestore_semaphore.py
+stock_db_builder/databases/us_stocks_master.json
+stock_db_builder/databases/us_stock_buckets.json
+stock_db_builder/databases/us_listed_securities.txt
+stock_db_builder/builders/us_master_builder.py
+stock_db_builder/builders/us_bucket_builder.py
+stock_db_builder/us_master_build.log
+stock_db_builder/requirements.txt
+stock_db_builder/build_us_master.py
+runit
+
