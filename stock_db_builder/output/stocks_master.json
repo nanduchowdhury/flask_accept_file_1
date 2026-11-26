@@ -10839,6 +10839,31 @@
         "ticker": "BRAHMINFRA.NS",
         "website": null
     },
+    "BRAHMVIRAT.NS": {
+        "city": "Mumbai",
+        "company_name": "Brahm Virat Industries Corporation Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 147,
+        "enterprise_value": 4928249856,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Apparel Manufacturing",
+        "isin": "INE467D01017",
+        "market_cap": 5970544640,
+        "sector": "Consumer Cyclical",
+        "series": "BE",
+        "shares_outstanding": 14523339,
+        "short_name": "BRAHM VIRAT IND CORP LTD",
+        "state": null,
+        "summary": "Brahm Virat Industries Corporation Limited manufactures and sells dress and sports socks for men, ladies, and children in India. The company offers combed cotton, viscose, wool, organic cotton, acrylic, wool/cashmere, coolmax, marl yarn, cotton/silk, and special yarns. It also provides football socks for many clubs in Europe. The company exports its products to the United Kingdom, Switzerland, the United Arab Emirates, and internationally. The company was formerly known as Virat Industries Limited and changed its name to Brahm Virat Industries Corporation Limited in September 2026. The company was incorporated in 1990 and is headquartered in Mumbai, India.",
+        "symbol": "BRAHMVIRAT",
+        "themes": [
+            "AI"
+        ],
+        "ticker": "BRAHMVIRAT.NS",
+        "website": "https://www.viratindustries.com"
+    },
     "BRIGADE.NS": {
         "city": "Bengaluru",
         "company_name": "Brigade Enterprises Limited",
@@ -14345,6 +14370,31 @@
         "themes": [],
         "ticker": "CRSL.NS",
         "website": null
+    },
+    "CRYSTALCP.NS": {
+        "city": "Delhi",
+        "company_name": "Crystal Crop Protection Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 2097,
+        "enterprise_value": 45320134656,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Agricultural Inputs",
+        "isin": "INE101P01016",
+        "market_cap": 45338894336,
+        "sector": "Basic Materials",
+        "series": "EQ",
+        "shares_outstanding": 163177583,
+        "short_name": null,
+        "state": null,
+        "summary": "Crystal Crop Protection Limited engages in the research, manufacturing, and distribution of agrochemicals, seeds, and farm equipment in India and internationally. It offers fungicides, herbicides, insecticides, plant growth regulators, and plant nutrition and seed treatment products. The company also provides seeds for field crops, vegetables, fruits, and flowers; manual, battery, engine, and self-propelled sprayers; and harvesters solutions. The company was incorporated in 1994 and is based in Delhi, India.",
+        "symbol": "CRYSTALCP",
+        "themes": [
+            "EV"
+        ],
+        "ticker": "CRYSTALCP.NS",
+        "website": "https://www.crystalcropprotection.com"
     },
     "CSBBANK.NS": {
         "city": "Thrissur",
@@ -19093,6 +19143,32 @@
         ],
         "ticker": "ESDS.NS",
         "website": "https://www.esds.co.in"
+    },
+    "ESFL.NS": {
+        "city": "Rajkot",
+        "company_name": "Essen Speciality Films Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 1142,
+        "enterprise_value": 3450101248,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Furnishings, Fixtures & Appliances",
+        "isin": "INE0ITO01014",
+        "market_cap": 2945910016,
+        "sector": "Consumer Cyclical",
+        "series": "EQ",
+        "shares_outstanding": 24839040,
+        "short_name": "ESSEN SPECIALITY FILMS L",
+        "state": null,
+        "summary": "Essen Speciality Films Limited manufactures and exports specialized plastic products in India and internationally. The company offers bath area products, such as PEVA shower curtains and liners, and bathtubs and shower mats, as well as shower curtain accessories, including curtain rings, hooks, hangers, anti-draft clips, magnets, and glass stones; and kitchen and dining products comprising chopping boards, tablecloths with non-woven backing, disposable party table covers, EVA foam placemats and coasters, and PP placemats. It also offers home décor products consisting of artificial plants and flowers; storage and organization products, which include shelf liners/drawer liners and desk mats; and fitness and lifestyle products, which comprise yoga mats, interlocking foam tiles, and kid's puzzle mats. In addition, the company provides outdoor and utility products, such as tarps/tarpaulins, vehicle covers, pond liners, and rain gears and ponchos; and customized products, which include delivery bags, reusable shopping bags, spa slippers, baby shower caps, plant pots, bottle carriers, and films/rolls. It also serves customers in home improvement and home furnishings, retailers and OEMs. Essen Speciality Films Limited was formerly known as Essen Speciality Films Private Limited. The company was incorporated in 2002 and is based in Rajkot, India.",
+        "symbol": "ESFL",
+        "themes": [
+            "AI",
+            "EV"
+        ],
+        "ticker": "ESFL.NS",
+        "website": "https://www.essenspeciality.com"
     },
     "ESSARSHPNG.NS": {
         "city": "Mumbai",
@@ -31006,6 +31082,31 @@
         "ticker": "JKPAPER.NS",
         "website": "https://jkpaper.com"
     },
+    "JKSHAH.NS": {
+        "city": "Chennai",
+        "company_name": "J.K. Shah Commerce Education Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": null,
+        "enterprise_value": null,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Education & Training Services",
+        "isin": "INE2OD001016",
+        "market_cap": 16967792640,
+        "sector": "Consumer Defensive",
+        "series": "BE",
+        "shares_outstanding": 96506610,
+        "short_name": "JK SHAH COMMERCE EDUC LTD",
+        "state": null,
+        "summary": "J.K. Shah Commerce Education Limited provides professional commerce education and test preparation services. The company offers coaching and training programs for Chartered Accountancy (CA), Company Secretary (CS), CMA, ACCA, and other commerce-related courses. It also provides undergraduate commerce education and international professional course training. The company was incorporated in 2025 and is based in Chennai, India. J.K. Shah Commerce Education Limited operates as a subsidiary of Veranda Learning Solutions Limited.",
+        "symbol": "JKSHAH",
+        "themes": [
+            "AI"
+        ],
+        "ticker": "JKSHAH.NS",
+        "website": "https://jkshahcommerceeducation.com"
+    },
     "JKTYRE.NS": {
         "city": "New Delhi",
         "company_name": "JK Tyre & Industries Limited",
@@ -39567,6 +39668,34 @@
         "ticker": "MITCON.NS",
         "website": "https://www.mitconindia.com"
     },
+    "MITSU.NS": {
+        "city": "Mumbai",
+        "company_name": "Mitsu Chem Plast Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 416,
+        "enterprise_value": 3916646144,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Specialty Chemicals",
+        "isin": "INE317V01016",
+        "market_cap": null,
+        "sector": "Basic Materials",
+        "series": "EQ",
+        "shares_outstanding": null,
+        "short_name": null,
+        "state": null,
+        "summary": "Mitsu Chem Plast Limited, together with its subsidiaries, manufactures plastic blow and injection molded products in India and internationally. The company offers molded industrial packaging products, including pail containers, jerry cans, full open top drums, narrow mouth drums, containers, wide mouth drums or jars, agro chemicals and pharma packaging products, and bulk drugs and fine chemicals; diagnostic, cosmetics, and consumables products, as well as injection molded solutions. It also provides healthcare furniture products, such as curved head and leg bow, straight head and foot bow, grill head and foot bow, panel head and foot bow, side railing with bracket mechanism, over bed table top, bed board plank, bed side locker part, bed liner, spine board and stretcher, head immobilizer, plastic CPR board, buffer wheel, and plastic toilet seat products. In addition, the company offers infrastructural furniture products comprising plastic chair and seat shells, stadium and chair seats, chair parts, and baby car seat shells, as well as bus seats; and automotive components, such as tanks, snorkels, rainhood and air intakes, plastic pipes, and injection molded articles. Further, it provides medical devices, including pregnancy, malaria, and HIV kits, as well as inhalers. Mitsu Chem Plast Limited was incorporated in 1988 and is based in Mumbai, India.",
+        "symbol": "MITSU",
+        "themes": [
+            "AI",
+            "Data Center",
+            "EV",
+            "Railway"
+        ],
+        "ticker": "MITSU.NS",
+        "website": "https://www.mitsuchem.com"
+    },
     "MITTAL.NS": {
         "city": "Mumbai",
         "company_name": "Mittal Life Style Limited",
@@ -40608,6 +40737,29 @@
         ],
         "ticker": "MRF.NS",
         "website": "https://www.mrftyres.com"
+    },
+    "MROTEK.NS": {
+        "city": null,
+        "company_name": "MRO-TEK Networks Limited",
+        "country": null,
+        "currency": "INR",
+        "employees": null,
+        "enterprise_value": null,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": null,
+        "isin": "INE398B01018",
+        "market_cap": null,
+        "sector": null,
+        "series": "EQ",
+        "shares_outstanding": null,
+        "short_name": null,
+        "state": null,
+        "summary": null,
+        "symbol": "MROTEK",
+        "themes": [],
+        "ticker": "MROTEK.NS",
+        "website": null
     },
     "MRPL.NS": {
         "city": "Mangalore",
@@ -44031,6 +44183,31 @@
         ],
         "ticker": "OLECTRA.NS",
         "website": "https://olectra.com"
+    },
+    "OLIL.NS": {
+        "city": "Mumbai",
+        "company_name": "Oneclick Logistics India Limited",
+        "country": "India",
+        "currency": "INR",
+        "employees": 30,
+        "enterprise_value": 2964098048,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Integrated Freight & Logistics",
+        "isin": "INE0OPS01011",
+        "market_cap": 4533944832,
+        "sector": "Industrials",
+        "series": "EQ",
+        "shares_outstanding": 10267085,
+        "short_name": "OLIL.NS,0P0001RNW4,3600",
+        "state": null,
+        "summary": "Oneclick Logistics India Limited engages in providing clearing and forwarding services in India. It offers air and ocean freight services, warehouse services, custom house brokerage services, and project cargo services. The company was founded in 2017 and is based in Mumbai, India.",
+        "symbol": "OLIL",
+        "themes": [
+            "AI"
+        ],
+        "ticker": "OLIL.NS",
+        "website": "https://www.1click.co.in"
     },
     "OMAXAUTO.NS": {
         "city": "Gurugram",
@@ -47904,6 +48081,29 @@
         ],
         "ticker": "PRAVEG.NS",
         "website": "https://www.dizcoverpraveg.com"
+    },
+    "PRAXIS-RE3.NS": {
+        "city": null,
+        "company_name": null,
+        "country": null,
+        "currency": null,
+        "employees": null,
+        "enterprise_value": null,
+        "exchange": null,
+        "indices": [],
+        "industry": null,
+        "isin": "INE546Y20048",
+        "market_cap": null,
+        "sector": null,
+        "series": "BE",
+        "shares_outstanding": null,
+        "short_name": null,
+        "state": null,
+        "summary": null,
+        "symbol": "PRAXIS-RE3",
+        "themes": [],
+        "ticker": "PRAXIS-RE3.NS",
+        "website": null
     },
     "PRAXIS.NS": {
         "city": "Mumbai",
@@ -56100,6 +56300,33 @@
         "themes": [],
         "ticker": "SHRJAGP.NS",
         "website": null
+    },
+    "SHUKRAMED.NS": {
+        "city": "Ahmedabad",
+        "company_name": "SHUKRA MEDTECH LIMITED",
+        "country": "India",
+        "currency": "INR",
+        "employees": null,
+        "enterprise_value": 38693183488,
+        "exchange": "NSI",
+        "indices": [],
+        "industry": "Drug Manufacturers - Specialty & Generic",
+        "isin": "INE551C01044",
+        "market_cap": 39809318912,
+        "sector": "Healthcare",
+        "series": "EQ",
+        "shares_outstanding": 442522440,
+        "short_name": "SHUKRA MEDTECH LIMITED",
+        "state": null,
+        "summary": "SHUKRA MEDTECH LIMITED engages in the manufacturing, marketing, and export of pharmaceutical formulations in India and internationally. The company offers various products, such as antibiotics, anti biotics, macrolides, quinolones, anti bacterial, anti fungal, anti malarial, anti viral, anti protozoal, anti anthelmintic, sedative and tranquilliser, anti depressant, anti manic, anti emetic, anti ulcer, beta blockers, diuretics, analgesic, muscle relaxants, anti tuberculosis, vitamin products, anti allergics, corticosteroids, hyper and hypoglycemic, and other products. It provides its products in ampoules, capsules, vials, and tablet forms. In addition, the company provides laboratory services; and surgical robots, diabetes technologies, cardiac sciences, advanced surgical and diagnostic solutions, imaging and critical care, medical simulations, wound care, boron neutron capture therapy, and virtual autopsy and forensic sciences. Further, it is involved in the supplying, selling, and distributing medical consumables; offers wound care products, medical, surgical, healthcare devices, materials, consumables, and allied solutions, as well as diabetes-related medical technologies solutions; and provision of virtual autopsy services and solutions. Additionally, the company offers expendable and non-expendable medical products, medical devices, emergency healthcare systems, combat medical support systems, first aid kits, trauma care kits; and artificial intelligence (AI), machine learning, deep learning, data analytics, predictive analytics, computer vision, natural language processing, generative AI, robotics, automation, digital platforms, hardware, cloud-based systems, decision support systems, and other technology solutions. The company was formerly known as Shukra Pharmaceuticals Limited and changed its name to SHUKRA MEDTECH LIMITED in October 2026. SHUKRA MEDTECH LIMITED was incorporated in 1993 and is headquartered in Ahmedabad, India.",
+        "symbol": "SHUKRAMED",
+        "themes": [
+            "AI",
+            "Cloud",
+            "EV"
+        ],
+        "ticker": "SHUKRAMED.NS",
+        "website": "https://www.shukrapharmaceuticals.com"
     },
     "SHUKRAPHAR.NS": {
         "city": "Ahmedabad",
